@@ -411,15 +411,35 @@ fn recurse<T: Radixable<K>, K: RadixKey>(
     if bits > 0 && size > 1 {
         let mut union = dummy.default_key();
         let mut intersection = None;
-        #[cfg(feature = "cf_phases")]
-        {
-            arena.stats.phases.union_records += size;
+        let width = radix.min(bits);
+        let top_mask =
+            dummy.default_mask(width) << dummy.usize_to_keytype(bits - width);
+        let mut id = input.head;
+        let mut offset = input.offset;
+        let mut remaining = size;
+        while remaining > 0 {
+            let end =
+                if id == input.tail { input.last_length } else { arena.b };
+            let take = remaining.min(end - offset);
+            let source = unsafe { arena.block(id).add(offset) };
+            for i in 0..take {
+                let key = unsafe { (*source.add(i)).into_key_type() };
+                union |= key;
+                intersection = Some(intersection.map_or(key, |old| old & key));
+            }
+            #[cfg(feature = "cf_phases")]
+            {
+                arena.stats.phases.union_records += take;
+            }
+            // A varying current digit fixes this node's split. Lower bits
+            // cannot change that decision, so unread spans need no OR/AND scan.
+            if union & top_mask != intersection.unwrap() & top_mask {
+                break;
+            }
+            remaining -= take;
+            id = arena.next[id];
+            offset = 0;
         }
-        input.visit(arena, size, &mut |value: T| {
-            let key = value.into_key_type();
-            union |= key;
-            intersection = Some(intersection.map_or(key, |old| old & key));
-        });
         let intersection = intersection.unwrap();
         while bits > 0 {
             let width = radix.min(bits);

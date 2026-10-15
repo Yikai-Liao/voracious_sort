@@ -10,6 +10,12 @@ directory. The current crate uses the upstream radix traits and existing MSD
 implementations through a local dependency. Its block-LSD comparison is frozen in
 `src/frozen_lsd/`, so it builds independently of the separate `block-lsd` branch.
 
+The follow-up [scan experiment](scan_experiment/REPORT.md) compares early
+termination of the variation scan with the exact archived full-scan source and
+adds a corrected stable-MSD comparison. Its measurements are separate from the
+historical matrices below. Feature `cf_early_scan` selects the candidate in
+`src/count_first.rs`; the default retains the archived full scan.
+
 ## Reading the results
 
 - [REPORT.md](REPORT.md): progression, correctness coverage, space accounting,
@@ -41,6 +47,7 @@ that stage. The top-level report describes the final state.
 | Endpoint with standard stable leaves | active crate, feature `cf_std_leaf` | `bench-endpoint-std-N.csv`, `comparison-endpoint-std.csv` |
 | Focused normal timing and phase diagnosis | `profile_normal_v1/`, `src/bin/profile_count_first.rs`, `src/phase_{algo,ordinary}/` | `focused-normal-*.csv`, `phases-*.csv`, `profile-*.{csv,log,txt}`, `profile-normal-hashes.txt` |
 | Compact remaining-count draft | `count_first_compact_draft/` | Uncompiled draft; no measurement or correctness claim |
+| Scan early-termination follow-up | `scan_experiment/full_scan.rs`, `src/count_first.rs` with `cf_early_scan`, `src/stable_baseline/` | [scan experiment report](scan_experiment/REPORT.md), `scan_experiment/measurements/`, comparison/counter summaries |
 
 Some early CSVs are retained both at the top level and beside their source
 snapshot. They are copies of the same observations, not independent trials.

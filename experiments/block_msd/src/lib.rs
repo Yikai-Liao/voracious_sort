@@ -1,7 +1,11 @@
 //! Experimental dense-tail stable block MSD. See REPORT.md for its space model.
 use std::{marker::PhantomData, mem::MaybeUninit, ptr};
 use voracious_radix_sort::{RadixKey, Radixable};
+#[cfg_attr(not(feature = "cf_early_scan"), path = "../scan_experiment/full_scan.rs")]
 pub mod count_first;
+#[path = "../scan_experiment/full_scan.rs"]
+pub mod count_first_full_scan;
+pub mod stable_baseline;
 
 #[derive(Default, Debug)]
 pub struct Stats {

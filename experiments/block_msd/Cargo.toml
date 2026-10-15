@@ -9,6 +9,7 @@ voracious_radix_sort = { path = "../.." }
 debug = true
 
 [features]
+cf_early_scan = []
 simple_stream = []
 terminal_fusion = []
 cf_span_leaf = []
