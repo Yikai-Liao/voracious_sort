@@ -19,6 +19,7 @@ pub enum Placement {
     FreeList,
     CarriedFreeList,
     CycleFreeList,
+    ScratchPathCycles,
 }
 #[derive(Default, Debug)]
 pub struct LocalStats {
@@ -377,7 +378,10 @@ fn recurse<T: Radixable<K>, K: RadixKey>(
             partition_carried(arr, &counts, mask, shift, block_size, stats)
         },
         Placement::CycleFreeList => partition_impl(
-            arr, &counts, mask, shift, block_size, stats, false, true,
+            arr, &counts, mask, shift, block_size, stats, false, 1,
+        ),
+        Placement::ScratchPathCycles => partition_impl(
+            arr, &counts, mask, shift, block_size, stats, false, 2,
         ),
     }
     let mut rest = arr;
@@ -407,7 +411,7 @@ pub(crate) fn partition<T: Radixable<K>, K: RadixKey>(
     block_size: usize,
     stats: &mut LocalStats,
 ) {
-    partition_impl(arr, counts, mask, shift, block_size, stats, false, false);
+    partition_impl(arr, counts, mask, shift, block_size, stats, false, 0);
 }
 
 pub(crate) fn partition_carried<T: Radixable<K>, K: RadixKey>(
@@ -418,7 +422,7 @@ pub(crate) fn partition_carried<T: Radixable<K>, K: RadixKey>(
     block_size: usize,
     stats: &mut LocalStats,
 ) {
-    partition_impl(arr, counts, mask, shift, block_size, stats, true, false);
+    partition_impl(arr, counts, mask, shift, block_size, stats, true, 0);
 }
 
 fn partition_impl<T: Radixable<K>, K: RadixKey>(
@@ -429,7 +433,7 @@ fn partition_impl<T: Radixable<K>, K: RadixKey>(
     block_size: usize,
     stats: &mut LocalStats,
     carry_boundary: bool,
-    cycles: bool,
+    cycle_mode: u8,
 ) {
     let length = arr.len();
     let size = length;
@@ -581,8 +585,8 @@ fn partition_impl<T: Radixable<K>, K: RadixKey>(
     stats.peak_directory_entries = stats.peak_directory_entries.max(total);
     #[cfg(feature = "cf_work")]
     let placement_start = std::time::Instant::now();
-    if cycles {
-        finalize_cycles(&mut arena, blocks, length, stats);
+    if cycle_mode != 0 {
+        finalize_cycles(&mut arena, blocks, length, stats, cycle_mode == 2);
     } else {
         finalize(&mut arena, blocks, length, stats);
     }
@@ -1136,6 +1140,7 @@ fn finalize_cycles<T: Copy>(
     mut blocks: Vec<usize>,
     length: usize,
     stats: &mut LocalStats,
+    scratch_paths: bool,
 ) {
     let full = length / arena.b;
     let tail = length % arena.b;
@@ -1159,34 +1164,31 @@ fn finalize_cycles<T: Copy>(
         stats.permutation_writes += tail;
         inverse[source] = NONE;
     }
-    // Every move fills one final destination. Its former source is the next
-    // empty target, unless it lies in scratch, where this path ends.
-    for target in 0..full {
-        let mut hole = arena.scratch_blocks + target;
-        if inverse[hole] != NONE {
-            continue;
+    // Every non-cycle path has a unique source outside the input target set.
+    // Starting there avoids probing every target in nearly fixed partitions.
+    if scratch_paths {
+        for source in 0..arena.scratch_blocks {
+            if inverse[source] == NONE {
+                continue;
+            }
+            let mut next = source;
+            let hole = loop {
+                let logical = inverse[next];
+                assert!(logical < full);
+                let target = arena.scratch_blocks + logical;
+                if inverse[target] == NONE {
+                    break target;
+                }
+                next = target;
+            };
+            drain_path(arena, &mut blocks, &mut inverse, hole, stats);
         }
-        loop {
-            let logical = hole - arena.scratch_blocks;
-            let source = blocks[logical];
-            if source == hole {
-                break;
+    } else {
+        for target in 0..full {
+            let hole = arena.scratch_blocks + target;
+            if inverse[hole] == NONE {
+                drain_path(arena, &mut blocks, &mut inverse, hole, stats);
             }
-            unsafe {
-                ptr::copy_nonoverlapping(
-                    arena.block(source),
-                    arena.block(hole),
-                    arena.b,
-                );
-            }
-            stats.permutation_writes += arena.b;
-            blocks[logical] = hole;
-            inverse[hole] = logical;
-            inverse[source] = NONE;
-            if source < arena.scratch_blocks {
-                break;
-            }
-            hole = source;
         }
     }
     // No live full scratch source remains after paths; scratch block zero is
@@ -1248,6 +1250,37 @@ fn finalize_cycles<T: Copy>(
     }
 }
 
+fn drain_path<T: Copy>(
+    arena: &mut Arena<T>,
+    blocks: &mut [usize],
+    inverse: &mut [usize],
+    mut hole: usize,
+    stats: &mut LocalStats,
+) {
+    loop {
+        let logical = hole - arena.scratch_blocks;
+        let source = blocks[logical];
+        if source == hole {
+            break;
+        }
+        unsafe {
+            ptr::copy_nonoverlapping(
+                arena.block(source),
+                arena.block(hole),
+                arena.b,
+            );
+        }
+        stats.permutation_writes += arena.b;
+        blocks[logical] = hole;
+        inverse[hole] = logical;
+        inverse[source] = NONE;
+        if source < arena.scratch_blocks {
+            break;
+        }
+        hole = source;
+    }
+}
+
 #[cfg(test)]
 mod reduction_tests {
     use super::*;
@@ -1257,6 +1290,7 @@ mod reduction_tests {
         tail: usize,
         map: &[usize],
         cycles: bool,
+        scratch_paths: bool,
     ) -> (Vec<u64>, usize) {
         let b = 4;
         let mut input = vec![999u64; full * b + tail];
@@ -1290,6 +1324,7 @@ mod reduction_tests {
                 map.to_vec(),
                 full * b + tail,
                 &mut stats,
+                scratch_paths,
             );
         } else {
             finalize(&mut arena, map.to_vec(), full * b + tail, &mut stats);
@@ -1306,8 +1341,13 @@ mod reduction_tests {
     ) {
         if map.len() == full + usize::from(tail != 0) {
             let (old, old_writes) =
-                mapped_case(full, scratch, tail, map, false);
-            let (new, new_writes) = mapped_case(full, scratch, tail, map, true);
+                mapped_case(full, scratch, tail, map, false, false);
+            let (new, new_writes) =
+                mapped_case(full, scratch, tail, map, true, false);
+            let (optimized, optimized_writes) =
+                mapped_case(full, scratch, tail, map, true, true);
+            assert_eq!(optimized, new);
+            assert_eq!(optimized_writes, new_writes);
             let expected: Vec<_> =
                 (0..full * 4 + tail).map(|x| x as u64).collect();
             assert_eq!(
@@ -1351,7 +1391,7 @@ mod reduction_tests {
     fn cycle_write_formula_and_mixed_components() {
         for k in 2..=9 {
             let map: Vec<_> = (0..k).map(|i| 1 + (i + 1) % k).collect();
-            let (_, writes) = mapped_case(k, 1, 0, &map, true);
+            let (_, writes) = mapped_case(k, 1, 0, &map, true, false);
             assert_eq!(writes, if k == 2 { 8 } else { (k + 1) * 4 });
         }
         for tail in [0, 1, 3] {
@@ -1359,8 +1399,8 @@ mod reduction_tests {
             if tail != 0 {
                 map.push(7);
             }
-            let (new, w) = mapped_case(6, 2, tail, &map, true);
-            let (old, ow) = mapped_case(6, 2, tail, &map, false);
+            let (new, w) = mapped_case(6, 2, tail, &map, true, false);
+            let (old, ow) = mapped_case(6, 2, tail, &map, false, false);
             assert_eq!(new, old);
             assert!(w <= ow);
         }

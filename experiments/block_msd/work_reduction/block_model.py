@@ -5,7 +5,7 @@ from itertools import permutations
 B = 4
 
 
-def run(full, scratch, tail, mapping, rotate):
+def run(full, scratch, tail, mapping, rotate, scratch_paths=False):
     blocks = list(mapping)
     memory = [[None] * B for _ in range(full + scratch)]
     owner = [None] * len(memory)
@@ -23,10 +23,22 @@ def run(full, scratch, tail, mapping, rotate):
             assert None not in final_tail
             writes += tail
             owner[source] = None
-        for target in range(full):
-            hole = scratch + target
-            if owner[hole] is not None:
-                continue
+        for start in range(scratch if scratch_paths else full):
+            if scratch_paths:
+                if owner[start] is None:
+                    continue
+                source = start
+                while True:
+                    logical = owner[source]
+                    assert logical is not None and logical < full
+                    hole = scratch + logical
+                    if owner[hole] is None:
+                        break
+                    source = hole
+            else:
+                hole = scratch + start
+                if owner[hole] is not None:
+                    continue
             while True:
                 logical = hole - scratch
                 source = blocks[logical]
@@ -104,6 +116,8 @@ def main():
                 for mapping in permutations(range(full + scratch), full + bool(tail)):
                     old = run(full, scratch, tail, mapping, False)
                     new = run(full, scratch, tail, mapping, True)
+                    optimized = run(full,scratch,tail,mapping,True,True)
+                    assert optimized == new
                     assert new <= old, (full, scratch, tail, mapping, old, new)
                     cases += 1
                     improved += new < old

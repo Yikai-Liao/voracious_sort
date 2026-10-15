@@ -159,7 +159,7 @@ fn random(s: &mut u64) -> u64 {
     *s ^= *s << 17;
     *s
 }
-const METHODS: [&str; 17] = [
+const METHODS: [&str; 21] = [
     "local_free",
     "reduction_control",
     "cached_two_arrays",
@@ -177,6 +177,10 @@ const METHODS: [&str; 17] = [
     "std_stable",
     "two_arrays_cycles",
     "hybrid_prepared_fused",
+    "scratch_path_cycles",
+    "two_arrays_scratch_paths",
+    "live_admission",
+    "admission_control",
 ];
 const CORE_METHODS: [usize; 15] =
     [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
@@ -210,19 +214,21 @@ fn sort<T: Radixable<K>, K: RadixKey>(
                 s.peak_scratch_records,
             ]);
         },
-        1 | 2 | 3 | 15 => {
+        1 | 2 | 3 | 15 | 17 | 18 => {
             use block_msd_research::reduction_node as node;
             let s = node::sort_reduced(
                 a,
                 8,
                 block,
                 node::CACHE_BUDGET,
-                if method == 3 || method == 15 {
+                if method == 17 || method == 18 {
+                    node::Placement::ScratchPathCycles
+                } else if method == 3 || method == 15 {
                     node::Placement::CycleFreeList
                 } else {
                     node::Placement::FreeList
                 },
-                method == 2 || method == 15,
+                method == 2 || method == 15 || method == 18,
             );
             #[cfg(feature = "cf_work")]
             {
@@ -239,6 +245,37 @@ fn sort<T: Radixable<K>, K: RadixKey>(
                 s.permutation_writes,
                 0,
                 s.peak_scratch_records,
+            ]);
+        },
+        19 | 20 => {
+            let s =
+                block_msd_research::reduction_admission::sort_with_lifetimes(
+                    a,
+                    8,
+                    block,
+                    node_local::CACHE_BUDGET,
+                    method == 19,
+                );
+            #[cfg(feature = "cf_work")]
+            {
+                let mut work = s.local.work;
+                work.placement_writes = s.local.permutation_writes;
+                WORK.with(|w| *w.borrow_mut() = work);
+            }
+            metrics[..8].copy_from_slice(&[
+                s.local.block_nodes,
+                s.local.cache_entries,
+                s.local.variation_records,
+                s.local.block_scatter_records,
+                s.local.cache_scatter_records,
+                s.local.permutation_writes,
+                0,
+                s.local.peak_scratch_records,
+            ]);
+            metrics[8..].copy_from_slice(&[
+                s.peak_retained_histogram_bytes,
+                s.max_cache_working_set,
+                s.root_cached as usize,
             ]);
         },
         4 | 7 => {

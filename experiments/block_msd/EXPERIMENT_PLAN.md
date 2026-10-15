@@ -1,5 +1,9 @@
 # Block MSD 实验安排
 
+Latest follow-up: the [749ca4d work-reduction plan](work_reduction/PLAN.md)
+has been implemented and measured in the [work-reduction report](work_reduction/REPORT.md).
+The earlier proposals and stopping criteria below remain historical context.
+
 目标是在稳定性与受限额外空间成立的前提下，分别量出扫描、块管理、归位时机和记录搬运的代价。每项实验保留独立对照；研究分支中的候选不自动成为默认实现。
 
 稳定分桶构造的前人出处见 [COUNT_FIRST.md](COUNT_FIRST.md#prior-art)。当前工作研究这些机制的实现取舍，不把共享边界与整块置换当成新发明。

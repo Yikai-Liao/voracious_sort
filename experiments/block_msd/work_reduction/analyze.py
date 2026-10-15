@@ -16,7 +16,10 @@ PAIRS = [('reduction_control','local_free'),('hybrid_control','hybrid'),
          ('hybrid_prepared','hybrid_control'),('hybrid_independent_mono','hybrid_control'),
          ('hybrid_fused_mono','hybrid_control'),('hybrid_fused_mono','hybrid_independent_mono'),
          ('two_arrays_cycles','cycle_placement'),('two_arrays_cycles','cached_two_arrays'),
-         ('hybrid_prepared_fused','hybrid_prepared'),('hybrid_prepared_fused','hybrid_fused_mono')]
+         ('hybrid_prepared_fused','hybrid_prepared'),('hybrid_prepared_fused','hybrid_fused_mono'),
+         ('scratch_path_cycles','cycle_placement'),('two_arrays_scratch_paths','cached_two_arrays'),
+         ('two_arrays_scratch_paths','scratch_path_cycles'),('two_arrays_scratch_paths','two_arrays_cycles'),
+         ('live_admission','admission_control'),('admission_control','cached_two_arrays')]
 
 
 def write(path, rows):

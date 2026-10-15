@@ -1,0 +1,10 @@
+Downloading pillow (6.6MiB)
+Downloading numpy (16.0MiB)
+Downloading fonttools (5.2MiB)
+Downloading matplotlib (9.4MiB)
+ Downloading fonttools
+ Downloading pillow
+ Downloading matplotlib
+ Downloading numpy
+Installed 11 packages in 11ms
+Plots generated from phase2 paired medians; matplotlib 3.11.2

@@ -1,0 +1,3 @@
+PASS: 200 cases; B1/B2 exact moves and heap; two-array deltas; admission control exact work; all admitted estimates and empirical root working sets within 256 KiB
+Admission changes whole-tree work in 4 cases; largest peak-heap increase 0 bytes; largest decrease 0 bytes
+PASS: 180 boundary case/method measurements; empirical root working-set checks

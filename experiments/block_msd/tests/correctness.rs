@@ -61,6 +61,34 @@ fn check<T: Radixable<K> + std::fmt::Debug + PartialEq, K: RadixKey>(
             two, cycles, r, b
         );
     }
+    for two in [false, true] {
+        use block_msd_research::reduction_node as node;
+        let mut values = source.clone();
+        node::sort_reduced(
+            &mut values,
+            r,
+            b,
+            node::CACHE_BUDGET,
+            node::Placement::ScratchPathCycles,
+            two,
+        );
+        assert_eq!(
+            values, expected,
+            "scratch-source cycle placement two={}",
+            two
+        );
+    }
+    for live in [false, true] {
+        let mut values = source.clone();
+        block_msd_research::reduction_admission::sort_with_lifetimes(
+            &mut values,
+            r,
+            b,
+            block_msd_research::node_local::CACHE_BUDGET,
+            live,
+        );
+        assert_eq!(values, expected, "lifetime admission live={}", live);
+    }
     for (prepared, fused) in [(true, false), (false, true), (true, true)] {
         let mut values = source.clone();
         block_msd_research::reduction_gate::sort_reduced(

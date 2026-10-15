@@ -1,14 +1,16 @@
 # Block MSD research archive
 
 This directory collects the serial stable block-MSD prototypes, their measurements,
-and the reasoning behind the experiments. The prototypes passed the recorded
-identity and sanitizer checks, but did not achieve competitive throughput against
-ordinary MSD across the tested scenarios. They remain research code.
+and the reasoning behind the experiments. Each stage records its own correctness,
+space accounting and performance limits. The active [work-reduction study](work_reduction/REPORT.md)
+implements the follow-up plan at 749ca4d, including independent reductions,
+compatible combinations and explicit negative cases. These remain research code.
 
 The branch starts from upstream commit `3dbdd7f`; all additions are under this
 directory. The current crate uses the upstream radix traits and existing MSD
-implementations through a local dependency. Its block-LSD comparison is frozen in
-`src/frozen_lsd/`, so it builds independently of the separate `block-lsd` branch.
+implementations through a local dependency. Historical LSD controls are frozen in `src/frozen_lsd/`; the current comparison
+uses the exact submitted source in `src/submitted_lsd/`. Both build independently
+of the separate `block-lsd` branch.
 
 The follow-up [scan experiment](scan_experiment/REPORT.md) compares early
 termination of the variation scan with the exact archived full-scan source and
@@ -22,8 +24,8 @@ in [COUNT_FIRST.md](COUNT_FIRST.md#prior-art).
 The [node-local materialization experiment](node_local_experiment/REPORT.md)
 independently tests per-node permutation and bounded contiguous stable MSD.
 
-The [combined-candidate follow-up](combined_experiment/REPORT.md) is the active
-comparison: three MSD combinations, the node-local baseline, submitted Block LSD
+The previous [combined-candidate follow-up](combined_experiment/REPORT.md), frozen
+at 749ca4d, compares three MSD combinations, the node-local baseline, submitted Block LSD
 at two block sizes, and ordinary/stable MSD plus Rust's stable sort. It adds
 strict reverse input and separate successful/last-inversion digit fixtures.
 
@@ -32,6 +34,12 @@ and measures prefix writeback, carried boundaries, leaf batching, budgeted joint
 counts, two admission gates and the single-layer/deferred minority paths.
 
 ## Reading the results
+
+- [Latest work-reduction report](work_reduction/REPORT.md): two-array cached kernel,
+  path/cycle placement, prepared fallback, fused evidence, combinations,
+  lifetime-aware admission and matched native/heap/work measurements.
+- [Reproduce the latest study](work_reduction/REPRODUCE.md) and
+  [space contract](work_reduction/SPACE.md).
 
 - [EXPERIMENT_PLAN.md](EXPERIMENT_PLAN.md): experiment order, controls, budgets,
   correctness gates and stopping criteria for the follow-up proposals.
@@ -51,7 +59,8 @@ counts, two admission gates and the single-layer/deferred minority paths.
 
 Paths in this table are relative to this directory. Versioned sources and reports
 are historical snapshots; their references to "current" or "active" describe
-that stage. The top-level report describes the final state.
+that stage. The active work-reduction report describes the latest stage; the top-level report
+is retained for the earlier progression.
 
 | Stage | Preserved source | Measurement and validation records |
 | --- | --- | --- |
@@ -68,6 +77,7 @@ that stage. The top-level report describes the final state.
 | Node-local materialization | `node_local_experiment/v1_free_list.rs`, active `src/node_local.rs` | [first-stage report](node_local_experiment/REPORT.md), `node_local_experiment/measurements/` |
 | Independent strategy comparison | `src/{node_local,carried_boundaries,leaf_batch,joint_histograms,materialization_gate,skew_paths}.rs`, `src/bin/strategy_experiment.rs` | [unified report](strategy_experiment/REPORT.md), raw samples, hashes and validation under `strategy_experiment/` |
 | Scan early-termination follow-up | `scan_experiment/full_scan.rs`, `src/count_first.rs` with `cf_early_scan`, `src/stable_baseline/` | [scan experiment report](scan_experiment/REPORT.md), `scan_experiment/measurements/`, comparison/counter summaries |
+| Work-reduction follow-up at 749ca4d | `src/reduction_{node,gate,stream,admission}.rs`, `src/work_reduction.rs`, `src/bin/work_reduction_experiment.rs` | [latest report](work_reduction/REPORT.md), paired first/second-stage matrices, diagnostics, boundary and kernel data under `work_reduction/` |
 
 Some early CSVs are retained both at the top level and beside their source
 snapshot. They are copies of the same observations, not independent trials.

@@ -7,8 +7,10 @@ from pathlib import Path
 import subprocess
 import time
 
-HERE = Path(__file__).resolve().parent
-ROOT = HERE.parent
+SOURCE = Path(__file__).resolve().parent
+HERE = Path(os.environ.get('MSD_REDUCTION_OUT', str(SOURCE)))
+HERE.mkdir(parents=True,exist_ok=True)
+ROOT = SOURCE.parent
 NATIVE = Path(os.environ.get('MSD_REDUCTION_NATIVE', '/tmp/block-msd-reduction-native/release'))
 DIAGNOSTIC = Path(os.environ.get('MSD_REDUCTION_DIAGNOSTIC', '/tmp/block-msd-reduction-diagnostic/release'))
 CPU = os.environ.get('MSD_CPU', '0')
@@ -36,7 +38,7 @@ def run_file(label, n, repeats, loads=LOADS, types=TYPES, methods='core', diagno
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('suite', choices=['pilot','full','diagnostics','boundaries','kernels','combined'])
+    parser.add_argument('suite', choices=['pilot','full','diagnostics','boundaries','kernels','combined','phase2_diagnostics','phase2_boundaries','focused'])
     args = parser.parse_args()
     if args.suite == 'pilot':
         for n in (1024, 16384):
@@ -60,11 +62,23 @@ def main():
         with (HERE/'kernel-comparison.csv').open('w') as output:
             subprocess.run(['taskset','-c',CPU,str(NATIVE/'work_kernel_experiment'),'100'],stdout=output,check=True)
         print('kernel-comparison.csv: PASS',flush=True)
+    elif args.suite == 'phase2_diagnostics':
+        methods='reduction_control,cached_two_arrays,cycle_placement,scratch_path_cycles,two_arrays_cycles,two_arrays_scratch_paths,hybrid_control,hybrid_prepared,hybrid_fused_mono,hybrid_prepared_fused,live_admission,admission_control'
+        for n in (1024,16384,262144,1048576):
+            run_file('phase2-diagnostics',n,0,methods=methods,diagnostic=True)
+    elif args.suite == 'phase2_boundaries':
+        methods='cached_two_arrays,admission_control,live_admission'
+        for layout, old, new in [('u32',28608,31488),('u64',12736,15232),('u128',4800,7104),('wide32',2368,3520),('large128',832,928)]:
+            for n in sorted({old-1,old,old+1,new-1,new,new+1}):
+                run_file('phase2-cache-'+layout,n,12,'uniform,deep_skew',layout,methods)
+    elif args.suite == 'focused':
+        methods='local_free,two_arrays_cycles,two_arrays_scratch_paths,hybrid_prepared_fused,hybrid_prepared,ordinary,stable_fixed,block_lsd,block_lsd512,std_stable'
+        run_file('focused',1048576,20,'uniform,deep_skew,digit_grouped,digit_tail_inversion','u32,wide32,large128',methods)
     elif args.suite == 'combined':
         # Run only after independent results justify both combinations.
-        methods='local_free,reduction_control,cached_two_arrays,cycle_placement,two_arrays_cycles,hybrid_control,hybrid_prepared,hybrid_independent_mono,hybrid_fused_mono,hybrid_prepared_fused,block_lsd,block_lsd512,ordinary,stable_fixed,std_stable'
+        methods='local_free,cached_two_arrays,cycle_placement,scratch_path_cycles,two_arrays_cycles,two_arrays_scratch_paths,hybrid_control,hybrid_prepared,hybrid_fused_mono,hybrid_prepared_fused,live_admission,admission_control,block_lsd512,std_stable'
         for n in (1024,16384,262144,1048576):
-            run_file('combined',n,15,methods=methods)
+            run_file('combined',n,14,methods=methods)
 
 
 if __name__ == '__main__':

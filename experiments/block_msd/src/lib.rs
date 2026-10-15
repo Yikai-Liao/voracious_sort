@@ -1026,3 +1026,4 @@ pub mod work_reduction;
 pub mod reduction_node;
 pub mod reduction_stream;
 pub mod reduction_gate;
+pub mod reduction_admission;

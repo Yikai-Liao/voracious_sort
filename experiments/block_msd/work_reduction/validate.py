@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Cross-check work ledgers against paired native allocation measurements."""
 import csv
+import os
 from pathlib import Path
 
-ROOT=Path(__file__).resolve().parent
+ROOT=Path(os.environ.get("MSD_REDUCTION_OUT",str(Path(__file__).resolve().parent)))
 KEY=('type','load','n','block')
 
 
