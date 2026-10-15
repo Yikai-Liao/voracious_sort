@@ -13,6 +13,11 @@ use std::{
 use voracious_radix_sort::{RadixKey, Radixable};
 
 pub const CACHE_BUDGET: usize = 256 * 1024;
+#[derive(Clone, Copy, Debug)]
+pub enum Placement {
+    FreeList,
+    PrefixWriteback,
+}
 #[derive(Default, Debug)]
 pub struct LocalStats {
     pub block_nodes: usize,
@@ -23,6 +28,7 @@ pub struct LocalStats {
     pub block_scatter_records: usize,
     pub cache_scatter_records: usize,
     pub permutation_writes: usize,
+    pub prefix_writeback_records: usize,
     pub peak_scratch_records: usize,
     pub peak_directory_entries: usize,
     pub max_cache_records: usize,
@@ -164,6 +170,22 @@ pub fn sort_with_budget<T: Radixable<K>, K: RadixKey>(
     block_size: usize,
     cache_budget: usize,
 ) -> LocalStats {
+    sort_with_placement(
+        arr,
+        radix,
+        block_size,
+        cache_budget,
+        Placement::FreeList,
+    )
+}
+
+pub fn sort_with_placement<T: Radixable<K>, K: RadixKey>(
+    arr: &mut [T],
+    radix: usize,
+    block_size: usize,
+    cache_budget: usize,
+    placement: Placement,
+) -> LocalStats {
     assert!((1..=8).contains(&radix));
     assert!(block_size > 0);
     let mut stats = LocalStats::default();
@@ -179,11 +201,11 @@ pub fn sort_with_budget<T: Radixable<K>, K: RadixKey>(
         return stats;
     }
     let bits = arr[0].type_size();
-    recurse(arr, bits, radix, block_size, cache_budget, &mut stats);
+    recurse(arr, bits, radix, block_size, cache_budget, placement, &mut stats);
     stats
 }
 
-fn cache_fits<T>(
+pub(crate) fn cache_fits<T>(
     length: usize,
     bits: usize,
     radix: usize,
@@ -212,6 +234,7 @@ fn recurse<T: Radixable<K>, K: RadixKey>(
     radix: usize,
     block_size: usize,
     cache_budget: usize,
+    placement: Placement,
     stats: &mut LocalStats,
 ) {
     if arr.len() < 2 || bits == 0 {
@@ -259,18 +282,33 @@ fn recurse<T: Radixable<K>, K: RadixKey>(
     }
     // partition finishes the permutation and destroys every block workspace.
     // Only this O(sigma) histogram survives while a child is being sorted.
-    partition(arr, &counts, mask, shift, block_size, stats);
+    match placement {
+        Placement::FreeList => {
+            partition(arr, &counts, mask, shift, block_size, stats)
+        },
+        Placement::PrefixWriteback => {
+            partition_prefix(arr, &counts, mask, shift, block_size, stats)
+        },
+    }
     let mut rest = arr;
     for count in counts {
         let (child, suffix) = rest.split_at_mut(count);
         rest = suffix;
         if count > 1 {
-            recurse(child, shift, radix, block_size, cache_budget, stats);
+            recurse(
+                child,
+                shift,
+                radix,
+                block_size,
+                cache_budget,
+                placement,
+                stats,
+            );
         }
     }
 }
 
-fn partition<T: Radixable<K>, K: RadixKey>(
+pub(crate) fn partition<T: Radixable<K>, K: RadixKey>(
     arr: &mut [T],
     counts: &[usize],
     mask: <<T as Radixable<K>>::Key as RadixKey>::Key,
@@ -460,7 +498,214 @@ fn partition<T: Radixable<K>, K: RadixKey>(
     // `arena` and all its directories are dropped here, before recursion.
 }
 
-fn cached_msd<T: Radixable<K>, K: RadixKey>(
+struct PrefixCursor<T> {
+    next: *mut T,
+    end: *mut T,
+    slot: usize,
+    logical: usize,
+}
+struct PrefixBucket {
+    full_pending: usize,
+    suffix_pending: usize,
+    interior_slot: usize,
+    suffix_slot: usize,
+    next_logical: usize,
+}
+
+fn partition_prefix<T: Radixable<K>, K: RadixKey>(
+    arr: &mut [T],
+    counts: &[usize],
+    mask: <<T as Radixable<K>>::Key as RadixKey>::Key,
+    shift: usize,
+    block: usize,
+    stats: &mut LocalStats,
+) {
+    let length = arr.len();
+    let full = length / block;
+    let tail = length % block;
+    // Keep the boundary-table policy identical in this placement experiment.
+    // Removing that table is a separate setup simplification.
+    let mut boundaries = Vec::new();
+    let mut end = 0;
+    for &count in counts {
+        end += count;
+        if end % block != 0 {
+            let logical = end / block;
+            if boundaries
+                .last()
+                .map_or(true, |&(previous, _)| previous != logical)
+            {
+                boundaries.push((logical, boundaries.len()));
+            }
+        }
+    }
+    assert_eq!(end, length);
+    let boundary = |logical| -> usize {
+        boundaries[boundaries
+            .binary_search_by_key(&logical, |&(index, _)| index)
+            .unwrap()]
+        .1
+    };
+    let boundary_slots = boundaries.len();
+    let mut slots = boundary_slots;
+    let mut buckets = Vec::with_capacity(counts.len());
+    let mut prefixes = Vec::with_capacity(counts.len());
+    let mut start = 0;
+    for &count in counts {
+        let end = start + count;
+        let prefix = if count > 0 && start % block != 0 {
+            boundary(start / block)
+        } else {
+            NONE
+        };
+        let suffix = if count > 0 && end % block != 0 {
+            boundary(end / block)
+        } else {
+            NONE
+        };
+        let full_pending = (end / block)
+            .saturating_sub(start / block + usize::from(start % block != 0));
+        let interior_slot = if full_pending > 0 {
+            let id = slots;
+            slots += 1;
+            id
+        } else {
+            NONE
+        };
+        buckets.push(PrefixBucket {
+            full_pending,
+            suffix_pending: if suffix != prefix { end % block } else { 0 },
+            interior_slot,
+            suffix_slot: suffix,
+            next_logical: start / block + usize::from(prefix != NONE),
+        });
+        prefixes.push((prefix, start % block, count, start / block));
+        start = end;
+    }
+    assert!(slots <= (2 * counts.len()).min(full + usize::from(tail != 0)));
+    let scratch_records = slots.checked_mul(block).unwrap();
+    let mut scratch = vec![MaybeUninit::<T>::uninit(); scratch_records];
+    let base = scratch.as_mut_ptr().cast::<T>();
+    let mut cursors = Vec::with_capacity(counts.len());
+    for (slot, offset, count, logical) in prefixes {
+        let (next, end) = if slot == NONE {
+            (ptr::null_mut(), ptr::null_mut())
+        } else {
+            let next = unsafe { base.add(slot * block + offset) };
+            (next, unsafe { next.add(count.min(block - offset)) })
+        };
+        cursors.push(PrefixCursor { next, end, slot, logical });
+    }
+    let mut filled = vec![0usize; slots];
+    let mut mapping = vec![NONE; full];
+    let mut completed = 0usize;
+    for input in 0..length {
+        let source = unsafe { arr.as_ptr().add(input) };
+        let digit = unsafe { (*source).extract(mask, shift) };
+        let cursor = &mut cursors[digit];
+        if cursor.next == cursor.end {
+            let bucket = &mut buckets[digit];
+            let (slot, take) = if bucket.full_pending > 0 {
+                bucket.full_pending -= 1;
+                (bucket.interior_slot, block)
+            } else if bucket.suffix_pending > 0 {
+                let take = bucket.suffix_pending;
+                bucket.suffix_pending = 0;
+                (bucket.suffix_slot, take)
+            } else {
+                panic!("extract changed bucket counts")
+            };
+            cursor.slot = slot;
+            cursor.logical = bucket.next_logical;
+            bucket.next_logical += 1;
+            cursor.next = unsafe { base.add(slot * block) };
+            cursor.end = unsafe { cursor.next.add(take) };
+        }
+        assert!(filled[cursor.slot] < block, "completed scratch block reused");
+        // Consume this record into scratch before any writeback to its prefix.
+        unsafe {
+            ptr::copy_nonoverlapping(source, cursor.next, 1);
+            cursor.next = cursor.next.add(1);
+        }
+        filled[cursor.slot] += 1;
+        if filled[cursor.slot] == block {
+            assert!(cursor.logical < full && mapping[cursor.logical] == NONE);
+            let written = (completed + 1).checked_mul(block).unwrap();
+            assert!(
+                written <= input + 1,
+                "writeback would overwrite unread input"
+            );
+            unsafe {
+                ptr::copy_nonoverlapping(
+                    base.add(cursor.slot * block),
+                    arr.as_mut_ptr().add(completed * block),
+                    block,
+                )
+            };
+            mapping[cursor.logical] = completed;
+            completed += 1;
+            if cursor.slot >= boundary_slots {
+                filled[cursor.slot] = 0;
+            }
+        }
+    }
+    for (cursor, bucket) in cursors.iter().zip(&buckets) {
+        assert_eq!(cursor.next, cursor.end, "extract changed bucket counts");
+        assert_eq!(bucket.full_pending, 0, "extract changed bucket counts");
+        assert_eq!(bucket.suffix_pending, 0, "extract changed bucket counts");
+    }
+    assert_eq!(completed, full);
+    if tail != 0 {
+        let slot = boundary(full);
+        assert_eq!(filled[slot], tail);
+        unsafe {
+            ptr::copy_nonoverlapping(
+                base.add(slot * block),
+                arr.as_mut_ptr().add(full * block),
+                tail,
+            )
+        };
+    }
+    stats.block_nodes += 1;
+    stats.block_scatter_records += length;
+    stats.prefix_writeback_records += length;
+    stats.peak_scratch_records =
+        stats.peak_scratch_records.max(scratch_records);
+    stats.peak_directory_entries = stats.peak_directory_entries.max(full);
+    drop(cursors);
+    drop(buckets);
+    drop(filled);
+    drop(scratch);
+    drop(boundaries);
+    // Every full physical prefix block now owns exactly one complete logical block.
+    let mut inverse = vec![NONE; full];
+    for (logical, &physical) in mapping.iter().enumerate() {
+        assert!(physical < full && inverse[physical] == NONE);
+        inverse[physical] = logical;
+    }
+    for logical in 0..full {
+        let source = mapping[logical];
+        if source == logical {
+            continue;
+        }
+        let other = inverse[logical];
+        unsafe {
+            for offset in 0..block {
+                ptr::swap(
+                    arr.as_mut_ptr().add(source * block + offset),
+                    arr.as_mut_ptr().add(logical * block + offset),
+                );
+            }
+        }
+        stats.permutation_writes += 2 * block;
+        mapping[other] = source;
+        inverse[source] = other;
+        mapping[logical] = logical;
+        inverse[logical] = logical;
+    }
+}
+
+pub(crate) fn cached_msd<T: Radixable<K>, K: RadixKey>(
     arr: &mut [T],
     scratch: &mut [MaybeUninit<T>],
     mut bits: usize,
@@ -538,7 +783,7 @@ fn cached_msd<T: Radixable<K>, K: RadixKey>(
     }
 }
 
-fn ordered<T: Radixable<K>, K: RadixKey>(arr: &mut [T]) -> bool {
+pub(crate) fn ordered<T: Radixable<K>, K: RadixKey>(arr: &mut [T]) -> bool {
     let first = arr[0].into_key_type();
     let mut different = 1;
     while different < arr.len() && arr[different].into_key_type() == first {

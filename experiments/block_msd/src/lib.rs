@@ -1004,3 +1004,13 @@ mod stream_tests {
         }
     }
 }
+
+pub mod leaf_batch;
+
+pub mod carried_boundaries;
+
+pub mod joint_histograms;
+
+pub mod skew_paths;
+
+pub mod materialization_gate;

@@ -65,6 +65,15 @@ fn forced_block_levels_partial_boundaries_and_cached_children() {
                             budget,
                         );
                         identical(&actual, &expected);
+                        let mut prefix = source.clone();
+                        node_local::sort_with_placement(
+                            &mut prefix,
+                            radix,
+                            block,
+                            budget,
+                            node_local::Placement::PrefixWriteback,
+                        );
+                        identical(&prefix, &expected);
                     }
                 }
             }
@@ -110,12 +119,86 @@ impl Radixable<u32> for Changing {
 #[test]
 fn changing_extractor_is_checked_before_reading_incomplete_output() {
     for budget in [0, node_local::CACHE_BUDGET] {
-        CALLS.store(0, AtomicOrdering::Relaxed);
-        let mut source: Vec<_> =
-            (0..257).map(|i| Changing((i * 61789) % 4093)).collect();
-        assert!(std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
-            node_local::sort_with_budget(&mut source, 8, 7, budget)
-        }))
-        .is_err());
+        for placement in [
+            node_local::Placement::FreeList,
+            node_local::Placement::PrefixWriteback,
+        ] {
+            CALLS.store(0, AtomicOrdering::Relaxed);
+            let mut source: Vec<_> =
+                (0..257).map(|i| Changing((i * 61789) % 4093)).collect();
+            assert!(std::panic::catch_unwind(std::panic::AssertUnwindSafe(
+                || node_local::sort_with_placement(
+                    &mut source,
+                    8,
+                    7,
+                    budget,
+                    placement
+                )
+            ))
+            .is_err());
+        }
+    }
+}
+
+#[derive(Clone, Copy, Debug, PartialEq)]
+#[repr(u8)]
+enum Tag {
+    A = 1,
+    B = 7,
+}
+#[derive(Clone, Copy, Debug)]
+struct Restricted<'a> {
+    key: std::num::NonZeroU32,
+    ordinal: usize,
+    tag: Tag,
+    reference: &'a u64,
+}
+impl PartialEq for Restricted<'_> {
+    fn eq(&self, b: &Self) -> bool {
+        self.key == b.key
+    }
+}
+impl PartialOrd for Restricted<'_> {
+    fn partial_cmp(&self, b: &Self) -> Option<Ordering> {
+        self.key.partial_cmp(&b.key)
+    }
+}
+impl Radixable<u32> for Restricted<'_> {
+    type Key = u32;
+    fn key(&self) -> u32 {
+        self.key.get()
+    }
+}
+#[test]
+fn prefix_blocks_preserve_restricted_values_and_references() {
+    let payload: Vec<_> = (0..2051).map(|i| i as u64 * 97).collect();
+    let source: Vec<_> = payload
+        .iter()
+        .enumerate()
+        .map(|(ordinal, reference)| Restricted {
+            key: std::num::NonZeroU32::new((ordinal * 691 % 4093 + 1) as u32)
+                .unwrap(),
+            ordinal,
+            tag: if ordinal % 2 == 0 { Tag::A } else { Tag::B },
+            reference,
+        })
+        .collect();
+    let mut expected = source.clone();
+    expected.sort_by_key(|r| r.key);
+    for radix in [1, 3, 8] {
+        for block in [1, 7, 64, 129] {
+            let mut actual = source.clone();
+            node_local::sort_with_placement(
+                &mut actual,
+                radix,
+                block,
+                0,
+                node_local::Placement::PrefixWriteback,
+            );
+            assert!(actual.iter().zip(&expected).all(|(a, b)| a.key == b.key
+                && a.ordinal == b.ordinal
+                && a.tag == b.tag
+                && std::ptr::eq(a.reference, b.reference)));
+        }
     }
 }

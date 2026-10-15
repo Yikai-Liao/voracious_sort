@@ -22,7 +22,14 @@ in [COUNT_FIRST.md](COUNT_FIRST.md#prior-art).
 The [node-local materialization experiment](node_local_experiment/REPORT.md)
 independently tests per-node permutation and bounded contiguous stable MSD.
 
+The [independent strategy comparison](strategy_experiment/REPORT.md) implements
+and measures prefix writeback, carried boundaries, leaf batching, budgeted joint
+counts, two admission gates and the single-layer/deferred minority paths.
+
 ## Reading the results
+
+- [EXPERIMENT_PLAN.md](EXPERIMENT_PLAN.md): experiment order, controls, budgets,
+  correctness gates and stopping criteria for the follow-up proposals.
 
 - [REPORT.md](REPORT.md): progression, correctness coverage, space accounting,
   performance results and remaining gaps.
@@ -53,6 +60,8 @@ that stage. The top-level report describes the final state.
 | Endpoint with standard stable leaves | active crate, feature `cf_std_leaf` | `bench-endpoint-std-N.csv`, `comparison-endpoint-std.csv` |
 | Focused normal timing and phase diagnosis | `profile_normal_v1/`, `src/bin/profile_count_first.rs`, `src/phase_{algo,ordinary}/` | `focused-normal-*.csv`, `phases-*.csv`, `profile-*.{csv,log,txt}`, `profile-normal-hashes.txt` |
 | Compact remaining-count draft | `count_first_compact_draft/` | Uncompiled draft; no measurement or correctness claim |
+| Node-local materialization | `node_local_experiment/v1_free_list.rs`, active `src/node_local.rs` | [first-stage report](node_local_experiment/REPORT.md), `node_local_experiment/measurements/` |
+| Independent strategy comparison | `src/{node_local,carried_boundaries,leaf_batch,joint_histograms,materialization_gate,skew_paths}.rs`, `src/bin/strategy_experiment.rs` | [unified report](strategy_experiment/REPORT.md), raw samples, hashes and validation under `strategy_experiment/` |
 | Scan early-termination follow-up | `scan_experiment/full_scan.rs`, `src/count_first.rs` with `cf_early_scan`, `src/stable_baseline/` | [scan experiment report](scan_experiment/REPORT.md), `scan_experiment/measurements/`, comparison/counter summaries |
 
 Some early CSVs are retained both at the top level and beside their source
