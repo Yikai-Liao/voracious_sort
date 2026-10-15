@@ -41,7 +41,9 @@ Last version tested/used:
 
 ## License
 
-This project is under the **MIT** license.
+This project is under the **MIT** license, except the block LSD sort adapted
+from Robert Clausecker’s Radsort, which is under **BSD-2-Clause** (see
+[LICENSE-BSD-2-Clause](LICENSE-BSD-2-Clause)).
 
 See the license file.
 
@@ -118,6 +120,25 @@ each elements. For a detail example, I let the reader read the Wikipedia page on
 
 <sup>[1]</sup>: If a radix of 8 is choosen, level 1 is the first 8 bits, level
 2 is the next 8 following bits, and so on until there is no more bit to handle.
+
+## Block LSD sort
+
+`block_lsd_stable_radixsort` is a single-threaded stable sort using the existing
+`Radixable` and `RadixKey` traits. It supports custom records and leaves the
+`voracious_*` dispatchers unchanged.
+
+```rust
+use voracious_radix_sort::block_lsd_stable_radixsort;
+let mut arr = [42u32, 7, 42, 0];
+block_lsd_stable_radixsort(&mut arr, 8, 512);
+assert_eq!(arr, [0, 7, 42, 42]);
+```
+
+`radix` is the number of bits per digit (1..=8); `block_size` is a positive
+number of elements. Values 8 and 512 match the original C implementation.
+For fixed radix and record size, auxiliary space is O(block_size + n / block_size),
+which is O(sqrt(n)) when block_size is proportional to sqrt(n).
+See [algorithm and additions](docs/block_lsd.md).
 
 ## Benchmarks
 

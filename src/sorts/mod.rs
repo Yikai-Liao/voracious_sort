@@ -1,4 +1,5 @@
 pub mod american_flag_sort;
+pub mod block_lsd_stable_sort;
 pub mod boolean_sort;
 pub mod comparative_sort;
 pub mod counting_sort;
