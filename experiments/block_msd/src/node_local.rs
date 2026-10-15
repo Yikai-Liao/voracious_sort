@@ -16,6 +16,7 @@ pub const CACHE_BUDGET: usize = 256 * 1024;
 #[derive(Clone, Copy, Debug)]
 pub enum Placement {
     FreeList,
+    CarriedFreeList,
     PrefixWriteback,
 }
 #[derive(Default, Debug)]
@@ -286,6 +287,9 @@ fn recurse<T: Radixable<K>, K: RadixKey>(
         Placement::FreeList => {
             partition(arr, &counts, mask, shift, block_size, stats)
         },
+        Placement::CarriedFreeList => {
+            partition_carried(arr, &counts, mask, shift, block_size, stats)
+        },
         Placement::PrefixWriteback => {
             partition_prefix(arr, &counts, mask, shift, block_size, stats)
         },
@@ -315,6 +319,29 @@ pub(crate) fn partition<T: Radixable<K>, K: RadixKey>(
     shift: usize,
     block_size: usize,
     stats: &mut LocalStats,
+) {
+    partition_impl(arr, counts, mask, shift, block_size, stats, false);
+}
+
+pub(crate) fn partition_carried<T: Radixable<K>, K: RadixKey>(
+    arr: &mut [T],
+    counts: &[usize],
+    mask: <<T as Radixable<K>>::Key as RadixKey>::Key,
+    shift: usize,
+    block_size: usize,
+    stats: &mut LocalStats,
+) {
+    partition_impl(arr, counts, mask, shift, block_size, stats, true);
+}
+
+fn partition_impl<T: Radixable<K>, K: RadixKey>(
+    arr: &mut [T],
+    counts: &[usize],
+    mask: <<T as Radixable<K>>::Key as RadixKey>::Key,
+    shift: usize,
+    block_size: usize,
+    stats: &mut LocalStats,
+    carry_boundary: bool,
 ) {
     let length = arr.len();
     let size = length;
@@ -370,62 +397,12 @@ pub(crate) fn partition<T: Radixable<K>, K: RadixKey>(
         last_length: if tail > 0 { tail } else { block_size },
         remaining: length,
     };
-    let mut boundaries = Vec::<(usize, usize)>::new();
-    let mut end = 0;
-    for &count in counts.iter() {
-        end += count;
-        if end % arena.b != 0 {
-            let index = end / arena.b;
-            if boundaries
-                .last()
-                .map_or(true, |&(previous, _)| previous != index)
-            {
-                boundaries.push((index, arena.allocate()));
-            }
-        }
-    }
-    debug_assert!(boundaries.len() <= sigma);
-    assert_eq!(end, size);
-    let boundary = |index: usize| -> usize {
-        boundaries[boundaries
-            .binary_search_by_key(&index, |&(i, _)| i)
-            .expect("missing shared boundary")]
-        .1
+    let (mut buckets, mut cursors, boundaries) = if carry_boundary {
+        let (buckets, cursors) = setup_carried(&mut arena, counts, size);
+        (buckets, cursors, Vec::new())
+    } else {
+        setup_boundaries(&mut arena, counts, size)
     };
-    let mut buckets = Vec::with_capacity(sigma);
-    let mut cursors: Vec<Cursor<T>> = Vec::with_capacity(sigma);
-    let mut start = 0;
-    for &count in counts.iter() {
-        let end = start + count;
-        let prefix = if count > 0 && start % arena.b != 0 {
-            boundary(start / arena.b)
-        } else {
-            NONE
-        };
-        let suffix = if count > 0 && end % arena.b != 0 {
-            boundary(end / arena.b)
-        } else {
-            NONE
-        };
-        let offset = start % arena.b;
-        let (next, cursor_end) = if prefix == NONE {
-            (ptr::null_mut(), ptr::null_mut())
-        } else {
-            let base = arena.block(prefix);
-            let take = count.min(arena.b - offset);
-            unsafe { (base.add(offset), base.add(offset + take)) }
-        };
-        cursors.push(Cursor { next, end: cursor_end });
-        buckets.push(Bucket {
-            prefix,
-            suffix,
-            full_pending: (end / arena.b)
-                .saturating_sub(start / arena.b + usize::from(offset != 0)),
-            suffix_pending: if suffix != prefix { end % arena.b } else { 0 },
-            interior: Chain::new(),
-        });
-        start = end;
-    }
     let mut remaining = size;
     while remaining > 0 {
         let (id, offset, available) = input.span(&arena);
@@ -496,6 +473,121 @@ pub(crate) fn partition<T: Radixable<K>, K: RadixKey>(
     stats.peak_directory_entries = stats.peak_directory_entries.max(total);
     finalize(&mut arena, blocks, length, stats);
     // `arena` and all its directories are dropped here, before recursion.
+}
+
+// Retaining this directory until assembly preserves the original partition's
+// allocation lifetime. Only the carried setup below avoids the allocation.
+fn setup_boundaries<T: Copy>(
+    arena: &mut Arena<T>,
+    counts: &[usize],
+    size: usize,
+) -> (Vec<Bucket>, Vec<Cursor<T>>, Vec<(usize, usize)>) {
+    let mut boundaries = Vec::<(usize, usize)>::new();
+    let mut end = 0;
+    for &count in counts.iter() {
+        end += count;
+        if end % arena.b != 0 {
+            let index = end / arena.b;
+            if boundaries
+                .last()
+                .map_or(true, |&(previous, _)| previous != index)
+            {
+                boundaries.push((index, arena.allocate()));
+            }
+        }
+    }
+    debug_assert!(boundaries.len() <= counts.len());
+    assert_eq!(end, size);
+    let boundary = |index: usize| -> usize {
+        boundaries[boundaries
+            .binary_search_by_key(&index, |&(i, _)| i)
+            .expect("missing shared boundary")]
+        .1
+    };
+    let mut buckets = Vec::with_capacity(counts.len());
+    let mut cursors: Vec<Cursor<T>> = Vec::with_capacity(counts.len());
+    let mut start = 0;
+    for &count in counts.iter() {
+        let end = start + count;
+        let prefix = if count > 0 && start % arena.b != 0 {
+            boundary(start / arena.b)
+        } else {
+            NONE
+        };
+        let suffix = if count > 0 && end % arena.b != 0 {
+            boundary(end / arena.b)
+        } else {
+            NONE
+        };
+        let offset = start % arena.b;
+        let (next, cursor_end) = if prefix == NONE {
+            (ptr::null_mut(), ptr::null_mut())
+        } else {
+            let base = arena.block(prefix);
+            let take = count.min(arena.b - offset);
+            unsafe { (base.add(offset), base.add(offset + take)) }
+        };
+        cursors.push(Cursor { next, end: cursor_end });
+        buckets.push(Bucket {
+            prefix,
+            suffix,
+            full_pending: (end / arena.b)
+                .saturating_sub(start / arena.b + usize::from(offset != 0)),
+            suffix_pending: if suffix != prefix { end % arena.b } else { 0 },
+            interior: Chain::new(),
+        });
+        start = end;
+    }
+    (buckets, cursors, boundaries)
+}
+
+// Bucket intervals arrive in logical order. A partial end is exactly the next
+// nonempty bucket's partial start, so one carried ID replaces the boundary map.
+fn setup_carried<T: Copy>(
+    arena: &mut Arena<T>,
+    counts: &[usize],
+    size: usize,
+) -> (Vec<Bucket>, Vec<Cursor<T>>) {
+    let mut buckets = Vec::with_capacity(counts.len());
+    let mut cursors = Vec::with_capacity(counts.len());
+    let mut start = 0;
+    let mut shared_tail = NONE;
+    for &count in counts {
+        let end = start + count;
+        let offset = start % arena.b;
+        let prefix = if count > 0 && offset != 0 { shared_tail } else { NONE };
+        debug_assert!(count == 0 || offset == 0 || prefix != NONE);
+        let suffix = if count == 0 || end % arena.b == 0 {
+            NONE
+        } else if start / arena.b == end / arena.b && prefix != NONE {
+            prefix
+        } else {
+            arena.allocate()
+        };
+        // Empty buckets carry no segments and must preserve the shared ID.
+        if count != 0 {
+            shared_tail = suffix;
+        }
+        let (next, cursor_end) = if prefix == NONE {
+            (ptr::null_mut(), ptr::null_mut())
+        } else {
+            let base = arena.block(prefix);
+            let take = count.min(arena.b - offset);
+            unsafe { (base.add(offset), base.add(offset + take)) }
+        };
+        cursors.push(Cursor { next, end: cursor_end });
+        buckets.push(Bucket {
+            prefix,
+            suffix,
+            full_pending: (end / arena.b)
+                .saturating_sub(start / arena.b + usize::from(offset != 0)),
+            suffix_pending: if suffix != prefix { end % arena.b } else { 0 },
+            interior: Chain::new(),
+        });
+        start = end;
+    }
+    assert_eq!(start, size);
+    (buckets, cursors)
 }
 
 struct PrefixCursor<T> {
@@ -885,6 +977,99 @@ fn finalize<T: Copy>(
                 arena.input.add(full * arena.b),
                 length % arena.b,
             );
+        }
+    }
+}
+
+#[cfg(test)]
+mod carried_setup_tests {
+    use super::*;
+    fn arena(b: usize, sigma: usize) -> Arena<'static, u64> {
+        let blocks = sigma + 8;
+        Arena {
+            input: ptr::null_mut(),
+            scratch: vec![MaybeUninit::uninit(); blocks * b],
+            scratch_blocks: blocks,
+            b,
+            next: vec![NONE; blocks],
+            free: (0..blocks).collect(),
+            live: vec![false; blocks],
+            stats: Stats::default(),
+            _borrow: PhantomData,
+        }
+    }
+
+    fn cursor_offsets(
+        arena: &Arena<u64>,
+        cursor: &Cursor<u64>,
+    ) -> (usize, usize) {
+        if cursor.next.is_null() {
+            assert!(cursor.end.is_null());
+            return (NONE, NONE);
+        }
+        let base = arena.scratch.as_ptr() as usize;
+        ((cursor.next as usize - base) / 8, (cursor.end as usize - base) / 8)
+    }
+
+    fn compare(counts: &[usize], b: usize) {
+        let mut old = arena(b, counts.len());
+        let mut new = arena(b, counts.len());
+        let size = counts.iter().sum();
+        let (old_buckets, old_cursors, boundaries) =
+            setup_boundaries(&mut old, counts, size);
+        let (new_buckets, new_cursors) = setup_carried(&mut new, counts, size);
+        for (a, b) in old_buckets.iter().zip(&new_buckets) {
+            assert_eq!(
+                (a.prefix, a.suffix, a.full_pending, a.suffix_pending),
+                (b.prefix, b.suffix, b.full_pending, b.suffix_pending),
+                "counts={:?}, block={}",
+                counts,
+                old.b
+            );
+            assert_eq!(
+                (a.interior.first, a.interior.last, a.interior.blocks),
+                (b.interior.first, b.interior.last, b.interior.blocks)
+            );
+        }
+        for (a, b) in old_cursors.iter().zip(&new_cursors) {
+            assert_eq!(cursor_offsets(&old, a), cursor_offsets(&new, b));
+        }
+        drop(boundaries);
+        // Same free-stack suffix and allocated IDs imply the same allocation
+        // order; next/live and peak also cover the real Arena side effects.
+        assert_eq!(old.free, new.free);
+        assert_eq!(old.next, new.next);
+        assert_eq!(old.live, new.live);
+        assert_eq!(old.stats.peak_live_blocks, new.stats.peak_live_blocks);
+    }
+
+    #[test]
+    fn carried_tail_matches_boundary_map_for_exhaustive_small_counts() {
+        for sigma in 1..=6 {
+            for word in 0..5usize.pow(sigma as u32) {
+                let counts: Vec<_> = (0..sigma)
+                    .map(|i| (word / 5usize.pow(i as u32)) % 5)
+                    .collect();
+                for b in 1..=7 {
+                    compare(&counts, b);
+                }
+            }
+        }
+    }
+
+    #[test]
+    fn carried_tail_matches_boundary_map_with_sparse_256_buckets() {
+        let mut seed = 0x6a09e667f3bcc909u64;
+        for trial in 0..1024 {
+            let mut counts = vec![0; 256];
+            for count in &mut counts {
+                seed ^= seed << 13;
+                seed ^= seed >> 7;
+                seed ^= seed << 17;
+                *count =
+                    if seed & 3 == 0 { 0 } else { (seed as usize >> 8) % 513 };
+            }
+            compare(&counts, [1, 2, 7, 64, 129, 257][trial % 6]);
         }
     }
 }

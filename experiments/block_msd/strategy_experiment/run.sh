@@ -11,6 +11,6 @@ for strategy_size do
  taskset -c "${MSD_CPU:-0}" "$CARGO_TARGET_DIR/release/strategy_experiment" \
   "$strategy_size" "${MSD_REPEATS:-9}" "${MSD_BLOCK:-64}" \
   "${MSD_LOADS:-uniform,deep_skew,skew95,shared_prefix,sorted,descending,almost_sorted}" \
-  "${MSD_TYPES:-u32,u64,u128,wide32,large128}" > "$strategy_out/normal-$strategy_size.csv"
+  "${MSD_TYPES:-u32,u64,u128,wide32,large128}" "${MSD_METHODS:-all}" > "$strategy_out/normal-$strategy_size.csv"
 done
 python3 strategy_experiment/analyze.py "$strategy_out"/normal-*.csv > "$strategy_out/comparison.csv"

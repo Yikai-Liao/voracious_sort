@@ -1014,3 +1014,10 @@ pub mod joint_histograms;
 pub mod skew_paths;
 
 pub mod materialization_gate;
+
+pub mod combined_stream;
+
+// Frozen external examples use the submitted crate namespace; benchmark oracles
+// exercise this reference, which is excluded from this experiment's rustdoc.
+#[cfg(not(doc))]
+pub mod submitted_lsd;

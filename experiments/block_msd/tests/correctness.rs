@@ -55,6 +55,37 @@ fn check<T: Radixable<K> + std::fmt::Debug + PartialEq, K: RadixKey>(
     );
     assert_eq!(prefix, expected, "prefix writeback r={} b={}", r, b);
 
+    for skip_monotone in [false, true] {
+        let mut combined = source.clone();
+        block_msd_research::materialization_gate::sort_with_options(
+            &mut combined,
+            r,
+            b,
+            block_msd_research::node_local::CACHE_BUDGET,
+            block_msd_research::materialization_gate::Gate::DyadicPotential,
+            true,
+            skip_monotone,
+        );
+        assert_eq!(
+            combined, expected,
+            "combined r={} b={} mono={}",
+            r, b, skip_monotone
+        );
+        let mut hybrid = source.clone();
+        block_msd_research::materialization_gate::sort_hybrid(
+            &mut hybrid,
+            r,
+            b,
+            block_msd_research::node_local::CACHE_BUDGET,
+            skip_monotone,
+        );
+        assert_eq!(
+            hybrid, expected,
+            "hybrid r={} b={} mono={}",
+            r, b, skip_monotone
+        );
+    }
+
     let mut pure = source.clone();
     let mut actual = source;
     let mut dense = actual.clone();

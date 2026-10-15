@@ -1,5 +1,8 @@
 # Independent block-MSD strategy comparison
 
+These measurements use commit `04e850a`. Check out that commit for its exact
+13-method harness; the active follow-up is [combined_experiment](../combined_experiment/REPORT.md).
+
 This experiment compares the proposed mechanisms separately. The original
 full-scan Stream/Writer implementation remains the default research entry;
 none of these candidates is installed in the production dispatcher.

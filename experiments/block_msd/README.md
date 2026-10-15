@@ -22,6 +22,11 @@ in [COUNT_FIRST.md](COUNT_FIRST.md#prior-art).
 The [node-local materialization experiment](node_local_experiment/REPORT.md)
 independently tests per-node permutation and bounded contiguous stable MSD.
 
+The [combined-candidate follow-up](combined_experiment/REPORT.md) is the active
+comparison: three MSD combinations, the node-local baseline, submitted Block LSD
+at two block sizes, and ordinary/stable MSD plus Rust's stable sort. It adds
+strict reverse input and separate successful/last-inversion digit fixtures.
+
 The [independent strategy comparison](strategy_experiment/REPORT.md) implements
 and measures prefix writeback, carried boundaries, leaf batching, budgeted joint
 counts, two admission gates and the single-layer/deferred minority paths.

@@ -90,3 +90,9 @@
 ## 本轮交付边界
 
 用户随后授权并行实现：本轮八项均形成独立候选，再由统一程序串行比较。13 个方法包括 full-scan、free-list、prefix、carry、leaf-batch、joint 0/512KiB、R4、整数势函数、single minority、deferred chain、ordinary 与正确稳定 MSD。各机制不叠加；结果见 [统一报告](strategy_experiment/REPORT.md)。生产 dispatcher、公开库 API 和 LSD 分支保持原有范围。
+
+## 联合候选与参考排序补测
+
+独立实验完成后，再测正交组合：全局 carry＋leaf batch，节点归位 carry＋势函数＋全局组合回退，以及独立打开 digit 单调免搬运的版本。新一轮只保留这三个组合、节点归位基线、Block LSD 的 64/512 两种块长、ordinary MSD、正确 stable MSD、Rust stable sort，共九项；不重跑旧十一项消融。
+
+补测保留原 descending，并新增严格 `n-1..0` 反序，以及 digit 有序但全 key 未排序、最后一对才逆序两个定向输入。九项采用同进程轮换；当前结果与旧二进制数据分目录保存。范围压缩不混入组合。详见 [联合候选报告](combined_experiment/REPORT.md)。

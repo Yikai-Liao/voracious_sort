@@ -158,7 +158,7 @@ fn random(s: &mut u64) -> u64 {
     *s ^= *s << 17;
     *s
 }
-const METHODS: [&str; 13] = [
+const METHODS: [&str; 22] = [
     "full_scan",
     "local_free",
     "local_prefix",
@@ -172,14 +172,26 @@ const METHODS: [&str; 13] = [
     "deferred_chain",
     "ordinary",
     "stable_fixed",
+    "std_stable",
+    "stream_carry_leaf",
+    "local_carried",
+    "gate_carried",
+    "mono_gate_carried",
+    "block_lsd",
+    "block_lsd512",
+    "hybrid",
+    "hybrid_mono",
 ];
+const CORE_METHODS: [usize; 9] = [1, 14, 20, 21, 18, 19, 11, 12, 13];
+
 fn sort<T: Radixable<K>, K: RadixKey>(
     a: &mut [T],
     method: usize,
     block: usize,
-) -> [usize; 8] {
-    match method {
-        0 | 3 | 4 => {
+) -> [usize; 11] {
+    let mut monotone = [0; 3];
+    let work = match method {
+        0 | 3 | 4 | 14 => {
             let s = match method {
                 0 => count_first_full_scan::block_msd_stable_radixsort(
                     a, 8, block,
@@ -187,6 +199,7 @@ fn sort<T: Radixable<K>, K: RadixKey>(
                 3 => {
                     carried_boundaries::block_msd_stable_radixsort(a, 8, block)
                 },
+                14 => block_msd_research::combined_stream::block_msd_stable_radixsort(a, 8, block),
                 _ => leaf_batch::block_msd_stable_radixsort(a, 8, block),
             };
             [
@@ -200,9 +213,11 @@ fn sort<T: Radixable<K>, K: RadixKey>(
                 0,
             ]
         },
-        1 | 2 => {
+        1 | 2 | 15 => {
             let placement = if method == 1 {
                 node_local::Placement::FreeList
+            } else if method == 15 {
+                node_local::Placement::CarriedFreeList
             } else {
                 node_local::Placement::PrefixWriteback
             };
@@ -242,19 +257,36 @@ fn sort<T: Radixable<K>, K: RadixKey>(
                 s.prepared_rejected_records,
             ]
         },
-        7 | 8 => {
+        7 | 8 | 16 | 17 | 20 | 21 => {
             let gate = if method == 7 {
                 materialization_gate::Gate::Retired
             } else {
                 materialization_gate::Gate::DyadicPotential
             };
-            let s = materialization_gate::sort_with_gate(
-                a,
-                8,
-                block,
-                node_local::CACHE_BUDGET,
-                gate,
-            );
+            let s = if method >= 20 {
+                materialization_gate::sort_hybrid(
+                    a,
+                    8,
+                    block,
+                    node_local::CACHE_BUDGET,
+                    method == 21,
+                )
+            } else {
+                materialization_gate::sort_with_options(
+                    a,
+                    8,
+                    block,
+                    node_local::CACHE_BUDGET,
+                    gate,
+                    method >= 16,
+                    method == 17,
+                )
+            };
+            monotone = [
+                s.monotone_records,
+                s.monotone_nodes,
+                s.skipped_scatter_records,
+            ];
             [
                 s.accepted_records,
                 s.retired_records,
@@ -298,8 +330,24 @@ fn sort<T: Radixable<K>, K: RadixKey>(
             stable_baseline::msd_stable_radixsort(a, 8);
             [0; 8]
         },
+        13 => {
+            a.sort_by_key(|value| value.into_key_type());
+            [0; 8]
+        },
+        18 | 19 => {
+            block_msd_research::submitted_lsd::block_lsd_stable_radixsort(
+                a,
+                8,
+                if method == 19 { 512 } else { block },
+            );
+            [0; 8]
+        },
         _ => unreachable!(),
-    }
+    };
+    let mut result = [0; 11];
+    result[..8].copy_from_slice(&work);
+    result[8..].copy_from_slice(&monotone);
+    result
 }
 fn run<T: Radixable<K> + Verified, K: RadixKey>(
     name: &str,
@@ -317,8 +365,31 @@ fn run<T: Radixable<K> + Verified, K: RadixKey>(
     if load == "sorted" || load == "descending" || load == "almost_sorted" {
         source.sort_by_key(|value| value.into_key_type());
     }
-    if load == "descending" {
+    if load == "descending" || load == "reverse_unique" {
         source.reverse();
+    }
+    if load == "reverse_unique" {
+        assert!(
+            source
+                .windows(2)
+                .all(|pair| pair[0].into_key_type() > pair[1].into_key_type()),
+            "reverse_unique must be strictly decreasing in converted keys"
+        );
+    }
+    if source.len() > 2
+        && (load == "digit_grouped" || load == "digit_tail_inversion")
+    {
+        let dummy = source[0];
+        let shift = dummy.type_size() - 8;
+        let mask = dummy.default_mask(8) << dummy.usize_to_keytype(shift);
+        let inversion = source.windows(2).position(|p| {
+            p[1].extract(mask, shift) < p[0].extract(mask, shift)
+        });
+        assert_eq!(
+            inversion,
+            if load == "digit_grouped" { None } else { Some(source.len() - 2) },
+            "top digit fixture"
+        );
     }
     if load == "almost_sorted" {
         let mut seed = 961748941;
@@ -327,6 +398,11 @@ fn run<T: Radixable<K> + Verified, K: RadixKey>(
             source.swap(i, other);
         }
     }
+    let methods: Vec<usize> = match std::env::args().nth(6).as_deref() {
+        None | Some("core") => CORE_METHODS.to_vec(),
+        Some("all") => (0..METHODS.len()).collect(),
+        _ => panic!("method set must be core or all"),
+    };
     let mut reference = source.clone();
     reference.sort_by_key(|v| v.into_key_type());
     let mut lookup = source.clone();
@@ -345,15 +421,15 @@ fn run<T: Radixable<K> + Verified, K: RadixKey>(
         }
     };
     let mut a = source.clone();
-    for method in 0..METHODS.len() {
+    for &method in &methods {
         a.copy_from_slice(&source);
         sort::<T, K>(&mut a, method, block);
         verify(&a, method);
     }
     let mut rows = Vec::new();
     for sample in 0..repeats {
-        for offset in 0..METHODS.len() {
-            let method = (sample + offset) % METHODS.len();
+        for offset in 0..methods.len() {
+            let method = methods[(sample + offset) % methods.len()];
             a.copy_from_slice(&source);
             let start = Instant::now();
             let metrics =
@@ -364,13 +440,13 @@ fn run<T: Radixable<K> + Verified, K: RadixKey>(
         }
     }
     let mut peaks = [0; METHODS.len()];
-    for method in 0..METHODS.len() {
+    for &method in &methods {
         a.copy_from_slice(&source);
         LIVE.store(0, Ordering::Relaxed);
         PEAK.store(0, Ordering::Relaxed);
         TRACK.store(true, Ordering::Relaxed);
         let stats = sort::<T, K>(&mut a, method, block);
-        drop(stats);
+        let _ = stats;
         TRACK.store(false, Ordering::Relaxed);
         assert_eq!(LIVE.load(Ordering::Relaxed), 0);
         peaks[method] = PEAK.load(Ordering::Relaxed);
@@ -391,14 +467,23 @@ fn run<T: Radixable<K> + Verified, K: RadixKey>(
         for value in metrics {
             print!(",{}", value);
         }
-        println!();
+        println!(
+            ",{}",
+            if method == 19 {
+                512
+            } else if matches!(method, 11 | 12 | 13) {
+                0
+            } else {
+                block
+            }
+        );
     }
 }
 fn main() {
     let args: Vec<String> = std::env::args().collect();
     let n = args.get(1).map(|s| s.parse().unwrap()).unwrap_or(100_000);
     let repeats = args.get(2).map(|s| s.parse().unwrap()).unwrap_or(3);
-    println!("type,load,n,block,algorithm,sample,ns,peak_heap,work1,work2,work3,work4,work5,work6,work7,work8");
+    println!("type,load,n,block,algorithm,sample,ns,peak_heap,work1,work2,work3,work4,work5,work6,work7,work8,work9,work10,work11,method_block");
     let blocks: Vec<usize> = if let Some(value) = args.get(3) {
         vec![value.parse().unwrap()]
     } else {
@@ -411,6 +496,9 @@ fn main() {
         "shared_prefix",
         "sorted",
         "descending",
+        "reverse_unique",
+        "digit_grouped",
+        "digit_tail_inversion",
         "almost_sorted",
     ]
     .iter()
@@ -422,12 +510,30 @@ fn main() {
         {
             continue;
         }
+        if load == "reverse_unique" {
+            assert!(
+                n <= u32::MAX as usize,
+                "unique keys must fit every layout"
+            );
+        }
         let mut seed = 61789;
         let raw: Vec<u128> = (0..n)
             .map(|i| {
+                if load == "reverse_unique" {
+                    return i as u128;
+                }
                 let x = ((random(&mut seed) as u128) << 64)
                     | random(&mut seed) as u128;
-                if load == "deep_skew" {
+                if load == "digit_grouped" || load == "digit_tail_inversion" {
+                    let digit = if load == "digit_tail_inversion" && i + 1 == n
+                    {
+                        0
+                    } else {
+                        (i as u128 * 256 / n as u128).min(255)
+                    };
+                    let repeated = 0x01000000010000000100000001000000u128;
+                    (x & !(repeated * 255)) | (digit * repeated)
+                } else if load == "deep_skew" {
                     if i % 97 == 0 {
                         1u128 << ((i / 97) % 128)
                     } else {

@@ -1,0 +1,4 @@
+Source commit d6f6b70497ae25f3600b5f458b316a4cedfcb470
+b63d248296468afa64d3b3892dcba75730dd724a2efc06e58a48cc1907327da5  src/submitted_lsd/sort.rs
+30a8d74b55de82de36cfa9c36f81b3d316491a5b6bf3914ea85275b1d9ece57b  src/frozen_lsd/utils.rs
+The original BSD-2-Clause license and copyright are retained in sort.rs.
