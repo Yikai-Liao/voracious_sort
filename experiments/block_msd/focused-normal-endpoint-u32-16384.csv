@@ -1,0 +1,2 @@
+method,type,load,n,repeats,median_sort_ns,nodes,peak_live_blocks,scratch_elements
+endpoint,u32,uniform,16384,100,175460,1,504,17408

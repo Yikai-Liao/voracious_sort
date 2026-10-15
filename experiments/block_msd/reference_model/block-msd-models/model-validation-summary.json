@@ -1,0 +1,137 @@
+{
+  "counting_rule": "Each final suite is counted once; repeated reruns are excluded. Inputs overlap across model variants, so do not sum these into a distinct-input total.",
+  "scope": "Standalone abstract mathematical models only; no repository implementation, performance benchmark, or true multithreaded execution. Python host containers and per-record descriptors are instrumentation, not the claimed space implementation.",
+  "suites": [
+    {
+      "name": "Exact-count local tail allocator",
+      "exhaustive": 156141,
+      "boundary_probes": 1485,
+      "results": "exact-tail-model-results.json"
+    },
+    {
+      "name": "Conservative global DFS",
+      "exhaustive": 70092,
+      "randomized": 500,
+      "edge_cases": 320,
+      "deep_fragmentation": 28,
+      "results": "global-dfs-model-results.json"
+    },
+    {
+      "name": "Retained full-block global DFS",
+      "exhaustive": 70092,
+      "randomized": 500,
+      "edge_cases": 320,
+      "deep_fragmentation": 28,
+      "results": "retained-dfs-model-results.json"
+    },
+    {
+      "name": "Endpoint-normalized global DFS",
+      "exhaustive": 70092,
+      "randomized": 500,
+      "edge_cases": 320,
+      "deep_fragmentation": 28,
+      "results": "normalized-dfs-model-results.json"
+    },
+    {
+      "name": "Endpoint arena alone",
+      "exhaustive_compositions": 20944,
+      "randomized": 2000,
+      "results": "endpoint-arena-model-results.json"
+    },
+    {
+      "name": "Fixed root fork",
+      "exhaustive": 26220,
+      "randomized": 500,
+      "many_tail_cases": 108,
+      "reverse_heavy_last_cases": 54,
+      "results": "fixed-fork-model-results.json"
+    },
+    {
+      "name": "Bounded adaptive frontier",
+      "exhaustive": 2046,
+      "randomized": 300,
+      "results": "adaptive-frontier-results.json"
+    },
+    {
+      "name": "Cooperative root",
+      "exhaustive": 3069,
+      "randomized": 500,
+      "deterministic_fragmentation_schedules": 135,
+      "p64_stress": 1,
+      "explicit_terminal_residue_case": 1,
+      "results": "cooperative-root-results.json"
+    },
+    {
+      "name": "Batched finalizer",
+      "exhaustive_serial_states": 3069,
+      "random_serial_states": 500,
+      "fragmented_root_states": 48,
+      "forced_relocation_states": 60,
+      "results": "batch-finalizer-no-extra-results.json",
+      "configurations": [
+        "Existing pool only, p external gather buffers",
+        "Conservative baseline with 2p additional pool blocks, p external gather buffers"
+      ],
+      "counting_note": "Same 3,677 source states tested under both configurations; do not double the state count."
+    },
+    {
+      "name": "Serial repeated-relocation finalizer",
+      "cases": 15,
+      "results": "finalizer-relocation-results.json"
+    },
+    {
+      "name": "Broken batch protocols",
+      "negative_cases": 2,
+      "expected_outcome": "Predicted corruption reproduced",
+      "results": "batch-negative-test-results.json"
+    }
+  ],
+  "batch_coverage": {
+    "batches": 10800,
+    "shared_source_gather_batches": 526,
+    "source_in_target_records": 8339,
+    "evacuated_C": 4069,
+    "evacuated_E": 906,
+    "target_already_free": 15801,
+    "relocated_handles_more_than_once": 807
+  },
+  "fixed_fork_bank_coverage": {
+    "jobs_returning_exact_K_handles": 52915,
+    "bank_physical_identity_changed": 47914,
+    "original_array_handles_returned": 16361,
+    "scratch_handles_retained_in_completed_streams": 70421
+  },
+  "deep_fragmentation_example": [
+    {
+      "model": "base",
+      "b": 4,
+      "depth": 24,
+      "n": 97,
+      "minimum_free_blocks": 21,
+      "maximum_nonfull_blocks": 51
+    },
+    {
+      "model": "retained",
+      "b": 4,
+      "depth": 24,
+      "n": 97,
+      "minimum_free_blocks": 21,
+      "maximum_nonfull_blocks": 51
+    },
+    {
+      "model": "normalized",
+      "b": 4,
+      "depth": 24,
+      "n": 97,
+      "minimum_free_blocks": 20,
+      "maximum_nonfull_blocks": 28
+    }
+  ],
+  "all_positive_suites_passed": true,
+  "negative_tests_reproduced_predicted_failures": true,
+  "batch_primary_configuration": {
+    "extra_pool_blocks": 0,
+    "external_gather_buffers": "p blocks of b records",
+    "required_initial_free_blocks_at_least": 3
+  }
+}

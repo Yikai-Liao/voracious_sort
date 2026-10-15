@@ -1,0 +1,14 @@
+{
+  "base": {
+    "cases_passed": 320,
+    "checks": "R=1,D=0,n=0,n=1,b=1,block boundary lengths, random fanout/skew; transient sample after every read/allocate/write"
+  },
+  "retained": {
+    "cases_passed": 320,
+    "checks": "R=1,D=0,n=0,n=1,b=1,block boundary lengths, random fanout/skew; transient sample after every read/allocate/write"
+  },
+  "normalized": {
+    "cases_passed": 320,
+    "checks": "R=1,D=0,n=0,n=1,b=1,block boundary lengths, random fanout/skew; transient sample after every read/allocate/write"
+  }
+}

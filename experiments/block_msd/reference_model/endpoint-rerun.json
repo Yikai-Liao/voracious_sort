@@ -1,0 +1,12 @@
+{
+  "cases": 72285,
+  "endpoint_merges": 149012,
+  "records_relocated": 1143886,
+  "checks": [
+    "exact logical suffix after every child",
+    "no missing or duplicated records",
+    "exact ceiling block count after normalization",
+    "each record relocated at most once"
+  ],
+  "scope": "Independent standalone sequential arena model only; no production or performance validation"
+}

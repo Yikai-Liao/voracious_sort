@@ -1,0 +1,16 @@
+[package]
+name = "block_msd_research"
+version = "0.0.0"
+edition = "2018"
+publish = false
+[dependencies]
+voracious_radix_sort = { path = "../.." }
+[profile.release]
+debug = true
+
+[features]
+simple_stream = []
+terminal_fusion = []
+cf_span_leaf = []
+cf_std_leaf = []
+cf_phases = []

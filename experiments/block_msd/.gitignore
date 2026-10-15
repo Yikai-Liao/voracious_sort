@@ -1,0 +1,4 @@
+/target/
+/*-warnings.txt
+__pycache__/
+*.pyc

@@ -1,0 +1,32 @@
+{
+  "negative_tests": [
+    {
+      "protocol": "early target write before all gathers",
+      "initial": [
+        "A",
+        "B"
+      ],
+      "expected": [
+        "B",
+        "A"
+      ],
+      "observed": [
+        "B",
+        "B"
+      ],
+      "failure": "A is lost and B duplicated"
+    },
+    {
+      "protocol": "evacuation destination chosen among batch targets",
+      "targets": [
+        0,
+        1
+      ],
+      "evacuation_destination": 1,
+      "expected_later_source": "FUTURE",
+      "observed_later_source": "OUTPUT1",
+      "failure": "final target write destroys evacuated future source"
+    }
+  ],
+  "result": "Both intentionally broken protocols reproduce the predicted corruption."
+}
