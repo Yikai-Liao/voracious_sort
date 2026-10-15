@@ -40,6 +40,9 @@ fn check<T: Radixable<K> + std::fmt::Debug + PartialEq, K: RadixKey>(
 ) {
     let mut expected = source.clone();
     expected.sort_by_key(|x| x.into_key_type());
+    let mut local = source.clone();
+    block_msd_research::node_local::block_msd_stable_radixsort(&mut local, r, b);
+    assert_eq!(local, expected, "node-local r={} b={}", r, b);
     let mut pure = source.clone();
     let mut actual = source;
     let mut dense = actual.clone();

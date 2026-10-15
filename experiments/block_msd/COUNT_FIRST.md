@@ -1,5 +1,16 @@
 # Complete count-first dense-node experiment
 
+## Prior art
+
+Kärkkäinen, Sanders and Burkhardt, [Linear Work Suffix Array Construction,
+Appendix B, Theorem 5, printed p.22](https://www.cs.helsinki.fi/u/tpkarkka/publications/jacm05-revised.pdf),
+gives a prior stable distribution construction using counted bucket sizes,
+aligned block offsets, shared boundary blocks, a free list and a final block
+permutation. These core ingredients of count-first are prior art. The current
+experiments concern their Rust implementation and the timing of materialization
+within MSD recursion; they do not claim a new stable distribution primitive.
+
+
 `src/count_first.rs` is a separate, generic, stable MSD backend implementing the uploaded proof's §16 route for arbitrary node size. It does not require `m<=σb`, allocate all `ceil(m/b)` output blocks in advance, or return to the old tail-packing path when a node is large. It uses existing Radixable/RadixKey contracts and converted-key order. V5 remains preserved as the benchmark comparison.
 
 Each branching node counts its current digit and knows every bucket interval in the dense logical output. Every nonaligned bucket end reserves its physical boundary block; adjacent small buckets share a boundary when their intervals intersect the same logical block. There are at most σ such blocks, including the node's final partial block. A bucket writes its prefix/suffix into those reservations. Its complete interior blocks are allocated lazily, at the first record written to each block. A full interior block becomes sealed; no empty successor is allocated. Stable input scan order therefore becomes stable order within every bucket.

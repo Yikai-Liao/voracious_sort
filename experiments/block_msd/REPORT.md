@@ -1,5 +1,9 @@
 # Block MSD research — complete count-first dense-node experiment
 
+The distribution primitive has a directly related prior construction in
+[Kärkkäinen, Sanders and Burkhardt, Appendix B, Theorem 5](https://www.cs.helsinki.fi/u/tpkarkka/publications/jacm05-revised.pdf).
+See [COUNT_FIRST.md](COUNT_FIRST.md#prior-art) for attribution.
+
 **The all-scenario objective—independently make block MSD competitive with ordinary MSD—has not been achieved.** This archived research remains experimental, outside production src/, dispatcher and public API. No C+E or parallel implementation has been added. [README.md](README.md) maps the preserved sources to their datasets and provides build and replay instructions.
 
 The benchmark primary is now the complete **count-first** backend in `src/count_first.rs`, with the preserved bounded v5 backend as a direct comparison. It applies dense scatter to arbitrary node size, uses shared boundary blocks and lazily allocated private interior heads, and uses a global intrusive block directory instead of per-frame m/b ID vectors. Its full construction, ownership and space argument are in [COUNT_FIRST.md](COUNT_FIRST.md). V1–v5 source/data are preserved under version directories. Source/data must not be mixed: the first complete-backend performance data are `bench-count-first-N.csv`; these correspond to the preserved `count_first_v1/` source, not future edits. In particular, `bench-v2-*.csv` describe v2, `bench-v3-*.csv` describe v3 and `bench-v4-*.csv` describe v4, not current code. Detailed v2 one-gap proof and simultaneous v1/v2 performance results remain in [v2/REPORT.md](v2/REPORT.md).
@@ -8,6 +12,9 @@ The measurements in this report describe the archived full-scan implementation.
 The later [scan experiment](scan_experiment/REPORT.md) preserves that exact source
 and records the isolated early-termination change and corrected stable baseline
 separately. Historical timing claims below are not assigned to the changed code.
+
+The later [node-local experiment](node_local_experiment/REPORT.md) tests early
+materialization independently, including an adverse deep-skew case.
 
 ## New backend validation and scope
 

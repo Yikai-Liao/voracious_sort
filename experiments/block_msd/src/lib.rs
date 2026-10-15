@@ -6,6 +6,7 @@ pub mod count_first;
 #[path = "../scan_experiment/full_scan.rs"]
 pub mod count_first_full_scan;
 pub mod stable_baseline;
+pub mod node_local;
 
 #[derive(Default, Debug)]
 pub struct Stats {

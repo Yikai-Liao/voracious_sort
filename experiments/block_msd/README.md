@@ -16,6 +16,12 @@ adds a corrected stable-MSD comparison. Its measurements are separate from the
 historical matrices below. Feature `cf_early_scan` selects the candidate in
 `src/count_first.rs`; the default retains the archived full scan.
 
+The count-first distribution ingredients are attributed to the prior construction
+in [COUNT_FIRST.md](COUNT_FIRST.md#prior-art).
+
+The [node-local materialization experiment](node_local_experiment/REPORT.md)
+independently tests per-node permutation and bounded contiguous stable MSD.
+
 ## Reading the results
 
 - [REPORT.md](REPORT.md): progression, correctness coverage, space accounting,
