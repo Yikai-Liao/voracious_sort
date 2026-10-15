@@ -1021,3 +1021,8 @@ pub mod combined_stream;
 // exercise this reference, which is excluded from this experiment's rustdoc.
 #[cfg(not(doc))]
 pub mod submitted_lsd;
+
+pub mod work_reduction;
+pub mod reduction_node;
+pub mod reduction_stream;
+pub mod reduction_gate;

@@ -1,0 +1,2 @@
+reduction_gate.rs: exact original SHA-256 match PASS
+reduction_stream.rs: exact original SHA-256 match PASS

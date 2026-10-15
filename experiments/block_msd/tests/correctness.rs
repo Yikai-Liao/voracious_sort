@@ -40,6 +40,43 @@ fn check<T: Radixable<K> + std::fmt::Debug + PartialEq, K: RadixKey>(
 ) {
     let mut expected = source.clone();
     expected.sort_by_key(|x| x.into_key_type());
+    for (two, cycles) in [(true, false), (false, true), (true, true)] {
+        use block_msd_research::reduction_node as node;
+        let mut values = source.clone();
+        node::sort_reduced(
+            &mut values,
+            r,
+            b,
+            node::CACHE_BUDGET,
+            if cycles {
+                node::Placement::CycleFreeList
+            } else {
+                node::Placement::FreeList
+            },
+            two,
+        );
+        assert_eq!(
+            values, expected,
+            "work reductions two={} cycles={} r={} b={}",
+            two, cycles, r, b
+        );
+    }
+    for (prepared, fused) in [(true, false), (false, true), (true, true)] {
+        let mut values = source.clone();
+        block_msd_research::reduction_gate::sort_reduced(
+            &mut values,
+            r,
+            b,
+            block_msd_research::node_local::CACHE_BUDGET,
+            prepared,
+            fused,
+        );
+        assert_eq!(
+            values, expected,
+            "work gate prepared={} fused={} r={} b={}",
+            prepared, fused, r, b
+        );
+    }
     let mut local = source.clone();
     block_msd_research::node_local::block_msd_stable_radixsort(
         &mut local, r, b,
@@ -484,6 +521,54 @@ fn tagged_nan_payloads_follow_converted_keys_stably() {
     for radix in [3, 7, 8].iter().copied() {
         for b in [1, 7, 64].iter().copied() {
             check(source.clone(), radix, b);
+        }
+    }
+}
+
+#[test]
+fn work_reductions_check_changed_counts_before_writing_uninitialized_output() {
+    for backend in 0..5 {
+        EXTRACT_CALLS.with(|calls| calls.set(0));
+        let mut values: Vec<_> =
+            (0..1000).map(|i| ChangingShortSegment((i * 73) % 1000)).collect();
+        let result =
+            std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
+                use block_msd_research::reduction_node as node;
+                match backend {
+                    0 | 1 | 2 => {
+                        node::sort_reduced(
+                            &mut values,
+                            8,
+                            64,
+                            if backend == 0 { 256 * 1024 } else { 0 },
+                            if backend == 2 {
+                                node::Placement::CycleFreeList
+                            } else {
+                                node::Placement::FreeList
+                            },
+                            true,
+                        );
+                    },
+                    _ => {
+                        block_msd_research::reduction_gate::sort_reduced(
+                            &mut values,
+                            8,
+                            64,
+                            0,
+                            backend == 4,
+                            false,
+                        );
+                    },
+                }
+            }));
+        // Rebuilding the histogram may accept this changing extractor safely;
+        // prepared roots and scatter kernels must reject their stale counts.
+        if backend != 3 {
+            assert!(
+                result.is_err(),
+                "backend {} must reject changed counts",
+                backend
+            );
         }
     }
 }
