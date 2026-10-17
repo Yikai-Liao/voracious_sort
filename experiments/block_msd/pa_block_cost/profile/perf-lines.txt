@@ -1,0 +1,371 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 2K of event 'cpu-clock:u'
+# Event count (approx.): 1437218250
+#
+# Overhead       Samples  Source:Line                
+# ........  ............  ...........................
+#
+    17.89%           514  block.rs:377
+            |          
+            |--5.29%--0x563ba31827d4
+            |          0x563ba31827d4
+            |          0x563ba3197a75
+            |          0x563ba3093c5b
+            |          0x563ba309e4a1
+            |          0x563ba309e4a1
+            |          0x563ba30901e0
+            |          0x563ba308b8a3
+            |          0x563ba3082d96
+            |          
+            |--4.70%--0x563ba3182727
+            |          0x563ba3182727
+            |          0x563ba3197a75
+            |          0x563ba3093c5b
+            |          0x563ba309e4a1
+            |          0x563ba309e4a1
+            |          0x563ba30901e0
+            |          0x563ba308b8a3
+            |          0x563ba3082d96
+            |          
+            |--4.56%--0x563ba3182679
+            |          0x563ba3182679
+            |          0x563ba3197a75
+            |          0x563ba3093c5b
+            |          0x563ba309e4a1
+            |          0x563ba309e4a1
+            |          0x563ba30901e0
+            |          0x563ba308b8a3
+            |          0x563ba3082d96
+            |          
+             --2.99%--_RNCINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB5_6SortertE7scattertNCINvNtB7_2pa9partitionttNtB7_8IdentityE0Kj0_E0Csh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB3_6SortertE7scattertNCINvNtB5_2pa9partitionttNtB5_8IdentityE0Kj0_ECsh6omwL59Vq1_19frontier_experiment
+                       _RINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB3_6SortertE9step_impltNCINvNtB5_2pa9partitionttNtB5_8IdentityE0ECsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+                       _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+                       _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+
+    10.37%           298  mut_ptr.rs:970
+            |          
+            |--2.96%--0x563ba31827c7
+            |          0x563ba31827c7
+            |          0x563ba31827c7
+            |          0x563ba3197a75
+            |          0x563ba3093c5b
+            |          0x563ba309e4a1
+            |          0x563ba309e4a1
+            |          0x563ba30901e0
+            |          0x563ba308b8a3
+            |          0x563ba3082d96
+            |          
+            |--2.78%--0x563ba318271a
+            |          0x563ba318271a
+            |          0x563ba318271a
+            |          0x563ba3197a75
+            |          0x563ba3093c5b
+            |          0x563ba309e4a1
+            |          0x563ba309e4a1
+            |          0x563ba30901e0
+            |          0x563ba308b8a3
+            |          0x563ba3082d96
+            |          
+            |--2.19%--0x563ba318266c
+            |          0x563ba318266c
+            |          0x563ba318266c
+            |          0x563ba3197a75
+            |          0x563ba3093c5b
+            |          0x563ba309e4a1
+            |          0x563ba309e4a1
+            |          0x563ba30901e0
+            |          0x563ba308b8a3
+            |          0x563ba3082d96
+            |          
+             --1.50%--_RNvMNtNtCsgxBkk5gSRhY_4core3ptr7mut_ptrOt3addCsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RNCINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB5_6SortertE7scattertNCINvNtB7_2pa9partitionttNtB7_8IdentityE0Kj0_E0Csh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB3_6SortertE7scattertNCINvNtB5_2pa9partitionttNtB5_8IdentityE0Kj0_ECsh6omwL59Vq1_19frontier_experiment
+                       _RINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB3_6SortertE9step_impltNCINvNtB5_2pa9partitionttNtB5_8IdentityE0ECsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+                       _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+                       _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+
+     8.81%           253  zip.rs:304
+            |          
+             --8.77%--0x563ba31b49db
+                       0x563ba31b49db
+                       0x563ba31b49db
+                       0x563ba31b49db
+                       0x563ba31b49db
+                       0x563ba31b49db
+
+     7.97%           229  block.rs:368
+            |          
+            |--1.84%--0x563ba31827b3
+            |          0x563ba31827b3
+            |          0x563ba3197a75
+            |          0x563ba3093c5b
+            |          0x563ba309e4a1
+            |          0x563ba309e4a1
+            |          0x563ba30901e0
+            |          0x563ba308b8a3
+            |          0x563ba3082d96
+            |          
+            |--1.46%--0x563ba31825bd
+            |          0x563ba31825bd
+            |          0x563ba3197a75
+            |          0x563ba3093c5b
+            |          0x563ba309e4a1
+            |          0x563ba309e4a1
+            |          0x563ba30901e0
+            |          0x563ba308b8a3
+            |          0x563ba3082d96
+            |          
+            |--1.39%--0x563ba3182658
+            |          0x563ba3182658
+            |          0x563ba3197a75
+            |          0x563ba3093c5b
+            |          0x563ba309e4a1
+            |          0x563ba309e4a1
+            |          0x563ba30901e0
+            |          0x563ba308b8a3
+            |          0x563ba3082d96
+            |          
+            |--1.36%--0x563ba3182706
+            |          0x563ba3182706
+            |          0x563ba3197a75
+            |          0x563ba3093c5b
+            |          0x563ba309e4a1
+            |          0x563ba309e4a1
+            |          0x563ba30901e0
+            |          0x563ba308b8a3
+            |          0x563ba3082d96
+            |          
+             --0.56%--0x563ba3182664
+                       0x563ba3182664
+                       0x563ba3197a75
+                       0x563ba3093c5b
+                       0x563ba309e4a1
+                       0x563ba309e4a1
+                       0x563ba30901e0
+                       0x563ba308b8a3
+                       0x563ba3082d96
+
+     7.83%           225  cmp.rs:1878
+            |
+            ---_RNvXsl_NtNtCsgxBkk5gSRhY_4core3cmp5implstNtB7_9PartialEq2eq (inlined)
+               _RNvXs7_NtNtCsgxBkk5gSRhY_4core3cmp5implsRtNtB7_9PartialEq2eqCsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RNvXs6_Csh6omwL59Vq1_19frontier_experimenttNtB5_8Verified4same (inlined)
+               _RNCINvCsh6omwL59Vq1_19frontier_experiment3runttEs2_0B4_ (inlined)
+               _RNCINvNvNtNtNtNtCsgxBkk5gSRhY_4core4iter6traits8iterator8Iterator3all5checkTRtB1c_ENCINvCsh6omwL59Vq1_19frontier_experiment3runttEs2_0E0B1o_ (inlined)
+               _RINvYINtNtNtNtCsgxBkk5gSRhY_4core4iter8adapters3zip3ZipINtNtNtBc_5slice4iter4ItertEBR_ENtNtNtBa_6traits8iterator8Iterator8try_folduNCINvNvB1n_3all5checkTRtB2r_ENCINvCsh6omwL59Vq1_19frontier_experiment3runttEs2_0E0INtNtNtBc_3ops12control_flow11ControlFlowuEEB2D_ (inlined)
+               _RINvYINtNtNtNtCsgxBkk5gSRhY_4core4iter8adapters3zip3ZipINtNtNtBc_5slice4iter4ItertEBR_ENtNtNtBa_6traits8iterator8Iterator3allNCINvCsh6omwL59Vq1_19frontier_experiment3runttEs2_0EB24_ (inlined)
+               _RINvCsh6omwL59Vq1_19frontier_experiment3runttEB2_ (inlined)
+               _RNvCsh6omwL59Vq1_19frontier_experiment4main
+
+     5.95%           171  mod.rs:640
+            |          
+            |--2.19%--0x563ba31aa893
+            |          0x563ba31aa893
+            |          0x563ba31aa893
+            |          0x563ba31aa893
+            |          0x563ba31aa893
+            |          
+            |--1.50%--_RINvNtCsgxBkk5gSRhY_4core3ptr4copytECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RNCINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB5_6SortertE7scattertNCINvNtB7_2pa9partitionttNtB7_8IdentityE0Kj0_E0Csh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB3_6SortertE7scattertNCINvNtB5_2pa9partitionttNtB5_8IdentityE0Kj0_ECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB3_6SortertE9step_impltNCINvNtB5_2pa9partitionttNtB5_8IdentityE0ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+            |          
+            |--0.94%--0x563ba3182723
+            |          0x563ba3182723
+            |          0x563ba3182723
+            |          0x563ba3197a75
+            |          0x563ba3093c5b
+            |          0x563ba309e4a1
+            |          0x563ba309e4a1
+            |          0x563ba30901e0
+            |          0x563ba308b8a3
+            |          0x563ba3082d96
+            |          
+             --0.77%--0x563ba3182675
+                       0x563ba3182675
+                       0x563ba3182675
+                       0x563ba3197a75
+                       0x563ba3093c5b
+                       0x563ba309e4a1
+                       0x563ba309e4a1
+                       0x563ba30901e0
+                       0x563ba308b8a3
+                       0x563ba3082d96
+
+     5.43%           156  libc.so.6[172d6d]
+            |
+            ---0x7f6b8d3ecd6d
+               _RINvNtCsgxBkk5gSRhY_4core3ptr19copy_nonoverlappingtECsh6omwL59Vq1_19frontier_experiment (inlined)
+               |          
+                --5.33%--_RINvNtCsgxBkk5gSRhY_4core5slice20copy_from_slice_impltECsh6omwL59Vq1_19frontier_experiment (inlined)
+                          _RNvMNtCsgxBkk5gSRhY_4core5sliceSt15copy_from_sliceCsh6omwL59Vq1_19frontier_experiment (inlined)
+                          _RINvCsh6omwL59Vq1_19frontier_experiment3runttEB2_ (inlined)
+                          _RNvCsh6omwL59Vq1_19frontier_experiment4main
+
+     5.29%           152  libc.so.6[172a8f]
+            |
+            ---0x7f6b8d3eca8f
+               _RINvNtCsgxBkk5gSRhY_4core3ptr4copytECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RNvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB2_6SortertE7compactCsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+
+     4.63%           133  block.rs:0
+            |          
+            |--0.80%--0x563ba318264f
+            |          0x563ba318264f
+            |          0x563ba3197a75
+            |          0x563ba3093c5b
+            |          0x563ba309e4a1
+            |          0x563ba309e4a1
+            |          0x563ba30901e0
+            |          0x563ba308b8a3
+            |          0x563ba3082d96
+            |          
+             --0.73%--0x563ba319fd20
+                       0x563ba319fd20
+                       0x563ba3093d03
+                       0x563ba309e4a1
+                       0x563ba309e4a1
+                       0x563ba30901e0
+                       0x563ba308b8a3
+                       0x563ba3082d96
+
+     2.05%            59  index.rs:238
+     1.74%            50  block.rs:378
+            |          
+             --0.63%--0x563ba3182670
+                       0x563ba3182670
+                       0x563ba3197a75
+                       0x563ba3093c5b
+                       0x563ba309e4a1
+                       0x563ba309e4a1
+                       0x563ba30901e0
+                       0x563ba308b8a3
+                       0x563ba3082d96
+
+     1.64%            47  step_by.rs:0
+            |
+            ---_RINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB3_6SortertE7scattertNCINvNtB5_2pa9partitionttNtB5_8IdentityE0Kj0_ECsh6omwL59Vq1_19frontier_experiment
+               _RINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB3_6SortertE9step_impltNCINvNtB5_2pa9partitionttNtB5_8IdentityE0ECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+
+     1.53%            44  block.rs:159
+     1.15%            33  pa.rs:326
+            |          
+             --0.56%--_RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa7preparettKb0_KB11_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+                       _RINvCsh6omwL59Vq1_19frontier_experiment3runttEB2_ (inlined)
+                       _RNvCsh6omwL59Vq1_19frontier_experiment4main
+
+     1.08%            31  block.rs:154
+     1.08%            31  libc.so.6[172b19]
+            |
+            ---0x7f6b8d3ecb19
+               _RINvNtCsgxBkk5gSRhY_4core3ptr4copytECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RNvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB2_6SortertE7compactCsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+
+     1.04%            30  libc.so.6[172a80]
+            |
+            ---0x7f6b8d3eca80
+               _RINvNtCsgxBkk5gSRhY_4core3ptr4copytECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RNvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB2_6SortertE7compactCsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+
+     1.01%            29  libc.so.6[172a89]
+            |
+            ---0x7f6b8d3eca89
+               _RINvNtCsgxBkk5gSRhY_4core3ptr4copytECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RNvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB2_6SortertE7compactCsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+
+     1.01%            29  mod.rs:130
+            |          
+             --0.56%--_RNvXsd_NtCs8mfXHD671Rl_18block_msd_research8frontiertNtB5_9NativeKey4byte (inlined)
+                       _RNCINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB5_6SortertE7scattertNCINvNtB7_2pa9partitionttNtB7_8IdentityE0Kj0_E0Csh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB3_6SortertE7scattertNCINvNtB5_2pa9partitionttNtB5_8IdentityE0Kj0_ECsh6omwL59Vq1_19frontier_experiment
+                       _RINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB3_6SortertE9step_impltNCINvNtB5_2pa9partitionttNtB5_8IdentityE0ECsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+                       _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+                       _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+
+     0.80%            23  index.rs:0
+     0.73%            21  libc.so.6[172b3e]
+            |
+            ---0x7f6b8d3ecb3e
+               _RINvNtCsgxBkk5gSRhY_4core3ptr4copytECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RNvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB2_6SortertE7compactCsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+
+     0.70%            20  block.rs:380
+     0.63%            18  libc.so.6[172b21]
+            |
+            ---0x7f6b8d3ecb21
+               _RINvNtCsgxBkk5gSRhY_4core3ptr4copytECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RNvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB2_6SortertE7compactCsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+
+     0.52%            15  index.rs:245
+
+
+#
+# (Tip: To change sampling frequency to 100 Hz: perf record -F 100)
+#

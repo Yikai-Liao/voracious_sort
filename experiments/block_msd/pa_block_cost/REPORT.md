@@ -1,0 +1,11 @@
+# Original Block scatter cost diagnosis
+
+This is diagnostic sampling of the Prepared control in the frozen e7c5e15 narrow ELF, after lookup-position screening ended. Source and executable ledgers are included. The active source was rolled back to Prepared plus registry coverage before this diagnostic; that does not change the frozen executable or its source snapshot.
+
+The exact command is in profile/metadata.json. It runs n=1048576, u16 sparse, B=64, seed42, one Prepared method, 256 repetitions on CPU2 under `perf record -e cpu-clock:u -F 1999 --call-graph dwarf,4096`. The complete process includes input generation, restore, full stable oracle and sorting. Its 256 CSV rows are diagnostic and are excluded from formal paired acceptance. No build/test job ran during capture.
+
+The recording contains 2,873 samples and reports zero lost samples. Original u16/Identity byte0 scatter accounts for 1,495 samples (52.04% of the whole process), compact for 150 (5.22%), and step fixup/setup for 72 (2.51%). Source-line reporting attributes 514 samples to the bucket.next update (line377), 229 to bucket indexing (line368), and 298 to pointer-add code. Optimized source locations can share instructions; these counts do not independently time each source statement and are not sorting-only phase shares. Main/oracle and libc copies account for much of the remaining process.
+
+This supports focusing on scatter again, while the rejected scalar/arithmetic/lookup loops show that removing a source-level metadata store alone does not establish a speedup. The next independent mechanism groups writes to each of the two buckets within one logical input block. Its safety proof must preserve bucket-relative source order and the original physical recycling bound; any change in evacuation copies must be measured rather than called identical work. No timing benefit is inferred here.
+
+`perf report` symbol and line outputs are retained. `perf annotate` was not used, following its earlier tool crash. The post-rollback registry and generator tests passed (2 tests, 0.48s); the original sorting implementation was restored from commit5150edd. No performance acceptance or active-goal completion is claimed.

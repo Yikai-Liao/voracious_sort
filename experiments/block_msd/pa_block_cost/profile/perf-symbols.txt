@@ -1,0 +1,593 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 2K of event 'cpu-clock:u'
+# Event count (approx.): 1437218250
+#
+# Overhead       Samples  Symbol                                                                                                                                                                                                                                                                                          IPC   [IPC Coverage]
+# ........  ............  ..............................................................................................................................................................................................................................................................................................  ....................
+#
+    52.04%          1495  [.] _RINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB3_6SortertE7scattertNCINvNtB5_2pa9partitionttNtB5_8IdentityE0Kj0_ECsh6omwL59Vq1_19frontier_experiment                                                                                                                        -      -            
+            |          
+            |--31.60%--_RNCINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB5_6SortertE7scattertNCINvNtB7_2pa9partitionttNtB7_8IdentityE0Kj0_E0Csh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB3_6SortertE7scattertNCINvNtB5_2pa9partitionttNtB5_8IdentityE0Kj0_ECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB3_6SortertE9step_impltNCINvNtB5_2pa9partitionttNtB5_8IdentityE0ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+            |          
+            |--9.95%--_RNvMNtNtCsgxBkk5gSRhY_4core3ptr7mut_ptrOt3addCsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          |          
+            |          |--9.47%--_RNCINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB5_6SortertE7scattertNCINvNtB7_2pa9partitionttNtB7_8IdentityE0Kj0_E0Csh6omwL59Vq1_19frontier_experiment (inlined)
+            |          |          _RINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB3_6SortertE7scattertNCINvNtB5_2pa9partitionttNtB5_8IdentityE0Kj0_ECsh6omwL59Vq1_19frontier_experiment
+            |          |          _RINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB3_6SortertE9step_impltNCINvNtB5_2pa9partitionttNtB5_8IdentityE0ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+            |          |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+            |          |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+            |          |          
+            |           --0.49%--_RNvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB2_6SortertE5blockCsh6omwL59Vq1_19frontier_experiment (inlined)
+            |                     _RNCINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB5_6SortertE7scattertNCINvNtB7_2pa9partitionttNtB7_8IdentityE0Kj0_E0Csh6omwL59Vq1_19frontier_experiment (inlined)
+            |                     _RINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB3_6SortertE7scattertNCINvNtB5_2pa9partitionttNtB5_8IdentityE0Kj0_ECsh6omwL59Vq1_19frontier_experiment
+            |                     _RINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB3_6SortertE9step_impltNCINvNtB5_2pa9partitionttNtB5_8IdentityE0ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |                     _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+            |                     _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |                     _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |                     _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+            |                     _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |                     _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+            |          
+            |--3.55%--_RINvNtCsgxBkk5gSRhY_4core3ptr4copytECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RNCINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB5_6SortertE7scattertNCINvNtB7_2pa9partitionttNtB7_8IdentityE0Kj0_E0Csh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB3_6SortertE7scattertNCINvNtB5_2pa9partitionttNtB5_8IdentityE0Kj0_ECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB3_6SortertE9step_impltNCINvNtB5_2pa9partitionttNtB5_8IdentityE0ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+            |          
+            |--2.16%--_RINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB3_6SortertE7scattertNCINvNtB5_2pa9partitionttNtB5_8IdentityE0Kj0_ECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB3_6SortertE9step_impltNCINvNtB5_2pa9partitionttNtB5_8IdentityE0ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+            |          
+            |--1.46%--_RNvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB2_6SortertE5blockCsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          |          
+            |          |--1.01%--_RNCINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB5_6SortertE7scattertNCINvNtB7_2pa9partitionttNtB7_8IdentityE0Kj0_E0Csh6omwL59Vq1_19frontier_experiment (inlined)
+            |          |          _RINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB3_6SortertE7scattertNCINvNtB5_2pa9partitionttNtB5_8IdentityE0Kj0_ECsh6omwL59Vq1_19frontier_experiment
+            |          |          _RINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB3_6SortertE9step_impltNCINvNtB5_2pa9partitionttNtB5_8IdentityE0ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+            |          |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+            |          |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+            |          |          
+            |           --0.45%--_RINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB3_6SortertE7scattertNCINvNtB5_2pa9partitionttNtB5_8IdentityE0Kj0_ECsh6omwL59Vq1_19frontier_experiment
+            |                     _RINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB3_6SortertE9step_impltNCINvNtB5_2pa9partitionttNtB5_8IdentityE0ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |                     _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+            |                     _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |                     _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |                     _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+            |                     _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |                     _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+            |          
+            |--1.39%--_RNvXs0_NtNtCsgxBkk5gSRhY_4core5slice5indexjINtB5_10SliceIndexSmE5indexCsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RNvXNtNtCsgxBkk5gSRhY_4core5slice5indexSmINtNtNtB6_3ops5index5IndexjE5indexCsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RNvXsc_NtCs6i54tJFfzR_5alloc3vecINtB5_3VecmEINtNtNtCsgxBkk5gSRhY_4core3ops5index5IndexjE5indexCsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RNCINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB5_6SortertE7scattertNCINvNtB7_2pa9partitionttNtB7_8IdentityE0Kj0_E0Csh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB3_6SortertE7scattertNCINvNtB5_2pa9partitionttNtB5_8IdentityE0Kj0_ECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB3_6SortertE9step_impltNCINvNtB5_2pa9partitionttNtB5_8IdentityE0ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+            |          
+            |--1.01%--_RNvXsd_NtCs8mfXHD671Rl_18block_msd_research8frontiertNtB5_9NativeKey4byte (inlined)
+            |          _RNCINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB5_6SortertE7scattertNCINvNtB7_2pa9partitionttNtB7_8IdentityE0Kj0_E0Csh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB3_6SortertE7scattertNCINvNtB5_2pa9partitionttNtB5_8IdentityE0Kj0_ECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB3_6SortertE9step_impltNCINvNtB5_2pa9partitionttNtB5_8IdentityE0ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+            |          
+            |--0.28%--_RNvXsi_NtNtNtCsgxBkk5gSRhY_4core4iter8adapters7step_byINtB5_6StepByINtNtNtBb_3ops5range5RangejEEINtB5_10StepByImplB13_E9spec_next (inlined)
+            |          _RNvXs_NtNtNtCsgxBkk5gSRhY_4core4iter8adapters7step_byINtB4_6StepByINtNtNtBa_3ops5range5RangejEENtNtNtB8_6traits8iterator8Iterator4nextCsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB3_6SortertE7scattertNCINvNtB5_2pa9partitionttNtB5_8IdentityE0Kj0_ECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB3_6SortertE9step_impltNCINvNtB5_2pa9partitionttNtB5_8IdentityE0ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+            |          
+            |--0.24%--_RNvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB2_6SortertE6lengthCsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB3_6SortertE7scattertNCINvNtB5_2pa9partitionttNtB5_8IdentityE0Kj0_ECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB3_6SortertE9step_impltNCINvNtB5_2pa9partitionttNtB5_8IdentityE0ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+            |          
+            |--0.14%--_RNvXs0_NtNtCsgxBkk5gSRhY_4core5slice5indexjINtB5_10SliceIndexShE9index_mutCsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RNvXs_NtNtCsgxBkk5gSRhY_4core5slice5indexShINtNtNtB8_3ops5index8IndexMutjE9index_mutCsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RNvXsd_NtCs6i54tJFfzR_5alloc3vecINtB5_3VechEINtNtNtCsgxBkk5gSRhY_4core3ops5index8IndexMutjE9index_mutCsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RNCINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB5_6SortertE7scattertNCINvNtB7_2pa9partitionttNtB7_8IdentityE0Kj0_E0Csh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB3_6SortertE7scattertNCINvNtB5_2pa9partitionttNtB5_8IdentityE0Kj0_ECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB3_6SortertE9step_impltNCINvNtB5_2pa9partitionttNtB5_8IdentityE0ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+            |          
+             --0.10%--_RNvXs0_NtNtCsgxBkk5gSRhY_4core5slice5indexjINtB5_10SliceIndexSNtNtNtCs8mfXHD671Rl_18block_msd_research8frontier5block7PartialE5indexCsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RNvXNtNtCsgxBkk5gSRhY_4core5slice5indexSNtNtNtCs8mfXHD671Rl_18block_msd_research8frontier5block7PartialINtNtNtB6_3ops5index5IndexjE5indexCsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RNvXsc_NtCs6i54tJFfzR_5alloc3vecINtB5_3VecNtNtNtCs8mfXHD671Rl_18block_msd_research8frontier5block7PartialEINtNtNtCsgxBkk5gSRhY_4core3ops5index5IndexjE5indexCsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RNvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB2_6SortertE6lengthCsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB3_6SortertE7scattertNCINvNtB5_2pa9partitionttNtB5_8IdentityE0Kj0_ECsh6omwL59Vq1_19frontier_experiment
+                       _RINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB3_6SortertE9step_impltNCINvNtB5_2pa9partitionttNtB5_8IdentityE0ECsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+                       _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+                       _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+
+    20.12%           578  [.] _RNvCsh6omwL59Vq1_19frontier_experiment4main                                                                                                                                                                                                                                                -      -            
+            |          
+            |--9.01%--_RNvXs3_NtNtNtCsgxBkk5gSRhY_4core4iter8adapters3zipINtB5_3ZipINtNtNtBb_5slice4iter4ItertEBW_EINtB5_7ZipImplBW_BW_E4nextCsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RNvXs_NtNtNtCsgxBkk5gSRhY_4core4iter8adapters3zipINtB4_3ZipINtNtNtBa_5slice4iter4ItertEBV_ENtNtNtB8_6traits8iterator8Iterator4nextCsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          |          
+            |           --8.98%--_RINvYINtNtNtNtCsgxBkk5gSRhY_4core4iter8adapters3zip3ZipINtNtNtBc_5slice4iter4ItertEBR_ENtNtNtBa_6traits8iterator8Iterator8try_folduNCINvNvB1n_3all5checkTRtB2r_ENCINvCsh6omwL59Vq1_19frontier_experiment3runttEs2_0E0INtNtNtBc_3ops12control_flow11ControlFlowuEEB2D_ (inlined)
+            |                     _RINvYINtNtNtNtCsgxBkk5gSRhY_4core4iter8adapters3zip3ZipINtNtNtBc_5slice4iter4ItertEBR_ENtNtNtBa_6traits8iterator8Iterator3allNCINvCsh6omwL59Vq1_19frontier_experiment3runttEs2_0EB24_ (inlined)
+            |                     _RINvCsh6omwL59Vq1_19frontier_experiment3runttEB2_ (inlined)
+            |                     _RNvCsh6omwL59Vq1_19frontier_experiment4main
+            |          
+            |--7.83%--_RNvXsl_NtNtCsgxBkk5gSRhY_4core3cmp5implstNtB7_9PartialEq2eq (inlined)
+            |          _RNvXs7_NtNtCsgxBkk5gSRhY_4core3cmp5implsRtNtB7_9PartialEq2eqCsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RNvXs6_Csh6omwL59Vq1_19frontier_experimenttNtB5_8Verified4same (inlined)
+            |          _RNCINvCsh6omwL59Vq1_19frontier_experiment3runttEs2_0B4_ (inlined)
+            |          _RNCINvNvNtNtNtNtCsgxBkk5gSRhY_4core4iter6traits8iterator8Iterator3all5checkTRtB1c_ENCINvCsh6omwL59Vq1_19frontier_experiment3runttEs2_0E0B1o_ (inlined)
+            |          _RINvYINtNtNtNtCsgxBkk5gSRhY_4core4iter8adapters3zip3ZipINtNtNtBc_5slice4iter4ItertEBR_ENtNtNtBa_6traits8iterator8Iterator8try_folduNCINvNvB1n_3all5checkTRtB2r_ENCINvCsh6omwL59Vq1_19frontier_experiment3runttEs2_0E0INtNtNtBc_3ops12control_flow11ControlFlowuEEB2D_ (inlined)
+            |          _RINvYINtNtNtNtCsgxBkk5gSRhY_4core4iter8adapters3zip3ZipINtNtNtBc_5slice4iter4ItertEBR_ENtNtNtBa_6traits8iterator8Iterator3allNCINvCsh6omwL59Vq1_19frontier_experiment3runttEs2_0EB24_ (inlined)
+            |          _RINvCsh6omwL59Vq1_19frontier_experiment3runttEB2_ (inlined)
+            |          _RNvCsh6omwL59Vq1_19frontier_experiment4main
+            |          
+            |--2.23%--_RINvNtCsgxBkk5gSRhY_4core3ptr4copyoECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtCsgxBkk5gSRhY_4core3ptr4swapoECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RNvMNtCsgxBkk5gSRhY_4core5sliceSo4swapCsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RNvCsh6omwL59Vq1_19frontier_experiment9make_keys (inlined)
+            |          _RNvCsh6omwL59Vq1_19frontier_experiment4main
+            |          
+            |--0.35%--_RNvMs9_NtCsgxBkk5gSRhY_4core3numj13unchecked_sub (inlined)
+            |          _RNvXsL_NtNtCsgxBkk5gSRhY_4core4iter5rangejNtB5_4Step18backward_unchecked (inlined)
+            |          _RNvXs3_NtNtCsgxBkk5gSRhY_4core4iter5rangeINtNtNtB9_3ops5range5RangejENtB5_17RangeIteratorImpl14spec_next_backCsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RNvXs5_NtNtCsgxBkk5gSRhY_4core4iter5rangeINtNtNtB9_3ops5range5RangejENtNtNtB7_6traits12double_ended19DoubleEndedIterator9next_backCsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RNvXs_NtNtNtCsgxBkk5gSRhY_4core4iter8adapters3revINtB4_3RevINtNtNtBa_3ops5range5RangejEENtNtNtB8_6traits8iterator8Iterator4nextCsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RNvCsh6omwL59Vq1_19frontier_experiment9make_keys (inlined)
+            |          _RNvCsh6omwL59Vq1_19frontier_experiment4main
+            |          
+            |--0.21%--_RINvYINtNtNtNtCsgxBkk5gSRhY_4core4iter8adapters3zip3ZipINtNtNtBc_5slice4iter4ItertEBR_ENtNtNtBa_6traits8iterator8Iterator8try_folduNCINvNvB1n_3all5checkTRtB2r_ENCINvCsh6omwL59Vq1_19frontier_experiment3runttEs2_0E0INtNtNtBc_3ops12control_flow11ControlFlowuEEB2D_ (inlined)
+            |          _RINvYINtNtNtNtCsgxBkk5gSRhY_4core4iter8adapters3zip3ZipINtNtNtBc_5slice4iter4ItertEBR_ENtNtNtBa_6traits8iterator8Iterator3allNCINvCsh6omwL59Vq1_19frontier_experiment3runttEs2_0EB24_ (inlined)
+            |          _RINvCsh6omwL59Vq1_19frontier_experiment3runttEB2_ (inlined)
+            |          _RNvCsh6omwL59Vq1_19frontier_experiment4main
+            |          
+            |--0.21%--_RINvNtCsgxBkk5gSRhY_4core3ptr19copy_nonoverlappingoECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtCsgxBkk5gSRhY_4core3ptr4swapoECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RNvMNtCsgxBkk5gSRhY_4core5sliceSo4swapCsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RNvCsh6omwL59Vq1_19frontier_experiment9make_keys (inlined)
+            |          _RNvCsh6omwL59Vq1_19frontier_experiment4main
+            |          
+             --0.17%--_RNCNvCsh6omwL59Vq1_19frontier_experiment4mains4_0B3_ (inlined)
+                       _RNCINvNtNtNtCsgxBkk5gSRhY_4core4iter8adapters3map8map_foldRotuNCNvCsh6omwL59Vq1_19frontier_experiment4mains4_0NCINvNvNtNtNtB8_6traits8iterator8Iterator8for_each4calltNCINvMsj_NtCs6i54tJFfzR_5alloc3vecINtB2N_3VectE14extend_trustedINtB4_3MapINtNtNtBa_5slice4iter4IteroEBY_EE0E0E0B12_ (inlined)
+                       _RINvXs2J_NtNtCsgxBkk5gSRhY_4core5slice4iterINtB7_4IteroENtNtNtNtBb_4iter6traits8iterator8Iterator4folduNCINvNtNtBY_8adapters3map8map_foldRotuNCNvCsh6omwL59Vq1_19frontier_experiment4mains4_0NCINvNvBS_8for_each4calltNCINvMsj_NtCs6i54tJFfzR_5alloc3vecINtB3z_3VectE14extend_trustedINtB1I_3MapBF_B2f_EE0E0E0EB2j_ (inlined)
+                       _RINvXs0_NtNtNtCsgxBkk5gSRhY_4core4iter8adapters3mapINtB6_3MapINtNtNtBc_5slice4iter4IteroENCNvCsh6omwL59Vq1_19frontier_experiment4mains4_0ENtNtNtBa_6traits8iterator8Iterator4folduNCINvNvB2c_8for_each4calltNCINvMsj_NtCs6i54tJFfzR_5alloc3vecINtB3p_3VectE14extend_trustedBN_E0E0EB1t_ (inlined)
+                       _RINvYINtNtNtNtCsgxBkk5gSRhY_4core4iter8adapters3map3MapINtNtNtBc_5slice4iter4IteroENCNvCsh6omwL59Vq1_19frontier_experiment4mains4_0ENtNtNtBa_6traits8iterator8Iterator8for_eachNCINvMsj_NtCs6i54tJFfzR_5alloc3vecINtB2W_3VectE14extend_trustedB3_E0EB1n_ (inlined)
+                       _RINvMsj_NtCs6i54tJFfzR_5alloc3vecINtB6_3VectE14extend_trustedINtNtNtNtCsgxBkk5gSRhY_4core4iter8adapters3map3MapINtNtNtB16_5slice4iter4IteroENCNvCsh6omwL59Vq1_19frontier_experiment4mains4_0EEB2i_ (inlined)
+                       _RNvXs_NtNtCs6i54tJFfzR_5alloc3vec11spec_extendINtB6_3VectEINtB4_10SpecExtendtINtNtNtNtCsgxBkk5gSRhY_4core4iter8adapters3map3MapINtNtNtB1m_5slice4iter4IteroENCNvCsh6omwL59Vq1_19frontier_experiment4mains4_0EE11spec_extendB2y_ (inlined)
+                       _RNvXs_NtNtCs6i54tJFfzR_5alloc3vec21spec_from_iter_nestedINtB6_3VectEINtB4_18SpecFromIterNestedtINtNtNtNtCsgxBkk5gSRhY_4core4iter8adapters3map3MapINtNtNtB1E_5slice4iter4IteroENCNvCsh6omwL59Vq1_19frontier_experiment4mains4_0EE9from_iterB2Q_ (inlined)
+                       _RNvXNtNtCs6i54tJFfzR_5alloc3vec14spec_from_iterINtB4_3VectEINtB2_12SpecFromItertINtNtNtNtCsgxBkk5gSRhY_4core4iter8adapters3map3MapINtNtNtB1p_5slice4iter4IteroENCNvCsh6omwL59Vq1_19frontier_experiment4mains4_0EE9from_iterB2B_ (inlined)
+                       _RINvXse_NtCs6i54tJFfzR_5alloc3vecINtB6_3VectEINtNtNtNtCsgxBkk5gSRhY_4core4iter6traits7collect12FromIteratortE9from_iterINtNtNtBO_8adapters3map3MapINtNtNtBQ_5slice4iter4IteroENCNvCsh6omwL59Vq1_19frontier_experiment4mains4_0EEB2Q_ (inlined)
+                       _RINvYINtNtNtNtCsgxBkk5gSRhY_4core4iter8adapters3map3MapINtNtNtBc_5slice4iter4IteroENCNvCsh6omwL59Vq1_19frontier_experiment4mains4_0ENtNtNtBa_6traits8iterator8Iterator7collectINtNtCs6i54tJFfzR_5alloc3vec3VectEEB1n_ (inlined)
+                       _RNvCsh6omwL59Vq1_19frontier_experiment4main
+
+     5.43%           156  [.] 0x0000000000172d6d                                                                                                                                                                                                                                                                          -      -            
+            |
+            ---_RINvNtCsgxBkk5gSRhY_4core3ptr19copy_nonoverlappingtECsh6omwL59Vq1_19frontier_experiment (inlined)
+               |          
+                --5.33%--_RINvNtCsgxBkk5gSRhY_4core5slice20copy_from_slice_impltECsh6omwL59Vq1_19frontier_experiment (inlined)
+                          _RNvMNtCsgxBkk5gSRhY_4core5sliceSt15copy_from_sliceCsh6omwL59Vq1_19frontier_experiment (inlined)
+                          _RINvCsh6omwL59Vq1_19frontier_experiment3runttEB2_ (inlined)
+                          _RNvCsh6omwL59Vq1_19frontier_experiment4main
+
+     5.29%           152  [.] 0x0000000000172a8f                                                                                                                                                                                                                                                                          -      -            
+            |
+            ---_RINvNtCsgxBkk5gSRhY_4core3ptr4copytECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RNvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB2_6SortertE7compactCsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+
+     5.22%           150  [.] _RNvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB2_6SortertE7compactCsh6omwL59Vq1_19frontier_experiment                                                                                                                                                                        -      -            
+            |          
+            |--2.19%--_RNvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB2_6SortertE7compactCsh6omwL59Vq1_19frontier_experiment
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+            |          
+            |--1.84%--_RNvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB2_6SortertE5blockCsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RNvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB2_6SortertE7compactCsh6omwL59Vq1_19frontier_experiment
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+            |          
+            |--0.35%--_RNvXs0_NtNtCsgxBkk5gSRhY_4core5slice5indexjINtB5_10SliceIndexSmE9index_mutCsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RNvXs_NtNtCsgxBkk5gSRhY_4core5slice5indexSmINtNtNtB8_3ops5index8IndexMutjE9index_mutCsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RNvXsd_NtCs6i54tJFfzR_5alloc3vecINtB5_3VecmEINtNtNtCsgxBkk5gSRhY_4core3ops5index8IndexMutjE9index_mutCsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RNvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB2_6SortertE7compactCsh6omwL59Vq1_19frontier_experiment
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+            |          
+            |--0.35%--_RINvNtCsgxBkk5gSRhY_4core3ptr4copytECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RNvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB2_6SortertE7compactCsh6omwL59Vq1_19frontier_experiment
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+            |          
+            |--0.17%--_RNvMs9_NtCsgxBkk5gSRhY_4core3numj13unchecked_add (inlined)
+            |          _RNvXsL_NtNtCsgxBkk5gSRhY_4core4iter5rangejNtB5_4Step17forward_unchecked (inlined)
+            |          _RNvXs3_NtNtCsgxBkk5gSRhY_4core4iter5rangeINtNtNtB9_3ops5range5RangejENtB5_17RangeIteratorImpl9spec_nextCsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RNvXs4_NtNtCsgxBkk5gSRhY_4core4iter5rangeINtNtNtB9_3ops5range5RangejENtNtNtB7_6traits8iterator8Iterator4nextCsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RNvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB2_6SortertE7compactCsh6omwL59Vq1_19frontier_experiment
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+            |          
+            |--0.14%--_RNvXsU_NtNtCsgxBkk5gSRhY_4core3cmp5implsjNtB7_10PartialOrd2lt (inlined)
+            |          _RNvXs3_NtNtCsgxBkk5gSRhY_4core4iter5rangeINtNtNtB9_3ops5range5RangejENtB5_17RangeIteratorImpl9spec_nextCsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RNvXs4_NtNtCsgxBkk5gSRhY_4core4iter5rangeINtNtNtB9_3ops5range5RangejENtNtNtB7_6traits8iterator8Iterator4nextCsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RNvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB2_6SortertE7compactCsh6omwL59Vq1_19frontier_experiment
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+            |          
+             --0.10%--_RNvMNtNtCsgxBkk5gSRhY_4core3ptr7mut_ptrOt3addCsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RNvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB2_6SortertE5blockCsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RNvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB2_6SortertE7compactCsh6omwL59Vq1_19frontier_experiment
+                       _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+                       _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+                       _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+
+     2.51%            72  [.] _RINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB3_6SortertE9step_impltNCINvNtB5_2pa9partitionttNtB5_8IdentityE0ECsh6omwL59Vq1_19frontier_experiment.llvm.7130911432553477091                                                                                                 -      -            
+            |          
+            |--1.43%--_RINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB3_6SortertE9step_impltNCINvNtB5_2pa9partitionttNtB5_8IdentityE0ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+            |          
+            |--0.31%--_RNvMNtNtCsgxBkk5gSRhY_4core3ptr7mut_ptrOt3addCsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB3_6SortertE9step_impltNCINvNtB5_2pa9partitionttNtB5_8IdentityE0ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+            |          
+            |--0.28%--_RNvXs0_NtNtCsgxBkk5gSRhY_4core5slice5indexjINtB5_10SliceIndexSINtNtNtCs8mfXHD671Rl_18block_msd_research8frontier5block6BuckettEE5indexCsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RNvXNtNtCsgxBkk5gSRhY_4core5slice5indexSINtNtNtCs8mfXHD671Rl_18block_msd_research8frontier5block6BuckettEINtNtNtB6_3ops5index5IndexjE5indexCsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RNvXsc_NtCs6i54tJFfzR_5alloc3vecINtB5_3VecINtNtNtCs8mfXHD671Rl_18block_msd_research8frontier5block6BuckettEEINtNtNtCsgxBkk5gSRhY_4core3ops5index5IndexjE5indexCsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB3_6SortertE9step_impltNCINvNtB5_2pa9partitionttNtB5_8IdentityE0ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+            |          
+            |--0.21%--_RNvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB2_6SortertE5blockCsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB3_6SortertE9step_impltNCINvNtB5_2pa9partitionttNtB5_8IdentityE0ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+            |          
+             --0.14%--_RNvXs0_NtNtCsgxBkk5gSRhY_4core5slice5indexjINtB5_10SliceIndexShE5indexCsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RNvXNtNtCsgxBkk5gSRhY_4core5slice5indexShINtNtNtB6_3ops5index5IndexjE5indexCsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RNvXsc_NtCs6i54tJFfzR_5alloc3vecINtB5_3VechEINtNtNtCsgxBkk5gSRhY_4core3ops5index5IndexjE5indexCsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RINvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB3_6SortertE9step_impltNCINvNtB5_2pa9partitionttNtB5_8IdentityE0ECsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+                       _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+                       _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+
+     1.67%            48  [.] _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment.llvm.11825749904344351533                                                                                                                                                               -      -            
+            |          
+            |--1.15%--_RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa7preparettKb0_KB11_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvCsh6omwL59Vq1_19frontier_experiment3runttEB2_ (inlined)
+            |          _RNvCsh6omwL59Vq1_19frontier_experiment4main
+            |          
+            |--0.24%--_RNvXsly_NtNtCsgxBkk5gSRhY_4core3ops3bittNtB6_12BitAndAssign13bitand_assign (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa7preparettKb0_KB11_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvCsh6omwL59Vq1_19frontier_experiment3runttEB2_ (inlined)
+            |          _RNvCsh6omwL59Vq1_19frontier_experiment4main
+            |          
+            |--0.17%--_RNvXslY_NtNtCsgxBkk5gSRhY_4core3ops3bittNtB6_11BitOrAssign12bitor_assign (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa7preparettKb0_KB11_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+            |          _RINvCsh6omwL59Vq1_19frontier_experiment3runttEB2_ (inlined)
+            |          _RNvCsh6omwL59Vq1_19frontier_experiment4main
+            |          
+             --0.10%--_RNvXs2J_NtNtCsgxBkk5gSRhY_4core5slice4iterINtB6_4ItertENtNtNtNtBa_4iter6traits8iterator8Iterator4nextCsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa7preparettKb0_KB11_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+                       _RINvCsh6omwL59Vq1_19frontier_experiment3runttEB2_ (inlined)
+                       _RNvCsh6omwL59Vq1_19frontier_experiment4main
+
+     1.25%            36  [.] _RINvXs0_NtNtNtCsgxBkk5gSRhY_4core4iter8adapters3mapINtB6_3MapINtNtNtBc_3ops5range5RangejENCNvCsh6omwL59Vq1_19frontier_experiment9make_keys0ENtNtNtBa_6traits8iterator8Iterator4folduNCINvNvB2e_8for_each4calloNCINvMsj_NtCs6i54tJFfzR_5alloc3vecINtB3r_3VecoE14extend_trustedBN_E0E0EB1t_  -      -            
+            |          
+            |--0.52%--_RNCNvCsh6omwL59Vq1_19frontier_experiment9make_keys0B3_ (inlined)
+            |          _RNCINvNtNtNtCsgxBkk5gSRhY_4core4iter8adapters3map8map_foldjouNCNvCsh6omwL59Vq1_19frontier_experiment9make_keys0NCINvNvNtNtNtB8_6traits8iterator8Iterator8for_each4calloNCINvMsj_NtCs6i54tJFfzR_5alloc3vecINtB2O_3VecoE14extend_trustedINtB4_3MapINtNtNtBa_3ops5range5RangejEBX_EE0E0E0B11_ (inlined)
+            |          _RINvYINtNtNtCsgxBkk5gSRhY_4core3ops5range5RangejENtNtNtNtBa_4iter6traits8iterator8Iterator4folduNCINvNtNtBR_8adapters3map8map_foldjouNCNvCsh6omwL59Vq1_19frontier_experiment9make_keys0NCINvNvBL_8for_each4calloNCINvMsj_NtCs6i54tJFfzR_5alloc3vecINtB3t_3VecoE14extend_trustedINtB1B_3MapB3_B27_EE0E0E0EB2b_ (inlined)
+            |          _RINvXs0_NtNtNtCsgxBkk5gSRhY_4core4iter8adapters3mapINtB6_3MapINtNtNtBc_3ops5range5RangejENCNvCsh6omwL59Vq1_19frontier_experiment9make_keys0ENtNtNtBa_6traits8iterator8Iterator4folduNCINvNvB2e_8for_each4calloNCINvMsj_NtCs6i54tJFfzR_5alloc3vecINtB3r_3VecoE14extend_trustedBN_E0E0EB1t_
+            |          _RINvYINtNtNtNtCsgxBkk5gSRhY_4core4iter8adapters3map3MapINtNtNtBc_3ops5range5RangejENCNvCsh6omwL59Vq1_19frontier_experiment9make_keys0ENtNtNtBa_6traits8iterator8Iterator8for_eachNCINvMsj_NtCs6i54tJFfzR_5alloc3vecINtB2Y_3VecoE14extend_trustedB3_E0EB1n_ (inlined)
+            |          _RINvMsj_NtCs6i54tJFfzR_5alloc3vecINtB6_3VecoE14extend_trustedINtNtNtNtCsgxBkk5gSRhY_4core4iter8adapters3map3MapINtNtNtB16_3ops5range5RangejENCNvCsh6omwL59Vq1_19frontier_experiment9make_keys0EEB2i_ (inlined)
+            |          _RNvXs_NtNtCs6i54tJFfzR_5alloc3vec11spec_extendINtB6_3VecoEINtB4_10SpecExtendoINtNtNtNtCsgxBkk5gSRhY_4core4iter8adapters3map3MapINtNtNtB1m_3ops5range5RangejENCNvCsh6omwL59Vq1_19frontier_experiment9make_keys0EE11spec_extendB2y_ (inlined)
+            |          _RNvXs_NtNtCs6i54tJFfzR_5alloc3vec21spec_from_iter_nestedINtB6_3VecoEINtB4_18SpecFromIterNestedoINtNtNtNtCsgxBkk5gSRhY_4core4iter8adapters3map3MapINtNtNtB1E_3ops5range5RangejENCNvCsh6omwL59Vq1_19frontier_experiment9make_keys0EE9from_iterB2Q_ (inlined)
+            |          _RNvXNtNtCs6i54tJFfzR_5alloc3vec14spec_from_iterINtB4_3VecoEINtB2_12SpecFromIteroINtNtNtNtCsgxBkk5gSRhY_4core4iter8adapters3map3MapINtNtNtB1p_3ops5range5RangejENCNvCsh6omwL59Vq1_19frontier_experiment9make_keys0EE9from_iterB2B_
+            |          _RINvXse_NtCs6i54tJFfzR_5alloc3vecINtB6_3VecoEINtNtNtNtCsgxBkk5gSRhY_4core4iter6traits7collect12FromIteratoroE9from_iterINtNtNtBO_8adapters3map3MapINtNtNtBQ_3ops5range5RangejENCNvCsh6omwL59Vq1_19frontier_experiment9make_keys0EEB2Q_ (inlined)
+            |          _RINvYINtNtNtNtCsgxBkk5gSRhY_4core4iter8adapters3map3MapINtNtNtBc_3ops5range5RangejENCNvCsh6omwL59Vq1_19frontier_experiment9make_keys0ENtNtNtBa_6traits8iterator8Iterator7collectINtNtCs6i54tJFfzR_5alloc3vec3VecoEEB1n_ (inlined)
+            |          _RNvCsh6omwL59Vq1_19frontier_experiment9make_keys (inlined)
+            |          _RNvCsh6omwL59Vq1_19frontier_experiment4main
+            |          
+            |--0.31%--_RNvCsh6omwL59Vq1_19frontier_experiment6random (inlined)
+            |          _RNCNvCsh6omwL59Vq1_19frontier_experiment9make_keys0B3_ (inlined)
+            |          _RNCINvNtNtNtCsgxBkk5gSRhY_4core4iter8adapters3map8map_foldjouNCNvCsh6omwL59Vq1_19frontier_experiment9make_keys0NCINvNvNtNtNtB8_6traits8iterator8Iterator8for_each4calloNCINvMsj_NtCs6i54tJFfzR_5alloc3vecINtB2O_3VecoE14extend_trustedINtB4_3MapINtNtNtBa_3ops5range5RangejEBX_EE0E0E0B11_ (inlined)
+            |          _RINvYINtNtNtCsgxBkk5gSRhY_4core3ops5range5RangejENtNtNtNtBa_4iter6traits8iterator8Iterator4folduNCINvNtNtBR_8adapters3map8map_foldjouNCNvCsh6omwL59Vq1_19frontier_experiment9make_keys0NCINvNvBL_8for_each4calloNCINvMsj_NtCs6i54tJFfzR_5alloc3vecINtB3t_3VecoE14extend_trustedINtB1B_3MapB3_B27_EE0E0E0EB2b_ (inlined)
+            |          _RINvXs0_NtNtNtCsgxBkk5gSRhY_4core4iter8adapters3mapINtB6_3MapINtNtNtBc_3ops5range5RangejENCNvCsh6omwL59Vq1_19frontier_experiment9make_keys0ENtNtNtBa_6traits8iterator8Iterator4folduNCINvNvB2e_8for_each4calloNCINvMsj_NtCs6i54tJFfzR_5alloc3vecINtB3r_3VecoE14extend_trustedBN_E0E0EB1t_
+            |          _RINvYINtNtNtNtCsgxBkk5gSRhY_4core4iter8adapters3map3MapINtNtNtBc_3ops5range5RangejENCNvCsh6omwL59Vq1_19frontier_experiment9make_keys0ENtNtNtBa_6traits8iterator8Iterator8for_eachNCINvMsj_NtCs6i54tJFfzR_5alloc3vecINtB2Y_3VecoE14extend_trustedB3_E0EB1n_ (inlined)
+            |          _RINvMsj_NtCs6i54tJFfzR_5alloc3vecINtB6_3VecoE14extend_trustedINtNtNtNtCsgxBkk5gSRhY_4core4iter8adapters3map3MapINtNtNtB16_3ops5range5RangejENCNvCsh6omwL59Vq1_19frontier_experiment9make_keys0EEB2i_ (inlined)
+            |          _RNvXs_NtNtCs6i54tJFfzR_5alloc3vec11spec_extendINtB6_3VecoEINtB4_10SpecExtendoINtNtNtNtCsgxBkk5gSRhY_4core4iter8adapters3map3MapINtNtNtB1m_3ops5range5RangejENCNvCsh6omwL59Vq1_19frontier_experiment9make_keys0EE11spec_extendB2y_ (inlined)
+            |          _RNvXs_NtNtCs6i54tJFfzR_5alloc3vec21spec_from_iter_nestedINtB6_3VecoEINtB4_18SpecFromIterNestedoINtNtNtNtCsgxBkk5gSRhY_4core4iter8adapters3map3MapINtNtNtB1E_3ops5range5RangejENCNvCsh6omwL59Vq1_19frontier_experiment9make_keys0EE9from_iterB2Q_ (inlined)
+            |          _RNvXNtNtCs6i54tJFfzR_5alloc3vec14spec_from_iterINtB4_3VecoEINtB2_12SpecFromIteroINtNtNtNtCsgxBkk5gSRhY_4core4iter8adapters3map3MapINtNtNtB1p_3ops5range5RangejENCNvCsh6omwL59Vq1_19frontier_experiment9make_keys0EE9from_iterB2B_
+            |          _RINvXse_NtCs6i54tJFfzR_5alloc3vecINtB6_3VecoEINtNtNtNtCsgxBkk5gSRhY_4core4iter6traits7collect12FromIteratoroE9from_iterINtNtNtBO_8adapters3map3MapINtNtNtBQ_3ops5range5RangejENCNvCsh6omwL59Vq1_19frontier_experiment9make_keys0EEB2Q_ (inlined)
+            |          _RINvYINtNtNtNtCsgxBkk5gSRhY_4core4iter8adapters3map3MapINtNtNtBc_3ops5range5RangejENCNvCsh6omwL59Vq1_19frontier_experiment9make_keys0ENtNtNtBa_6traits8iterator8Iterator7collectINtNtCs6i54tJFfzR_5alloc3vec3VecoEEB1n_ (inlined)
+            |          _RNvCsh6omwL59Vq1_19frontier_experiment9make_keys (inlined)
+            |          _RNvCsh6omwL59Vq1_19frontier_experiment4main
+            |          
+            |--0.21%--_RINvNtCsgxBkk5gSRhY_4core3ptr5writeoECsh6omwL59Vq1_19frontier_experiment (inlined)
+            |          _RNCINvMsj_NtCs6i54tJFfzR_5alloc3vecINtB8_3VecoE14extend_trustedINtNtNtNtCsgxBkk5gSRhY_4core4iter8adapters3map3MapINtNtNtB18_3ops5range5RangejENCNvCsh6omwL59Vq1_19frontier_experiment9make_keys0EE0B2k_ (inlined)
+            |          _RNCINvNvNtNtNtNtCsgxBkk5gSRhY_4core4iter6traits8iterator8Iterator8for_each4calloNCINvMsj_NtCs6i54tJFfzR_5alloc3vecINtB1p_3VecoE14extend_trustedINtNtNtBc_8adapters3map3MapINtNtNtBe_3ops5range5RangejENCNvCsh6omwL59Vq1_19frontier_experiment9make_keys0EE0E0B3e_ (inlined)
+            |          _RNCINvNtNtNtCsgxBkk5gSRhY_4core4iter8adapters3map8map_foldjouNCNvCsh6omwL59Vq1_19frontier_experiment9make_keys0NCINvNvNtNtNtB8_6traits8iterator8Iterator8for_each4calloNCINvMsj_NtCs6i54tJFfzR_5alloc3vecINtB2O_3VecoE14extend_trustedINtB4_3MapINtNtNtBa_3ops5range5RangejEBX_EE0E0E0B11_ (inlined)
+            |          _RINvYINtNtNtCsgxBkk5gSRhY_4core3ops5range5RangejENtNtNtNtBa_4iter6traits8iterator8Iterator4folduNCINvNtNtBR_8adapters3map8map_foldjouNCNvCsh6omwL59Vq1_19frontier_experiment9make_keys0NCINvNvBL_8for_each4calloNCINvMsj_NtCs6i54tJFfzR_5alloc3vecINtB3t_3VecoE14extend_trustedINtB1B_3MapB3_B27_EE0E0E0EB2b_ (inlined)
+            |          _RINvXs0_NtNtNtCsgxBkk5gSRhY_4core4iter8adapters3mapINtB6_3MapINtNtNtBc_3ops5range5RangejENCNvCsh6omwL59Vq1_19frontier_experiment9make_keys0ENtNtNtBa_6traits8iterator8Iterator4folduNCINvNvB2e_8for_each4calloNCINvMsj_NtCs6i54tJFfzR_5alloc3vecINtB3r_3VecoE14extend_trustedBN_E0E0EB1t_
+            |          _RINvYINtNtNtNtCsgxBkk5gSRhY_4core4iter8adapters3map3MapINtNtNtBc_3ops5range5RangejENCNvCsh6omwL59Vq1_19frontier_experiment9make_keys0ENtNtNtBa_6traits8iterator8Iterator8for_eachNCINvMsj_NtCs6i54tJFfzR_5alloc3vecINtB2Y_3VecoE14extend_trustedB3_E0EB1n_ (inlined)
+            |          _RINvMsj_NtCs6i54tJFfzR_5alloc3vecINtB6_3VecoE14extend_trustedINtNtNtNtCsgxBkk5gSRhY_4core4iter8adapters3map3MapINtNtNtB16_3ops5range5RangejENCNvCsh6omwL59Vq1_19frontier_experiment9make_keys0EEB2i_ (inlined)
+            |          _RNvXs_NtNtCs6i54tJFfzR_5alloc3vec11spec_extendINtB6_3VecoEINtB4_10SpecExtendoINtNtNtNtCsgxBkk5gSRhY_4core4iter8adapters3map3MapINtNtNtB1m_3ops5range5RangejENCNvCsh6omwL59Vq1_19frontier_experiment9make_keys0EE11spec_extendB2y_ (inlined)
+            |          _RNvXs_NtNtCs6i54tJFfzR_5alloc3vec21spec_from_iter_nestedINtB6_3VecoEINtB4_18SpecFromIterNestedoINtNtNtNtCsgxBkk5gSRhY_4core4iter8adapters3map3MapINtNtNtB1E_3ops5range5RangejENCNvCsh6omwL59Vq1_19frontier_experiment9make_keys0EE9from_iterB2Q_ (inlined)
+            |          _RNvXNtNtCs6i54tJFfzR_5alloc3vec14spec_from_iterINtB4_3VecoEINtB2_12SpecFromIteroINtNtNtNtCsgxBkk5gSRhY_4core4iter8adapters3map3MapINtNtNtB1p_3ops5range5RangejENCNvCsh6omwL59Vq1_19frontier_experiment9make_keys0EE9from_iterB2B_
+            |          _RINvXse_NtCs6i54tJFfzR_5alloc3vecINtB6_3VecoEINtNtNtNtCsgxBkk5gSRhY_4core4iter6traits7collect12FromIteratoroE9from_iterINtNtNtBO_8adapters3map3MapINtNtNtBQ_3ops5range5RangejENCNvCsh6omwL59Vq1_19frontier_experiment9make_keys0EEB2Q_ (inlined)
+            |          _RINvYINtNtNtNtCsgxBkk5gSRhY_4core4iter8adapters3map3MapINtNtNtBc_3ops5range5RangejENCNvCsh6omwL59Vq1_19frontier_experiment9make_keys0ENtNtNtBa_6traits8iterator8Iterator7collectINtNtCs6i54tJFfzR_5alloc3vec3VecoEEB1n_ (inlined)
+            |          _RNvCsh6omwL59Vq1_19frontier_experiment9make_keys (inlined)
+            |          _RNvCsh6omwL59Vq1_19frontier_experiment4main
+            |          
+             --0.14%--_RNvXs3_NtNtCsgxBkk5gSRhY_4core5slice3cmphINtB5_14SlicePartialEqhE17equal_same_lengthCsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RNvXNtNtCsgxBkk5gSRhY_4core5slice3cmpShNtNtB6_3cmp9PartialEq2eqCsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RNvXs7_NtNtCsgxBkk5gSRhY_4core3cmp5implsRShNtB7_9PartialEq2eqCsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RNvXs_NtNtCsgxBkk5gSRhY_4core3str6traitseNtNtB8_3cmp9PartialEq2eq (inlined)
+                       _RNCNvCsh6omwL59Vq1_19frontier_experiment9make_keys0B3_ (inlined)
+                       _RNCINvNtNtNtCsgxBkk5gSRhY_4core4iter8adapters3map8map_foldjouNCNvCsh6omwL59Vq1_19frontier_experiment9make_keys0NCINvNvNtNtNtB8_6traits8iterator8Iterator8for_each4calloNCINvMsj_NtCs6i54tJFfzR_5alloc3vecINtB2O_3VecoE14extend_trustedINtB4_3MapINtNtNtBa_3ops5range5RangejEBX_EE0E0E0B11_ (inlined)
+                       _RINvYINtNtNtCsgxBkk5gSRhY_4core3ops5range5RangejENtNtNtNtBa_4iter6traits8iterator8Iterator4folduNCINvNtNtBR_8adapters3map8map_foldjouNCNvCsh6omwL59Vq1_19frontier_experiment9make_keys0NCINvNvBL_8for_each4calloNCINvMsj_NtCs6i54tJFfzR_5alloc3vecINtB3t_3VecoE14extend_trustedINtB1B_3MapB3_B27_EE0E0E0EB2b_ (inlined)
+                       _RINvXs0_NtNtNtCsgxBkk5gSRhY_4core4iter8adapters3mapINtB6_3MapINtNtNtBc_3ops5range5RangejENCNvCsh6omwL59Vq1_19frontier_experiment9make_keys0ENtNtNtBa_6traits8iterator8Iterator4folduNCINvNvB2e_8for_each4calloNCINvMsj_NtCs6i54tJFfzR_5alloc3vecINtB3r_3VecoE14extend_trustedBN_E0E0EB1t_
+                       _RINvYINtNtNtNtCsgxBkk5gSRhY_4core4iter8adapters3map3MapINtNtNtBc_3ops5range5RangejENCNvCsh6omwL59Vq1_19frontier_experiment9make_keys0ENtNtNtBa_6traits8iterator8Iterator8for_eachNCINvMsj_NtCs6i54tJFfzR_5alloc3vecINtB2Y_3VecoE14extend_trustedB3_E0EB1n_ (inlined)
+                       _RINvMsj_NtCs6i54tJFfzR_5alloc3vecINtB6_3VecoE14extend_trustedINtNtNtNtCsgxBkk5gSRhY_4core4iter8adapters3map3MapINtNtNtB16_3ops5range5RangejENCNvCsh6omwL59Vq1_19frontier_experiment9make_keys0EEB2i_ (inlined)
+                       _RNvXs_NtNtCs6i54tJFfzR_5alloc3vec11spec_extendINtB6_3VecoEINtB4_10SpecExtendoINtNtNtNtCsgxBkk5gSRhY_4core4iter8adapters3map3MapINtNtNtB1m_3ops5range5RangejENCNvCsh6omwL59Vq1_19frontier_experiment9make_keys0EE11spec_extendB2y_ (inlined)
+                       _RNvXs_NtNtCs6i54tJFfzR_5alloc3vec21spec_from_iter_nestedINtB6_3VecoEINtB4_18SpecFromIterNestedoINtNtNtNtCsgxBkk5gSRhY_4core4iter8adapters3map3MapINtNtNtB1E_3ops5range5RangejENCNvCsh6omwL59Vq1_19frontier_experiment9make_keys0EE9from_iterB2Q_ (inlined)
+                       _RNvXNtNtCs6i54tJFfzR_5alloc3vec14spec_from_iterINtB4_3VecoEINtB2_12SpecFromIteroINtNtNtNtCsgxBkk5gSRhY_4core4iter8adapters3map3MapINtNtNtB1p_3ops5range5RangejENCNvCsh6omwL59Vq1_19frontier_experiment9make_keys0EE9from_iterB2B_
+                       _RINvXse_NtCs6i54tJFfzR_5alloc3vecINtB6_3VecoEINtNtNtNtCsgxBkk5gSRhY_4core4iter6traits7collect12FromIteratoroE9from_iterINtNtNtBO_8adapters3map3MapINtNtNtBQ_3ops5range5RangejENCNvCsh6omwL59Vq1_19frontier_experiment9make_keys0EEB2Q_ (inlined)
+                       _RINvYINtNtNtNtCsgxBkk5gSRhY_4core4iter8adapters3map3MapINtNtNtBc_3ops5range5RangejENCNvCsh6omwL59Vq1_19frontier_experiment9make_keys0ENtNtNtBa_6traits8iterator8Iterator7collectINtNtCs6i54tJFfzR_5alloc3vec3VecoEEB1n_ (inlined)
+                       _RNvCsh6omwL59Vq1_19frontier_experiment9make_keys (inlined)
+                       _RNvCsh6omwL59Vq1_19frontier_experiment4main
+
+     1.08%            31  [.] 0x0000000000172b19                                                                                                                                                                                                                                                                          -      -            
+            |
+            ---_RINvNtCsgxBkk5gSRhY_4core3ptr4copytECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RNvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB2_6SortertE7compactCsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+
+     1.04%            30  [.] 0x0000000000172a80                                                                                                                                                                                                                                                                          -      -            
+            |
+            ---_RINvNtCsgxBkk5gSRhY_4core3ptr4copytECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RNvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB2_6SortertE7compactCsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+
+     1.01%            29  [.] 0x0000000000172a89                                                                                                                                                                                                                                                                          -      -            
+            |
+            ---_RINvNtCsgxBkk5gSRhY_4core3ptr4copytECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RNvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB2_6SortertE7compactCsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+
+     0.73%            21  [.] 0x0000000000172b3e                                                                                                                                                                                                                                                                          -      -            
+            |
+            ---_RINvNtCsgxBkk5gSRhY_4core3ptr4copytECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RNvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB2_6SortertE7compactCsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+
+     0.63%            18  [.] 0x0000000000172b21                                                                                                                                                                                                                                                                          -      -            
+            |
+            ---_RINvNtCsgxBkk5gSRhY_4core3ptr4copytECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RNvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB2_6SortertE7compactCsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+
+     0.24%             7  [.] 0x0000000000172b56                                                                                                                                                                                                                                                                          -      -            
+            |
+            ---_RINvNtCsgxBkk5gSRhY_4core3ptr4copytECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RNvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB2_6SortertE7compactCsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+
+     0.24%             7  [.] 0x0000000000173613                                                                                                                                                                                                                                                                          -      -            
+            |          
+             --0.21%--_RINvNtCsgxBkk5gSRhY_4core3ptr11write_byteshECsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RNvYNtCsh6omwL59Vq1_19frontier_experiment5AllocNtNtNtCsgxBkk5gSRhY_4core5alloc6global11GlobalAlloc12alloc_zeroedB4_ (inlined)
+                       _RNvCs1njKG4L9aB3_7___rustc19___rust_alloc_zeroed (inlined)
+                       _RNvNtCs6i54tJFfzR_5alloc5alloc12alloc_zeroed (inlined)
+                       _RNvMNtCs6i54tJFfzR_5alloc5allocNtB2_6Global18alloc_impl_runtime (inlined)
+                       _RNvMNtCs6i54tJFfzR_5alloc5allocNtB2_6Global10alloc_impl (inlined)
+                       _RNvXs_NtCs6i54tJFfzR_5alloc5allocNtB4_6GlobalNtNtCsgxBkk5gSRhY_4core5alloc9Allocator15allocate_zeroed (inlined)
+                       _RNvMs5_NtCs6i54tJFfzR_5alloc7raw_vecNtB5_11RawVecInner15try_allocate_inCsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RNvMs2_NtCs6i54tJFfzR_5alloc7raw_vecNtB5_11RawVecInner23with_capacity_zeroed_inCsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RNvMs0_NtCs6i54tJFfzR_5alloc7raw_vecINtB5_6RawVecmE23with_capacity_zeroed_inCsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RINvXs_NtNtCs6i54tJFfzR_5alloc3vec14spec_from_elemmNtB5_12SpecFromElem9from_elemNtNtB9_5alloc6GlobalECsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RINvNtCs6i54tJFfzR_5alloc3vec9from_elemmECsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RNvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB2_6SortertE3newCsh6omwL59Vq1_19frontier_experiment
+                       _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+                       _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+                       _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+                       _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+
+     0.21%             6  [.] _RINvNtNtNtNtCsgxBkk5gSRhY_4core5slice4sort6stable9quicksort9quicksorttNCINvMNtCs6i54tJFfzR_5alloc5sliceSt11sort_by_keytNCINvCsh6omwL59Vq1_19frontier_experiment3runttE0E0EB1Y_                                                                                                             -      -            
+            |          
+             --0.14%--_RNvMNtNtNtNtCsgxBkk5gSRhY_4core5slice4sort6stable9quicksortINtB2_14PartitionStatetE13partition_oneCsh6omwL59Vq1_19frontier_experiment (inlined)
+
+     0.21%             6  [.] 0x0000000000172b27                                                                                                                                                                                                                                                                          -      -            
+            |
+            ---_RINvNtCsgxBkk5gSRhY_4core3ptr4copytECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RNvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB2_6SortertE7compactCsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+
+     0.21%             6  [.] 0x0000000000172b36                                                                                                                                                                                                                                                                          -      -            
+            |
+            ---_RINvNtCsgxBkk5gSRhY_4core3ptr4copytECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RNvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB2_6SortertE7compactCsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+
+     0.17%             5  [.] 0x0000000000172a83                                                                                                                                                                                                                                                                          -      -            
+            |
+            ---_RINvNtCsgxBkk5gSRhY_4core3ptr4copytECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RNvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB2_6SortertE7compactCsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+
+     0.14%             4  [.] 0x0000000000172b40                                                                                                                                                                                                                                                                          -      -            
+            |
+            ---_RINvNtCsgxBkk5gSRhY_4core3ptr4copytECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RNvMNtNtCs8mfXHD671Rl_18block_msd_research8frontier5blockINtB2_6SortertE7compactCsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution11block_bytesttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution12finish_labelttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier18local_distribution15distribute_implttNCINvNtB4_2pa9partitionttNtB4_8IdentityE0Kb1_KB26_Kb0_ECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa9partitionttNtB4_8IdentityECsh6omwL59Vq1_19frontier_experiment
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa5visitttECsh6omwL59Vq1_19frontier_experiment (inlined)
+               _RINvNtNtCs8mfXHD671Rl_18block_msd_research8frontier2pa22sort_pa_with_thresholdttECsh6omwL59Vq1_19frontier_experiment
+
+
+
+#
+# (Tip: To change sampling frequency to 100 Hz: perf record -F 100)
+#

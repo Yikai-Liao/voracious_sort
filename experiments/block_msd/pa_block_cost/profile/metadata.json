@@ -1,0 +1,30 @@
+{
+  "command": [
+    "perf",
+    "record",
+    "-e",
+    "cpu-clock:u",
+    "-F",
+    "1999",
+    "--call-graph",
+    "dwarf,4096",
+    "-o",
+    "experiments/block_msd/pa_block_cost/profile/perf-u16-sparse.data",
+    "--",
+    "taskset",
+    "-c",
+    "2",
+    "experiments/block_msd/target/pa-lookup/time",
+    "1048576",
+    "256",
+    "Pa_unified_prepared_t16777216",
+    "sparse",
+    "u16",
+    "time",
+    "64",
+    "42"
+  ],
+  "source_ref": "e7c5e157ce57a9099f62019a7a9a953f1dc5100b",
+  "scope": "diagnostic process including preparation, restore, full oracle and sorting; percentages are not sorting-only shares",
+  "active_source": "38493fc"
+}
