@@ -1,0 +1,27 @@
+{
+  "removed": [
+    {
+      "path": "experiments/block_msd/target/release/deps/libvoracious_radix_sort-c0851abb9ebf080e.rlib",
+      "bytes": 41436234,
+      "sha256": "8066c001a1e25af090113ab885e27e6c9b3a3eb3afa44b7fb68c4b45a20149e7"
+    },
+    {
+      "path": "experiments/block_msd/target/release/deps/libvoracious_radix_sort-c0851abb9ebf080e.rmeta",
+      "bytes": 2977653,
+      "sha256": "3b27e6d1756f6426ab5d9278f2c3d1f7ce056a3cc9afe1b187992b7c4bddcb3c"
+    },
+    {
+      "path": "experiments/block_msd/target/release/deps/libvoracious_radix_sort-f26e5c7361acfb7d.rlib",
+      "bytes": 33248558,
+      "sha256": "b2f4134c96d191c0f800623867b17fe7a4e6b247d34cda5197046f7fa9a599bc"
+    },
+    {
+      "path": "experiments/block_msd/target/release/deps/libvoracious_radix_sort-f26e5c7361acfb7d.rmeta",
+      "bytes": 1327153,
+      "sha256": "b2d2e635a605ba33fb7010d3b3685dcdf6ba2d3258eec6cac88b37cd5f03da6f"
+    }
+  ],
+  "reason": "obsolete full-DWARF profiles; all current time/work builds use 286fae313920444e; current incremental caches and all frozen ELFs retained",
+  "hash_ledgers_checked": 83,
+  "root_free_bytes_after": 279011328
+}

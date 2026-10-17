@@ -1,0 +1,7 @@
+{
+  "completed_check_cache": "experiments/block_msd/target/pa-outline-check",
+  "logical_bytes": 87410793,
+  "hash_ledgers_checked": 83,
+  "frozen_binary_references": 0,
+  "root_free_bytes_after": 254341120
+}
