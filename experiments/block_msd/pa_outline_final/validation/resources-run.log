@@ -1,0 +1,11 @@
+work-guards-b64-s42.csv 0 11.66
+work-prefix-b64-s42.csv 0 11.44
+work-prefix-b512-s42.csv 0 11.8
+work-large-b512-s42.csv 0 9.0
+work-medium-b64-s42.csv 0 0.7
+heap-guards-b64-s42.csv 0 16.16
+heap-domain-b512-s42.csv 0 20.06
+heap-prefix-b64-s42.csv 0 17.96
+heap-prefix-b512-s42.csv 0 18.46
+heap-large-b512-s42.csv 0 12.99
+heap-medium-b64-s42.csv 0 0.84

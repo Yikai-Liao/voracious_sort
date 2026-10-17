@@ -1,0 +1,5 @@
+L_frozen cases 12 geomean 1.2762 fast>5% 4 slow>5% 8
+Pa cases 12 geomean 1.0 fast>5% 0 slow>5% 0
+Pa_band cases 12 geomean 0.9164 fast>5% 5 slow>5% 0
+Pa_unified_groups_t16777216 cases 12 geomean 0.7891 fast>5% 11 slow>5% 0
+stable_msd cases 12 geomean 1.454 fast>5% 1 slow>5% 9

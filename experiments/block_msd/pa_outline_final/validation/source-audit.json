@@ -1,0 +1,13 @@
+{
+  "base_source": "2513fa5",
+  "candidate_source": "8bf14e0668282791c65fe78fd7afba377903ed67",
+  "frozen_source_files": 156,
+  "changed_files": [
+    "experiments/block_msd/src/bin/frontier_experiment.rs",
+    "experiments/block_msd/src/frontier/block.rs"
+  ],
+  "block_diff_only": "inline(never) comment/attribute plus added multibit stable-payload test",
+  "runner_diff_only": "harness narrow feature expanded to seven native-word layouts; full build omits feature",
+  "all_other_frozen_source_hashes_equal": true,
+  "original_scalar_and_grouped_bodies_exact": true
+}

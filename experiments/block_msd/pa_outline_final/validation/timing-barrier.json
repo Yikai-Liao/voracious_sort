@@ -1,0 +1,10 @@
+{
+  "cleared_ns": 1792267481988183269,
+  "active_task_compilers_or_sanitizer_tests": [],
+  "native_frontier_tests_passed": 32,
+  "runner_tests_passed": 2,
+  "asan_frontier_tests_passed": 32,
+  "asan_optimized_oracle_rows": 170,
+  "work_heap_rows_verified": 572,
+  "root_free_bytes": 476807168
+}

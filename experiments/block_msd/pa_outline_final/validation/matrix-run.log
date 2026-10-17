@@ -1,0 +1,10 @@
+final-guards-b64-s42.csv 0 85.4
+final-prefix-b64-s42.csv 0 109.41
+final-seedflip-b64-s7.csv 0 3.2
+final-prefix-b512-s42.csv 0 106.23
+final-cache-domain-b512-s42.csv 0 82.84
+final-narrow-repeat-b64-s42.csv 0 3.24
+final-order-small-b64-s42.csv 0 0.1
+final-order-large-b64-s42.csv 0 9.69
+final-large-b512-s42.csv 0 64.65
+final-medium-b64-s42.csv 0 4.56

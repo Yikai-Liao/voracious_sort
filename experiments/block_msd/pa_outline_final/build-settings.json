@@ -1,0 +1,47 @@
+{
+  "release": {
+    "opt_level": 3,
+    "debug": "line-tables-only",
+    "codegen_units": 16,
+    "lto": false,
+    "incremental": true,
+    "jobs": 6,
+    "rustflags": "-C target-cpu=native"
+  },
+  "time_features": [],
+  "work_features": [
+    "frontier_work"
+  ],
+  "asan": {
+    "toolchain": "nightly",
+    "target": "x86_64-unknown-linux-gnu",
+    "features": [
+      "frontier_work"
+    ],
+    "profile": "release",
+    "debug_assertions": false,
+    "overflow_checks": false,
+    "rustflags": "-Zsanitizer=address -C target-cpu=native",
+    "ASAN_OPTIONS": "detect_leaks=1",
+    "purpose": "fresh optimized frontier regression suite; previous source has debug ASan coverage and both algorithm bodies are identical"
+  },
+  "dependency_flags": [
+    "--locked",
+    "--offline"
+  ],
+  "timing_affinity": [
+    2
+  ],
+  "offline_local_threshold_bytes": 16777216,
+  "asan_release": {
+    "features": [],
+    "profile": "release",
+    "rustflags": "-Zsanitizer=address -C target-cpu=native",
+    "target": "x86_64-unknown-linux-gnu",
+    "work_counters": false,
+    "purpose": "pure optimized scalar/grouped loop and full ten-layout boundary diagnostics; 170 stable-oracle rows, no timing claims"
+  },
+  "source_commit": "8bf14e0668282791c65fe78fd7afba377903ed67",
+  "changes_from_previous": "one inline(never) on existing scalar scatter; all original scalar/grouped bodies unchanged",
+  "status": "safety/resources complete; 91-cell seen timing FAIL: stable u128/equal small-input gap; no held-out seed or mechanism sweep executed"
+}

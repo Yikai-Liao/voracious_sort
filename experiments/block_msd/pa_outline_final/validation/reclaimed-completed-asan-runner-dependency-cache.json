@@ -1,0 +1,18 @@
+{
+  "removed": [
+    {
+      "path": "experiments/block_msd/target/pa-outline-asan/x86_64-unknown-linux-gnu/release/incremental/block_msd_research-2q4bmshpf5bnp",
+      "logical_bytes": 22584491
+    },
+    {
+      "path": "experiments/block_msd/target/pa-outline-asan/x86_64-unknown-linux-gnu/release/incremental/voracious_radix_sort-0is91ob55y1dq",
+      "logical_bytes": 71986223
+    }
+  ],
+  "active_asan_crates": [
+    "frontier_experiment"
+  ],
+  "reason": "both dependencies complete; active full runner uses their self-contained rlibs; isolated caches removed after successful archival anyway",
+  "hash_ledgers_checked": 87,
+  "root_free_bytes_after": 222707712
+}

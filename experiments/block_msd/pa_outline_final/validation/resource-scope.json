@@ -1,0 +1,6 @@
+{
+  "started_ns": 1792266927005328702,
+  "scope": "deterministic logical Work and requested heap/allocation fields only",
+  "concurrent_activity": "isolated ASan build may overlap; no resource CSV wall/CPU field is used for timing claims",
+  "formal_timing_barrier": "all builds/tests/ASan must finish before ablation and seen-matrix time runs"
+}

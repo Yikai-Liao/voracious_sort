@@ -1,0 +1,15 @@
+{
+  "removed": [
+    {
+      "path": "experiments/block_msd/target/release/incremental/frontier_experiment-1cyk8iz4n2t0m",
+      "logical_bytes": 211317857
+    },
+    {
+      "path": "experiments/block_msd/target/release/incremental/block_msd_research-32rv60e7jcr99",
+      "logical_bytes": 39927852
+    }
+  ],
+  "reason": "positive seven-layout screen frozen; proceeding only full-layout time/work validation; preserve full time/work/libtest caches and every frozen ELF",
+  "hash_ledgers_checked": 85,
+  "root_free_bytes_after": 384360448
+}

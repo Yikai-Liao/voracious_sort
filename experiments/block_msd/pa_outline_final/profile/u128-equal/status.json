@@ -1,0 +1,30 @@
+{
+  "source_commit": "8bf14e0668282791c65fe78fd7afba377903ed67",
+  "binary": "experiments/block_msd/target/pa-outline-final/time",
+  "binary_sha256": "f86514281f700713db136b996561c5fa7ea139599ff868350aa8c66322151949",
+  "diagnostic_command": [
+    "perf",
+    "record",
+    "-e",
+    "cpu-clock:u",
+    "-F",
+    "1999",
+    "--",
+    "taskset",
+    "-c",
+    "2",
+    "experiments/block_msd/target/pa-outline-final/time",
+    "16384",
+    "32768",
+    "Pa_unified_groups_t16777216",
+    "equal",
+    "u128",
+    "time",
+    "64",
+    "42"
+  ],
+  "diagnostic_oracle_rows": 32768,
+  "samples": 4244,
+  "lost_samples": 0,
+  "scope": "whole-process user samples including restore/oracle/formatting; all formal seen timings finished before this profile; diagnostic CSV excluded from formal timing review"
+}

@@ -1,0 +1,91 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 4K of event 'cpu-clock:u'
+# Event count (approx.): 2123061000
+#
+# Overhead  Command  Shared Object     Symbol                                                                                                                                                                                                                                                                                        
+# ........  .......  ................  ..............................................................................................................................................................................................................................................................................................
+#
+    49.32%  time     time              [.] _RNvCsh0OFtX7QJDB_19frontier_experiment4main
+    26.08%  time     time              [.] _RINvNtNtCsbkRNkUNbpMw_18block_msd_research8frontier13ordered_tiled7orderedooECsh0OFtX7QJDB_19frontier_experiment
+    14.00%  time     libc.so.6         [.] 0x0000000000172d6d
+     1.74%  time     [vdso]            [.] __vdso_clock_gettime
+     1.44%  time     libc.so.6         [.] malloc
+     1.06%  time     libc.so.6         [.] cfree
+     1.01%  time     libc.so.6         [.] 0x000000000008f687
+     0.68%  time     time              [.] _RINvNtCs6i54tJFfzR_5alloc3str17join_generic_copyehNtNtB4_6string6StringECsh0OFtX7QJDB_19frontier_experiment
+     0.38%  time     time              [.] _RNvMsf_NtNtNtCsgxBkk5gSRhY_4core3fmt3num3impy10__fmt_inner
+     0.38%  time     time              [.] _RNvMsk_NtNtNtCsgxBkk5gSRhY_4core3fmt3num3impj4__fmt
+     0.31%  time     libc.so.6         [.] 0x0000000000172ac0
+     0.28%  time     libc.so.6         [.] 0x0000000000172ad7
+     0.26%  time     libc.so.6         [.] 0x0000000000172a83
+     0.21%  time     libc.so.6         [.] 0x0000000000172a80
+     0.21%  time     time              [.] _RNvCs1njKG4L9aB3_7___rustc35___rust_no_alloc_shim_is_unstable_v2
+     0.16%  time     libc.so.6         [.] 0x0000000000172ae5
+     0.14%  time     libc.so.6         [.] clock_gettime
+     0.14%  time     time              [.] _RINvCsh0OFtX7QJDB_19frontier_experiment7executeooEB2_
+     0.12%  time     libc.so.6         [.] 0x0000000000172ac5
+     0.12%  time     time              [.] _RNvNtCsgxBkk5gSRhY_4core3fmt5write
+     0.12%  time     time              [.] _RNvXsi_NtNtCs9k3SxhrAWiO_3std2io5stdioNtB5_10StdoutLockNtB7_5Write9write_all
+     0.09%  time     libc.so.6         [.] 0x0000000000172a8f
+     0.07%  time     libc.so.6         [.] 0x00000000000a1398
+     0.07%  time     libc.so.6         [.] 0x0000000000172ab2
+     0.07%  time     time              [.] _RNvMNtCs9k3SxhrAWiO_3std4timeNtB2_7Instant7elapsed
+     0.07%  time     time              [.] _RNvMs0_NtNtCsgxBkk5gSRhY_4core3fmt3numo4__fmt
+     0.07%  time     time              [.] _RNvNtNtCs9k3SxhrAWiO_3std2io5stdio6__print
+     0.07%  time     time              [.] _RNvXsf_NtNtCs9k3SxhrAWiO_3std2io5stdioRNtB5_6StdoutNtB7_5Write9write_fmt
+     0.05%  time     libc.so.6         [.] 0x00000000000a0608
+     0.05%  time     libc.so.6         [.] 0x00000000000a063d
+     0.05%  time     libc.so.6         [.] 0x00000000000a13b9
+     0.05%  time     libc.so.6         [.] 0x0000000000173540
+     0.05%  time     time              [.] _RINvNtNtCsbkRNkUNbpMw_18block_msd_research8frontier2pa22sort_pa_with_thresholdooECsh0OFtX7QJDB_19frontier_experiment
+     0.05%  time     time              [.] _RINvNtNtCsbkRNkUNbpMw_18block_msd_research8frontier2pa5visitooECsh0OFtX7QJDB_19frontier_experiment.llvm.5840278210049151275
+     0.05%  time     time              [.] _RNvMs_NtNtNtCs9k3SxhrAWiO_3std2io8buffered9bufwriterINtB4_9BufWriterNtNtB8_5stdio9StdoutRawE9flush_bufBa_
+     0.05%  time     time              [.] _RNvNtNtCsgxBkk5gSRhY_4core5slice6memchr7memrchr
+     0.05%  time     time              [.] _RNvXsi_NtCsgxBkk5gSRhY_4core3fmteNtB5_7Display3fmt
+     0.02%  time     libc.so.6         [.] write
+     0.02%  time     libc.so.6         [.] 0x000000000008f6ad
+     0.02%  time     libc.so.6         [.] 0x00000000000a05a7
+     0.02%  time     libc.so.6         [.] 0x00000000000a05a9
+     0.02%  time     libc.so.6         [.] 0x00000000000a05be
+     0.02%  time     libc.so.6         [.] 0x00000000000a05e7
+     0.02%  time     libc.so.6         [.] 0x00000000000a05f9
+     0.02%  time     libc.so.6         [.] 0x00000000000a0613
+     0.02%  time     libc.so.6         [.] 0x00000000000a0634
+     0.02%  time     libc.so.6         [.] 0x00000000000a0653
+     0.02%  time     libc.so.6         [.] 0x00000000000a12b5
+     0.02%  time     libc.so.6         [.] 0x00000000000a1338
+     0.02%  time     libc.so.6         [.] 0x00000000000a134f
+     0.02%  time     libc.so.6         [.] 0x00000000000a1394
+     0.02%  time     libc.so.6         [.] 0x00000000000a13c8
+     0.02%  time     libc.so.6         [.] 0x00000000000a13cc
+     0.02%  time     libc.so.6         [.] 0x00000000000a13e0
+     0.02%  time     libc.so.6         [.] 0x00000000000a13f2
+     0.02%  time     libc.so.6         [.] 0x00000000000a13f9
+     0.02%  time     libc.so.6         [.] 0x00000000000a1833
+     0.02%  time     libc.so.6         [.] 0x00000000000a18b8
+     0.02%  time     libc.so.6         [.] 0x0000000000172ab0
+     0.02%  time     libc.so.6         [.] 0x0000000000172aba
+     0.02%  time     libc.so.6         [.] 0x0000000000172ad0
+     0.02%  time     libc.so.6         [.] 0x0000000000172ad5
+     0.02%  time     libc.so.6         [.] 0x0000000000172aea
+     0.02%  time     libc.so.6         [.] 0x0000000000172c46
+     0.02%  time     libc.so.6         [.] 0x0000000000172c54
+     0.02%  time     libc.so.6         [.] 0x0000000000172c7a
+     0.02%  time     libc.so.6         [.] 0x0000000000172d4e
+     0.02%  time     libc.so.6         [.] 0x00000000001735c6
+     0.02%  time     libc.so.6         [.] 0x00000000001735ea
+     0.02%  time     libgcc_s.so.1     [.] __cpu_indicator_init
+     0.02%  time     time              [.] _RINvMNtCsgxBkk5gSRhY_4core3stre5parsejECsh0OFtX7QJDB_19frontier_experiment
+     0.02%  time     time              [.] _RINvXs0_NtNtNtCsgxBkk5gSRhY_4core4iter8adapters3mapINtB6_3MapINtNtNtBc_3ops5range5RangejENCNvCsh0OFtX7QJDB_19frontier_experiment9make_keys0ENtNtNtBa_6traits8iterator8Iterator4folduNCINvNvB2e_8for_each4calloNCINvMsj_NtCs6i54tJFfzR_5alloc3vecINtB3r_3VecoE14extend_trustedBN_E0E0EB1t_
+     0.02%  time     time              [.] _RNvMNtNtNtNtCs9k3SxhrAWiO_3std3sys3pal4unix4timeNtB2_8Timespec3now
+     0.02%  time     time              [.] _RNvMsa_NtCsgxBkk5gSRhY_4core3fmtNtB5_9Formatter3pad
+     0.02%  time     time              [.] _RNvNtNtCs9k3SxhrAWiO_3std2io5stdio31print_to_buffer_if_capture_used
+
+
+#
+# (Tip: To add Node.js USDT(User-Level Statically Defined Tracing): perf buildid-cache --add `which node`)
+#

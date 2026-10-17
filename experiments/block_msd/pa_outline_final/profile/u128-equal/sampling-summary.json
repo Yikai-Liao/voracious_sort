@@ -1,0 +1,60 @@
+{
+  "samples_total": 4244,
+  "samples_ordered": 1107,
+  "samples_first_equal_tile_loop": 1089,
+  "first_tile_static_range": [
+    "0x40c1c4",
+    "0x40c34a"
+  ],
+  "top_static_addresses": [
+    [
+      "0x40c29f",
+      39
+    ],
+    [
+      "0x40c309",
+      36
+    ],
+    [
+      "0x40c313",
+      36
+    ],
+    [
+      "0x40c2f9",
+      36
+    ],
+    [
+      "0x40c205",
+      35
+    ],
+    [
+      "0x40c2e9",
+      34
+    ],
+    [
+      "0x40c2bf",
+      30
+    ],
+    [
+      "0x40c229",
+      27
+    ],
+    [
+      "0x40c1f5",
+      26
+    ],
+    [
+      "0x40c2af",
+      25
+    ],
+    [
+      "0x40c255",
+      24
+    ],
+    [
+      "0x40c2dd",
+      24
+    ]
+  ],
+  "scope": "whole-process flat user CPU samples; includes restore/oracle/formatting; no timing claims"
+}

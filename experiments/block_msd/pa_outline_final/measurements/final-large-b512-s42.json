@@ -1,0 +1,33 @@
+{
+  "command": [
+    "taskset",
+    "-c",
+    "2",
+    "/root/code/voracious_sort-pa-unified/experiments/block_msd/target/pa-outline-final/time",
+    "1048576",
+    "12",
+    "Pa,Pa_band,Pa_unified_groups_t16777216,L_frozen,stable_msd,Pa",
+    "deep_skew,majority_prefix,deep_unique90",
+    "large128",
+    "time",
+    "512",
+    "42"
+  ],
+  "started_ns": 1792267939033405584,
+  "pid": 1741386,
+  "meminfo_before": "MemTotal:       16344888 kB\nMemFree:         6925976 kB\nMemAvailable:   11428308 kB\nBuffers:          133792 kB\nCached:          3762240 kB\nSwapCached:        14744 kB\nActive:          3632800 kB\nInactive:        2485036 kB\nActive(anon):    1889744 kB\nInactive(anon):   359312 kB\nActive(file):    1743056 kB\nInactive(file):  2125724 kB\nUnevictable:           0 kB\nMlocked:               0 kB\nSwapTotal:      12366328 kB\nSwapFree:        6176232 kB\nZswap:                 0 kB\nZswapped:              0 kB\nDirty:              1384 kB\nWriteback:             0 kB\nAnonPages:       2154440 kB\nMapped:           324216 kB\nShmem:             27324 kB\nKReclaimable:     975252 kB\nSlab:            1206032 kB\nSReclaimable:     975252 kB\nSUnreclaim:       230780 kB\nKernelStack:       13044 kB\nPageTables:        52908 kB\nSecPageTables:         0 kB\nNFS_Unstable:          0 kB\nBounce:                0 kB\nWritebackTmp:          0 kB\nCommitLimit:    20538772 kB\nCommitted_AS:   10773532 kB\nVmallocTotal:   34359738367 kB\nVmallocUsed:       82436 kB\nVmallocChunk:          0 kB\nPercpu:            64000 kB\nHardwareCorrupted:     0 kB\nAnonHugePages:   1067008 kB\nShmemHugePages:        0 kB\nShmemPmdMapped:        0 kB\nFileHugePages:         0 kB\nFilePmdMapped:         0 kB\nUnaccepted:            0 kB\nHugePages_Total:       0\nHugePages_Free:        0\nHugePages_Rsvd:        0\nHugePages_Surp:        0\nHugepagesize:       2048 kB\nHugetlb:               0 kB\nDirectMap4k:      245604 kB\nDirectMap2M:    10240000 kB\nDirectMap1G:     8388608 kB\n",
+  "load_before": "2.69 2.86 3.10 3/683 1741390\n",
+  "ended_ns": 1792268003680613359,
+  "returncode": 0,
+  "meminfo_after": "MemTotal:       16344888 kB\nMemFree:         6902504 kB\nMemAvailable:   11406148 kB\nBuffers:          133792 kB\nCached:          3763436 kB\nSwapCached:        14744 kB\nActive:          3629388 kB\nInactive:        2486272 kB\nActive(anon):    1886256 kB\nInactive(anon):   359312 kB\nActive(file):    1743132 kB\nInactive(file):  2126960 kB\nUnevictable:           0 kB\nMlocked:               0 kB\nSwapTotal:      12366328 kB\nSwapFree:        6176488 kB\nZswap:                 0 kB\nZswapped:              0 kB\nDirty:               732 kB\nWriteback:             0 kB\nAnonPages:       2149296 kB\nMapped:           295840 kB\nShmem:             27216 kB\nKReclaimable:     975252 kB\nSlab:            1206024 kB\nSReclaimable:     975252 kB\nSUnreclaim:       230772 kB\nKernelStack:       12944 kB\nPageTables:        54336 kB\nSecPageTables:         0 kB\nNFS_Unstable:          0 kB\nBounce:                0 kB\nWritebackTmp:          0 kB\nCommitLimit:    20538772 kB\nCommitted_AS:   11432180 kB\nVmallocTotal:   34359738367 kB\nVmallocUsed:       82264 kB\nVmallocChunk:          0 kB\nPercpu:            64000 kB\nHardwareCorrupted:     0 kB\nAnonHugePages:   1064960 kB\nShmemHugePages:        0 kB\nShmemPmdMapped:        0 kB\nFileHugePages:         0 kB\nFilePmdMapped:         0 kB\nUnaccepted:            0 kB\nHugePages_Total:       0\nHugePages_Free:        0\nHugePages_Rsvd:        0\nHugePages_Surp:        0\nHugepagesize:       2048 kB\nHugetlb:               0 kB\nDirectMap4k:      245604 kB\nDirectMap2M:    10240000 kB\nDirectMap1G:     8388608 kB\n",
+  "load_after": "2.79 2.90 3.10 3/677 1743095\n",
+  "child_usage": {
+    "ru_utime": 59.227683,
+    "ru_stime": 5.304305,
+    "ru_maxrss": 931672,
+    "ru_minflt": 141943,
+    "ru_majflt": 0,
+    "ru_nvcsw": 1,
+    "ru_nivcsw": 1367
+  }
+}

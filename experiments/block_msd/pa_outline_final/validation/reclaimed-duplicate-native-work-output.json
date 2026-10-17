@@ -1,0 +1,12 @@
+{
+  "completed_cargo_hardlinks": [
+    "experiments/block_msd/target/release/frontier_experiment",
+    "experiments/block_msd/target/release/deps/frontier_experiment-62096031a210a0c0"
+  ],
+  "frozen_identical_copy": "experiments/block_msd/target/pa-outline-final/work",
+  "sha256": "ecc5605542039067a5a3145b9cf8afda8eaa473507a6c64587fcc764405b8e59",
+  "bytes_freed": 26984048,
+  "hash_ledgers_checked": 87,
+  "native_full_time_work_incremental_caches_retained": true,
+  "root_free_bytes_after": 326594560
+}

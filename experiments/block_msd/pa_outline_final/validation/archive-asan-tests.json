@@ -1,0 +1,10 @@
+{
+  "artifact": "experiments/block_msd/target/pa-outline-final/asan-tests",
+  "bytes": 37657272,
+  "sha256": "90aaa25bec38b4640a296e303d52741792ef15c08cb75b9302d7ab980fc0f29c",
+  "compiler_artifact": "/root/code/voracious_sort-pa-unified/experiments/block_msd/target/pa-outline-asan/x86_64-unknown-linux-gnu/release/build/block_msd_research/930c41db65a1f593/out/block_msd_research-930c41db65a1f593",
+  "reclaimed_isolated_cache": "experiments/block_msd/target/pa-outline-asan",
+  "reclaimed_logical_bytes": 234062588,
+  "hash_ledgers_checked": 87,
+  "root_free_bytes_after": 337932288
+}

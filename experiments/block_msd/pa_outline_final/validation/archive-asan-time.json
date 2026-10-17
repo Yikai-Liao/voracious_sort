@@ -1,0 +1,10 @@
+{
+  "artifact": "experiments/block_msd/target/pa-outline-final/asan-time",
+  "bytes": 46833408,
+  "sha256": "7604c464c1da1c7adae34c72cca0fd7bd5bda59de97322ff4cbcaa11a8eb5515",
+  "compiler_artifact": "/root/code/voracious_sort-pa-unified/experiments/block_msd/target/pa-outline-asan/x86_64-unknown-linux-gnu/release/frontier_experiment",
+  "reclaimed_isolated_cache": "experiments/block_msd/target/pa-outline-asan",
+  "reclaimed_logical_bytes": 300314075,
+  "hash_ledgers_checked": 87,
+  "root_free_bytes_after": 477671424
+}

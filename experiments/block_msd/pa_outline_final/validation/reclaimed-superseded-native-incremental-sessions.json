@@ -1,0 +1,20 @@
+{
+  "records": [
+    {
+      "removed_superseded_session": "experiments/block_msd/target/release/incremental/frontier_experiment-30hi91pzzd2m5/s-hnayon19x3-0ngeuhk-9yeurzogt0k78x7lb2rrgisfe",
+      "removed_logical_bytes": 148076022,
+      "kept_latest_complete_session": "experiments/block_msd/target/release/incremental/frontier_experiment-30hi91pzzd2m5/s-hnazuuvf1o-0ndcra8-1ghz2u5bhv1vhzmcunoynt15o",
+      "kept_logical_bytes": 137946277
+    },
+    {
+      "removed_superseded_session": "experiments/block_msd/target/release/incremental/frontier_experiment-2ppr6pev2w1sb/s-hnayrtkeh1-141x3ez-9fi77gb1uny3bj047xwmt63qd",
+      "removed_logical_bytes": 145965644,
+      "kept_latest_complete_session": "experiments/block_msd/target/release/incremental/frontier_experiment-2ppr6pev2w1sb/s-hnazwqjmj0-1di1xnx-3bxegs54yuz2trc7jxd9i46ex",
+      "kept_logical_bytes": 137169600
+    }
+  ],
+  "reason": "completed old source generation only; latest complete full time/work sessions retained along with all library caches and frozen ELFs",
+  "hash_ledgers_checked": 87,
+  "active_native_compilers": [],
+  "root_free_bytes_after": 298098688
+}

@@ -1,0 +1,28 @@
+{
+  "removed": [
+    {
+      "path": "experiments/block_msd/target/release/deps/block_msd_research-268751d61ea28b08",
+      "logical_bytes": 24129032,
+      "sha256": "6f7afeb8d723b40c08193d245d5c24574287dcbb405409fe00981cc3b616ad64",
+      "reason": "completed successful native test output; no frozen hash-ledger reference"
+    },
+    {
+      "path": "experiments/block_msd/target/release/deps/frontier_experiment-31d88eafb46aba2f",
+      "logical_bytes": 13301144,
+      "sha256": "f9c5177bf33a9b5e75ddbae9a975c98402ff38e707aae426801d46af9d42b356",
+      "reason": "completed successful native test output; no frozen hash-ledger reference"
+    },
+    {
+      "path": "experiments/block_msd/target/release/incremental/block_msd_research-1bvnrj9gk07jh",
+      "logical_bytes": 281057461,
+      "reason": "completed successful native test cache; full time/work caches retained"
+    },
+    {
+      "path": "experiments/block_msd/target/release/incremental/frontier_experiment-3vdu1qm3jczgw",
+      "logical_bytes": 20913841,
+      "reason": "completed successful native test cache; full time/work caches retained"
+    }
+  ],
+  "hash_ledgers_checked": 87,
+  "root_free_bytes_after": 353890304
+}

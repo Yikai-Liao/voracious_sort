@@ -1,0 +1,18 @@
+{
+  "removed": [
+    {
+      "completed_cargo_output": "experiments/block_msd/target/release/deps/frontier_experiment-60b10e10741940af",
+      "frozen_identical_copy": "experiments/block_msd/target/pa-outline/time",
+      "bytes": 21084528,
+      "sha256": "ace0eeeeb0ef758ffab8ab19ac0c8c7f215d21228a0863585f69021a0cbe09ae"
+    },
+    {
+      "completed_cargo_output": "experiments/block_msd/target/release/deps/frontier_experiment-ce06adec1b9a905d",
+      "frozen_identical_copy": "experiments/block_msd/target/pa-outline-final/time",
+      "bytes": 27456896,
+      "sha256": "f86514281f700713db136b996561c5fa7ea139599ff868350aa8c66322151949"
+    }
+  ],
+  "hash_ledgers_checked": 86,
+  "root_free_bytes_after": 145289216
+}

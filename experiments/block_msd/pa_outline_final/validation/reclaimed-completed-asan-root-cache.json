@@ -1,0 +1,10 @@
+{
+  "completed_dependency_incremental_cache": "experiments/block_msd/target/pa-outline-asan/x86_64-unknown-linux-gnu/release/incremental/voracious_radix_sort-0is91ob55y1dq",
+  "logical_bytes": 71986236,
+  "active_asan_crates": [
+    "block_msd_research"
+  ],
+  "reason": "root dependency finished; active test crate uses its self-contained rlib; no sanitizer dependency cache will survive the predeclared archive cleanup",
+  "hash_ledgers_checked": 87,
+  "root_free_bytes_after": 163430400
+}

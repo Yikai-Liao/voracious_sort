@@ -1,0 +1,58 @@
+{
+  "scalar_functions": [
+    {
+      "byte": 0,
+      "address": "0000000000141780",
+      "size": "000000000000062f",
+      "name": "<block_msd_research::frontier::block::Sorter<frontier_experiment::Small>>::scatter::<u32, block_msd_research::frontier::distribute_children<frontier_experiment::Small, u32, block_msd_research::frontier::Prefix<u32>, 1>::{closure#0}, 0>",
+      "calls": [
+        "141d12:\tcall   *0x379480(%rip)        # 4bb198 <_DYNAMIC+0x2a8>",
+        "141d3d:\tcall   *0x37943d(%rip)        # 4bb180 <_DYNAMIC+0x290>",
+        "141d50:\tcall   *0x379442(%rip)        # 4bb198 <_DYNAMIC+0x2a8>",
+        "141d60:\tcall   *0x379432(%rip)        # 4bb198 <_DYNAMIC+0x2a8>",
+        "141d75:\tcall   *0x37941d(%rip)        # 4bb198 <_DYNAMIC+0x2a8>",
+        "141d85:\tcall   *0x37940d(%rip)        # 4bb198 <_DYNAMIC+0x2a8>",
+        "141d97:\tcall   *0x3793fb(%rip)        # 4bb198 <_DYNAMIC+0x2a8>",
+        "141da9:\tcall   *0x3793e9(%rip)        # 4bb198 <_DYNAMIC+0x2a8>"
+      ]
+    },
+    {
+      "byte": 1,
+      "address": "0000000000141db0",
+      "size": "0000000000000643",
+      "name": "<block_msd_research::frontier::block::Sorter<frontier_experiment::Small>>::scatter::<u32, block_msd_research::frontier::distribute_children<frontier_experiment::Small, u32, block_msd_research::frontier::Prefix<u32>, 1>::{closure#0}, 1>",
+      "calls": [
+        "142356:\tcall   *0x378e3c(%rip)        # 4bb198 <_DYNAMIC+0x2a8>",
+        "142381:\tcall   *0x378df9(%rip)        # 4bb180 <_DYNAMIC+0x290>",
+        "142394:\tcall   *0x378dfe(%rip)        # 4bb198 <_DYNAMIC+0x2a8>",
+        "1423a4:\tcall   *0x378dee(%rip)        # 4bb198 <_DYNAMIC+0x2a8>",
+        "1423b9:\tcall   *0x378dd9(%rip)        # 4bb198 <_DYNAMIC+0x2a8>",
+        "1423c9:\tcall   *0x378dc9(%rip)        # 4bb198 <_DYNAMIC+0x2a8>",
+        "1423db:\tcall   *0x378db7(%rip)        # 4bb198 <_DYNAMIC+0x2a8>",
+        "1423ed:\tcall   *0x378da5(%rip)        # 4bb198 <_DYNAMIC+0x2a8>"
+      ]
+    },
+    {
+      "byte": 2,
+      "address": "0000000000142400",
+      "size": "0000000000000643",
+      "name": "<block_msd_research::frontier::block::Sorter<frontier_experiment::Small>>::scatter::<u32, block_msd_research::frontier::distribute_children<frontier_experiment::Small, u32, block_msd_research::frontier::Prefix<u32>, 1>::{closure#0}, 2>",
+      "calls": [
+        "1429a6:\tcall   *0x3787ec(%rip)        # 4bb198 <_DYNAMIC+0x2a8>",
+        "1429d1:\tcall   *0x3787a9(%rip)        # 4bb180 <_DYNAMIC+0x290>",
+        "1429e4:\tcall   *0x3787ae(%rip)        # 4bb198 <_DYNAMIC+0x2a8>",
+        "1429f4:\tcall   *0x37879e(%rip)        # 4bb198 <_DYNAMIC+0x2a8>",
+        "142a09:\tcall   *0x378789(%rip)        # 4bb198 <_DYNAMIC+0x2a8>",
+        "142a19:\tcall   *0x378779(%rip)        # 4bb198 <_DYNAMIC+0x2a8>",
+        "142a2b:\tcall   *0x378767(%rip)        # 4bb198 <_DYNAMIC+0x2a8>",
+        "142a3d:\tcall   *0x378755(%rip)        # 4bb198 <_DYNAMIC+0x2a8>"
+      ]
+    }
+  ],
+  "pa_step": {
+    "address": "000000000014fed0",
+    "size": "0000000000000b18",
+    "name": "<block_msd_research::frontier::block::Sorter<frontier_experiment::Small>>::step_impl::<u32, block_msd_research::frontier::pa::partition<frontier_experiment::Small, u32, block_msd_research::frontier::Prefix<u32>>::{closure#0}>"
+  },
+  "actual_pa_caller_to_folded_functions_verified": true
+}

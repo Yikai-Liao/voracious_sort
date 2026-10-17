@@ -1,0 +1,33 @@
+{
+  "validated_ns": 1792268241161609324,
+  "source_commit": "8bf14e0668282791c65fe78fd7afba377903ed67",
+  "binary_sha256": {
+    "experiments/block_msd/target/pa-outline-final/time": "f86514281f700713db136b996561c5fa7ea139599ff868350aa8c66322151949",
+    "experiments/block_msd/target/pa-outline-final/work": "ecc5605542039067a5a3145b9cf8afda8eaa473507a6c64587fcc764405b8e59",
+    "experiments/block_msd/target/pa-outline-final/asan-tests": "90aaa25bec38b4640a296e303d52741792ef15c08cb75b9302d7ab980fc0f29c",
+    "experiments/block_msd/target/pa-outline-final/asan-time": "7604c464c1da1c7adae34c72cca0fd7bd5bda59de97322ff4cbcaa11a8eb5515"
+  },
+  "optimized_sanitizer_frontier_tests_passed": 32,
+  "pure_optimized_sanitizer_oracle_rows": 170,
+  "blocks": [
+    3,
+    17,
+    64,
+    129,
+    512
+  ],
+  "record_sizes": {
+    "u8": 1,
+    "u16": 2,
+    "u32": 4,
+    "u64": 8,
+    "u8_id8": 8,
+    "u16_id8": 8,
+    "small8": 8,
+    "u128": 16,
+    "wide32": 32,
+    "large128": 128
+  },
+  "no_stderr": true,
+  "scope": "memory-safety and full stable oracle only; no ASan timing claims"
+}
