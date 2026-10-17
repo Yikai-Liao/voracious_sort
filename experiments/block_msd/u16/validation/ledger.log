@@ -1,0 +1,6 @@
+u16-1048576 2016 OK
+u16-16384 2016 OK
+u16-262144 2016 OK
+u16-memory 168 OK
+widths-seed42 1344 OK
+all 7560 rows; source/binary hashes OK

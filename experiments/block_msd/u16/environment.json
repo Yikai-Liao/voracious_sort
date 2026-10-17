@@ -1,0 +1,33 @@
+{
+  "created_utc": "2026-10-17T15:59:56.071862+00:00",
+  "baseline": "34080cf0fb95355411e029046e026b5aa65fb68c",
+  "rustc": "rustc 1.98.1 (48a229cea 2026-09-01)\nbinary: rustc\ncommit-hash: 48a229ceaefd4985c50990b14116b6d856af0985\ncommit-date: 2026-09-01\nhost: x86_64-unknown-linux-gnu\nrelease: 1.98.1\nLLVM version: 22.1.8\n",
+  "cargo": "cargo 1.98.1 (797e8a9bc 2026-08-05)\n",
+  "uname": {
+    "system": "Linux",
+    "node": "us-agent",
+    "release": "6.12.101+deb13-amd64",
+    "version": "#1 SMP PREEMPT_DYNAMIC Debian 6.12.101-1 (2026-08-05)",
+    "machine": "x86_64",
+    "processor": ""
+  },
+  "lscpu": "Architecture:                            x86_64\nCPU op-mode(s):                          32-bit, 64-bit\nAddress sizes:                           46 bits physical, 48 bits virtual\nByte Order:                              Little Endian\nCPU(s):                                  6\nOn-line CPU(s) list:                     0-5\nVendor ID:                               GenuineIntel\nModel name:                              Intel(R) Xeon(R) Gold 6140 CPU @ 2.30GHz\nCPU family:                              6\nModel:                                   85\nThread(s) per core:                      1\nCore(s) per socket:                      1\nSocket(s):                               6\nStepping:                                4\nBogoMIPS:                                4589.21\nFlags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon rep_good nopl xtopology cpuid tsc_known_freq pni pclmulqdq ssse3 fma cx16 pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand hypervisor lahf_lm abm 3dnowprefetch cpuid_fault pti ssbd ibrs ibpb stibp fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm mpx avx512f avx512dq rdseed adx smap clflushopt clwb avx512cd avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves arat umip pku ospke md_clear flush_l1d arch_capabilities\nHypervisor vendor:                       KVM\nVirtualization type:                     full\nL1d cache:                               192 KiB (6 instances)\nL1i cache:                               192 KiB (6 instances)\nL2 cache:                                6 MiB (6 instances)\nL3 cache:                                148.5 MiB (6 instances)\nNUMA node(s):                            1\nNUMA node0 CPU(s):                       0-5\nVulnerability Gather data sampling:      Not affected\nVulnerability Indirect target selection: Mitigation; Aligned branch/return thunks\nVulnerability Itlb multihit:             Not affected\nVulnerability L1tf:                      Mitigation; PTE Inversion\nVulnerability Mds:                       Mitigation; Clear CPU buffers; SMT Host state unknown\nVulnerability Meltdown:                  Mitigation; PTI\nVulnerability Mmio stale data:           Mitigation; Clear CPU buffers; SMT Host state unknown\nVulnerability Reg file data sampling:    Not affected\nVulnerability Retbleed:                  Mitigation; IBRS\nVulnerability Spec rstack overflow:      Not affected\nVulnerability Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl\nVulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization\nVulnerability Spectre v2:                Mitigation; IBRS; IBPB conditional; STIBP disabled; RSB filling; PBRSB-eIBRS Not affected; BHI SW loop, KVM SW loop\nVulnerability Srbds:                     Not affected\nVulnerability Tsa:                       Not affected\nVulnerability Tsx async abort:           Mitigation; Clear CPU buffers; SMT Host state unknown\nVulnerability Vmscape:                   Not affected\n",
+  "flags": "-C target-cpu=native",
+  "profile": "release (opt-level=3, debug=true, no LTO)",
+  "cpu_affinity": [
+    2
+  ],
+  "workers": 1,
+  "memory": "MemTotal:       16344888 kB\nMemFree:         1660656 kB\nMemAvailable:    8743336 kB\nBuffers:          422048 kB\nCached:          8244052 kB\nSwapCached:         8600 kB\nActive:          4331552 kB\nInactive:        8056744 kB\nActive(anon):    3391112 kB\nInactive(anon):  2857824 kB\nActive(file):     940440 kB\nInactive(file):  5198920 kB\nUnevictable:           0 kB\nMlocked:               0 kB\nSwapTotal:      12366328 kB\nSwapFree:       10280620 kB\nZswap:                 0 kB\nZswapped:              0 kB\nDirty:               576 kB\nWriteback:             0 kB\nAnonPages:       3577980 kB\nMapped:           515536 kB\nShmem:           2526832 kB\nKReclaimable:    1280924 kB\nSlab:            1513004 kB\nSReclaimable:    1280924 kB\nSUnreclaim:       232080 kB\nKernelStack:       13192 kB\nPageTables:        52460 kB\nSecPageTables:         0 kB\nNFS_Unstable:          0 kB\nBounce:                0 kB\nWritebackTmp:          0 kB\nCommitLimit:    20538772 kB\nCommitted_AS:   10076368 kB\nVmallocTotal:   34359738367 kB\nVmallocUsed:       82508 kB\nVmallocChunk:          0 kB\nPercpu:            64000 kB\nHardwareCorrupted:     0 kB\nAnonHugePages:   1908736 kB\nShmemHugePages:        0 kB\nShmemPmdMapped:        0 kB\nFileHugePages:         0 kB\nFilePmdMapped:         0 kB\nUnaccepted:            0 kB\nHugePages_Total:       0\nHugePages_Free:        0\nHugePages_Rsvd:        0\nHugePages_Surp:        0\nHugepagesize:       2048 kB\nHugetlb:               0 kB\nDirectMap4k:      245604 kB\nDirectMap2M:    10240000 kB\nDirectMap1G:     8388608 kB\n",
+  "loadavg": "2.45 2.89 2.86 2/694 1277759\n",
+  "cgroup": "0::/system.slice/paseo.service\n",
+  "plan_sha256": "4e6804220977f382242c1c15606a530983cc5aa779411b53d178312508d5303d",
+  "baselines": {
+    "L_frozen": "submitted_lsd at d6f6b70497ae25f3600b5f458b316a4cedfcb470, preserved by baseline 34080cf",
+    "stable_msd": "stable_baseline copy of upstream MSD, with stable descending-run normalization",
+    "best_msd": "reduction_node::sort_reduced, ScratchPathCycles, cached_two_arrays=true"
+  },
+  "scope": "u16 benchmark coverage supplement; sorting algorithms unchanged; runner adds u16 and u16_id8",
+  "parent_experiment_commit": "7d91e8c",
+  "parent_environment_created_utc": "2026-10-17T15:13:55.488678+00:00"
+}

@@ -90,6 +90,11 @@ impl Radixable<u32> for Large {
 trait Verified {
     fn same(&self, b: &Self) -> bool;
 }
+impl Verified for u16 {
+    fn same(&self, b: &Self) -> bool {
+        self == b
+    }
+}
 impl Verified for u32 {
     fn same(&self, b: &Self) -> bool {
         self == b
@@ -144,6 +149,33 @@ impl Radixable<u32> for Small {
     }
 }
 impl Verified for Small {
+    fn same(&self, b: &Self) -> bool {
+        self.key == b.key && self.serial == b.serial
+    }
+}
+
+#[derive(Clone, Copy, Debug)]
+struct Small16 {
+    key: u16,
+    serial: u32,
+}
+impl PartialEq for Small16 {
+    fn eq(&self, b: &Self) -> bool {
+        self.key == b.key
+    }
+}
+impl PartialOrd for Small16 {
+    fn partial_cmp(&self, b: &Self) -> Option<Cmp> {
+        self.key.partial_cmp(&b.key)
+    }
+}
+impl Radixable<u16> for Small16 {
+    type Key = u16;
+    fn key(&self) -> u16 {
+        self.key
+    }
+}
+impl Verified for Small16 {
     fn same(&self, b: &Self) -> bool {
         self.key == b.key && self.serial == b.serial
     }
@@ -487,6 +519,7 @@ fn main() {
     for layout in layouts {
         for &case in &cases {
             let bits = match layout {
+                "u16" | "u16_id8" => 16,
                 "u32" | "small8" | "large128" => 32,
                 "u64" => 64,
                 "u128" | "wide32" => 128,
@@ -494,6 +527,32 @@ fn main() {
             };
             let keys = make_keys(n, bits, case, seed);
             match layout {
+                "u16" => run::<_, u16>(
+                    keys.iter().map(|&x| x as u16).collect(),
+                    layout,
+                    case,
+                    &methods,
+                    reps,
+                    block,
+                    seed,
+                    kind,
+                ),
+                "u16_id8" => run::<_, u16>(
+                    keys.iter()
+                        .enumerate()
+                        .map(|(i, &key)| Small16 {
+                            key: key as u16,
+                            serial: i as u32,
+                        })
+                        .collect(),
+                    layout,
+                    case,
+                    &methods,
+                    reps,
+                    block,
+                    seed,
+                    kind,
+                ),
                 "u32" => run::<_, u32>(
                     keys.iter().map(|&x| x as u32).collect(),
                     layout,
