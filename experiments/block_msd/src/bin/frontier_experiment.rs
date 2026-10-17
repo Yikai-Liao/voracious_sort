@@ -255,6 +255,7 @@ const METHODS: &[&str] = &[
     "Pa_unified_candidate_t16777216",
     "Pa_unified_reuse_t16777216",
     "Pa_unified_prepared_t16777216",
+    "Pa_unified_groups_t16777216",
     "L",
     "L_frozen",
     "H1",
@@ -323,6 +324,9 @@ where
     } else if let Some(value) = method.strip_prefix("Pa_unified_reuse_t") {
         local_workspace_threshold = value.parse().unwrap();
         "Pa_unified_reuse"
+    } else if let Some(value) = method.strip_prefix("Pa_unified_groups_t") {
+        local_workspace_threshold = value.parse().unwrap();
+        "Pa_unified_groups"
     } else if let Some(value) = method.strip_prefix("Pa_unified_prepared_t") {
         local_workspace_threshold = value.parse().unwrap();
         "Pa_unified_prepared"
@@ -355,7 +359,8 @@ where
         | "Pa_unified_radix"
         | "Pa_unified_candidate"
         | "Pa_unified_reuse"
-        | "Pa_unified_prepared" => {
+        | "Pa_unified_prepared"
+        | "Pa_unified_groups" => {
             use frontier::PaExperiment::*;
             let experiment = match method {
                 "Pa_ref" => Reference,
@@ -383,6 +388,7 @@ where
                 "Pa_unified_candidate" => UnifiedCandidate,
                 "Pa_unified_reuse" => UnifiedReuse,
                 "Pa_unified_prepared" => UnifiedPrepared,
+                "Pa_unified_groups" => UnifiedGroups,
                 _ => Both,
             };
             return frontier::sort_pa_with_threshold::<T, K>(
@@ -544,11 +550,11 @@ mod workload_tests {
             execute::<_, u16>(&mut actual, method, 17);
             assert!(
                 actual.iter().zip(&expected).all(|(a, b)| a.same(b)),
-                "{}", method
+                "{}",
+                method
             );
         }
     }
-
 
     #[test]
     fn progressive_skew_has_distinct_complete_keys() {
