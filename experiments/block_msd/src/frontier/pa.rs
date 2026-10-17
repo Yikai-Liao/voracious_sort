@@ -24,6 +24,8 @@ pub enum PaExperiment {
     TerminalLocal,
     PrefixBandLocal,
     Unified,
+    PrefixBandCached,
+    UnifiedCached,
 }
 
 #[derive(Clone, Copy)]
@@ -39,6 +41,8 @@ struct Policy {
     stable_leaf: bool,
     tiled_order: bool,
     local_distribution: bool,
+    cached_distribution: bool,
+    local_workspace_threshold: usize,
     block: usize,
 }
 
@@ -46,6 +50,19 @@ pub fn sort_pa_experiment<T: Radixable<K>, K: RadixKey>(
     arr: &mut [T],
     experiment: PaExperiment,
     block: usize,
+) -> Work
+where
+    Converted<T, K>: NativeKey,
+{
+    // Existing experiment callers retain the initial screen's parameter.
+    sort_pa_with_threshold(arr, experiment, block, 1024 * 1024)
+}
+
+pub fn sort_pa_with_threshold<T: Radixable<K>, K: RadixKey>(
+    arr: &mut [T],
+    experiment: PaExperiment,
+    block: usize,
+    local_workspace_threshold: usize,
 ) -> Work
 where
     Converted<T, K>: NativeKey,
@@ -67,7 +84,9 @@ where
                 | PaExperiment::PrefixBandNested
                 | PaExperiment::TerminalLocal
                 | PaExperiment::PrefixBandLocal
+                | PaExperiment::PrefixBandCached
                 | PaExperiment::Unified
+                | PaExperiment::UnifiedCached
         ),
         ordered: matches!(
             experiment,
@@ -77,6 +96,7 @@ where
                 | PaExperiment::BothThreeWay
                 | PaExperiment::OrderedTiled
                 | PaExperiment::Unified
+                | PaExperiment::UnifiedCached
         ),
         skew: matches!(
             experiment,
@@ -102,7 +122,9 @@ where
                 | PaExperiment::PrefixBandStableLeaf
                 | PaExperiment::PrefixBandNested
                 | PaExperiment::PrefixBandLocal
+                | PaExperiment::PrefixBandCached
                 | PaExperiment::Unified
+                | PaExperiment::UnifiedCached
         ),
         band_root: matches!(
             experiment,
@@ -110,28 +132,42 @@ where
                 | PaExperiment::PrefixBandStableLeaf
                 | PaExperiment::PrefixBandNested
                 | PaExperiment::PrefixBandLocal
+                | PaExperiment::PrefixBandCached
                 | PaExperiment::Unified
+                | PaExperiment::UnifiedCached
         ),
         nested_band: matches!(
             experiment,
-            PaExperiment::PrefixBandNested | PaExperiment::Unified
+            PaExperiment::PrefixBandNested
+                | PaExperiment::Unified
+                | PaExperiment::UnifiedCached
         ),
         stable_leaf: matches!(
             experiment,
             PaExperiment::TerminalStableLeaf
                 | PaExperiment::PrefixBandStableLeaf
                 | PaExperiment::Unified
+                | PaExperiment::UnifiedCached
         ),
         tiled_order: matches!(
             experiment,
-            PaExperiment::OrderedTiled | PaExperiment::Unified
+            PaExperiment::OrderedTiled
+                | PaExperiment::Unified
+                | PaExperiment::UnifiedCached
         ),
         local_distribution: matches!(
             experiment,
             PaExperiment::TerminalLocal
                 | PaExperiment::PrefixBandLocal
+                | PaExperiment::PrefixBandCached
                 | PaExperiment::Unified
+                | PaExperiment::UnifiedCached
         ),
+        cached_distribution: matches!(
+            experiment,
+            PaExperiment::PrefixBandCached | PaExperiment::UnifiedCached
+        ),
+        local_workspace_threshold,
         block,
     };
     let mut stats = Work::default();
@@ -541,7 +577,15 @@ fn partition<T: Radixable<K>, K: RadixKey, C: Classifier<Converted<T, K>>>(
         classifier.label(item.into_key_type())
     };
     // distribute owns and releases all scratch before the first recursive call.
-    let passes = if policy.local_distribution {
+    let passes = if policy.cached_distribution {
+        super::local_distribution::distribute_cached(
+            arr,
+            &label,
+            policy.block,
+            policy.local_workspace_threshold,
+            stats,
+        )
+    } else if policy.local_distribution {
         super::local_distribution::distribute_local(
             arr,
             &label,

@@ -192,6 +192,8 @@ fn recursive_identity_and_payload_matrix() {
                 PaExperiment::TerminalLocal,
                 PaExperiment::PrefixBandLocal,
                 PaExperiment::Unified,
+                PaExperiment::PrefixBandCached,
+                PaExperiment::UnifiedCached,
             ] {
                 let mut actual = input.clone();
                 sort_pa_experiment::<_, u128>(&mut actual, experiment, 64);
@@ -232,6 +234,49 @@ fn signed_float_converted_order() {
             .iter()
             .zip(expected)
             .all(|(a, b)| a.to_bits() == b.to_bits()));
+    }
+}
+
+#[test]
+fn pa_new_policies_preserve_converted_float_order() {
+    let mut state = 42;
+    let mut input: Vec<f64> =
+        (0..4097).map(|_| f64::from_bits(random(&mut state))).collect();
+    input.extend([
+        0.,
+        -0.,
+        f64::NAN,
+        f64::from_bits(0xfff8000000000017),
+        f64::INFINITY,
+        f64::NEG_INFINITY,
+    ]);
+    let mut expected = input.clone();
+    expected.sort_by_key(|x| <f64 as RadixKey>::into_keytype(x));
+    let mut reversed = expected.clone();
+    reversed.reverse();
+    for experiment in [
+        PaExperiment::TerminalStableLeaf,
+        PaExperiment::PrefixBandStableLeaf,
+        PaExperiment::PrefixBandNested,
+        PaExperiment::OrderedTiled,
+        PaExperiment::TerminalLocal,
+        PaExperiment::PrefixBandLocal,
+        PaExperiment::Unified,
+        PaExperiment::PrefixBandCached,
+        PaExperiment::UnifiedCached,
+    ] {
+        for source in [&input, &expected, &reversed] {
+            let mut actual = source.to_vec();
+            sort_pa_experiment::<_, f64>(&mut actual, experiment, 17);
+            assert!(
+                actual
+                    .iter()
+                    .zip(&expected)
+                    .all(|(a, b)| a.to_bits() == b.to_bits()),
+                "{:?}",
+                experiment
+            );
+        }
     }
 }
 
@@ -301,6 +346,8 @@ fn native_small_integer_widths() {
         PaExperiment::TerminalLocal,
         PaExperiment::PrefixBandLocal,
         PaExperiment::Unified,
+        PaExperiment::PrefixBandCached,
+        PaExperiment::UnifiedCached,
     ] {
         macro_rules! check_pa {
             ($t:ty) => {{
@@ -367,6 +414,8 @@ fn block_tail_sizes_and_large_workspace() {
             PaExperiment::TerminalLocal,
             PaExperiment::PrefixBandLocal,
             PaExperiment::Unified,
+            PaExperiment::PrefixBandCached,
+            PaExperiment::UnifiedCached,
         ] {
             let mut actual = input.clone();
             sort_pa_experiment::<_, u128>(&mut actual, experiment, block);

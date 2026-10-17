@@ -12,6 +12,37 @@ pub(super) fn distribute_local<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
     block_size: usize,
     stats: &mut Work,
 ) -> usize {
+    distribute_impl::<T, U, F, false>(arr, label, block_size, 0, stats)
+}
+
+pub(super) fn distribute_cached<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
+    arr: &mut [T],
+    label: &F,
+    block_size: usize,
+    workspace_threshold: usize,
+    stats: &mut Work,
+) -> usize {
+    distribute_impl::<T, U, F, true>(
+        arr,
+        label,
+        block_size,
+        workspace_threshold,
+        stats,
+    )
+}
+
+fn distribute_impl<
+    T: Copy,
+    U: NativeKey,
+    F: Fn(&T) -> U,
+    const CACHE_AWARE: bool,
+>(
+    arr: &mut [T],
+    label: &F,
+    block_size: usize,
+    workspace_threshold: usize,
+    stats: &mut Work,
+) -> usize {
     if arr.len() < 2 {
         return 0;
     }
@@ -37,6 +68,30 @@ pub(super) fn distribute_local<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
     }
 
     let high_byte = levels - 1;
+    if CACHE_AWARE {
+        // An explicit offline tuning parameter, independent of the unchanged
+        // allocation budget. Sorting performs no hardware discovery.
+        if budget <= workspace_threshold {
+            return finish_label(
+                arr, label, levels, variation, block_size, budget, stats,
+            );
+        }
+        let mut lengths = [0usize; 256];
+        for item in arr.iter() {
+            lengths[label(item).byte(high_byte)] += 1;
+        }
+        work! { stats.label_records += arr.len(); }
+        if lengths
+            .iter()
+            .any(|&length| !dense_fits::<T>(length, high_byte, budget))
+        {
+            // Reject before moving records; the existing variation scan is
+            // sufficient to execute the original whole-label path.
+            return finish_label(
+                arr, label, levels, variation, block_size, budget, stats,
+            );
+        }
+    }
     work! {
         stats.block_nodes += 1;
         stats.passes += 1;
@@ -133,7 +188,7 @@ fn finish_label<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
 #[cfg(all(test, feature = "frontier_work"))]
 mod tests {
     use super::super::{distribute, Work};
-    use super::{dense_fits, distribute_local};
+    use super::{dense_fits, distribute_cached, distribute_local};
 
     #[derive(Clone, Copy, Debug, PartialEq, Eq)]
     struct Record {
@@ -186,21 +241,32 @@ mod tests {
 
         let label = |record: &Record| record.key;
         let mut reference = input.clone();
+        let mut cached = input.clone();
         let mut local = input;
         let mut reference_work = Work::default();
+        let mut cached_work = Work::default();
         let mut local_work = Work::default();
         let reference_passes =
             distribute(&mut reference, &label, BLOCK, &mut reference_work);
         let local_passes =
             distribute_local(&mut local, &label, BLOCK, &mut local_work);
+        let cached_passes = distribute_cached(
+            &mut cached,
+            &label,
+            BLOCK,
+            1024 * 1024,
+            &mut cached_work,
+        );
 
         // Full-record equality checks stable duplicate identities and every
         // payload byte, including the single-record high-byte run.
-        for (position, ((reference, local), expected)) in
-            reference.iter().zip(&local).zip(&expected).enumerate()
-        {
-            assert_eq!(reference, expected, "reference record {position}");
-            assert_eq!(local, expected, "local record {position}");
+        for (position, expected) in expected.iter().enumerate() {
+            assert_eq!(
+                &reference[position], expected,
+                "reference record {position}"
+            );
+            assert_eq!(&local[position], expected, "local record {position}");
+            assert_eq!(&cached[position], expected, "cached record {position}");
         }
         assert_eq!(reference_passes, 2);
         assert_eq!(local_passes, reference_passes);
@@ -213,5 +279,95 @@ mod tests {
         assert_eq!(local_work.block_nodes, 2);
         assert_eq!(local_work.dense_nodes, 9);
         assert_eq!(local_work.passes, 11);
+        // The oversized run rejects cached completion after exactly one
+        // extra histogram scan, before changing the original scatter path.
+        assert_eq!(cached_passes, reference_passes);
+        assert_eq!(cached_work.scatter_records, reference_work.scatter_records);
+        assert_eq!(cached_work.block_nodes, reference_work.block_nodes);
+        assert_eq!(cached_work.dense_nodes, reference_work.dense_nodes);
+        assert_eq!(cached_work.passes, reference_work.passes);
+        assert_eq!(cached_work.compact_records, reference_work.compact_records);
+        assert_eq!(cached_work.tail_records, reference_work.tail_records);
+        assert_eq!(cached_work.label_records, reference_work.label_records + N);
+    }
+
+    #[test]
+    fn cached_completion_checks_budget_and_all_high_byte_runs() {
+        const N: usize = 8705;
+        let input: Vec<Record> = (0..N)
+            .map(|id| Record {
+                key: (((id % 16) as u32) << 16)
+                    | 0x5a00
+                    | ((id / 16) % 13) as u32,
+                id: id as u32,
+                payload: [id as u8; 120],
+            })
+            .collect();
+        let mut expected = input.clone();
+        expected.sort_by_key(|record| record.key);
+        let label = |record: &Record| record.key;
+
+        for block_size in [16, 17] {
+            let budget = 512 * block_size * std::mem::size_of::<Record>();
+            assert!(!dense_fits::<Record>(N, 3, budget));
+            assert!(dense_fits::<Record>((N + 15) / 16, 2, budget));
+            let mut reference = input.clone();
+            let mut cached = input.clone();
+            let mut reference_work = Work::default();
+            let mut cached_work = Work::default();
+            let reference_passes = distribute(
+                &mut reference,
+                &label,
+                block_size,
+                &mut reference_work,
+            );
+            let cached_passes = distribute_cached(
+                &mut cached,
+                &label,
+                block_size,
+                1024 * 1024,
+                &mut cached_work,
+            );
+            for (position, expected) in expected.iter().enumerate() {
+                assert_eq!(&reference[position], expected);
+                assert_eq!(&cached[position], expected);
+            }
+            assert_eq!(cached_passes, reference_passes);
+            assert_eq!(
+                cached_work.scatter_records,
+                reference_work.scatter_records
+            );
+            if block_size == 16 {
+                assert_eq!(budget, 1024 * 1024);
+                assert_eq!(cached_work.block_nodes, 1);
+                assert_eq!(cached_work.dense_nodes, 0);
+                assert_eq!(
+                    cached_work.label_records,
+                    reference_work.label_records
+                );
+            } else {
+                let mut local = input.clone();
+                let mut local_work = Work::default();
+                let local_passes = distribute_local(
+                    &mut local,
+                    &label,
+                    block_size,
+                    &mut local_work,
+                );
+                assert_eq!(cached_passes, local_passes);
+                assert!(cached.iter().zip(&local).all(|(a, b)| a == b));
+                assert_eq!(cached_work.block_nodes, 1);
+                assert_eq!(cached_work.dense_nodes, 16);
+                assert_eq!(cached_work.passes, 17);
+                assert_eq!(
+                    cached_work.compact_records,
+                    local_work.compact_records
+                );
+                assert_eq!(
+                    cached_work.label_records,
+                    local_work.label_records + N
+                );
+            }
+        }
     }
 }

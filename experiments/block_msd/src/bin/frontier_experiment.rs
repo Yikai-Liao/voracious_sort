@@ -236,6 +236,20 @@ const METHODS: &[&str] = &[
     "Pa_terminal_local",
     "Pa_band_local",
     "Pa_unified",
+    "Pa_band_cache",
+    "Pa_unified_cache",
+    "Pa_band_cache_t0",
+    "Pa_band_cache_t262144",
+    "Pa_band_cache_t1048576",
+    "Pa_band_cache_t4194304",
+    "Pa_band_cache_t16777216",
+    "Pa_band_cache_toff",
+    "Pa_unified_cache_t0",
+    "Pa_unified_cache_t262144",
+    "Pa_unified_cache_t1048576",
+    "Pa_unified_cache_t4194304",
+    "Pa_unified_cache_t16777216",
+    "Pa_unified_cache_toff",
     "L",
     "L_frozen",
     "H1",
@@ -280,6 +294,21 @@ fn execute<T: Radixable<K>, K: RadixKey>(
 where
     <<T as Radixable<K>>::Key as RadixKey>::Key: frontier::NativeKey,
 {
+    // The suffix records an offline tuning parameter in every raw row. The
+    // sorting algorithm does not query cache topology or infer hardware size.
+    let mut local_workspace_threshold = 1024 * 1024;
+    let method = if let Some(value) = method.strip_prefix("Pa_unified_cache_t")
+    {
+        local_workspace_threshold =
+            if value == "off" { usize::MAX } else { value.parse().unwrap() };
+        "Pa_unified_cache"
+    } else if let Some(value) = method.strip_prefix("Pa_band_cache_t") {
+        local_workspace_threshold =
+            if value == "off" { usize::MAX } else { value.parse().unwrap() };
+        "Pa_band_cache"
+    } else {
+        method
+    };
     match method {
         "Pa_ref"
         | "Pa_terminal"
@@ -299,7 +328,9 @@ where
         | "Pa_ordered_tiled"
         | "Pa_terminal_local"
         | "Pa_band_local"
-        | "Pa_unified" => {
+        | "Pa_unified"
+        | "Pa_band_cache"
+        | "Pa_unified_cache" => {
             use frontier::PaExperiment::*;
             let experiment = match method {
                 "Pa_ref" => Reference,
@@ -320,10 +351,15 @@ where
                 "Pa_terminal_local" => TerminalLocal,
                 "Pa_band_local" => PrefixBandLocal,
                 "Pa_unified" => Unified,
+                "Pa_band_cache" => PrefixBandCached,
+                "Pa_unified_cache" => UnifiedCached,
                 _ => Both,
             };
-            return frontier::sort_pa_experiment::<T, K>(
-                arr, experiment, block,
+            return frontier::sort_pa_with_threshold::<T, K>(
+                arr,
+                experiment,
+                block,
+                local_workspace_threshold,
             );
         },
         "L_frozen" => {

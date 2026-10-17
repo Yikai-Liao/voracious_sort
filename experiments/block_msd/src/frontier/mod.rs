@@ -11,7 +11,7 @@ mod local_distribution;
 mod ordered_tiled;
 mod pa;
 mod prefix_band;
-pub use pa::{sort_pa_experiment, PaExperiment};
+pub use pa::{sort_pa_experiment, sort_pa_with_threshold, PaExperiment};
 #[cfg(test)]
 mod tests;
 
