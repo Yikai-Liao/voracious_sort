@@ -1,0 +1,6 @@
+{
+  "path": "target/release/deps/block_msd_research-5c476af70e3f292e",
+  "bytes": 45671008,
+  "sha256": "e2c570f4196e9f76ea90bfce1a6fccaf62cb54fcab7d8bd01f30123877925784",
+  "reason": "unreferenced previous release unit-test executable; preserve current release incremental cache"
+}

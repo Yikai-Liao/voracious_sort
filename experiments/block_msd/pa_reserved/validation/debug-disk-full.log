@@ -1,0 +1,4 @@
+Diagnostic transcription from tool output, not an intact compiler log.
+First debug build exited 101 during linking. cc/collect2 reported: ld terminated with signal 7 [Bus error]. root_free was 16748544 bytes and soon reached zero. A subsequent copy attempt failed with ENOSPC and the retry truncated debug.log; the original full log was lost.
+Removed 151 unreferenced failed block_msd_research-0e4eb989025b8690* test/link outputs and its own incremental directory. Frozen ELFs and release incremental cache were preserved. The concurrent release build also exited 101 with ENOSPC; its surviving log is build-time-disk-full.log.
+Retry debug checks retain debug assertions and overflow checks but use CARGO_PROFILE_DEV_DEBUG=0 to reduce debug metadata. Release build settings remain unchanged.
