@@ -12,7 +12,9 @@ pub(super) fn distribute_local<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
     block_size: usize,
     stats: &mut Work,
 ) -> usize {
-    distribute_impl::<T, U, F, false>(arr, label, block_size, 0, stats)
+    distribute_impl::<T, U, F, false, false, false>(
+        arr, label, block_size, 0, stats,
+    )
 }
 
 pub(super) fn distribute_cached<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
@@ -22,7 +24,59 @@ pub(super) fn distribute_cached<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
     workspace_threshold: usize,
     stats: &mut Work,
 ) -> usize {
-    distribute_impl::<T, U, F, true>(
+    distribute_impl::<T, U, F, true, false, false>(
+        arr,
+        label,
+        block_size,
+        workspace_threshold,
+        stats,
+    )
+}
+
+pub(super) fn distribute_sampled<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
+    arr: &mut [T],
+    label: &F,
+    block_size: usize,
+    workspace_threshold: usize,
+    stats: &mut Work,
+) -> usize {
+    distribute_impl::<T, U, F, true, true, false>(
+        arr,
+        label,
+        block_size,
+        workspace_threshold,
+        stats,
+    )
+}
+
+pub(super) fn distribute_reduced<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
+    arr: &mut [T],
+    label: &F,
+    block_size: usize,
+    workspace_threshold: usize,
+    stats: &mut Work,
+) -> usize {
+    distribute_impl::<T, U, F, true, false, true>(
+        arr,
+        label,
+        block_size,
+        workspace_threshold,
+        stats,
+    )
+}
+
+pub(super) fn distribute_sampled_reduced<
+    T: Copy,
+    U: NativeKey,
+    F: Fn(&T) -> U,
+>(
+    arr: &mut [T],
+    label: &F,
+    block_size: usize,
+    workspace_threshold: usize,
+    stats: &mut Work,
+) -> usize {
+    distribute_impl::<T, U, F, true, true, true>(
         arr,
         label,
         block_size,
@@ -36,6 +90,8 @@ fn distribute_impl<
     U: NativeKey,
     F: Fn(&T) -> U,
     const CACHE_AWARE: bool,
+    const SAMPLE_GUARD: bool,
+    const REDUCED_RADIX: bool,
 >(
     arr: &mut [T],
     label: &F,
@@ -62,7 +118,7 @@ fn distribute_impl<
         .and_then(|n| n.checked_mul(std::mem::size_of::<T>()))
         .expect("budget overflow");
     if passes == 1 || dense_fits::<T>(arr.len(), levels, budget) {
-        return finish_label(
+        return finish_label::<T, U, F, REDUCED_RADIX>(
             arr, label, levels, variation, block_size, budget, stats,
         );
     }
@@ -72,7 +128,15 @@ fn distribute_impl<
         // An explicit offline tuning parameter, independent of the unchanged
         // allocation budget. Sorting performs no hardware discovery.
         if budget <= workspace_threshold {
-            return finish_label(
+            return finish_label::<T, U, F, REDUCED_RADIX>(
+                arr, label, levels, variation, block_size, budget, stats,
+            );
+        }
+        if SAMPLE_GUARD
+            && arr.len() >= 64
+            && !sample_runs_fit_dense(arr, label, high_byte, budget, stats)
+        {
+            return finish_label::<T, U, F, REDUCED_RADIX>(
                 arr, label, levels, variation, block_size, budget, stats,
             );
         }
@@ -87,7 +151,7 @@ fn distribute_impl<
         {
             // Reject before moving records; the existing variation scan is
             // sufficient to execute the original whole-label path.
-            return finish_label(
+            return finish_label::<T, U, F, REDUCED_RADIX>(
                 arr, label, levels, variation, block_size, budget, stats,
             );
         }
@@ -97,15 +161,17 @@ fn distribute_impl<
         stats.passes += 1;
         stats.scatter_records += arr.len();
     }
-    {
-        let mut sorter = block::Sorter::new(arr, 256, block_size);
-        sorter.step(label, high_byte);
-        sorter.compact();
-        work! {
-            stats.compact_records += sorter.compact_records;
-            stats.tail_records += sorter.tail_records;
-        }
-    }
+    // Only the selected high byte is active during the first split.
+    let high_variation =
+        variation & (U::mask(levels * 8) ^ U::mask(high_byte * 8));
+    block_bytes::<T, U, F, REDUCED_RADIX>(
+        arr,
+        label,
+        levels,
+        high_variation,
+        block_size,
+        stats,
+    );
     // The root workspace has been released. Only one run's dense or block
     // workspace can be live while completing the remaining label bytes.
     let low_variation = variation & U::mask(high_byte * 8);
@@ -122,7 +188,7 @@ fn distribute_impl<
             }
             end += 1;
         }
-        finish_label(
+        finish_label::<T, U, F, REDUCED_RADIX>(
             &mut arr[start..end],
             label,
             high_byte,
@@ -148,10 +214,46 @@ fn dense_fits<T>(length: usize, levels: usize, budget: usize) -> bool {
         .map_or(false, |bytes| bytes <= budget)
 }
 
+/// Predict only whether to pay for the full histogram. A sample may reject a
+/// profitable split; every accepted split still needs the exact population check.
+fn sample_runs_fit_dense<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
+    arr: &[T],
+    label: &F,
+    high_byte: usize,
+    budget: usize,
+    stats: &mut Work,
+) -> bool {
+    debug_assert!(arr.len() >= 64);
+    let span = arr.len() - 1;
+    let stride = span / 63;
+    let remainder = span % 63;
+    let mut lengths = [0u8; 256];
+    let mut maximum = 0usize;
+    for i in 0..64 {
+        // Equivalent to floor(i * span / 63), with unique indices from 0 to
+        // span and no overflowing product even for a very large input.
+        let index = i * stride + (i * remainder) / 63;
+        let length = &mut lengths[label(&arr[index]).byte(high_byte)];
+        *length += 1;
+        maximum = maximum.max(usize::from(*length));
+    }
+    work! { stats.label_records += 64; }
+    // ceil(n * maximum / 64) without forming n * maximum. The first product
+    // and the sum are at most n; the remaining numerator is at most 4095.
+    let predicted =
+        (arr.len() / 64) * maximum + ((arr.len() % 64) * maximum + 63) / 64;
+    dense_fits::<T>(predicted, high_byte, budget)
+}
+
 /// Complete the indicated low bytes without changing the fixed label or
 /// introducing another physical split. The supplied variation is from the
 /// whole classifier partition, so this remains a same-scatter-work experiment.
-fn finish_label<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
+fn finish_label<
+    T: Copy,
+    U: NativeKey,
+    F: Fn(&T) -> U,
+    const REDUCED_RADIX: bool,
+>(
     arr: &mut [T],
     label: &F,
     levels: usize,
@@ -170,6 +272,44 @@ fn finish_label<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
         dense(arr, label, levels, variation, stats);
     } else {
         work! { stats.block_nodes += 1; }
+        block_bytes::<T, U, F, REDUCED_RADIX>(
+            arr, label, levels, variation, block_size, stats,
+        );
+    }
+    passes
+}
+
+/// Strip constant label bits only when that also reduces the bucket count.
+/// For fixed variation v, every label is (label & v) | c for one common c;
+/// removing c preserves order and equality. Active byte digits are <= v.byte.
+fn block_bytes<T: Copy, U: NativeKey, F: Fn(&T) -> U, const REDUCED: bool>(
+    arr: &mut [T],
+    label: &F,
+    levels: usize,
+    variation: U,
+    block_size: usize,
+    stats: &mut Work,
+) {
+    let maximum = if REDUCED {
+        (0..levels).map(|byte| variation.byte(byte)).max().unwrap_or(0)
+    } else {
+        255
+    };
+    if maximum < 255 {
+        let normalized = |item: &T| label(item) & variation;
+        let mut sorter = block::Sorter::new(arr, maximum + 1, block_size);
+        for byte in 0..levels {
+            if variation.byte(byte) != 0 {
+                sorter.step(&normalized, byte);
+            }
+        }
+        sorter.compact();
+        work! {
+            stats.compact_records += sorter.compact_records;
+            stats.tail_records += sorter.tail_records;
+        }
+    } else {
+        // Ordinary full-byte labels keep the original extraction hot loop.
         let mut sorter = block::Sorter::new(arr, 256, block_size);
         for byte in 0..levels {
             if variation.byte(byte) != 0 {
@@ -182,19 +322,72 @@ fn finish_label<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
             stats.tail_records += sorter.tail_records;
         }
     }
-    passes
 }
 
 #[cfg(all(test, feature = "frontier_work"))]
 mod tests {
     use super::super::{distribute, Work};
-    use super::{dense_fits, distribute_cached, distribute_local};
+    use super::{
+        dense_fits, distribute_cached, distribute_local, distribute_sampled,
+    };
 
     #[derive(Clone, Copy, Debug, PartialEq, Eq)]
     struct Record {
         key: u32,
         id: u32,
         payload: [u8; 120],
+    }
+
+    #[test]
+    fn reduced_radix_preserves_constant_bits_empty_buckets_and_tails() {
+        const N: usize = 16_385;
+        for mask in [0x050005u32, 0x000001, 0x050001] {
+            let mut input: Vec<Record> = (0..N)
+                .map(|id| Record {
+                    key: 0x80a5a0
+                        | ((id.wrapping_mul(2654435761) as u32) & mask),
+                    id: id as u32,
+                    payload: [id as u8; 120],
+                })
+                .collect();
+            input.reverse();
+            let mut expected = input.clone();
+            expected.sort_by_key(|r| r.key);
+            let mut ordinary = input.clone();
+            let mut reduced = input.clone();
+            let mut combined = input;
+            let mut old = Work::default();
+            let mut new = Work::default();
+            let mut both = Work::default();
+            let label = |r: &Record| r.key;
+            let p = distribute_cached(
+                &mut ordinary,
+                &label,
+                17,
+                usize::MAX,
+                &mut old,
+            );
+            let q = super::distribute_reduced(
+                &mut reduced,
+                &label,
+                17,
+                usize::MAX,
+                &mut new,
+            );
+            let z = super::distribute_sampled_reduced(
+                &mut combined,
+                &label,
+                17,
+                usize::MAX,
+                &mut both,
+            );
+            assert_eq!(ordinary, expected);
+            assert_eq!(reduced, expected);
+            assert_eq!(combined, expected);
+            assert_eq!((p, old.scatter_records), (q, new.scatter_records));
+            assert_eq!((p, old.scatter_records), (z, both.scatter_records));
+            assert!(new.block_nodes > 0);
+        }
     }
 
     #[test]
@@ -242,9 +435,11 @@ mod tests {
         let label = |record: &Record| record.key;
         let mut reference = input.clone();
         let mut cached = input.clone();
+        let mut sampled = input.clone();
         let mut local = input;
         let mut reference_work = Work::default();
         let mut cached_work = Work::default();
+        let mut sampled_work = Work::default();
         let mut local_work = Work::default();
         let reference_passes =
             distribute(&mut reference, &label, BLOCK, &mut reference_work);
@@ -257,6 +452,13 @@ mod tests {
             1024 * 1024,
             &mut cached_work,
         );
+        let sampled_passes = distribute_sampled(
+            &mut sampled,
+            &label,
+            BLOCK,
+            1024 * 1024,
+            &mut sampled_work,
+        );
 
         // Full-record equality checks stable duplicate identities and every
         // payload byte, including the single-record high-byte run.
@@ -267,6 +469,10 @@ mod tests {
             );
             assert_eq!(&local[position], expected, "local record {position}");
             assert_eq!(&cached[position], expected, "cached record {position}");
+            assert_eq!(
+                &sampled[position], expected,
+                "sampled record {position}"
+            );
         }
         assert_eq!(reference_passes, 2);
         assert_eq!(local_passes, reference_passes);
@@ -289,6 +495,19 @@ mod tests {
         assert_eq!(cached_work.compact_records, reference_work.compact_records);
         assert_eq!(cached_work.tail_records, reference_work.tail_records);
         assert_eq!(cached_work.label_records, reference_work.label_records + N);
+        // The heavy run is rejected from 64 labels instead of the exact
+        // histogram, retaining precisely the cached path's whole-label work.
+        assert_eq!(sampled_passes, cached_passes);
+        assert_eq!(sampled_work.scatter_records, cached_work.scatter_records);
+        assert_eq!(sampled_work.block_nodes, cached_work.block_nodes);
+        assert_eq!(sampled_work.dense_nodes, cached_work.dense_nodes);
+        assert_eq!(sampled_work.passes, cached_work.passes);
+        assert_eq!(sampled_work.compact_records, cached_work.compact_records);
+        assert_eq!(sampled_work.tail_records, cached_work.tail_records);
+        assert_eq!(
+            sampled_work.label_records + N - 64,
+            cached_work.label_records
+        );
     }
 
     #[test]
@@ -313,8 +532,10 @@ mod tests {
             assert!(dense_fits::<Record>((N + 15) / 16, 2, budget));
             let mut reference = input.clone();
             let mut cached = input.clone();
+            let mut sampled = input.clone();
             let mut reference_work = Work::default();
             let mut cached_work = Work::default();
+            let mut sampled_work = Work::default();
             let reference_passes = distribute(
                 &mut reference,
                 &label,
@@ -328,15 +549,36 @@ mod tests {
                 1024 * 1024,
                 &mut cached_work,
             );
+            let sampled_passes = distribute_sampled(
+                &mut sampled,
+                &label,
+                block_size,
+                1024 * 1024,
+                &mut sampled_work,
+            );
             for (position, expected) in expected.iter().enumerate() {
                 assert_eq!(&reference[position], expected);
                 assert_eq!(&cached[position], expected);
+                assert_eq!(&sampled[position], expected);
             }
             assert_eq!(cached_passes, reference_passes);
+            assert_eq!(sampled_passes, cached_passes);
             assert_eq!(
                 cached_work.scatter_records,
                 reference_work.scatter_records
             );
+            assert_eq!(
+                sampled_work.scatter_records,
+                cached_work.scatter_records
+            );
+            assert_eq!(sampled_work.block_nodes, cached_work.block_nodes);
+            assert_eq!(sampled_work.dense_nodes, cached_work.dense_nodes);
+            assert_eq!(sampled_work.passes, cached_work.passes);
+            assert_eq!(
+                sampled_work.compact_records,
+                cached_work.compact_records
+            );
+            assert_eq!(sampled_work.tail_records, cached_work.tail_records);
             if block_size == 16 {
                 assert_eq!(budget, 1024 * 1024);
                 assert_eq!(cached_work.block_nodes, 1);
@@ -344,6 +586,10 @@ mod tests {
                 assert_eq!(
                     cached_work.label_records,
                     reference_work.label_records
+                );
+                assert_eq!(
+                    sampled_work.label_records,
+                    cached_work.label_records
                 );
             } else {
                 let mut local = input.clone();
@@ -366,6 +612,10 @@ mod tests {
                 assert_eq!(
                     cached_work.label_records,
                     local_work.label_records + N
+                );
+                assert_eq!(
+                    sampled_work.label_records,
+                    cached_work.label_records + 64
                 );
             }
         }

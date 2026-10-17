@@ -194,6 +194,9 @@ fn recursive_identity_and_payload_matrix() {
                 PaExperiment::Unified,
                 PaExperiment::PrefixBandCached,
                 PaExperiment::UnifiedCached,
+                PaExperiment::UnifiedSampled,
+                PaExperiment::UnifiedReduced,
+                PaExperiment::UnifiedCandidate,
             ] {
                 let mut actual = input.clone();
                 sort_pa_experiment::<_, u128>(&mut actual, experiment, 64);
@@ -264,6 +267,9 @@ fn pa_new_policies_preserve_converted_float_order() {
         PaExperiment::Unified,
         PaExperiment::PrefixBandCached,
         PaExperiment::UnifiedCached,
+        PaExperiment::UnifiedSampled,
+        PaExperiment::UnifiedReduced,
+        PaExperiment::UnifiedCandidate,
     ] {
         for source in [&input, &expected, &reversed] {
             let mut actual = source.to_vec();
@@ -348,6 +354,9 @@ fn native_small_integer_widths() {
         PaExperiment::Unified,
         PaExperiment::PrefixBandCached,
         PaExperiment::UnifiedCached,
+        PaExperiment::UnifiedSampled,
+        PaExperiment::UnifiedReduced,
+        PaExperiment::UnifiedCandidate,
     ] {
         macro_rules! check_pa {
             ($t:ty) => {{
@@ -416,6 +425,9 @@ fn block_tail_sizes_and_large_workspace() {
             PaExperiment::Unified,
             PaExperiment::PrefixBandCached,
             PaExperiment::UnifiedCached,
+            PaExperiment::UnifiedSampled,
+            PaExperiment::UnifiedReduced,
+            PaExperiment::UnifiedCandidate,
         ] {
             let mut actual = input.clone();
             sort_pa_experiment::<_, u128>(&mut actual, experiment, block);

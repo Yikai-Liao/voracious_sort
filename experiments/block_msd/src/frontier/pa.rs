@@ -26,6 +26,9 @@ pub enum PaExperiment {
     Unified,
     PrefixBandCached,
     UnifiedCached,
+    UnifiedSampled,
+    UnifiedReduced,
+    UnifiedCandidate,
 }
 
 #[derive(Clone, Copy)]
@@ -42,6 +45,8 @@ struct Policy {
     tiled_order: bool,
     local_distribution: bool,
     cached_distribution: bool,
+    sampled_distribution: bool,
+    reduced_radix: bool,
     local_workspace_threshold: usize,
     block: usize,
 }
@@ -87,6 +92,9 @@ where
                 | PaExperiment::PrefixBandCached
                 | PaExperiment::Unified
                 | PaExperiment::UnifiedCached
+                | PaExperiment::UnifiedSampled
+                | PaExperiment::UnifiedReduced
+                | PaExperiment::UnifiedCandidate
         ),
         ordered: matches!(
             experiment,
@@ -97,6 +105,9 @@ where
                 | PaExperiment::OrderedTiled
                 | PaExperiment::Unified
                 | PaExperiment::UnifiedCached
+                | PaExperiment::UnifiedSampled
+                | PaExperiment::UnifiedReduced
+                | PaExperiment::UnifiedCandidate
         ),
         skew: matches!(
             experiment,
@@ -125,6 +136,9 @@ where
                 | PaExperiment::PrefixBandCached
                 | PaExperiment::Unified
                 | PaExperiment::UnifiedCached
+                | PaExperiment::UnifiedSampled
+                | PaExperiment::UnifiedReduced
+                | PaExperiment::UnifiedCandidate
         ),
         band_root: matches!(
             experiment,
@@ -135,12 +149,18 @@ where
                 | PaExperiment::PrefixBandCached
                 | PaExperiment::Unified
                 | PaExperiment::UnifiedCached
+                | PaExperiment::UnifiedSampled
+                | PaExperiment::UnifiedReduced
+                | PaExperiment::UnifiedCandidate
         ),
         nested_band: matches!(
             experiment,
             PaExperiment::PrefixBandNested
                 | PaExperiment::Unified
                 | PaExperiment::UnifiedCached
+                | PaExperiment::UnifiedSampled
+                | PaExperiment::UnifiedReduced
+                | PaExperiment::UnifiedCandidate
         ),
         stable_leaf: matches!(
             experiment,
@@ -148,12 +168,18 @@ where
                 | PaExperiment::PrefixBandStableLeaf
                 | PaExperiment::Unified
                 | PaExperiment::UnifiedCached
+                | PaExperiment::UnifiedSampled
+                | PaExperiment::UnifiedReduced
+                | PaExperiment::UnifiedCandidate
         ),
         tiled_order: matches!(
             experiment,
             PaExperiment::OrderedTiled
                 | PaExperiment::Unified
                 | PaExperiment::UnifiedCached
+                | PaExperiment::UnifiedSampled
+                | PaExperiment::UnifiedReduced
+                | PaExperiment::UnifiedCandidate
         ),
         local_distribution: matches!(
             experiment,
@@ -162,10 +188,25 @@ where
                 | PaExperiment::PrefixBandCached
                 | PaExperiment::Unified
                 | PaExperiment::UnifiedCached
+                | PaExperiment::UnifiedSampled
+                | PaExperiment::UnifiedReduced
+                | PaExperiment::UnifiedCandidate
         ),
         cached_distribution: matches!(
             experiment,
-            PaExperiment::PrefixBandCached | PaExperiment::UnifiedCached
+            PaExperiment::PrefixBandCached
+                | PaExperiment::UnifiedCached
+                | PaExperiment::UnifiedSampled
+                | PaExperiment::UnifiedReduced
+                | PaExperiment::UnifiedCandidate
+        ),
+        sampled_distribution: matches!(
+            experiment,
+            PaExperiment::UnifiedSampled | PaExperiment::UnifiedCandidate
+        ),
+        reduced_radix: matches!(
+            experiment,
+            PaExperiment::UnifiedReduced | PaExperiment::UnifiedCandidate
         ),
         local_workspace_threshold,
         block,
@@ -577,7 +618,31 @@ fn partition<T: Radixable<K>, K: RadixKey, C: Classifier<Converted<T, K>>>(
         classifier.label(item.into_key_type())
     };
     // distribute owns and releases all scratch before the first recursive call.
-    let passes = if policy.cached_distribution {
+    let passes = if policy.sampled_distribution && policy.reduced_radix {
+        super::local_distribution::distribute_sampled_reduced(
+            arr,
+            &label,
+            policy.block,
+            policy.local_workspace_threshold,
+            stats,
+        )
+    } else if policy.sampled_distribution {
+        super::local_distribution::distribute_sampled(
+            arr,
+            &label,
+            policy.block,
+            policy.local_workspace_threshold,
+            stats,
+        )
+    } else if policy.reduced_radix {
+        super::local_distribution::distribute_reduced(
+            arr,
+            &label,
+            policy.block,
+            policy.local_workspace_threshold,
+            stats,
+        )
+    } else if policy.cached_distribution {
         super::local_distribution::distribute_cached(
             arr,
             &label,

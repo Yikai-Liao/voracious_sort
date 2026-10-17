@@ -250,6 +250,9 @@ const METHODS: &[&str] = &[
     "Pa_unified_cache_t4194304",
     "Pa_unified_cache_t16777216",
     "Pa_unified_cache_toff",
+    "Pa_unified_sample_t16777216",
+    "Pa_unified_radix_t16777216",
+    "Pa_unified_candidate_t16777216",
     "L",
     "L_frozen",
     "H1",
@@ -306,6 +309,15 @@ where
         local_workspace_threshold =
             if value == "off" { usize::MAX } else { value.parse().unwrap() };
         "Pa_band_cache"
+    } else if let Some(value) = method.strip_prefix("Pa_unified_sample_t") {
+        local_workspace_threshold = value.parse().unwrap();
+        "Pa_unified_sample"
+    } else if let Some(value) = method.strip_prefix("Pa_unified_radix_t") {
+        local_workspace_threshold = value.parse().unwrap();
+        "Pa_unified_radix"
+    } else if let Some(value) = method.strip_prefix("Pa_unified_candidate_t") {
+        local_workspace_threshold = value.parse().unwrap();
+        "Pa_unified_candidate"
     } else {
         method
     };
@@ -330,7 +342,10 @@ where
         | "Pa_band_local"
         | "Pa_unified"
         | "Pa_band_cache"
-        | "Pa_unified_cache" => {
+        | "Pa_unified_cache"
+        | "Pa_unified_sample"
+        | "Pa_unified_radix"
+        | "Pa_unified_candidate" => {
             use frontier::PaExperiment::*;
             let experiment = match method {
                 "Pa_ref" => Reference,
@@ -353,6 +368,9 @@ where
                 "Pa_unified" => Unified,
                 "Pa_band_cache" => PrefixBandCached,
                 "Pa_unified_cache" => UnifiedCached,
+                "Pa_unified_sample" => UnifiedSampled,
+                "Pa_unified_radix" => UnifiedReduced,
+                "Pa_unified_candidate" => UnifiedCandidate,
                 _ => Both,
             };
             return frontier::sort_pa_with_threshold::<T, K>(
