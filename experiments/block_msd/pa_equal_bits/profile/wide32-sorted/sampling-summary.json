@@ -1,0 +1,115 @@
+{
+  "samples_total": 19491,
+  "samples_ordered": 4800,
+  "static_start": "0xe51d0",
+  "static_size": "0xc11",
+  "raw_symbol": "_RINvNtNtCsbkRNkUNbpMw_18block_msd_research8frontier13ordered_tiled7orderedNtCsh0OFtX7QJDB_19frontier_experiment4WideoEB1c_",
+  "top_static_addresses": [
+    [
+      "0xe57e5",
+      1774
+    ],
+    [
+      "0xe57f9",
+      1423
+    ],
+    [
+      "0xe58fb",
+      293
+    ],
+    [
+      "0xe5825",
+      80
+    ],
+    [
+      "0xe5875",
+      67
+    ],
+    [
+      "0xe583f",
+      66
+    ],
+    [
+      "0xe58b3",
+      66
+    ],
+    [
+      "0xe5871",
+      60
+    ],
+    [
+      "0xe582b",
+      57
+    ],
+    [
+      "0xe57ea",
+      56
+    ],
+    [
+      "0xe57fe",
+      55
+    ],
+    [
+      "0xe580b",
+      48
+    ],
+    [
+      "0xe5851",
+      48
+    ],
+    [
+      "0xe5861",
+      46
+    ],
+    [
+      "0xe584c",
+      45
+    ],
+    [
+      "0xe583b",
+      44
+    ],
+    [
+      "0xe5806",
+      40
+    ],
+    [
+      "0xe5813",
+      36
+    ],
+    [
+      "0xe5816",
+      35
+    ],
+    [
+      "0xe5857",
+      34
+    ],
+    [
+      "0xe586b",
+      34
+    ],
+    [
+      "0xe5820",
+      34
+    ],
+    [
+      "0xe5803",
+      33
+    ],
+    [
+      "0xe587d",
+      31
+    ],
+    [
+      "0xe5854",
+      27
+    ]
+  ],
+  "scope": "whole-process flat user samples including restore/oracle/formatting; not phase percentages",
+  "samples_ascending_tile_inner_loop": 4400,
+  "ascending_loop_range": [
+    "0xe57e0",
+    "0xe588d"
+  ]
+}

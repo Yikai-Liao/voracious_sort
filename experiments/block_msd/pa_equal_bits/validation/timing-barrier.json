@@ -1,0 +1,9 @@
+{
+  "time_ns": 1792268608668078378,
+  "active_rustc_or_cargo": [],
+  "source_inputs": 156,
+  "optimized_frontier_tests": "33 passed",
+  "ordered_module_tests": "7 passed",
+  "full_layouts": 10,
+  "features": []
+}

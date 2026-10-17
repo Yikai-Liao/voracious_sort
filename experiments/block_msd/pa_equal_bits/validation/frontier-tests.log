@@ -1,0 +1,39 @@
+
+running 33 tests
+test frontier::block::tests::scatter_preserves_multibit_payload_records ... ok
+test frontier::local_distribution::tests::cached_completion_checks_budget_and_all_high_byte_runs ... ok
+test frontier::block::tests::grouped_scatter_preserves_constant_buckets_all_tails_and_wide_payloads ... ok
+test frontier::block::tests::grouped_scatter_preserves_narrow_records ... ok
+test frontier::local_distribution::tests::prepared_zero_mask_does_not_read_labels_or_move_records ... ok
+test frontier::ordered_tiled::tests::descending_equal_prefix_is_repaired_when_the_suffix_is_unique ... ok
+test frontier::block::tests::grouped_scatter_recycling_handles_every_short_binary_pattern ... ok
+test frontier::ordered_tiled::tests::descending_groups_spanning_tiles_preserve_duplicate_order ... ok
+test frontier::local_distribution::tests::local_label_completion_preserves_stability_and_scatter_work ... ok
+test frontier::ordered_tiled::tests::disorder_at_tile_boundaries_is_rejected_without_writes ... ok
+test frontier::ordered_tiled::tests::equal_and_ascending_ranges_keep_identity_and_payload ... ok
+test frontier::ordered_tiled::tests::first_difference_can_follow_an_equal_tile_or_land_in_the_tail ... ok
+test frontier::ordered_tiled::tests::unique_descending_range_is_completed ... ok
+test frontier::prefix_band::tests::inner_approval_uses_actual_width_and_requires_a_prefix_jump ... ok
+test frontier::prefix_band::tests::terminal_inner_uses_minimum_majority_child_budget ... ok
+test frontier::prefix_band::tests::prefix_intervals_preserve_order_and_suffix ... ok
+test frontier::ordered_tiled::tests::each_key_bit_detects_an_interior_outlier_across_tiles_and_tail ... ok
+test frontier::tests::exhaustive_frontier_intervals ... ok
+test frontier::local_distribution::tests::prepared_conservative_mask_sorts_three_labels_stably ... ok
+test frontier::tests::nested_band_rejection_keeps_the_original_interval ... ok
+test frontier::tests::pa_new_policies_preserve_converted_float_order ... ok
+test frontier::tests::nested_band_can_choose_a_less_supported_terminal_majority ... ok
+test frontier::tests::pa_root_probe_is_only_a_cost_signal ... ok
+test frontier::local_distribution::tests::reduced_radix_preserves_constant_bits_empty_buckets_and_tails ... ok
+distinct fixture: scatter 435842 -> 110745, compact 64513 -> 66933
+test frontier::tests::pa_skew_gate_uses_a_heavy_child ... ok
+test frontier::tests::pa_prefix_band_handles_distinct_keys ... ok
+test frontier::local_distribution::tests::prepared_identity_and_prefix_preserve_work_except_the_label_scan ... ok
+test frontier::tests::signed_float_converted_order ... ok
+test frontier::tests::wide_labels_and_common_high_bits ... ok
+test frontier::tests::same_coarse_prefix_configs ... ok
+test frontier::tests::native_small_integer_widths ... ok
+test frontier::tests::block_tail_sizes_and_large_workspace ... ok
+test frontier::tests::recursive_identity_and_payload_matrix ... ok
+
+test result: ok. 33 passed; 0 failed; 0 ignored; 0 measured; 14 filtered out; finished in 5.28s
+

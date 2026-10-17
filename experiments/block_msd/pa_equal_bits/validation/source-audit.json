@@ -1,0 +1,12 @@
+{
+  "old_source": "8bf14e0668282791c65fe78fd7afba377903ed67",
+  "new_source": "cb10efb48e3c63cfb23c23ea06541ae644e434dc",
+  "changed_compilation_inputs": [
+    "experiments/block_msd/src/frontier/ordered_tiled.rs"
+  ],
+  "compilation_input_count": 156,
+  "scatter_bodies": "all identical",
+  "tile_size": 128,
+  "per_record_key_order_and_count": "unchanged",
+  "added_test": "128 key bits x seven interior outlier positions x primitive and payload record"
+}

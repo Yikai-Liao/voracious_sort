@@ -1,0 +1,47 @@
+{
+  "release": {
+    "opt_level": 3,
+    "debug": "line-tables-only",
+    "codegen_units": 16,
+    "lto": false,
+    "incremental": true,
+    "jobs": 6,
+    "rustflags": "-C target-cpu=native"
+  },
+  "time_features": [],
+  "work_features": [
+    "frontier_work"
+  ],
+  "asan": {
+    "toolchain": "nightly",
+    "target": "x86_64-unknown-linux-gnu",
+    "features": [
+      "frontier_work"
+    ],
+    "profile": "release",
+    "debug_assertions": false,
+    "overflow_checks": false,
+    "rustflags": "-Zsanitizer=address -C target-cpu=native",
+    "ASAN_OPTIONS": "detect_leaks=1",
+    "purpose": "not yet built for this source"
+  },
+  "dependency_flags": [
+    "--locked",
+    "--offline"
+  ],
+  "timing_affinity": [
+    2
+  ],
+  "offline_local_threshold_bytes": 16777216,
+  "asan_release": {
+    "features": [],
+    "profile": "release",
+    "rustflags": "-Zsanitizer=address -C target-cpu=native",
+    "target": "x86_64-unknown-linux-gnu",
+    "work_counters": false,
+    "purpose": "not yet built for this source"
+  },
+  "source_commit": "cb10efb48e3c63cfb23c23ea06541ae644e434dc",
+  "changes_from_previous": "first_different native XOR/OR reduction, identical tile boundaries/key evaluation order/work counters; all scatter bodies unchanged",
+  "status": "screen complete, equality improved; full matrix deferred: wide32 sorted remains 4.3 percent behind Stable"
+}

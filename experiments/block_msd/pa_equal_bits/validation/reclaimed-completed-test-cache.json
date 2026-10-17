@@ -1,0 +1,5 @@
+{
+  "path": "experiments/block_msd/target/release/incremental/block_msd_research-1bvnrj9gk07jh",
+  "logical_bytes": 134757502,
+  "proof": "33 optimized frontier tests completed successfully; no active lib-test compiler; no SHA ledger references; cache only, ELF retained"
+}
