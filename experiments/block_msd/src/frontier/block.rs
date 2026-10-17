@@ -177,7 +177,7 @@ impl<'a, T: Copy> Sorter<'a, T> {
         byte: usize,
         varying_bit: u8,
     ) {
-        assert!(varying_bit.is_power_of_two() && byte * 8 < U::BITS);
+        assert!(varying_bit.is_power_of_two() && byte < U::BITS / 8);
         self.step_impl(label, byte, Some(varying_bit));
     }
     fn step_impl<U: super::NativeKey, F: Fn(&T) -> U>(
@@ -557,7 +557,7 @@ mod tests {
                 } else {
                     sorter.step(&counted_label, byte);
                 }
-                // The binary loop probes the first live record once, then visits
+                // The grouped label scan probes the first live record once, then visits
                 // all live records in the same logical order as the original.
                 assert_eq!(
                     *trace.borrow(), expected_trace,
@@ -585,8 +585,8 @@ mod tests {
     }
 
     fn key(id: usize, radix: usize) -> u16 {
-        // Irregular labels exercise all four-record prefix counts and refill
-        // positions; the benchmark uses its separately seeded shuffled input.
+        // Irregular labels cross mask-chunk and bucket-refill boundaries;
+        // the benchmark uses its separately seeded shuffled input.
         let mut x = (id as u64).wrapping_add(0x9e3779b97f4a7c15);
         x = (x ^ (x >> 30)).wrapping_mul(0xbf58476d1ce4e5b9);
         x = (x ^ (x >> 27)).wrapping_mul(0x94d049bb133111eb);
@@ -635,7 +635,7 @@ mod tests {
                     );
                 }
             }
-            // The lookup backend prepares a native bit mask outside the loop;
+            // The grouped backend prepares a native bit mask outside the loop;
             // cover the highest u64 bit as well as low-byte binary labels.
             let keys: Vec<u64> = (0..4097)
                 .map(|id| {

@@ -6,7 +6,9 @@ publish = false
 [dependencies]
 voracious_radix_sort = { path = "../.." }
 [profile.release]
-debug = true
+# Keep source locations for profiling without retaining full type/local DWARF
+# in every monomorphized benchmark body and copied evidence executable.
+debug = "line-tables-only"
 # Reuse optimized artifacts while screening changes. Freeze build settings and
 # the resulting ELF separately for final measurements.
 incremental = true
