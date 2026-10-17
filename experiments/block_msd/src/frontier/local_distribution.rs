@@ -13,7 +13,7 @@ pub(super) fn distribute_local<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
     stats: &mut Work,
 ) -> usize {
     distribute_impl::<T, U, F, false, false, false>(
-        arr, label, block_size, 0, None, stats,
+        arr, label, block_size, 0, None, false, stats,
     )
 }
 
@@ -30,6 +30,7 @@ pub(super) fn distribute_cached<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
         block_size,
         workspace_threshold,
         None,
+        false,
         stats,
     )
 }
@@ -47,6 +48,7 @@ pub(super) fn distribute_sampled<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
         block_size,
         workspace_threshold,
         None,
+        false,
         stats,
     )
 }
@@ -68,6 +70,7 @@ pub(super) fn distribute_prepared<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
         block_size,
         workspace_threshold,
         Some(label_mask),
+        false,
         stats,
     )
 }
@@ -91,6 +94,31 @@ pub(super) fn distribute_prepared_sampled<
         block_size,
         workspace_threshold,
         Some(label_mask),
+        false,
+        stats,
+    )
+}
+
+/// Prepared sampling with local cursors for digits covered by one varying bit.
+pub(super) fn distribute_prepared_binary<
+    T: Copy,
+    U: NativeKey,
+    F: Fn(&T) -> U,
+>(
+    arr: &mut [T],
+    label: &F,
+    block_size: usize,
+    workspace_threshold: usize,
+    label_mask: U,
+    stats: &mut Work,
+) -> usize {
+    distribute_impl::<T, U, F, true, true, false>(
+        arr,
+        label,
+        block_size,
+        workspace_threshold,
+        Some(label_mask),
+        true,
         stats,
     )
 }
@@ -108,6 +136,7 @@ pub(super) fn distribute_reduced<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
         block_size,
         workspace_threshold,
         None,
+        false,
         stats,
     )
 }
@@ -129,6 +158,7 @@ pub(super) fn distribute_sampled_reduced<
         block_size,
         workspace_threshold,
         None,
+        false,
         stats,
     )
 }
@@ -146,6 +176,7 @@ fn distribute_impl<
     block_size: usize,
     workspace_threshold: usize,
     label_mask: Option<U>,
+    binary: bool,
     stats: &mut Work,
 ) -> usize {
     if arr.len() < 2 {
@@ -174,7 +205,7 @@ fn distribute_impl<
         .expect("budget overflow");
     if passes == 1 || dense_fits::<T>(arr.len(), levels, budget) {
         return finish_label::<T, U, F, REDUCED_RADIX>(
-            arr, label, levels, variation, block_size, budget, stats,
+            arr, label, levels, variation, block_size, budget, binary, stats,
         );
     }
 
@@ -184,7 +215,8 @@ fn distribute_impl<
         // allocation budget. Sorting performs no hardware discovery.
         if budget <= workspace_threshold {
             return finish_label::<T, U, F, REDUCED_RADIX>(
-                arr, label, levels, variation, block_size, budget, stats,
+                arr, label, levels, variation, block_size, budget, binary,
+                stats,
             );
         }
         if SAMPLE_GUARD
@@ -192,7 +224,8 @@ fn distribute_impl<
             && !sample_runs_fit_dense(arr, label, high_byte, budget, stats)
         {
             return finish_label::<T, U, F, REDUCED_RADIX>(
-                arr, label, levels, variation, block_size, budget, stats,
+                arr, label, levels, variation, block_size, budget, binary,
+                stats,
             );
         }
         let mut lengths = [0usize; 256];
@@ -207,7 +240,8 @@ fn distribute_impl<
             // Reject before moving records; the existing variation scan is
             // sufficient to execute the original whole-label path.
             return finish_label::<T, U, F, REDUCED_RADIX>(
-                arr, label, levels, variation, block_size, budget, stats,
+                arr, label, levels, variation, block_size, budget, binary,
+                stats,
             );
         }
     }
@@ -225,6 +259,7 @@ fn distribute_impl<
         levels,
         high_variation,
         block_size,
+        binary,
         stats,
     );
     // The root workspace has been released. Only one run's dense or block
@@ -250,6 +285,7 @@ fn distribute_impl<
             low_variation,
             block_size,
             budget,
+            binary,
             stats,
         );
         start = end;
@@ -315,6 +351,7 @@ fn finish_label<
     variation: U,
     block_size: usize,
     budget: usize,
+    binary: bool,
     stats: &mut Work,
 ) -> usize {
     let passes = (0..levels).filter(|&i| variation.byte(i) != 0).count();
@@ -328,7 +365,7 @@ fn finish_label<
     } else {
         work! { stats.block_nodes += 1; }
         block_bytes::<T, U, F, REDUCED_RADIX>(
-            arr, label, levels, variation, block_size, stats,
+            arr, label, levels, variation, block_size, binary, stats,
         );
     }
     passes
@@ -344,6 +381,7 @@ fn block_bytes<T: Copy, U: NativeKey, F: Fn(&T) -> U, const REDUCED: bool>(
     levels: usize,
     variation: U,
     block_size: usize,
+    binary: bool,
     stats: &mut Work,
 ) {
     let maximum = if REDUCED {
@@ -356,7 +394,15 @@ fn block_bytes<T: Copy, U: NativeKey, F: Fn(&T) -> U, const REDUCED: bool>(
         let mut sorter = block::Sorter::new(arr, maximum + 1, block_size);
         for byte in 0..levels {
             if variation.byte(byte) != 0 {
-                sorter.step(&normalized, byte);
+                if binary && variation.byte(byte).is_power_of_two() {
+                    sorter.step_binary(
+                        &normalized,
+                        byte,
+                        variation.byte(byte) as u8,
+                    );
+                } else {
+                    sorter.step(&normalized, byte);
+                }
             }
         }
         sorter.compact();
@@ -369,7 +415,11 @@ fn block_bytes<T: Copy, U: NativeKey, F: Fn(&T) -> U, const REDUCED: bool>(
         let mut sorter = block::Sorter::new(arr, 256, block_size);
         for byte in 0..levels {
             if variation.byte(byte) != 0 {
-                sorter.step(label, byte);
+                if binary && variation.byte(byte).is_power_of_two() {
+                    sorter.step_binary(label, byte, variation.byte(byte) as u8);
+                } else {
+                    sorter.step(label, byte);
+                }
             }
         }
         sorter.compact();
