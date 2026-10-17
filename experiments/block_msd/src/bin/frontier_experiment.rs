@@ -256,6 +256,7 @@ const METHODS: &[&str] = &[
     "Pa_unified_reuse_t16777216",
     "Pa_unified_prepared_t16777216",
     "Pa_unified_groups_t16777216",
+    "Pa_unified_direct_t16777216",
     "L",
     "L_frozen",
     "H1",
@@ -327,6 +328,9 @@ where
     } else if let Some(value) = method.strip_prefix("Pa_unified_groups_t") {
         local_workspace_threshold = value.parse().unwrap();
         "Pa_unified_groups"
+    } else if let Some(value) = method.strip_prefix("Pa_unified_direct_t") {
+        local_workspace_threshold = value.parse().unwrap();
+        "Pa_unified_direct"
     } else if let Some(value) = method.strip_prefix("Pa_unified_prepared_t") {
         local_workspace_threshold = value.parse().unwrap();
         "Pa_unified_prepared"
@@ -360,7 +364,8 @@ where
         | "Pa_unified_candidate"
         | "Pa_unified_reuse"
         | "Pa_unified_prepared"
-        | "Pa_unified_groups" => {
+        | "Pa_unified_groups"
+        | "Pa_unified_direct" => {
             use frontier::PaExperiment::*;
             let experiment = match method {
                 "Pa_ref" => Reference,
@@ -389,6 +394,7 @@ where
                 "Pa_unified_reuse" => UnifiedReuse,
                 "Pa_unified_prepared" => UnifiedPrepared,
                 "Pa_unified_groups" => UnifiedGroups,
+                "Pa_unified_direct" => UnifiedDirect,
                 _ => Both,
             };
             return frontier::sort_pa_with_threshold::<T, K>(
@@ -747,7 +753,7 @@ fn main() {
         .collect();
     assert!(cases.iter().all(|c| CASES.contains(c)));
     let default_layouts = if cfg!(feature = "frontier_narrow_screen") {
-        "u8,u16,u8_id8,u16_id8"
+        "u8,u16,u32,u64,u8_id8,u16_id8,small8"
     } else {
         "u32,u64,small8,wide32,large128"
     };
@@ -756,14 +762,15 @@ fn main() {
         .map_or(default_layouts, String::as_str)
         .split(',')
         .collect();
-    // Compile only the failing narrow-layout screen during development. This
+    // Compile only native-word-sized records during the development screen. This
     // feature restricts the harness; the sorting implementation is unchanged.
     #[cfg(feature = "frontier_narrow_screen")]
     assert!(
         layouts.iter().all(|layout| {
-            ["u8", "u16", "u8_id8", "u16_id8"].contains(layout)
+            ["u8", "u16", "u32", "u64", "u8_id8", "u16_id8", "small8"]
+                .contains(layout)
         }),
-        "frontier_narrow_screen supports only u8/u16 and their ID layouts"
+        "frontier_narrow_screen supports only native-word-sized records"
     );
     let kind = args.get(6).map_or("time", String::as_str);
     assert!(["time", "work", "memory"].contains(&kind));
@@ -838,7 +845,6 @@ fn main() {
                     seed,
                     kind,
                 ),
-                #[cfg(not(feature = "frontier_narrow_screen"))]
                 "u32" => run::<_, u32>(
                     keys.iter().map(|&x| x as u32).collect(),
                     layout,
@@ -849,7 +855,6 @@ fn main() {
                     seed,
                     kind,
                 ),
-                #[cfg(not(feature = "frontier_narrow_screen"))]
                 "u64" => run::<_, u64>(
                     keys.iter().map(|&x| x as u64).collect(),
                     layout,
@@ -864,7 +869,6 @@ fn main() {
                 "u128" => run::<_, u128>(
                     keys, layout, case, &methods, reps, block, seed, kind,
                 ),
-                #[cfg(not(feature = "frontier_narrow_screen"))]
                 "small8" => run::<_, u32>(
                     keys.iter()
                         .enumerate()

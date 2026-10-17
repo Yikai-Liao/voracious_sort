@@ -37,9 +37,9 @@ counts, two admission gates and the single-layer/deferred minority paths.
 
 The release profile reuses incremental artifacts with 16 codegen units. Keep the
 same target directory and flags between edits; use `--jobs 6` on this six-vCPU
-host. `frontier_narrow_screen` compiles only the u8/u16 primitive and ID layouts
-in the benchmark harness, while retaining the same generic sorting code and full
-stable oracle:
+host. `frontier_narrow_screen` compiles only native-word-sized records in the
+benchmark harness: u8/u16/u32/u64 primitives and the three 8-byte ID layouts.
+It retains the same generic sorting code and full stable oracle:
 
 ```sh
 RUSTFLAGS='-C target-cpu=native' cargo build \

@@ -6,6 +6,34 @@
 
 use super::{block, dense, work, NativeKey, Work};
 
+#[derive(Clone, Copy, PartialEq, Eq)]
+pub(super) enum BlockScatter {
+    Original,
+    Grouped,
+    Direct,
+}
+
+impl BlockScatter {
+    fn step<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
+        self,
+        sorter: &mut block::Sorter<'_, T>,
+        label: &F,
+        byte: usize,
+        variation: U,
+    ) {
+        let mask = variation.byte(byte);
+        let bit = (self != Self::Original && mask.is_power_of_two())
+            .then_some(mask as u8);
+        match self {
+            Self::Direct => sorter.step_direct(label, byte, bit),
+            _ => match bit {
+                Some(bit) => sorter.step_grouped(label, byte, bit),
+                None => sorter.step(label, byte),
+            },
+        }
+    }
+}
+
 pub(super) fn distribute_local<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
     arr: &mut [T],
     label: &F,
@@ -13,7 +41,13 @@ pub(super) fn distribute_local<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
     stats: &mut Work,
 ) -> usize {
     distribute_impl::<T, U, F, false, false, false>(
-        arr, label, block_size, 0, None, false, stats,
+        arr,
+        label,
+        block_size,
+        0,
+        None,
+        BlockScatter::Original,
+        stats,
     )
 }
 
@@ -30,7 +64,7 @@ pub(super) fn distribute_cached<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
         block_size,
         workspace_threshold,
         None,
-        false,
+        BlockScatter::Original,
         stats,
     )
 }
@@ -48,7 +82,7 @@ pub(super) fn distribute_sampled<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
         block_size,
         workspace_threshold,
         None,
-        false,
+        BlockScatter::Original,
         stats,
     )
 }
@@ -70,7 +104,7 @@ pub(super) fn distribute_prepared<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
         block_size,
         workspace_threshold,
         Some(label_mask),
-        false,
+        BlockScatter::Original,
         stats,
     )
 }
@@ -94,13 +128,13 @@ pub(super) fn distribute_prepared_sampled<
         block_size,
         workspace_threshold,
         Some(label_mask),
-        false,
+        BlockScatter::Original,
         stats,
     )
 }
 
-/// Prepared sampling with grouped writes for digits covered by one varying bit.
-pub(super) fn distribute_prepared_grouped<
+/// Prepared sampling with the selected block write schedule.
+pub(super) fn distribute_prepared_scatter<
     T: Copy,
     U: NativeKey,
     F: Fn(&T) -> U,
@@ -110,6 +144,7 @@ pub(super) fn distribute_prepared_grouped<
     block_size: usize,
     workspace_threshold: usize,
     label_mask: U,
+    scatter: BlockScatter,
     stats: &mut Work,
 ) -> usize {
     distribute_impl::<T, U, F, true, true, false>(
@@ -118,7 +153,7 @@ pub(super) fn distribute_prepared_grouped<
         block_size,
         workspace_threshold,
         Some(label_mask),
-        true,
+        scatter,
         stats,
     )
 }
@@ -136,7 +171,7 @@ pub(super) fn distribute_reduced<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
         block_size,
         workspace_threshold,
         None,
-        false,
+        BlockScatter::Original,
         stats,
     )
 }
@@ -158,7 +193,7 @@ pub(super) fn distribute_sampled_reduced<
         block_size,
         workspace_threshold,
         None,
-        false,
+        BlockScatter::Original,
         stats,
     )
 }
@@ -176,7 +211,7 @@ fn distribute_impl<
     block_size: usize,
     workspace_threshold: usize,
     label_mask: Option<U>,
-    grouped: bool,
+    scatter: BlockScatter,
     stats: &mut Work,
 ) -> usize {
     if arr.len() < 2 {
@@ -205,7 +240,7 @@ fn distribute_impl<
         .expect("budget overflow");
     if passes == 1 || dense_fits::<T>(arr.len(), levels, budget) {
         return finish_label::<T, U, F, REDUCED_RADIX>(
-            arr, label, levels, variation, block_size, budget, grouped, stats,
+            arr, label, levels, variation, block_size, budget, scatter, stats,
         );
     }
 
@@ -215,7 +250,7 @@ fn distribute_impl<
         // allocation budget. Sorting performs no hardware discovery.
         if budget <= workspace_threshold {
             return finish_label::<T, U, F, REDUCED_RADIX>(
-                arr, label, levels, variation, block_size, budget, grouped,
+                arr, label, levels, variation, block_size, budget, scatter,
                 stats,
             );
         }
@@ -224,7 +259,7 @@ fn distribute_impl<
             && !sample_runs_fit_dense(arr, label, high_byte, budget, stats)
         {
             return finish_label::<T, U, F, REDUCED_RADIX>(
-                arr, label, levels, variation, block_size, budget, grouped,
+                arr, label, levels, variation, block_size, budget, scatter,
                 stats,
             );
         }
@@ -240,7 +275,7 @@ fn distribute_impl<
             // Reject before moving records; the existing variation scan is
             // sufficient to execute the original whole-label path.
             return finish_label::<T, U, F, REDUCED_RADIX>(
-                arr, label, levels, variation, block_size, budget, grouped,
+                arr, label, levels, variation, block_size, budget, scatter,
                 stats,
             );
         }
@@ -259,7 +294,7 @@ fn distribute_impl<
         levels,
         high_variation,
         block_size,
-        grouped,
+        scatter,
         stats,
     );
     // The root workspace has been released. Only one run's dense or block
@@ -285,7 +320,7 @@ fn distribute_impl<
             low_variation,
             block_size,
             budget,
-            grouped,
+            scatter,
             stats,
         );
         start = end;
@@ -351,7 +386,7 @@ fn finish_label<
     variation: U,
     block_size: usize,
     budget: usize,
-    grouped: bool,
+    scatter: BlockScatter,
     stats: &mut Work,
 ) -> usize {
     let passes = (0..levels).filter(|&i| variation.byte(i) != 0).count();
@@ -365,7 +400,7 @@ fn finish_label<
     } else {
         work! { stats.block_nodes += 1; }
         block_bytes::<T, U, F, REDUCED_RADIX>(
-            arr, label, levels, variation, block_size, grouped, stats,
+            arr, label, levels, variation, block_size, scatter, stats,
         );
     }
     passes
@@ -381,7 +416,7 @@ fn block_bytes<T: Copy, U: NativeKey, F: Fn(&T) -> U, const REDUCED: bool>(
     levels: usize,
     variation: U,
     block_size: usize,
-    grouped: bool,
+    scatter: BlockScatter,
     stats: &mut Work,
 ) {
     let maximum = if REDUCED {
@@ -394,15 +429,7 @@ fn block_bytes<T: Copy, U: NativeKey, F: Fn(&T) -> U, const REDUCED: bool>(
         let mut sorter = block::Sorter::new(arr, maximum + 1, block_size);
         for byte in 0..levels {
             if variation.byte(byte) != 0 {
-                if grouped && variation.byte(byte).is_power_of_two() {
-                    sorter.step_grouped(
-                        &normalized,
-                        byte,
-                        variation.byte(byte) as u8,
-                    );
-                } else {
-                    sorter.step(&normalized, byte);
-                }
+                scatter.step(&mut sorter, &normalized, byte, variation);
             }
         }
         sorter.compact();
@@ -415,15 +442,7 @@ fn block_bytes<T: Copy, U: NativeKey, F: Fn(&T) -> U, const REDUCED: bool>(
         let mut sorter = block::Sorter::new(arr, 256, block_size);
         for byte in 0..levels {
             if variation.byte(byte) != 0 {
-                if grouped && variation.byte(byte).is_power_of_two() {
-                    sorter.step_grouped(
-                        label,
-                        byte,
-                        variation.byte(byte) as u8,
-                    );
-                } else {
-                    sorter.step(label, byte);
-                }
+                scatter.step(&mut sorter, label, byte, variation);
             }
         }
         sorter.compact();
