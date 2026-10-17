@@ -29,6 +29,8 @@ pub enum PaExperiment {
     UnifiedSampled,
     UnifiedReduced,
     UnifiedCandidate,
+    UnifiedReuse,
+    UnifiedPrepared,
 }
 
 #[derive(Clone, Copy)]
@@ -47,6 +49,7 @@ struct Policy {
     cached_distribution: bool,
     sampled_distribution: bool,
     reduced_radix: bool,
+    prepared_distribution: bool,
     local_workspace_threshold: usize,
     block: usize,
 }
@@ -92,6 +95,8 @@ where
                 | PaExperiment::PrefixBandCached
                 | PaExperiment::Unified
                 | PaExperiment::UnifiedCached
+                | PaExperiment::UnifiedReuse
+                | PaExperiment::UnifiedPrepared
                 | PaExperiment::UnifiedSampled
                 | PaExperiment::UnifiedReduced
                 | PaExperiment::UnifiedCandidate
@@ -105,6 +110,8 @@ where
                 | PaExperiment::OrderedTiled
                 | PaExperiment::Unified
                 | PaExperiment::UnifiedCached
+                | PaExperiment::UnifiedReuse
+                | PaExperiment::UnifiedPrepared
                 | PaExperiment::UnifiedSampled
                 | PaExperiment::UnifiedReduced
                 | PaExperiment::UnifiedCandidate
@@ -136,6 +143,8 @@ where
                 | PaExperiment::PrefixBandCached
                 | PaExperiment::Unified
                 | PaExperiment::UnifiedCached
+                | PaExperiment::UnifiedReuse
+                | PaExperiment::UnifiedPrepared
                 | PaExperiment::UnifiedSampled
                 | PaExperiment::UnifiedReduced
                 | PaExperiment::UnifiedCandidate
@@ -149,6 +158,8 @@ where
                 | PaExperiment::PrefixBandCached
                 | PaExperiment::Unified
                 | PaExperiment::UnifiedCached
+                | PaExperiment::UnifiedReuse
+                | PaExperiment::UnifiedPrepared
                 | PaExperiment::UnifiedSampled
                 | PaExperiment::UnifiedReduced
                 | PaExperiment::UnifiedCandidate
@@ -158,6 +169,8 @@ where
             PaExperiment::PrefixBandNested
                 | PaExperiment::Unified
                 | PaExperiment::UnifiedCached
+                | PaExperiment::UnifiedReuse
+                | PaExperiment::UnifiedPrepared
                 | PaExperiment::UnifiedSampled
                 | PaExperiment::UnifiedReduced
                 | PaExperiment::UnifiedCandidate
@@ -168,6 +181,8 @@ where
                 | PaExperiment::PrefixBandStableLeaf
                 | PaExperiment::Unified
                 | PaExperiment::UnifiedCached
+                | PaExperiment::UnifiedReuse
+                | PaExperiment::UnifiedPrepared
                 | PaExperiment::UnifiedSampled
                 | PaExperiment::UnifiedReduced
                 | PaExperiment::UnifiedCandidate
@@ -177,6 +192,8 @@ where
             PaExperiment::OrderedTiled
                 | PaExperiment::Unified
                 | PaExperiment::UnifiedCached
+                | PaExperiment::UnifiedReuse
+                | PaExperiment::UnifiedPrepared
                 | PaExperiment::UnifiedSampled
                 | PaExperiment::UnifiedReduced
                 | PaExperiment::UnifiedCandidate
@@ -188,6 +205,8 @@ where
                 | PaExperiment::PrefixBandCached
                 | PaExperiment::Unified
                 | PaExperiment::UnifiedCached
+                | PaExperiment::UnifiedReuse
+                | PaExperiment::UnifiedPrepared
                 | PaExperiment::UnifiedSampled
                 | PaExperiment::UnifiedReduced
                 | PaExperiment::UnifiedCandidate
@@ -196,17 +215,25 @@ where
             experiment,
             PaExperiment::PrefixBandCached
                 | PaExperiment::UnifiedCached
+                | PaExperiment::UnifiedReuse
+                | PaExperiment::UnifiedPrepared
                 | PaExperiment::UnifiedSampled
                 | PaExperiment::UnifiedReduced
                 | PaExperiment::UnifiedCandidate
         ),
         sampled_distribution: matches!(
             experiment,
-            PaExperiment::UnifiedSampled | PaExperiment::UnifiedCandidate
+            PaExperiment::UnifiedSampled
+                | PaExperiment::UnifiedCandidate
+                | PaExperiment::UnifiedPrepared
         ),
         reduced_radix: matches!(
             experiment,
             PaExperiment::UnifiedReduced | PaExperiment::UnifiedCandidate
+        ),
+        prepared_distribution: matches!(
+            experiment,
+            PaExperiment::UnifiedReuse | PaExperiment::UnifiedPrepared
         ),
         local_workspace_threshold,
         block,
@@ -520,10 +547,28 @@ fn visit<T: Radixable<K>, K: RadixKey>(
         });
     if let Some((band, population, terminal_band)) = approved_band {
         work! { stats.band_nodes += 1; stats.band_records += population; stats.terminal_band_nodes += usize::from(terminal_band); }
-        partition::<T, K, _>(arr, &band, policy, false, stats, depth, path);
+        partition::<T, K, _>(
+            arr,
+            &band,
+            Some(Converted::<T, K>::from_u128(3)),
+            policy,
+            false,
+            stats,
+            depth,
+            path,
+        );
     } else if policy.terminal && coarse == width && !(policy.probe && use_skew)
     {
-        partition::<T, K, _>(arr, &Identity, policy, true, stats, depth, path);
+        partition::<T, K, _>(
+            arr,
+            &Identity,
+            Some(p.union ^ p.intersection),
+            policy,
+            true,
+            stats,
+            depth,
+            path,
+        );
     } else if use_skew {
         // Each surviving BM vote is an occurrence of the final candidate.
         // votes > m/2 certifies a complete-key majority without a verify pass.
@@ -539,6 +584,7 @@ fn visit<T: Radixable<K>, K: RadixKey>(
             partition::<T, K, _>(
                 arr,
                 &classifier,
+                Some(Converted::<T, K>::from_u128(3)),
                 policy,
                 false,
                 stats,
@@ -551,6 +597,7 @@ fn visit<T: Radixable<K>, K: RadixKey>(
             partition::<T, K, _>(
                 arr,
                 &classifier,
+                None,
                 policy,
                 false,
                 stats,
@@ -566,6 +613,10 @@ fn visit<T: Radixable<K>, K: RadixKey>(
         partition::<T, K, _>(
             arr,
             &classifier,
+            Some(
+                ((p.union ^ p.intersection) >> classifier.low)
+                    & classifier.mask,
+            ),
             policy,
             false,
             stats,
@@ -603,6 +654,7 @@ impl<U: NativeKey> Classifier<U> for EqualSplit<U> {
 fn partition<T: Radixable<K>, K: RadixKey, C: Classifier<Converted<T, K>>>(
     arr: &mut [T],
     classifier: &C,
+    label_mask: Option<Converted<T, K>>,
     policy: Policy,
     terminal: bool,
     stats: &mut Work,
@@ -618,7 +670,29 @@ fn partition<T: Radixable<K>, K: RadixKey, C: Classifier<Converted<T, K>>>(
         classifier.label(item.into_key_type())
     };
     // distribute owns and releases all scratch before the first recursive call.
-    let passes = if policy.sampled_distribution && policy.reduced_radix {
+    let prepared_mask =
+        if policy.prepared_distribution { label_mask } else { None };
+    let passes = if let Some(mask) = prepared_mask {
+        if policy.sampled_distribution {
+            super::local_distribution::distribute_prepared_sampled(
+                arr,
+                &label,
+                policy.block,
+                policy.local_workspace_threshold,
+                mask,
+                stats,
+            )
+        } else {
+            super::local_distribution::distribute_prepared(
+                arr,
+                &label,
+                policy.block,
+                policy.local_workspace_threshold,
+                mask,
+                stats,
+            )
+        }
+    } else if policy.sampled_distribution && policy.reduced_radix {
         super::local_distribution::distribute_sampled_reduced(
             arr,
             &label,

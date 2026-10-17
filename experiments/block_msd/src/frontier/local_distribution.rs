@@ -13,7 +13,7 @@ pub(super) fn distribute_local<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
     stats: &mut Work,
 ) -> usize {
     distribute_impl::<T, U, F, false, false, false>(
-        arr, label, block_size, 0, stats,
+        arr, label, block_size, 0, None, stats,
     )
 }
 
@@ -29,6 +29,7 @@ pub(super) fn distribute_cached<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
         label,
         block_size,
         workspace_threshold,
+        None,
         stats,
     )
 }
@@ -45,6 +46,51 @@ pub(super) fn distribute_sampled<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
         label,
         block_size,
         workspace_threshold,
+        None,
+        stats,
+    )
+}
+
+/// Reuse a mask covering every varying bit of the observed labels. Extra bits
+/// are permitted; zero proves that every label is equal. Bits outside the mask
+/// must be constant throughout this partition.
+pub(super) fn distribute_prepared<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
+    arr: &mut [T],
+    label: &F,
+    block_size: usize,
+    workspace_threshold: usize,
+    label_mask: U,
+    stats: &mut Work,
+) -> usize {
+    distribute_impl::<T, U, F, true, false, false>(
+        arr,
+        label,
+        block_size,
+        workspace_threshold,
+        Some(label_mask),
+        stats,
+    )
+}
+
+/// Apply the sampling guard with the same mask contract as `distribute_prepared`.
+pub(super) fn distribute_prepared_sampled<
+    T: Copy,
+    U: NativeKey,
+    F: Fn(&T) -> U,
+>(
+    arr: &mut [T],
+    label: &F,
+    block_size: usize,
+    workspace_threshold: usize,
+    label_mask: U,
+    stats: &mut Work,
+) -> usize {
+    distribute_impl::<T, U, F, true, true, false>(
+        arr,
+        label,
+        block_size,
+        workspace_threshold,
+        Some(label_mask),
         stats,
     )
 }
@@ -61,6 +107,7 @@ pub(super) fn distribute_reduced<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
         label,
         block_size,
         workspace_threshold,
+        None,
         stats,
     )
 }
@@ -81,6 +128,7 @@ pub(super) fn distribute_sampled_reduced<
         label,
         block_size,
         workspace_threshold,
+        None,
         stats,
     )
 }
@@ -97,17 +145,24 @@ fn distribute_impl<
     label: &F,
     block_size: usize,
     workspace_threshold: usize,
+    label_mask: Option<U>,
     stats: &mut Work,
 ) -> usize {
     if arr.len() < 2 {
         return 0;
     }
-    let first = label(&arr[0]);
-    let mut variation = U::from_u128(0);
-    for item in arr.iter() {
-        variation |= label(item) ^ first;
-    }
-    work! { stats.label_records += arr.len(); }
+    let variation = match label_mask {
+        Some(mask) => mask,
+        None => {
+            let first = label(&arr[0]);
+            let mut variation = U::from_u128(0);
+            for item in arr.iter() {
+                variation |= label(item) ^ first;
+            }
+            work! { stats.label_records += arr.len(); }
+            variation
+        },
+    };
     let levels = (U::BITS - variation.leading_zeros() as usize + 7) / 8;
     if levels == 0 {
         return 0;
@@ -280,8 +335,9 @@ fn finish_label<
 }
 
 /// Strip constant label bits only when that also reduces the bucket count.
-/// For fixed variation v, every label is (label & v) | c for one common c;
-/// removing c preserves order and equality. Active byte digits are <= v.byte.
+/// In each processed byte, every digit is (digit & v.byte) | c for one common
+/// c; removing c preserves order and equality in that byte. Unprocessed bytes
+/// need not be constant. Normalized active digits are at most v.byte.
 fn block_bytes<T: Copy, U: NativeKey, F: Fn(&T) -> U, const REDUCED: bool>(
     arr: &mut [T],
     label: &F,
@@ -328,14 +384,254 @@ fn block_bytes<T: Copy, U: NativeKey, F: Fn(&T) -> U, const REDUCED: bool>(
 mod tests {
     use super::super::{distribute, Work};
     use super::{
-        dense_fits, distribute_cached, distribute_local, distribute_sampled,
+        dense_fits, distribute_cached, distribute_local, distribute_prepared,
+        distribute_prepared_sampled, distribute_sampled,
     };
+    use std::cell::Cell;
 
     #[derive(Clone, Copy, Debug, PartialEq, Eq)]
     struct Record {
         key: u32,
         id: u32,
         payload: [u8; 120],
+    }
+
+    fn assert_same_work(expected: &Work, actual: &Work) {
+        macro_rules! compare {
+            ($($field:ident),+ $(,)?) => {
+                // Keep the comparison exhaustive as Work gains fields.
+                let Work { $($field: _),+ } = expected;
+                $(assert_eq!(expected.$field, actual.$field, stringify!($field));)+
+            };
+        }
+        compare!(
+            nodes,
+            node_records,
+            prepare_records,
+            order_records,
+            candidate_records,
+            label_records,
+            label_evals,
+            scatter_records,
+            dense_nodes,
+            block_nodes,
+            passes,
+            compact_records,
+            tail_records,
+            runs_records,
+            unresolved_records,
+            leaves,
+            leaf_records,
+            max_depth,
+            max_path_passes,
+            frontier_nodes,
+            equal_nodes,
+            band_nodes,
+            band_records,
+            terminal_band_nodes,
+            probe_records,
+            leaf_lengths,
+        );
+    }
+
+    #[test]
+    fn prepared_identity_and_prefix_preserve_work_except_the_label_scan() {
+        for length in [257usize, 16_385] {
+            for prefix in [false, true] {
+                let mut input: Vec<Record> = (0..length)
+                    .map(|id| {
+                        let raw_label = 0x80a5a0
+                            | ((id.wrapping_mul(2654435761) as u32) & 0x050005);
+                        Record {
+                            key: if prefix {
+                                0xa0000000 | (raw_label << 4) | (id % 16) as u32
+                            } else {
+                                raw_label
+                            },
+                            id: id as u32,
+                            payload: [id as u8; 120],
+                        }
+                    })
+                    .collect();
+                input.reverse();
+                let label = |record: &Record| {
+                    if prefix {
+                        (record.key >> 4) & 0x00ffffff
+                    } else {
+                        record.key
+                    }
+                };
+                let (union, intersection) = input.iter().fold(
+                    (input[0].key, input[0].key),
+                    |(union, intersection), record| {
+                        (union | record.key, intersection & record.key)
+                    },
+                );
+                let mask = if prefix {
+                    ((union ^ intersection) >> 4) & 0x00ffffff
+                } else {
+                    union ^ intersection
+                };
+                let mut expected = input.clone();
+                expected.sort_by_key(&label);
+
+                for sampled in [false, true] {
+                    let mut old = input.clone();
+                    let mut new = input.clone();
+                    let old_calls = Cell::new(0usize);
+                    let new_calls = Cell::new(0usize);
+                    let old_label = |record: &Record| {
+                        old_calls.set(old_calls.get() + 1);
+                        label(record)
+                    };
+                    let new_label = |record: &Record| {
+                        new_calls.set(new_calls.get() + 1);
+                        label(record)
+                    };
+                    let mut old_work = Work::default();
+                    let mut new_work = Work::default();
+                    let (old_passes, new_passes) = if sampled {
+                        (
+                            distribute_sampled(
+                                &mut old,
+                                &old_label,
+                                17,
+                                usize::MAX,
+                                &mut old_work,
+                            ),
+                            distribute_prepared_sampled(
+                                &mut new,
+                                &new_label,
+                                17,
+                                usize::MAX,
+                                mask,
+                                &mut new_work,
+                            ),
+                        )
+                    } else {
+                        (
+                            distribute_cached(
+                                &mut old,
+                                &old_label,
+                                17,
+                                usize::MAX,
+                                &mut old_work,
+                            ),
+                            distribute_prepared(
+                                &mut new,
+                                &new_label,
+                                17,
+                                usize::MAX,
+                                mask,
+                                &mut new_work,
+                            ),
+                        )
+                    };
+                    assert_eq!(old, expected);
+                    assert_eq!(new, expected);
+                    assert_eq!(old_passes, new_passes);
+                    assert_eq!(old_calls.get(), new_calls.get() + length + 1);
+                    assert_eq!(
+                        old_work.label_records,
+                        new_work.label_records + length
+                    );
+                    old_work.label_records -= length;
+                    assert_same_work(&old_work, &new_work);
+                    if length == 257 {
+                        assert_eq!(new_work.dense_nodes, 1);
+                        assert_eq!(new_work.block_nodes, 0);
+                    } else {
+                        assert_eq!(new_work.dense_nodes, 0);
+                        assert_eq!(new_work.block_nodes, 1);
+                    }
+                }
+            }
+        }
+    }
+
+    #[test]
+    fn prepared_zero_mask_does_not_read_labels_or_move_records() {
+        for length in [0, 1, 129] {
+            let input: Vec<Record> = (0..length)
+                .map(|id| Record { key: 0xa5, id, payload: [id as u8; 120] })
+                .rev()
+                .collect();
+            let label =
+                |_: &Record| -> u32 { panic!("constant mask reads no labels") };
+            for sampled in [false, true] {
+                let mut actual = input.clone();
+                let mut stats = Work::default();
+                let passes = if sampled {
+                    distribute_prepared_sampled(
+                        &mut actual,
+                        &label,
+                        17,
+                        usize::MAX,
+                        0,
+                        &mut stats,
+                    )
+                } else {
+                    distribute_prepared(
+                        &mut actual,
+                        &label,
+                        17,
+                        usize::MAX,
+                        0,
+                        &mut stats,
+                    )
+                };
+                assert_eq!(actual, input);
+                assert_eq!(passes, 0);
+                assert_same_work(&stats, &Work::default());
+            }
+        }
+    }
+
+    #[test]
+    fn prepared_conservative_mask_sorts_three_labels_stably() {
+        // The classifier's range is 0/1/2 even when this partition contains
+        // only 0/1 or a constant 1. A conservative mask may add work safely.
+        for distinct in [1, 2, 3] {
+            let input: Vec<Record> = (0..16_385u32)
+                .rev()
+                .map(|id| Record {
+                    key: if distinct == 1 { 1 } else { id % distinct },
+                    id,
+                    payload: [id as u8; 120],
+                })
+                .collect();
+            let mut expected = input.clone();
+            expected.sort_by_key(|record| record.key);
+            for sampled in [false, true] {
+                let mut actual = input.clone();
+                let mut stats = Work::default();
+                let label = |record: &Record| record.key;
+                let passes = if sampled {
+                    distribute_prepared_sampled(
+                        &mut actual,
+                        &label,
+                        17,
+                        usize::MAX,
+                        3,
+                        &mut stats,
+                    )
+                } else {
+                    distribute_prepared(
+                        &mut actual,
+                        &label,
+                        17,
+                        usize::MAX,
+                        3,
+                        &mut stats,
+                    )
+                };
+                assert_eq!(actual, expected);
+                assert_eq!(passes, 1);
+                assert_eq!(stats.block_nodes, 1);
+                assert_eq!(stats.scatter_records, input.len());
+                assert_eq!(stats.label_records, 0);
+            }
+        }
     }
 
     #[test]
