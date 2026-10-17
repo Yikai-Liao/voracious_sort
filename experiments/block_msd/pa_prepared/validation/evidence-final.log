@@ -1,0 +1,8 @@
+screen-known-skew-b64-s42 32 OK
+screen-large-b512-s42 96 OK
+screen-medium-b64-s42 288 OK
+screen-narrow-b64-s42 256 OK
+all 672 rows; source/binary hashes OK
+profile source snapshot: git show 609e8c0cde4812d18d2cec2701a035f13d1dffca:experiments/block_msd/src/frontier/block.rs byte-identical; current worktree block.rs not read
+profile metadata/status, 128 diagnostic CSV rows, 649-sample report, zero-byte annotate outputs and raw perf.data size OK; profile CSV excluded from formal timings
+step-objdump.txt reproduced byte-identically from frozen time ELF; no perf/annotate/benchmark rerun

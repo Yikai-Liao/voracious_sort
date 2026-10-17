@@ -1,0 +1,22 @@
+{
+  "source_commit": "609e8c0cde4812d18d2cec2701a035f13d1dffca",
+  "executable": "experiments/block_msd/target/pa-prepared/time",
+  "event": "cpu-clock:u",
+  "frequency": 997,
+  "call_graph": "dwarf,8192",
+  "command": [
+    "taskset",
+    "-c",
+    "2",
+    "experiments/block_msd/target/pa-prepared/time",
+    "1048576",
+    "128",
+    "Pa_unified_prepared_t16777216",
+    "sparse",
+    "u16",
+    "time",
+    "64",
+    "42"
+  ],
+  "purpose": "diagnostic sampling, includes input generation, warmup, restoration and full oracle; CSV timings under perf excluded from formal evidence"
+}

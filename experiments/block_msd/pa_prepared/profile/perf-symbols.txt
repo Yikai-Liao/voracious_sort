@@ -1,0 +1,26 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 649  of event 'cpu-clock:u'
+# Event count (approx.): 650952841
+#
+# Overhead  Symbol                                                                                                                                                                                                                                                                                         IPC   [IPC Coverage]
+# ........  .............................................................................................................................................................................................................................................................................................  ....................
+#
+    53.00%  [.] _RINvMNtNtCs3WZc4OYeHMK_18block_msd_research8frontier5blockINtB3_6SortertE4steptNCINvB5_19distribute_childrenttNtB5_8IdentityKh0_E0ECsq0rkKib9eb_19frontier_experiment                                                                                                                     -      -            
+    16.95%  [.] _RNvCsq0rkKib9eb_19frontier_experiment4main                                                                                                                                                                                                                                                -      -            
+     7.09%  [.] _RNvMNtNtCs3WZc4OYeHMK_18block_msd_research8frontier5blockINtB2_6SortertE7compactCsq0rkKib9eb_19frontier_experiment                                                                                                                                                                        -      -            
+     6.78%  [.] 0x0000000000172a8f                                                                                                                                                                                                                                                                         -      -            
+     5.70%  [.] 0x0000000000172d6d                                                                                                                                                                                                                                                                         -      -            
+     2.62%  [.] _RINvXs0_NtNtNtCsgxBkk5gSRhY_4core4iter8adapters3mapINtB6_3MapINtNtNtBc_3ops5range5RangejENCNvCsq0rkKib9eb_19frontier_experiment9make_keys0ENtNtNtBa_6traits8iterator8Iterator4folduNCINvNvB2d_8for_each4calloNCINvMsj_NtCs6i54tJFfzR_5alloc3vecINtB3q_3VecoE14extend_trustedBN_E0E0EB1t_  -      -            
+     2.31%  [.] _RINvNtNtCs3WZc4OYeHMK_18block_msd_research8frontier2pa5visitttECsq0rkKib9eb_19frontier_experiment.llvm.1336955233426824036                                                                                                                                                                -      -            
+     1.08%  [.] 0x0000000000172b21                                                                                                                                                                                                                                                                         -      -            
+     0.62%  [.] 0x0000000000172a80                                                                                                                                                                                                                                                                         -      -            
+     0.62%  [.] 0x0000000000172b19                                                                                                                                                                                                                                                                         -      -            
+
+
+#
+# (Tip: When collecting LBR backtraces use --stitch-lbr to handle more than 32 deep entries: perf record --call-graph lbr ; perf report --stitch-lbr)
+#

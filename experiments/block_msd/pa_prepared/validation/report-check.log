@@ -1,0 +1,300 @@
+screen-known-skew-b64-s42: 32 raw rows; 7 summary rows; 2 noise rows independently checked
+  u64 / deep_unique90 / 1048576 / 64
+    Pa_unified_cache_t16777216: wall_ms=27.887207500
+    Pa_unified_sample_t16777216: wall_ms=27.727466000
+    Pa_unified_reuse_t16777216: wall_ms=25.172051000
+    Pa_unified_prepared_t16777216: wall_ms=26.475050500
+    Pa_band: wall_ms=59.814926000
+    stable_msd: wall_ms=51.514431000
+    Pa_unified_sample_t16777216/Pa_unified_cache_t16777216: wall=0.969105773 [0.769069032, 1.105759026]; slower=1/4; threadcpu_median=0.968955335
+    Pa_unified_reuse_t16777216/Pa_unified_cache_t16777216: wall=0.934745009 [0.691918558, 1.006624046]; slower=2/4; threadcpu_median=0.934834914
+    Pa_unified_prepared_t16777216/Pa_unified_cache_t16777216: wall=0.952037996 [0.710718913, 1.061786186]; slower=2/4; threadcpu_median=0.952241872
+    Pa_unified_prepared_t16777216/Pa_unified_reuse_t16777216: wall=1.051770394 [0.998107004, 1.061194416]; slower=3/4; threadcpu_median=1.049444620
+    Pa_unified_prepared_t16777216/Pa: wall=0.722807537 [0.682408984, 0.782047677]; slower=0/4; threadcpu_median=0.722348322
+    Pa_unified_prepared_t16777216/Pa_band: wall=0.430113791 [0.402734476, 0.471199241]; slower=0/4; threadcpu_median=0.432800412
+    Pa_unified_prepared_t16777216/stable_msd: wall=0.511901710 [0.482099050, 0.554317543]; slower=0/4; threadcpu_median=0.510953439
+screen-large-b512-s42: 96 raw rows; 21 summary rows; 4 noise rows independently checked
+  large128 / deep_unique90 / 1048576 / 512
+    Pa_unified_cache_t16777216: wall_ms=231.194146000
+    Pa_unified_sample_t16777216: wall_ms=207.099923500
+    Pa_unified_reuse_t16777216: wall_ms=211.043779500
+    Pa_unified_prepared_t16777216: wall_ms=204.946342500
+    Pa_band: wall_ms=204.121853500
+    stable_msd: wall_ms=323.037275500
+    Pa_unified_sample_t16777216/Pa_unified_cache_t16777216: wall=0.885003697 [0.870464175, 0.918811402]; slower=0/4; threadcpu_median=0.884509666
+    Pa_unified_reuse_t16777216/Pa_unified_cache_t16777216: wall=0.912948731 [0.897909607, 0.969160592]; slower=0/4; threadcpu_median=0.912265360
+    Pa_unified_prepared_t16777216/Pa_unified_cache_t16777216: wall=0.886592740 [0.832194745, 0.918712348]; slower=0/4; threadcpu_median=0.886311910
+    Pa_unified_prepared_t16777216/Pa_unified_reuse_t16777216: wall=0.953595354 [0.917299266, 0.971861957]; slower=0/4; threadcpu_median=0.954492922
+    Pa_unified_prepared_t16777216/Pa: wall=0.968079236 [0.910968602, 1.006642387]; slower=2/4; threadcpu_median=0.968104573
+    Pa_unified_prepared_t16777216/Pa_band: wall=1.015973403 [0.893369338, 1.023576170]; slower=3/4; threadcpu_median=1.015970502
+    Pa_unified_prepared_t16777216/stable_msd: wall=0.632471247 [0.600342204, 0.645826692]; slower=0/4; threadcpu_median=0.632744216
+  large128 / majority_prefix / 1048576 / 512
+    Pa_unified_cache_t16777216: wall_ms=235.001883000
+    Pa_unified_sample_t16777216: wall_ms=206.742649500
+    Pa_unified_reuse_t16777216: wall_ms=218.190481500
+    Pa_unified_prepared_t16777216: wall_ms=202.517154000
+    Pa_band: wall_ms=211.204439500
+    stable_msd: wall_ms=387.575268500
+    Pa_unified_sample_t16777216/Pa_unified_cache_t16777216: wall=0.900296465 [0.864326920, 0.928805068]; slower=0/4; threadcpu_median=0.899818567
+    Pa_unified_reuse_t16777216/Pa_unified_cache_t16777216: wall=0.924701504 [0.890674058, 0.982420304]; slower=0/4; threadcpu_median=0.924354732
+    Pa_unified_prepared_t16777216/Pa_unified_cache_t16777216: wall=0.847650276 [0.830422790, 0.925881695]; slower=0/4; threadcpu_median=0.847370048
+    Pa_unified_prepared_t16777216/Pa_unified_reuse_t16777216: wall=0.930619547 [0.909385592, 0.954106833]; slower=0/4; threadcpu_median=0.929952393
+    Pa_unified_prepared_t16777216/Pa: wall=0.893708786 [0.864216343, 0.969653650]; slower=0/4; threadcpu_median=0.893197533
+    Pa_unified_prepared_t16777216/Pa_band: wall=0.944321070 [0.895604301, 1.046143505]; slower=1/4; threadcpu_median=0.944618843
+    Pa_unified_prepared_t16777216/stable_msd: wall=0.524754588 [0.504257499, 0.542667087]; slower=0/4; threadcpu_median=0.525082599
+  large128 / uniform / 1048576 / 512
+    Pa_unified_cache_t16777216: wall_ms=215.153005000
+    Pa_unified_sample_t16777216: wall_ms=213.104011000
+    Pa_unified_reuse_t16777216: wall_ms=205.582976000
+    Pa_unified_prepared_t16777216: wall_ms=202.478537000
+    Pa_band: wall_ms=270.129954500
+    stable_msd: wall_ms=219.837716500
+    Pa_unified_sample_t16777216/Pa_unified_cache_t16777216: wall=0.995902241 [0.940189638, 1.020956517]; slower=2/4; threadcpu_median=0.995876401
+    Pa_unified_reuse_t16777216/Pa_unified_cache_t16777216: wall=0.942205594 [0.931794720, 0.996482999]; slower=1/4; threadcpu_median=0.941716922
+    Pa_unified_prepared_t16777216/Pa_unified_cache_t16777216: wall=0.937939846 [0.910432211, 0.973718313]; slower=0/4; threadcpu_median=0.936799586
+    Pa_unified_prepared_t16777216/Pa_unified_reuse_t16777216: wall=0.987112670 [0.920839865, 1.045057637]; slower=2/4; threadcpu_median=0.986249571
+    Pa_unified_prepared_t16777216/Pa: wall=0.757955006 [0.735622267, 0.777976060]; slower=0/4; threadcpu_median=0.758224324
+    Pa_unified_prepared_t16777216/Pa_band: wall=0.749558392 [0.731124634, 0.774992681]; slower=0/4; threadcpu_median=0.750013183
+    Pa_unified_prepared_t16777216/stable_msd: wall=0.927605306 [0.910425126, 0.945280872]; slower=0/4; threadcpu_median=0.926536738
+screen-medium-b64-s42: 288 raw rows; 63 summary rows; 10 noise rows independently checked
+  u128 / deep_unique90 / 262144 / 64
+    Pa_unified_cache_t16777216: wall_ms=21.679687000
+    Pa_unified_sample_t16777216: wall_ms=20.585394000
+    Pa_unified_reuse_t16777216: wall_ms=17.930912500
+    Pa_unified_prepared_t16777216: wall_ms=17.983290000
+    Pa_band: wall_ms=25.754037500
+    stable_msd: wall_ms=44.299469000
+    Pa_unified_sample_t16777216/Pa_unified_cache_t16777216: wall=0.950147525 [0.870591646, 1.042322184]; slower=1/4; threadcpu_median=0.947561669
+    Pa_unified_reuse_t16777216/Pa_unified_cache_t16777216: wall=0.819257450 [0.772648585, 0.899767068]; slower=0/4; threadcpu_median=0.818772844
+    Pa_unified_prepared_t16777216/Pa_unified_cache_t16777216: wall=0.821936315 [0.774584423, 0.847009294]; slower=0/4; threadcpu_median=0.821424659
+    Pa_unified_prepared_t16777216/Pa_unified_reuse_t16777216: wall=1.003612171 [0.928348984, 1.018742015]; slower=3/4; threadcpu_median=1.003592101
+    Pa_unified_prepared_t16777216/Pa: wall=0.718748870 [0.708211830, 0.735204017]; slower=0/4; threadcpu_median=0.719120262
+    Pa_unified_prepared_t16777216/Pa_band: wall=0.692200063 [0.579115680, 0.708645639]; slower=0/4; threadcpu_median=0.693126357
+    Pa_unified_prepared_t16777216/stable_msd: wall=0.403212123 [0.398828564, 0.407536446]; slower=0/4; threadcpu_median=0.403523488
+  u128 / majority_prefix / 262144 / 64
+    Pa_unified_cache_t16777216: wall_ms=11.779044500
+    Pa_unified_sample_t16777216: wall_ms=11.409309500
+    Pa_unified_reuse_t16777216: wall_ms=10.711874000
+    Pa_unified_prepared_t16777216: wall_ms=10.123238000
+    Pa_band: wall_ms=12.131464500
+    stable_msd: wall_ms=43.899066500
+    Pa_unified_sample_t16777216/Pa_unified_cache_t16777216: wall=0.968699570 [0.943002524, 0.995800347]; slower=1/4; threadcpu_median=0.969763040
+    Pa_unified_reuse_t16777216/Pa_unified_cache_t16777216: wall=0.897403480 [0.830836966, 0.934999796]; slower=0/4; threadcpu_median=0.893696347
+    Pa_unified_prepared_t16777216/Pa_unified_cache_t16777216: wall=0.889380031 [0.763149505, 0.960853365]; slower=0/4; threadcpu_median=0.859285617
+    Pa_unified_prepared_t16777216/Pa_unified_reuse_t16777216: wall=0.976432931 [0.881789855, 1.082838050]; slower=2/4; threadcpu_median=0.969094283
+    Pa_unified_prepared_t16777216/Pa: wall=0.578438740 [0.470454821, 0.669226183]; slower=0/4; threadcpu_median=0.578605649
+    Pa_unified_prepared_t16777216/Pa_band: wall=0.852642492 [0.813390175, 0.906931150]; slower=0/4; threadcpu_median=0.843305515
+    Pa_unified_prepared_t16777216/stable_msd: wall=0.237933686 [0.216406233, 0.260737589]; slower=0/4; threadcpu_median=0.238081621
+  u128 / uniform / 262144 / 64
+    Pa_unified_cache_t16777216: wall_ms=6.067749000
+    Pa_unified_sample_t16777216: wall_ms=6.058803500
+    Pa_unified_reuse_t16777216: wall_ms=5.998498500
+    Pa_unified_prepared_t16777216: wall_ms=6.659353000
+    Pa_band: wall_ms=6.558381500
+    stable_msd: wall_ms=9.309173000
+    Pa_unified_sample_t16777216/Pa_unified_cache_t16777216: wall=1.003876272 [0.996662152, 1.147446152]; slower=3/4; threadcpu_median=1.004000637
+    Pa_unified_reuse_t16777216/Pa_unified_cache_t16777216: wall=1.008194276 [0.959971062, 1.034440209]; slower=2/4; threadcpu_median=1.008130535
+    Pa_unified_prepared_t16777216/Pa_unified_cache_t16777216: wall=1.053690268 [0.960242237, 1.191432111]; slower=3/4; threadcpu_median=1.053430392
+    Pa_unified_prepared_t16777216/Pa_unified_reuse_t16777216: wall=1.089824564 [0.945925204, 1.178624062]; slower=3/4; threadcpu_median=1.089397177
+    Pa_unified_prepared_t16777216/Pa: wall=0.863479383 [0.823114890, 0.908696891]; slower=0/4; threadcpu_median=0.863489589
+    Pa_unified_prepared_t16777216/Pa_band: wall=0.982339792 [0.815078250, 1.112364288]; slower=2/4; threadcpu_median=0.984025445
+    Pa_unified_prepared_t16777216/stable_msd: wall=0.702189997 [0.662360856, 0.772195322]; slower=0/4; threadcpu_median=0.702528620
+  u64 / deep_unique90 / 262144 / 64
+    Pa_unified_cache_t16777216: wall_ms=6.297057500
+    Pa_unified_sample_t16777216: wall_ms=6.227208500
+    Pa_unified_reuse_t16777216: wall_ms=6.020285500
+    Pa_unified_prepared_t16777216: wall_ms=5.960233500
+    Pa_band: wall_ms=8.527701000
+    stable_msd: wall_ms=18.069553500
+    Pa_unified_sample_t16777216/Pa_unified_cache_t16777216: wall=0.984139267 [0.964197939, 1.016441371]; slower=1/4; threadcpu_median=0.981226314
+    Pa_unified_reuse_t16777216/Pa_unified_cache_t16777216: wall=0.949494290 [0.941655750, 0.958856751]; slower=0/4; threadcpu_median=0.943822859
+    Pa_unified_prepared_t16777216/Pa_unified_cache_t16777216: wall=0.938411879 [0.933108649, 0.967263988]; slower=0/4; threadcpu_median=0.938410930
+    Pa_unified_prepared_t16777216/Pa_unified_reuse_t16777216: wall=0.989410363 [0.980942944, 1.018142324]; slower=1/4; threadcpu_median=0.989287587
+    Pa_unified_prepared_t16777216/Pa: wall=0.632805971 [0.619857072, 0.650994714]; slower=0/4; threadcpu_median=0.632974246
+    Pa_unified_prepared_t16777216/Pa_band: wall=0.692561046 [0.535308296, 0.727990870]; slower=0/4; threadcpu_median=0.703090940
+    Pa_unified_prepared_t16777216/stable_msd: wall=0.326389851 [0.308166356, 0.340176933]; slower=0/4; threadcpu_median=0.327278296
+  u64 / majority_prefix / 262144 / 64
+    Pa_unified_cache_t16777216: wall_ms=5.962782500
+    Pa_unified_sample_t16777216: wall_ms=5.886028000
+    Pa_unified_reuse_t16777216: wall_ms=5.552821500
+    Pa_unified_prepared_t16777216: wall_ms=5.679006000
+    Pa_band: wall_ms=6.079047500
+    stable_msd: wall_ms=17.464237500
+    Pa_unified_sample_t16777216/Pa_unified_cache_t16777216: wall=1.007027561 [0.945201257, 1.024256019]; slower=2/4; threadcpu_median=1.007171409
+    Pa_unified_reuse_t16777216/Pa_unified_cache_t16777216: wall=0.896091921 [0.827074005, 0.984678077]; slower=1/4; threadcpu_median=0.896023857
+    Pa_unified_prepared_t16777216/Pa_unified_cache_t16777216: wall=0.971720835 [0.881978310, 1.000074486]; slower=1/4; threadcpu_median=0.971974272
+    Pa_unified_prepared_t16777216/Pa_unified_reuse_t16777216: wall=1.004032663 [0.990958987, 1.167172785]; slower=2/4; threadcpu_median=1.004109086
+    Pa_unified_prepared_t16777216/Pa: wall=0.878652564 [0.812088679, 0.993250066]; slower=1/4; threadcpu_median=0.878511706
+    Pa_unified_prepared_t16777216/Pa_band: wall=0.952129689 [0.851753277, 1.092117557]; slower=1/4; threadcpu_median=0.952425927
+    Pa_unified_prepared_t16777216/stable_msd: wall=0.319578200 [0.295388008, 0.367326473]; slower=0/4; threadcpu_median=0.319859677
+  u64 / uniform / 262144 / 64
+    Pa_unified_cache_t16777216: wall_ms=3.795041000
+    Pa_unified_sample_t16777216: wall_ms=4.555191000
+    Pa_unified_reuse_t16777216: wall_ms=4.442204000
+    Pa_unified_prepared_t16777216: wall_ms=4.605730500
+    Pa_band: wall_ms=3.646092500
+    stable_msd: wall_ms=7.122539500
+    Pa_unified_sample_t16777216/Pa_unified_cache_t16777216: wall=1.007599968 [0.989875635, 1.268829710]; slower=3/4; threadcpu_median=1.007558071
+    Pa_unified_reuse_t16777216/Pa_unified_cache_t16777216: wall=1.002898342 [0.988244116, 1.230093307]; slower=3/4; threadcpu_median=1.002801835
+    Pa_unified_prepared_t16777216/Pa_unified_cache_t16777216: wall=0.999600130 [0.969911139, 1.299187789]; slower=2/4; threadcpu_median=0.999489906
+    Pa_unified_prepared_t16777216/Pa_unified_reuse_t16777216: wall=0.996684853 [0.981427271, 1.052661932]; slower=2/4; threadcpu_median=0.996669796
+    Pa_unified_prepared_t16777216/Pa: wall=0.930274135 [0.920741748, 0.958348051]; slower=0/4; threadcpu_median=0.934168947
+    Pa_unified_prepared_t16777216/Pa_band: wall=1.013729904 [0.994986480, 1.387351121]; slower=3/4; threadcpu_median=1.013840918
+    Pa_unified_prepared_t16777216/stable_msd: wall=0.675630931 [0.612461154, 0.687481322]; slower=0/4; threadcpu_median=0.677334261
+  wide32 / deep_unique90 / 262144 / 64
+    Pa_unified_cache_t16777216: wall_ms=28.249910000
+    Pa_unified_sample_t16777216: wall_ms=27.857318500
+    Pa_unified_reuse_t16777216: wall_ms=25.778088000
+    Pa_unified_prepared_t16777216: wall_ms=24.188553500
+    Pa_band: wall_ms=31.893111000
+    stable_msd: wall_ms=67.131470000
+    Pa_unified_sample_t16777216/Pa_unified_cache_t16777216: wall=0.980704527 [0.895639147, 0.995454487]; slower=0/4; threadcpu_median=0.982223627
+    Pa_unified_reuse_t16777216/Pa_unified_cache_t16777216: wall=0.942347985 [0.751947188, 0.988478534]; slower=1/4; threadcpu_median=0.943870011
+    Pa_unified_prepared_t16777216/Pa_unified_cache_t16777216: wall=0.856197764 [0.764524821, 0.859060503]; slower=0/4; threadcpu_median=0.857653512
+    Pa_unified_prepared_t16777216/Pa_unified_reuse_t16777216: wall=0.909199571 [0.867561942, 1.030307722]; slower=1/4; threadcpu_median=0.908763587
+    Pa_unified_prepared_t16777216/Pa: wall=0.737007177 [0.686082618, 0.794669292]; slower=0/4; threadcpu_median=0.737065882
+    Pa_unified_prepared_t16777216/Pa_band: wall=0.755154065 [0.725127996, 0.828463998]; slower=0/4; threadcpu_median=0.758020234
+    Pa_unified_prepared_t16777216/stable_msd: wall=0.360891250 [0.336277580, 0.379261327]; slower=0/4; threadcpu_median=0.361104834
+  wide32 / majority_prefix / 262144 / 64
+    Pa_unified_cache_t16777216: wall_ms=19.859723000
+    Pa_unified_sample_t16777216: wall_ms=20.814623500
+    Pa_unified_reuse_t16777216: wall_ms=18.713479500
+    Pa_unified_prepared_t16777216: wall_ms=15.268975500
+    Pa_band: wall_ms=20.300126000
+    stable_msd: wall_ms=66.504829000
+    Pa_unified_sample_t16777216/Pa_unified_cache_t16777216: wall=1.067342665 [1.008279068, 1.119072166]; slower=4/4; threadcpu_median=1.064158221
+    Pa_unified_reuse_t16777216/Pa_unified_cache_t16777216: wall=0.925257009 [0.880662838, 1.090047574]; slower=1/4; threadcpu_median=0.924102282
+    Pa_unified_prepared_t16777216/Pa_unified_cache_t16777216: wall=0.816407345 [0.585254759, 1.109031101]; slower=1/4; threadcpu_median=0.816499558
+    Pa_unified_prepared_t16777216/Pa_unified_reuse_t16777216: wall=0.771538509 [0.658846884, 1.145404807]; slower=1/4; threadcpu_median=0.771603556
+    Pa_unified_prepared_t16777216/Pa: wall=0.664933980 [0.624733564, 0.754562362]; slower=0/4; threadcpu_median=0.665616691
+    Pa_unified_prepared_t16777216/Pa_band: wall=0.817366702 [0.588937598, 1.060117030]; slower=1/4; threadcpu_median=0.817429661
+    Pa_unified_prepared_t16777216/stable_msd: wall=0.237584422 [0.200517949, 0.263806823]; slower=0/4; threadcpu_median=0.237685370
+  wide32 / uniform / 262144 / 64
+    Pa_unified_cache_t16777216: wall_ms=10.211431000
+    Pa_unified_sample_t16777216: wall_ms=10.827905000
+    Pa_unified_reuse_t16777216: wall_ms=10.370896000
+    Pa_unified_prepared_t16777216: wall_ms=11.296103000
+    Pa_band: wall_ms=10.831794000
+    stable_msd: wall_ms=12.438676500
+    Pa_unified_sample_t16777216/Pa_unified_cache_t16777216: wall=1.114106081 [0.936343235, 1.206531033]; slower=3/4; threadcpu_median=1.114184277
+    Pa_unified_reuse_t16777216/Pa_unified_cache_t16777216: wall=0.982569076 [0.859734593, 1.211472002]; slower=2/4; threadcpu_median=0.982618596
+    Pa_unified_prepared_t16777216/Pa_unified_cache_t16777216: wall=1.077721106 [0.858916779, 1.282838375]; slower=2/4; threadcpu_median=1.077533397
+    Pa_unified_prepared_t16777216/Pa_unified_reuse_t16777216: wall=1.042820689 [0.972746482, 1.128958954]; slower=3/4; threadcpu_median=1.042737798
+    Pa_unified_prepared_t16777216/Pa: wall=0.929591201 [0.788626467, 1.122171332]; slower=1/4; threadcpu_median=0.929520356
+    Pa_unified_prepared_t16777216/Pa_band: wall=0.996060555 [0.904640510, 1.084247049]; slower=2/4; threadcpu_median=0.996050405
+    Pa_unified_prepared_t16777216/stable_msd: wall=0.956981004 [0.613101950, 1.082561307]; slower=1/4; threadcpu_median=0.956863580
+screen-narrow-b64-s42: 256 raw rows; 56 summary rows; 9 noise rows independently checked
+  u16 / sparse / 1048576 / 64
+    Pa_unified_cache_t16777216: wall_ms=3.745847000
+    Pa_unified_sample_t16777216: wall_ms=3.688782000
+    Pa_unified_reuse_t16777216: wall_ms=3.631674000
+    Pa_unified_prepared_t16777216: wall_ms=3.647951500
+    Pa_band: wall_ms=3.785780500
+    stable_msd: wall_ms=3.239891000
+    Pa_unified_sample_t16777216/Pa_unified_cache_t16777216: wall=0.999045357 [0.969513447, 1.007002219]; slower=1/4; threadcpu_median=0.983739066
+    Pa_unified_reuse_t16777216/Pa_unified_cache_t16777216: wall=0.969308879 [0.930244623, 1.016586913]; slower=1/4; threadcpu_median=0.969419156
+    Pa_unified_prepared_t16777216/Pa_unified_cache_t16777216: wall=0.981562998 [0.920743732, 1.011747911]; slower=2/4; threadcpu_median=0.981412157
+    Pa_unified_prepared_t16777216/Pa_unified_reuse_t16777216: wall=0.995637030 [0.983502182, 1.015135721]; slower=2/4; threadcpu_median=0.995745501
+    Pa_unified_prepared_t16777216/Pa: wall=0.692003588 [0.682216861, 0.709146871]; slower=0/4; threadcpu_median=0.695733234
+    Pa_unified_prepared_t16777216/Pa_band: wall=0.955742506 [0.940134737, 0.977622080]; slower=0/4; threadcpu_median=0.959958266
+    Pa_unified_prepared_t16777216/stable_msd: wall=1.126034850 [1.079507513, 1.167691621]; slower=4/4; threadcpu_median=1.125918235
+  u16 / uniform / 1048576 / 64
+    Pa_unified_cache_t16777216: wall_ms=5.466474500
+    Pa_unified_sample_t16777216: wall_ms=5.547602500
+    Pa_unified_reuse_t16777216: wall_ms=5.239727500
+    Pa_unified_prepared_t16777216: wall_ms=5.319137500
+    Pa_band: wall_ms=5.763560500
+    stable_msd: wall_ms=6.172362500
+    Pa_unified_sample_t16777216/Pa_unified_cache_t16777216: wall=1.022674759 [0.793411467, 1.052671524]; slower=3/4; threadcpu_median=1.022633146
+    Pa_unified_reuse_t16777216/Pa_unified_cache_t16777216: wall=0.978664436 [0.754939244, 1.058675699]; slower=2/4; threadcpu_median=0.980167469
+    Pa_unified_prepared_t16777216/Pa_unified_cache_t16777216: wall=0.983200197 [0.765239450, 1.012835231]; slower=1/4; threadcpu_median=0.980771817
+    Pa_unified_prepared_t16777216/Pa_unified_reuse_t16777216: wall=0.992720735 [0.957186077, 1.021824813]; slower=2/4; threadcpu_median=0.991206204
+    Pa_unified_prepared_t16777216/Pa: wall=0.576926475 [0.491980941, 0.607374704]; slower=0/4; threadcpu_median=0.579697832
+    Pa_unified_prepared_t16777216/Pa_band: wall=0.948235704 [0.734855985, 0.960435452]; slower=0/4; threadcpu_median=0.943621766
+    Pa_unified_prepared_t16777216/stable_msd: wall=0.867078594 [0.837151935, 0.879889136]; slower=0/4; threadcpu_median=0.864839803
+  u16_id8 / sparse / 1048576 / 64
+    Pa_unified_cache_t16777216: wall_ms=5.083729000
+    Pa_unified_sample_t16777216: wall_ms=5.395461000
+    Pa_unified_reuse_t16777216: wall_ms=5.929791500
+    Pa_unified_prepared_t16777216: wall_ms=5.280263500
+    Pa_band: wall_ms=5.437812000
+    stable_msd: wall_ms=6.602622500
+    Pa_unified_sample_t16777216/Pa_unified_cache_t16777216: wall=1.028333027 [1.019081722, 1.226525730]; slower=4/4; threadcpu_median=1.031179420
+    Pa_unified_reuse_t16777216/Pa_unified_cache_t16777216: wall=1.084529211 [0.943762680, 1.495127253]; slower=3/4; threadcpu_median=1.082262461
+    Pa_unified_prepared_t16777216/Pa_unified_cache_t16777216: wall=1.041836318 [0.921344219, 1.317423181]; slower=2/4; threadcpu_median=1.002512327
+    Pa_unified_prepared_t16777216/Pa_unified_reuse_t16777216: wall=1.051480830 [0.701500119, 1.209835060]; slower=3/4; threadcpu_median=1.017378114
+    Pa_unified_prepared_t16777216/Pa: wall=0.746167030 [0.593881269, 0.943702099]; slower=1/4; threadcpu_median=0.719366555
+    Pa_unified_prepared_t16777216/Pa_band: wall=0.985605978 [0.669363894, 1.359798820]; slower=2/4; threadcpu_median=0.947897219
+    Pa_unified_prepared_t16777216/stable_msd: wall=0.813460522 [0.742460152, 0.985473537]; slower=1/4; threadcpu_median=0.790488667
+  u16_id8 / uniform / 1048576 / 64
+    Pa_unified_cache_t16777216: wall_ms=13.563534500
+    Pa_unified_sample_t16777216: wall_ms=12.012626000
+    Pa_unified_reuse_t16777216: wall_ms=13.132119500
+    Pa_unified_prepared_t16777216: wall_ms=12.531319000
+    Pa_band: wall_ms=12.377635000
+    stable_msd: wall_ms=16.845181500
+    Pa_unified_sample_t16777216/Pa_unified_cache_t16777216: wall=0.879290098 [0.843034230, 0.953395797]; slower=0/4; threadcpu_median=0.879362849
+    Pa_unified_reuse_t16777216/Pa_unified_cache_t16777216: wall=0.971357600 [0.838692708, 1.140284605]; slower=2/4; threadcpu_median=0.967254643
+    Pa_unified_prepared_t16777216/Pa_unified_cache_t16777216: wall=0.902501346 [0.844518045, 1.094532822]; slower=1/4; threadcpu_median=0.908574730
+    Pa_unified_prepared_t16777216/Pa_unified_reuse_t16777216: wall=0.952745459 [0.923630330, 1.026935288]; slower=1/4; threadcpu_median=0.955043048
+    Pa_unified_prepared_t16777216/Pa: wall=0.727817175 [0.645777257, 0.769811798]; slower=0/4; threadcpu_median=0.726339753
+    Pa_unified_prepared_t16777216/Pa_band: wall=1.006598622 [0.915334775, 1.059780226]; slower=2/4; threadcpu_median=1.006505239
+    Pa_unified_prepared_t16777216/stable_msd: wall=0.724402317 [0.667532537, 0.779052128]; slower=0/4; threadcpu_median=0.738092646
+  u8 / sparse / 1048576 / 64
+    Pa_unified_cache_t16777216: wall_ms=3.402126500
+    Pa_unified_sample_t16777216: wall_ms=3.448814000
+    Pa_unified_reuse_t16777216: wall_ms=3.427221000
+    Pa_unified_prepared_t16777216: wall_ms=3.601874000
+    Pa_band: wall_ms=3.459130000
+    stable_msd: wall_ms=3.637648000
+    Pa_unified_sample_t16777216/Pa_unified_cache_t16777216: wall=1.013189816 [0.991678490, 1.018854672]; slower=3/4; threadcpu_median=1.012910782
+    Pa_unified_reuse_t16777216/Pa_unified_cache_t16777216: wall=1.002496917 [0.987279169, 1.033293408]; slower=2/4; threadcpu_median=1.002398093
+    Pa_unified_prepared_t16777216/Pa_unified_cache_t16777216: wall=1.067069711 [1.012230825, 1.140362147]; slower=3/4; threadcpu_median=1.066936105
+    Pa_unified_prepared_t16777216/Pa_unified_reuse_t16777216: wall=1.037579159 [1.015059137, 1.138742721]; slower=4/4; threadcpu_median=1.037804290
+    Pa_unified_prepared_t16777216/Pa: wall=0.712006390 [0.677537935, 0.759630744]; slower=0/4; threadcpu_median=0.713441364
+    Pa_unified_prepared_t16777216/Pa_band: wall=1.041125581 [0.899991438, 1.136625360]; slower=3/4; threadcpu_median=1.041475517
+    Pa_unified_prepared_t16777216/stable_msd: wall=0.972502581 [0.863180374, 1.071118280]; slower=2/4; threadcpu_median=0.972580950
+  u8 / uniform / 1048576 / 64
+    Pa_unified_cache_t16777216: wall_ms=3.258649500
+    Pa_unified_sample_t16777216: wall_ms=3.095355500
+    Pa_unified_reuse_t16777216: wall_ms=3.117508000
+    Pa_unified_prepared_t16777216: wall_ms=3.060207500
+    Pa_band: wall_ms=3.358663500
+    stable_msd: wall_ms=4.966811000
+    Pa_unified_sample_t16777216/Pa_unified_cache_t16777216: wall=0.967246369 [0.901474592, 1.028495779]; slower=1/4; threadcpu_median=0.989590529
+    Pa_unified_reuse_t16777216/Pa_unified_cache_t16777216: wall=0.967369280 [0.918472918, 1.043258989]; slower=1/4; threadcpu_median=0.990361447
+    Pa_unified_prepared_t16777216/Pa_unified_cache_t16777216: wall=0.960585295 [0.905925741, 1.012537129]; slower=1/4; threadcpu_median=0.982824752
+    Pa_unified_prepared_t16777216/Pa_unified_reuse_t16777216: wall=0.984133265 [0.962768892, 1.002210298]; slower=1/4; threadcpu_median=0.990320903
+    Pa_unified_prepared_t16777216/Pa: wall=0.553077831 [0.516735062, 0.604583612]; slower=0/4; threadcpu_median=0.553003781
+    Pa_unified_prepared_t16777216/Pa_band: wall=0.930106306 [0.814106435, 1.006098730]; slower=1/4; threadcpu_median=0.928945031
+    Pa_unified_prepared_t16777216/stable_msd: wall=0.629652161 [0.586649536, 0.663242705]; slower=0/4; threadcpu_median=0.647401567
+  u8_id8 / sparse / 1048576 / 64
+    Pa_unified_cache_t16777216: wall_ms=6.170962000
+    Pa_unified_sample_t16777216: wall_ms=5.921253500
+    Pa_unified_reuse_t16777216: wall_ms=5.655537500
+    Pa_unified_prepared_t16777216: wall_ms=5.256501500
+    Pa_band: wall_ms=6.166546500
+    stable_msd: wall_ms=7.064772500
+    Pa_unified_sample_t16777216/Pa_unified_cache_t16777216: wall=0.996604441 [0.950976741, 1.047721282]; slower=2/4; threadcpu_median=0.997845350
+    Pa_unified_reuse_t16777216/Pa_unified_cache_t16777216: wall=0.875709029 [0.788199141, 1.013145972]; slower=1/4; threadcpu_median=0.876779434
+    Pa_unified_prepared_t16777216/Pa_unified_cache_t16777216: wall=0.835824077 [0.774727903, 0.948214624]; slower=0/4; threadcpu_median=0.837637918
+    Pa_unified_prepared_t16777216/Pa_unified_reuse_t16777216: wall=0.961180071 [0.926553514, 0.987804830]; slower=0/4; threadcpu_median=0.961386180
+    Pa_unified_prepared_t16777216/Pa: wall=0.600491067 [0.589980382, 0.654059064]; slower=0/4; threadcpu_median=0.601348673
+    Pa_unified_prepared_t16777216/Pa_band: wall=0.806561139 [0.720048797, 1.012979384]; slower=1/4; threadcpu_median=0.803313068
+    Pa_unified_prepared_t16777216/stable_msd: wall=0.758511328 [0.670939558, 0.816486024]; slower=0/4; threadcpu_median=0.756057789
+  u8_id8 / uniform / 1048576 / 64
+    Pa_unified_cache_t16777216: wall_ms=5.756693000
+    Pa_unified_sample_t16777216: wall_ms=5.351668500
+    Pa_unified_reuse_t16777216: wall_ms=5.022448500
+    Pa_unified_prepared_t16777216: wall_ms=5.130051000
+    Pa_band: wall_ms=5.131922000
+    stable_msd: wall_ms=10.477325000
+    Pa_unified_sample_t16777216/Pa_unified_cache_t16777216: wall=0.930756561 [0.864635050, 1.055955608]; slower=1/4; threadcpu_median=0.921943089
+    Pa_unified_reuse_t16777216/Pa_unified_cache_t16777216: wall=0.872680448 [0.824991275, 0.962212180]; slower=0/4; threadcpu_median=0.848936725
+    Pa_unified_prepared_t16777216/Pa_unified_cache_t16777216: wall=0.935182507 [0.878007200, 0.969170522]; slower=0/4; threadcpu_median=0.939160336
+    Pa_unified_prepared_t16777216/Pa_unified_reuse_t16777216: wall=1.051357965 [0.979112793, 1.114538838]; slower=3/4; threadcpu_median=1.076940117
+    Pa_unified_prepared_t16777216/Pa: wall=0.653192197 [0.616267805, 0.679483526]; slower=0/4; threadcpu_median=0.654237071
+    Pa_unified_prepared_t16777216/Pa_band: wall=1.049745160 [0.931141019, 1.059715944]; slower=3/4; threadcpu_median=1.054906992
+    Pa_unified_prepared_t16777216/stable_msd: wall=0.488479460 [0.472967727, 0.531378968]; slower=0/4; threadcpu_median=0.489866260
+all 672 raw rows; 147 summary rows; 25 noise rows; independent recomputation OK
+Pairing keeps file/layout/case/n/block/seed/rep separate; Pa denominator is the mean of its two fixed slots. Quantiles describe samples, not confidence intervals. Profile CSV excluded.

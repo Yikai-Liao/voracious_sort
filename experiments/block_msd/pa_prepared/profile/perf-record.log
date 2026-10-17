@@ -1,0 +1,2 @@
+[ perf record: Woken up 21 times to write data ]
+[ perf record: Captured and wrote 5.236 MB experiments/block_msd/pa_prepared/profile/u16-sparse.data (649 samples) ]

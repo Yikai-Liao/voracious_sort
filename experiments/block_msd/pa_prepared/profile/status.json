@@ -1,0 +1,38 @@
+{
+  "record_status": "complete",
+  "event": "cpu-clock:u",
+  "frequency_hz": 997,
+  "samples": 649,
+  "lost_samples": 0,
+  "data_file": "u16-sparse.data",
+  "data_bytes": 5509014,
+  "sorter_crash_observed": false,
+  "formal_timing": false,
+  "annotate_attempts": [
+    {
+      "command": [
+        "perf", "annotate", "-i", "experiments/block_msd/pa_prepared/profile/u16-sparse.data",
+        "--stdio", "--symbol",
+        "_RINvMNtNtCs3WZc4OYeHMK_18block_msd_research8frontier5blockINtB3_6SortertE4steptNCINvB5_19distribute_childrenttNtB5_8IdentityKh0_E0ECsq0rkKib9eb_19frontier_experiment"
+      ],
+      "stdout_file": "perf-step.txt",
+      "stdout_bytes": 0,
+      "exit_code": 139,
+      "signal": "SIGSEGV"
+    },
+    {
+      "command": [
+        "perf", "annotate", "-i", "experiments/block_msd/pa_prepared/profile/u16-sparse.data",
+        "--stdio", "--no-source", "--symbol",
+        "_RINvMNtNtCs3WZc4OYeHMK_18block_msd_research8frontier5blockINtB3_6SortertE4steptNCINvB5_19distribute_childrenttNtB5_8IdentityKh0_E0ECsq0rkKib9eb_19frontier_experiment"
+      ],
+      "stdout_file": "perf-step-asm.txt",
+      "stdout_bytes": 0,
+      "exit_code": 139,
+      "signal": "SIGSEGV"
+    }
+  ],
+  "annotate_retry_planned": false,
+  "fallback": ["perf report", "objdump -d -C"],
+  "source_snapshot": "block-source.rs"
+}
