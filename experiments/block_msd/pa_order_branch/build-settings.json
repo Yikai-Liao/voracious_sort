@@ -1,0 +1,47 @@
+{
+  "release": {
+    "opt_level": 3,
+    "debug": "line-tables-only",
+    "codegen_units": 16,
+    "lto": false,
+    "incremental": true,
+    "jobs": 6,
+    "rustflags": "-C target-cpu=native"
+  },
+  "time_features": [],
+  "work_features": [
+    "frontier_work"
+  ],
+  "asan": {
+    "toolchain": "nightly",
+    "target": "x86_64-unknown-linux-gnu",
+    "features": [
+      "frontier_work"
+    ],
+    "profile": "release",
+    "debug_assertions": false,
+    "overflow_checks": false,
+    "rustflags": "-Zsanitizer=address -C target-cpu=native",
+    "ASAN_OPTIONS": "detect_leaks=1",
+    "purpose": "not yet built for this source"
+  },
+  "dependency_flags": [
+    "--locked",
+    "--offline"
+  ],
+  "timing_affinity": [
+    2
+  ],
+  "offline_local_threshold_bytes": 16777216,
+  "asan_release": {
+    "features": [],
+    "profile": "release",
+    "rustflags": "-Zsanitizer=address -C target-cpu=native",
+    "target": "x86_64-unknown-linux-gnu",
+    "work_counters": false,
+    "purpose": "not yet built for this source"
+  },
+  "source_commit": "49db9f8c18329e35d1b2ec6d7b0cacda4c39cec9",
+  "changes_from_previous": "cb10efb equality proof; original boolean monotone tiles; keys wider than usize exit within the same loop at first violating pair; no external sorter dispatch",
+  "status": "positive near-parity screen; advance to full validation, watch wide32 equal n1M and sorted n16384"
+}

@@ -1,0 +1,8 @@
+{
+  "time_ns": 1792269285697285463,
+  "active_rustc_or_cargo": [],
+  "source_inputs": 156,
+  "frontier_tests": "deferred until first-screen success; every sort checks full stable oracle",
+  "full_layouts": 10,
+  "features": []
+}

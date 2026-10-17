@@ -1,0 +1,10 @@
+{
+  "kept_latest": "experiments/block_msd/target/release/incremental/frontier_experiment-30hi91pzzd2m5/s-hnb11frgtw-09raqds-e314q1kyyyqdye8opby390ej6",
+  "removed": [
+    {
+      "path": "experiments/block_msd/target/release/incremental/frontier_experiment-30hi91pzzd2m5/s-hnb0ynylp6-0srk8uj-1qu8vanxrvslgxpxikwnzen2f",
+      "logical_bytes": 143509988
+    }
+  ],
+  "proof": "all previous builds/tests complete; latest native cache kept; all immutable Time executables preserved"
+}
