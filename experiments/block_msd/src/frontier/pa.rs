@@ -1,6 +1,5 @@
 //! Independent Pa ablations. Policies change node preparation or its classifier;
 //! all policies use the same distribution workspace and recursive ownership.
-use super::local_distribution::BinaryBackend;
 use super::prefix_band::PrefixBand;
 use super::*;
 
@@ -32,9 +31,6 @@ pub enum PaExperiment {
     UnifiedCandidate,
     UnifiedReuse,
     UnifiedPrepared,
-    UnifiedBinary,
-    UnifiedBatch,
-    UnifiedLookup,
 }
 
 #[derive(Clone, Copy)]
@@ -54,7 +50,6 @@ struct Policy {
     sampled_distribution: bool,
     reduced_radix: bool,
     prepared_distribution: bool,
-    binary_scatter: BinaryBackend,
     local_workspace_threshold: usize,
     block: usize,
 }
@@ -102,9 +97,6 @@ where
                 | PaExperiment::UnifiedCached
                 | PaExperiment::UnifiedReuse
                 | PaExperiment::UnifiedPrepared
-                | PaExperiment::UnifiedBinary
-                | PaExperiment::UnifiedBatch
-                | PaExperiment::UnifiedLookup
                 | PaExperiment::UnifiedSampled
                 | PaExperiment::UnifiedReduced
                 | PaExperiment::UnifiedCandidate
@@ -120,9 +112,6 @@ where
                 | PaExperiment::UnifiedCached
                 | PaExperiment::UnifiedReuse
                 | PaExperiment::UnifiedPrepared
-                | PaExperiment::UnifiedBinary
-                | PaExperiment::UnifiedBatch
-                | PaExperiment::UnifiedLookup
                 | PaExperiment::UnifiedSampled
                 | PaExperiment::UnifiedReduced
                 | PaExperiment::UnifiedCandidate
@@ -156,9 +145,6 @@ where
                 | PaExperiment::UnifiedCached
                 | PaExperiment::UnifiedReuse
                 | PaExperiment::UnifiedPrepared
-                | PaExperiment::UnifiedBinary
-                | PaExperiment::UnifiedBatch
-                | PaExperiment::UnifiedLookup
                 | PaExperiment::UnifiedSampled
                 | PaExperiment::UnifiedReduced
                 | PaExperiment::UnifiedCandidate
@@ -174,9 +160,6 @@ where
                 | PaExperiment::UnifiedCached
                 | PaExperiment::UnifiedReuse
                 | PaExperiment::UnifiedPrepared
-                | PaExperiment::UnifiedBinary
-                | PaExperiment::UnifiedBatch
-                | PaExperiment::UnifiedLookup
                 | PaExperiment::UnifiedSampled
                 | PaExperiment::UnifiedReduced
                 | PaExperiment::UnifiedCandidate
@@ -188,9 +171,6 @@ where
                 | PaExperiment::UnifiedCached
                 | PaExperiment::UnifiedReuse
                 | PaExperiment::UnifiedPrepared
-                | PaExperiment::UnifiedBinary
-                | PaExperiment::UnifiedBatch
-                | PaExperiment::UnifiedLookup
                 | PaExperiment::UnifiedSampled
                 | PaExperiment::UnifiedReduced
                 | PaExperiment::UnifiedCandidate
@@ -203,9 +183,6 @@ where
                 | PaExperiment::UnifiedCached
                 | PaExperiment::UnifiedReuse
                 | PaExperiment::UnifiedPrepared
-                | PaExperiment::UnifiedBinary
-                | PaExperiment::UnifiedBatch
-                | PaExperiment::UnifiedLookup
                 | PaExperiment::UnifiedSampled
                 | PaExperiment::UnifiedReduced
                 | PaExperiment::UnifiedCandidate
@@ -217,9 +194,6 @@ where
                 | PaExperiment::UnifiedCached
                 | PaExperiment::UnifiedReuse
                 | PaExperiment::UnifiedPrepared
-                | PaExperiment::UnifiedBinary
-                | PaExperiment::UnifiedBatch
-                | PaExperiment::UnifiedLookup
                 | PaExperiment::UnifiedSampled
                 | PaExperiment::UnifiedReduced
                 | PaExperiment::UnifiedCandidate
@@ -233,9 +207,6 @@ where
                 | PaExperiment::UnifiedCached
                 | PaExperiment::UnifiedReuse
                 | PaExperiment::UnifiedPrepared
-                | PaExperiment::UnifiedBinary
-                | PaExperiment::UnifiedBatch
-                | PaExperiment::UnifiedLookup
                 | PaExperiment::UnifiedSampled
                 | PaExperiment::UnifiedReduced
                 | PaExperiment::UnifiedCandidate
@@ -246,9 +217,6 @@ where
                 | PaExperiment::UnifiedCached
                 | PaExperiment::UnifiedReuse
                 | PaExperiment::UnifiedPrepared
-                | PaExperiment::UnifiedBinary
-                | PaExperiment::UnifiedBatch
-                | PaExperiment::UnifiedLookup
                 | PaExperiment::UnifiedSampled
                 | PaExperiment::UnifiedReduced
                 | PaExperiment::UnifiedCandidate
@@ -258,9 +226,6 @@ where
             PaExperiment::UnifiedSampled
                 | PaExperiment::UnifiedCandidate
                 | PaExperiment::UnifiedPrepared
-                | PaExperiment::UnifiedBinary
-                | PaExperiment::UnifiedBatch
-                | PaExperiment::UnifiedLookup
         ),
         reduced_radix: matches!(
             experiment,
@@ -268,18 +233,8 @@ where
         ),
         prepared_distribution: matches!(
             experiment,
-            PaExperiment::UnifiedReuse
-                | PaExperiment::UnifiedPrepared
-                | PaExperiment::UnifiedBinary
-                | PaExperiment::UnifiedBatch
-                | PaExperiment::UnifiedLookup
+            PaExperiment::UnifiedReuse | PaExperiment::UnifiedPrepared
         ),
-        binary_scatter: match experiment {
-            PaExperiment::UnifiedBinary => BinaryBackend::Scalar,
-            PaExperiment::UnifiedBatch => BinaryBackend::Batched,
-            PaExperiment::UnifiedLookup => BinaryBackend::Lookup,
-            _ => BinaryBackend::Original,
-        },
         local_workspace_threshold,
         block,
     };
@@ -718,17 +673,7 @@ fn partition<T: Radixable<K>, K: RadixKey, C: Classifier<Converted<T, K>>>(
     let prepared_mask =
         if policy.prepared_distribution { label_mask } else { None };
     let passes = if let Some(mask) = prepared_mask {
-        if policy.binary_scatter != BinaryBackend::Original {
-            super::local_distribution::distribute_prepared_binary(
-                arr,
-                &label,
-                policy.block,
-                policy.local_workspace_threshold,
-                mask,
-                policy.binary_scatter,
-                stats,
-            )
-        } else if policy.sampled_distribution {
+        if policy.sampled_distribution {
             super::local_distribution::distribute_prepared_sampled(
                 arr,
                 &label,

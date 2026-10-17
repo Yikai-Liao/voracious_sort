@@ -255,9 +255,6 @@ const METHODS: &[&str] = &[
     "Pa_unified_candidate_t16777216",
     "Pa_unified_reuse_t16777216",
     "Pa_unified_prepared_t16777216",
-    "Pa_unified_binary_t16777216",
-    "Pa_unified_batch_t16777216",
-    "Pa_unified_lookup_t16777216",
     "L",
     "L_frozen",
     "H1",
@@ -326,15 +323,6 @@ where
     } else if let Some(value) = method.strip_prefix("Pa_unified_reuse_t") {
         local_workspace_threshold = value.parse().unwrap();
         "Pa_unified_reuse"
-    } else if let Some(value) = method.strip_prefix("Pa_unified_lookup_t") {
-        local_workspace_threshold = value.parse().unwrap();
-        "Pa_unified_lookup"
-    } else if let Some(value) = method.strip_prefix("Pa_unified_batch_t") {
-        local_workspace_threshold = value.parse().unwrap();
-        "Pa_unified_batch"
-    } else if let Some(value) = method.strip_prefix("Pa_unified_binary_t") {
-        local_workspace_threshold = value.parse().unwrap();
-        "Pa_unified_binary"
     } else if let Some(value) = method.strip_prefix("Pa_unified_prepared_t") {
         local_workspace_threshold = value.parse().unwrap();
         "Pa_unified_prepared"
@@ -367,10 +355,7 @@ where
         | "Pa_unified_radix"
         | "Pa_unified_candidate"
         | "Pa_unified_reuse"
-        | "Pa_unified_prepared"
-        | "Pa_unified_binary"
-        | "Pa_unified_batch"
-        | "Pa_unified_lookup" => {
+        | "Pa_unified_prepared" => {
             use frontier::PaExperiment::*;
             let experiment = match method {
                 "Pa_ref" => Reference,
@@ -398,9 +383,6 @@ where
                 "Pa_unified_candidate" => UnifiedCandidate,
                 "Pa_unified_reuse" => UnifiedReuse,
                 "Pa_unified_prepared" => UnifiedPrepared,
-                "Pa_unified_binary" => UnifiedBinary,
-                "Pa_unified_batch" => UnifiedBatch,
-                "Pa_unified_lookup" => UnifiedLookup,
                 _ => Both,
             };
             return frontier::sort_pa_with_threshold::<T, K>(
@@ -548,7 +530,6 @@ fn make_keys(n: usize, bits: usize, case: &str, seed: u64) -> Vec<u128> {
 #[cfg(test)]
 mod workload_tests {
     use super::*;
-
     #[test]
     fn registered_methods_execute_and_preserve_records() {
         let input: Vec<Small16> = make_keys(513, 16, "uniform", 42)
@@ -563,10 +544,11 @@ mod workload_tests {
             execute::<_, u16>(&mut actual, method, 17);
             assert!(
                 actual.iter().zip(&expected).all(|(a, b)| a.same(b)),
-                "{method}"
+                "{}", method
             );
         }
     }
+
 
     #[test]
     fn progressive_skew_has_distinct_complete_keys() {
