@@ -38,6 +38,37 @@ struct Bucket<T> {
     next: *mut T,
     end: *mut T,
 }
+#[derive(Clone, Copy)]
+enum BinaryGroup {
+    Single,
+    Arithmetic,
+    Lookup,
+}
+
+// For each four-bit bucket pattern, pack the selected-bucket offsets of
+// records 1, 2 and 3 into three bytes, followed by the total high-bucket count.
+// Record 0 always has offset zero. This is 64 bytes of immutable static data.
+const BINARY_GROUP_POSITIONS: [u32; 16] = {
+    let mut positions = [0; 16];
+    let mut pattern = 0;
+    while pattern < 16 {
+        let mut highs = 0;
+        let mut record = 0;
+        let mut packed = 0;
+        while record < 4 {
+            let high = (pattern >> record) & 1;
+            let offset = if high != 0 { highs } else { record - highs };
+            if record != 0 {
+                packed |= (offset as u32) << ((record - 1) * 8);
+            }
+            highs += high;
+            record += 1;
+        }
+        positions[pattern] = packed | ((highs as u32) << 24);
+        pattern += 1;
+    }
+    positions
+};
 pub(super) struct Sorter<'a, T> {
     block_size: usize,
     radix_range: usize,
@@ -167,7 +198,7 @@ impl<'a, T: Copy> Sorter<'a, T> {
         label: &F,
         byte: usize,
     ) {
-        self.step_impl(label, byte, 0, false);
+        self.step_impl(label, byte, 0, BinaryGroup::Single);
     }
     /// All varying digit bits are covered by this one-bit mask. Other digit
     /// bits must be constant; the ordinary bucket table and workspace remain.
@@ -178,7 +209,7 @@ impl<'a, T: Copy> Sorter<'a, T> {
         varying_bit: u8,
     ) {
         assert!(varying_bit.is_power_of_two());
-        self.step_impl(label, byte, varying_bit, false);
+        self.step_impl(label, byte, varying_bit, BinaryGroup::Single);
     }
     pub(super) fn step_binary_batched<U: super::NativeKey, F: Fn(&T) -> U>(
         &mut self,
@@ -187,14 +218,23 @@ impl<'a, T: Copy> Sorter<'a, T> {
         varying_bit: u8,
     ) {
         assert!(varying_bit.is_power_of_two() && byte < 16);
-        self.step_impl(label, byte, varying_bit, true);
+        self.step_impl(label, byte, varying_bit, BinaryGroup::Arithmetic);
+    }
+    pub(super) fn step_binary_lookup<U: super::NativeKey, F: Fn(&T) -> U>(
+        &mut self,
+        label: &F,
+        byte: usize,
+        varying_bit: u8,
+    ) {
+        assert!(varying_bit.is_power_of_two() && byte < 16);
+        self.step_impl(label, byte, varying_bit, BinaryGroup::Lookup);
     }
     fn step_impl<U: super::NativeKey, F: Fn(&T) -> U>(
         &mut self,
         label: &F,
         byte: usize,
         varying_bit: u8,
-        batched: bool,
+        group: BinaryGroup,
     ) {
         let mut buckets =
             vec![
@@ -227,16 +267,28 @@ impl<'a, T: Copy> Sorter<'a, T> {
                 }
             };
         }
-        let output = if batched
+        let output = if !matches!(group, BinaryGroup::Single)
             && std::mem::size_of::<T>() <= std::mem::size_of::<usize>()
         {
-            self.scatter_binary_batched(
-                label,
-                byte,
-                varying_bit,
-                &mut buckets,
-                &mut counts,
-            )
+            match group {
+                BinaryGroup::Arithmetic => self
+                    .scatter_binary_batched::<U, F, false>(
+                        label,
+                        byte,
+                        varying_bit,
+                        &mut buckets,
+                        &mut counts,
+                    ),
+                BinaryGroup::Lookup => self
+                    .scatter_binary_batched::<U, F, true>(
+                        label,
+                        byte,
+                        varying_bit,
+                        &mut buckets,
+                        &mut counts,
+                    ),
+                BinaryGroup::Single => unreachable!(),
+            }
         } else {
             match byte {
                 0 => pass!(0),
@@ -438,9 +490,13 @@ impl<'a, T: Copy> Sorter<'a, T> {
         output
     }
     // The native-key bit mask is prepared once. This loop needs no const-byte
-    // specialization, keeping the new backend to one instance per label type.
+    // specialization. Only the arithmetic and lookup group calculations differ.
     #[inline(never)]
-    fn scatter_binary_batched<U: super::NativeKey, F: Fn(&T) -> U>(
+    fn scatter_binary_batched<
+        U: super::NativeKey,
+        F: Fn(&T) -> U,
+        const LOOKUP: bool,
+    >(
         &mut self,
         label: &F,
         byte: usize,
@@ -524,8 +580,32 @@ impl<'a, T: Copy> Sorter<'a, T> {
                             label(&*source.add(start + 3)) & key_bit != zero,
                         ]
                     };
-                    let mut highs = 0;
-                    macro_rules! copy {
+                    let highs = if LOOKUP {
+                        let pattern = usize::from(h0)
+                            | (usize::from(h1) << 1)
+                            | (usize::from(h2) << 2)
+                            | (usize::from(h3) << 3);
+                        let packed = BINARY_GROUP_POSITIONS[pattern];
+                        macro_rules! copy_position {
+                            ($i:literal, $is_high:expr, $offset:expr) => {{
+                                let base = if $is_high { next_high } else { next_low };
+                                // SAFETY: the table stores precisely the selected
+                                // bucket's preceding-record count. As in the
+                                // arithmetic control, destinations match scalar
+                                // writes with no refill and preserve unread input.
+                                unsafe {
+                                    ptr::copy(source.add(start + $i), base.add($offset), 1);
+                                }
+                            }};
+                        }
+                        copy_position!(0, h0, 0);
+                        copy_position!(1, h1, (packed & 255) as usize);
+                        copy_position!(2, h2, ((packed >> 8) & 255) as usize);
+                        copy_position!(3, h3, ((packed >> 16) & 255) as usize);
+                        (packed >> 24) as usize
+                    } else {
+                        let mut highs = 0;
+                        macro_rules! copy {
                         ($i:literal, $is_high:expr) => {{
                             let is_high = $is_high;
                             let base = if is_high { next_high } else { next_low };
@@ -539,11 +619,13 @@ impl<'a, T: Copy> Sorter<'a, T> {
                             }
                             highs += usize::from(is_high);
                         }};
-                    }
-                    copy!(0, h0);
-                    copy!(1, h1);
-                    copy!(2, h2);
-                    copy!(3, h3);
+                        }
+                        copy!(0, h0);
+                        copy!(1, h1);
+                        copy!(2, h2);
+                        copy!(3, h3);
+                        highs
+                    };
                     let lows = 4 - highs;
                     // SAFETY: both remaining capacities were strictly above 4.
                     unsafe {
@@ -676,7 +758,7 @@ mod tests {
         let mut expected = input.to_vec();
         expected.sort_by_key(&label);
         let mut original_work = None;
-        for variant in 0..3 {
+        for variant in 0..4 {
             let mut actual = input.to_vec();
             let trace = RefCell::new(Vec::new());
             let counted_label = |record: &T| {
@@ -706,7 +788,13 @@ mod tests {
                     expected_trace.extend(logical_order.first().copied());
                 }
                 expected_trace.extend_from_slice(&logical_order);
-                if binary && variant == 2 {
+                if binary && variant == 3 {
+                    sorter.step_binary_lookup(
+                        &counted_label,
+                        byte,
+                        varying_bit as u8,
+                    );
+                } else if binary && variant == 2 {
                     sorter.step_binary_batched(
                         &counted_label,
                         byte,
@@ -746,7 +834,7 @@ mod tests {
 
     fn key(id: usize, radix: usize) -> u16 {
         // Irregular labels exercise all four-record prefix counts and refill
-        // positions independently of the benchmark's alternating sparse input.
+        // positions; the benchmark uses its separately seeded shuffled input.
         let mut x = (id as u64).wrapping_add(0x9e3779b97f4a7c15);
         x = (x ^ (x >> 30)).wrapping_mul(0xbf58476d1ce4e5b9);
         x = (x ^ (x >> 27)).wrapping_mul(0x94d049bb133111eb);
@@ -795,6 +883,17 @@ mod tests {
                     );
                 }
             }
+            // The lookup backend prepares a native bit mask outside the loop;
+            // cover the highest u64 bit as well as low-byte binary labels.
+            let keys: Vec<u64> = (0..4097)
+                .map(|id| {
+                    let bits = key(id, 2);
+                    0x4222_2222_2222_2242
+                        | (u64::from(bits & 1) << 63)
+                        | (u64::from((bits >> 8) & 1) << 3)
+                })
+                .collect();
+            check_variants(&keys, |&key| key, &[0, 7], 256, block);
         }
     }
 

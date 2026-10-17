@@ -34,6 +34,7 @@ pub enum PaExperiment {
     UnifiedPrepared,
     UnifiedBinary,
     UnifiedBatch,
+    UnifiedLookup,
 }
 
 #[derive(Clone, Copy)]
@@ -103,6 +104,7 @@ where
                 | PaExperiment::UnifiedPrepared
                 | PaExperiment::UnifiedBinary
                 | PaExperiment::UnifiedBatch
+                | PaExperiment::UnifiedLookup
                 | PaExperiment::UnifiedSampled
                 | PaExperiment::UnifiedReduced
                 | PaExperiment::UnifiedCandidate
@@ -120,6 +122,7 @@ where
                 | PaExperiment::UnifiedPrepared
                 | PaExperiment::UnifiedBinary
                 | PaExperiment::UnifiedBatch
+                | PaExperiment::UnifiedLookup
                 | PaExperiment::UnifiedSampled
                 | PaExperiment::UnifiedReduced
                 | PaExperiment::UnifiedCandidate
@@ -155,6 +158,7 @@ where
                 | PaExperiment::UnifiedPrepared
                 | PaExperiment::UnifiedBinary
                 | PaExperiment::UnifiedBatch
+                | PaExperiment::UnifiedLookup
                 | PaExperiment::UnifiedSampled
                 | PaExperiment::UnifiedReduced
                 | PaExperiment::UnifiedCandidate
@@ -172,6 +176,7 @@ where
                 | PaExperiment::UnifiedPrepared
                 | PaExperiment::UnifiedBinary
                 | PaExperiment::UnifiedBatch
+                | PaExperiment::UnifiedLookup
                 | PaExperiment::UnifiedSampled
                 | PaExperiment::UnifiedReduced
                 | PaExperiment::UnifiedCandidate
@@ -185,6 +190,7 @@ where
                 | PaExperiment::UnifiedPrepared
                 | PaExperiment::UnifiedBinary
                 | PaExperiment::UnifiedBatch
+                | PaExperiment::UnifiedLookup
                 | PaExperiment::UnifiedSampled
                 | PaExperiment::UnifiedReduced
                 | PaExperiment::UnifiedCandidate
@@ -199,6 +205,7 @@ where
                 | PaExperiment::UnifiedPrepared
                 | PaExperiment::UnifiedBinary
                 | PaExperiment::UnifiedBatch
+                | PaExperiment::UnifiedLookup
                 | PaExperiment::UnifiedSampled
                 | PaExperiment::UnifiedReduced
                 | PaExperiment::UnifiedCandidate
@@ -212,6 +219,7 @@ where
                 | PaExperiment::UnifiedPrepared
                 | PaExperiment::UnifiedBinary
                 | PaExperiment::UnifiedBatch
+                | PaExperiment::UnifiedLookup
                 | PaExperiment::UnifiedSampled
                 | PaExperiment::UnifiedReduced
                 | PaExperiment::UnifiedCandidate
@@ -227,6 +235,7 @@ where
                 | PaExperiment::UnifiedPrepared
                 | PaExperiment::UnifiedBinary
                 | PaExperiment::UnifiedBatch
+                | PaExperiment::UnifiedLookup
                 | PaExperiment::UnifiedSampled
                 | PaExperiment::UnifiedReduced
                 | PaExperiment::UnifiedCandidate
@@ -239,6 +248,7 @@ where
                 | PaExperiment::UnifiedPrepared
                 | PaExperiment::UnifiedBinary
                 | PaExperiment::UnifiedBatch
+                | PaExperiment::UnifiedLookup
                 | PaExperiment::UnifiedSampled
                 | PaExperiment::UnifiedReduced
                 | PaExperiment::UnifiedCandidate
@@ -250,6 +260,7 @@ where
                 | PaExperiment::UnifiedPrepared
                 | PaExperiment::UnifiedBinary
                 | PaExperiment::UnifiedBatch
+                | PaExperiment::UnifiedLookup
         ),
         reduced_radix: matches!(
             experiment,
@@ -261,10 +272,12 @@ where
                 | PaExperiment::UnifiedPrepared
                 | PaExperiment::UnifiedBinary
                 | PaExperiment::UnifiedBatch
+                | PaExperiment::UnifiedLookup
         ),
         binary_scatter: match experiment {
             PaExperiment::UnifiedBinary => BinaryBackend::Scalar,
             PaExperiment::UnifiedBatch => BinaryBackend::Batched,
+            PaExperiment::UnifiedLookup => BinaryBackend::Lookup,
             _ => BinaryBackend::Original,
         },
         local_workspace_threshold,

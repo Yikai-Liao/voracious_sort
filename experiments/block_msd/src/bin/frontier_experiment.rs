@@ -395,6 +395,7 @@ where
                 "Pa_unified_prepared" => UnifiedPrepared,
                 "Pa_unified_binary" => UnifiedBinary,
                 "Pa_unified_batch" => UnifiedBatch,
+                "Pa_unified_lookup" => UnifiedLookup,
                 _ => Both,
             };
             return frontier::sort_pa_with_threshold::<T, K>(

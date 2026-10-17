@@ -11,6 +11,7 @@ pub(super) enum BinaryBackend {
     Original,
     Scalar,
     Batched,
+    Lookup,
 }
 
 pub(super) fn distribute_local<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
@@ -420,6 +421,11 @@ fn block_bytes<T: Copy, U: NativeKey, F: Fn(&T) -> U, const REDUCED: bool>(
                             byte,
                             variation.byte(byte) as u8,
                         ),
+                    (BinaryBackend::Lookup, true) => sorter.step_binary_lookup(
+                        &normalized,
+                        byte,
+                        variation.byte(byte) as u8,
+                    ),
                     _ => sorter.step(&normalized, byte),
                 }
             }
@@ -446,6 +452,11 @@ fn block_bytes<T: Copy, U: NativeKey, F: Fn(&T) -> U, const REDUCED: bool>(
                             byte,
                             variation.byte(byte) as u8,
                         ),
+                    (BinaryBackend::Lookup, true) => sorter.step_binary_lookup(
+                        label,
+                        byte,
+                        variation.byte(byte) as u8,
+                    ),
                     _ => sorter.step(label, byte),
                 }
             }
