@@ -1,0 +1,47 @@
+{
+  "release": {
+    "opt_level": 3,
+    "debug": "line-tables-only",
+    "codegen_units": 16,
+    "lto": false,
+    "incremental": true,
+    "jobs": 6,
+    "rustflags": "-C target-cpu=native"
+  },
+  "time_features": [],
+  "work_features": [
+    "frontier_work"
+  ],
+  "asan": {
+    "toolchain": "nightly",
+    "target": "x86_64-unknown-linux-gnu",
+    "features": [
+      "frontier_work"
+    ],
+    "profile": "release",
+    "debug_assertions": false,
+    "overflow_checks": false,
+    "rustflags": "-Zsanitizer=address -C target-cpu=native",
+    "ASAN_OPTIONS": "detect_leaks=1",
+    "purpose": "not yet built for this source"
+  },
+  "dependency_flags": [
+    "--locked",
+    "--offline"
+  ],
+  "timing_affinity": [
+    2
+  ],
+  "offline_local_threshold_bytes": 16777216,
+  "asan_release": {
+    "features": [],
+    "profile": "release",
+    "rustflags": "-Zsanitizer=address -C target-cpu=native",
+    "target": "x86_64-unknown-linux-gnu",
+    "work_counters": false,
+    "purpose": "not yet built for this source"
+  },
+  "source_commit": "b654de73a190dc8c1c3ca5f127783874552990d8",
+  "changes_from_previous": "safe monotone proof OR(left XOR min(left,right)) for ascending; max for descending; exact tile/key calls/failure boundary unchanged",
+  "status": "REJECTED: wide ascending regression; no extended validation"
+}

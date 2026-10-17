@@ -1,0 +1,10 @@
+{
+  "kept_latest": "experiments/block_msd/target/release/incremental/frontier_experiment-30hi91pzzd2m5/s-hnb0sxp4db-1c1vq95-3vsw8ms2tglwy0z6pgc5wfz9t",
+  "removed": [
+    {
+      "path": "experiments/block_msd/target/release/incremental/frontier_experiment-30hi91pzzd2m5/s-hnazuuvf1o-0ndcra8-1ghz2u5bhv1vhzmcunoynt15o",
+      "logical_bytes": 137946277
+    }
+  ],
+  "proof": "completed final Time build and immutable ELF verified; no active rustc/cargo; frozen executable paths untouched"
+}
