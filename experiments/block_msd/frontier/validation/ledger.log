@@ -1,0 +1,11 @@
+block512 864 OK
+calibration-constant 80 OK
+holdout-42 864 OK
+main-1048576 5472 OK
+memory-1048576 456 OK
+memory-block512 72 OK
+screen-16384 10944 OK
+screen-262144 8208 OK
+work-1048576 360 OK
+work-sparse-32768 24 OK
+all 27344 rows; source/binary hashes OK

@@ -1,0 +1,2 @@
+[ perf record: Woken up 118 times to write data ]
+[ perf record: Captured and wrote 29.635 MB experiments/block_msd/target/frontier/native-key.perf (3678 samples) ]

@@ -1027,3 +1027,5 @@ pub mod reduction_node;
 pub mod reduction_stream;
 pub mod reduction_gate;
 pub mod reduction_admission;
+
+pub mod frontier;

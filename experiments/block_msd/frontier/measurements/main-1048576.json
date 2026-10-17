@@ -1,0 +1,33 @@
+{
+  "command": [
+    "taskset",
+    "-c",
+    "2",
+    "/root/code/voracious_sort-prefix-frontier/experiments/block_msd/target/frontier/time",
+    "1048576",
+    "8",
+    "L,L_frozen,H1,H2,H3,P1,P2,P3,Pa,F1,F2,F3,Fa,Fsame1,Fsame2,Fsame3,best_msd,stable_msd,L",
+    "uniform,deep_skew,majority_prefix,sparse,common_high,multi_heavy",
+    "u32,u64,small8,u128,wide32,large128",
+    "time",
+    "64",
+    "81985529216486895"
+  ],
+  "started_ns": 1792251138091797417,
+  "pid": 1226140,
+  "meminfo_before": "MemTotal:       16344888 kB\nMemFree:         1496660 kB\nMemAvailable:    8739772 kB\nBuffers:          422976 kB\nCached:          8400144 kB\nSwapCached:         8708 kB\nActive:          4524704 kB\nInactive:        8009128 kB\nActive(anon):    3659448 kB\nInactive(anon):  2587424 kB\nActive(file):     865256 kB\nInactive(file):  5421704 kB\nUnevictable:           0 kB\nMlocked:               0 kB\nSwapTotal:      12366328 kB\nSwapFree:       10280620 kB\nZswap:                 0 kB\nZswapped:              0 kB\nDirty:               364 kB\nWriteback:             0 kB\nAnonPages:       3568780 kB\nMapped:           495040 kB\nShmem:           2536244 kB\nKReclaimable:    1293756 kB\nSlab:            1525620 kB\nSReclaimable:    1293756 kB\nSUnreclaim:       231864 kB\nKernelStack:       13008 kB\nPageTables:        55452 kB\nSecPageTables:         0 kB\nNFS_Unstable:          0 kB\nBounce:                0 kB\nWritebackTmp:          0 kB\nCommitLimit:    20538772 kB\nCommitted_AS:   11183844 kB\nVmallocTotal:   34359738367 kB\nVmallocUsed:       82348 kB\nVmallocChunk:          0 kB\nPercpu:            64000 kB\nHardwareCorrupted:     0 kB\nAnonHugePages:   1902592 kB\nShmemHugePages:        0 kB\nShmemPmdMapped:        0 kB\nFileHugePages:         0 kB\nFilePmdMapped:         0 kB\nUnaccepted:            0 kB\nHugePages_Total:       0\nHugePages_Free:        0\nHugePages_Rsvd:        0\nHugePages_Surp:        0\nHugepagesize:       2048 kB\nHugetlb:               0 kB\nDirectMap4k:      245604 kB\nDirectMap2M:    10240000 kB\nDirectMap1G:     8388608 kB\n",
+  "load_before": "2.57 2.92 3.01 2/684 1230719\n",
+  "ended_ns": 1792251804992083167,
+  "returncode": 0,
+  "meminfo_after": "MemTotal:       16344888 kB\nMemFree:         1493792 kB\nMemAvailable:    8748724 kB\nBuffers:          423140 kB\nCached:          8411448 kB\nSwapCached:         8708 kB\nActive:          4515972 kB\nInactive:        8019940 kB\nActive(anon):    3650200 kB\nInactive(anon):  2587424 kB\nActive(file):     865772 kB\nInactive(file):  5432516 kB\nUnevictable:           0 kB\nMlocked:               0 kB\nSwapTotal:      12366328 kB\nSwapFree:       10280876 kB\nZswap:                 0 kB\nZswapped:              0 kB\nDirty:               152 kB\nWriteback:             0 kB\nAnonPages:       3558516 kB\nMapped:           495960 kB\nShmem:           2536384 kB\nKReclaimable:    1294248 kB\nSlab:            1526324 kB\nSReclaimable:    1294248 kB\nSUnreclaim:       232076 kB\nKernelStack:       12832 kB\nPageTables:        56652 kB\nSecPageTables:         0 kB\nNFS_Unstable:          0 kB\nBounce:                0 kB\nWritebackTmp:          0 kB\nCommitLimit:    20538772 kB\nCommitted_AS:   11743756 kB\nVmallocTotal:   34359738367 kB\nVmallocUsed:       82204 kB\nVmallocChunk:          0 kB\nPercpu:            64000 kB\nHardwareCorrupted:     0 kB\nAnonHugePages:   1898496 kB\nShmemHugePages:        0 kB\nShmemPmdMapped:        0 kB\nFileHugePages:         0 kB\nFilePmdMapped:         0 kB\nUnaccepted:            0 kB\nHugePages_Total:       0\nHugePages_Free:        0\nHugePages_Rsvd:        0\nHugePages_Surp:        0\nHugepagesize:       2048 kB\nHugetlb:               0 kB\nDirectMap4k:      245604 kB\nDirectMap2M:    10240000 kB\nDirectMap1G:     8388608 kB\n",
+  "load_after": "2.88 2.81 2.92 3/674 1247193\n",
+  "child_usage": {
+    "ru_utime": 835.726146,
+    "ru_stime": 21.48084,
+    "ru_maxrss": 971736,
+    "ru_minflt": 2421909,
+    "ru_majflt": 0,
+    "ru_nvcsw": 85,
+    "ru_nivcsw": 14582
+  }
+}
