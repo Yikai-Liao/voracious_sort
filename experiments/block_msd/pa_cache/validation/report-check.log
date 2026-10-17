@@ -1,0 +1,14 @@
+guards-priority-1048576 1440 summary samples/wall/cpu/paired Pa+Stable OK
+small-ordered-priority-16384 864 summary samples/wall/cpu/paired Pa+Stable OK
+tune-1048576-block512-seed42 480 summary samples/wall/cpu/paired Pa+Stable OK
+tune-262144-block64-seed42 480 summary samples/wall/cpu/paired Pa+Stable OK
+all 3264 rows independently summarized
+tune-1048576-block512-seed42 large128 uniform Pa_unified_cache_t16777216 Pa_unified_cache_toff median_ms/ref_ms/paired/p10/p90 (201.2351375, 255.2604155, 0.7845789092651434, 0.7666690431342744, 0.8035892938615884)
+tune-1048576-block512-seed42 large128 majority_prefix Pa_unified_cache_t16777216 Pa_unified_cache_toff median_ms/ref_ms/paired/p10/p90 (215.67814, 195.877492, 1.091408974264577, 1.0729939304860636, 1.120326723674855)
+tune-262144-block64-seed42 large128 majority_prefix Pa_unified_cache_t1048576 Pa_unified_cache_toff median_ms/ref_ms/paired/p10/p90 (43.6061365, 40.026661, 1.1164213547254516, 1.0585954210500903, 1.4249538427924413)
+tune-262144-block64-seed42 large128 deep_unique90 Pa_unified_cache_t1048576 Pa_unified_cache_toff median_ms/ref_ms/paired/p10/p90 (44.953685, 38.5765745, 1.1653036954695477, 1.100809904289954, 1.2218968679554483)
+tune-262144-block64-seed42 u128 uniform Pa_unified_cache_t0 Pa_unified_cache_toff median_ms/ref_ms/paired/p10/p90 (10.8501, 6.7092635, 1.614843683183941, 1.5289571348396809, 1.6967864879323162)
+tune-262144-block64-seed42 u128 uniform Pa_unified_cache_t262144 Pa_unified_cache_toff median_ms/ref_ms/paired/p10/p90 (10.6532745, 6.7092635, 1.597143691115571, 1.53093024109234, 1.6392048541586044)
+guards-priority-1048576 u8 sparse Pa_unified_cache_t16777216 stable_msd median_ms/ref_ms/paired/p10/p90 (3.4213455, 3.178032, 1.0802881641300124, 0.9498504477510045, 1.1121256352322313)
+guards-priority-1048576 u16 sparse Pa_unified_cache_t16777216 stable_msd median_ms/ref_ms/paired/p10/p90 (3.625195, 3.1453665, 1.153162776021189, 1.0419085631286664, 1.3603586499248899)
+small-ordered-priority-16384 wide32 sorted Pa_unified_cache_t16777216 stable_msd median_ms/ref_ms/paired/p10/p90 (0.0224065, 0.020411, 1.09200276215132, 0.8019816339703819, 1.9838878277801073)

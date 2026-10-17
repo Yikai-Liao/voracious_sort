@@ -1,0 +1,33 @@
+{
+  "command": [
+    "taskset",
+    "-c",
+    "2",
+    "/root/code/voracious_sort-pa-unified/experiments/block_msd/target/pa-cache/time",
+    "1048576",
+    "4",
+    "Pa,Pa_band,Pa_unified_cache_t0,Pa_unified_cache_t262144,Pa_unified_cache_t1048576,Pa_unified_cache_t4194304,Pa_unified_cache_t16777216,Pa_unified_cache_toff,stable_msd,Pa",
+    "uniform,majority_prefix,deep_unique90",
+    "u64,u128,wide32,large128",
+    "time",
+    "512",
+    "42"
+  ],
+  "started_ns": 1792258162405492558,
+  "pid": 1445378,
+  "meminfo_before": "MemTotal:       16344888 kB\nMemFree:         2468948 kB\nMemAvailable:    9874948 kB\nBuffers:          269696 kB\nCached:          7027604 kB\nSwapCached:         8448 kB\nActive:          4895396 kB\nInactive:        5967816 kB\nActive(anon):    3339584 kB\nInactive(anon):   968104 kB\nActive(file):    1555812 kB\nInactive(file):  4999712 kB\nUnevictable:           0 kB\nMlocked:               0 kB\nSwapTotal:      12366328 kB\nSwapFree:        8168620 kB\nZswap:                 0 kB\nZswapped:              0 kB\nDirty:            137912 kB\nWriteback:             0 kB\nAnonPages:       3426952 kB\nMapped:           463800 kB\nShmem:            741860 kB\nKReclaimable:    1188080 kB\nSlab:            1423188 kB\nSReclaimable:    1188080 kB\nSUnreclaim:       235108 kB\nKernelStack:       13144 kB\nPageTables:        58048 kB\nSecPageTables:         0 kB\nNFS_Unstable:          0 kB\nBounce:                0 kB\nWritebackTmp:          0 kB\nCommitLimit:    20538772 kB\nCommitted_AS:   12228080 kB\nVmallocTotal:   34359738367 kB\nVmallocUsed:       82556 kB\nVmallocChunk:          0 kB\nPercpu:            64000 kB\nHardwareCorrupted:     0 kB\nAnonHugePages:   1673216 kB\nShmemHugePages:        0 kB\nShmemPmdMapped:        0 kB\nFileHugePages:         0 kB\nFilePmdMapped:         0 kB\nUnaccepted:            0 kB\nHugePages_Total:       0\nHugePages_Free:        0\nHugePages_Rsvd:        0\nHugePages_Surp:        0\nHugepagesize:       2048 kB\nHugetlb:               0 kB\nDirectMap4k:      245604 kB\nDirectMap2M:    10240000 kB\nDirectMap1G:     8388608 kB\n",
+  "load_before": "3.89 4.39 3.85 2/700 1445387\n",
+  "ended_ns": 1792258248867765593,
+  "returncode": 0,
+  "meminfo_after": "MemTotal:       16344888 kB\nMemFree:         2459456 kB\nMemAvailable:    9867704 kB\nBuffers:          270160 kB\nCached:          7018972 kB\nSwapCached:         8448 kB\nActive:          4896364 kB\nInactive:        5970032 kB\nActive(anon):    3340544 kB\nInactive(anon):   968104 kB\nActive(file):    1555820 kB\nInactive(file):  5001928 kB\nUnevictable:           0 kB\nMlocked:               0 kB\nSwapTotal:      12366328 kB\nSwapFree:        8168620 kB\nZswap:                 0 kB\nZswapped:              0 kB\nDirty:              1456 kB\nWriteback:             0 kB\nAnonPages:       3436824 kB\nMapped:           449496 kB\nShmem:            731468 kB\nKReclaimable:    1188104 kB\nSlab:            1423380 kB\nSReclaimable:    1188104 kB\nSUnreclaim:       235276 kB\nKernelStack:       13164 kB\nPageTables:        58376 kB\nSecPageTables:         0 kB\nNFS_Unstable:          0 kB\nBounce:                0 kB\nWritebackTmp:          0 kB\nCommitLimit:    20538772 kB\nCommitted_AS:   12071684 kB\nVmallocTotal:   34359738367 kB\nVmallocUsed:       82540 kB\nVmallocChunk:          0 kB\nPercpu:            64000 kB\nHardwareCorrupted:     0 kB\nAnonHugePages:   1665024 kB\nShmemHugePages:        0 kB\nShmemPmdMapped:        0 kB\nFileHugePages:         0 kB\nFilePmdMapped:         0 kB\nUnaccepted:            0 kB\nHugePages_Total:       0\nHugePages_Free:        0\nHugePages_Rsvd:        0\nHugePages_Surp:        0\nHugepagesize:       2048 kB\nHugetlb:               0 kB\nDirectMap4k:      245604 kB\nDirectMap2M:    10240000 kB\nDirectMap1G:     8388608 kB\n",
+  "load_after": "4.54 4.30 3.86 3/699 1448902\n",
+  "child_usage": {
+    "ru_utime": 81.960906,
+    "ru_stime": 3.098693,
+    "ru_maxrss": 900880,
+    "ru_minflt": 154755,
+    "ru_majflt": 0,
+    "ru_nvcsw": 2,
+    "ru_nivcsw": 10241
+  }
+}

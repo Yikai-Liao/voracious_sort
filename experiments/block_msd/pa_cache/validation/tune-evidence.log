@@ -1,0 +1,3 @@
+tune-1048576-block512-seed42 480 OK
+tune-262144-block64-seed42 480 OK
+all 960 rows; source/binary hashes OK

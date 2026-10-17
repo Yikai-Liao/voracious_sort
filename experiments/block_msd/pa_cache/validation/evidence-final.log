@@ -1,0 +1,5 @@
+guards-priority-1048576 1440 OK
+small-ordered-priority-16384 864 OK
+tune-1048576-block512-seed42 480 OK
+tune-262144-block64-seed42 480 OK
+all 3264 rows; source/binary hashes OK
