@@ -13,7 +13,7 @@ pub(super) fn distribute_local<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
     stats: &mut Work,
 ) -> usize {
     distribute_impl::<T, U, F, false, false, false>(
-        arr, label, block_size, 0, None, false, stats,
+        arr, label, block_size, 0, None, stats,
     )
 }
 
@@ -30,7 +30,6 @@ pub(super) fn distribute_cached<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
         block_size,
         workspace_threshold,
         None,
-        false,
         stats,
     )
 }
@@ -48,7 +47,6 @@ pub(super) fn distribute_sampled<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
         block_size,
         workspace_threshold,
         None,
-        false,
         stats,
     )
 }
@@ -70,7 +68,6 @@ pub(super) fn distribute_prepared<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
         block_size,
         workspace_threshold,
         Some(label_mask),
-        false,
         stats,
     )
 }
@@ -94,31 +91,6 @@ pub(super) fn distribute_prepared_sampled<
         block_size,
         workspace_threshold,
         Some(label_mask),
-        false,
-        stats,
-    )
-}
-
-/// Prepared sampling with the independent four-destination reservation loop.
-pub(super) fn distribute_prepared_reserved<
-    T: Copy,
-    U: NativeKey,
-    F: Fn(&T) -> U,
->(
-    arr: &mut [T],
-    label: &F,
-    block_size: usize,
-    workspace_threshold: usize,
-    label_mask: U,
-    stats: &mut Work,
-) -> usize {
-    distribute_impl::<T, U, F, true, true, false>(
-        arr,
-        label,
-        block_size,
-        workspace_threshold,
-        Some(label_mask),
-        true,
         stats,
     )
 }
@@ -136,7 +108,6 @@ pub(super) fn distribute_reduced<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
         block_size,
         workspace_threshold,
         None,
-        false,
         stats,
     )
 }
@@ -158,7 +129,6 @@ pub(super) fn distribute_sampled_reduced<
         block_size,
         workspace_threshold,
         None,
-        false,
         stats,
     )
 }
@@ -176,7 +146,6 @@ fn distribute_impl<
     block_size: usize,
     workspace_threshold: usize,
     label_mask: Option<U>,
-    reserved: bool,
     stats: &mut Work,
 ) -> usize {
     if arr.len() < 2 {
@@ -205,7 +174,7 @@ fn distribute_impl<
         .expect("budget overflow");
     if passes == 1 || dense_fits::<T>(arr.len(), levels, budget) {
         return finish_label::<T, U, F, REDUCED_RADIX>(
-            arr, label, levels, variation, block_size, budget, reserved, stats,
+            arr, label, levels, variation, block_size, budget, stats,
         );
     }
 
@@ -215,8 +184,7 @@ fn distribute_impl<
         // allocation budget. Sorting performs no hardware discovery.
         if budget <= workspace_threshold {
             return finish_label::<T, U, F, REDUCED_RADIX>(
-                arr, label, levels, variation, block_size, budget, reserved,
-                stats,
+                arr, label, levels, variation, block_size, budget, stats,
             );
         }
         if SAMPLE_GUARD
@@ -224,8 +192,7 @@ fn distribute_impl<
             && !sample_runs_fit_dense(arr, label, high_byte, budget, stats)
         {
             return finish_label::<T, U, F, REDUCED_RADIX>(
-                arr, label, levels, variation, block_size, budget, reserved,
-                stats,
+                arr, label, levels, variation, block_size, budget, stats,
             );
         }
         let mut lengths = [0usize; 256];
@@ -240,8 +207,7 @@ fn distribute_impl<
             // Reject before moving records; the existing variation scan is
             // sufficient to execute the original whole-label path.
             return finish_label::<T, U, F, REDUCED_RADIX>(
-                arr, label, levels, variation, block_size, budget, reserved,
-                stats,
+                arr, label, levels, variation, block_size, budget, stats,
             );
         }
     }
@@ -259,7 +225,6 @@ fn distribute_impl<
         levels,
         high_variation,
         block_size,
-        reserved,
         stats,
     );
     // The root workspace has been released. Only one run's dense or block
@@ -285,7 +250,6 @@ fn distribute_impl<
             low_variation,
             block_size,
             budget,
-            reserved,
             stats,
         );
         start = end;
@@ -351,7 +315,6 @@ fn finish_label<
     variation: U,
     block_size: usize,
     budget: usize,
-    reserved: bool,
     stats: &mut Work,
 ) -> usize {
     let passes = (0..levels).filter(|&i| variation.byte(i) != 0).count();
@@ -365,7 +328,7 @@ fn finish_label<
     } else {
         work! { stats.block_nodes += 1; }
         block_bytes::<T, U, F, REDUCED_RADIX>(
-            arr, label, levels, variation, block_size, reserved, stats,
+            arr, label, levels, variation, block_size, stats,
         );
     }
     passes
@@ -381,7 +344,6 @@ fn block_bytes<T: Copy, U: NativeKey, F: Fn(&T) -> U, const REDUCED: bool>(
     levels: usize,
     variation: U,
     block_size: usize,
-    reserved: bool,
     stats: &mut Work,
 ) {
     let maximum = if REDUCED {
@@ -394,11 +356,7 @@ fn block_bytes<T: Copy, U: NativeKey, F: Fn(&T) -> U, const REDUCED: bool>(
         let mut sorter = block::Sorter::new(arr, maximum + 1, block_size);
         for byte in 0..levels {
             if variation.byte(byte) != 0 {
-                if reserved {
-                    sorter.step_reserved(&normalized, byte);
-                } else {
-                    sorter.step(&normalized, byte);
-                }
+                sorter.step(&normalized, byte);
             }
         }
         sorter.compact();
@@ -411,11 +369,7 @@ fn block_bytes<T: Copy, U: NativeKey, F: Fn(&T) -> U, const REDUCED: bool>(
         let mut sorter = block::Sorter::new(arr, 256, block_size);
         for byte in 0..levels {
             if variation.byte(byte) != 0 {
-                if reserved {
-                    sorter.step_reserved(label, byte);
-                } else {
-                    sorter.step(label, byte);
-                }
+                sorter.step(label, byte);
             }
         }
         sorter.compact();

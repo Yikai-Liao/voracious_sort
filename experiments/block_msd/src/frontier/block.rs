@@ -58,15 +58,12 @@ pub(super) struct Sorter<'a, T> {
     pub(super) tail_records: usize,
 }
 impl<'a, T: Copy> Sorter<'a, T> {
-    pub(super) fn new(
-        records: &'a mut [T],
-        radix_range: usize,
-        block_size: usize,
-    ) -> Self {
+    pub(super) fn new(records: &'a mut [T], radix_range: usize, block_size: usize) -> Self {
         let scratch_blocks = 2 * radix_range;
         let full = records.len() / block_size;
-        let blocks =
-            full.checked_add(scratch_blocks).expect("block count overflow");
+        let blocks = full
+            .checked_add(scratch_blocks)
+            .expect("block count overflow");
         assert!(blocks <= u32::MAX as usize);
         let fill = radix_range + full + 1;
         let mut perm = vec![0; blocks];
@@ -91,13 +88,24 @@ impl<'a, T: Copy> Sorter<'a, T> {
         unsafe {
             ptr::copy_nonoverlapping(
                 records.as_ptr().add(full * block_size),
-                scratch.as_mut_ptr().cast::<T>().add(radix_range * block_size),
+                scratch
+                    .as_mut_ptr()
+                    .cast::<T>()
+                    .add(radix_range * block_size),
                 tail,
             );
         }
-        let mut partials =
-            vec![Partial { index: blocks, length: 0 }; radix_range];
-        partials[0] = Partial { index: fill - 1, length: tail };
+        let mut partials = vec![
+            Partial {
+                index: blocks,
+                length: 0
+            };
+            radix_range
+        ];
+        partials[0] = Partial {
+            index: fill - 1,
+            length: tail,
+        };
         let length = records.len();
         let records = records.as_mut_ptr();
         let scratch_base = scratch.as_mut_ptr().cast::<T>();
@@ -134,9 +142,7 @@ impl<'a, T: Copy> Sorter<'a, T> {
         }
     }
     fn length(&self, logical: usize, partial: &mut usize) -> usize {
-        if *partial < self.partials.len()
-            && self.partials[*partial].index == logical
-        {
+        if *partial < self.partials.len() && self.partials[*partial].index == logical {
             let length = self.partials[*partial].length;
             *partial += 1;
             length
@@ -162,54 +168,29 @@ impl<'a, T: Copy> Sorter<'a, T> {
             .sum();
         assert_eq!(total, self.length);
     }
-    pub(super) fn step<U: super::NativeKey, F: Fn(&T) -> U>(
-        &mut self,
-        label: &F,
-        byte: usize,
-    ) {
-        self.step_impl(label, byte, false);
-    }
-    pub(super) fn step_reserved<U: super::NativeKey, F: Fn(&T) -> U>(
-        &mut self,
-        label: &F,
-        byte: usize,
-    ) {
-        self.step_impl(label, byte, true);
-    }
-    fn step_impl<U: super::NativeKey, F: Fn(&T) -> U>(
-        &mut self,
-        label: &F,
-        byte: usize,
-        reserved: bool,
-    ) {
-        let mut buckets =
-            vec![
-                Bucket::<T> { next: ptr::null_mut(), end: ptr::null_mut() };
-                self.radix_range
-            ];
+    pub(super) fn step<U: super::NativeKey, F: Fn(&T) -> U>(&mut self, label: &F, byte: usize) {
+        let mut buckets = vec![
+            Bucket::<T> {
+                next: ptr::null_mut(),
+                end: ptr::null_mut()
+            };
+            self.radix_range
+        ];
         let mut counts = vec![1_usize; self.radix_range];
         for (i, bucket) in buckets.iter_mut().enumerate() {
             let out = self.block(self.perm[i] as usize);
             // SAFETY: block() returns storage for block_size elements.
-            *bucket =
-                Bucket { next: out, end: unsafe { out.add(self.block_size) } };
+            *bucket = Bucket {
+                next: out,
+                end: unsafe { out.add(self.block_size) },
+            };
             self.usage[i] = i as u8;
         }
         // Match the submitted backend's constant-byte extraction for wide keys.
         // The classifier is fixed across every byte in this macro node.
         macro_rules! pass {
             ($i:literal) => {
-                if reserved
-                    && std::mem::size_of::<T>() <= std::mem::size_of::<usize>()
-                {
-                    self.scatter_reserved::<U, F, $i>(
-                        label,
-                        &mut buckets,
-                        &mut counts,
-                    )
-                } else {
-                    self.scatter::<U, F, $i>(label, &mut buckets, &mut counts)
-                }
+                self.scatter::<U, F, $i>(label, &mut buckets, &mut counts)
             };
         }
         let output = match byte {
@@ -246,16 +227,13 @@ impl<'a, T: Copy> Sorter<'a, T> {
             if unsafe { base.add(self.block_size) } == buckets[b].end {
                 self.partials[b] = Partial {
                     index: j,
-                    length: unsafe {
-                        buckets[b].next.offset_from(base) as usize
-                    },
+                    length: unsafe { buckets[b].next.offset_from(base) as usize },
                 };
             }
         }
         assert!(self.fill + self.radix_range <= self.perm.len());
-        self.perm2[..self.radix_range].copy_from_slice(
-            &self.perm[self.fill..self.fill + self.radix_range],
-        );
+        self.perm2[..self.radix_range]
+            .copy_from_slice(&self.perm[self.fill..self.fill + self.radix_range]);
         self.perm2[self.fill + self.radix_range..]
             .copy_from_slice(&self.perm[self.fill + self.radix_range..]);
         self.fill += self.radix_range;
@@ -310,9 +288,8 @@ impl<'a, T: Copy> Sorter<'a, T> {
             };
             // Bound expansion by copy volume: at most four records and four
             // machine words. The group size is constant after monomorphization.
-            let group = (4 * std::mem::size_of::<usize>()
-                / std::mem::size_of::<T>().max(1))
-            .clamp(1, 4);
+            let group =
+                (4 * std::mem::size_of::<usize>() / std::mem::size_of::<T>().max(1)).clamp(1, 4);
             let complete = length - length % group;
             for start in (0..complete).step_by(group) {
                 for offset in 0..group {
@@ -321,82 +298,6 @@ impl<'a, T: Copy> Sorter<'a, T> {
             }
             for offset in complete..length {
                 write(offset);
-            }
-        }
-        output
-    }
-    // Keep this independent experiment out of the 16-way constant-byte caller.
-    #[inline(never)]
-    fn scatter_reserved<
-        U: super::NativeKey,
-        F: Fn(&T) -> U,
-        const BYTE: usize,
-    >(
-        &mut self,
-        label: &F,
-        buckets: &mut [Bucket<T>],
-        counts: &mut [usize],
-    ) -> usize {
-        let mut output = self.radix_range;
-        let mut partial = 0;
-        for input in self.radix_range..self.fill {
-            let source = self.block(self.perm[input] as usize);
-            let length = self.length(input, &mut partial);
-            macro_rules! reserve {
-                ($b:expr) => {{
-                    let b = $b;
-                    let bucket = &mut buckets[b];
-                    let destination = bucket.next;
-                    // SAFETY: the cursor has one unused cell. Reservation uses
-                    // the original record order and identical block accounting.
-                    bucket.next = unsafe { destination.add(1) };
-                    if bucket.next == bucket.end {
-                        debug_assert!(output <= input);
-                        let out = self.block(self.perm[output] as usize);
-                        *bucket = Bucket {
-                            next: out,
-                            end: unsafe { out.add(self.block_size) },
-                        };
-                        self.usage[output] = b as u8;
-                        counts[b] += 1;
-                        output += 1;
-                    }
-                    destination
-                }};
-            }
-            let complete = length - length % 4;
-            for start in (0..complete).step_by(4) {
-                // SAFETY: these four initialized input cells remain live while
-                // only bucket/permutation metadata is updated. Delaying the
-                // stores preserves the original reservation order and addresses.
-                // Its recycling bound (see scatter) prevents any earlier store
-                // from overwriting a later source cell, including within a group.
-                let [b0, b1, b2, b3] = unsafe {
-                    [
-                        label(&*source.add(start)).byte(BYTE),
-                        label(&*source.add(start + 1)).byte(BYTE),
-                        label(&*source.add(start + 2)).byte(BYTE),
-                        label(&*source.add(start + 3)).byte(BYTE),
-                    ]
-                };
-                let d0 = reserve!(b0);
-                let d1 = reserve!(b1);
-                let d2 = reserve!(b2);
-                let d3 = reserve!(b3);
-                // SAFETY: reservations retain the original destinations and
-                // store order; the source cells remain live until these copies.
-                unsafe {
-                    ptr::copy(source.add(start), d0, 1);
-                    ptr::copy(source.add(start + 1), d1, 1);
-                    ptr::copy(source.add(start + 2), d2, 1);
-                    ptr::copy(source.add(start + 3), d3, 1);
-                }
-            }
-            for offset in complete..length {
-                // SAFETY: offset visits the remaining initialized prefix.
-                let b = label(unsafe { &*source.add(offset) }).byte(BYTE);
-                let destination = reserve!(b);
-                unsafe { ptr::copy(source.add(offset), destination, 1) };
             }
         }
         output
@@ -414,10 +315,7 @@ impl<'a, T: Copy> Sorter<'a, T> {
             let mut output = self.perm2[destination] as usize;
             let source = self.perm[input] as usize;
             if output > input && output < self.fill {
-                debug_assert!(
-                    free_logical < self.radix_range
-                        || free_logical >= self.fill
-                );
+                debug_assert!(free_logical < self.radix_range || free_logical >= self.fill);
                 let from = self.block(destination);
                 let to = self.block(free_physical);
                 // SAFETY: both physical IDs are valid full blocks. Free block
@@ -471,170 +369,5 @@ impl<'a, T: Copy> Sorter<'a, T> {
             start += length;
         }
         assert_eq!(start, self.length);
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::Sorter;
-    use crate::frontier::NativeKey;
-    use std::{cell::RefCell, fmt::Debug};
-
-    #[derive(Clone, Copy, Debug, PartialEq, Eq)]
-    #[repr(C)]
-    struct Record8 {
-        key: u16,
-        payload: u16,
-        id: u32,
-    }
-
-    #[derive(Clone, Copy, Debug, PartialEq, Eq)]
-    struct WideRecord {
-        key: u16,
-        id: u32,
-        payload: [u8; 24],
-    }
-
-    fn check_variants<T: Copy + Debug + Eq, U: NativeKey, F: Fn(&T) -> U>(
-        input: &[T],
-        label: F,
-        bytes: &[usize],
-        radix: usize,
-        block: usize,
-    ) {
-        let mut expected = input.to_vec();
-        expected.sort_by_key(&label);
-        let mut original_work = None;
-        for variant in 0..2 {
-            let mut actual = input.to_vec();
-            let trace = RefCell::new(Vec::new());
-            let counted_label = |record: &T| {
-                trace.borrow_mut().push(*record);
-                label(record)
-            };
-            let mut logical_order = input.to_vec();
-            let mut sorter = Sorter::new(&mut actual, radix, block);
-            for &byte in bytes {
-                trace.borrow_mut().clear();
-                match variant {
-                    0 => sorter.step(&counted_label, byte),
-                    1 => sorter.step_reserved(&counted_label, byte),
-                    _ => unreachable!(),
-                }
-                // Every live record is visited once, in the same logical order,
-                // including duplicate identities and partial-block payloads.
-                assert_eq!(
-                    *trace.borrow(),
-                    logical_order,
-                    "label order: variant {variant}, radix {radix}, block {block}, byte {byte}"
-                );
-                logical_order.sort_by_key(|record| label(record).byte(byte));
-            }
-            sorter.compact();
-            let work = (sorter.compact_records, sorter.tail_records);
-            assert_eq!(sorter.tail_records, input.len() % block);
-            drop(sorter);
-            assert_eq!(
-                actual, expected,
-                "stable records: variant {variant}, radix {radix}, block {block}"
-            );
-            if let Some(original) = original_work {
-                assert_eq!(
-                    work, original,
-                    "compact/tail work: variant {variant}, radix {radix}, block {block}"
-                );
-            } else {
-                original_work = Some(work);
-            }
-        }
-    }
-
-    fn key(id: usize, radix: usize) -> u16 {
-        let digits: &[u16] =
-            if radix == 2 { &[0, 1] } else { &[0, 1, 127, 255] };
-        let low = digits[(id.wrapping_mul(5) ^ (id / 3)) % digits.len()];
-        let high = digits[(id.wrapping_mul(7) ^ (id / 11)) % digits.len()];
-        low | (high << 8)
-    }
-
-    #[test]
-    fn reserved_scatter_preserves_narrow_records_and_work() {
-        assert_eq!(std::mem::size_of::<Record8>(), 8);
-        for block in [3usize, 17, 64] {
-            let mut lengths = vec![0, 1, 2, 3, 4, 63, 64, 65, 257, 4097];
-            lengths.extend([block - 1, block, block + 1]);
-            lengths.sort_unstable();
-            lengths.dedup();
-            for radix in [2, 256] {
-                for &length in &lengths {
-                    let keys: Vec<u16> =
-                        (0..length).rev().map(|id| key(id, radix)).collect();
-                    let bytes: Vec<u8> =
-                        keys.iter().map(|&key| key as u8).collect();
-                    check_variants(&bytes, |&key| key, &[0], radix, block);
-                    check_variants(&keys, |&key| key, &[0, 1], radix, block);
-                    let records: Vec<Record8> = keys
-                        .iter()
-                        .enumerate()
-                        .map(|(id, &key)| Record8 {
-                            key,
-                            payload: (id as u16).wrapping_mul(31337),
-                            id: id as u32,
-                        })
-                        .collect();
-                    check_variants(
-                        &records,
-                        |record| record.key,
-                        &[0, 1],
-                        radix,
-                        block,
-                    );
-                }
-            }
-        }
-    }
-
-    #[test]
-    fn reserved_scatter_preserves_constant_buckets_all_tails_and_wide_payloads()
-    {
-        for block in [3usize, 17, 64] {
-            for radix in [2, 256] {
-                for tail in 0..block {
-                    let records: Vec<Record8> = (0..2 * block + tail)
-                        .rev()
-                        .map(|id| Record8 {
-                            key: 0x0101,
-                            payload: (id as u16).wrapping_mul(31337),
-                            id: id as u32,
-                        })
-                        .collect();
-                    check_variants(
-                        &records,
-                        |record| record.key,
-                        &[0, 1],
-                        radix,
-                        block,
-                    );
-                }
-                let wide: Vec<WideRecord> = (0..257usize)
-                    .rev()
-                    .map(|id| WideRecord {
-                        key: key(id, radix),
-                        id: id as u32,
-                        payload: std::array::from_fn(|offset| {
-                            (id.wrapping_mul(31) ^ offset.wrapping_mul(17))
-                                as u8
-                        }),
-                    })
-                    .collect();
-                check_variants(
-                    &wide,
-                    |record| record.key,
-                    &[0, 1],
-                    radix,
-                    block,
-                );
-            }
-        }
     }
 }
