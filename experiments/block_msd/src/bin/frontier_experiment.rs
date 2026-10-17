@@ -255,6 +255,9 @@ const METHODS: &[&str] = &[
     "Pa_unified_candidate_t16777216",
     "Pa_unified_reuse_t16777216",
     "Pa_unified_prepared_t16777216",
+    "Pa_unified_fixed_t16777216",
+    "Pa_unified_preload_t16777216",
+    "Pa_unified_backend_t16777216",
     "L",
     "L_frozen",
     "H1",
@@ -326,6 +329,15 @@ where
     } else if let Some(value) = method.strip_prefix("Pa_unified_prepared_t") {
         local_workspace_threshold = value.parse().unwrap();
         "Pa_unified_prepared"
+    } else if let Some(value) = method.strip_prefix("Pa_unified_fixed_t") {
+        local_workspace_threshold = value.parse().unwrap();
+        "Pa_unified_fixed"
+    } else if let Some(value) = method.strip_prefix("Pa_unified_preload_t") {
+        local_workspace_threshold = value.parse().unwrap();
+        "Pa_unified_preload"
+    } else if let Some(value) = method.strip_prefix("Pa_unified_backend_t") {
+        local_workspace_threshold = value.parse().unwrap();
+        "Pa_unified_backend"
     } else {
         method
     };
@@ -355,7 +367,10 @@ where
         | "Pa_unified_radix"
         | "Pa_unified_candidate"
         | "Pa_unified_reuse"
-        | "Pa_unified_prepared" => {
+        | "Pa_unified_prepared"
+        | "Pa_unified_fixed"
+        | "Pa_unified_preload"
+        | "Pa_unified_backend" => {
             use frontier::PaExperiment::*;
             let experiment = match method {
                 "Pa_ref" => Reference,
@@ -383,6 +398,9 @@ where
                 "Pa_unified_candidate" => UnifiedCandidate,
                 "Pa_unified_reuse" => UnifiedReuse,
                 "Pa_unified_prepared" => UnifiedPrepared,
+                "Pa_unified_fixed" => UnifiedFixed,
+                "Pa_unified_preload" => UnifiedPreload,
+                "Pa_unified_backend" => UnifiedBackend,
                 _ => Both,
             };
             return frontier::sort_pa_with_threshold::<T, K>(

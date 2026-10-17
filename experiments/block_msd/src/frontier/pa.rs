@@ -31,6 +31,9 @@ pub enum PaExperiment {
     UnifiedCandidate,
     UnifiedReuse,
     UnifiedPrepared,
+    UnifiedFixed,
+    UnifiedPreload,
+    UnifiedBackend,
 }
 
 #[derive(Clone, Copy)]
@@ -50,6 +53,7 @@ struct Policy {
     sampled_distribution: bool,
     reduced_radix: bool,
     prepared_distribution: bool,
+    block_backend: super::local_distribution::Backend,
     local_workspace_threshold: usize,
     block: usize,
 }
@@ -95,6 +99,9 @@ where
                 | PaExperiment::PrefixBandCached
                 | PaExperiment::Unified
                 | PaExperiment::UnifiedCached
+                | PaExperiment::UnifiedFixed
+                | PaExperiment::UnifiedPreload
+                | PaExperiment::UnifiedBackend
                 | PaExperiment::UnifiedReuse
                 | PaExperiment::UnifiedPrepared
                 | PaExperiment::UnifiedSampled
@@ -110,6 +117,9 @@ where
                 | PaExperiment::OrderedTiled
                 | PaExperiment::Unified
                 | PaExperiment::UnifiedCached
+                | PaExperiment::UnifiedFixed
+                | PaExperiment::UnifiedPreload
+                | PaExperiment::UnifiedBackend
                 | PaExperiment::UnifiedReuse
                 | PaExperiment::UnifiedPrepared
                 | PaExperiment::UnifiedSampled
@@ -143,6 +153,9 @@ where
                 | PaExperiment::PrefixBandCached
                 | PaExperiment::Unified
                 | PaExperiment::UnifiedCached
+                | PaExperiment::UnifiedFixed
+                | PaExperiment::UnifiedPreload
+                | PaExperiment::UnifiedBackend
                 | PaExperiment::UnifiedReuse
                 | PaExperiment::UnifiedPrepared
                 | PaExperiment::UnifiedSampled
@@ -158,6 +171,9 @@ where
                 | PaExperiment::PrefixBandCached
                 | PaExperiment::Unified
                 | PaExperiment::UnifiedCached
+                | PaExperiment::UnifiedFixed
+                | PaExperiment::UnifiedPreload
+                | PaExperiment::UnifiedBackend
                 | PaExperiment::UnifiedReuse
                 | PaExperiment::UnifiedPrepared
                 | PaExperiment::UnifiedSampled
@@ -169,6 +185,9 @@ where
             PaExperiment::PrefixBandNested
                 | PaExperiment::Unified
                 | PaExperiment::UnifiedCached
+                | PaExperiment::UnifiedFixed
+                | PaExperiment::UnifiedPreload
+                | PaExperiment::UnifiedBackend
                 | PaExperiment::UnifiedReuse
                 | PaExperiment::UnifiedPrepared
                 | PaExperiment::UnifiedSampled
@@ -181,6 +200,9 @@ where
                 | PaExperiment::PrefixBandStableLeaf
                 | PaExperiment::Unified
                 | PaExperiment::UnifiedCached
+                | PaExperiment::UnifiedFixed
+                | PaExperiment::UnifiedPreload
+                | PaExperiment::UnifiedBackend
                 | PaExperiment::UnifiedReuse
                 | PaExperiment::UnifiedPrepared
                 | PaExperiment::UnifiedSampled
@@ -192,6 +214,9 @@ where
             PaExperiment::OrderedTiled
                 | PaExperiment::Unified
                 | PaExperiment::UnifiedCached
+                | PaExperiment::UnifiedFixed
+                | PaExperiment::UnifiedPreload
+                | PaExperiment::UnifiedBackend
                 | PaExperiment::UnifiedReuse
                 | PaExperiment::UnifiedPrepared
                 | PaExperiment::UnifiedSampled
@@ -205,6 +230,9 @@ where
                 | PaExperiment::PrefixBandCached
                 | PaExperiment::Unified
                 | PaExperiment::UnifiedCached
+                | PaExperiment::UnifiedFixed
+                | PaExperiment::UnifiedPreload
+                | PaExperiment::UnifiedBackend
                 | PaExperiment::UnifiedReuse
                 | PaExperiment::UnifiedPrepared
                 | PaExperiment::UnifiedSampled
@@ -215,6 +243,9 @@ where
             experiment,
             PaExperiment::PrefixBandCached
                 | PaExperiment::UnifiedCached
+                | PaExperiment::UnifiedFixed
+                | PaExperiment::UnifiedPreload
+                | PaExperiment::UnifiedBackend
                 | PaExperiment::UnifiedReuse
                 | PaExperiment::UnifiedPrepared
                 | PaExperiment::UnifiedSampled
@@ -226,6 +257,9 @@ where
             PaExperiment::UnifiedSampled
                 | PaExperiment::UnifiedCandidate
                 | PaExperiment::UnifiedPrepared
+                | PaExperiment::UnifiedFixed
+                | PaExperiment::UnifiedPreload
+                | PaExperiment::UnifiedBackend
         ),
         reduced_radix: matches!(
             experiment,
@@ -233,8 +267,24 @@ where
         ),
         prepared_distribution: matches!(
             experiment,
-            PaExperiment::UnifiedReuse | PaExperiment::UnifiedPrepared
+            PaExperiment::UnifiedReuse
+                | PaExperiment::UnifiedPrepared
+                | PaExperiment::UnifiedFixed
+                | PaExperiment::UnifiedPreload
+                | PaExperiment::UnifiedBackend
         ),
+        block_backend: match experiment {
+            PaExperiment::UnifiedFixed => {
+                super::local_distribution::Backend::Fixed
+            },
+            PaExperiment::UnifiedPreload => {
+                super::local_distribution::Backend::Preload
+            },
+            PaExperiment::UnifiedBackend => {
+                super::local_distribution::Backend::Combined
+            },
+            _ => super::local_distribution::Backend::Original,
+        },
         local_workspace_threshold,
         block,
     };
@@ -673,7 +723,20 @@ fn partition<T: Radixable<K>, K: RadixKey, C: Classifier<Converted<T, K>>>(
     let prepared_mask =
         if policy.prepared_distribution { label_mask } else { None };
     let passes = if let Some(mask) = prepared_mask {
-        if policy.sampled_distribution {
+        if !matches!(
+            policy.block_backend,
+            super::local_distribution::Backend::Original
+        ) {
+            super::local_distribution::distribute_prepared_backend(
+                arr,
+                &label,
+                policy.block,
+                policy.local_workspace_threshold,
+                mask,
+                policy.block_backend,
+                stats,
+            )
+        } else if policy.sampled_distribution {
             super::local_distribution::distribute_prepared_sampled(
                 arr,
                 &label,
