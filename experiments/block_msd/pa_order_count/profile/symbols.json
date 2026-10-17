@@ -1,0 +1,12 @@
+[
+  {
+    "address": 3300064,
+    "size": 3107,
+    "symbol": "block_msd_research::frontier::ordered_tiled::ordered::<frontier_experiment::Wide, u128>"
+  },
+  {
+    "address": 3328960,
+    "size": 2718,
+    "symbol": "block_msd_research::frontier::ordered_tiled::ordered::<u128, u128>"
+  }
+]

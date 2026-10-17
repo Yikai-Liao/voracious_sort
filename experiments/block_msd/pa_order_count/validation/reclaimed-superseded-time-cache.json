@@ -1,0 +1,10 @@
+{
+  "kept_latest": "experiments/block_msd/target/release/incremental/frontier_experiment-30hi91pzzd2m5/s-hnb0ynylp6-0srk8uj-1qu8vanxrvslgxpxikwnzen2f",
+  "removed": [
+    {
+      "path": "experiments/block_msd/target/release/incremental/frontier_experiment-30hi91pzzd2m5/s-hnb0sxp4db-1c1vq95-3vsw8ms2tglwy0z6pgc5wfz9t",
+      "logical_bytes": 139127321
+    }
+  ],
+  "proof": "all previous native builds/tests complete; immutable frozen Time ELF preserved; cache only"
+}

@@ -1,0 +1,47 @@
+{
+  "release": {
+    "opt_level": 3,
+    "debug": "line-tables-only",
+    "codegen_units": 16,
+    "lto": false,
+    "incremental": true,
+    "jobs": 6,
+    "rustflags": "-C target-cpu=native"
+  },
+  "time_features": [],
+  "work_features": [
+    "frontier_work"
+  ],
+  "asan": {
+    "toolchain": "nightly",
+    "target": "x86_64-unknown-linux-gnu",
+    "features": [
+      "frontier_work"
+    ],
+    "profile": "release",
+    "debug_assertions": false,
+    "overflow_checks": false,
+    "rustflags": "-Zsanitizer=address -C target-cpu=native",
+    "ASAN_OPTIONS": "detect_leaks=1",
+    "purpose": "not yet built for this source"
+  },
+  "dependency_flags": [
+    "--locked",
+    "--offline"
+  ],
+  "timing_affinity": [
+    2
+  ],
+  "offline_local_threshold_bytes": 16777216,
+  "asan_release": {
+    "features": [],
+    "profile": "release",
+    "rustflags": "-Zsanitizer=address -C target-cpu=native",
+    "target": "x86_64-unknown-linux-gnu",
+    "work_counters": false,
+    "purpose": "not yet built for this source"
+  },
+  "source_commit": "aee9c8e3b581ec01fe5ec013dd2f5021d7c7e2cd",
+  "changes_from_previous": "retain cb10efb equality proof; replace monotone boolean reduction with exact u8 violation count at most TILE=128; key calls/tile boundaries/Work unchanged",
+  "status": "REJECTED: wide32 sorted gap remains; broad tests and extended validation not run"
+}
