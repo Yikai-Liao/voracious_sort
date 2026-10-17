@@ -4,6 +4,8 @@
 use std::{mem::MaybeUninit, ptr};
 use voracious_radix_sort::{RadixKey, Radixable};
 mod block;
+mod pa;
+pub use pa::{sort_pa_experiment, PaExperiment};
 #[cfg(test)]
 mod tests;
 
@@ -32,6 +34,7 @@ pub struct Work {
     pub nodes: usize,
     pub node_records: usize,
     pub prepare_records: usize,
+    pub order_records: usize,
     pub candidate_records: usize,
     pub label_records: usize,
     pub label_evals: usize,
@@ -47,6 +50,8 @@ pub struct Work {
     pub leaf_records: usize,
     pub max_depth: usize,
     pub max_path_passes: usize,
+    pub frontier_nodes: usize,
+    pub equal_nodes: usize,
     pub leaf_lengths: [usize; 129],
 }
 
@@ -56,6 +61,7 @@ impl Default for Work {
             nodes: 0,
             node_records: 0,
             prepare_records: 0,
+            order_records: 0,
             candidate_records: 0,
             label_records: 0,
             label_evals: 0,
@@ -71,6 +77,8 @@ impl Default for Work {
             leaf_records: 0,
             max_depth: 0,
             max_path_passes: 0,
+            frontier_nodes: 0,
+            equal_nodes: 0,
             leaf_lengths: [0; 129],
         }
     }
@@ -275,7 +283,7 @@ fn node<T: Radixable<K>, K: RadixKey, const MODE: u8>(
             }
         }
     }
-    work! { stats.prepare_records += arr.len(); if MODE == 3 { stats.candidate_records += arr.len(); } }
+    work! { stats.prepare_records += arr.len(); stats.order_records += arr.len(); if MODE == 3 { stats.candidate_records += arr.len(); } }
     if ascending {
         return;
     }
@@ -283,9 +291,13 @@ fn node<T: Radixable<K>, K: RadixKey, const MODE: u8>(
         arr.reverse();
         let mut start = 0;
         while start < arr.len() {
+            work! { stats.order_records += 1; }
             let key = arr[start].into_key_type();
             let mut end = start + 1;
-            while end < arr.len() && arr[end].into_key_type() == key {
+            while end < arr.len() && {
+                work! { stats.order_records += 1; }
+                arr[end].into_key_type() == key
+            } {
                 end += 1;
             }
             arr[start..end].reverse();
@@ -316,6 +328,7 @@ fn node<T: Radixable<K>, K: RadixKey, const MODE: u8>(
     if MODE == 0 {
         distribute_children::<T, K, _, MODE>(arr, &Identity, config, stats, depth, path);
     } else if MODE == 3 {
+        work! { stats.frontier_nodes += 1; }
         let classifier = Frontier::new(pivot, width, coarse);
         distribute_children::<T, K, _, MODE>(arr, &classifier, config, stats, depth, path);
     } else {

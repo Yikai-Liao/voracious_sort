@@ -163,6 +163,29 @@ fn recursive_identity_and_payload_matrix() {
                     }
                 }
             }
+            for experiment in [
+                PaExperiment::Reference,
+                PaExperiment::Terminal,
+                PaExperiment::Ordered,
+                PaExperiment::Lean,
+                PaExperiment::Skew,
+                PaExperiment::Both,
+                PaExperiment::SkewThreeWay,
+                PaExperiment::BothThreeWay,
+            ] {
+                let mut actual = input.clone();
+                sort_pa_experiment::<_, u128>(&mut actual, experiment, 64);
+                assert!(
+                    actual
+                        .iter()
+                        .zip(&expected)
+                        .all(|(a, b)| a.key == b.key && a.id == b.id && a.payload == b.payload),
+                    "Pa experiment {:?} n={} distribution={}",
+                    experiment,
+                    n,
+                    distribution
+                );
+            }
         }
     }
 }
@@ -257,6 +280,34 @@ fn native_small_integer_widths() {
             check!(i32);
         }
     }
+    for experiment in [
+        PaExperiment::Reference,
+        PaExperiment::Terminal,
+        PaExperiment::Ordered,
+        PaExperiment::Lean,
+        PaExperiment::Skew,
+        PaExperiment::Both,
+        PaExperiment::SkewThreeWay,
+        PaExperiment::BothThreeWay,
+    ] {
+        macro_rules! check_pa {
+            ($t:ty) => {{
+                let mut actual: Vec<$t> = values.iter().map(|&x| x as $t).collect();
+                let mut expected = actual.clone();
+                expected.sort();
+                sort_pa_experiment::<_, $t>(&mut actual, experiment, 1);
+                assert_eq!(actual, expected);
+            }};
+        }
+        check_pa!(u8);
+        check_pa!(u16);
+        check_pa!(u32);
+        check_pa!(u64);
+        check_pa!(i8);
+        check_pa!(i16);
+        check_pa!(i32);
+        check_pa!(i64);
+    }
 }
 
 #[test]
@@ -287,6 +338,68 @@ fn block_tail_sizes_and_large_workspace() {
                 .iter()
                 .zip(&expected)
                 .all(|(a, b)| a.key == b.key && a.id == b.id && a.payload == b.payload));
+        }
+        for experiment in [
+            PaExperiment::Reference,
+            PaExperiment::Terminal,
+            PaExperiment::Ordered,
+            PaExperiment::Lean,
+            PaExperiment::Skew,
+            PaExperiment::Both,
+            PaExperiment::SkewThreeWay,
+            PaExperiment::BothThreeWay,
+        ] {
+            let mut actual = input.clone();
+            sort_pa_experiment::<_, u128>(&mut actual, experiment, block);
+            assert!(actual
+                .iter()
+                .zip(&expected)
+                .all(|(a, b)| a.key == b.key && a.id == b.id && a.payload == b.payload));
+        }
+    }
+}
+
+#[test]
+#[cfg(feature = "frontier_work")]
+fn pa_skew_gate_uses_a_heavy_child() {
+    let mut state = 42;
+    for heavy in [false, true] {
+        let input: Vec<Item> = (0..32769)
+            .map(|id| Item {
+                key: if heavy && id % 10 != 0 {
+                    0
+                } else {
+                    if heavy {
+                        1u128 << (id % 128)
+                    } else {
+                        (random(&mut state) as u128) << 64 | random(&mut state) as u128
+                    }
+                },
+                id,
+                payload: [id as u64; 3],
+            })
+            .collect();
+        let mut reference = input.clone();
+        let mut actual = input.clone();
+        let before = sort::<_, u128>(
+            &mut reference,
+            Config {
+                mode: Mode::P,
+                bytes: 0,
+                coarse_bits: 0,
+                block: 64,
+            },
+        );
+        let after = sort_pa_experiment::<_, u128>(&mut actual, PaExperiment::Skew, 64);
+        assert!(actual
+            .iter()
+            .zip(&reference)
+            .all(|(a, b)| a.key == b.key && a.id == b.id && a.payload == b.payload));
+        if heavy {
+            assert!(after.candidate_records > 0);
+            assert!(after.scatter_records < before.scatter_records);
+        } else {
+            assert_eq!(after.candidate_records, 0);
         }
     }
 }

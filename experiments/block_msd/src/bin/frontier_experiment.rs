@@ -90,6 +90,11 @@ impl Radixable<u32> for Large {
 trait Verified {
     fn same(&self, b: &Self) -> bool;
 }
+impl Verified for u8 {
+    fn same(&self, b: &Self) -> bool {
+        self == b
+    }
+}
 impl Verified for u16 {
     fn same(&self, b: &Self) -> bool {
         self == b
@@ -159,6 +164,32 @@ struct Small16 {
     key: u16,
     serial: u32,
 }
+#[derive(Clone, Copy, Debug)]
+struct Small8 {
+    key: u8,
+    serial: u32,
+}
+impl PartialEq for Small8 {
+    fn eq(&self, b: &Self) -> bool {
+        self.key == b.key
+    }
+}
+impl PartialOrd for Small8 {
+    fn partial_cmp(&self, b: &Self) -> Option<Cmp> {
+        self.key.partial_cmp(&b.key)
+    }
+}
+impl Radixable<u8> for Small8 {
+    type Key = u8;
+    fn key(&self) -> u8 {
+        self.key
+    }
+}
+impl Verified for Small8 {
+    fn same(&self, b: &Self) -> bool {
+        self.key == b.key && self.serial == b.serial
+    }
+}
 impl PartialEq for Small16 {
     fn eq(&self, b: &Self) -> bool {
         self.key == b.key
@@ -182,6 +213,14 @@ impl Verified for Small16 {
 }
 
 const METHODS: &[&str] = &[
+    "Pa_ref",
+    "Pa_terminal",
+    "Pa_ordered",
+    "Pa_lean",
+    "Pa_skew",
+    "Pa_skew3",
+    "Pa_both",
+    "Pa_both3",
     "L",
     "L_frozen",
     "H1",
@@ -225,6 +264,21 @@ where
     <<T as Radixable<K>>::Key as RadixKey>::Key: frontier::NativeKey,
 {
     match method {
+        "Pa_ref" | "Pa_terminal" | "Pa_ordered" | "Pa_lean" | "Pa_skew" | "Pa_both"
+        | "Pa_skew3" | "Pa_both3" => {
+            use frontier::PaExperiment::*;
+            let experiment = match method {
+                "Pa_ref" => Reference,
+                "Pa_terminal" => Terminal,
+                "Pa_ordered" => Ordered,
+                "Pa_lean" => Lean,
+                "Pa_skew" => Skew,
+                "Pa_skew3" => SkewThreeWay,
+                "Pa_both3" => BothThreeWay,
+                _ => Both,
+            };
+            return frontier::sort_pa_experiment::<T, K>(arr, experiment, block);
+        }
         "L_frozen" => {
             block_msd_research::submitted_lsd::block_lsd_stable_radixsort::<T, K>(arr, 8, block);
             return Default::default();
@@ -461,6 +515,7 @@ fn run<T: Radixable<K> + Verified, K: RadixKey>(
                 stats.nodes.to_string(),
                 stats.node_records.to_string(),
                 stats.prepare_records.to_string(),
+                stats.order_records.to_string(),
                 stats.candidate_records.to_string(),
                 stats.label_evals.to_string(),
                 stats.scatter_records.to_string(),
@@ -475,6 +530,8 @@ fn run<T: Radixable<K> + Verified, K: RadixKey>(
                 stats.leaf_records.to_string(),
                 stats.max_depth.to_string(),
                 stats.max_path_passes.to_string(),
+                stats.frontier_nodes.to_string(),
+                stats.equal_nodes.to_string(),
                 cfg!(feature = "frontier_work").to_string(),
                 (actual.as_ptr() as usize).to_string(),
                 lengths,
@@ -515,10 +572,11 @@ fn main() {
     let seed = args
         .get(8)
         .map_or(0x123456789abcdef, |s| s.parse().unwrap());
-    println!("layout,case,n,record_bytes,seed,block,method,slot,rep,kind,wall_ns,cpu_ns,heap_peak,allocs,nodes,node_records,prepare_records,candidate_records,label_evals,scatter_records,dense_nodes,block_nodes,passes,compact_records,tail_records,runs_records,unresolved_records,leaves,leaf_records,max_depth,max_path_passes,instrumented,input_address,leaf_lengths");
+    println!("layout,case,n,record_bytes,seed,block,method,slot,rep,kind,wall_ns,cpu_ns,heap_peak,allocs,nodes,node_records,prepare_records,order_records,candidate_records,label_evals,scatter_records,dense_nodes,block_nodes,passes,compact_records,tail_records,runs_records,unresolved_records,leaves,leaf_records,max_depth,max_path_passes,frontier_nodes,equal_nodes,instrumented,input_address,leaf_lengths");
     for layout in layouts {
         for &case in &cases {
             let bits = match layout {
+                "u8" | "u8_id8" => 8,
                 "u16" | "u16_id8" => 16,
                 "u32" | "small8" | "large128" => 32,
                 "u64" => 64,
@@ -527,6 +585,32 @@ fn main() {
             };
             let keys = make_keys(n, bits, case, seed);
             match layout {
+                "u8" => run::<_, u8>(
+                    keys.iter().map(|&x| x as u8).collect(),
+                    layout,
+                    case,
+                    &methods,
+                    reps,
+                    block,
+                    seed,
+                    kind,
+                ),
+                "u8_id8" => run::<_, u8>(
+                    keys.iter()
+                        .enumerate()
+                        .map(|(i, &key)| Small8 {
+                            key: key as u8,
+                            serial: i as u32,
+                        })
+                        .collect(),
+                    layout,
+                    case,
+                    &methods,
+                    reps,
+                    block,
+                    seed,
+                    kind,
+                ),
                 "u16" => run::<_, u16>(
                     keys.iter().map(|&x| x as u16).collect(),
                     layout,
