@@ -94,26 +94,25 @@ where
     let complete = pairs - pairs % TILE;
     let left_tiles = arr[..pairs].chunks_exact(TILE);
     let right_tiles = arr[1..].chunks_exact(TILE);
-    let zero = Converted::<T, K>::from_u128(0);
     let mut has_equal_keys = false;
     // Offset slices include the pairs crossing record-tile boundaries. Each
     // comparison is independent; the direction is specialized outside the loop.
     for (left, right) in left_tiles.zip(right_tiles) {
-        let mut difference = zero;
+        // At most TILE=128 pairs can violate the direction, so this count
+        // cannot overflow u8 and is zero exactly when the tile is ordered.
+        let mut violations = 0u8;
         for offset in 0..TILE {
             work! { stats.order_records += 2; }
             let left = left[offset].into_key_type();
             let right = right[offset].into_key_type();
-            // The ordered extremum equals `left` exactly when this pair has
-            // the required direction. Any violation contributes a set bit.
-            let ordered_left =
-                if DESCENDING { left.max(right) } else { left.min(right) };
-            difference |= left ^ ordered_left;
+            violations += u8::from(
+                if DESCENDING { left < right } else { left > right },
+            );
             if DESCENDING {
                 has_equal_keys |= left == right;
             }
         }
-        if difference != zero {
+        if violations != 0 {
             return (false, false);
         }
     }
