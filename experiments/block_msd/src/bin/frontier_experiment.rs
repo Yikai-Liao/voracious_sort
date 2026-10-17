@@ -227,6 +227,8 @@ const METHODS: &[&str] = &[
     "Pa_both3",
     "Pa_core3",
     "Pa_probe3",
+    "Pa_band",
+    "Pa_band_child",
     "L",
     "L_frozen",
     "H1",
@@ -254,6 +256,8 @@ const CASES: &[&str] = &[
     "few",
     "common_high",
     "deep_skew",
+    "deep_unique90",
+    "deep_unique98",
     "multi_heavy",
     "majority_prefix",
     "outlier_first",
@@ -271,7 +275,8 @@ where
 {
     match method {
         "Pa_ref" | "Pa_terminal" | "Pa_ordered" | "Pa_lean" | "Pa_skew"
-        | "Pa_both" | "Pa_skew3" | "Pa_both3" | "Pa_core3" | "Pa_probe3" => {
+        | "Pa_both" | "Pa_skew3" | "Pa_both3" | "Pa_core3" | "Pa_probe3"
+        | "Pa_band" | "Pa_band_child" => {
             use frontier::PaExperiment::*;
             let experiment = match method {
                 "Pa_ref" => Reference,
@@ -283,6 +288,8 @@ where
                 "Pa_both3" => BothThreeWay,
                 "Pa_core3" => CoreThreeWay,
                 "Pa_probe3" => ProbeThreeWay,
+                "Pa_band" => PrefixBand,
+                "Pa_band_child" => PrefixBandChild,
                 _ => Both,
             };
             return frontier::sort_pa_experiment::<T, K>(
@@ -338,6 +345,12 @@ where
 fn make_keys(n: usize, bits: usize, case: &str, seed: u64) -> Vec<u128> {
     let mut state = seed;
     let mask = if bits == 128 { u128::MAX } else { (1u128 << bits) - 1 };
+    let unique_bits =
+        usize::BITS as usize - n.saturating_sub(1).leading_zeros() as usize;
+    let reserved = ((unique_bits + 7) / 8) * 8;
+    if case.starts_with("deep_unique") {
+        assert!(reserved <= bits, "distinct workload does not fit key width");
+    }
     let mut keys: Vec<u128> = (0..n)
         .map(|i| {
             let r = ((random(&mut state) as u128) << 64
@@ -354,6 +367,25 @@ fn make_keys(n: usize, bits: usize, case: &str, seed: u64) -> Vec<u128> {
                     } else {
                         1u128 << (i % bits)
                     }
+                },
+                "deep_unique90" | "deep_unique98" => {
+                    let keep = if case == "deep_unique90" { 90 } else { 98 };
+                    let mut key = i as u128;
+                    let mut exited = false;
+                    for byte in (reserved / 8..bits / 8).rev() {
+                        let draw = random(&mut state);
+                        if !exited && draw % 100 < keep {
+                            continue;
+                        }
+                        let value = if exited {
+                            draw & 255
+                        } else {
+                            1 + (draw >> 8) % 255
+                        };
+                        exited = true;
+                        key |= (value as u128) << (byte * 8);
+                    }
+                    key
                 },
                 "multi_heavy" => ((r % 4) << (bits - 2)) | (r & 0xfff),
                 "majority_prefix" => {
@@ -399,6 +431,29 @@ fn make_keys(n: usize, bits: usize, case: &str, seed: u64) -> Vec<u128> {
     keys
 }
 
+#[cfg(test)]
+mod workload_tests {
+    use super::*;
+    #[test]
+    fn progressive_skew_has_distinct_complete_keys() {
+        for bits in [32, 64, 128] {
+            for case in ["deep_unique90", "deep_unique98"] {
+                let keys = make_keys(32769, bits, case, 42);
+                let mut sorted = keys.clone();
+                sorted.sort();
+                assert!(sorted.windows(2).all(|w| w[0] != w[1]));
+                assert!(keys.windows(2).any(|w| w[0] > w[1]));
+                let first_byte_zero =
+                    keys.iter().filter(|&&x| x >> (bits - 8) == 0).count();
+                assert!(
+                    first_byte_zero > keys.len() * 8 / 10
+                        && first_byte_zero < keys.len()
+                );
+            }
+        }
+    }
+}
+
 #[repr(C)]
 #[derive(Default)]
 struct Timespec {
@@ -442,7 +497,7 @@ fn run<T: Radixable<K> + Verified, K: RadixKey>(
         );
     }
     for rep in 0..reps {
-        // Rotate and reverse each paired block. Duplicate L entries provide A/A.
+        // Rotate and reverse each paired block. Repeated method slots provide A/A.
         for j in 0..methods.len() {
             let index = if rep % 2 == 0 {
                 (j + rep / 2) % methods.len()
@@ -540,6 +595,9 @@ fn run<T: Radixable<K> + Verified, K: RadixKey>(
                 stats.max_path_passes.to_string(),
                 stats.frontier_nodes.to_string(),
                 stats.equal_nodes.to_string(),
+                stats.band_nodes.to_string(),
+                stats.band_records.to_string(),
+                stats.probe_records.to_string(),
                 cfg!(feature = "frontier_work").to_string(),
                 (actual.as_ptr() as usize).to_string(),
                 lengths,
@@ -578,7 +636,7 @@ fn main() {
     );
     let block = args.get(7).map_or(64, |s| s.parse().unwrap());
     let seed = args.get(8).map_or(0x123456789abcdef, |s| s.parse().unwrap());
-    println!("layout,case,n,record_bytes,seed,block,method,slot,rep,kind,wall_ns,cpu_ns,heap_peak,allocs,nodes,node_records,prepare_records,order_records,candidate_records,label_evals,scatter_records,dense_nodes,block_nodes,passes,compact_records,tail_records,runs_records,unresolved_records,leaves,leaf_records,max_depth,max_path_passes,frontier_nodes,equal_nodes,instrumented,input_address,leaf_lengths");
+    println!("layout,case,n,record_bytes,seed,block,method,slot,rep,kind,wall_ns,cpu_ns,heap_peak,allocs,nodes,node_records,prepare_records,order_records,candidate_records,label_evals,scatter_records,dense_nodes,block_nodes,passes,compact_records,tail_records,runs_records,unresolved_records,leaves,leaf_records,max_depth,max_path_passes,frontier_nodes,equal_nodes,band_nodes,band_records,probe_records,instrumented,input_address,leaf_lengths");
     for layout in layouts {
         for &case in &cases {
             let bits = match layout {

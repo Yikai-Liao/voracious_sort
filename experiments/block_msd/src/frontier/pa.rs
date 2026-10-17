@@ -1,5 +1,6 @@
 //! Independent Pa ablations. Policies change node preparation or its classifier;
 //! all policies use the same distribution workspace and recursive ownership.
+use super::prefix_band::PrefixBand;
 use super::*;
 
 #[derive(Clone, Copy, Debug)]
@@ -14,6 +15,8 @@ pub enum PaExperiment {
     BothThreeWay,
     CoreThreeWay,
     ProbeThreeWay,
+    PrefixBand,
+    PrefixBandChild,
 }
 
 #[derive(Clone, Copy)]
@@ -23,6 +26,8 @@ struct Policy {
     skew: bool,
     three_way: bool,
     probe: bool,
+    band: bool,
+    band_root: bool,
     block: usize,
 }
 
@@ -44,6 +49,8 @@ where
                 | PaExperiment::BothThreeWay
                 | PaExperiment::CoreThreeWay
                 | PaExperiment::ProbeThreeWay
+                | PaExperiment::PrefixBand
+                | PaExperiment::PrefixBandChild
         ),
         ordered: matches!(
             experiment,
@@ -69,6 +76,11 @@ where
                 | PaExperiment::ProbeThreeWay
         ),
         probe: matches!(experiment, PaExperiment::ProbeThreeWay),
+        band: matches!(
+            experiment,
+            PaExperiment::PrefixBand | PaExperiment::PrefixBandChild
+        ),
+        band_root: matches!(experiment, PaExperiment::PrefixBand),
         block,
     };
     let mut stats = Work::default();
@@ -131,6 +143,36 @@ where
         }
     }
     p
+}
+
+fn prepare_band<T: Radixable<K>, K: RadixKey>(
+    arr: &[T],
+    band: &PrefixBand<Converted<T, K>>,
+) -> (Prepared<Converted<T, K>>, usize)
+where
+    Converted<T, K>: NativeKey,
+{
+    let first = arr[0].into_key_type();
+    let mut p = Prepared {
+        union: first,
+        intersection: first,
+        ascending: true,
+        descending: true,
+        pivot: first,
+        votes: 0,
+    };
+    let mut previous = first;
+    let mut population = 0;
+    for item in arr {
+        let key = item.into_key_type();
+        p.union |= key;
+        p.intersection &= key;
+        p.ascending &= previous <= key;
+        p.descending &= previous >= key;
+        previous = key;
+        population += usize::from(band.contains(key));
+    }
+    (p, population)
 }
 
 // Return as soon as an order violation is seen. Reverse only after validating
@@ -249,19 +291,34 @@ fn visit<T: Radixable<K>, K: RadixKey>(
     if policy.ordered && ordered::<T, K>(arr, stats) {
         return;
     }
+    let bytes =
+        (usize::BITS as usize - (arr.len() - 1).leading_zeros() as usize + 7)
+            / 8;
+    let band = if policy.band && (heavy || (policy.band_root && depth == 0)) {
+        super::prefix_band::sample::<T, K>(arr, cap, bytes * 8, stats)
+    } else {
+        None
+    };
     let candidate = policy.skew
         && cap > 8
         && (heavy
             || (policy.probe
                 && depth == 0
                 && root_majority_signal::<T, K>(arr)));
-    let p = match (policy.ordered, candidate) {
-        (false, false) => prepare::<T, K, true, false>(arr),
-        (false, true) => prepare::<T, K, true, true>(arr),
-        (true, false) => prepare::<T, K, false, false>(arr),
-        (true, true) => prepare::<T, K, false, true>(arr),
+    let mut population = 0;
+    let p = if let Some(ref band) = band {
+        let (p, count) = prepare_band::<T, K>(arr, band);
+        population = count;
+        p
+    } else {
+        match (policy.ordered, candidate) {
+            (false, false) => prepare::<T, K, true, false>(arr),
+            (false, true) => prepare::<T, K, true, true>(arr),
+            (true, false) => prepare::<T, K, false, false>(arr),
+            (true, true) => prepare::<T, K, false, true>(arr),
+        }
     };
-    work! { stats.prepare_records += arr.len(); if !policy.ordered { stats.order_records += arr.len(); } if candidate { stats.candidate_records += arr.len(); } }
+    work! { stats.prepare_records += arr.len(); if !policy.ordered { stats.order_records += arr.len(); } if candidate || band.is_some() { stats.candidate_records += arr.len(); } }
     if !policy.ordered {
         if p.ascending {
             return;
@@ -278,13 +335,16 @@ fn visit<T: Radixable<K>, K: RadixKey>(
     if width == 0 {
         return;
     }
-    let bytes =
-        (usize::BITS as usize - (arr.len() - 1).leading_zeros() as usize + 7)
-            / 8;
     let coarse = width.min(8 * bytes);
     work! { stats.nodes += 1; stats.node_records += arr.len(); }
     let use_skew = candidate && p.votes > arr.len() / 2 && width > 8;
-    if policy.terminal && coarse == width && !(policy.probe && use_skew) {
+    let approved_band = band
+        .and_then(|band| band.approve(width, coarse, population, arr.len()));
+    if let Some(band) = approved_band {
+        work! { stats.band_nodes += 1; stats.band_records += population; }
+        partition::<T, K, _>(arr, &band, policy, false, stats, depth, path);
+    } else if policy.terminal && coarse == width && !(policy.probe && use_skew)
+    {
         partition::<T, K, _>(arr, &Identity, policy, true, stats, depth, path);
     } else if use_skew {
         // Each surviving BM vote is an occurrence of the final candidate.

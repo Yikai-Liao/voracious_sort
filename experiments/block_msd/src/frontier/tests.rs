@@ -183,6 +183,8 @@ fn recursive_identity_and_payload_matrix() {
                 PaExperiment::BothThreeWay,
                 PaExperiment::CoreThreeWay,
                 PaExperiment::ProbeThreeWay,
+                PaExperiment::PrefixBand,
+                PaExperiment::PrefixBandChild,
             ] {
                 let mut actual = input.clone();
                 sort_pa_experiment::<_, u128>(&mut actual, experiment, 64);
@@ -283,6 +285,8 @@ fn native_small_integer_widths() {
         PaExperiment::BothThreeWay,
         PaExperiment::CoreThreeWay,
         PaExperiment::ProbeThreeWay,
+        PaExperiment::PrefixBand,
+        PaExperiment::PrefixBandChild,
     ] {
         macro_rules! check_pa {
             ($t:ty) => {{
@@ -340,6 +344,8 @@ fn block_tail_sizes_and_large_workspace() {
             PaExperiment::BothThreeWay,
             PaExperiment::CoreThreeWay,
             PaExperiment::ProbeThreeWay,
+            PaExperiment::PrefixBand,
+            PaExperiment::PrefixBandChild,
         ] {
             let mut actual = input.clone();
             sort_pa_experiment::<_, u128>(&mut actual, experiment, block);
@@ -416,6 +422,7 @@ fn pa_root_probe_is_only_a_cost_signal() {
     for i in 0..64 {
         input[i * (32769 - 1) / 63] = if i == 20 { 1 } else { 0 };
     }
+    let original = input.clone();
     let mut expected = input.clone();
     expected.sort();
     let work = sort_pa_experiment::<_, u32>(
@@ -426,4 +433,52 @@ fn pa_root_probe_is_only_a_cost_signal() {
     assert_eq!(input, expected);
     assert!(work.candidate_records >= 32769);
     assert_eq!(work.equal_nodes, 0);
+    let mut input = original;
+    let work =
+        sort_pa_experiment::<_, u32>(&mut input, PaExperiment::PrefixBand, 64);
+    assert_eq!(input, expected);
+    assert!(work.candidate_records >= 32769);
+    assert_eq!(work.band_nodes, 0);
+}
+
+#[test]
+#[cfg(feature = "frontier_work")]
+fn pa_prefix_band_handles_distinct_keys() {
+    let mut input: Vec<Item> = (0..32769)
+        .map(|id| Item {
+            key: id as u128
+                | if id % 10 == 0 { 1u128 << (32 + id % 96) } else { 0 },
+            id,
+            payload: [id as u64; 3],
+        })
+        .collect();
+    let mut state = 42;
+    for i in (1..input.len()).rev() {
+        let j = random(&mut state) as usize % (i + 1);
+        input.swap(i, j);
+    }
+    let mut expected = input.clone();
+    expected.sort_by_key(|x| x.key);
+    assert!(expected.windows(2).all(|w| w[0].key != w[1].key));
+    let mut reference = input.clone();
+    let before = sort::<_, u128>(
+        &mut reference,
+        Config { mode: Mode::P, bytes: 0, coarse_bits: 0, block: 64 },
+    );
+    let mut actual = input;
+    let after = sort_pa_experiment::<_, u128>(
+        &mut actual,
+        PaExperiment::PrefixBand,
+        64,
+    );
+    assert!(actual.iter().zip(&expected).all(|(a, b)| a.key == b.key
+        && a.id == b.id
+        && a.payload == b.payload));
+    assert!(after.band_nodes > 0);
+    assert_eq!(after.equal_nodes, 0);
+    assert!(after.scatter_records < before.scatter_records);
+    // The classifier must skip prefix work; compact is an independent cost,
+    // not a monotone consequence of fewer radix writes.
+    eprintln!("distinct fixture: scatter {} -> {}, compact {} -> {}",
+        before.scatter_records, after.scatter_records, before.compact_records, after.compact_records);
 }

@@ -1,10 +1,14 @@
 //! Serial L/H/P/F screen. No production entry point changes.
 //! Each node releases its distribution workspace before visiting children.
-#![cfg_attr(not(feature = "frontier_work"), allow(unused_variables, unused_mut))]
+#![cfg_attr(
+    not(feature = "frontier_work"),
+    allow(unused_variables, unused_mut)
+)]
 use std::{mem::MaybeUninit, ptr};
 use voracious_radix_sort::{RadixKey, Radixable};
 mod block;
 mod pa;
+mod prefix_band;
 pub use pa::{sort_pa_experiment, PaExperiment};
 #[cfg(test)]
 mod tests;
@@ -52,6 +56,9 @@ pub struct Work {
     pub max_path_passes: usize,
     pub frontier_nodes: usize,
     pub equal_nodes: usize,
+    pub band_nodes: usize,
+    pub band_records: usize,
+    pub probe_records: usize,
     pub leaf_lengths: [usize; 129],
 }
 
@@ -79,6 +86,9 @@ impl Default for Work {
             max_path_passes: 0,
             frontier_nodes: 0,
             equal_nodes: 0,
+            band_nodes: 0,
+            band_records: 0,
+            probe_records: 0,
             leaf_lengths: [0; 129],
         }
     }
@@ -207,7 +217,10 @@ impl<U: NativeKey> Classifier<U> for Frontier<U> {
             self.equal
         } else {
             self.high
-                + U::from_u128(self.exits[U::BITS - 1 - diff.leading_zeros() as usize] as u128)
+                + U::from_u128(
+                    self.exits[U::BITS - 1 - diff.leading_zeros() as usize]
+                        as u128,
+                )
         }
     }
     fn remaining(&self, key: U) -> usize {
@@ -228,16 +241,26 @@ pub fn sort<T: Radixable<K>, K: RadixKey>(arr: &mut [T], config: Config) -> Work
 where
     Converted<T, K>: NativeKey,
 {
-    assert!(config.block > 0 && config.bytes <= 16 && config.coarse_bits <= 128);
+    assert!(
+        config.block > 0 && config.bytes <= 16 && config.coarse_bits <= 128
+    );
     let mut stats = Work::default();
     if arr.len() < 2 || std::mem::size_of::<T>() == 0 {
         return stats;
     }
     match config.mode {
-        Mode::L => node::<T, K, 0>(arr, arr[0].type_size(), config, &mut stats, 0, 0),
-        Mode::H => node::<T, K, 1>(arr, arr[0].type_size(), config, &mut stats, 0, 0),
-        Mode::P => node::<T, K, 2>(arr, arr[0].type_size(), config, &mut stats, 0, 0),
-        Mode::F => node::<T, K, 3>(arr, arr[0].type_size(), config, &mut stats, 0, 0),
+        Mode::L => {
+            node::<T, K, 0>(arr, arr[0].type_size(), config, &mut stats, 0, 0)
+        },
+        Mode::H => {
+            node::<T, K, 1>(arr, arr[0].type_size(), config, &mut stats, 0, 0)
+        },
+        Mode::P => {
+            node::<T, K, 2>(arr, arr[0].type_size(), config, &mut stats, 0, 0)
+        },
+        Mode::F => {
+            node::<T, K, 3>(arr, arr[0].type_size(), config, &mut stats, 0, 0)
+        },
     }
     stats
 }
@@ -262,7 +285,8 @@ fn node<T: Radixable<K>, K: RadixKey, const MODE: u8>(
         return;
     }
     let first = arr[0].into_key_type();
-    let (mut union, mut intersection, mut previous, mut pivot) = (first, first, first, first);
+    let (mut union, mut intersection, mut previous, mut pivot) =
+        (first, first, first, first);
     let (mut ascending, mut descending, mut votes) = (true, true, 0usize);
     // Candidate selection is fused into the same full variation/order scan.
     for item in arr.iter() {
@@ -305,13 +329,15 @@ fn node<T: Radixable<K>, K: RadixKey, const MODE: u8>(
         }
         return;
     }
-    let width =
-        (Converted::<T, K>::BITS - (union ^ intersection).leading_zeros() as usize).min(cap);
+    let width = (Converted::<T, K>::BITS
+        - (union ^ intersection).leading_zeros() as usize)
+        .min(cap);
     if width == 0 {
         return;
     }
     let bytes = if config.bytes == 0 {
-        ((usize::BITS as usize - (arr.len() - 1).leading_zeros() as usize) + 7) / 8
+        ((usize::BITS as usize - (arr.len() - 1).leading_zeros() as usize) + 7)
+            / 8
     } else {
         config.bytes
     };
@@ -326,17 +352,33 @@ fn node<T: Radixable<K>, K: RadixKey, const MODE: u8>(
     };
     work! { stats.nodes += 1; stats.node_records += arr.len(); }
     if MODE == 0 {
-        distribute_children::<T, K, _, MODE>(arr, &Identity, config, stats, depth, path);
+        distribute_children::<T, K, _, MODE>(
+            arr, &Identity, config, stats, depth, path,
+        );
     } else if MODE == 3 {
         work! { stats.frontier_nodes += 1; }
         let classifier = Frontier::new(pivot, width, coarse);
-        distribute_children::<T, K, _, MODE>(arr, &classifier, config, stats, depth, path);
+        distribute_children::<T, K, _, MODE>(
+            arr,
+            &classifier,
+            config,
+            stats,
+            depth,
+            path,
+        );
     } else {
         let classifier = Prefix {
             low: width - coarse,
             mask: Converted::<T, K>::mask(coarse),
         };
-        distribute_children::<T, K, _, MODE>(arr, &classifier, config, stats, depth, path);
+        distribute_children::<T, K, _, MODE>(
+            arr,
+            &classifier,
+            config,
+            stats,
+            depth,
+            path,
+        );
     }
 }
 
@@ -423,10 +465,10 @@ fn distribute<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
     let passes = (0..levels).filter(|&i| variation.byte(i) != 0).count();
     work! { stats.passes += passes; stats.scatter_records += passes*arr.len(); }
     // Identical budget for L/H/P/F, including dense histograms and cursors.
-    let dense_bytes = arr
-        .len()
-        .checked_mul(std::mem::size_of::<T>())
-        .and_then(|b| b.checked_add((levels + 2) * 256 * std::mem::size_of::<usize>()));
+    let dense_bytes =
+        arr.len().checked_mul(std::mem::size_of::<T>()).and_then(|b| {
+            b.checked_add((levels + 2) * 256 * std::mem::size_of::<usize>())
+        });
     let budget = 512usize
         .checked_mul(block)
         .and_then(|n| n.checked_mul(std::mem::size_of::<T>()))
@@ -479,11 +521,8 @@ fn dense<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
             offset += hist[i][b];
             ends[b] = offset;
         }
-        let (source, destination) = if in_buffer {
-            (buffer, input)
-        } else {
-            (input, buffer)
-        };
+        let (source, destination) =
+            if in_buffer { (buffer, input) } else { (input, buffer) };
         // SAFETY: the source is initialized after the preceding complete pass;
         // allocations are disjoint, every cursor stays inside its own bucket.
         for j in 0..arr.len() {
