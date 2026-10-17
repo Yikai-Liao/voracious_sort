@@ -1,0 +1,6 @@
+{
+  "path": "target/pa-guard-debug/debug/deps/block_msd_research-142da8e65d1b2844",
+  "bytes": 183721032,
+  "sha256": "3490fb52eeff582ac092878d4130096df5888fbbbf2e35629fe619930b44cf59",
+  "reason": "obsolete unreferenced test executable from an earlier debug profile; preserve current test and optimized caches"
+}

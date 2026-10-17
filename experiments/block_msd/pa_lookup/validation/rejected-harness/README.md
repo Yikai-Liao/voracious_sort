@@ -1,0 +1,3 @@
+# Rejected harness invocation
+
+Source 279d11a, with sorting kernel/source frozen in source-sha256.txt and first ELF in binary-sha256.txt. The process exited 101 at the method-registry assertion before generation or sorting. No timing rows were produced. The lookup method had been added to the final enum mapping but omitted from METHODS, suffix parsing and the outer dispatch match. All original failure files are retained here. The runner was corrected, a registered-method execution/full-record oracle test was added, and a new ELF/source snapshot was made before the real screen. The sorting library did not change after the 30-test debug run.
