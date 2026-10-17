@@ -1,0 +1,82 @@
+{
+  "created_utc": "2026-10-17T16:48:47.607272+00:00",
+  "baseline": "34080cf0fb95355411e029046e026b5aa65fb68c",
+  "rustc": "rustc 1.98.1 (48a229cea 2026-09-01)\nbinary: rustc\ncommit-hash: 48a229ceaefd4985c50990b14116b6d856af0985\ncommit-date: 2026-09-01\nhost: x86_64-unknown-linux-gnu\nrelease: 1.98.1\nLLVM version: 22.1.8\n",
+  "cargo": "cargo 1.98.1 (797e8a9bc 2026-08-05)\n",
+  "uname": {
+    "system": "Linux",
+    "node": "us-agent",
+    "release": "6.12.101+deb13-amd64",
+    "version": "#1 SMP PREEMPT_DYNAMIC Debian 6.12.101-1 (2026-08-05)",
+    "machine": "x86_64",
+    "processor": ""
+  },
+  "lscpu": "Architecture:                            x86_64\nCPU op-mode(s):                          32-bit, 64-bit\nAddress sizes:                           46 bits physical, 48 bits virtual\nByte Order:                              Little Endian\nCPU(s):                                  6\nOn-line CPU(s) list:                     0-5\nVendor ID:                               GenuineIntel\nModel name:                              Intel(R) Xeon(R) Gold 6140 CPU @ 2.30GHz\nCPU family:                              6\nModel:                                   85\nThread(s) per core:                      1\nCore(s) per socket:                      1\nSocket(s):                               6\nStepping:                                4\nBogoMIPS:                                4589.21\nFlags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon rep_good nopl xtopology cpuid tsc_known_freq pni pclmulqdq ssse3 fma cx16 pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand hypervisor lahf_lm abm 3dnowprefetch cpuid_fault pti ssbd ibrs ibpb stibp fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm mpx avx512f avx512dq rdseed adx smap clflushopt clwb avx512cd avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves arat umip pku ospke md_clear flush_l1d arch_capabilities\nHypervisor vendor:                       KVM\nVirtualization type:                     full\nL1d cache:                               192 KiB (6 instances)\nL1i cache:                               192 KiB (6 instances)\nL2 cache:                                6 MiB (6 instances)\nL3 cache:                                148.5 MiB (6 instances)\nNUMA node(s):                            1\nNUMA node0 CPU(s):                       0-5\nVulnerability Gather data sampling:      Not affected\nVulnerability Indirect target selection: Mitigation; Aligned branch/return thunks\nVulnerability Itlb multihit:             Not affected\nVulnerability L1tf:                      Mitigation; PTE Inversion\nVulnerability Mds:                       Mitigation; Clear CPU buffers; SMT Host state unknown\nVulnerability Meltdown:                  Mitigation; PTI\nVulnerability Mmio stale data:           Mitigation; Clear CPU buffers; SMT Host state unknown\nVulnerability Reg file data sampling:    Not affected\nVulnerability Retbleed:                  Mitigation; IBRS\nVulnerability Spec rstack overflow:      Not affected\nVulnerability Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl\nVulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization\nVulnerability Spectre v2:                Mitigation; IBRS; IBPB conditional; STIBP disabled; RSB filling; PBRSB-eIBRS Not affected; BHI SW loop, KVM SW loop\nVulnerability Srbds:                     Not affected\nVulnerability Tsa:                       Not affected\nVulnerability Tsx async abort:           Mitigation; Clear CPU buffers; SMT Host state unknown\nVulnerability Vmscape:                   Not affected\n",
+  "flags": "-C target-cpu=native",
+  "profile": "release opt-level=3/debug=true; lto unset (Cargo default false)",
+  "cpu_affinity": [
+    2
+  ],
+  "workers": 1,
+  "memory": "MemTotal:       16344888 kB\nMemFree:         1374012 kB\nMemAvailable:    8411068 kB\nBuffers:          207956 kB\nCached:          6719068 kB\nSwapCached:         8384 kB\nActive:          6167532 kB\nInactive:        5820076 kB\nActive(anon):    4802328 kB\nInactive(anon):   993116 kB\nActive(file):    1365204 kB\nInactive(file):  4826960 kB\nUnevictable:           0 kB\nMlocked:               0 kB\nSwapTotal:      12366328 kB\nSwapFree:        8182444 kB\nZswap:                 0 kB\nZswapped:              0 kB\nDirty:             36892 kB\nWriteback:             0 kB\nAnonPages:       4698336 kB\nMapped:           719388 kB\nShmem:            734952 kB\nKReclaimable:    1182496 kB\nSlab:            1417256 kB\nSReclaimable:    1182496 kB\nSUnreclaim:       234760 kB\nKernelStack:       13352 kB\nPageTables:        62264 kB\nSecPageTables:         0 kB\nNFS_Unstable:          0 kB\nBounce:                0 kB\nWritebackTmp:          0 kB\nCommitLimit:    20538772 kB\nCommitted_AS:   12484216 kB\nVmallocTotal:   34359738367 kB\nVmallocUsed:       82696 kB\nVmallocChunk:          0 kB\nPercpu:            64000 kB\nHardwareCorrupted:     0 kB\nAnonHugePages:   2142208 kB\nShmemHugePages:        0 kB\nShmemPmdMapped:        0 kB\nFileHugePages:         0 kB\nFilePmdMapped:         0 kB\nUnaccepted:            0 kB\nHugePages_Total:       0\nHugePages_Free:        0\nHugePages_Rsvd:        0\nHugePages_Surp:        0\nHugepagesize:       2048 kB\nHugetlb:               0 kB\nDirectMap4k:      245604 kB\nDirectMap2M:    10240000 kB\nDirectMap1G:     8388608 kB\n",
+  "loadavg": "5.15 4.33 3.68 4/709 1363466\n",
+  "cgroup": "0::/system.slice/paseo.service\n",
+  "plan_sha256": "4e6804220977f382242c1c15606a530983cc5aa779411b53d178312508d5303d",
+  "baselines": {
+    "L_frozen": "submitted_lsd at d6f6b70497ae25f3600b5f458b316a4cedfcb470, preserved by baseline 34080cf",
+    "stable_msd": "stable_baseline copy of upstream MSD, with stable descending-run normalization",
+    "best_msd": "reduction_node::sort_reduced, ScratchPathCycles, cached_two_arrays=true"
+  },
+  "scope": "Goal cache-gated physical label completion, nested terminal prefix, stable leaf, tiled order proof; no production default or outer type routing",
+  "parent_experiment_commit": "c13f5d3",
+  "parent_environment_created_utc": "2026-10-17T16:23:18.155840+00:00",
+  "parent_commit": "1de8000",
+  "cpu2_cache": {
+    "index0": {
+      "level": "1",
+      "type": "Data",
+      "size": "32K",
+      "shared_cpu_list": "2"
+    },
+    "index1": {
+      "level": "1",
+      "type": "Instruction",
+      "size": "32K",
+      "shared_cpu_list": "2"
+    },
+    "index2": {
+      "level": "2",
+      "type": "Unified",
+      "size": "1024K",
+      "shared_cpu_list": "2"
+    },
+    "index3": {
+      "level": "3",
+      "type": "Unified",
+      "size": "25344K",
+      "shared_cpu_list": "2"
+    }
+  },
+  "initial_local_workspace_threshold_bytes": 1048576,
+  "local_workspace_threshold_candidates": [
+    0,
+    262144,
+    1048576,
+    4194304,
+    16777216,
+    "off"
+  ],
+  "threshold_semantics": "offline hyperparameter; sorter does not query cache size",
+  "next_stage": "independent fixed bucket table length proof and small-record group4 preload",
+  "selected_workspace_threshold": 16777216,
+  "new_seed": "20261018 reserved until mechanisms are frozen",
+  "reduced_radix_in_selected_candidate": false,
+  "stage_created_utc": "2026-10-17T17:56:18.931013+00:00",
+  "stage_parent_source_commit": "609e8c0cde4812d18d2cec2701a035f13d1dffca",
+  "stage_source_commit": "8fc91c006757475611564b2976282c877b09e086",
+  "stage_memory": "MemTotal:       16344888 kB\nMemFree:         2955804 kB\nMemAvailable:    5819076 kB\nBuffers:           76760 kB\nCached:          2189280 kB\nSwapCached:        14636 kB\nActive:          7499284 kB\nInactive:        2602952 kB\nActive(anon):    6080504 kB\nInactive(anon):  1774700 kB\nActive(file):    1418780 kB\nInactive(file):   828252 kB\nUnevictable:           0 kB\nMlocked:               0 kB\nSwapTotal:      12366328 kB\nSwapFree:        5955380 kB\nZswap:                 0 kB\nZswapped:              0 kB\nDirty:            100352 kB\nWriteback:             0 kB\nAnonPages:       7565240 kB\nMapped:           323788 kB\nShmem:             18876 kB\nKReclaimable:     957940 kB\nSlab:            1190116 kB\nSReclaimable:     957940 kB\nSUnreclaim:       232176 kB\nKernelStack:       13232 kB\nPageTables:        72016 kB\nSecPageTables:         0 kB\nNFS_Unstable:          0 kB\nBounce:                0 kB\nWritebackTmp:          0 kB\nCommitLimit:    20538772 kB\nCommitted_AS:   10840888 kB\nVmallocTotal:   34359738367 kB\nVmallocUsed:       82536 kB\nVmallocChunk:          0 kB\nPercpu:            64000 kB\nHardwareCorrupted:     0 kB\nAnonHugePages:   1509376 kB\nShmemHugePages:        0 kB\nShmemPmdMapped:        0 kB\nFileHugePages:         0 kB\nFilePmdMapped:         0 kB\nUnaccepted:            0 kB\nHugePages_Total:       0\nHugePages_Free:        0\nHugePages_Rsvd:        0\nHugePages_Surp:        0\nHugepagesize:       2048 kB\nHugetlb:               0 kB\nDirectMap4k:      245604 kB\nDirectMap2M:    10240000 kB\nDirectMap1G:     8388608 kB\n",
+  "stage_loadavg": "4.13 3.71 3.76 3/698 1506294\n",
+  "historical_cargo_incremental": 0,
+  "historical_jobs": "Cargo default; 6 logical CPUs, no configured jobs override",
+  "historical_codegen_units": "Cargo default; no configured override"
+}
