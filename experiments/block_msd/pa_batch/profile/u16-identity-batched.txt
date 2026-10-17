@@ -1,0 +1,666 @@
+
+target/pa-batch/time:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000119920 <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>>:
+  119920:	push   %rbp
+  119921:	push   %r15
+  119923:	push   %r14
+  119925:	push   %r13
+  119927:	push   %r12
+  119929:	push   %rbx
+  11992a:	sub    $0xe8,%rsp
+  119931:	mov    %r9,0x58(%rsp)
+  119936:	mov    %rsi,%r10
+  119939:	mov    0x80(%rdi),%rbx
+  119940:	mov    0xa8(%rdi),%rsi
+  119947:	mov    0x68(%rdi),%rax
+  11994b:	mov    0x70(%rdi),%r15
+  11994f:	lea    0x78(%rdi),%r14
+  119953:	cmp    %rsi,%rbx
+  119956:	mov    %rsi,0x80(%rsp)
+  11995e:	cmova  %rbx,%rsi
+  119962:	xor    %r9d,%r9d
+  119965:	mov    %rbx,0x8(%rsp)
+  11996a:	jmp    11997c <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x5c>
+  11996c:	nopl   0x0(%rax)
+  119970:	mov    %r14,%r11
+  119973:	inc    %rbx
+  119976:	cmpq   $0x0,(%r11)
+  11997a:	jne    1199aa <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x8a>
+  11997c:	cmp    %rbx,%rsi
+  11997f:	je     11a2cc <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x9ac>
+  119985:	cmp    %r15,%r9
+  119988:	jae    119970 <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x50>
+  11998a:	mov    %r9,%r11
+  11998d:	shl    $0x4,%r11
+  119991:	cmp    (%rax,%r11,1),%rbx
+  119995:	jne    119970 <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x50>
+  119997:	add    %rax,%r11
+  11999a:	add    $0x8,%r11
+  11999e:	inc    %r9
+  1199a1:	inc    %rbx
+  1199a4:	cmpq   $0x0,(%r11)
+  1199a8:	je     11997c <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x5c>
+  1199aa:	mov    0x28(%rdi),%r12
+  1199ae:	lea    -0x1(%rbx),%r11
+  1199b2:	cmp    %r12,%r11
+  1199b5:	jae    11a460 <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0xb40>
+  1199bb:	mov    0x20(%rdi),%rsi
+  1199bf:	mov    %rsi,0x40(%rsp)
+  1199c4:	mov    -0x4(%rsi,%rbx,4),%ebp
+  1199c8:	cmp    %rbp,%r12
+  1199cb:	jbe    11a2e3 <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x9c3>
+  1199d1:	mov    0x78(%rdi),%rbx
+  1199d5:	mov    0x88(%rdi),%r14
+  1199dc:	xor    %r11d,%r11d
+  1199df:	cmp    %rbp,%r14
+  1199e2:	mov    0xa0(%rdi),%r13
+  1199e9:	mov    %rdi,%rsi
+  1199ec:	mov    0x90(%rdi),%r9
+  1199f3:	mov    %r14,%rdi
+  1199f6:	cmova  %r11,%rdi
+  1199fa:	mov    %r9,0x30(%rsp)
+  1199ff:	mov    %r13,0x38(%rsp)
+  119a04:	cmova  %r13,%r9
+  119a08:	sub    %rdi,%rbp
+  119a0b:	mov    %rbx,0x20(%rsp)
+  119a10:	imul   %rbx,%rbp
+  119a14:	movzwl (%r9,%rbp,2),%r9d
+  119a19:	shl    $0x3,%r10d
+  119a1d:	mov    %r10d,%edi
+  119a20:	and    $0x8,%dil
+  119a24:	shrx   %rdi,%r9,%rdi
+  119a29:	movzbl %dil,%edi
+  119a2d:	movzbl %dl,%edx
+  119a30:	shlx   %r10,%rdx,%r9
+  119a35:	test   $0x40,%r10b
+  119a39:	cmovne %r11,%r9
+  119a3d:	mov    %r9,0x10(%rsp)
+  119a42:	andn   %edi,%edx,%r9d
+  119a47:	mov    %r9,0x28(%rsp)
+  119a4c:	cmp    %r8,%r9
+  119a4f:	jae    11a473 <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0xb53>
+  119a55:	or     %rdx,%rdi
+  119a58:	cmp    %r8,%rdi
+  119a5b:	jae    11a488 <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0xb68>
+  119a61:	mov    0x28(%rsp),%rdx
+  119a66:	shl    $0x4,%edx
+  119a69:	add    %rcx,%rdx
+  119a6c:	mov    %rdx,0xa0(%rsp)
+  119a74:	mov    (%rdx),%rdx
+  119a77:	mov    %rdi,0x50(%rsp)
+  119a7c:	shl    $0x4,%edi
+  119a7f:	mov    %rcx,0xa8(%rsp)
+  119a87:	mov    %rdi,0x98(%rsp)
+  119a8f:	mov    (%rcx,%rdi,1),%r13
+  119a93:	mov    0x8(%rsp),%rcx
+  119a98:	cmp    0x80(%rsp),%rcx
+  119aa0:	jae    11a28f <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x96f>
+  119aa6:	mov    %r15,0xc0(%rsp)
+  119aae:	mov    %rax,0xb0(%rsp)
+  119ab6:	mov    0x50(%rsi),%rax
+  119aba:	mov    %rax,0x48(%rsp)
+  119abf:	mov    0x58(%rsi),%rax
+  119ac3:	mov    %rax,0x18(%rsp)
+  119ac8:	mov    0x20(%rsp),%rax
+  119acd:	lea    (%rax,%rax,1),%rcx
+  119ad1:	mov    %rcx,0xb8(%rsp)
+  119ad9:	xor    %r8d,%r8d
+  119adc:	mov    %rax,%r15
+  119adf:	mov    0x8(%rsp),%rcx
+  119ae4:	mov    %r12,0x70(%rsp)
+  119ae9:	mov    %r14,0x68(%rsp)
+  119aee:	jmp    119b1e <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x1fe>
+  119af0:	mov    %rdi,%rax
+  119af3:	mov    0x90(%rsp),%rcx
+  119afb:	inc    %rcx
+  119afe:	cmp    0x80(%rsp),%rcx
+  119b06:	mov    0x70(%rsp),%r12
+  119b0b:	mov    0x68(%rsp),%r14
+  119b10:	mov    0xd0(%rsp),%r8
+  119b18:	je     11a297 <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x977>
+  119b1e:	cmp    %r12,%rcx
+  119b21:	je     11a44d <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0xb2d>
+  119b27:	mov    %rcx,%rsi
+  119b2a:	mov    0x40(%rsp),%rcx
+  119b2f:	mov    (%rcx,%rsi,4),%ecx
+  119b32:	cmp    %rcx,%r12
+  119b35:	jbe    11a2e3 <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x9c3>
+  119b3b:	mov    %rsi,0x90(%rsp)
+  119b43:	mov    %rcx,%r10
+  119b46:	cmp    %rcx,%r14
+  119b49:	mov    $0x0,%ecx
+  119b4e:	cmovbe %r14,%rcx
+  119b52:	mov    0x30(%rsp),%rsi
+  119b57:	cmova  0x38(%rsp),%rsi
+  119b5d:	mov    %rsi,0x88(%rsp)
+  119b65:	cmp    0xc0(%rsp),%r8
+  119b6d:	jae    119ba0 <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x280>
+  119b6f:	mov    %r8,%rsi
+  119b72:	shl    $0x4,%rsi
+  119b76:	mov    0xb0(%rsp),%rdi
+  119b7e:	mov    0x90(%rsp),%r9
+  119b86:	cmp    %r9,(%rdi,%rsi,1)
+  119b8a:	jne    119ba0 <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x280>
+  119b8c:	add    %rdi,%rsi
+  119b8f:	mov    0x8(%rsi),%rsi
+  119b93:	inc    %r8
+  119b96:	jmp    119ba5 <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x285>
+  119b98:	nopl   0x0(%rax,%rax,1)
+  119ba0:	mov    0x20(%rsp),%rsi
+  119ba5:	mov    %rax,%rdi
+  119ba8:	mov    %r8,0xd0(%rsp)
+  119bb0:	sub    %rcx,%r10
+  119bb3:	mov    %rsi,0x78(%rsp)
+  119bb8:	shr    $0x2,%rsi
+  119bbc:	mov    %rsi,0xe0(%rsp)
+  119bc4:	mov    %r10,0xc8(%rsp)
+  119bcc:	je     11a120 <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x800>
+  119bd2:	mov    0xb8(%rsp),%rcx
+  119bda:	imul   %r10,%rcx
+  119bde:	mov    0x88(%rsp),%rsi
+  119be6:	lea    (%rsi,%rcx,1),%rax
+  119bea:	add    $0x6,%rax
+  119bee:	mov    %rax,0x60(%rsp)
+  119bf3:	xor    %esi,%esi
+  119bf5:	jmp    119ced <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x3cd>
+  119bfa:	nopw   0x0(%rax,%rax,1)
+  119c00:	xor    %r11d,%r11d
+  119c03:	mov    0x10(%rsp),%rbp
+  119c08:	test   %bp,%r8w
+  119c0c:	setne  %r11b
+  119c10:	mov    %rdx,%rcx
+  119c13:	cmovne %r13,%rcx
+  119c17:	xor    %r9d,%r9d
+  119c1a:	mov    %rax,0xd8(%rsp)
+  119c22:	mov    0x60(%rsp),%rax
+  119c27:	test   %bp,-0x4(%rax,%rsi,8)
+  119c2c:	setne  %r9b
+  119c30:	mov    %rdx,%rdi
+  119c33:	cmovne %r13,%rdi
+  119c37:	mov    %r11d,%ebx
+  119c3a:	xor    %r9b,%bl
+  119c3d:	xor    $0x1,%bl
+  119c40:	add    %r11,%r9
+  119c43:	mov    $0x2,%r12d
+  119c49:	sub    %r9d,%r12d
+  119c4c:	xor    %r11d,%r11d
+  119c4f:	test   %bp,-0x2(%rax,%rsi,8)
+  119c54:	setne  %r11b
+  119c58:	mov    %rdx,%r14
+  119c5b:	cmovne %r13,%r14
+  119c5f:	cmovne %r9d,%r12d
+  119c63:	add    %r12d,%r12d
+  119c66:	add    %r9,%r11
+  119c69:	mov    $0x3,%r10d
+  119c6f:	sub    %r11d,%r10d
+  119c72:	xor    %r9d,%r9d
+  119c75:	test   %bp,(%rax,%rsi,8)
+  119c79:	mov    %r8w,(%rcx)
+  119c7d:	movzbl %bl,%ecx
+  119c80:	movzwl -0x4(%rax,%rsi,8),%r8d
+  119c86:	mov    %r8w,(%rdi,%rcx,2)
+  119c8b:	movzwl -0x2(%rax,%rsi,8),%ecx
+  119c90:	mov    %cx,(%r14,%r12,1)
+  119c95:	mov    0x68(%rsp),%r14
+  119c9a:	mov    0x70(%rsp),%r12
+  119c9f:	setne  %r9b
+  119ca3:	mov    %rdx,%rcx
+  119ca6:	cmovne %r13,%rcx
+  119caa:	cmovne %r11d,%r10d
+  119cae:	add    %r10d,%r10d
+  119cb1:	movzwl (%rax,%rsi,8),%edi
+  119cb5:	mov    %di,(%rcx,%r10,1)
+  119cba:	add    %r11,%r9
+  119cbd:	mov    $0x4,%ecx
+  119cc2:	sub    %r9,%rcx
+  119cc5:	lea    (%rdx,%rcx,2),%rdx
+  119cc9:	sub    %rcx,%r15
+  119ccc:	lea    0x0(%r13,%r9,2),%r13
+  119cd1:	mov    0xd8(%rsp),%rdi
+  119cd9:	sub    %r9,%rdi
+  119cdc:	inc    %rsi
+  119cdf:	cmp    %rsi,0xe0(%rsp)
+  119ce7:	je     11a120 <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x800>
+  119ced:	mov    0x60(%rsp),%rax
+  119cf2:	movzwl -0x6(%rax,%rsi,8),%r8d
+  119cf8:	cmp    $0x5,%r15
+  119cfc:	mov    %rdi,%rax
+  119cff:	jb     119d0b <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x3eb>
+  119d01:	cmp    $0x4,%rax
+  119d05:	ja     119c00 <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x2e0>
+  119d0b:	mov    0x10(%rsp),%r10
+  119d10:	test   %r10w,%r8w
+  119d14:	mov    %rax,%rbx
+  119d17:	cmove  %r15,%rbx
+  119d1b:	dec    %rbx
+  119d1e:	test   %r10w,%r8w
+  119d22:	mov    %r13,%r11
+  119d25:	cmove  %rdx,%r11
+  119d29:	mov    %r15,%rcx
+  119d2c:	cmove  %rbx,%rcx
+  119d30:	mov    %rbx,%rbp
+  119d33:	cmove  %rax,%rbp
+  119d37:	lea    0x2(%r11),%r9
+  119d3b:	test   %r10w,%r8w
+  119d3f:	mov    %r8w,(%r11)
+  119d43:	mov    %r9,%r11
+  119d46:	cmove  %r13,%r11
+  119d4a:	cmovne %rdx,%r9
+  119d4e:	test   %rbx,%rbx
+  119d51:	je     119d61 <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x441>
+  119d53:	mov    %r11,%r13
+  119d56:	mov    %r9,%rdx
+  119d59:	mov    %rcx,%r15
+  119d5c:	jmp    119e07 <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x4e7>
+  119d61:	cmp    %r12,0x8(%rsp)
+  119d66:	jae    11a33d <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0xa1d>
+  119d6c:	mov    0x40(%rsp),%rcx
+  119d71:	mov    0x8(%rsp),%rdi
+  119d76:	mov    (%rcx,%rdi,4),%ecx
+  119d79:	cmp    %rcx,%r12
+  119d7c:	jbe    11a2e3 <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x9c3>
+  119d82:	cmp    %rcx,%r14
+  119d85:	ja     119d91 <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x471>
+  119d87:	mov    %r14,%r9
+  119d8a:	mov    0x30(%rsp),%rdi
+  119d8f:	jmp    119d99 <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x479>
+  119d91:	xor    %r9d,%r9d
+  119d94:	mov    0x38(%rsp),%rdi
+  119d99:	sub    %r9,%rcx
+  119d9c:	mov    0x20(%rsp),%r9
+  119da1:	imul   %r9,%rcx
+  119da5:	test   %r8w,0x10(%rsp)
+  119dab:	lea    (%rdi,%rcx,2),%rcx
+  119daf:	mov    0x50(%rsp),%r8
+  119db4:	cmove  0x28(%rsp),%r8
+  119dba:	cmovne %rcx,%r13
+  119dbe:	cmove  %rcx,%rdx
+  119dc2:	cmovne %r9,%rax
+  119dc6:	cmove  %r9,%r15
+  119dca:	mov    0x18(%rsp),%rcx
+  119dcf:	cmp    %rcx,0x8(%rsp)
+  119dd4:	jae    11a391 <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0xa71>
+  119dda:	mov    0x8(%rsp),%rcx
+  119ddf:	mov    0x48(%rsp),%rdi
+  119de4:	mov    %r8b,(%rdi,%rcx,1)
+  119de8:	cmp    0x120(%rsp),%r8
+  119df0:	jae    11a3a8 <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0xa88>
+  119df6:	mov    0x58(%rsp),%rcx
+  119dfb:	incq   (%rcx,%r8,8)
+  119dff:	incq   0x8(%rsp)
+  119e04:	mov    %rax,%rbp
+  119e07:	mov    0x60(%rsp),%rax
+  119e0c:	movzwl -0x4(%rax,%rsi,8),%r8d
+  119e12:	mov    0x10(%rsp),%rbx
+  119e17:	test   %bx,%r8w
+  119e1b:	mov    %rbp,%r10
+  119e1e:	cmove  %r15,%r10
+  119e22:	dec    %r10
+  119e25:	test   %bx,%r8w
+  119e29:	mov    %r13,%r11
+  119e2c:	cmove  %rdx,%r11
+  119e30:	mov    %r15,%rcx
+  119e33:	cmove  %r10,%rcx
+  119e37:	mov    %r10,%rdi
+  119e3a:	cmove  %rbp,%rdi
+  119e3e:	lea    0x2(%r11),%r9
+  119e42:	test   %bx,%r8w
+  119e46:	mov    %r8w,(%r11)
+  119e4a:	mov    %r9,%r11
+  119e4d:	cmove  %r13,%r11
+  119e51:	cmovne %rdx,%r9
+  119e55:	test   %r10,%r10
+  119e58:	je     119e6b <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x54b>
+  119e5a:	mov    %r11,%r13
+  119e5d:	mov    %r9,%rdx
+  119e60:	mov    %rdi,%rbp
+  119e63:	mov    %rcx,%r15
+  119e66:	jmp    119f0e <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x5ee>
+  119e6b:	cmp    %r12,0x8(%rsp)
+  119e70:	jae    11a352 <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0xa32>
+  119e76:	mov    0x40(%rsp),%rcx
+  119e7b:	mov    0x8(%rsp),%rdi
+  119e80:	mov    (%rcx,%rdi,4),%ecx
+  119e83:	cmp    %rcx,%r12
+  119e86:	jbe    11a2e3 <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x9c3>
+  119e8c:	cmp    %rcx,%r14
+  119e8f:	ja     119e9b <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x57b>
+  119e91:	mov    %r14,%r9
+  119e94:	mov    0x30(%rsp),%rdi
+  119e99:	jmp    119ea3 <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x583>
+  119e9b:	xor    %r9d,%r9d
+  119e9e:	mov    0x38(%rsp),%rdi
+  119ea3:	sub    %r9,%rcx
+  119ea6:	mov    0x20(%rsp),%r9
+  119eab:	imul   %r9,%rcx
+  119eaf:	test   %r8w,0x10(%rsp)
+  119eb5:	lea    (%rdi,%rcx,2),%rcx
+  119eb9:	mov    0x50(%rsp),%r8
+  119ebe:	cmove  0x28(%rsp),%r8
+  119ec4:	cmovne %rcx,%r13
+  119ec8:	cmove  %rcx,%rdx
+  119ecc:	cmovne %r9,%rbp
+  119ed0:	cmove  %r9,%r15
+  119ed4:	mov    0x18(%rsp),%rcx
+  119ed9:	cmp    %rcx,0x8(%rsp)
+  119ede:	jae    11a3d8 <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0xab8>
+  119ee4:	mov    0x8(%rsp),%rcx
+  119ee9:	mov    0x48(%rsp),%rdi
+  119eee:	mov    %r8b,(%rdi,%rcx,1)
+  119ef2:	cmp    0x120(%rsp),%r8
+  119efa:	jae    11a3c0 <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0xaa0>
+  119f00:	mov    0x58(%rsp),%rcx
+  119f05:	incq   (%rcx,%r8,8)
+  119f09:	incq   0x8(%rsp)
+  119f0e:	mov    0x60(%rsp),%rax
+  119f13:	movzwl -0x2(%rax,%rsi,8),%r8d
+  119f19:	mov    0x10(%rsp),%rbx
+  119f1e:	test   %bx,%r8w
+  119f22:	mov    %rbp,%r10
+  119f25:	cmove  %r15,%r10
+  119f29:	dec    %r10
+  119f2c:	test   %bx,%r8w
+  119f30:	mov    %r13,%r11
+  119f33:	cmove  %rdx,%r11
+  119f37:	mov    %r15,%rcx
+  119f3a:	cmove  %r10,%rcx
+  119f3e:	mov    %r10,%rdi
+  119f41:	cmove  %rbp,%rdi
+  119f45:	lea    0x2(%r11),%r9
+  119f49:	test   %bx,%r8w
+  119f4d:	mov    %r8w,(%r11)
+  119f51:	mov    %r9,%r11
+  119f54:	cmove  %r13,%r11
+  119f58:	cmovne %rdx,%r9
+  119f5c:	test   %r10,%r10
+  119f5f:	je     119f72 <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x652>
+  119f61:	mov    %r11,%r13
+  119f64:	mov    %r9,%rdx
+  119f67:	mov    %rdi,%rbp
+  119f6a:	mov    %rcx,%r15
+  119f6d:	jmp    11a015 <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x6f5>
+  119f72:	cmp    %r12,0x8(%rsp)
+  119f77:	jae    11a367 <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0xa47>
+  119f7d:	mov    0x40(%rsp),%rcx
+  119f82:	mov    0x8(%rsp),%rdi
+  119f87:	mov    (%rcx,%rdi,4),%ecx
+  119f8a:	cmp    %rcx,%r12
+  119f8d:	jbe    11a2e3 <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x9c3>
+  119f93:	cmp    %rcx,%r14
+  119f96:	ja     119fa2 <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x682>
+  119f98:	mov    %r14,%r9
+  119f9b:	mov    0x30(%rsp),%rdi
+  119fa0:	jmp    119faa <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x68a>
+  119fa2:	xor    %r9d,%r9d
+  119fa5:	mov    0x38(%rsp),%rdi
+  119faa:	sub    %r9,%rcx
+  119fad:	mov    0x20(%rsp),%r9
+  119fb2:	imul   %r9,%rcx
+  119fb6:	test   %r8w,0x10(%rsp)
+  119fbc:	lea    (%rdi,%rcx,2),%rcx
+  119fc0:	mov    0x50(%rsp),%r8
+  119fc5:	cmove  0x28(%rsp),%r8
+  119fcb:	cmovne %rcx,%r13
+  119fcf:	cmove  %rcx,%rdx
+  119fd3:	cmovne %r9,%rbp
+  119fd7:	cmove  %r9,%r15
+  119fdb:	mov    0x18(%rsp),%rcx
+  119fe0:	cmp    %rcx,0x8(%rsp)
+  119fe5:	jae    11a3ef <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0xacf>
+  119feb:	mov    0x8(%rsp),%rcx
+  119ff0:	mov    0x48(%rsp),%rdi
+  119ff5:	mov    %r8b,(%rdi,%rcx,1)
+  119ff9:	cmp    0x120(%rsp),%r8
+  11a001:	jae    11a406 <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0xae6>
+  11a007:	mov    0x58(%rsp),%rcx
+  11a00c:	incq   (%rcx,%r8,8)
+  11a010:	incq   0x8(%rsp)
+  11a015:	mov    0x60(%rsp),%rax
+  11a01a:	movzwl (%rax,%rsi,8),%r8d
+  11a01f:	mov    0x10(%rsp),%rbx
+  11a024:	test   %bx,%r8w
+  11a028:	mov    %rbp,%r10
+  11a02b:	cmove  %r15,%r10
+  11a02f:	dec    %r10
+  11a032:	test   %bx,%r8w
+  11a036:	mov    %r13,%r11
+  11a039:	cmove  %rdx,%r11
+  11a03d:	mov    %r15,%rcx
+  11a040:	cmove  %r10,%rcx
+  11a044:	mov    %r10,%rdi
+  11a047:	cmove  %rbp,%rdi
+  11a04b:	lea    0x2(%r11),%r9
+  11a04f:	test   %bx,%r8w
+  11a053:	mov    %r8w,(%r11)
+  11a057:	mov    %r9,%r11
+  11a05a:	cmove  %r13,%r11
+  11a05e:	cmovne %rdx,%r9
+  11a062:	test   %r10,%r10
+  11a065:	je     11a075 <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x755>
+  11a067:	mov    %r11,%r13
+  11a06a:	mov    %r9,%rdx
+  11a06d:	mov    %rcx,%r15
+  11a070:	jmp    119cdc <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x3bc>
+  11a075:	cmp    %r12,0x8(%rsp)
+  11a07a:	jae    11a37c <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0xa5c>
+  11a080:	mov    0x40(%rsp),%rcx
+  11a085:	mov    0x8(%rsp),%rdi
+  11a08a:	mov    (%rcx,%rdi,4),%ecx
+  11a08d:	cmp    %rcx,%r12
+  11a090:	jbe    11a2e3 <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x9c3>
+  11a096:	cmp    %rcx,%r14
+  11a099:	ja     11a0a5 <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x785>
+  11a09b:	mov    %r14,%r9
+  11a09e:	mov    0x30(%rsp),%rdi
+  11a0a3:	jmp    11a0ad <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x78d>
+  11a0a5:	xor    %r9d,%r9d
+  11a0a8:	mov    0x38(%rsp),%rdi
+  11a0ad:	sub    %r9,%rcx
+  11a0b0:	mov    0x20(%rsp),%r9
+  11a0b5:	imul   %r9,%rcx
+  11a0b9:	test   %r8w,0x10(%rsp)
+  11a0bf:	lea    (%rdi,%rcx,2),%rcx
+  11a0c3:	mov    0x50(%rsp),%r8
+  11a0c8:	cmove  0x28(%rsp),%r8
+  11a0ce:	cmovne %rcx,%r13
+  11a0d2:	cmove  %rcx,%rdx
+  11a0d6:	cmovne %r9,%rbp
+  11a0da:	cmove  %r9,%r15
+  11a0de:	mov    0x18(%rsp),%rcx
+  11a0e3:	cmp    %rcx,0x8(%rsp)
+  11a0e8:	jae    11a41e <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0xafe>
+  11a0ee:	mov    0x8(%rsp),%rcx
+  11a0f3:	mov    0x48(%rsp),%rdi
+  11a0f8:	mov    %r8b,(%rdi,%rcx,1)
+  11a0fc:	cmp    0x120(%rsp),%r8
+  11a104:	jae    11a435 <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0xb15>
+  11a10a:	mov    %rbp,%rdi
+  11a10d:	mov    0x58(%rsp),%rcx
+  11a112:	incq   (%rcx,%r8,8)
+  11a116:	incq   0x8(%rsp)
+  11a11b:	jmp    119cdc <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x3bc>
+  11a120:	mov    0x78(%rsp),%rcx
+  11a125:	mov    %rcx,%r14
+  11a128:	and    $0xfffffffffffffffc,%r14
+  11a12c:	cmp    %rcx,%r14
+  11a12f:	je     119af0 <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x1d0>
+  11a135:	mov    0xc8(%rsp),%rcx
+  11a13d:	imul   0x20(%rsp),%rcx
+  11a143:	mov    0x88(%rsp),%rsi
+  11a14b:	lea    (%rsi,%rcx,2),%r9
+  11a14f:	mov    %rdi,%rax
+  11a152:	jmp    11a17d <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x85d>
+  11a154:	data16 data16 cs nopw 0x0(%rax,%rax,1)
+  11a160:	mov    %r11,%r13
+  11a163:	mov    %r10,%rdx
+  11a166:	mov    %rdi,%rax
+  11a169:	mov    %rcx,%r15
+  11a16c:	mov    0x78(%rsp),%rcx
+  11a171:	inc    %r14
+  11a174:	cmp    %rcx,%r14
+  11a177:	jae    119af3 <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x1d3>
+  11a17d:	movzwl (%r9,%r14,2),%r8d
+  11a182:	mov    0x10(%rsp),%rsi
+  11a187:	test   %si,%r8w
+  11a18b:	mov    %rax,%rbx
+  11a18e:	cmove  %r15,%rbx
+  11a192:	dec    %rbx
+  11a195:	test   %si,%r8w
+  11a199:	mov    %r13,%r12
+  11a19c:	cmove  %rdx,%r12
+  11a1a0:	mov    %r15,%rcx
+  11a1a3:	cmove  %rbx,%rcx
+  11a1a7:	mov    %rbx,%rdi
+  11a1aa:	cmove  %rax,%rdi
+  11a1ae:	lea    0x2(%r12),%r10
+  11a1b3:	test   %si,%r8w
+  11a1b7:	mov    %r10,%r11
+  11a1ba:	cmove  %r13,%r11
+  11a1be:	cmovne %rdx,%r10
+  11a1c2:	mov    %r8w,(%r12)
+  11a1c7:	test   %rbx,%rbx
+  11a1ca:	jne    11a160 <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x840>
+  11a1cc:	mov    0x70(%rsp),%rsi
+  11a1d1:	cmp    %rsi,0x8(%rsp)
+  11a1d6:	jae    11a2fc <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x9dc>
+  11a1dc:	mov    0x40(%rsp),%rcx
+  11a1e1:	mov    0x8(%rsp),%rdi
+  11a1e6:	mov    (%rcx,%rdi,4),%ecx
+  11a1e9:	cmp    %rcx,%rsi
+  11a1ec:	jbe    11a2e3 <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x9c3>
+  11a1f2:	mov    0x68(%rsp),%rsi
+  11a1f7:	cmp    %rcx,%rsi
+  11a1fa:	mov    $0x0,%edi
+  11a1ff:	cmovbe %rsi,%rdi
+  11a203:	mov    0x30(%rsp),%r10
+  11a208:	cmova  0x38(%rsp),%r10
+  11a20e:	sub    %rdi,%rcx
+  11a211:	mov    0x20(%rsp),%rsi
+  11a216:	imul   %rsi,%rcx
+  11a21a:	test   %r8w,0x10(%rsp)
+  11a220:	lea    (%r10,%rcx,2),%rcx
+  11a224:	cmovne %rcx,%r13
+  11a228:	cmove  %rcx,%rdx
+  11a22c:	mov    0x50(%rsp),%r8
+  11a231:	cmove  0x28(%rsp),%r8
+  11a237:	cmovne %rsi,%rax
+  11a23b:	cmove  %rsi,%r15
+  11a23f:	mov    0x18(%rsp),%rcx
+  11a244:	cmp    %rcx,0x8(%rsp)
+  11a249:	jae    11a30e <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x9ee>
+  11a24f:	mov    0x8(%rsp),%rcx
+  11a254:	mov    0x48(%rsp),%rsi
+  11a259:	mov    %r8b,(%rsi,%rcx,1)
+  11a25d:	cmp    0x120(%rsp),%r8
+  11a265:	jae    11a325 <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0xa05>
+  11a26b:	mov    0x58(%rsp),%rcx
+  11a270:	incq   (%rcx,%r8,8)
+  11a274:	incq   0x8(%rsp)
+  11a279:	mov    0x78(%rsp),%rcx
+  11a27e:	inc    %r14
+  11a281:	cmp    %rcx,%r14
+  11a284:	jb     11a17d <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x85d>
+  11a28a:	jmp    119af3 <<block_msd_research::frontier::block::Sorter<u16>>::scatter_binary_batched::<u16, block_msd_research::frontier::pa::partition<u16, u16, block_msd_research::frontier::Identity>::{closure#0}>+0x1d3>
+  11a28f:	mov    0x20(%rsp),%r15
+  11a294:	mov    %r15,%rax
+  11a297:	mov    0xa8(%rsp),%rsi
+  11a29f:	add    0x98(%rsp),%rsi
+  11a2a7:	lea    (%rdx,%r15,2),%rcx
+  11a2ab:	mov    0xa0(%rsp),%rdi
+  11a2b3:	mov    %rdx,(%rdi)
+  11a2b6:	mov    %rcx,0x8(%rdi)
+  11a2ba:	lea    0x0(,%rax,2),%rcx
+  11a2c2:	add    %r13,%rcx
+  11a2c5:	mov    %r13,(%rsi)
+  11a2c8:	mov    %rcx,0x8(%rsi)
+  11a2cc:	mov    0x8(%rsp),%rax
+  11a2d1:	add    $0xe8,%rsp
+  11a2d8:	pop    %rbx
+  11a2d9:	pop    %r12
+  11a2db:	pop    %r13
+  11a2dd:	pop    %r14
+  11a2df:	pop    %r15
+  11a2e1:	pop    %rbp
+  11a2e2:	ret
+  11a2e3:	lea    -0x106251(%rip),%rdi        # 14099 <anon.4e16d10bbe2c652869c46f968db1f584.7.llvm.7203410810539450392+0xea>
+  11a2ea:	lea    0x10c5df(%rip),%rdx        # 2268d0 <anon.4e16d10bbe2c652869c46f968db1f584.8.llvm.7203410810539450392+0x400>
+  11a2f1:	mov    $0x2c,%esi
+  11a2f6:	call   *0x1180dc(%rip)        # 2323d8 <_DYNAMIC+0x298>
+  11a2fc:	lea    0x10c245(%rip),%rdx        # 226548 <anon.4e16d10bbe2c652869c46f968db1f584.8.llvm.7203410810539450392+0x78>
+  11a303:	mov    0x8(%rsp),%rdi
+  11a308:	call   *0x1180da(%rip)        # 2323e8 <_DYNAMIC+0x2a8>
+  11a30e:	lea    0x10c233(%rip),%rdx        # 226548 <anon.4e16d10bbe2c652869c46f968db1f584.8.llvm.7203410810539450392+0x78>
+  11a315:	mov    0x8(%rsp),%rdi
+  11a31a:	mov    0x18(%rsp),%rsi
+  11a31f:	call   *0x1180c3(%rip)        # 2323e8 <_DYNAMIC+0x2a8>
+  11a325:	lea    0x10c21c(%rip),%rdx        # 226548 <anon.4e16d10bbe2c652869c46f968db1f584.8.llvm.7203410810539450392+0x78>
+  11a32c:	mov    %r8,%rdi
+  11a32f:	mov    0x120(%rsp),%rsi
+  11a337:	call   *0x1180ab(%rip)        # 2323e8 <_DYNAMIC+0x2a8>
+  11a33d:	lea    0x10c21c(%rip),%rdx        # 226560 <anon.4e16d10bbe2c652869c46f968db1f584.8.llvm.7203410810539450392+0x90>
+  11a344:	mov    0x8(%rsp),%rdi
+  11a349:	mov    %r12,%rsi
+  11a34c:	call   *0x118096(%rip)        # 2323e8 <_DYNAMIC+0x2a8>
+  11a352:	lea    0x10c21f(%rip),%rdx        # 226578 <anon.4e16d10bbe2c652869c46f968db1f584.8.llvm.7203410810539450392+0xa8>
+  11a359:	mov    0x8(%rsp),%rdi
+  11a35e:	mov    %r12,%rsi
+  11a361:	call   *0x118081(%rip)        # 2323e8 <_DYNAMIC+0x2a8>
+  11a367:	lea    0x10c222(%rip),%rdx        # 226590 <anon.4e16d10bbe2c652869c46f968db1f584.8.llvm.7203410810539450392+0xc0>
+  11a36e:	mov    0x8(%rsp),%rdi
+  11a373:	mov    %r12,%rsi
+  11a376:	call   *0x11806c(%rip)        # 2323e8 <_DYNAMIC+0x2a8>
+  11a37c:	lea    0x10c225(%rip),%rdx        # 2265a8 <anon.4e16d10bbe2c652869c46f968db1f584.8.llvm.7203410810539450392+0xd8>
+  11a383:	mov    0x8(%rsp),%rdi
+  11a388:	mov    %r12,%rsi
+  11a38b:	call   *0x118057(%rip)        # 2323e8 <_DYNAMIC+0x2a8>
+  11a391:	lea    0x10c1c8(%rip),%rdx        # 226560 <anon.4e16d10bbe2c652869c46f968db1f584.8.llvm.7203410810539450392+0x90>
+  11a398:	mov    0x8(%rsp),%rdi
+  11a39d:	mov    0x18(%rsp),%rsi
+  11a3a2:	call   *0x118040(%rip)        # 2323e8 <_DYNAMIC+0x2a8>
+  11a3a8:	lea    0x10c1b1(%rip),%rdx        # 226560 <anon.4e16d10bbe2c652869c46f968db1f584.8.llvm.7203410810539450392+0x90>
+  11a3af:	mov    %r8,%rdi
+  11a3b2:	mov    0x120(%rsp),%rsi
+  11a3ba:	call   *0x118028(%rip)        # 2323e8 <_DYNAMIC+0x2a8>
+  11a3c0:	lea    0x10c1b1(%rip),%rdx        # 226578 <anon.4e16d10bbe2c652869c46f968db1f584.8.llvm.7203410810539450392+0xa8>
+  11a3c7:	mov    %r8,%rdi
+  11a3ca:	mov    0x120(%rsp),%rsi
+  11a3d2:	call   *0x118010(%rip)        # 2323e8 <_DYNAMIC+0x2a8>
+  11a3d8:	lea    0x10c199(%rip),%rdx        # 226578 <anon.4e16d10bbe2c652869c46f968db1f584.8.llvm.7203410810539450392+0xa8>
+  11a3df:	mov    0x8(%rsp),%rdi
+  11a3e4:	mov    0x18(%rsp),%rsi
+  11a3e9:	call   *0x117ff9(%rip)        # 2323e8 <_DYNAMIC+0x2a8>
+  11a3ef:	lea    0x10c19a(%rip),%rdx        # 226590 <anon.4e16d10bbe2c652869c46f968db1f584.8.llvm.7203410810539450392+0xc0>
+  11a3f6:	mov    0x8(%rsp),%rdi
+  11a3fb:	mov    0x18(%rsp),%rsi
+  11a400:	call   *0x117fe2(%rip)        # 2323e8 <_DYNAMIC+0x2a8>
+  11a406:	lea    0x10c183(%rip),%rdx        # 226590 <anon.4e16d10bbe2c652869c46f968db1f584.8.llvm.7203410810539450392+0xc0>
+  11a40d:	mov    %r8,%rdi
+  11a410:	mov    0x120(%rsp),%rsi
+  11a418:	call   *0x117fca(%rip)        # 2323e8 <_DYNAMIC+0x2a8>
+  11a41e:	lea    0x10c183(%rip),%rdx        # 2265a8 <anon.4e16d10bbe2c652869c46f968db1f584.8.llvm.7203410810539450392+0xd8>
+  11a425:	mov    0x8(%rsp),%rdi
+  11a42a:	mov    0x18(%rsp),%rsi
+  11a42f:	call   *0x117fb3(%rip)        # 2323e8 <_DYNAMIC+0x2a8>
+  11a435:	lea    0x10c16c(%rip),%rdx        # 2265a8 <anon.4e16d10bbe2c652869c46f968db1f584.8.llvm.7203410810539450392+0xd8>
+  11a43c:	mov    %r8,%rdi
+  11a43f:	mov    0x120(%rsp),%rsi
+  11a447:	call   *0x117f9b(%rip)        # 2323e8 <_DYNAMIC+0x2a8>
+  11a44d:	lea    0x10c0dc(%rip),%rdx        # 226530 <anon.4e16d10bbe2c652869c46f968db1f584.8.llvm.7203410810539450392+0x60>
+  11a454:	mov    %r12,%rdi
+  11a457:	mov    %r12,%rsi
+  11a45a:	call   *0x117f88(%rip)        # 2323e8 <_DYNAMIC+0x2a8>
+  11a460:	lea    0x10c081(%rip),%rdx        # 2264e8 <anon.4e16d10bbe2c652869c46f968db1f584.8.llvm.7203410810539450392+0x18>
+  11a467:	mov    %r11,%rdi
+  11a46a:	mov    %r12,%rsi
+  11a46d:	call   *0x117f75(%rip)        # 2323e8 <_DYNAMIC+0x2a8>
+  11a473:	lea    0x10c086(%rip),%rdx        # 226500 <anon.4e16d10bbe2c652869c46f968db1f584.8.llvm.7203410810539450392+0x30>
+  11a47a:	mov    0x28(%rsp),%rdi
+  11a47f:	mov    %r8,%rsi
+  11a482:	call   *0x117f60(%rip)        # 2323e8 <_DYNAMIC+0x2a8>
+  11a488:	lea    0x10c089(%rip),%rdx        # 226518 <anon.4e16d10bbe2c652869c46f968db1f584.8.llvm.7203410810539450392+0x48>
+  11a48f:	mov    %r8,%rsi
+  11a492:	call   *0x117f50(%rip)        # 2323e8 <_DYNAMIC+0x2a8>
