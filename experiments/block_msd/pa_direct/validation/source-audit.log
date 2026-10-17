@@ -1,0 +1,5 @@
+Original scalar control byte-for-byte unchanged.
+Grouped mask/copy kernel byte-for-byte unchanged.
+Direct per-record statements equal original closure after removing comments and the macro argument binding.
+One runtime selector is outside record loops; no whole-step const mode flag.
+Runner method list, threshold parser, family match and enum dispatch all registered.

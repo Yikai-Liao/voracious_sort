@@ -1,0 +1,35 @@
+{
+  "release": {
+    "opt_level": 3,
+    "debug": "line-tables-only",
+    "codegen_units": 16,
+    "lto": false,
+    "incremental": true,
+    "jobs": 6,
+    "rustflags": "-C target-cpu=native"
+  },
+  "time_features": [
+    "frontier_narrow_screen"
+  ],
+  "work_features": [
+    "frontier_work"
+  ],
+  "dependency_flags": [
+    "--locked",
+    "--offline"
+  ],
+  "timing_affinity": [
+    2
+  ],
+  "offline_local_threshold_bytes": 16777216,
+  "screen_layouts": [
+    "u8",
+    "u16",
+    "u32",
+    "u64",
+    "u8_id8",
+    "u16_id8",
+    "small8"
+  ],
+  "asan_status": "not yet run for this source; screen first"
+}

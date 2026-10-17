@@ -1,0 +1,104 @@
+[
+  {
+    "tag": "direct-small-prefix-0",
+    "address": "0000000000203740",
+    "size": "0000000000000685",
+    "name": "<block_msd_research::frontier::block::Sorter<frontier_experiment::Small>>::scatter_direct::<u32, block_msd_research::frontier::pa::partition<frontier_experiment::Small, u32, block_msd_research::frontier::Prefix<u32>>::{closure#0}, 0>",
+    "calls": [
+      "203d13:\tcall   *0x1dd86f(%rip)        # 3e1588 <_DYNAMIC+0x2f0>",
+      "203d26:\tcall   *0x1dd7ec(%rip)        # 3e1518 <_DYNAMIC+0x280>",
+      "203d36:\tcall   *0x1dd7dc(%rip)        # 3e1518 <_DYNAMIC+0x280>",
+      "203d4b:\tcall   *0x1dd7c7(%rip)        # 3e1518 <_DYNAMIC+0x280>",
+      "203d60:\tcall   *0x1dd7b2(%rip)        # 3e1518 <_DYNAMIC+0x280>",
+      "203d73:\tcall   *0x1dd79f(%rip)        # 3e1518 <_DYNAMIC+0x280>",
+      "203d83:\tcall   *0x1dd78f(%rip)        # 3e1518 <_DYNAMIC+0x280>",
+      "203d98:\tcall   *0x1dd77a(%rip)        # 3e1518 <_DYNAMIC+0x280>",
+      "203dad:\tcall   *0x1dd765(%rip)        # 3e1518 <_DYNAMIC+0x280>",
+      "203dbf:\tcall   *0x1dd753(%rip)        # 3e1518 <_DYNAMIC+0x280>"
+    ]
+  },
+  {
+    "tag": "original-small-prefix-0",
+    "address": "000000000021af00",
+    "size": "000000000000062f",
+    "name": "<block_msd_research::frontier::block::Sorter<frontier_experiment::Small>>::scatter::<u32, block_msd_research::frontier::pa::partition<frontier_experiment::Small, u32, block_msd_research::frontier::Prefix<u32>>::{closure#0}, 0>",
+    "calls": [
+      "21b492:\tcall   *0x1c6080(%rip)        # 3e1518 <_DYNAMIC+0x280>",
+      "21b4bd:\tcall   *0x1c60c5(%rip)        # 3e1588 <_DYNAMIC+0x2f0>",
+      "21b4d0:\tcall   *0x1c6042(%rip)        # 3e1518 <_DYNAMIC+0x280>",
+      "21b4e0:\tcall   *0x1c6032(%rip)        # 3e1518 <_DYNAMIC+0x280>",
+      "21b4f5:\tcall   *0x1c601d(%rip)        # 3e1518 <_DYNAMIC+0x280>",
+      "21b505:\tcall   *0x1c600d(%rip)        # 3e1518 <_DYNAMIC+0x280>",
+      "21b517:\tcall   *0x1c5ffb(%rip)        # 3e1518 <_DYNAMIC+0x280>",
+      "21b529:\tcall   *0x1c5fe9(%rip)        # 3e1518 <_DYNAMIC+0x280>"
+    ]
+  },
+  {
+    "tag": "direct-small-prefix-1",
+    "address": "0000000000203dd0",
+    "size": "0000000000000699",
+    "name": "<block_msd_research::frontier::block::Sorter<frontier_experiment::Small>>::scatter_direct::<u32, block_msd_research::frontier::pa::partition<frontier_experiment::Small, u32, block_msd_research::frontier::Prefix<u32>>::{closure#0}, 1>",
+    "calls": [
+      "2043b7:\tcall   *0x1dd1cb(%rip)        # 3e1588 <_DYNAMIC+0x2f0>",
+      "2043ca:\tcall   *0x1dd148(%rip)        # 3e1518 <_DYNAMIC+0x280>",
+      "2043da:\tcall   *0x1dd138(%rip)        # 3e1518 <_DYNAMIC+0x280>",
+      "2043ef:\tcall   *0x1dd123(%rip)        # 3e1518 <_DYNAMIC+0x280>",
+      "204404:\tcall   *0x1dd10e(%rip)        # 3e1518 <_DYNAMIC+0x280>",
+      "204417:\tcall   *0x1dd0fb(%rip)        # 3e1518 <_DYNAMIC+0x280>",
+      "204427:\tcall   *0x1dd0eb(%rip)        # 3e1518 <_DYNAMIC+0x280>",
+      "20443c:\tcall   *0x1dd0d6(%rip)        # 3e1518 <_DYNAMIC+0x280>",
+      "204451:\tcall   *0x1dd0c1(%rip)        # 3e1518 <_DYNAMIC+0x280>",
+      "204463:\tcall   *0x1dd0af(%rip)        # 3e1518 <_DYNAMIC+0x280>"
+    ]
+  },
+  {
+    "tag": "original-small-prefix-1",
+    "address": "000000000021b530",
+    "size": "0000000000000643",
+    "name": "<block_msd_research::frontier::block::Sorter<frontier_experiment::Small>>::scatter::<u32, block_msd_research::frontier::pa::partition<frontier_experiment::Small, u32, block_msd_research::frontier::Prefix<u32>>::{closure#0}, 1>",
+    "calls": [
+      "21bad6:\tcall   *0x1c5a3c(%rip)        # 3e1518 <_DYNAMIC+0x280>",
+      "21bb01:\tcall   *0x1c5a81(%rip)        # 3e1588 <_DYNAMIC+0x2f0>",
+      "21bb14:\tcall   *0x1c59fe(%rip)        # 3e1518 <_DYNAMIC+0x280>",
+      "21bb24:\tcall   *0x1c59ee(%rip)        # 3e1518 <_DYNAMIC+0x280>",
+      "21bb39:\tcall   *0x1c59d9(%rip)        # 3e1518 <_DYNAMIC+0x280>",
+      "21bb49:\tcall   *0x1c59c9(%rip)        # 3e1518 <_DYNAMIC+0x280>",
+      "21bb5b:\tcall   *0x1c59b7(%rip)        # 3e1518 <_DYNAMIC+0x280>",
+      "21bb6d:\tcall   *0x1c59a5(%rip)        # 3e1518 <_DYNAMIC+0x280>"
+    ]
+  },
+  {
+    "tag": "direct-small-prefix-2",
+    "address": "0000000000204470",
+    "size": "0000000000000699",
+    "name": "<block_msd_research::frontier::block::Sorter<frontier_experiment::Small>>::scatter_direct::<u32, block_msd_research::frontier::pa::partition<frontier_experiment::Small, u32, block_msd_research::frontier::Prefix<u32>>::{closure#0}, 2>",
+    "calls": [
+      "204a57:\tcall   *0x1dcb2b(%rip)        # 3e1588 <_DYNAMIC+0x2f0>",
+      "204a6a:\tcall   *0x1dcaa8(%rip)        # 3e1518 <_DYNAMIC+0x280>",
+      "204a7a:\tcall   *0x1dca98(%rip)        # 3e1518 <_DYNAMIC+0x280>",
+      "204a8f:\tcall   *0x1dca83(%rip)        # 3e1518 <_DYNAMIC+0x280>",
+      "204aa4:\tcall   *0x1dca6e(%rip)        # 3e1518 <_DYNAMIC+0x280>",
+      "204ab7:\tcall   *0x1dca5b(%rip)        # 3e1518 <_DYNAMIC+0x280>",
+      "204ac7:\tcall   *0x1dca4b(%rip)        # 3e1518 <_DYNAMIC+0x280>",
+      "204adc:\tcall   *0x1dca36(%rip)        # 3e1518 <_DYNAMIC+0x280>",
+      "204af1:\tcall   *0x1dca21(%rip)        # 3e1518 <_DYNAMIC+0x280>",
+      "204b03:\tcall   *0x1dca0f(%rip)        # 3e1518 <_DYNAMIC+0x280>"
+    ]
+  },
+  {
+    "tag": "original-small-prefix-2",
+    "address": "000000000021bb80",
+    "size": "0000000000000643",
+    "name": "<block_msd_research::frontier::block::Sorter<frontier_experiment::Small>>::scatter::<u32, block_msd_research::frontier::pa::partition<frontier_experiment::Small, u32, block_msd_research::frontier::Prefix<u32>>::{closure#0}, 2>",
+    "calls": [
+      "21c126:\tcall   *0x1c53ec(%rip)        # 3e1518 <_DYNAMIC+0x280>",
+      "21c151:\tcall   *0x1c5431(%rip)        # 3e1588 <_DYNAMIC+0x2f0>",
+      "21c164:\tcall   *0x1c53ae(%rip)        # 3e1518 <_DYNAMIC+0x280>",
+      "21c174:\tcall   *0x1c539e(%rip)        # 3e1518 <_DYNAMIC+0x280>",
+      "21c189:\tcall   *0x1c5389(%rip)        # 3e1518 <_DYNAMIC+0x280>",
+      "21c199:\tcall   *0x1c5379(%rip)        # 3e1518 <_DYNAMIC+0x280>",
+      "21c1ab:\tcall   *0x1c5367(%rip)        # 3e1518 <_DYNAMIC+0x280>",
+      "21c1bd:\tcall   *0x1c5355(%rip)        # 3e1518 <_DYNAMIC+0x280>"
+    ]
+  }
+]

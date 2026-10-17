@@ -1,0 +1,34 @@
+{
+  "reason": "completed unreferenced executable outputs only; retain all release incremental caches, current Cargo work executable and every frozen ELF",
+  "files": [
+    {
+      "path": "experiments/block_msd/target/release/deps/frontier_experiment-23da8c9a5081f4c8",
+      "bytes": 45689152,
+      "sha256": "aade3d181b69e895b8f02f21eaa48bdc188003e0f4f3ad2ea48dd34ff5dc7108",
+      "frozen_copies": [
+        "experiments/block_msd/target/pa-groups/time"
+      ]
+    },
+    {
+      "path": "experiments/block_msd/target/release/deps/frontier_experiment-ce06adec1b9a905d",
+      "bytes": 32001592,
+      "sha256": "5f7c06a1c7862aea9e13b90fb101ee99a225b8cc10900da310fa06b7d1670d74",
+      "frozen_copies": [
+        "experiments/block_msd/target/pa-groups-final/time"
+      ]
+    },
+    {
+      "path": "experiments/block_msd/target/release/deps/frontier_experiment-8a71dfed6e0be7f9",
+      "bytes": 13651304,
+      "sha256": "fd55909f75d07ebf763a4f96cc217ab2e8a91d54ae7d49b9c69ad6545bcd7001",
+      "frozen_copies": []
+    },
+    {
+      "path": "experiments/block_msd/target/release/deps/block_msd_research-268751d61ea28b08",
+      "bytes": 29296376,
+      "sha256": "a2d590af741b6fe426091b1440c38a8bb50323e80ef362d28173972eef32ceeb",
+      "frozen_copies": []
+    }
+  ],
+  "ledger_files_checked": 79
+}

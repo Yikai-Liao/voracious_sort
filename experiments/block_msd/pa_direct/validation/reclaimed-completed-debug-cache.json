@@ -1,0 +1,6 @@
+{
+  "path": "experiments/block_msd/target/pa-guard-debug",
+  "bytes": 339748646,
+  "reason": "32 tests, registry and all-feature checks completed; retain current release caches and frozen executables",
+  "ledger_files_checked": 80
+}
