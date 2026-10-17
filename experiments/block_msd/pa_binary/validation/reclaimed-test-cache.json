@@ -1,0 +1,6 @@
+{
+  "path": "experiments/block_msd/target/pa-guard-debug",
+  "logical_bytes_including_hardlinks": 555043822,
+  "reason": "finished unreferenced test build cache; free space for next test/link; preserve frozen ELFs and current optimized incremental cache",
+  "previous_default_debug_cache_removed": "experiments/block_msd/target/debug"
+}
