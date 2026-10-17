@@ -1,0 +1,26 @@
+{
+  "rows": 70,
+  "blocks": [
+    3,
+    17,
+    64,
+    129,
+    512
+  ],
+  "layouts": [
+    "small8",
+    "u16",
+    "u16_id8",
+    "u32",
+    "u64",
+    "u8",
+    "u8_id8"
+  ],
+  "methods": [
+    "Pa_unified_prepared_t16777216",
+    "Pa_unified_groups_t16777216"
+  ],
+  "all_oracles_passed": true,
+  "all_stderr_empty": true,
+  "diagnostic_not_timing_evidence": true
+}

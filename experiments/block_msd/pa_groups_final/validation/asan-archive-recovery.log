@@ -1,0 +1,2 @@
+The sanitizer cargo test passed31 tests in184.00s. Its post-copy script exited1 because verbose nightly Cargo reports `Running <command>` rather than `Running unittests (path)`. Parsed the recorded command and copied the same successful test executable without rerunning tests.
+/root/code/voracious_sort-pa-unified/experiments/block_msd/target/pa-groups-asan/x86_64-unknown-linux-gnu/debug/build/block_msd_research/8c284a7f286c35b3/out/block_msd_research-8c284a7f286c35b3

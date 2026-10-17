@@ -1,0 +1,17 @@
+{
+  "reason": "Old full-DWARF library caches predate the frozen line-tables-only profile; retain every current native release cache and frozen ELF",
+  "profile_change_mtime": 1792263812.7009761,
+  "directories": [
+    {
+      "path": "experiments/block_msd/target/release/incremental/block_msd_research-1havcqmb0ezqx",
+      "logical_bytes": 42949758,
+      "last_file_mtime": 1792263394.3898916
+    },
+    {
+      "path": "experiments/block_msd/target/release/incremental/voracious_radix_sort-0snksgdqryj4v",
+      "logical_bytes": 81631795,
+      "last_file_mtime": 1792260689.745984
+    }
+  ],
+  "ledger_files_checked": 77
+}

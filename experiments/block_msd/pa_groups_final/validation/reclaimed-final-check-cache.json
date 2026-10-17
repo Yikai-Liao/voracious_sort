@@ -1,0 +1,6 @@
+{
+  "path": "experiments/block_msd/target/debug",
+  "logical_bytes": 87313324,
+  "reason": "all-target/all-feature check completed successfully; no ledger references these development check outputs; retain all current release caches and frozen binaries",
+  "ledger_files_checked": 77
+}

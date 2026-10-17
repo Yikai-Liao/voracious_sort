@@ -1,0 +1,23 @@
+ablation-narrow-full-b64-s42 576 OK
+final-cache-domain-b512-s42 864 OK
+final-guards-b64-s42 1440 OK
+final-large-b512-s42 216 OK
+final-medium-b64-s42 216 OK
+final-narrow-repeat-b64-s42 288 OK
+final-order-large-b64-s42 864 OK
+final-order-small-b64-s42 864 OK
+final-prefix-b512-s42 864 OK
+final-prefix-b64-s42 864 OK
+final-seedflip-b64-s7 72 OK
+heap-domain-b512-s42 72 OK
+heap-guards-b64-s42 120 OK
+heap-large-b512-s42 18 OK
+heap-medium-b64-s42 18 OK
+heap-prefix-b512-s42 72 OK
+heap-prefix-b64-s42 72 OK
+work-guards-b64-s42 80 OK
+work-large-b512-s42 12 OK
+work-medium-b64-s42 12 OK
+work-prefix-b512-s42 48 OK
+work-prefix-b64-s42 48 OK
+all 7700 rows; source/binary hashes OK

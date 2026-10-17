@@ -1,0 +1,43 @@
+{
+  "release": {
+    "opt_level": 3,
+    "debug": "line-tables-only",
+    "codegen_units": 16,
+    "lto": false,
+    "incremental": true,
+    "jobs": 6,
+    "rustflags": "-C target-cpu=native"
+  },
+  "time_features": [],
+  "work_features": [
+    "frontier_work"
+  ],
+  "asan": {
+    "toolchain": "nightly",
+    "target": "x86_64-unknown-linux-gnu",
+    "features": [
+      "frontier_work"
+    ],
+    "dev_debug": 0,
+    "debug_assertions": true,
+    "overflow_checks": true,
+    "rustflags": "-Zsanitizer=address -C target-cpu=native",
+    "ASAN_OPTIONS": "detect_leaks=1"
+  },
+  "dependency_flags": [
+    "--locked",
+    "--offline"
+  ],
+  "timing_affinity": [
+    2
+  ],
+  "offline_local_threshold_bytes": 16777216,
+  "asan_release": {
+    "features": [],
+    "profile": "release",
+    "rustflags": "-Zsanitizer=address -C target-cpu=native",
+    "target": "x86_64-unknown-linux-gnu",
+    "work_counters": false,
+    "purpose": "pure vectorizable grouped loop and boundary diagnostics; no timing claims"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "path": "experiments/block_msd/target/pa-groups-asan",
+  "logical_bytes": 415414330,
+  "reason": "successful optimized ASan ELF archived and hash checked; reclaim isolated sanitizer build cache only; native release caches preserved",
+  "archived_sha256": "ccb316ceea33c11732bb2e7ef1eda0a6cc11860249a93d14a8c67cf50bfc2223"
+}

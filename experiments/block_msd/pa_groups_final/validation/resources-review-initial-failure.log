@@ -1,0 +1,13 @@
+All 200 work rows and 372 memory rows completed successfully before this review.
+The initial review_resources.py assertion failed on small8/sparse:
+  AssertionError: (.../work-guards-b64-s42.csv,
+    ('1048576', '64', '42', 'small8', 'sparse'), 2, 1)
+
+The review script incorrectly assumed every sparse layout had only keys 0/1
+and needed one pass. The frozen make_keys generator places independent bits
+at positions 0,18,...,126 before truncating to the layout key width and shuffling.
+u8/u16 have keys 0/1; u32/small8 need two passes, and u64 has ten passes across
+its recursive nodes. Every eligible sparse block pass adds one probe. The
+review assertion was corrected to this contract; no sorting source, input,
+binary or measurement was changed or rerun. The independent general bound
+0 <= extra_label_evals <= passes had already passed all 50 work cells.

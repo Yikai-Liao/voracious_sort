@@ -1,0 +1,5 @@
+{
+  "path": "target/pa-guard-debug",
+  "logical_bytes_including_hardlinks": 762248719,
+  "reason": "completed unreferenced debug test cache; make room for final full native time/work and ASan builds while preserving optimized incremental caches and all frozen ELFs"
+}

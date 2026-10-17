@@ -1,0 +1,6 @@
+156 frozen source files match both commit 2513fa5ba9abe473949f0a64a45809a7f32b5cc4 and active source.
+Four separate full-layout ELF hashes frozen; no narrow-screen feature.
+5f7c06a1c7862aea9e13b90fb101ee99a225b8cc10900da310fa06b7d1670d74  experiments/block_msd/target/pa-groups-final/time
+261628c099cc1f3bec497e30687977f4d3dfc8d1bc643e759790b9ca7dc8dfab  experiments/block_msd/target/pa-groups-final/work
+4ad36a74ce7de1e60953d15c1ac5e934a32232e172395ac5a01a7550d181108c  experiments/block_msd/target/pa-groups-final/asan-tests
+ccb316ceea33c11732bb2e7ef1eda0a6cc11860249a93d14a8c67cf50bfc2223  experiments/block_msd/target/pa-groups-final/asan-time

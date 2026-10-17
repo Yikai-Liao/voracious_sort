@@ -1,0 +1,820 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 6K of event 'cpu-clock:u'
+# Event count (approx.): 3236617500
+#
+# Overhead  Source:Line                                                                                                                                                                                                                                                                                                 
+# ........  ............................................................................................................................................................................................................................................................................................................
+#
+     6.52%  block.rs:301
+            |          
+            |--3.51%--0x5642c7a416f7
+            |          0x5642c7a416f7
+            |          0x5642c7a416f7
+            |          0x5642c7a416f7
+            |          |          
+            |          |--2.70%--0x5642c78bbc79
+            |          |          0x5642c7a5b899
+            |          |          0x5642c7a5b899
+            |          |          0x5642c7a7be73
+            |          |          0x5642c7a7be73
+            |          |          0x5642c7a7be73
+            |          |          0x5642c7a7be73
+            |          |          0x5642c7a7be73
+            |          |          0x5642c7a7be73
+            |          |          0x5642c7c4a487
+            |          |          0x5642c7c4a487
+            |          |          0x5642c7c4a487
+            |          |          0x5642c7c4a487
+            |          |          0x5642c7c37c33
+            |          |          0x5642c7c37c33
+            |          |          0x5642c7c37c33
+            |          |          0x5642c7c37c33
+            |          |          0x5642c7c2f20f
+            |          |          
+            |           --0.80%--0x5642c78bbc6b
+            |                     0x5642c7a5b899
+            |                     0x5642c7a5b899
+            |                     0x5642c7a7be73
+            |                     0x5642c7a7be73
+            |                     0x5642c7a7be73
+            |                     0x5642c7a7be73
+            |                     0x5642c7a7be73
+            |                     0x5642c7a7be73
+            |                     0x5642c7c4a487
+            |                     0x5642c7c4a487
+            |                     0x5642c7c4a487
+            |                     0x5642c7c4a487
+            |                     0x5642c7c37c33
+            |                     0x5642c7c37c33
+            |                     0x5642c7c37c33
+            |                     0x5642c7c37c33
+            |                     0x5642c7c2f20f
+            |          
+            |--0.99%--0x5642c7a41854
+            |          |          
+            |           --0.76%--0x5642c78bb49d
+            |                     0x5642c7a5b899
+            |                     0x5642c7a5b899
+            |                     0x5642c7a7be73
+            |                     0x5642c7a7be73
+            |                     0x5642c7a7be73
+            |                     0x5642c7a7be73
+            |                     0x5642c7a7be73
+            |                     0x5642c7a7be73
+            |                     0x5642c7c4a487
+            |                     0x5642c7c4a487
+            |                     0x5642c7c4a487
+            |                     0x5642c7c4a487
+            |                     0x5642c7c37c33
+            |                     0x5642c7c37c33
+            |                     0x5642c7c37c33
+            |                     0x5642c7c37c33
+            |                     0x5642c7c2f20f
+            |          
+            |--0.83%--_RNCINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB5_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE7scattermNCINvB7_19distribute_childrenB19_mINtB7_6PrefixmEKh1_E0Kj1_E0B1b_
+            |          |          
+            |           --0.63%--/root/code/voracious_sort-pa-unified/experiments/block_msd/src/frontier/block.rs:319 (inlined)
+            |                     stable_partition<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+            |                     _RINvNtNtNtNtCsgxBkk5gSRhY_4core5slice4sort6stable9quicksort9quicksortNtCsh0OFtX7QJDB_19frontier_experiment5SmallNCINvMNtCs6i54tJFfzR_5alloc5sliceSB15_11sort_by_keymNCINvB17_3runB15_mE0E0EB17_ (inlined)
+            |                     _RINvNtNtNtNtCsgxBkk5gSRhY_4core5slice4sort6stable5drift4sortNtCsh0OFtX7QJDB_19frontier_experiment5SmallNCINvMNtCs6i54tJFfzR_5alloc5sliceSBW_11sort_by_keymNCINvBY_3runBW_mE0E0EBY_ (inlined)
+            |                     {closure#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>> (inlined)
+            |                     merge_up<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+            |                     merge<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+            |                     logical_merge<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+            |                     sort<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+            |                     /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/ptr/mut_ptr.rs:970 (inlined)
+            |                     /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:95 (inlined)
+            |                     /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:56 (inlined)
+            |                     /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/drift.rs:211 (inlined)
+            |                     /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/ptr/mod.rs:549 (inlined)
+            |                     /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:93 (inlined)
+            |                     /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:56 (inlined)
+            |                     /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/drift.rs:211 (inlined)
+            |                     _RINvNtNtCsbkRNkUNbpMw_18block_msd_research8frontier2pa22sort_pa_with_thresholdNtCsh0OFtX7QJDB_19frontier_experiment5SmallmEB1g_
+            |          
+             --0.66%--0x5642c7a4184f
+                       0x5642c7a4184f
+                       0x5642c7a4184f
+                       0x5642c7a4184f
+                       0x5642c7a4184f
+                       0x5642c7a4184f
+
+     6.23%  block.rs:296
+            |          
+             --6.11%--/root/code/voracious_sort-pa-unified/experiments/block_msd/src/frontier/block.rs:319 (inlined)
+                       |          
+                        --6.03%--/root/code/voracious_sort-pa-unified/experiments/block_msd/src/frontier/block.rs:319 (inlined)
+                                  stable_partition<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                                  _RINvNtNtNtNtCsgxBkk5gSRhY_4core5slice4sort6stable9quicksort9quicksortNtCsh0OFtX7QJDB_19frontier_experiment5SmallNCINvMNtCs6i54tJFfzR_5alloc5sliceSB15_11sort_by_keymNCINvB17_3runB15_mE0E0EB17_ (inlined)
+                                  _RINvNtNtNtNtCsgxBkk5gSRhY_4core5slice4sort6stable5drift4sortNtCsh0OFtX7QJDB_19frontier_experiment5SmallNCINvMNtCs6i54tJFfzR_5alloc5sliceSBW_11sort_by_keymNCINvBY_3runBW_mE0E0EBY_ (inlined)
+                                  {closure#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>> (inlined)
+                                  merge_up<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                                  merge<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                                  logical_merge<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                                  sort<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                                  /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/ptr/mut_ptr.rs:970 (inlined)
+                                  /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:95 (inlined)
+                                  /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:56 (inlined)
+                                  /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/drift.rs:211 (inlined)
+                                  /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/ptr/mod.rs:549 (inlined)
+                                  /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:93 (inlined)
+                                  /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:56 (inlined)
+                                  /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/drift.rs:211 (inlined)
+                                  _RINvNtNtCsbkRNkUNbpMw_18block_msd_research8frontier2pa22sort_pa_with_thresholdNtCsh0OFtX7QJDB_19frontier_experiment5SmallmEB1g_
+
+     5.81%  _RNCINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB5_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE7scattermNCINvB7_19distribute_childrenB19_mINtB7_6PrefixmEKh1_E0Kj2_E0B1b_+33
+            |
+            ---_RNCINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB5_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE7scattermNCINvB7_19distribute_childrenB19_mINtB7_6PrefixmEKh1_E0Kj2_E0B1b_
+               |          
+                --5.75%--_RINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB3_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE9step_implmNCINvNtB5_2pa9partitionB17_mINtB5_6PrefixmEE0EB19_.llvm.6863592281246770637
+                          stable_partition<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                          _RINvNtNtNtNtCsgxBkk5gSRhY_4core5slice4sort6stable9quicksort9quicksortNtCsh0OFtX7QJDB_19frontier_experiment5SmallNCINvMNtCs6i54tJFfzR_5alloc5sliceSB15_11sort_by_keymNCINvB17_3runB15_mE0E0EB17_ (inlined)
+                          _RINvNtNtNtNtCsgxBkk5gSRhY_4core5slice4sort6stable5drift4sortNtCsh0OFtX7QJDB_19frontier_experiment5SmallNCINvMNtCs6i54tJFfzR_5alloc5sliceSBW_11sort_by_keymNCINvBY_3runBW_mE0E0EBY_ (inlined)
+                          {closure#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>> (inlined)
+                          merge_up<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                          merge<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                          logical_merge<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                          sort<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/ptr/mut_ptr.rs:970 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:95 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:56 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/drift.rs:211 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/ptr/mod.rs:549 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:93 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:56 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/drift.rs:211 (inlined)
+                          _RINvNtNtCsbkRNkUNbpMw_18block_msd_research8frontier2pa22sort_pa_with_thresholdNtCsh0OFtX7QJDB_19frontier_experiment5SmallmEB1g_
+
+     5.72%  block.rs:244
+            |          
+            |--3.74%--_RINvNtNtCsbkRNkUNbpMw_18block_msd_research8frontier2pa5visitNtCsh0OFtX7QJDB_19frontier_experiment5SmallmEBY_.llvm.5840278210049151275 (inlined)
+            |          |          
+            |          |--1.08%--_RNvCsh0OFtX7QJDB_19frontier_experiment4main (inlined)
+            |          |          main (inlined)
+            |          |          stable_partition<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+            |          |          _RINvNtNtNtNtCsgxBkk5gSRhY_4core5slice4sort6stable9quicksort9quicksortNtCsh0OFtX7QJDB_19frontier_experiment5SmallNCINvMNtCs6i54tJFfzR_5alloc5sliceSB15_11sort_by_keymNCINvB17_3runB15_mE0E0EB17_ (inlined)
+            |          |          _RINvNtNtNtNtCsgxBkk5gSRhY_4core5slice4sort6stable5drift4sortNtCsh0OFtX7QJDB_19frontier_experiment5SmallNCINvMNtCs6i54tJFfzR_5alloc5sliceSBW_11sort_by_keymNCINvBY_3runBW_mE0E0EBY_ (inlined)
+            |          |          {closure#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>> (inlined)
+            |          |          merge_up<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+            |          |          merge<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+            |          |          logical_merge<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+            |          |          sort<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+            |          |          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/ptr/mut_ptr.rs:970 (inlined)
+            |          |          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:95 (inlined)
+            |          |          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:56 (inlined)
+            |          |          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/drift.rs:211 (inlined)
+            |          |          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/ptr/mod.rs:549 (inlined)
+            |          |          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:93 (inlined)
+            |          |          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:56 (inlined)
+            |          |          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/drift.rs:211 (inlined)
+            |          |          _RINvNtNtCsbkRNkUNbpMw_18block_msd_research8frontier2pa22sort_pa_with_thresholdNtCsh0OFtX7QJDB_19frontier_experiment5SmallmEB1g_
+            |          |          
+            |          |--0.96%--_RINvNtNtCsbkRNkUNbpMw_18block_msd_research8frontier2pa9partitionNtCsh0OFtX7QJDB_19frontier_experiment5SmallmINtB4_6PrefixmEEB12_ (inlined)
+            |          |          stable_partition<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+            |          |          _RINvNtNtNtNtCsgxBkk5gSRhY_4core5slice4sort6stable9quicksort9quicksortNtCsh0OFtX7QJDB_19frontier_experiment5SmallNCINvMNtCs6i54tJFfzR_5alloc5sliceSB15_11sort_by_keymNCINvB17_3runB15_mE0E0EB17_ (inlined)
+            |          |          _RINvNtNtNtNtCsgxBkk5gSRhY_4core5slice4sort6stable5drift4sortNtCsh0OFtX7QJDB_19frontier_experiment5SmallNCINvMNtCs6i54tJFfzR_5alloc5sliceSBW_11sort_by_keymNCINvBY_3runBW_mE0E0EBY_ (inlined)
+            |          |          {closure#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>> (inlined)
+            |          |          merge_up<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+            |          |          merge<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+            |          |          logical_merge<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+            |          |          sort<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+            |          |          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/ptr/mut_ptr.rs:970 (inlined)
+            |          |          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:95 (inlined)
+            |          |          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:56 (inlined)
+            |          |          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/drift.rs:211 (inlined)
+            |          |          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/ptr/mod.rs:549 (inlined)
+            |          |          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:93 (inlined)
+            |          |          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:56 (inlined)
+            |          |          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/drift.rs:211 (inlined)
+            |          |          _RINvNtNtCsbkRNkUNbpMw_18block_msd_research8frontier2pa22sort_pa_with_thresholdNtCsh0OFtX7QJDB_19frontier_experiment5SmallmEB1g_
+            |          |          
+            |          |--0.88%--_RINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB3_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE9step_implmNCINvNtB5_2pa9partitionB17_mINtB5_6PrefixmEE0EB19_.llvm.6863592281246770637
+            |          |          stable_partition<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+            |          |          _RINvNtNtNtNtCsgxBkk5gSRhY_4core5slice4sort6stable9quicksort9quicksortNtCsh0OFtX7QJDB_19frontier_experiment5SmallNCINvMNtCs6i54tJFfzR_5alloc5sliceSB15_11sort_by_keymNCINvB17_3runB15_mE0E0EB17_ (inlined)
+            |          |          _RINvNtNtNtNtCsgxBkk5gSRhY_4core5slice4sort6stable5drift4sortNtCsh0OFtX7QJDB_19frontier_experiment5SmallNCINvMNtCs6i54tJFfzR_5alloc5sliceSBW_11sort_by_keymNCINvBY_3runBW_mE0E0EBY_ (inlined)
+            |          |          {closure#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>> (inlined)
+            |          |          merge_up<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+            |          |          merge<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+            |          |          logical_merge<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+            |          |          sort<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+            |          |          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/ptr/mut_ptr.rs:970 (inlined)
+            |          |          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:95 (inlined)
+            |          |          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:56 (inlined)
+            |          |          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/drift.rs:211 (inlined)
+            |          |          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/ptr/mod.rs:549 (inlined)
+            |          |          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:93 (inlined)
+            |          |          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:56 (inlined)
+            |          |          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/drift.rs:211 (inlined)
+            |          |          _RINvNtNtCsbkRNkUNbpMw_18block_msd_research8frontier2pa22sort_pa_with_thresholdNtCsh0OFtX7QJDB_19frontier_experiment5SmallmEB1g_
+            |          |          
+            |           --0.82%--_RINvNtNtNtNtCsgxBkk5gSRhY_4core5slice4sort6stable9quicksort9quicksortNtCsh0OFtX7QJDB_19frontier_experiment5SmallNCINvMNtCs6i54tJFfzR_5alloc5sliceSB15_11sort_by_keymNCINvB17_3runB15_mE0E0EB17_ (inlined)
+            |                     partition_one<frontier_experiment::Small> (inlined)
+            |                     stable_partition<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+            |                     _RINvNtNtNtNtCsgxBkk5gSRhY_4core5slice4sort6stable9quicksort9quicksortNtCsh0OFtX7QJDB_19frontier_experiment5SmallNCINvMNtCs6i54tJFfzR_5alloc5sliceSB15_11sort_by_keymNCINvB17_3runB15_mE0E0EB17_ (inlined)
+            |                     stable_partition<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+            |                     _RINvNtNtNtNtCsgxBkk5gSRhY_4core5slice4sort6stable9quicksort9quicksortNtCsh0OFtX7QJDB_19frontier_experiment5SmallNCINvMNtCs6i54tJFfzR_5alloc5sliceSB15_11sort_by_keymNCINvB17_3runB15_mE0E0EB17_ (inlined)
+            |                     _RINvNtNtNtNtCsgxBkk5gSRhY_4core5slice4sort6stable5drift4sortNtCsh0OFtX7QJDB_19frontier_experiment5SmallNCINvMNtCs6i54tJFfzR_5alloc5sliceSBW_11sort_by_keymNCINvBY_3runBW_mE0E0EBY_ (inlined)
+            |                     {closure#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>> (inlined)
+            |                     merge_up<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+            |                     merge<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+            |                     logical_merge<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+            |                     sort<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+            |                     /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/ptr/mut_ptr.rs:970 (inlined)
+            |                     /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:95 (inlined)
+            |                     /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:56 (inlined)
+            |                     /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/drift.rs:211 (inlined)
+            |                     /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/ptr/mod.rs:549 (inlined)
+            |                     /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:93 (inlined)
+            |                     /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:56 (inlined)
+            |                     /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/drift.rs:211 (inlined)
+            |                     _RINvNtNtCsbkRNkUNbpMw_18block_msd_research8frontier2pa22sort_pa_with_thresholdNtCsh0OFtX7QJDB_19frontier_experiment5SmallmEB1g_
+            |          
+            |--1.11%--0x5642c7a41594
+            |          0x5642c7a41594
+            |          
+             --0.76%--0x5642c7a4158f
+                       0x5642c7a4158f
+
+     4.33%  index.rs:19
+            |          
+            |--3.57%--0x5642c7a41597
+            |          0x5642c7a41597
+            |          0x5642c7a41597
+            |          0x5642c7a41597
+            |          |          
+            |          |--1.00%--0x5642c78ba8fd
+            |          |          0x5642c78ba8fd
+            |          |          0x5642c78ba8fd
+            |          |          0x5642c78ba8fd
+            |          |          0x5642c7a5b899
+            |          |          0x5642c7a5b899
+            |          |          0x5642c7a7be73
+            |          |          0x5642c7a7be73
+            |          |          0x5642c7a7be73
+            |          |          0x5642c7a7be73
+            |          |          0x5642c7a7be73
+            |          |          0x5642c7a7be73
+            |          |          0x5642c7c4a487
+            |          |          0x5642c7c4a487
+            |          |          0x5642c7c4a487
+            |          |          0x5642c7c4a487
+            |          |          0x5642c7c37c33
+            |          |          0x5642c7c37c33
+            |          |          0x5642c7c37c33
+            |          |          0x5642c7c37c33
+            |          |          0x5642c7c2f20f
+            |          |          
+            |          |--0.88%--0x5642c78ba927
+            |          |          0x5642c7a5b899
+            |          |          0x5642c7a5b899
+            |          |          0x5642c7a7be73
+            |          |          0x5642c7a7be73
+            |          |          0x5642c7a7be73
+            |          |          0x5642c7a7be73
+            |          |          0x5642c7a7be73
+            |          |          0x5642c7a7be73
+            |          |          0x5642c7c4a487
+            |          |          0x5642c7c4a487
+            |          |          0x5642c7c4a487
+            |          |          0x5642c7c4a487
+            |          |          0x5642c7c37c33
+            |          |          0x5642c7c37c33
+            |          |          0x5642c7c37c33
+            |          |          0x5642c7c37c33
+            |          |          0x5642c7c2f20f
+            |          |          
+            |          |--0.85%--0x5642c78ba90b
+            |          |          0x5642c7a5b899
+            |          |          0x5642c7a5b899
+            |          |          0x5642c7a7be73
+            |          |          0x5642c7a7be73
+            |          |          0x5642c7a7be73
+            |          |          0x5642c7a7be73
+            |          |          0x5642c7a7be73
+            |          |          0x5642c7a7be73
+            |          |          0x5642c7c4a487
+            |          |          0x5642c7c4a487
+            |          |          0x5642c7c4a487
+            |          |          0x5642c7c4a487
+            |          |          0x5642c7c37c33
+            |          |          0x5642c7c37c33
+            |          |          0x5642c7c37c33
+            |          |          0x5642c7c37c33
+            |          |          0x5642c7c2f20f
+            |          |          
+            |           --0.83%--0x5642c78ba919
+            |                     0x5642c78ba919
+            |                     0x5642c7a5b899
+            |                     0x5642c7a5b899
+            |                     0x5642c7a7be73
+            |                     0x5642c7a7be73
+            |                     0x5642c7a7be73
+            |                     0x5642c7a7be73
+            |                     0x5642c7a7be73
+            |                     0x5642c7a7be73
+            |                     0x5642c7c4a487
+            |                     0x5642c7c4a487
+            |                     0x5642c7c4a487
+            |                     0x5642c7c4a487
+            |                     0x5642c7c37c33
+            |                     0x5642c7c37c33
+            |                     0x5642c7c37c33
+            |                     0x5642c7c37c33
+            |                     0x5642c7c2f20f
+            |          
+             --0.51%--0x5642c7a416ef
+                       0x5642c7a416ef
+
+     3.91%  block.rs:0
+            |          
+             --3.37%--0x5642c7a41857
+                       |          
+                       |--2.67%--0x5642c78bb49d
+                       |          0x5642c7a5b899
+                       |          0x5642c7a5b899
+                       |          0x5642c7a7be73
+                       |          0x5642c7a7be73
+                       |          0x5642c7a7be73
+                       |          0x5642c7a7be73
+                       |          0x5642c7a7be73
+                       |          0x5642c7a7be73
+                       |          0x5642c7c4a487
+                       |          0x5642c7c4a487
+                       |          0x5642c7c4a487
+                       |          0x5642c7c4a487
+                       |          0x5642c7c37c33
+                       |          0x5642c7c37c33
+                       |          0x5642c7c37c33
+                       |          0x5642c7c37c33
+                       |          0x5642c7c2f20f
+                       |          
+                        --0.70%--0x5642c78bb4c7
+                                  0x5642c7a5b899
+                                  0x5642c7a5b899
+                                  0x5642c7a7be73
+                                  0x5642c7a7be73
+                                  0x5642c7a7be73
+                                  0x5642c7a7be73
+                                  0x5642c7a7be73
+                                  0x5642c7a7be73
+                                  0x5642c7c4a487
+                                  0x5642c7c4a487
+                                  0x5642c7c4a487
+                                  0x5642c7c4a487
+                                  0x5642c7c37c33
+                                  0x5642c7c37c33
+                                  0x5642c7c37c33
+                                  0x5642c7c37c33
+                                  0x5642c7c2f20f
+
+     3.59%  libc.so.6[172d6d]
+            |
+            ---0x7fe6fd41cd6d
+
+     3.28%  _RNCINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB5_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE7scattermNCINvB7_19distribute_childrenB19_mINtB7_6PrefixmEKh1_E0Kj2_E0B1b_+71
+            |
+            ---_RNCINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB5_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE7scattermNCINvB7_19distribute_childrenB19_mINtB7_6PrefixmEKh1_E0Kj2_E0B1b_
+               |          
+               |--2.43%--_RINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB3_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE9step_implmNCINvNtB5_2pa9partitionB17_mINtB5_6PrefixmEE0EB19_.llvm.6863592281246770637
+               |          stable_partition<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+               |          _RINvNtNtNtNtCsgxBkk5gSRhY_4core5slice4sort6stable9quicksort9quicksortNtCsh0OFtX7QJDB_19frontier_experiment5SmallNCINvMNtCs6i54tJFfzR_5alloc5sliceSB15_11sort_by_keymNCINvB17_3runB15_mE0E0EB17_ (inlined)
+               |          _RINvNtNtNtNtCsgxBkk5gSRhY_4core5slice4sort6stable5drift4sortNtCsh0OFtX7QJDB_19frontier_experiment5SmallNCINvMNtCs6i54tJFfzR_5alloc5sliceSBW_11sort_by_keymNCINvBY_3runBW_mE0E0EBY_ (inlined)
+               |          {closure#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>> (inlined)
+               |          merge_up<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+               |          merge<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+               |          logical_merge<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+               |          sort<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+               |          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/ptr/mut_ptr.rs:970 (inlined)
+               |          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:95 (inlined)
+               |          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:56 (inlined)
+               |          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/drift.rs:211 (inlined)
+               |          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/ptr/mod.rs:549 (inlined)
+               |          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:93 (inlined)
+               |          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:56 (inlined)
+               |          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/drift.rs:211 (inlined)
+               |          _RINvNtNtCsbkRNkUNbpMw_18block_msd_research8frontier2pa22sort_pa_with_thresholdNtCsh0OFtX7QJDB_19frontier_experiment5SmallmEB1g_
+               |          
+                --0.85%--/root/code/voracious_sort-pa-unified/experiments/block_msd/src/frontier/block.rs:319 (inlined)
+                          stable_partition<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                          _RINvNtNtNtNtCsgxBkk5gSRhY_4core5slice4sort6stable9quicksort9quicksortNtCsh0OFtX7QJDB_19frontier_experiment5SmallNCINvMNtCs6i54tJFfzR_5alloc5sliceSB15_11sort_by_keymNCINvB17_3runB15_mE0E0EB17_ (inlined)
+                          _RINvNtNtNtNtCsgxBkk5gSRhY_4core5slice4sort6stable5drift4sortNtCsh0OFtX7QJDB_19frontier_experiment5SmallNCINvMNtCs6i54tJFfzR_5alloc5sliceSBW_11sort_by_keymNCINvBY_3runBW_mE0E0EBY_ (inlined)
+                          {closure#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>> (inlined)
+                          merge_up<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                          merge<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                          logical_merge<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                          sort<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/ptr/mut_ptr.rs:970 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:95 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:56 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/drift.rs:211 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/ptr/mod.rs:549 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:93 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:56 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/drift.rs:211 (inlined)
+                          _RINvNtNtCsbkRNkUNbpMw_18block_msd_research8frontier2pa22sort_pa_with_thresholdNtCsh0OFtX7QJDB_19frontier_experiment5SmallmEB1g_
+
+     2.95%  _RNCINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB5_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE7scattermNCINvB7_19distribute_childrenB19_mINtB7_6PrefixmEKh1_E0Kj1_E0B1b_+71
+            |
+            ---_RNCINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB5_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE7scattermNCINvB7_19distribute_childrenB19_mINtB7_6PrefixmEKh1_E0Kj1_E0B1b_
+               |          
+               |--2.09%--/root/code/voracious_sort-pa-unified/experiments/block_msd/src/frontier/block.rs:319 (inlined)
+               |          stable_partition<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+               |          _RINvNtNtNtNtCsgxBkk5gSRhY_4core5slice4sort6stable9quicksort9quicksortNtCsh0OFtX7QJDB_19frontier_experiment5SmallNCINvMNtCs6i54tJFfzR_5alloc5sliceSB15_11sort_by_keymNCINvB17_3runB15_mE0E0EB17_ (inlined)
+               |          _RINvNtNtNtNtCsgxBkk5gSRhY_4core5slice4sort6stable5drift4sortNtCsh0OFtX7QJDB_19frontier_experiment5SmallNCINvMNtCs6i54tJFfzR_5alloc5sliceSBW_11sort_by_keymNCINvBY_3runBW_mE0E0EBY_ (inlined)
+               |          {closure#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>> (inlined)
+               |          merge_up<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+               |          merge<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+               |          logical_merge<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+               |          sort<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+               |          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/ptr/mut_ptr.rs:970 (inlined)
+               |          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:95 (inlined)
+               |          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:56 (inlined)
+               |          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/drift.rs:211 (inlined)
+               |          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/ptr/mod.rs:549 (inlined)
+               |          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:93 (inlined)
+               |          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:56 (inlined)
+               |          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/drift.rs:211 (inlined)
+               |          _RINvNtNtCsbkRNkUNbpMw_18block_msd_research8frontier2pa22sort_pa_with_thresholdNtCsh0OFtX7QJDB_19frontier_experiment5SmallmEB1g_
+               |          
+                --0.87%--_RINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB3_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE9step_implmNCINvNtB5_2pa9partitionB17_mINtB5_6PrefixmEE0EB19_.llvm.6863592281246770637
+                          stable_partition<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                          _RINvNtNtNtNtCsgxBkk5gSRhY_4core5slice4sort6stable9quicksort9quicksortNtCsh0OFtX7QJDB_19frontier_experiment5SmallNCINvMNtCs6i54tJFfzR_5alloc5sliceSB15_11sort_by_keymNCINvB17_3runB15_mE0E0EB17_ (inlined)
+                          _RINvNtNtNtNtCsgxBkk5gSRhY_4core5slice4sort6stable5drift4sortNtCsh0OFtX7QJDB_19frontier_experiment5SmallNCINvMNtCs6i54tJFfzR_5alloc5sliceSBW_11sort_by_keymNCINvBY_3runBW_mE0E0EBY_ (inlined)
+                          {closure#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>> (inlined)
+                          merge_up<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                          merge<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                          logical_merge<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                          sort<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/ptr/mut_ptr.rs:970 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:95 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:56 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/drift.rs:211 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/ptr/mod.rs:549 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:93 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:56 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/drift.rs:211 (inlined)
+                          _RINvNtNtCsbkRNkUNbpMw_18block_msd_research8frontier2pa22sort_pa_with_thresholdNtCsh0OFtX7QJDB_19frontier_experiment5SmallmEB1g_
+
+     1.82%  radixable.rs:203
+            |          
+             --1.42%--_RNvCsh0OFtX7QJDB_19frontier_experiment4main
+                       {closure#4}<frontier_experiment::Small, u32> (inlined)
+                       {closure#0}<(&frontier_experiment::Small, &frontier_experiment::Small), frontier_experiment::run::{closure_env#4}<frontier_experiment::Small, u32>> (inlined)
+                       try_fold<core::iter::adapters::zip::Zip<core::slice::iter::Iter<frontier_experiment::Small>, core::slice::iter::Iter<frontier_experiment::Small>>, (), core::iter::traits::iterator::Iterator::all::check::{closure_env#0}<(&frontier_experiment::Small, &frontier_experiment::Small), frontier_experiment::run::{closure_env#4}<frontier_experiment::Small, u32>>, core::ops::control_flow::ControlFlow<(), ()>> (inlined)
+                       all<core::iter::adapters::zip::Zip<core::slice::iter::Iter<frontier_experiment::Small>, core::slice::iter::Iter<frontier_experiment::Small>>, frontier_experiment::run::{closure_env#4}<frontier_experiment::Small, u32>> (inlined)
+                       run<frontier_experiment::Small, u32> (inlined)
+                       main (inlined)
+
+     1.78%  quicksort.rs:173
+            |          
+            |--0.73%--_RINvNtNtCsbkRNkUNbpMw_18block_msd_research8frontier2pa9partitionNtCsh0OFtX7QJDB_19frontier_experiment5SmallmINtB4_6PrefixmEEB12_
+            |          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/ptr/mod.rs:549 (inlined)
+            |          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:93 (inlined)
+            |          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:56 (inlined)
+            |          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/drift.rs:211 (inlined)
+            |          _RINvNtNtCsbkRNkUNbpMw_18block_msd_research8frontier2pa22sort_pa_with_thresholdNtCsh0OFtX7QJDB_19frontier_experiment5SmallmEB1g_
+            |          _RNvCsh0OFtX7QJDB_19frontier_experiment4main
+            |          
+             --0.60%--0x5642c7c4a526
+                       0x5642c7c37c33
+                       0x5642c7c37c33
+                       0x5642c7c37c33
+                       0x5642c7c37c33
+                       0x5642c7c2f20f
+                       |          
+                        --0.59%--0x5642c7812c25
+
+     1.67%  block.rs:295
+            |          
+            |--0.60%--_RNCINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB5_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE7scattermNCINvB7_19distribute_childrenB19_mINtB7_6PrefixmEKh1_E0Kj1_E0B1b_
+            |          
+             --0.59%--0x5642c7a4180c
+                       0x5642c7a4180c
+
+     1.58%  libc.so.6[172c0e]
+            |
+            ---0x7fe6fd41cc0e
+
+     1.39%  _RNCINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB5_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE7scattermNCINvB7_19distribute_childrenB19_mINtB7_6PrefixmEKh1_E0Kj2_E0B1b_+36
+            |
+            ---{closure#3}<frontier_experiment::Small, u32> (inlined)
+               {closure#0}<(&frontier_experiment::Small, &frontier_experiment::Small), frontier_experiment::run::{closure_env#3}<frontier_experiment::Small, u32>> (inlined)
+               try_fold<core::iter::adapters::zip::Zip<core::slice::iter::Iter<frontier_experiment::Small>, core::slice::iter::Iter<frontier_experiment::Small>>, (), core::iter::traits::iterator::Iterator::all::check::{closure_env#0}<(&frontier_experiment::Small, &frontier_experiment::Small), frontier_experiment::run::{closure_env#3}<frontier_experiment::Small, u32>>, core::ops::control_flow::ControlFlow<(), ()>> (inlined)
+               all<core::iter::adapters::zip::Zip<core::slice::iter::Iter<frontier_experiment::Small>, core::slice::iter::Iter<frontier_experiment::Small>>, frontier_experiment::run::{closure_env#3}<frontier_experiment::Small, u32>> (inlined)
+               run<frontier_experiment::Small, u32> (inlined)
+               main (inlined)
+               |          
+                --1.04%--_RINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB3_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE9step_implmNCINvNtB5_2pa9partitionB17_mINtB5_6PrefixmEE0EB19_.llvm.6863592281246770637
+                          stable_partition<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                          _RINvNtNtNtNtCsgxBkk5gSRhY_4core5slice4sort6stable9quicksort9quicksortNtCsh0OFtX7QJDB_19frontier_experiment5SmallNCINvMNtCs6i54tJFfzR_5alloc5sliceSB15_11sort_by_keymNCINvB17_3runB15_mE0E0EB17_ (inlined)
+                          _RINvNtNtNtNtCsgxBkk5gSRhY_4core5slice4sort6stable5drift4sortNtCsh0OFtX7QJDB_19frontier_experiment5SmallNCINvMNtCs6i54tJFfzR_5alloc5sliceSBW_11sort_by_keymNCINvBY_3runBW_mE0E0EBY_ (inlined)
+                          {closure#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>> (inlined)
+                          merge_up<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                          merge<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                          logical_merge<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                          sort<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/ptr/mut_ptr.rs:970 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:95 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:56 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/drift.rs:211 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/ptr/mod.rs:549 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:93 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:56 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/drift.rs:211 (inlined)
+                          _RINvNtNtCsbkRNkUNbpMw_18block_msd_research8frontier2pa22sort_pa_with_thresholdNtCsh0OFtX7QJDB_19frontier_experiment5SmallmEB1g_
+
+     1.39%  range.rs:985
+            |          
+             --1.25%--0x5642c7a4155e
+
+     1.27%  libc.so.6[172a8f]
+            |
+            ---0x7fe6fd41ca8f
+
+     1.21%  _RNvCsh0OFtX7QJDB_19frontier_experiment4main+128193
+            |
+            ---_RNvCsh0OFtX7QJDB_19frontier_experiment4main
+
+     1.08%  _RNvCsh0OFtX7QJDB_19frontier_experiment4main+128181
+            |
+            ---_RNvCsh0OFtX7QJDB_19frontier_experiment4main
+
+     1.00%  mod.rs:167
+            |          
+             --0.97%--_RNCINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB5_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE7scattermNCINvB7_19distribute_childrenB19_mINtB7_6PrefixmEKh1_E0Kj1_E0B1b_
+                       |          
+                        --0.76%--/root/code/voracious_sort-pa-unified/experiments/block_msd/src/frontier/block.rs:319 (inlined)
+                                  stable_partition<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                                  _RINvNtNtNtNtCsgxBkk5gSRhY_4core5slice4sort6stable9quicksort9quicksortNtCsh0OFtX7QJDB_19frontier_experiment5SmallNCINvMNtCs6i54tJFfzR_5alloc5sliceSB15_11sort_by_keymNCINvB17_3runB15_mE0E0EB17_ (inlined)
+                                  _RINvNtNtNtNtCsgxBkk5gSRhY_4core5slice4sort6stable5drift4sortNtCsh0OFtX7QJDB_19frontier_experiment5SmallNCINvMNtCs6i54tJFfzR_5alloc5sliceSBW_11sort_by_keymNCINvBY_3runBW_mE0E0EBY_ (inlined)
+                                  {closure#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>> (inlined)
+                                  merge_up<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                                  merge<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                                  logical_merge<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                                  sort<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                                  /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/ptr/mut_ptr.rs:970 (inlined)
+                                  /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:95 (inlined)
+                                  /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:56 (inlined)
+                                  /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/drift.rs:211 (inlined)
+                                  /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/ptr/mod.rs:549 (inlined)
+                                  /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:93 (inlined)
+                                  /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:56 (inlined)
+                                  /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/drift.rs:211 (inlined)
+                                  _RINvNtNtCsbkRNkUNbpMw_18block_msd_research8frontier2pa22sort_pa_with_thresholdNtCsh0OFtX7QJDB_19frontier_experiment5SmallmEB1g_
+
+     0.99%  _RNCINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB5_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE7scattermNCINvB7_19distribute_childrenB19_mINtB7_6PrefixmEKh1_E0Kj2_E0B1b_+24
+            |
+            ---/root/code/voracious_sort-pa-unified/experiments/block_msd/src/frontier/block.rs:319 (inlined)
+               |          
+                --0.66%--_RINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB3_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE9step_implmNCINvNtB5_2pa9partitionB17_mINtB5_6PrefixmEE0EB19_.llvm.6863592281246770637
+                          stable_partition<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                          _RINvNtNtNtNtCsgxBkk5gSRhY_4core5slice4sort6stable9quicksort9quicksortNtCsh0OFtX7QJDB_19frontier_experiment5SmallNCINvMNtCs6i54tJFfzR_5alloc5sliceSB15_11sort_by_keymNCINvB17_3runB15_mE0E0EB17_ (inlined)
+                          _RINvNtNtNtNtCsgxBkk5gSRhY_4core5slice4sort6stable5drift4sortNtCsh0OFtX7QJDB_19frontier_experiment5SmallNCINvMNtCs6i54tJFfzR_5alloc5sliceSBW_11sort_by_keymNCINvBY_3runBW_mE0E0EBY_ (inlined)
+                          {closure#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>> (inlined)
+                          merge_up<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                          merge<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                          logical_merge<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                          sort<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/ptr/mut_ptr.rs:970 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:95 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:56 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/drift.rs:211 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/ptr/mod.rs:549 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:93 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:56 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/drift.rs:211 (inlined)
+                          _RINvNtNtCsbkRNkUNbpMw_18block_msd_research8frontier2pa22sort_pa_with_thresholdNtCsh0OFtX7QJDB_19frontier_experiment5SmallmEB1g_
+
+     0.94%  _RNCINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB5_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE7scattermNCINvB7_19distribute_childrenB19_mINtB7_6PrefixmEKh1_E0Kj0_E0B1b_+39
+            |
+            ---_RINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB3_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE9step_implmNCINvNtB5_2pa9partitionB17_mINtB5_6PrefixmEE0EB19_.llvm.6863592281246770637 (inlined)
+               step_impl<frontier_experiment::Small, u32, block_msd_research::frontier::pa::partition::{closure_env#0}<frontier_experiment::Small, u32, block_msd_research::frontier::Prefix<u32>>> (inlined)
+
+     0.91%  _RNCINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB5_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE7scattermNCINvB7_19distribute_childrenB19_mINtB7_6PrefixmEKh1_E0Kj0_E0B1b_+96
+            |
+            ---_RNCINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB5_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE7scattermNCINvB7_19distribute_childrenB19_mINtB7_6PrefixmEKh1_E0Kj0_E0B1b_
+
+     0.88%  _RNCINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB5_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE7scattermNCINvB7_19distribute_childrenB19_mINtB7_6PrefixmEKh1_E0Kj0_E0B1b_+36
+            |
+            ---_RINvCsh0OFtX7QJDB_19frontier_experiment7executeNtB2_5SmallmEB2_ (inlined)
+               is_prefix_of (inlined)
+               strip_prefix_of (inlined)
+               strip_prefix<&str> (inlined)
+               execute<frontier_experiment::Small, u32> (inlined)
+
+     0.87%  quicksort.rs:134
+            |          
+             --0.57%--0x5642c7c37169
+                       0x5642c7c37169
+                       0x5642c7c37169
+                       0x5642c7c37169
+                       0x5642c7c37169
+                       0x5642c7c2f20f
+                       |          
+                        --0.56%--0x5642c7812c25
+
+     0.85%  _RNvCsh0OFtX7QJDB_19frontier_experiment4main+128202
+            |
+            ---_RNvCsh0OFtX7QJDB_19frontier_experiment4main
+
+     0.77%  _RNCINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB5_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE7scattermNCINvB7_19distribute_childrenB19_mINtB7_6PrefixmEKh1_E0Kj2_E0B1b_+27
+            |
+            ---_RNCINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB5_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE7scattermNCINvB7_19distribute_childrenB19_mINtB7_6PrefixmEKh1_E0Kj2_E0B1b_
+               {closure#0}<frontier_experiment::Small, u32, block_msd_research::frontier::distribute_children::{closure_env#0}<frontier_experiment::Small, u32, block_msd_research::frontier::Prefix<u32>, 1>, 2> (inlined)
+               |          
+                --0.63%--_RINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB3_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE9step_implmNCINvNtB5_2pa9partitionB17_mINtB5_6PrefixmEE0EB19_.llvm.6863592281246770637
+                          stable_partition<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                          _RINvNtNtNtNtCsgxBkk5gSRhY_4core5slice4sort6stable9quicksort9quicksortNtCsh0OFtX7QJDB_19frontier_experiment5SmallNCINvMNtCs6i54tJFfzR_5alloc5sliceSB15_11sort_by_keymNCINvB17_3runB15_mE0E0EB17_ (inlined)
+                          _RINvNtNtNtNtCsgxBkk5gSRhY_4core5slice4sort6stable5drift4sortNtCsh0OFtX7QJDB_19frontier_experiment5SmallNCINvMNtCs6i54tJFfzR_5alloc5sliceSBW_11sort_by_keymNCINvBY_3runBW_mE0E0EBY_ (inlined)
+                          {closure#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>> (inlined)
+                          merge_up<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                          merge<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                          logical_merge<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                          sort<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/ptr/mut_ptr.rs:970 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:95 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:56 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/drift.rs:211 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/ptr/mod.rs:549 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:93 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:56 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/drift.rs:211 (inlined)
+                          _RINvNtNtCsbkRNkUNbpMw_18block_msd_research8frontier2pa22sort_pa_with_thresholdNtCsh0OFtX7QJDB_19frontier_experiment5SmallmEB1g_
+
+     0.76%  _RNCINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB5_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE7scattermNCINvB7_19distribute_childrenB19_mINtB7_6PrefixmEKh1_E0Kj1_E0B1b_+24
+            |
+            ---/rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/iter/traits/iterator.rs:2842 (inlined)
+               |          
+                --0.60%--/root/code/voracious_sort-pa-unified/experiments/block_msd/src/frontier/block.rs:319 (inlined)
+                          stable_partition<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                          _RINvNtNtNtNtCsgxBkk5gSRhY_4core5slice4sort6stable9quicksort9quicksortNtCsh0OFtX7QJDB_19frontier_experiment5SmallNCINvMNtCs6i54tJFfzR_5alloc5sliceSB15_11sort_by_keymNCINvB17_3runB15_mE0E0EB17_ (inlined)
+                          _RINvNtNtNtNtCsgxBkk5gSRhY_4core5slice4sort6stable5drift4sortNtCsh0OFtX7QJDB_19frontier_experiment5SmallNCINvMNtCs6i54tJFfzR_5alloc5sliceSBW_11sort_by_keymNCINvBY_3runBW_mE0E0EBY_ (inlined)
+                          {closure#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>> (inlined)
+                          merge_up<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                          merge<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                          logical_merge<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                          sort<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/ptr/mut_ptr.rs:970 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:95 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:56 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/drift.rs:211 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/ptr/mod.rs:549 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:93 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:56 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/drift.rs:211 (inlined)
+                          _RINvNtNtCsbkRNkUNbpMw_18block_msd_research8frontier2pa22sort_pa_with_thresholdNtCsh0OFtX7QJDB_19frontier_experiment5SmallmEB1g_
+
+     0.76%  _RNCINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB5_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE7scattermNCINvB7_19distribute_childrenB19_mINtB7_6PrefixmEKh1_E0Kj2_E0B1b_+96
+            |
+            ---_RNCINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB5_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE7scattermNCINvB7_19distribute_childrenB19_mINtB7_6PrefixmEKh1_E0Kj2_E0B1b_
+               |          
+                --0.57%--_RINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB3_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE9step_implmNCINvNtB5_2pa9partitionB17_mINtB5_6PrefixmEE0EB19_.llvm.6863592281246770637
+                          stable_partition<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                          _RINvNtNtNtNtCsgxBkk5gSRhY_4core5slice4sort6stable9quicksort9quicksortNtCsh0OFtX7QJDB_19frontier_experiment5SmallNCINvMNtCs6i54tJFfzR_5alloc5sliceSB15_11sort_by_keymNCINvB17_3runB15_mE0E0EB17_ (inlined)
+                          _RINvNtNtNtNtCsgxBkk5gSRhY_4core5slice4sort6stable5drift4sortNtCsh0OFtX7QJDB_19frontier_experiment5SmallNCINvMNtCs6i54tJFfzR_5alloc5sliceSBW_11sort_by_keymNCINvBY_3runBW_mE0E0EBY_ (inlined)
+                          {closure#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>> (inlined)
+                          merge_up<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                          merge<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                          logical_merge<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                          sort<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/ptr/mut_ptr.rs:970 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:95 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:56 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/drift.rs:211 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/ptr/mod.rs:549 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:93 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:56 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/drift.rs:211 (inlined)
+                          _RINvNtNtCsbkRNkUNbpMw_18block_msd_research8frontier2pa22sort_pa_with_thresholdNtCsh0OFtX7QJDB_19frontier_experiment5SmallmEB1g_
+
+     0.74%  block.rs:436
+            |          
+             --0.71%--_RNvCsh0OFtX7QJDB_19frontier_experiment4main
+
+     0.73%  _RINvNtNtCsbkRNkUNbpMw_18block_msd_research8frontier2pa9partitionNtCsh0OFtX7QJDB_19frontier_experiment5SmallmINtB4_6PrefixmEEB12_+476
+            |
+            ---_RINvNtNtCsbkRNkUNbpMw_18block_msd_research8frontier2pa9partitionNtCsh0OFtX7QJDB_19frontier_experiment5SmallmINtB4_6PrefixmEEB12_
+               /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/ptr/mod.rs:549 (inlined)
+               /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:93 (inlined)
+               /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:56 (inlined)
+               /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/drift.rs:211 (inlined)
+               _RINvNtNtCsbkRNkUNbpMw_18block_msd_research8frontier2pa22sort_pa_with_thresholdNtCsh0OFtX7QJDB_19frontier_experiment5SmallmEB1g_
+               _RNvCsh0OFtX7QJDB_19frontier_experiment4main
+
+     0.70%  _RNCINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB5_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE7scattermNCINvB7_19distribute_childrenB19_mINtB7_6PrefixmEKh1_E0Kj0_E0B1b_+2
+            |
+            ---_RNCINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB5_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE7scattermNCINvB7_19distribute_childrenB19_mINtB7_6PrefixmEKh1_E0Kj0_E0B1b_
+
+     0.68%  _RINvNtNtCsbkRNkUNbpMw_18block_msd_research8frontier2pa9partitionNtCsh0OFtX7QJDB_19frontier_experiment5SmallmINtB4_6PrefixmEEB12_+452
+            |
+            ---_RINvNtNtCsbkRNkUNbpMw_18block_msd_research8frontier2pa9partitionNtCsh0OFtX7QJDB_19frontier_experiment5SmallmINtB4_6PrefixmEEB12_
+               /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/ptr/mod.rs:549 (inlined)
+               /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:93 (inlined)
+               /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:56 (inlined)
+               /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/drift.rs:211 (inlined)
+               _RINvNtNtCsbkRNkUNbpMw_18block_msd_research8frontier2pa22sort_pa_with_thresholdNtCsh0OFtX7QJDB_19frontier_experiment5SmallmEB1g_
+               _RNvCsh0OFtX7QJDB_19frontier_experiment4main
+
+     0.68%  _RNCINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB5_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE7scattermNCINvB7_19distribute_childrenB19_mINtB7_6PrefixmEKh1_E0Kj1_E0B1b_+36
+            |
+            ---/root/code/voracious_sort-pa-unified/experiments/block_msd/src/frontier/block.rs:319 (inlined)
+               |          
+                --0.51%--/root/code/voracious_sort-pa-unified/experiments/block_msd/src/frontier/block.rs:319 (inlined)
+                          stable_partition<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                          _RINvNtNtNtNtCsgxBkk5gSRhY_4core5slice4sort6stable9quicksort9quicksortNtCsh0OFtX7QJDB_19frontier_experiment5SmallNCINvMNtCs6i54tJFfzR_5alloc5sliceSB15_11sort_by_keymNCINvB17_3runB15_mE0E0EB17_ (inlined)
+                          _RINvNtNtNtNtCsgxBkk5gSRhY_4core5slice4sort6stable5drift4sortNtCsh0OFtX7QJDB_19frontier_experiment5SmallNCINvMNtCs6i54tJFfzR_5alloc5sliceSBW_11sort_by_keymNCINvBY_3runBW_mE0E0EBY_ (inlined)
+                          {closure#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>> (inlined)
+                          merge_up<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                          merge<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                          logical_merge<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                          sort<frontier_experiment::Small, alloc::slice::{impl#0}::sort_by_key::{closure_env#0}<frontier_experiment::Small, u32, frontier_experiment::run::{closure_env#0}<frontier_experiment::Small, u32>>> (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/ptr/mut_ptr.rs:970 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:95 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:56 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/drift.rs:211 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/ptr/mod.rs:549 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:93 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:56 (inlined)
+                          /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/drift.rs:211 (inlined)
+                          _RINvNtNtCsbkRNkUNbpMw_18block_msd_research8frontier2pa22sort_pa_with_thresholdNtCsh0OFtX7QJDB_19frontier_experiment5SmallmEB1g_
+
+     0.66%  index.rs:32
+            |          
+             --0.63%--_RNCINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB5_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE7scattermNCINvB7_19distribute_childrenB19_mINtB7_6PrefixmEKh1_E0Kj0_E0B1b_
+                       label<u32> (inlined)
+                       {closure#0}<frontier_experiment::Small, u32, block_msd_research::frontier::Prefix<u32>, 1> (inlined)
+                       {closure#0}<frontier_experiment::Small, u32, block_msd_research::frontier::distribute_children::{closure_env#0}<frontier_experiment::Small, u32, block_msd_research::frontier::Prefix<u32>, 1>, 0> (inlined)
+
+     0.65%  _RINvNtNtCsbkRNkUNbpMw_18block_msd_research8frontier2pa9partitionNtCsh0OFtX7QJDB_19frontier_experiment5SmallmINtB4_6PrefixmEEB12_+409
+            |
+            ---_RINvNtNtCsbkRNkUNbpMw_18block_msd_research8frontier2pa9partitionNtCsh0OFtX7QJDB_19frontier_experiment5SmallmINtB4_6PrefixmEEB12_
+               /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/ptr/mod.rs:549 (inlined)
+               /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:93 (inlined)
+               /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:56 (inlined)
+               /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/drift.rs:211 (inlined)
+               _RINvNtNtCsbkRNkUNbpMw_18block_msd_research8frontier2pa22sort_pa_with_thresholdNtCsh0OFtX7QJDB_19frontier_experiment5SmallmEB1g_
+               |          
+                --0.62%--_RNvCsh0OFtX7QJDB_19frontier_experiment4main
+
+     0.65%  _RNCINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB5_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE7scattermNCINvB7_19distribute_childrenB19_mINtB7_6PrefixmEKh1_E0Kj0_E0B1b_+11
+            |
+            ---_RINvNtNtCsbkRNkUNbpMw_18block_msd_research8frontier2pa9partitionNtCsh0OFtX7QJDB_19frontier_experiment5SmallmINtB4_6PrefixmEEB12_ (inlined)
+               _RINvNtNtCsbkRNkUNbpMw_18block_msd_research8frontier2pa9partitionNtCsh0OFtX7QJDB_19frontier_experiment5SmallmINtB4_6PrefixmEEB12_ (inlined)
+
+     0.65%  _RNCINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB5_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE7scattermNCINvB7_19distribute_childrenB19_mINtB7_6PrefixmEKh1_E0Kj2_E0B1b_+59
+            |
+            ---/rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/iter/traits/iterator.rs:2842 (inlined)
+
+     0.63%  _RNCINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB5_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE7scattermNCINvB7_19distribute_childrenB19_mINtB7_6PrefixmEKh1_E0Kj2_E0B1b_+2
+            |
+            ---_RNCINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB5_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE7scattermNCINvB7_19distribute_childrenB19_mINtB7_6PrefixmEKh1_E0Kj2_E0B1b_
+
+     0.62%  _RNvCsh0OFtX7QJDB_19frontier_experiment4main+5306
+            |
+            ---{closure#0} (inlined)
+               {closure#0}<usize, u128, (), frontier_experiment::make_keys::{closure_env#0}, core::iter::traits::iterator::Iterator::for_each::call::{closure_env#0}<u128, alloc::vec::{impl#21}::extend_trusted::{closure_env#0}<u128, alloc::alloc::Global, core::iter::adapters::map::Map<core::ops::range::Range<usize>, frontier_experiment::make_keys::{closure_env#0}>>>> (inlined)
+               fold<core::ops::range::Range<usize>, (), core::iter::adapters::map::map_fold::{closure_env#0}<usize, u128, (), frontier_experiment::make_keys::{closure_env#0}, core::iter::traits::iterator::Iterator::for_each::call::{closure_env#0}<u128, alloc::vec::{impl#21}::extend_trusted::{closure_env#0}<u128, alloc::alloc::Global, core::iter::adapters::map::Map<core::ops::range::Range<usize>, frontier_experiment::make_keys::{closure_env#0}>>>>> (inlined)
+               fold<u128, core::ops::range::Range<usize>, frontier_experiment::make_keys::{closure_env#0}, (), core::iter::traits::iterator::Iterator::for_each::call::{closure_env#0}<u128, alloc::vec::{impl#21}::extend_trusted::{closure_env#0}<u128, alloc::alloc::Global, core::iter::adapters::map::Map<core::ops::range::Range<usize>, frontier_experiment::make_keys::{closure_env#0}>>>> (inlined)
+
+     0.57%  _RNCINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB5_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE7scattermNCINvB7_19distribute_childrenB19_mINtB7_6PrefixmEKh1_E0Kj1_E0B1b_+96
+            |
+            ---_RNCINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB5_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE7scattermNCINvB7_19distribute_childrenB19_mINtB7_6PrefixmEKh1_E0Kj1_E0B1b_
+
+     0.56%  _RNCINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB5_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE7scattermNCINvB7_19distribute_childrenB19_mINtB7_6PrefixmEKh1_E0Kj0_E0B1b_+24
+            |
+            ---scatter<frontier_experiment::Small, u32, block_msd_research::frontier::pa::partition::{closure_env#0}<frontier_experiment::Small, u32, block_msd_research::frontier::Prefix<u32>>, 1> (inlined)
+               _RINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB3_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE9step_implmNCINvNtB5_2pa9partitionB17_mINtB5_6PrefixmEE0EB19_.llvm.6863592281246770637 (inlined)
+
+     0.53%  libc.so.6[172c4d]
+            |
+            ---0x7fe6fd41cc4d
+
+     0.53%  quicksort.rs:169
+            |
+            ---_RINvNtNtCsbkRNkUNbpMw_18block_msd_research8frontier2pa9partitionNtCsh0OFtX7QJDB_19frontier_experiment5SmallmINtB4_6PrefixmEEB12_
+               /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/ptr/mod.rs:549 (inlined)
+               /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:93 (inlined)
+               /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:56 (inlined)
+               /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/drift.rs:211 (inlined)
+               _RINvNtNtCsbkRNkUNbpMw_18block_msd_research8frontier2pa22sort_pa_with_thresholdNtCsh0OFtX7QJDB_19frontier_experiment5SmallmEB1g_
+               _RNvCsh0OFtX7QJDB_19frontier_experiment4main
+
+     0.51%  _RINvNtNtCsbkRNkUNbpMw_18block_msd_research8frontier2pa9partitionNtCsh0OFtX7QJDB_19frontier_experiment5SmallmINtB4_6PrefixmEEB12_+472
+            |
+            ---/rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/iter/traits/iterator.rs:2842 (inlined)
+               /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/ptr/mod.rs:549 (inlined)
+               /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:93 (inlined)
+               /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/merge.rs:56 (inlined)
+               /rustc/48a229ceaefd4985c50990b14116b6d856af0985/library/core/src/slice/sort/stable/drift.rs:211 (inlined)
+               _RINvNtNtCsbkRNkUNbpMw_18block_msd_research8frontier2pa22sort_pa_with_thresholdNtCsh0OFtX7QJDB_19frontier_experiment5SmallmEB1g_
+               _RNvCsh0OFtX7QJDB_19frontier_experiment4main
+
+
+
+#
+# (Tip: Use --symfs <dir> if your symbol files are in non-standard locations)
+#

@@ -1,0 +1,35 @@
+{
+  "selected": [
+    {
+      "percent": 23.48,
+      "samples": 1519,
+      "address": "00000000002fe800",
+      "size": "000000000000015b",
+      "raw_symbol": "_RNCINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB5_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE7scattermNCINvB7_19distribute_childrenB19_mINtB7_6PrefixmEKh1_E0Kj2_E0B1b_",
+      "names": [
+        "<block_msd_research::frontier::block::Sorter<frontier_experiment::Small>>::scatter::<u32, block_msd_research::frontier::distribute_children<frontier_experiment::Small, u32, block_msd_research::frontier::Prefix<u32>, 1>::{closure#0}, 2>::{closure#0}"
+      ]
+    },
+    {
+      "percent": 23.08,
+      "samples": 1493,
+      "address": "00000000002fe6a0",
+      "size": "000000000000015b",
+      "raw_symbol": "_RNCINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB5_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE7scattermNCINvB7_19distribute_childrenB19_mINtB7_6PrefixmEKh1_E0Kj1_E0B1b_",
+      "names": [
+        "<block_msd_research::frontier::block::Sorter<frontier_experiment::Small>>::scatter::<u32, block_msd_research::frontier::distribute_children<frontier_experiment::Small, u32, block_msd_research::frontier::Prefix<u32>, 1>::{closure#0}, 1>::{closure#0}"
+      ]
+    },
+    {
+      "percent": 18.5,
+      "samples": 1197,
+      "address": "00000000002fe540",
+      "size": "0000000000000155",
+      "raw_symbol": "_RNCINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB5_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE7scattermNCINvB7_19distribute_childrenB19_mINtB7_6PrefixmEKh1_E0Kj0_E0B1b_",
+      "names": [
+        "<block_msd_research::frontier::block::Sorter<frontier_experiment::Small>>::scatter::<u32, block_msd_research::frontier::distribute_children<frontier_experiment::Small, u32, block_msd_research::frontier::Prefix<u32>, 1>::{closure#0}, 0>::{closure#0}"
+      ]
+    }
+  ],
+  "comparisons": []
+}

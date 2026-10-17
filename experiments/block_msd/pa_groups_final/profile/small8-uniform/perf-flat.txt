@@ -1,0 +1,29 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 6K of event 'cpu-clock:u'
+# Event count (approx.): 3236617500
+#
+# Overhead       Samples  Symbol                                                                                                                                                                                                                                                                                                       IPC   [IPC Coverage]
+# ........  ............  ...........................................................................................................................................................................................................................................................................................................  ....................
+#
+    23.48%          1519  [.] _RNCINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB5_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE7scattermNCINvB7_19distribute_childrenB19_mINtB7_6PrefixmEKh1_E0Kj2_E0B1b_                                                                                                         -      -            
+    23.08%          1493  [.] _RNCINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB5_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE7scattermNCINvB7_19distribute_childrenB19_mINtB7_6PrefixmEKh1_E0Kj1_E0B1b_                                                                                                         -      -            
+    18.50%          1197  [.] _RNCINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB5_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE7scattermNCINvB7_19distribute_childrenB19_mINtB7_6PrefixmEKh1_E0Kj0_E0B1b_                                                                                                         -      -            
+     8.67%           561  [.] _RINvNtNtCsbkRNkUNbpMw_18block_msd_research8frontier2pa9partitionNtCsh0OFtX7QJDB_19frontier_experiment5SmallmINtB4_6PrefixmEEB12_                                                                                                                                                                        -      -            
+     6.63%           429  [.] _RNvCsh0OFtX7QJDB_19frontier_experiment4main                                                                                                                                                                                                                                                             -      -            
+     5.87%           380  [.] _RINvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB3_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE9step_implmNCINvNtB5_2pa9partitionB17_mINtB5_6PrefixmEE0EB19_.llvm.6863592281246770637                                                                                               -      -            
+     3.59%           232  [.] 0x0000000000172d6d                                                                                                                                                                                                                                                                                       -      -            
+     2.13%           138  [.] _RINvNtNtCsbkRNkUNbpMw_18block_msd_research8frontier2pa5visitNtCsh0OFtX7QJDB_19frontier_experiment5SmallmEBY_.llvm.5840278210049151275                                                                                                                                                                   -      -            
+     1.58%           102  [.] 0x0000000000172c0e                                                                                                                                                                                                                                                                                       -      -            
+     1.27%            82  [.] 0x0000000000172a8f                                                                                                                                                                                                                                                                                       -      -            
+     0.68%            44  [.] _RINvNtNtNtNtCsgxBkk5gSRhY_4core5slice4sort6stable9quicksort9quicksortNtCsh0OFtX7QJDB_19frontier_experiment5SmallNCINvMNtCs6i54tJFfzR_5alloc5sliceSB15_11sort_by_keymNCINvB17_3runB15_mE0E0EB17_                                                                                                         -      -            
+     0.60%            39  [.] _RNvMNtNtCsbkRNkUNbpMw_18block_msd_research8frontier5blockINtB2_6SorterNtCsh0OFtX7QJDB_19frontier_experiment5SmallE7compactB18_                                                                                                                                                                          -      -            
+     0.53%            34  [.] 0x0000000000172c4d                                                                                                                                                                                                                                                                                       -      -            
+
+
+#
+# (Tip: To see call chains by final symbol taking CPU time (bottom up) use perf report -G)
+#

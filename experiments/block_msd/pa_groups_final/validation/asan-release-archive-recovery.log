@@ -1,0 +1,7 @@
+Optimized ASan build succeeded. Original post-build shutil.copy2 failed with OSError [Errno 28] No space left on device; incomplete destination (7045120 bytes) removed.
+Moved the complete successful artifact on the same filesystem without rebuilding.
+source=/root/code/voracious_sort-pa-unified/experiments/block_msd/target/pa-groups-asan/x86_64-unknown-linux-gnu/release/frontier_experiment
+destination=experiments/block_msd/target/pa-groups-final/asan-time
+bytes=52826032
+sha256=ccb316ceea33c11732bb2e7ef1eda0a6cc11860249a93d14a8c67cf50bfc2223
+Final hash verified after rename.

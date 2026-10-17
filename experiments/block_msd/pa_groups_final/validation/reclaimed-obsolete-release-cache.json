@@ -1,0 +1,11 @@
+{
+  "reason": "old full-DWARF narrow binary caches are not reused by the frozen line-tables-only release profile; retain all current time/work caches and every frozen ELF",
+  "profile_change_mtime": 1792263812.7009761,
+  "directories": [
+    {
+      "path": "experiments/block_msd/target/release/incremental/frontier_experiment-3125g3dk4kjmj",
+      "logical_bytes": 235986694,
+      "last_file_mtime": 1792263482.2705388
+    }
+  ]
+}

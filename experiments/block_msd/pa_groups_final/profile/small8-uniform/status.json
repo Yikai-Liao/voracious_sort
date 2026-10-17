@@ -1,0 +1,40 @@
+{
+  "source_commit": "2513fa5ba9abe473949f0a64a45809a7f32b5cc4",
+  "binary": "experiments/block_msd/target/pa-groups-final/time",
+  "binary_sha256": "5f7c06a1c7862aea9e13b90fb101ee99a225b8cc10900da310fa06b7d1670d74",
+  "diagnostic_command": [
+    "perf",
+    "record",
+    "-e",
+    "cpu-clock:u",
+    "-F",
+    "1999",
+    "--call-graph",
+    "dwarf,4096",
+    "-o",
+    "experiments/block_msd/pa_groups_final/profile/small8-uniform/perf.data",
+    "--",
+    "taskset",
+    "-c",
+    "2",
+    "experiments/block_msd/target/pa-groups-final/time",
+    "1048576",
+    "64",
+    "Pa_unified_groups_t16777216",
+    "uniform",
+    "small8",
+    "time",
+    "64",
+    "42"
+  ],
+  "rows": 64,
+  "samples": 6470,
+  "lost_samples": 0,
+  "scope": "whole process user-space samples including restore/oracle; excluded from formal timings",
+  "authoritative_report": "perf-flat.txt",
+  "excluded_reports": [
+    "perf-symbols.txt",
+    "perf-lines.txt"
+  ],
+  "exclusion_reason": "addr2line sentinel errors in inline/source resolution; flat no-inline/no-callgraph report has empty stderr"
+}

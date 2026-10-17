@@ -1,0 +1,14 @@
+{
+  "reason": "successful test executable copied and preserved; reclaim debug-only sanitizer cache for optimized sanitizer build, keep native release incremental caches",
+  "directories": [
+    {
+      "path": "experiments/block_msd/target/pa-groups-asan/debug",
+      "logical_bytes": 0
+    },
+    {
+      "path": "experiments/block_msd/target/pa-groups-asan/x86_64-unknown-linux-gnu/debug",
+      "logical_bytes": 251651335
+    }
+  ],
+  "copied_asan_sha256": "4ad36a74ce7de1e60953d15c1ac5e934a32232e172395ac5a01a7550d181108c"
+}
