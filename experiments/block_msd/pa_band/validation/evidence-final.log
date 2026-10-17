@@ -1,0 +1,15 @@
+guards-1048576-seed42 1764 OK
+large-block512 252 OK
+memory-block512 72 OK
+memory-confirm 240 OK
+memory-distinct 36 OK
+shared-block512 1260 OK
+shared-confirm-1048576-seed42 1620 OK
+shared-holdout-seed7 1008 OK
+shared-screen-262144 540 OK
+small-16384 12960 OK
+work-confirm 200 OK
+work-distinct 30 OK
+work-holdout-distinct 6 OK
+work-screen-262144 75 OK
+all 20063 rows; source/binary hashes OK

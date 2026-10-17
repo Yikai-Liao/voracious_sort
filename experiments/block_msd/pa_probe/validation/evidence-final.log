@@ -1,0 +1,9 @@
+block512 2268 OK
+confirm-1048576-seed42 7560 OK
+holdout-seed7 1512 OK
+memory-block512 189 OK
+memory-confirm 360 OK
+screen-262144 864 OK
+small-16384 12960 OK
+work-confirm 240 OK
+all 25953 rows; source/binary hashes OK
