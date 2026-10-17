@@ -51,14 +51,17 @@ fn first_different<T: Radixable<K>, K: RadixKey>(
 where
     Converted<T, K>: NativeKey,
 {
+    let zero = Converted::<T, K>::from_u128(0);
     let mut chunks = arr[1..].chunks_exact(TILE);
     for (tile, chunk) in chunks.by_ref().enumerate() {
-        let mut equal = true;
+        // Any differing bit makes the tile unequal. Keep the reduction in the
+        // native key representation rather than packing per-record predicates.
+        let mut difference = zero;
         for item in chunk {
             work! { stats.order_records += 1; }
-            equal &= item.into_key_type() == first;
+            difference |= item.into_key_type() ^ first;
         }
-        if !equal {
+        if difference != zero {
             for (offset, item) in chunk.iter().enumerate() {
                 work! { stats.order_records += 1; }
                 let key = item.into_key_type();
@@ -185,6 +188,28 @@ mod tests {
             let expected = actual.clone();
             assert!(ordered::<_, u128>(&mut actual, &mut Work::default()));
             assert_eq!(actual, expected, "different={different}");
+        }
+    }
+
+    #[test]
+    fn each_key_bit_detects_an_interior_outlier_across_tiles_and_tail() {
+        let n = 3 * TILE + 5;
+        let base = 1u128 << 120;
+        for bit in 0..128 {
+            for outlier in
+                [1, TILE - 1, TILE, TILE + 1, 2 * TILE - 1, 2 * TILE, n - 2]
+            {
+                let mut keys = vec![base; n];
+                keys[outlier] ^= 1u128 << bit;
+                let expected = keys.clone();
+                assert!(!ordered::<_, u128>(&mut keys, &mut Work::default()));
+                assert_eq!(keys, expected, "bit={bit} outlier={outlier}");
+
+                let mut actual = records(expected);
+                let expected = actual.clone();
+                assert!(!ordered::<_, u128>(&mut actual, &mut Work::default()));
+                assert_eq!(actual, expected, "record bit={bit} outlier={outlier}");
+            }
         }
     }
 
