@@ -1,0 +1,13 @@
+{
+  "source_commit": "e9e8004220fcca2d617085ab3ba3a03563a0a7aa",
+  "first_build": "1m37s",
+  "noop_build": "0.04s",
+  "jobs": 6,
+  "incremental": true,
+  "codegen_units": 16,
+  "flags": "-C target-cpu=native",
+  "feature": "frontier_narrow_screen",
+  "as_built_binary_sha256": "655623fb6d0c7d6b25c6c915aea2824deaa235dc5226591bf69a780b815f6f12",
+  "as_built_binary_bytes": 42740240,
+  "note": "No-op build has no source edit. CLI smoke CSV is diagnostic; no Goal performance conclusion."
+}

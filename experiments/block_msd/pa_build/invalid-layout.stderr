@@ -1,0 +1,4 @@
+
+thread 'main' (1543159) panicked at src/bin/frontier_experiment.rs:736:5:
+frontier_narrow_screen supports only u8/u16 and their ID layouts
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace

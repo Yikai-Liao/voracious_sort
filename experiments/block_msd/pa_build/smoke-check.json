@@ -1,0 +1,6 @@
+{
+  "source_commit": "e9e8004220fcca2d617085ab3ba3a03563a0a7aa",
+  "oracle_rows": 24,
+  "invalid_layout_exit": 101,
+  "note": "diagnostic oracle smoke, not formal goal timings; no-op build has no source edit"
+}
