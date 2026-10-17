@@ -257,6 +257,7 @@ const METHODS: &[&str] = &[
     "Pa_unified_prepared_t16777216",
     "Pa_unified_binary_t16777216",
     "Pa_unified_batch_t16777216",
+    "Pa_unified_lookup_t16777216",
     "L",
     "L_frozen",
     "H1",
@@ -325,6 +326,9 @@ where
     } else if let Some(value) = method.strip_prefix("Pa_unified_reuse_t") {
         local_workspace_threshold = value.parse().unwrap();
         "Pa_unified_reuse"
+    } else if let Some(value) = method.strip_prefix("Pa_unified_lookup_t") {
+        local_workspace_threshold = value.parse().unwrap();
+        "Pa_unified_lookup"
     } else if let Some(value) = method.strip_prefix("Pa_unified_batch_t") {
         local_workspace_threshold = value.parse().unwrap();
         "Pa_unified_batch"
@@ -365,7 +369,8 @@ where
         | "Pa_unified_reuse"
         | "Pa_unified_prepared"
         | "Pa_unified_binary"
-        | "Pa_unified_batch" => {
+        | "Pa_unified_batch"
+        | "Pa_unified_lookup" => {
             use frontier::PaExperiment::*;
             let experiment = match method {
                 "Pa_ref" => Reference,
@@ -543,6 +548,26 @@ fn make_keys(n: usize, bits: usize, case: &str, seed: u64) -> Vec<u128> {
 #[cfg(test)]
 mod workload_tests {
     use super::*;
+
+    #[test]
+    fn registered_methods_execute_and_preserve_records() {
+        let input: Vec<Small16> = make_keys(513, 16, "uniform", 42)
+            .into_iter()
+            .enumerate()
+            .map(|(id, key)| Small16 { key: key as u16, serial: id as u32 })
+            .collect();
+        let mut expected = input.clone();
+        expected.sort_by_key(|record| record.key);
+        for &method in METHODS {
+            let mut actual = input.clone();
+            execute::<_, u16>(&mut actual, method, 17);
+            assert!(
+                actual.iter().zip(&expected).all(|(a, b)| a.same(b)),
+                "{method}"
+            );
+        }
+    }
+
     #[test]
     fn progressive_skew_has_distinct_complete_keys() {
         for bits in [32, 64, 128] {
