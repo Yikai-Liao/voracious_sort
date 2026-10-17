@@ -12,6 +12,8 @@ pub enum PaExperiment {
     SkewThreeWay,
     Both,
     BothThreeWay,
+    CoreThreeWay,
+    ProbeThreeWay,
 }
 
 #[derive(Clone, Copy)]
@@ -20,6 +22,7 @@ struct Policy {
     ordered: bool,
     skew: bool,
     three_way: bool,
+    probe: bool,
     block: usize,
 }
 
@@ -39,6 +42,8 @@ where
                 | PaExperiment::Lean
                 | PaExperiment::Both
                 | PaExperiment::BothThreeWay
+                | PaExperiment::CoreThreeWay
+                | PaExperiment::ProbeThreeWay
         ),
         ordered: matches!(
             experiment,
@@ -53,11 +58,17 @@ where
                 | PaExperiment::Both
                 | PaExperiment::SkewThreeWay
                 | PaExperiment::BothThreeWay
+                | PaExperiment::CoreThreeWay
+                | PaExperiment::ProbeThreeWay
         ),
         three_way: matches!(
             experiment,
-            PaExperiment::SkewThreeWay | PaExperiment::BothThreeWay
+            PaExperiment::SkewThreeWay
+                | PaExperiment::BothThreeWay
+                | PaExperiment::CoreThreeWay
+                | PaExperiment::ProbeThreeWay
         ),
+        probe: matches!(experiment, PaExperiment::ProbeThreeWay),
         block,
     };
     let mut stats = Work::default();
@@ -78,7 +89,12 @@ struct Prepared<U> {
 
 // Specialize scans outside the record loop. Ordinary nodes do not pay the
 // candidate comparison/branch; ordered ablation removes order reductions here.
-fn prepare<T: Radixable<K>, K: RadixKey, const ORDER: bool, const CANDIDATE: bool>(
+fn prepare<
+    T: Radixable<K>,
+    K: RadixKey,
+    const ORDER: bool,
+    const CANDIDATE: bool,
+>(
     arr: &[T],
 ) -> Prepared<Converted<T, K>>
 where
@@ -119,7 +135,10 @@ where
 
 // Return as soon as an order violation is seen. Reverse only after validating
 // the whole range, and restore equal-key groups only when any equality exists.
-fn ordered<T: Radixable<K>, K: RadixKey>(arr: &mut [T], stats: &mut Work) -> bool
+fn ordered<T: Radixable<K>, K: RadixKey>(
+    arr: &mut [T],
+    stats: &mut Work,
+) -> bool
 where
     Converted<T, K>: NativeKey,
 {
@@ -157,8 +176,10 @@ where
     true
 }
 
-fn restore_equal_groups<T: Radixable<K>, K: RadixKey>(arr: &mut [T], stats: &mut Work)
-where
+fn restore_equal_groups<T: Radixable<K>, K: RadixKey>(
+    arr: &mut [T],
+    stats: &mut Work,
+) where
     Converted<T, K>: NativeKey,
 {
     let mut start = 0;
@@ -175,6 +196,34 @@ where
         arr[start..end].reverse();
         start = end;
     }
+}
+
+// Only a cost gate: correctness and actual classifier selection still use the
+// complete node scan. Monotone samples avoid candidate work on ordered inputs.
+fn root_majority_signal<T: Radixable<K>, K: RadixKey>(arr: &[T]) -> bool
+where
+    Converted<T, K>: NativeKey,
+{
+    let mut pivot = arr[0].into_key_type();
+    let mut previous = pivot;
+    let mut votes = 0;
+    let mut ascending = true;
+    let mut descending = true;
+    for i in 0..64 {
+        let key = arr[i * (arr.len() - 1) / 63].into_key_type();
+        ascending &= previous <= key;
+        descending &= previous >= key;
+        previous = key;
+        if votes == 0 {
+            pivot = key;
+            votes = 1;
+        } else if pivot == key {
+            votes += 1;
+        } else {
+            votes -= 1;
+        }
+    }
+    votes > 32 && !ascending && !descending
 }
 
 fn visit<T: Radixable<K>, K: RadixKey>(
@@ -200,7 +249,12 @@ fn visit<T: Radixable<K>, K: RadixKey>(
     if policy.ordered && ordered::<T, K>(arr, stats) {
         return;
     }
-    let candidate = policy.skew && heavy && cap > 8;
+    let candidate = policy.skew
+        && cap > 8
+        && (heavy
+            || (policy.probe
+                && depth == 0
+                && root_majority_signal::<T, K>(arr)));
     let p = match (policy.ordered, candidate) {
         (false, false) => prepare::<T, K, true, false>(arr),
         (false, true) => prepare::<T, K, true, true>(arr),
@@ -218,17 +272,21 @@ fn visit<T: Radixable<K>, K: RadixKey>(
             return;
         }
     }
-    let width =
-        (Converted::<T, K>::BITS - (p.union ^ p.intersection).leading_zeros() as usize).min(cap);
+    let width = (Converted::<T, K>::BITS
+        - (p.union ^ p.intersection).leading_zeros() as usize)
+        .min(cap);
     if width == 0 {
         return;
     }
-    let bytes = (usize::BITS as usize - (arr.len() - 1).leading_zeros() as usize + 7) / 8;
+    let bytes =
+        (usize::BITS as usize - (arr.len() - 1).leading_zeros() as usize + 7)
+            / 8;
     let coarse = width.min(8 * bytes);
     work! { stats.nodes += 1; stats.node_records += arr.len(); }
-    if policy.terminal && coarse == width {
+    let use_skew = candidate && p.votes > arr.len() / 2 && width > 8;
+    if policy.terminal && coarse == width && !(policy.probe && use_skew) {
         partition::<T, K, _>(arr, &Identity, policy, true, stats, depth, path);
-    } else if candidate && p.votes > arr.len() / 2 && width > 8 {
+    } else if use_skew {
         // Each surviving BM vote is an occurrence of the final candidate.
         // votes > m/2 certifies a complete-key majority without a verify pass.
         // It deliberately misses some weaker majorities; correctness of the
@@ -240,18 +298,42 @@ fn visit<T: Radixable<K>, K: RadixKey>(
                 mask: Converted::<T, K>::mask(width),
                 width,
             };
-            partition::<T, K, _>(arr, &classifier, policy, false, stats, depth, path);
+            partition::<T, K, _>(
+                arr,
+                &classifier,
+                policy,
+                false,
+                stats,
+                depth,
+                path,
+            );
         } else {
             work! { stats.frontier_nodes += 1; }
             let classifier = Frontier::new(p.pivot, width, 7);
-            partition::<T, K, _>(arr, &classifier, policy, false, stats, depth, path);
+            partition::<T, K, _>(
+                arr,
+                &classifier,
+                policy,
+                false,
+                stats,
+                depth,
+                path,
+            );
         }
     } else {
         let classifier = Prefix {
             low: width - coarse,
             mask: Converted::<T, K>::mask(coarse),
         };
-        partition::<T, K, _>(arr, &classifier, policy, false, stats, depth, path);
+        partition::<T, K, _>(
+            arr,
+            &classifier,
+            policy,
+            false,
+            stats,
+            depth,
+            path,
+        );
     }
 }
 

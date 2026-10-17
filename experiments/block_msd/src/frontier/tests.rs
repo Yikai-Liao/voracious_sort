@@ -41,7 +41,9 @@ fn exhaustive_frontier_intervals() {
                 for x in 0..(1u128 << width) {
                     let label = f.label(x);
                     assert!(label >= previous);
-                    assert!(label < (1u128 << coarse) + (width - coarse) as u128);
+                    assert!(
+                        label < (1u128 << coarse) + (width - coarse) as u128
+                    );
                     if x == 0 || previous != label {
                         group_start = x;
                     }
@@ -65,7 +67,9 @@ fn wide_labels_and_common_high_bits() {
             .copied()
             .filter(|&k| k <= width)
         {
-            for pivot in [0, 1, u128::MAX, 0xaaaa_aaaa_aaaa_aaaa_5555_5555_5555_5555] {
+            for pivot in
+                [0, 1, u128::MAX, 0xaaaa_aaaa_aaaa_aaaa_5555_5555_5555_5555]
+            {
                 let f = Frontier::new(pivot, width, coarse);
                 let mut keys = vec![0, 1, mask(width), pivot & mask(width)];
                 for b in 0..width {
@@ -74,7 +78,10 @@ fn wide_labels_and_common_high_bits() {
                 keys.sort();
                 for pair in keys.windows(2) {
                     assert!(f.label(pair[0]) <= f.label(pair[1]));
-                    assert_eq!(f.label(pair[0]), f.label(pair[0] | !mask(width)));
+                    assert_eq!(
+                        f.label(pair[0]),
+                        f.label(pair[0] | !mask(width))
+                    );
                 }
             }
         }
@@ -85,13 +92,14 @@ fn wide_labels_and_common_high_bits() {
 fn recursive_identity_and_payload_matrix() {
     let mut state = 0x123456789abcdef;
     for n in [
-        0, 1, 2, 20, 127, 128, 129, 255, 256, 257, 511, 512, 513, 4095, 4096, 65535, 65536, 65537,
+        0, 1, 2, 20, 127, 128, 129, 255, 256, 257, 511, 512, 513, 4095, 4096,
+        65535, 65536, 65537,
     ] {
         for distribution in 0..8 {
             let mut input: Vec<Item> = (0..n)
                 .map(|id| {
-                    let random_key =
-                        (random(&mut state) as u128) << 64 | random(&mut state) as u128;
+                    let random_key = (random(&mut state) as u128) << 64
+                        | random(&mut state) as u128;
                     let key = match distribution {
                         0 => random_key,
                         1 => random_key & 0xffff,
@@ -101,19 +109,21 @@ fn recursive_identity_and_payload_matrix() {
                             } else {
                                 1u128 << (id % 128)
                             }
-                        }
+                        },
                         3 => (random_key & 0xffff) | (0xdeadbeefu128 << 96),
                         4 => [0, 18, 36, 54, 72, 90, 108, 126]
                             .iter()
                             .enumerate()
-                            .fold(0, |key, (i, b)| key | (((id >> i) & 1) as u128) << b),
+                            .fold(0, |key, (i, b)| {
+                                key | (((id >> i) & 1) as u128) << b
+                            }),
                         5 => {
                             if id % 10 != 0 {
                                 random_key & ((1u128 << 64) - 1)
                             } else {
                                 random_key
                             }
-                        }
+                        },
                         6 => id as u128 / 3,
                         _ => 7,
                     };
@@ -136,23 +146,22 @@ fn recursive_identity_and_payload_matrix() {
             for mode in [Mode::L, Mode::H, Mode::P, Mode::F] {
                 for bytes in [0, 1, 2, 3] {
                     for block in [1, 64] {
-                        if n > 4096 && (block == 1 || bytes == 1 || bytes == 2) {
+                        if n > 4096 && (block == 1 || bytes == 1 || bytes == 2)
+                        {
                             continue;
                         }
                         let mut actual = input.clone();
                         sort::<_, u128>(
                             &mut actual,
-                            Config {
-                                mode,
-                                bytes,
-                                coarse_bits: 0,
-                                block,
-                            },
+                            Config { mode, bytes, coarse_bits: 0, block },
                         );
                         assert!(
-                            actual.iter().zip(&expected).all(|(a, b)| a.key == b.key
-                                && a.id == b.id
-                                && a.payload == b.payload),
+                            actual
+                                .iter()
+                                .zip(&expected)
+                                .all(|(a, b)| a.key == b.key
+                                    && a.id == b.id
+                                    && a.payload == b.payload),
                             "n={} distribution={} mode={:?} bytes={} block={}",
                             n,
                             distribution,
@@ -172,14 +181,15 @@ fn recursive_identity_and_payload_matrix() {
                 PaExperiment::Both,
                 PaExperiment::SkewThreeWay,
                 PaExperiment::BothThreeWay,
+                PaExperiment::CoreThreeWay,
+                PaExperiment::ProbeThreeWay,
             ] {
                 let mut actual = input.clone();
                 sort_pa_experiment::<_, u128>(&mut actual, experiment, 64);
                 assert!(
-                    actual
-                        .iter()
-                        .zip(&expected)
-                        .all(|(a, b)| a.key == b.key && a.id == b.id && a.payload == b.payload),
+                    actual.iter().zip(&expected).all(|(a, b)| a.key == b.key
+                        && a.id == b.id
+                        && a.payload == b.payload),
                     "Pa experiment {:?} n={} distribution={}",
                     experiment,
                     n,
@@ -193,18 +203,13 @@ fn recursive_identity_and_payload_matrix() {
 #[test]
 fn signed_float_converted_order() {
     let mut state = 0x123456789abcdef;
-    let signed: Vec<i64> = (0..4097).map(|_| random(&mut state) as i64).collect();
-    let mut floats: Vec<f64> = (0..4097)
-        .map(|_| f64::from_bits(random(&mut state)))
-        .collect();
+    let signed: Vec<i64> =
+        (0..4097).map(|_| random(&mut state) as i64).collect();
+    let mut floats: Vec<f64> =
+        (0..4097).map(|_| f64::from_bits(random(&mut state))).collect();
     floats.extend([0., -0., f64::NAN, f64::INFINITY, f64::NEG_INFINITY]);
     for mode in [Mode::L, Mode::H, Mode::P, Mode::F] {
-        let config = Config {
-            mode,
-            bytes: 1,
-            coarse_bits: 0,
-            block: 1,
-        };
+        let config = Config { mode, bytes: 1, coarse_bits: 0, block: 1 };
         let mut actual = signed.clone();
         let mut expected = signed.clone();
         expected.sort();
@@ -225,11 +230,7 @@ fn signed_float_converted_order() {
 fn same_coarse_prefix_configs() {
     let mut state = 42;
     let input: Vec<Item> = (0..10001)
-        .map(|id| Item {
-            key: random(&mut state) as u128,
-            id,
-            payload: [0; 3],
-        })
+        .map(|id| Item { key: random(&mut state) as u128, id, payload: [0; 3] })
         .collect();
     let mut expected = input.clone();
     expected.sort_by_key(|x| x.key);
@@ -237,12 +238,7 @@ fn same_coarse_prefix_configs() {
         let mut actual = input.clone();
         sort::<_, u128>(
             &mut actual,
-            Config {
-                mode: Mode::F,
-                bytes: 0,
-                coarse_bits,
-                block: 1,
-            },
+            Config { mode: Mode::F, bytes: 0, coarse_bits, block: 1 },
         );
         assert!(actual
             .iter()
@@ -257,15 +253,11 @@ fn native_small_integer_widths() {
     let values: Vec<u64> = (0..4097).map(|_| random(&mut state)).collect();
     for mode in [Mode::L, Mode::H, Mode::P, Mode::F] {
         for bytes in [0, 1, 2, 16] {
-            let config = Config {
-                mode,
-                bytes,
-                coarse_bits: 0,
-                block: 1,
-            };
+            let config = Config { mode, bytes, coarse_bits: 0, block: 1 };
             macro_rules! check {
                 ($t:ty) => {{
-                    let mut actual: Vec<$t> = values.iter().map(|&x| x as $t).collect();
+                    let mut actual: Vec<$t> =
+                        values.iter().map(|&x| x as $t).collect();
                     let mut expected = actual.clone();
                     expected.sort();
                     sort::<_, $t>(&mut actual, config);
@@ -289,10 +281,13 @@ fn native_small_integer_widths() {
         PaExperiment::Both,
         PaExperiment::SkewThreeWay,
         PaExperiment::BothThreeWay,
+        PaExperiment::CoreThreeWay,
+        PaExperiment::ProbeThreeWay,
     ] {
         macro_rules! check_pa {
             ($t:ty) => {{
-                let mut actual: Vec<$t> = values.iter().map(|&x| x as $t).collect();
+                let mut actual: Vec<$t> =
+                    values.iter().map(|&x| x as $t).collect();
                 let mut expected = actual.clone();
                 expected.sort();
                 sort_pa_experiment::<_, $t>(&mut actual, experiment, 1);
@@ -316,7 +311,8 @@ fn block_tail_sizes_and_large_workspace() {
     for (n, block) in [(4097, 3), (10001, 17), (262145, 512)] {
         let input: Vec<Item> = (0..n)
             .map(|id| Item {
-                key: ((random(&mut state) as u128) << 64) | random(&mut state) as u128,
+                key: ((random(&mut state) as u128) << 64)
+                    | random(&mut state) as u128,
                 id,
                 payload: [id as u64; 3],
             })
@@ -327,17 +323,11 @@ fn block_tail_sizes_and_large_workspace() {
             let mut actual = input.clone();
             sort::<_, u128>(
                 &mut actual,
-                Config {
-                    mode,
-                    bytes: 1,
-                    coarse_bits: 0,
-                    block,
-                },
+                Config { mode, bytes: 1, coarse_bits: 0, block },
             );
-            assert!(actual
-                .iter()
-                .zip(&expected)
-                .all(|(a, b)| a.key == b.key && a.id == b.id && a.payload == b.payload));
+            assert!(actual.iter().zip(&expected).all(|(a, b)| a.key == b.key
+                && a.id == b.id
+                && a.payload == b.payload));
         }
         for experiment in [
             PaExperiment::Reference,
@@ -348,13 +338,14 @@ fn block_tail_sizes_and_large_workspace() {
             PaExperiment::Both,
             PaExperiment::SkewThreeWay,
             PaExperiment::BothThreeWay,
+            PaExperiment::CoreThreeWay,
+            PaExperiment::ProbeThreeWay,
         ] {
             let mut actual = input.clone();
             sort_pa_experiment::<_, u128>(&mut actual, experiment, block);
-            assert!(actual
-                .iter()
-                .zip(&expected)
-                .all(|(a, b)| a.key == b.key && a.id == b.id && a.payload == b.payload));
+            assert!(actual.iter().zip(&expected).all(|(a, b)| a.key == b.key
+                && a.id == b.id
+                && a.payload == b.payload));
         }
     }
 }
@@ -372,7 +363,8 @@ fn pa_skew_gate_uses_a_heavy_child() {
                     if heavy {
                         1u128 << (id % 128)
                     } else {
-                        (random(&mut state) as u128) << 64 | random(&mut state) as u128
+                        (random(&mut state) as u128) << 64
+                            | random(&mut state) as u128
                     }
                 },
                 id,
@@ -383,23 +375,55 @@ fn pa_skew_gate_uses_a_heavy_child() {
         let mut actual = input.clone();
         let before = sort::<_, u128>(
             &mut reference,
-            Config {
-                mode: Mode::P,
-                bytes: 0,
-                coarse_bits: 0,
-                block: 64,
-            },
+            Config { mode: Mode::P, bytes: 0, coarse_bits: 0, block: 64 },
         );
-        let after = sort_pa_experiment::<_, u128>(&mut actual, PaExperiment::Skew, 64);
-        assert!(actual
-            .iter()
-            .zip(&reference)
-            .all(|(a, b)| a.key == b.key && a.id == b.id && a.payload == b.payload));
+        let after =
+            sort_pa_experiment::<_, u128>(&mut actual, PaExperiment::Skew, 64);
+        assert!(actual.iter().zip(&reference).all(|(a, b)| a.key == b.key
+            && a.id == b.id
+            && a.payload == b.payload));
         if heavy {
             assert!(after.candidate_records > 0);
             assert!(after.scatter_records < before.scatter_records);
         } else {
             assert_eq!(after.candidate_records, 0);
         }
+        let mut probed = input.clone();
+        let probe = sort_pa_experiment::<_, u128>(
+            &mut probed,
+            PaExperiment::ProbeThreeWay,
+            64,
+        );
+        assert!(probed.iter().zip(&reference).all(|(a, b)| a.key == b.key
+            && a.id == b.id
+            && a.payload == b.payload));
+        if heavy {
+            assert!(probe.equal_nodes > 0);
+            assert!(probe.scatter_records < after.scatter_records);
+        } else {
+            assert_eq!(probe.candidate_records, 0);
+        }
     }
+}
+
+#[test]
+#[cfg(feature = "frontier_work")]
+fn pa_root_probe_is_only_a_cost_signal() {
+    let mut state = 73;
+    let mut input: Vec<u32> =
+        (0..32769).map(|_| random(&mut state) as u32).collect();
+    // Misleading samples pay candidate preparation but cannot certify a majority.
+    for i in 0..64 {
+        input[i * (32769 - 1) / 63] = if i == 20 { 1 } else { 0 };
+    }
+    let mut expected = input.clone();
+    expected.sort();
+    let work = sort_pa_experiment::<_, u32>(
+        &mut input,
+        PaExperiment::ProbeThreeWay,
+        64,
+    );
+    assert_eq!(input, expected);
+    assert!(work.candidate_records >= 32769);
+    assert_eq!(work.equal_nodes, 0);
 }

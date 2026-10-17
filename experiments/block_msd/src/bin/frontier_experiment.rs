@@ -117,12 +117,16 @@ impl Verified for u128 {
 }
 impl Verified for Wide {
     fn same(&self, b: &Self) -> bool {
-        self.key == b.key && self.serial == b.serial && self.payload == b.payload
+        self.key == b.key
+            && self.serial == b.serial
+            && self.payload == b.payload
     }
 }
 impl Verified for Large {
     fn same(&self, b: &Self) -> bool {
-        self.key == b.key && self.serial == b.serial && self.payload == b.payload
+        self.key == b.key
+            && self.serial == b.serial
+            && self.payload == b.payload
     }
 }
 fn random(s: &mut u64) -> u64 {
@@ -221,6 +225,8 @@ const METHODS: &[&str] = &[
     "Pa_skew3",
     "Pa_both",
     "Pa_both3",
+    "Pa_core3",
+    "Pa_probe3",
     "L",
     "L_frozen",
     "H1",
@@ -264,8 +270,8 @@ where
     <<T as Radixable<K>>::Key as RadixKey>::Key: frontier::NativeKey,
 {
     match method {
-        "Pa_ref" | "Pa_terminal" | "Pa_ordered" | "Pa_lean" | "Pa_skew" | "Pa_both"
-        | "Pa_skew3" | "Pa_both3" => {
+        "Pa_ref" | "Pa_terminal" | "Pa_ordered" | "Pa_lean" | "Pa_skew"
+        | "Pa_both" | "Pa_skew3" | "Pa_both3" | "Pa_core3" | "Pa_probe3" => {
             use frontier::PaExperiment::*;
             let experiment = match method {
                 "Pa_ref" => Reference,
@@ -275,14 +281,20 @@ where
                 "Pa_skew" => Skew,
                 "Pa_skew3" => SkewThreeWay,
                 "Pa_both3" => BothThreeWay,
+                "Pa_core3" => CoreThreeWay,
+                "Pa_probe3" => ProbeThreeWay,
                 _ => Both,
             };
-            return frontier::sort_pa_experiment::<T, K>(arr, experiment, block);
-        }
+            return frontier::sort_pa_experiment::<T, K>(
+                arr, experiment, block,
+            );
+        },
         "L_frozen" => {
-            block_msd_research::submitted_lsd::block_lsd_stable_radixsort::<T, K>(arr, 8, block);
+            block_msd_research::submitted_lsd::block_lsd_stable_radixsort::<T, K>(
+                arr, 8, block,
+            );
             return Default::default();
-        }
+        },
         "best_msd" => {
             use block_msd_research::reduction_node as r;
             r::sort_reduced::<T, K>(
@@ -294,12 +306,14 @@ where
                 true,
             );
             return Default::default();
-        }
+        },
         "stable_msd" => {
-            block_msd_research::stable_baseline::msd_stable_radixsort::<T, K>(arr, 8);
+            block_msd_research::stable_baseline::msd_stable_radixsort::<T, K>(
+                arr, 8,
+            );
             return Default::default();
-        }
-        _ => {}
+        },
+        _ => {},
     }
     let mode = match method.as_bytes()[0] {
         b'L' => Mode::L,
@@ -318,27 +332,17 @@ where
     } else {
         method[1..].parse().unwrap()
     };
-    frontier::sort::<T, K>(
-        arr,
-        Config {
-            mode,
-            bytes,
-            coarse_bits,
-            block,
-        },
-    )
+    frontier::sort::<T, K>(arr, Config { mode, bytes, coarse_bits, block })
 }
 
 fn make_keys(n: usize, bits: usize, case: &str, seed: u64) -> Vec<u128> {
     let mut state = seed;
-    let mask = if bits == 128 {
-        u128::MAX
-    } else {
-        (1u128 << bits) - 1
-    };
+    let mask = if bits == 128 { u128::MAX } else { (1u128 << bits) - 1 };
     let mut keys: Vec<u128> = (0..n)
         .map(|i| {
-            let r = ((random(&mut state) as u128) << 64 | random(&mut state) as u128) & mask;
+            let r = ((random(&mut state) as u128) << 64
+                | random(&mut state) as u128)
+                & mask;
             match case {
                 "uniform" | "sorted" | "reverse" => r,
                 "equal" => mask / 3,
@@ -350,7 +354,7 @@ fn make_keys(n: usize, bits: usize, case: &str, seed: u64) -> Vec<u128> {
                     } else {
                         1u128 << (i % bits)
                     }
-                }
+                },
                 "multi_heavy" => ((r % 4) << (bits - 2)) | (r & 0xfff),
                 "majority_prefix" => {
                     if i % 10 != 0 {
@@ -358,20 +362,23 @@ fn make_keys(n: usize, bits: usize, case: &str, seed: u64) -> Vec<u128> {
                     } else {
                         r
                     }
-                }
+                },
                 "sparse" => [0, 18, 36, 54, 72, 90, 108, 126]
                     .iter()
                     .copied()
                     .filter(|&b| b < bits)
                     .enumerate()
-                    .fold(0, |key, (j, b)| key | ((((i % 256) >> j) & 1) as u128) << b),
+                    .fold(0, |key, (j, b)| {
+                        key | ((((i % 256) >> j) & 1) as u128) << b
+                    }),
                 "comb" => {
                     if i % 2 == 0 {
                         0
                     } else {
-                        (1u128 << ((i % ((bits + 7) / 8)) * 8).min(bits - 1)) | (r & 7)
+                        (1u128 << ((i % ((bits + 7) / 8)) * 8).min(bits - 1))
+                            | (r & 7)
                     }
-                }
+                },
                 _ => panic!("unknown case"),
             }
         })
@@ -455,7 +462,11 @@ fn run<T: Radixable<K> + Verified, K: RadixKey>(
                 TRACK.store(true, Ordering::Relaxed);
                 stats = execute::<T, K>(&mut actual, method, block);
                 TRACK.store(false, Ordering::Relaxed);
-                assert_eq!(LIVE.load(Ordering::Relaxed), 0, "workspace escaped sort");
+                assert_eq!(
+                    LIVE.load(Ordering::Relaxed),
+                    0,
+                    "workspace escaped sort"
+                );
             } else {
                 let c = cpu_ns();
                 let start = Instant::now();
@@ -475,11 +486,8 @@ fn run<T: Radixable<K> + Verified, K: RadixKey>(
                 method,
                 rep
             );
-            let peak = if kind == "memory" {
-                PEAK.load(Ordering::Relaxed)
-            } else {
-                0
-            };
+            let peak =
+                if kind == "memory" { PEAK.load(Ordering::Relaxed) } else { 0 };
             let allocs = if kind == "memory" {
                 ALLOCS.load(Ordering::Relaxed)
             } else {
@@ -569,9 +577,7 @@ fn main() {
         "use separate timed and work binaries"
     );
     let block = args.get(7).map_or(64, |s| s.parse().unwrap());
-    let seed = args
-        .get(8)
-        .map_or(0x123456789abcdef, |s| s.parse().unwrap());
+    let seed = args.get(8).map_or(0x123456789abcdef, |s| s.parse().unwrap());
     println!("layout,case,n,record_bytes,seed,block,method,slot,rep,kind,wall_ns,cpu_ns,heap_peak,allocs,nodes,node_records,prepare_records,order_records,candidate_records,label_evals,scatter_records,dense_nodes,block_nodes,passes,compact_records,tail_records,runs_records,unresolved_records,leaves,leaf_records,max_depth,max_path_passes,frontier_nodes,equal_nodes,instrumented,input_address,leaf_lengths");
     for layout in layouts {
         for &case in &cases {
@@ -657,7 +663,9 @@ fn main() {
                     seed,
                     kind,
                 ),
-                "u128" => run::<_, u128>(keys, layout, case, &methods, reps, block, seed, kind),
+                "u128" => run::<_, u128>(
+                    keys, layout, case, &methods, reps, block, seed, kind,
+                ),
                 "small8" => run::<_, u32>(
                     keys.iter()
                         .enumerate()
