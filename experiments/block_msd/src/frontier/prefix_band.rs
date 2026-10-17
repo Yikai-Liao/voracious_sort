@@ -2,9 +2,11 @@
 //! It can contain distinct keys; only its shared prefix is consumed.
 use super::*;
 
+#[derive(Clone, Copy)]
 pub(super) struct PrefixBand<U> {
     low: usize,
     prefix: U,
+    pivot: U,
     mask: U,
     side_width: usize,
 }
@@ -13,6 +15,24 @@ impl<U: NativeKey> PrefixBand<U> {
     #[inline]
     pub(super) fn contains(&self, key: U) -> bool {
         (key & self.mask) >> self.low == self.prefix
+    }
+
+    // Every approved middle contains at least len/2+1 records. Using that
+    // minimum child's byte budget makes this interval terminal in its child,
+    // including just above the 256^k parent-budget boundaries.
+    pub(super) fn terminal_inner(&self, len: usize) -> Option<Self> {
+        let bits = usize::BITS as usize - (len / 2).leading_zeros() as usize;
+        let low = 8 * ((bits + 7) / 8);
+        if low >= self.low {
+            return None;
+        }
+        Some(Self {
+            low,
+            prefix: self.pivot >> low,
+            pivot: self.pivot,
+            mask: self.mask,
+            side_width: self.side_width,
+        })
     }
 
     // A sampled interval is only a preparation signal. Exact membership must
@@ -100,7 +120,7 @@ where
     if cap - low <= coarse || (union ^ intersection) >> low == zero {
         return None;
     }
-    Some(PrefixBand { low, prefix: pivot >> low, mask, side_width: cap })
+    Some(PrefixBand { low, prefix: pivot >> low, pivot, mask, side_width: cap })
 }
 
 #[cfg(test)]
@@ -114,6 +134,7 @@ mod tests {
                     let band = PrefixBand {
                         low,
                         prefix,
+                        pivot: prefix << low,
                         mask: (1 << width) - 1,
                         side_width: width,
                     };
@@ -132,5 +153,48 @@ mod tests {
                 }
             }
         }
+    }
+
+    #[test]
+    fn terminal_inner_uses_minimum_majority_child_budget() {
+        for (len, expected_low) in
+            [(257, 8), (513, 16), (65537, 16), (131073, 24)]
+        {
+            let outer = PrefixBand {
+                low: 40,
+                prefix: 0,
+                pivot: 0x12345678u64,
+                mask: u64::MAX,
+                side_width: 64,
+            };
+            let inner = outer.terminal_inner(len).unwrap();
+            assert_eq!(inner.low, expected_low);
+            assert!(inner.contains(outer.pivot));
+            assert!(inner.approve(64, 16, len / 2, len).is_none());
+            assert!(inner.approve(64, 16, len / 2 + 1, len).is_some());
+            for population in [len / 2 + 1, len - 1, len] {
+                let bits = usize::BITS as usize
+                    - (population - 1).leading_zeros() as usize;
+                assert!(inner.low <= 8 * ((bits + 7) / 8));
+            }
+        }
+    }
+
+    #[test]
+    fn inner_approval_uses_actual_width_and_requires_a_prefix_jump() {
+        let band = PrefixBand {
+            low: 24,
+            prefix: 0,
+            pivot: 0u64,
+            mask: u64::MAX,
+            side_width: 64,
+        };
+        for width in [0, 16, 24, 48] {
+            assert!(band.approve(width, 24, 600, 1000).is_none());
+        }
+        assert!(band.approve(49, 24, 600, 1000).is_some());
+        assert!(band.terminal_inner(1048576).is_none());
+        let equal = PrefixBand { low: 0, ..band };
+        assert!(equal.terminal_inner(257).is_none());
     }
 }

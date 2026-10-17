@@ -17,6 +17,13 @@ pub enum PaExperiment {
     ProbeThreeWay,
     PrefixBand,
     PrefixBandChild,
+    TerminalStableLeaf,
+    PrefixBandStableLeaf,
+    PrefixBandNested,
+    OrderedTiled,
+    TerminalLocal,
+    PrefixBandLocal,
+    Unified,
 }
 
 #[derive(Clone, Copy)]
@@ -28,6 +35,10 @@ struct Policy {
     probe: bool,
     band: bool,
     band_root: bool,
+    nested_band: bool,
+    stable_leaf: bool,
+    tiled_order: bool,
+    local_distribution: bool,
     block: usize,
 }
 
@@ -51,6 +62,12 @@ where
                 | PaExperiment::ProbeThreeWay
                 | PaExperiment::PrefixBand
                 | PaExperiment::PrefixBandChild
+                | PaExperiment::TerminalStableLeaf
+                | PaExperiment::PrefixBandStableLeaf
+                | PaExperiment::PrefixBandNested
+                | PaExperiment::TerminalLocal
+                | PaExperiment::PrefixBandLocal
+                | PaExperiment::Unified
         ),
         ordered: matches!(
             experiment,
@@ -58,6 +75,8 @@ where
                 | PaExperiment::Lean
                 | PaExperiment::Both
                 | PaExperiment::BothThreeWay
+                | PaExperiment::OrderedTiled
+                | PaExperiment::Unified
         ),
         skew: matches!(
             experiment,
@@ -78,9 +97,41 @@ where
         probe: matches!(experiment, PaExperiment::ProbeThreeWay),
         band: matches!(
             experiment,
-            PaExperiment::PrefixBand | PaExperiment::PrefixBandChild
+            PaExperiment::PrefixBand
+                | PaExperiment::PrefixBandChild
+                | PaExperiment::PrefixBandStableLeaf
+                | PaExperiment::PrefixBandNested
+                | PaExperiment::PrefixBandLocal
+                | PaExperiment::Unified
         ),
-        band_root: matches!(experiment, PaExperiment::PrefixBand),
+        band_root: matches!(
+            experiment,
+            PaExperiment::PrefixBand
+                | PaExperiment::PrefixBandStableLeaf
+                | PaExperiment::PrefixBandNested
+                | PaExperiment::PrefixBandLocal
+                | PaExperiment::Unified
+        ),
+        nested_band: matches!(
+            experiment,
+            PaExperiment::PrefixBandNested | PaExperiment::Unified
+        ),
+        stable_leaf: matches!(
+            experiment,
+            PaExperiment::TerminalStableLeaf
+                | PaExperiment::PrefixBandStableLeaf
+                | PaExperiment::Unified
+        ),
+        tiled_order: matches!(
+            experiment,
+            PaExperiment::OrderedTiled | PaExperiment::Unified
+        ),
+        local_distribution: matches!(
+            experiment,
+            PaExperiment::TerminalLocal
+                | PaExperiment::PrefixBandLocal
+                | PaExperiment::Unified
+        ),
         block,
     };
     let mut stats = Work::default();
@@ -145,10 +196,16 @@ where
     p
 }
 
-fn prepare_band<T: Radixable<K>, K: RadixKey>(
+fn prepare_band<
+    T: Radixable<K>,
+    K: RadixKey,
+    const ORDER: bool,
+    const INNER: bool,
+>(
     arr: &[T],
     band: &PrefixBand<Converted<T, K>>,
-) -> (Prepared<Converted<T, K>>, usize)
+    inner: &PrefixBand<Converted<T, K>>,
+) -> (Prepared<Converted<T, K>>, [usize; 2])
 where
     Converted<T, K>: NativeKey,
 {
@@ -162,17 +219,22 @@ where
         votes: 0,
     };
     let mut previous = first;
-    let mut population = 0;
+    let mut populations = [0, 0];
     for item in arr {
         let key = item.into_key_type();
         p.union |= key;
         p.intersection &= key;
-        p.ascending &= previous <= key;
-        p.descending &= previous >= key;
-        previous = key;
-        population += usize::from(band.contains(key));
+        if ORDER {
+            p.ascending &= previous <= key;
+            p.descending &= previous >= key;
+            previous = key;
+        }
+        populations[0] += usize::from(band.contains(key));
+        if INNER {
+            populations[1] += usize::from(inner.contains(key));
+        }
     }
-    (p, population)
+    (p, populations)
 }
 
 // Return as soon as an order violation is seen. Reverse only after validating
@@ -218,7 +280,7 @@ where
     true
 }
 
-fn restore_equal_groups<T: Radixable<K>, K: RadixKey>(
+pub(super) fn restore_equal_groups<T: Radixable<K>, K: RadixKey>(
     arr: &mut [T],
     stats: &mut Work,
 ) where
@@ -285,11 +347,22 @@ fn visit<T: Radixable<K>, K: RadixKey>(
     work! { stats.max_depth = stats.max_depth.max(depth); }
     if arr.len() <= 128 {
         work! { stats.leaves += 1; stats.leaf_records += arr.len(); stats.leaf_lengths[arr.len()] += 1; }
-        super::super::insertion_sort_key::<T, K>(arr);
+        if policy.stable_leaf {
+            arr.sort_by_key(|item| item.into_key_type());
+        } else {
+            super::super::insertion_sort_key::<T, K>(arr);
+        }
         return;
     }
-    if policy.ordered && ordered::<T, K>(arr, stats) {
-        return;
+    if policy.ordered {
+        let complete = if policy.tiled_order {
+            super::ordered_tiled::ordered::<T, K>(arr, stats)
+        } else {
+            ordered::<T, K>(arr, stats)
+        };
+        if complete {
+            return;
+        }
     }
     let bytes =
         (usize::BITS as usize - (arr.len() - 1).leading_zeros() as usize + 7)
@@ -305,10 +378,31 @@ fn visit<T: Radixable<K>, K: RadixKey>(
             || (policy.probe
                 && depth == 0
                 && root_majority_signal::<T, K>(arr)));
-    let mut population = 0;
+    let inner = band.as_ref().and_then(|band| {
+        if policy.nested_band {
+            band.terminal_inner(arr.len())
+        } else {
+            None
+        }
+    });
+    let mut populations = [0, 0];
     let p = if let Some(ref band) = band {
-        let (p, count) = prepare_band::<T, K>(arr, band);
-        population = count;
+        let inner_band = inner.as_ref().unwrap_or(band);
+        let (p, counts) = match (policy.ordered, inner.is_some()) {
+            (false, false) => {
+                prepare_band::<T, K, true, false>(arr, band, inner_band)
+            },
+            (false, true) => {
+                prepare_band::<T, K, true, true>(arr, band, inner_band)
+            },
+            (true, false) => {
+                prepare_band::<T, K, false, false>(arr, band, inner_band)
+            },
+            (true, true) => {
+                prepare_band::<T, K, false, true>(arr, band, inner_band)
+            },
+        };
+        populations = counts;
         p
     } else {
         match (policy.ordered, candidate) {
@@ -338,10 +432,17 @@ fn visit<T: Radixable<K>, K: RadixKey>(
     let coarse = width.min(8 * bytes);
     work! { stats.nodes += 1; stats.node_records += arr.len(); }
     let use_skew = candidate && p.votes > arr.len() / 2 && width > 8;
-    let approved_band = band
-        .and_then(|band| band.approve(width, coarse, population, arr.len()));
-    if let Some(band) = approved_band {
-        work! { stats.band_nodes += 1; stats.band_records += population; }
+    let approved_band = inner
+        .and_then(|band| band.approve(width, coarse, populations[1], arr.len()))
+        .map(|band| (band, populations[1], true))
+        .or_else(|| {
+            band.and_then(|band| {
+                band.approve(width, coarse, populations[0], arr.len())
+            })
+            .map(|band| (band, populations[0], false))
+        });
+    if let Some((band, population, terminal_band)) = approved_band {
+        work! { stats.band_nodes += 1; stats.band_records += population; stats.terminal_band_nodes += usize::from(terminal_band); }
         partition::<T, K, _>(arr, &band, policy, false, stats, depth, path);
     } else if policy.terminal && coarse == width && !(policy.probe && use_skew)
     {
@@ -440,7 +541,16 @@ fn partition<T: Radixable<K>, K: RadixKey, C: Classifier<Converted<T, K>>>(
         classifier.label(item.into_key_type())
     };
     // distribute owns and releases all scratch before the first recursive call.
-    let passes = distribute(arr, &label, policy.block, stats);
+    let passes = if policy.local_distribution {
+        super::local_distribution::distribute_local(
+            arr,
+            &label,
+            policy.block,
+            stats,
+        )
+    } else {
+        distribute(arr, &label, policy.block, stats)
+    };
     work! { stats.max_path_passes = stats.max_path_passes.max(path + passes); }
     if !terminal {
         let parent_len = arr.len();

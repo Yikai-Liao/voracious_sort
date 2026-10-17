@@ -229,6 +229,13 @@ const METHODS: &[&str] = &[
     "Pa_probe3",
     "Pa_band",
     "Pa_band_child",
+    "Pa_terminal_sortleaf",
+    "Pa_band_sortleaf",
+    "Pa_band_nested",
+    "Pa_ordered_tiled",
+    "Pa_terminal_local",
+    "Pa_band_local",
+    "Pa_unified",
     "L",
     "L_frozen",
     "H1",
@@ -274,9 +281,25 @@ where
     <<T as Radixable<K>>::Key as RadixKey>::Key: frontier::NativeKey,
 {
     match method {
-        "Pa_ref" | "Pa_terminal" | "Pa_ordered" | "Pa_lean" | "Pa_skew"
-        | "Pa_both" | "Pa_skew3" | "Pa_both3" | "Pa_core3" | "Pa_probe3"
-        | "Pa_band" | "Pa_band_child" => {
+        "Pa_ref"
+        | "Pa_terminal"
+        | "Pa_ordered"
+        | "Pa_lean"
+        | "Pa_skew"
+        | "Pa_both"
+        | "Pa_skew3"
+        | "Pa_both3"
+        | "Pa_core3"
+        | "Pa_probe3"
+        | "Pa_band"
+        | "Pa_band_child"
+        | "Pa_terminal_sortleaf"
+        | "Pa_band_sortleaf"
+        | "Pa_band_nested"
+        | "Pa_ordered_tiled"
+        | "Pa_terminal_local"
+        | "Pa_band_local"
+        | "Pa_unified" => {
             use frontier::PaExperiment::*;
             let experiment = match method {
                 "Pa_ref" => Reference,
@@ -290,6 +313,13 @@ where
                 "Pa_probe3" => ProbeThreeWay,
                 "Pa_band" => PrefixBand,
                 "Pa_band_child" => PrefixBandChild,
+                "Pa_terminal_sortleaf" => TerminalStableLeaf,
+                "Pa_band_sortleaf" => PrefixBandStableLeaf,
+                "Pa_band_nested" => PrefixBandNested,
+                "Pa_ordered_tiled" => OrderedTiled,
+                "Pa_terminal_local" => TerminalLocal,
+                "Pa_band_local" => PrefixBandLocal,
+                "Pa_unified" => Unified,
                 _ => Both,
             };
             return frontier::sort_pa_experiment::<T, K>(
@@ -597,6 +627,7 @@ fn run<T: Radixable<K> + Verified, K: RadixKey>(
                 stats.equal_nodes.to_string(),
                 stats.band_nodes.to_string(),
                 stats.band_records.to_string(),
+                stats.terminal_band_nodes.to_string(),
                 stats.probe_records.to_string(),
                 cfg!(feature = "frontier_work").to_string(),
                 (actual.as_ptr() as usize).to_string(),
@@ -636,7 +667,7 @@ fn main() {
     );
     let block = args.get(7).map_or(64, |s| s.parse().unwrap());
     let seed = args.get(8).map_or(0x123456789abcdef, |s| s.parse().unwrap());
-    println!("layout,case,n,record_bytes,seed,block,method,slot,rep,kind,wall_ns,cpu_ns,heap_peak,allocs,nodes,node_records,prepare_records,order_records,candidate_records,label_evals,scatter_records,dense_nodes,block_nodes,passes,compact_records,tail_records,runs_records,unresolved_records,leaves,leaf_records,max_depth,max_path_passes,frontier_nodes,equal_nodes,band_nodes,band_records,probe_records,instrumented,input_address,leaf_lengths");
+    println!("layout,case,n,record_bytes,seed,block,method,slot,rep,kind,wall_ns,cpu_ns,heap_peak,allocs,nodes,node_records,prepare_records,order_records,candidate_records,label_evals,scatter_records,dense_nodes,block_nodes,passes,compact_records,tail_records,runs_records,unresolved_records,leaves,leaf_records,max_depth,max_path_passes,frontier_nodes,equal_nodes,band_nodes,band_records,terminal_band_nodes,probe_records,instrumented,input_address,leaf_lengths");
     for layout in layouts {
         for &case in &cases {
             let bits = match layout {

@@ -7,6 +7,8 @@
 use std::{mem::MaybeUninit, ptr};
 use voracious_radix_sort::{RadixKey, Radixable};
 mod block;
+mod local_distribution;
+mod ordered_tiled;
 mod pa;
 mod prefix_band;
 pub use pa::{sort_pa_experiment, PaExperiment};
@@ -58,6 +60,7 @@ pub struct Work {
     pub equal_nodes: usize,
     pub band_nodes: usize,
     pub band_records: usize,
+    pub terminal_band_nodes: usize,
     pub probe_records: usize,
     pub leaf_lengths: [usize; 129],
 }
@@ -88,6 +91,7 @@ impl Default for Work {
             equal_nodes: 0,
             band_nodes: 0,
             band_records: 0,
+            terminal_band_nodes: 0,
             probe_records: 0,
             leaf_lengths: [0; 129],
         }

@@ -185,6 +185,13 @@ fn recursive_identity_and_payload_matrix() {
                 PaExperiment::ProbeThreeWay,
                 PaExperiment::PrefixBand,
                 PaExperiment::PrefixBandChild,
+                PaExperiment::TerminalStableLeaf,
+                PaExperiment::PrefixBandStableLeaf,
+                PaExperiment::PrefixBandNested,
+                PaExperiment::OrderedTiled,
+                PaExperiment::TerminalLocal,
+                PaExperiment::PrefixBandLocal,
+                PaExperiment::Unified,
             ] {
                 let mut actual = input.clone();
                 sort_pa_experiment::<_, u128>(&mut actual, experiment, 64);
@@ -287,6 +294,13 @@ fn native_small_integer_widths() {
         PaExperiment::ProbeThreeWay,
         PaExperiment::PrefixBand,
         PaExperiment::PrefixBandChild,
+        PaExperiment::TerminalStableLeaf,
+        PaExperiment::PrefixBandStableLeaf,
+        PaExperiment::PrefixBandNested,
+        PaExperiment::OrderedTiled,
+        PaExperiment::TerminalLocal,
+        PaExperiment::PrefixBandLocal,
+        PaExperiment::Unified,
     ] {
         macro_rules! check_pa {
             ($t:ty) => {{
@@ -346,6 +360,13 @@ fn block_tail_sizes_and_large_workspace() {
             PaExperiment::ProbeThreeWay,
             PaExperiment::PrefixBand,
             PaExperiment::PrefixBandChild,
+            PaExperiment::TerminalStableLeaf,
+            PaExperiment::PrefixBandStableLeaf,
+            PaExperiment::PrefixBandNested,
+            PaExperiment::OrderedTiled,
+            PaExperiment::TerminalLocal,
+            PaExperiment::PrefixBandLocal,
+            PaExperiment::Unified,
         ] {
             let mut actual = input.clone();
             sort_pa_experiment::<_, u128>(&mut actual, experiment, block);
@@ -479,6 +500,92 @@ fn pa_prefix_band_handles_distinct_keys() {
     assert!(after.scatter_records < before.scatter_records);
     // The classifier must skip prefix work; compact is an independent cost,
     // not a monotone consequence of fewer radix writes.
-    eprintln!("distinct fixture: scatter {} -> {}, compact {} -> {}",
-        before.scatter_records, after.scatter_records, before.compact_records, after.compact_records);
+    eprintln!(
+        "distinct fixture: scatter {} -> {}, compact {} -> {}",
+        before.scatter_records,
+        after.scatter_records,
+        before.compact_records,
+        after.compact_records
+    );
+}
+
+#[test]
+#[cfg(feature = "frontier_work")]
+fn nested_band_can_choose_a_less_supported_terminal_majority() {
+    let n = 32769;
+    let mut input: Vec<Item> = (0..n)
+        .map(|id| Item {
+            key: id as u128
+                | if id % 5 < 3 { 0 } else { 1u128 << (32 + id % 96) },
+            id,
+            payload: [id as u64; 3],
+        })
+        .collect();
+    let mut state = 42;
+    for i in (1..input.len()).rev() {
+        let j = random(&mut state) as usize % (i + 1);
+        input.swap(i, j);
+    }
+    // Fix the probe geometry: 38/64 near the median, eight wider points,
+    // then exits outside the sampled interval. Exact membership still has a
+    // majority, even though the narrower interval misses the 40/64 signal.
+    for i in 0..64 {
+        let index = i * ((n - 1) / 63) + i * ((n - 1) % 63) / 63;
+        let key = input[index].id as u128;
+        input[index].key = key
+            | match i {
+                0..=37 => 0,
+                38..=45 => 1u128 << 96,
+                _ => 1u128 << 127,
+            };
+    }
+    let mut expected = input.clone();
+    expected.sort_by_key(|x| x.key);
+    assert!(expected.windows(2).all(|w| w[0].key != w[1].key));
+    let after = sort_pa_experiment::<_, u128>(
+        &mut input,
+        PaExperiment::PrefixBandNested,
+        64,
+    );
+    assert!(input.iter().zip(&expected).all(|(a, b)| a.key == b.key
+        && a.id == b.id
+        && a.payload == b.payload));
+    assert!(after.terminal_band_nodes > 0);
+}
+
+#[test]
+#[cfg(feature = "frontier_work")]
+fn nested_band_rejection_keeps_the_original_interval() {
+    let n = 513;
+    let mut input: Vec<Item> = (0..n)
+        .map(|id| Item {
+            key: ((id as u32).wrapping_mul(0x9e3779b9) as u128)
+                | if id % 5 == 0 { 1u128 << 127 } else { 0 },
+            id,
+            payload: [id as u64; 3],
+        })
+        .collect();
+    let mut state = 42;
+    for i in (1..n).rev() {
+        let j = random(&mut state) as usize % (i + 1);
+        input.swap(i, j);
+    }
+    for i in 0..64 {
+        let index = i * ((n - 1) / 63) + i * ((n - 1) % 63) / 63;
+        input[index].key = (input[index].id as u32).wrapping_mul(0x9e3779b9)
+            as u128
+            | if i < 50 { 0 } else { 1u128 << 127 };
+    }
+    let mut expected = input.clone();
+    expected.sort_by_key(|x| x.key);
+    let work = sort_pa_experiment::<_, u128>(
+        &mut input,
+        PaExperiment::PrefixBandNested,
+        64,
+    );
+    assert!(input.iter().zip(&expected).all(|(a, b)| a.key == b.key
+        && a.id == b.id
+        && a.payload == b.payload));
+    assert!(work.band_nodes > 0);
+    assert_eq!(work.terminal_band_nodes, 0);
 }
