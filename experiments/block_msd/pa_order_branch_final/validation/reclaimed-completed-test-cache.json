@@ -1,0 +1,5 @@
+{
+  "path": "experiments/block_msd/target/release/incremental/block_msd_research-1bvnrj9gk07jh",
+  "logical_bytes": 134762312,
+  "proof": "all native build/test commands complete; source49 33 tests PASS; successful test ELF retained; no SHA path references"
+}

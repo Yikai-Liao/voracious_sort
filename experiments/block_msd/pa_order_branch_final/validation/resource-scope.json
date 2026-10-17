@@ -1,0 +1,6 @@
+{
+  "started_ns": 1792269606716662092,
+  "scope": "logical Work counters and requested heap/allocation count only",
+  "overlap": "native optimized regression test compilation may overlap; no resource-row wall/CPU timing claims",
+  "executables": "frozen source49db9f8 native Time and Work copied before this run"
+}

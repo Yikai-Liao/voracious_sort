@@ -1,0 +1,11 @@
+{
+  "old_source": "8bf14e0668282791c65fe78fd7afba377903ed67",
+  "source": "49db9f8c18329e35d1b2ec6d7b0cacda4c39cec9",
+  "compilation_inputs": 156,
+  "changed_compilation_inputs": [
+    "experiments/block_msd/src/frontier/ordered_tiled.rs"
+  ],
+  "entire_block_module_identical": true,
+  "block_module_sha256": "e45a8af82c00e5088317e91e9d8eafd105e86581cf168771a91fe1f36ac84602",
+  "new_operations": "safe integer XOR/OR equality proof and native-capacity early order failure; stable-bit regression test; no new pointer/unsafe operations"
+}

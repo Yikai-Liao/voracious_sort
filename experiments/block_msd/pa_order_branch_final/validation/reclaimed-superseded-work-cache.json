@@ -1,0 +1,10 @@
+{
+  "kept_latest": "experiments/block_msd/target/release/incremental/frontier_experiment-2ppr6pev2w1sb/s-hnb189mnrz-07s2t9p-9kf0edjhpa8t6z9ud05w021qn",
+  "removed": [
+    {
+      "path": "experiments/block_msd/target/release/incremental/frontier_experiment-2ppr6pev2w1sb/s-hnazwqjmj0-1di1xnx-3bxegs54yuz2trc7jxd9i46ex",
+      "logical_bytes": 137169600
+    }
+  ],
+  "proof": "native Work complete and frozen ELF hash matches successful Cargo output; no active Work binary compiler; completed superseded cache only"
+}

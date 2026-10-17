@@ -1,0 +1,17 @@
+[
+  {
+    "path": "experiments/block_msd/target/release/deps/frontier_experiment-ce06adec1b9a905d",
+    "bytes": 27462712,
+    "proof": "completed duplicate time output matches immutable frozen Time ELF; single link; no SHA ledger refs"
+  },
+  {
+    "path": "experiments/block_msd/target/release/incremental/block_msd_research-20aec7bwn4llq/s-hnb11fdg2h-0af1wu3-dajhw9s07c192i3ogym90yle9",
+    "bytes": 19745974,
+    "proof": "older completed library incremental session; latest kept; Time/Work builds complete; current test uses distinct cache"
+  },
+  {
+    "path": "experiments/block_msd/target/release/incremental/block_msd_research-2bj135l2abpjz/s-hnazwq5uns-0c3cb1x-1ia3mkv1huts9n6yqrlaw72oz",
+    "bytes": 19787772,
+    "proof": "older completed library incremental session; latest kept; Time/Work builds complete; current test uses distinct cache"
+  }
+]

@@ -1,0 +1,33 @@
+{
+  "command": [
+    "taskset",
+    "-c",
+    "2",
+    "/root/code/voracious_sort-pa-unified/experiments/block_msd/target/pa-order-branch/time",
+    "1048576",
+    "16",
+    "Pa,Pa_unified,Pa_unified_cache_t16777216,Pa_unified_sample_t16777216,Pa_unified_reuse_t16777216,Pa_unified_prepared_t16777216,Pa_unified_groups_t16777216,Pa",
+    "uniform,majority_prefix,deep_unique90",
+    "large128",
+    "time",
+    "512",
+    "42"
+  ],
+  "started_ns": 1792270323516357875,
+  "pid": 1801362,
+  "meminfo_before": "MemTotal:       16344888 kB\nMemFree:         6714380 kB\nMemAvailable:   11441724 kB\nBuffers:          134848 kB\nCached:          3982300 kB\nSwapCached:        14628 kB\nActive:          3719256 kB\nInactive:        2653812 kB\nActive(anon):    1924104 kB\nInactive(anon):   359224 kB\nActive(file):    1795152 kB\nInactive(file):  2294588 kB\nUnevictable:           0 kB\nMlocked:               0 kB\nSwapTotal:      12366328 kB\nSwapFree:        6180084 kB\nZswap:                 0 kB\nZswapped:              0 kB\nDirty:               720 kB\nWriteback:             0 kB\nAnonPages:       2175516 kB\nMapped:           302684 kB\nShmem:             27476 kB\nKReclaimable:     979304 kB\nSlab:            1210344 kB\nSReclaimable:     979304 kB\nSUnreclaim:       231040 kB\nKernelStack:       12960 kB\nPageTables:        56928 kB\nSecPageTables:         0 kB\nNFS_Unstable:          0 kB\nBounce:                0 kB\nWritebackTmp:          0 kB\nCommitLimit:    20538772 kB\nCommitted_AS:   12215632 kB\nVmallocTotal:   34359738367 kB\nVmallocUsed:       82252 kB\nVmallocChunk:          0 kB\nPercpu:            64000 kB\nHardwareCorrupted:     0 kB\nAnonHugePages:   1052672 kB\nShmemHugePages:        0 kB\nShmemPmdMapped:        0 kB\nFileHugePages:         0 kB\nFilePmdMapped:         0 kB\nUnaccepted:            0 kB\nHugePages_Total:       0\nHugePages_Free:        0\nHugePages_Rsvd:        0\nHugePages_Surp:        0\nHugepagesize:       2048 kB\nHugetlb:               0 kB\nDirectMap4k:      245604 kB\nDirectMap2M:    10240000 kB\nDirectMap1G:     8388608 kB\n",
+  "load_before": "2.65 2.81 2.96 1/683 1801365\n",
+  "ended_ns": 1792270433507550495,
+  "returncode": 0,
+  "meminfo_after": "MemTotal:       16344888 kB\nMemFree:         6699140 kB\nMemAvailable:   11428900 kB\nBuffers:          135104 kB\nCached:          3984460 kB\nSwapCached:        14624 kB\nActive:          3722508 kB\nInactive:        2656144 kB\nActive(anon):    1927272 kB\nInactive(anon):   359224 kB\nActive(file):    1795236 kB\nInactive(file):  2296920 kB\nUnevictable:           0 kB\nMlocked:               0 kB\nSwapTotal:      12366328 kB\nSwapFree:        6180084 kB\nZswap:                 0 kB\nZswapped:              0 kB\nDirty:               132 kB\nWriteback:             0 kB\nAnonPages:       2180192 kB\nMapped:           302632 kB\nShmem:             27496 kB\nKReclaimable:     979304 kB\nSlab:            1210424 kB\nSReclaimable:     979304 kB\nSUnreclaim:       231120 kB\nKernelStack:       13072 kB\nPageTables:        57284 kB\nSecPageTables:         0 kB\nNFS_Unstable:          0 kB\nBounce:                0 kB\nWritebackTmp:          0 kB\nCommitLimit:    20538772 kB\nCommitted_AS:   12278160 kB\nVmallocTotal:   34359738367 kB\nVmallocUsed:       82444 kB\nVmallocChunk:          0 kB\nPercpu:            64000 kB\nHardwareCorrupted:     0 kB\nAnonHugePages:   1056768 kB\nShmemHugePages:        0 kB\nShmemPmdMapped:        0 kB\nFileHugePages:         0 kB\nFilePmdMapped:         0 kB\nUnaccepted:            0 kB\nHugePages_Total:       0\nHugePages_Free:        0\nHugePages_Rsvd:        0\nHugePages_Surp:        0\nHugepagesize:       2048 kB\nHugetlb:               0 kB\nDirectMap4k:      245604 kB\nDirectMap2M:    10240000 kB\nDirectMap1G:     8388608 kB\n",
+  "load_after": "2.68 2.87 2.97 3/689 1804174\n",
+  "child_usage": {
+    "ru_utime": 106.309433,
+    "ru_stime": 3.460275,
+    "ru_maxrss": 444588,
+    "ru_minflt": 198830,
+    "ru_majflt": 0,
+    "ru_nvcsw": 1,
+    "ru_nivcsw": 6856
+  }
+}

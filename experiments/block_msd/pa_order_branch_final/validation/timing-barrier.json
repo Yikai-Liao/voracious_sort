@@ -1,0 +1,9 @@
+{
+  "time_ns": 1792269742852706062,
+  "active_rustc_cargo": [],
+  "optimized_frontier_tests": "33 passed; 0 failed",
+  "resource_rows": 572,
+  "source_inputs": 156,
+  "time_work_elf_frozen": true,
+  "safety_scope": "safe integer/order-only diff; prior-source ASan not claimed as current"
+}

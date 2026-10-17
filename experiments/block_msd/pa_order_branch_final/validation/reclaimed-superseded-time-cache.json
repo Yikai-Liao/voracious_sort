@@ -1,0 +1,10 @@
+{
+  "kept_latest": "experiments/block_msd/target/release/incremental/frontier_experiment-30hi91pzzd2m5/s-hnb143yu52-1jwny0m-2hj9zbd9lt2tcdjhbw4cqsp7d",
+  "removed": [
+    {
+      "path": "experiments/block_msd/target/release/incremental/frontier_experiment-30hi91pzzd2m5/s-hnb11frgtw-09raqds-e314q1kyyyqdye8opby390ej6",
+      "logical_bytes": 144619125
+    }
+  ],
+  "proof": "screen completed, same native Time ELF frozen/verified; no active compilation; only superseded cache reclaimed"
+}

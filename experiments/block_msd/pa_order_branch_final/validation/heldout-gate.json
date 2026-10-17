@@ -1,0 +1,13 @@
+{
+  "time_ns": 1792270615679453006,
+  "source": "49db9f8c18329e35d1b2ec6d7b0cacda4c39cec9",
+  "native_tests": 33,
+  "resource_rows": 572,
+  "seen_primary_cells": 91,
+  "mechanism_cells": 22,
+  "source_pair_cells": 14,
+  "source_pair_rows": 896,
+  "new_seed": 20261018,
+  "new_seed_executed_before_gate": false,
+  "source_and_time_elf": "unchanged since before first screen; no parameter changes from mechanism results"
+}
