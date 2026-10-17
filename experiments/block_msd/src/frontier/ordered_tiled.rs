@@ -98,21 +98,25 @@ where
     // Offset slices include the pairs crossing record-tile boundaries. Each
     // comparison is independent; the direction is specialized outside the loop.
     for (left, right) in left_tiles.zip(right_tiles) {
-        // At most TILE=128 pairs can violate the direction, so this count
-        // cannot overflow u8 and is zero exactly when the tile is ordered.
-        let mut violations = 0u8;
+        let mut is_ordered = true;
         for offset in 0..TILE {
             work! { stats.order_records += 2; }
             let left = left[offset].into_key_type();
             let right = right[offset].into_key_type();
-            violations += u8::from(
-                if DESCENDING { left < right } else { left > right },
-            );
+            let pair_ordered =
+                if DESCENDING { left >= right } else { left <= right };
+            // Software-wide comparisons become scalar predicate packing when
+            // reduced across the tile. An early exit keeps those comparisons
+            // scalar; native-word keys retain the vectorizable tile reduction.
+            if Converted::<T, K>::BITS > usize::BITS as usize && !pair_ordered {
+                return (false, false);
+            }
+            is_ordered &= pair_ordered;
             if DESCENDING {
                 has_equal_keys |= left == right;
             }
         }
-        if violations != 0 {
+        if !is_ordered {
             return (false, false);
         }
     }
