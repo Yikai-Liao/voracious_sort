@@ -6,6 +6,13 @@
 
 use super::{block, dense, work, NativeKey, Work};
 
+#[derive(Clone, Copy, PartialEq, Eq)]
+pub(super) enum BinaryBackend {
+    Original,
+    Scalar,
+    Batched,
+}
+
 pub(super) fn distribute_local<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
     arr: &mut [T],
     label: &F,
@@ -13,7 +20,13 @@ pub(super) fn distribute_local<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
     stats: &mut Work,
 ) -> usize {
     distribute_impl::<T, U, F, false, false, false>(
-        arr, label, block_size, 0, None, false, stats,
+        arr,
+        label,
+        block_size,
+        0,
+        None,
+        BinaryBackend::Original,
+        stats,
     )
 }
 
@@ -30,7 +43,7 @@ pub(super) fn distribute_cached<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
         block_size,
         workspace_threshold,
         None,
-        false,
+        BinaryBackend::Original,
         stats,
     )
 }
@@ -48,7 +61,7 @@ pub(super) fn distribute_sampled<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
         block_size,
         workspace_threshold,
         None,
-        false,
+        BinaryBackend::Original,
         stats,
     )
 }
@@ -70,7 +83,7 @@ pub(super) fn distribute_prepared<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
         block_size,
         workspace_threshold,
         Some(label_mask),
-        false,
+        BinaryBackend::Original,
         stats,
     )
 }
@@ -94,7 +107,7 @@ pub(super) fn distribute_prepared_sampled<
         block_size,
         workspace_threshold,
         Some(label_mask),
-        false,
+        BinaryBackend::Original,
         stats,
     )
 }
@@ -110,6 +123,7 @@ pub(super) fn distribute_prepared_binary<
     block_size: usize,
     workspace_threshold: usize,
     label_mask: U,
+    binary: BinaryBackend,
     stats: &mut Work,
 ) -> usize {
     distribute_impl::<T, U, F, true, true, false>(
@@ -118,7 +132,7 @@ pub(super) fn distribute_prepared_binary<
         block_size,
         workspace_threshold,
         Some(label_mask),
-        true,
+        binary,
         stats,
     )
 }
@@ -136,7 +150,7 @@ pub(super) fn distribute_reduced<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
         block_size,
         workspace_threshold,
         None,
-        false,
+        BinaryBackend::Original,
         stats,
     )
 }
@@ -158,7 +172,7 @@ pub(super) fn distribute_sampled_reduced<
         block_size,
         workspace_threshold,
         None,
-        false,
+        BinaryBackend::Original,
         stats,
     )
 }
@@ -176,7 +190,7 @@ fn distribute_impl<
     block_size: usize,
     workspace_threshold: usize,
     label_mask: Option<U>,
-    binary: bool,
+    binary: BinaryBackend,
     stats: &mut Work,
 ) -> usize {
     if arr.len() < 2 {
@@ -351,7 +365,7 @@ fn finish_label<
     variation: U,
     block_size: usize,
     budget: usize,
-    binary: bool,
+    binary: BinaryBackend,
     stats: &mut Work,
 ) -> usize {
     let passes = (0..levels).filter(|&i| variation.byte(i) != 0).count();
@@ -381,7 +395,7 @@ fn block_bytes<T: Copy, U: NativeKey, F: Fn(&T) -> U, const REDUCED: bool>(
     levels: usize,
     variation: U,
     block_size: usize,
-    binary: bool,
+    binary: BinaryBackend,
     stats: &mut Work,
 ) {
     let maximum = if REDUCED {
@@ -394,14 +408,19 @@ fn block_bytes<T: Copy, U: NativeKey, F: Fn(&T) -> U, const REDUCED: bool>(
         let mut sorter = block::Sorter::new(arr, maximum + 1, block_size);
         for byte in 0..levels {
             if variation.byte(byte) != 0 {
-                if binary && variation.byte(byte).is_power_of_two() {
-                    sorter.step_binary(
+                match (binary, variation.byte(byte).is_power_of_two()) {
+                    (BinaryBackend::Scalar, true) => sorter.step_binary(
                         &normalized,
                         byte,
                         variation.byte(byte) as u8,
-                    );
-                } else {
-                    sorter.step(&normalized, byte);
+                    ),
+                    (BinaryBackend::Batched, true) => sorter
+                        .step_binary_batched(
+                            &normalized,
+                            byte,
+                            variation.byte(byte) as u8,
+                        ),
+                    _ => sorter.step(&normalized, byte),
                 }
             }
         }
@@ -415,10 +434,19 @@ fn block_bytes<T: Copy, U: NativeKey, F: Fn(&T) -> U, const REDUCED: bool>(
         let mut sorter = block::Sorter::new(arr, 256, block_size);
         for byte in 0..levels {
             if variation.byte(byte) != 0 {
-                if binary && variation.byte(byte).is_power_of_two() {
-                    sorter.step_binary(label, byte, variation.byte(byte) as u8);
-                } else {
-                    sorter.step(label, byte);
+                match (binary, variation.byte(byte).is_power_of_two()) {
+                    (BinaryBackend::Scalar, true) => sorter.step_binary(
+                        label,
+                        byte,
+                        variation.byte(byte) as u8,
+                    ),
+                    (BinaryBackend::Batched, true) => sorter
+                        .step_binary_batched(
+                            label,
+                            byte,
+                            variation.byte(byte) as u8,
+                        ),
+                    _ => sorter.step(label, byte),
                 }
             }
         }

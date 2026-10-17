@@ -167,7 +167,7 @@ impl<'a, T: Copy> Sorter<'a, T> {
         label: &F,
         byte: usize,
     ) {
-        self.step_impl(label, byte, 0);
+        self.step_impl(label, byte, 0, false);
     }
     /// All varying digit bits are covered by this one-bit mask. Other digit
     /// bits must be constant; the ordinary bucket table and workspace remain.
@@ -178,13 +178,23 @@ impl<'a, T: Copy> Sorter<'a, T> {
         varying_bit: u8,
     ) {
         assert!(varying_bit.is_power_of_two());
-        self.step_impl(label, byte, varying_bit);
+        self.step_impl(label, byte, varying_bit, false);
+    }
+    pub(super) fn step_binary_batched<U: super::NativeKey, F: Fn(&T) -> U>(
+        &mut self,
+        label: &F,
+        byte: usize,
+        varying_bit: u8,
+    ) {
+        assert!(varying_bit.is_power_of_two() && byte < 16);
+        self.step_impl(label, byte, varying_bit, true);
     }
     fn step_impl<U: super::NativeKey, F: Fn(&T) -> U>(
         &mut self,
         label: &F,
         byte: usize,
         varying_bit: u8,
+        batched: bool,
     ) {
         let mut buckets =
             vec![
@@ -217,24 +227,36 @@ impl<'a, T: Copy> Sorter<'a, T> {
                 }
             };
         }
-        let output = match byte {
-            0 => pass!(0),
-            1 => pass!(1),
-            2 => pass!(2),
-            3 => pass!(3),
-            4 => pass!(4),
-            5 => pass!(5),
-            6 => pass!(6),
-            7 => pass!(7),
-            8 => pass!(8),
-            9 => pass!(9),
-            10 => pass!(10),
-            11 => pass!(11),
-            12 => pass!(12),
-            13 => pass!(13),
-            14 => pass!(14),
-            15 => pass!(15),
-            _ => unreachable!("key wider than 128 bits"),
+        let output = if batched
+            && std::mem::size_of::<T>() <= std::mem::size_of::<usize>()
+        {
+            self.scatter_binary_batched(
+                label,
+                byte,
+                varying_bit,
+                &mut buckets,
+                &mut counts,
+            )
+        } else {
+            match byte {
+                0 => pass!(0),
+                1 => pass!(1),
+                2 => pass!(2),
+                3 => pass!(3),
+                4 => pass!(4),
+                5 => pass!(5),
+                6 => pass!(6),
+                7 => pass!(7),
+                8 => pass!(8),
+                9 => pass!(9),
+                10 => pass!(10),
+                11 => pass!(11),
+                12 => pass!(12),
+                13 => pass!(13),
+                14 => pass!(14),
+                15 => pass!(15),
+                _ => unreachable!("key wider than 128 bits"),
+            }
         };
         self.fill = output;
         let mut starts = vec![self.radix_range; self.radix_range];
@@ -415,6 +437,141 @@ impl<'a, T: Copy> Sorter<'a, T> {
         buckets[high] = Bucket { next: next_high, end: end_high };
         output
     }
+    // The native-key bit mask is prepared once. This loop needs no const-byte
+    // specialization, keeping the new backend to one instance per label type.
+    #[inline(never)]
+    fn scatter_binary_batched<U: super::NativeKey, F: Fn(&T) -> U>(
+        &mut self,
+        label: &F,
+        byte: usize,
+        varying_bit: u8,
+        buckets: &mut [Bucket<T>],
+        counts: &mut [usize],
+    ) -> usize {
+        let mut first_digit = None;
+        let mut partial = 0;
+        for input in self.radix_range..self.fill {
+            if self.length(input, &mut partial) != 0 {
+                let source = self.block(self.perm[input] as usize);
+                // SAFETY: the selected logical block has a live first cell.
+                first_digit = Some(label(unsafe { &*source }).byte(byte));
+                break;
+            }
+        }
+        let Some(first_digit) = first_digit else {
+            return self.radix_range;
+        };
+        let bit = usize::from(varying_bit);
+        let key_bit = U::from_u128(u128::from(varying_bit) << (byte * 8));
+        let zero = U::from_u128(0);
+        let low = first_digit & !bit;
+        let high = low | bit;
+        let mut next_low = buckets[low].next;
+        let mut next_high = buckets[high].next;
+        // Step initializes every bucket to a fresh full-sized output block.
+        let mut left_low = self.block_size;
+        let mut left_high = self.block_size;
+        let mut output = self.radix_range;
+        let mut partial = 0;
+        for input in self.radix_range..self.fill {
+            let source = self.block(self.perm[input] as usize);
+            let length = self.length(input, &mut partial);
+            macro_rules! scalar {
+                ($offset:expr) => {{
+                    let offset = $offset;
+                    // SAFETY: only the initialized prefix is visited, with the
+                    // original record order and immediate per-record refill.
+                    let value = unsafe { source.add(offset).read() };
+                    let is_high = label(&value) & key_bit != zero;
+                    let destination =
+                        if is_high { next_high } else { next_low };
+                    let left = if is_high { left_high } else { left_low } - 1;
+                    let next = unsafe {
+                        destination.write(value);
+                        destination.add(1)
+                    };
+                    next_low = if is_high { next_low } else { next };
+                    next_high = if is_high { next } else { next_high };
+                    left_low = if is_high { left_low } else { left };
+                    left_high = if is_high { left } else { left_high };
+                    if left == 0 {
+                        debug_assert!(output <= input);
+                        let out = self.block(self.perm[output] as usize);
+                        let b = if is_high { high } else { low };
+                        if is_high {
+                            next_high = out;
+                            left_high = self.block_size;
+                        } else {
+                            next_low = out;
+                            left_low = self.block_size;
+                        }
+                        self.usage[output] = b as u8;
+                        counts[b] += 1;
+                        output += 1;
+                    }
+                }};
+            }
+            let complete = length - length % 4;
+            for start in (0..complete).step_by(4) {
+                if left_low > 4 && left_high > 4 {
+                    // SAFETY: all four source cells are live. Both outputs have
+                    // room beyond this group, so no block can be recycled here.
+                    let [h0, h1, h2, h3] = unsafe {
+                        [
+                            label(&*source.add(start)) & key_bit != zero,
+                            label(&*source.add(start + 1)) & key_bit != zero,
+                            label(&*source.add(start + 2)) & key_bit != zero,
+                            label(&*source.add(start + 3)) & key_bit != zero,
+                        ]
+                    };
+                    let mut highs = 0;
+                    macro_rules! copy {
+                        ($i:literal, $is_high:expr) => {{
+                            let is_high = $is_high;
+                            let base = if is_high { next_high } else { next_low };
+                            let offset = if is_high { highs } else { $i - highs };
+                            // SAFETY: prefix counts reserve distinct cells in
+                            // original order within each bucket. These are the
+                            // same addresses as four scalar writes with no refill;
+                            // the original overwrite bound preserves later input.
+                            unsafe {
+                                ptr::copy(source.add(start + $i), base.add(offset), 1);
+                            }
+                            highs += usize::from(is_high);
+                        }};
+                    }
+                    copy!(0, h0);
+                    copy!(1, h1);
+                    copy!(2, h2);
+                    copy!(3, h3);
+                    let lows = 4 - highs;
+                    // SAFETY: both remaining capacities were strictly above 4.
+                    unsafe {
+                        next_low = next_low.add(lows);
+                        next_high = next_high.add(highs);
+                    }
+                    left_low -= lows;
+                    left_high -= highs;
+                } else {
+                    scalar!(start);
+                    scalar!(start + 1);
+                    scalar!(start + 2);
+                    scalar!(start + 3);
+                }
+            }
+            for offset in complete..length {
+                scalar!(offset);
+            }
+        }
+        // SAFETY: remaining capacity ends at the current physical block's end.
+        buckets[low] =
+            Bucket { next: next_low, end: unsafe { next_low.add(left_low) } };
+        buckets[high] = Bucket {
+            next: next_high,
+            end: unsafe { next_high.add(left_high) },
+        };
+        output
+    }
     pub(super) fn compact(&mut self) {
         for i in 0..self.perm.len() {
             self.perm2[self.perm[i] as usize] = i as u32;
@@ -519,7 +676,7 @@ mod tests {
         let mut expected = input.to_vec();
         expected.sort_by_key(&label);
         let mut original_work = None;
-        for variant in 0..2 {
+        for variant in 0..3 {
             let mut actual = input.to_vec();
             let trace = RefCell::new(Vec::new());
             let counted_label = |record: &T| {
@@ -541,7 +698,7 @@ mod tests {
                 });
                 // A conservative one-bit mask also covers a constant digit.
                 let varying_bit = if variation == 0 { 1 } else { variation };
-                let binary = variant == 1 && varying_bit.is_power_of_two();
+                let binary = variant != 0 && varying_bit.is_power_of_two();
                 let mut expected_trace = Vec::new();
                 if binary
                     && std::mem::size_of::<T>() <= std::mem::size_of::<usize>()
@@ -549,7 +706,13 @@ mod tests {
                     expected_trace.extend(logical_order.first().copied());
                 }
                 expected_trace.extend_from_slice(&logical_order);
-                if binary {
+                if binary && variant == 2 {
+                    sorter.step_binary_batched(
+                        &counted_label,
+                        byte,
+                        varying_bit as u8,
+                    );
+                } else if binary {
                     sorter.step_binary(&counted_label, byte, varying_bit as u8);
                 } else {
                     sorter.step(&counted_label, byte);
@@ -582,8 +745,13 @@ mod tests {
     }
 
     fn key(id: usize, radix: usize) -> u16 {
-        let x = id.wrapping_mul(5) ^ (id / 3);
-        let y = id.wrapping_mul(7) ^ (id / 11);
+        // Irregular labels exercise all four-record prefix counts and refill
+        // positions independently of the benchmark's alternating sparse input.
+        let mut x = (id as u64).wrapping_add(0x9e3779b97f4a7c15);
+        x = (x ^ (x >> 30)).wrapping_mul(0xbf58476d1ce4e5b9);
+        x = (x ^ (x >> 27)).wrapping_mul(0x94d049bb133111eb);
+        x ^= x >> 31;
+        let y = x >> 17;
         if radix == 2 {
             (x as u16 & 1) | ((y as u16 & 1) << 8)
         } else {
