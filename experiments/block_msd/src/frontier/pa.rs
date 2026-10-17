@@ -32,7 +32,6 @@ pub enum PaExperiment {
     UnifiedReuse,
     UnifiedPrepared,
     UnifiedGroups,
-    UnifiedDirect,
 }
 
 #[derive(Clone, Copy)]
@@ -52,7 +51,7 @@ struct Policy {
     sampled_distribution: bool,
     reduced_radix: bool,
     prepared_distribution: bool,
-    scatter: super::local_distribution::BlockScatter,
+    grouped_scatter: bool,
     local_workspace_threshold: usize,
     block: usize,
 }
@@ -101,7 +100,6 @@ where
                 | PaExperiment::UnifiedReuse
                 | PaExperiment::UnifiedPrepared
                 | PaExperiment::UnifiedGroups
-                | PaExperiment::UnifiedDirect
                 | PaExperiment::UnifiedSampled
                 | PaExperiment::UnifiedReduced
                 | PaExperiment::UnifiedCandidate
@@ -118,7 +116,6 @@ where
                 | PaExperiment::UnifiedReuse
                 | PaExperiment::UnifiedPrepared
                 | PaExperiment::UnifiedGroups
-                | PaExperiment::UnifiedDirect
                 | PaExperiment::UnifiedSampled
                 | PaExperiment::UnifiedReduced
                 | PaExperiment::UnifiedCandidate
@@ -153,7 +150,6 @@ where
                 | PaExperiment::UnifiedReuse
                 | PaExperiment::UnifiedPrepared
                 | PaExperiment::UnifiedGroups
-                | PaExperiment::UnifiedDirect
                 | PaExperiment::UnifiedSampled
                 | PaExperiment::UnifiedReduced
                 | PaExperiment::UnifiedCandidate
@@ -170,7 +166,6 @@ where
                 | PaExperiment::UnifiedReuse
                 | PaExperiment::UnifiedPrepared
                 | PaExperiment::UnifiedGroups
-                | PaExperiment::UnifiedDirect
                 | PaExperiment::UnifiedSampled
                 | PaExperiment::UnifiedReduced
                 | PaExperiment::UnifiedCandidate
@@ -183,7 +178,6 @@ where
                 | PaExperiment::UnifiedReuse
                 | PaExperiment::UnifiedPrepared
                 | PaExperiment::UnifiedGroups
-                | PaExperiment::UnifiedDirect
                 | PaExperiment::UnifiedSampled
                 | PaExperiment::UnifiedReduced
                 | PaExperiment::UnifiedCandidate
@@ -197,7 +191,6 @@ where
                 | PaExperiment::UnifiedReuse
                 | PaExperiment::UnifiedPrepared
                 | PaExperiment::UnifiedGroups
-                | PaExperiment::UnifiedDirect
                 | PaExperiment::UnifiedSampled
                 | PaExperiment::UnifiedReduced
                 | PaExperiment::UnifiedCandidate
@@ -210,7 +203,6 @@ where
                 | PaExperiment::UnifiedReuse
                 | PaExperiment::UnifiedPrepared
                 | PaExperiment::UnifiedGroups
-                | PaExperiment::UnifiedDirect
                 | PaExperiment::UnifiedSampled
                 | PaExperiment::UnifiedReduced
                 | PaExperiment::UnifiedCandidate
@@ -225,7 +217,6 @@ where
                 | PaExperiment::UnifiedReuse
                 | PaExperiment::UnifiedPrepared
                 | PaExperiment::UnifiedGroups
-                | PaExperiment::UnifiedDirect
                 | PaExperiment::UnifiedSampled
                 | PaExperiment::UnifiedReduced
                 | PaExperiment::UnifiedCandidate
@@ -237,7 +228,6 @@ where
                 | PaExperiment::UnifiedReuse
                 | PaExperiment::UnifiedPrepared
                 | PaExperiment::UnifiedGroups
-                | PaExperiment::UnifiedDirect
                 | PaExperiment::UnifiedSampled
                 | PaExperiment::UnifiedReduced
                 | PaExperiment::UnifiedCandidate
@@ -248,7 +238,6 @@ where
                 | PaExperiment::UnifiedCandidate
                 | PaExperiment::UnifiedPrepared
                 | PaExperiment::UnifiedGroups
-                | PaExperiment::UnifiedDirect
         ),
         reduced_radix: matches!(
             experiment,
@@ -259,17 +248,8 @@ where
             PaExperiment::UnifiedReuse
                 | PaExperiment::UnifiedPrepared
                 | PaExperiment::UnifiedGroups
-                | PaExperiment::UnifiedDirect
         ),
-        scatter: match experiment {
-            PaExperiment::UnifiedGroups => {
-                super::local_distribution::BlockScatter::Grouped
-            },
-            PaExperiment::UnifiedDirect => {
-                super::local_distribution::BlockScatter::Direct
-            },
-            _ => super::local_distribution::BlockScatter::Original,
-        },
+        grouped_scatter: matches!(experiment, PaExperiment::UnifiedGroups),
         local_workspace_threshold,
         block,
     };
@@ -708,14 +688,13 @@ fn partition<T: Radixable<K>, K: RadixKey, C: Classifier<Converted<T, K>>>(
     let prepared_mask =
         if policy.prepared_distribution { label_mask } else { None };
     let passes = if let Some(mask) = prepared_mask {
-        if policy.scatter != super::local_distribution::BlockScatter::Original {
-            super::local_distribution::distribute_prepared_scatter(
+        if policy.grouped_scatter {
+            super::local_distribution::distribute_prepared_grouped(
                 arr,
                 &label,
                 policy.block,
                 policy.local_workspace_threshold,
                 mask,
-                policy.scatter,
                 stats,
             )
         } else if policy.sampled_distribution {

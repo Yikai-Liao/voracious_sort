@@ -167,7 +167,7 @@ impl<'a, T: Copy> Sorter<'a, T> {
         label: &F,
         byte: usize,
     ) {
-        self.step_impl(label, byte, None, false);
+        self.step_impl(label, byte, None);
     }
     /// Reorder writes within each input block while preserving each bucket's
     /// input order. All digit variation must be covered by this one-bit mask.
@@ -178,27 +178,13 @@ impl<'a, T: Copy> Sorter<'a, T> {
         varying_bit: u8,
     ) {
         assert!(varying_bit.is_power_of_two() && byte < U::BITS / 8);
-        self.step_impl(label, byte, Some(varying_bit), false);
-    }
-    /// Keep the grouped schedule when applicable; otherwise emit each record's
-    /// write directly in the scalar loop instead of calling a captured closure.
-    pub(super) fn step_direct<U: super::NativeKey, F: Fn(&T) -> U>(
-        &mut self,
-        label: &F,
-        byte: usize,
-        varying_bit: Option<u8>,
-    ) {
-        if let Some(bit) = varying_bit {
-            assert!(bit.is_power_of_two() && byte < U::BITS / 8);
-        }
-        self.step_impl(label, byte, varying_bit, true);
+        self.step_impl(label, byte, Some(varying_bit));
     }
     fn step_impl<U: super::NativeKey, F: Fn(&T) -> U>(
         &mut self,
         label: &F,
         byte: usize,
         grouped_bit: Option<u8>,
-        direct: bool,
     ) {
         let mut buckets =
             vec![
@@ -217,15 +203,7 @@ impl<'a, T: Copy> Sorter<'a, T> {
         // The classifier is fixed across every byte in this macro node.
         macro_rules! pass {
             ($i:literal) => {
-                if direct {
-                    self.scatter_direct::<U, F, $i>(
-                        label,
-                        &mut buckets,
-                        &mut counts,
-                    )
-                } else {
-                    self.scatter::<U, F, $i>(label, &mut buckets, &mut counts)
-                }
+                self.scatter::<U, F, $i>(label, &mut buckets, &mut counts)
             };
         }
         let output = if let Some(bit) = grouped_bit.filter(|_| {
@@ -285,6 +263,9 @@ impl<'a, T: Copy> Sorter<'a, T> {
         #[cfg(debug_assertions)]
         self.validate();
     }
+    // Keep one scalar pass outside the sixteen-way byte dispatcher so the
+    // compiler can inline record writes without expanding the whole step.
+    #[inline(never)]
     fn scatter<U: super::NativeKey, F: Fn(&T) -> U, const BYTE: usize>(
         &mut self,
         label: &F,
@@ -343,68 +324,6 @@ impl<'a, T: Copy> Sorter<'a, T> {
             }
             for offset in complete..length {
                 write(offset);
-            }
-        }
-        output
-    }
-    // Keep this body out of the sixteen-way step dispatcher. The write macro
-    // retains the original reservation/store order without a per-record call.
-    #[inline(never)]
-    fn scatter_direct<
-        U: super::NativeKey,
-        F: Fn(&T) -> U,
-        const BYTE: usize,
-    >(
-        &mut self,
-        label: &F,
-        buckets: &mut [Bucket<T>],
-        counts: &mut [usize],
-    ) -> usize {
-        let mut output = self.radix_range;
-        let mut partial = 0;
-        for input in self.radix_range..self.fill {
-            let source = self.block(self.perm[input] as usize);
-            let length = self.length(input, &mut partial);
-            macro_rules! write {
-                ($offset:expr) => {{
-                    let offset = $offset;
-                    // SAFETY: this is the original scatter protocol. Every
-                    // live cell is read in order before recycling can reach
-                    // it; the new block is first written on the next record.
-                    let value = unsafe { source.add(offset).read() };
-                    let b = label(&value).byte(BYTE);
-                    let bucket = &mut buckets[b];
-                    let next = bucket.next;
-                    let end = bucket.end;
-                    let next = unsafe {
-                        ptr::copy(source.add(offset), next, 1);
-                        next.add(1)
-                    };
-                    bucket.next = next;
-                    if next == end {
-                        debug_assert!(output <= input);
-                        let out = self.block(self.perm[output] as usize);
-                        *bucket = Bucket {
-                            next: out,
-                            end: unsafe { out.add(self.block_size) },
-                        };
-                        self.usage[output] = b as u8;
-                        counts[b] += 1;
-                        output += 1;
-                    }
-                }};
-            }
-            let group = (4 * std::mem::size_of::<usize>()
-                / std::mem::size_of::<T>().max(1))
-            .clamp(1, 4);
-            let complete = length - length % group;
-            for start in (0..complete).step_by(group) {
-                for offset in 0..group {
-                    write!(start + offset);
-                }
-            }
-            for offset in complete..length {
-                write!(offset);
             }
         }
         output
@@ -602,8 +521,7 @@ mod tests {
     ) {
         let mut expected = input.to_vec();
         expected.sort_by_key(&label);
-        let mut work_by_variant = Vec::new();
-        for variant in 0..4 {
+        for variant in 0..2 {
             let mut actual = input.to_vec();
             let trace = RefCell::new(Vec::new());
             let counted_label = |record: &T| {
@@ -625,8 +543,7 @@ mod tests {
                 });
                 // A conservative one-bit mask also covers a constant digit.
                 let varying_bit = if variation == 0 { 1 } else { variation };
-                let binary =
-                    matches!(variant, 1 | 2) && varying_bit.is_power_of_two();
+                let binary = variant != 0 && varying_bit.is_power_of_two();
                 let mut expected_trace = Vec::new();
                 if binary
                     && std::mem::size_of::<T>() <= std::mem::size_of::<usize>()
@@ -634,13 +551,7 @@ mod tests {
                     expected_trace.extend(logical_order.first().copied());
                 }
                 expected_trace.extend_from_slice(&logical_order);
-                if variant >= 2 {
-                    sorter.step_direct(
-                        &counted_label,
-                        byte,
-                        binary.then_some(varying_bit as u8),
-                    );
-                } else if binary {
+                if binary {
                     sorter.step_grouped(
                         &counted_label,
                         byte,
@@ -659,13 +570,6 @@ mod tests {
             }
             sorter.compact();
             let work = (sorter.compact_records, sorter.tail_records);
-            if variant >= 2 {
-                assert_eq!(
-                    work,
-                    work_by_variant[if variant == 2 { 1 } else { 0 }]
-                );
-            }
-            work_by_variant.push(work);
             assert_eq!(sorter.tail_records, input.len() % block);
             drop(sorter);
             assert_eq!(
@@ -701,7 +605,7 @@ mod tests {
     }
 
     #[test]
-    fn direct_scatter_preserves_multibit_payload_records() {
+    fn scatter_preserves_multibit_payload_records() {
         #[derive(Clone, Copy, Debug, PartialEq, Eq)]
         struct Record32 {
             key: u32,
