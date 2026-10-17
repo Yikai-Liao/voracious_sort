@@ -7,6 +7,10 @@ publish = false
 voracious_radix_sort = { path = "../.." }
 [profile.release]
 debug = true
+# Reuse optimized artifacts while screening changes. Freeze build settings and
+# the resulting ELF separately for final measurements.
+incremental = true
+codegen-units = 16
 
 [features]
 cf_early_scan = []
@@ -17,3 +21,4 @@ cf_std_leaf = []
 cf_phases = []
 cf_work = []
 frontier_work = []
+frontier_narrow_screen = []

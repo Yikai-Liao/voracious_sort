@@ -255,9 +255,6 @@ const METHODS: &[&str] = &[
     "Pa_unified_candidate_t16777216",
     "Pa_unified_reuse_t16777216",
     "Pa_unified_prepared_t16777216",
-    "Pa_unified_fixed_t16777216",
-    "Pa_unified_preload_t16777216",
-    "Pa_unified_backend_t16777216",
     "L",
     "L_frozen",
     "H1",
@@ -329,15 +326,6 @@ where
     } else if let Some(value) = method.strip_prefix("Pa_unified_prepared_t") {
         local_workspace_threshold = value.parse().unwrap();
         "Pa_unified_prepared"
-    } else if let Some(value) = method.strip_prefix("Pa_unified_fixed_t") {
-        local_workspace_threshold = value.parse().unwrap();
-        "Pa_unified_fixed"
-    } else if let Some(value) = method.strip_prefix("Pa_unified_preload_t") {
-        local_workspace_threshold = value.parse().unwrap();
-        "Pa_unified_preload"
-    } else if let Some(value) = method.strip_prefix("Pa_unified_backend_t") {
-        local_workspace_threshold = value.parse().unwrap();
-        "Pa_unified_backend"
     } else {
         method
     };
@@ -367,10 +355,7 @@ where
         | "Pa_unified_radix"
         | "Pa_unified_candidate"
         | "Pa_unified_reuse"
-        | "Pa_unified_prepared"
-        | "Pa_unified_fixed"
-        | "Pa_unified_preload"
-        | "Pa_unified_backend" => {
+        | "Pa_unified_prepared" => {
             use frontier::PaExperiment::*;
             let experiment = match method {
                 "Pa_ref" => Reference,
@@ -398,9 +383,6 @@ where
                 "Pa_unified_candidate" => UnifiedCandidate,
                 "Pa_unified_reuse" => UnifiedReuse,
                 "Pa_unified_prepared" => UnifiedPrepared,
-                "Pa_unified_fixed" => UnifiedFixed,
-                "Pa_unified_preload" => UnifiedPreload,
-                "Pa_unified_backend" => UnifiedBackend,
                 _ => Both,
             };
             return frontier::sort_pa_with_threshold::<T, K>(
@@ -738,11 +720,25 @@ fn main() {
         .split(',')
         .collect();
     assert!(cases.iter().all(|c| CASES.contains(c)));
+    let default_layouts = if cfg!(feature = "frontier_narrow_screen") {
+        "u8,u16,u8_id8,u16_id8"
+    } else {
+        "u32,u64,small8,wide32,large128"
+    };
     let layouts: Vec<&str> = args
         .get(5)
-        .map_or("u32,u64,small8,wide32,large128", String::as_str)
+        .map_or(default_layouts, String::as_str)
         .split(',')
         .collect();
+    // Compile only the failing narrow-layout screen during development. This
+    // feature restricts the harness; the sorting implementation is unchanged.
+    #[cfg(feature = "frontier_narrow_screen")]
+    assert!(
+        layouts.iter().all(|layout| {
+            ["u8", "u16", "u8_id8", "u16_id8"].contains(layout)
+        }),
+        "frontier_narrow_screen supports only u8/u16 and their ID layouts"
+    );
     let kind = args.get(6).map_or("time", String::as_str);
     assert!(["time", "work", "memory"].contains(&kind));
     assert!(
@@ -816,6 +812,7 @@ fn main() {
                     seed,
                     kind,
                 ),
+                #[cfg(not(feature = "frontier_narrow_screen"))]
                 "u32" => run::<_, u32>(
                     keys.iter().map(|&x| x as u32).collect(),
                     layout,
@@ -826,6 +823,7 @@ fn main() {
                     seed,
                     kind,
                 ),
+                #[cfg(not(feature = "frontier_narrow_screen"))]
                 "u64" => run::<_, u64>(
                     keys.iter().map(|&x| x as u64).collect(),
                     layout,
@@ -836,9 +834,11 @@ fn main() {
                     seed,
                     kind,
                 ),
+                #[cfg(not(feature = "frontier_narrow_screen"))]
                 "u128" => run::<_, u128>(
                     keys, layout, case, &methods, reps, block, seed, kind,
                 ),
+                #[cfg(not(feature = "frontier_narrow_screen"))]
                 "small8" => run::<_, u32>(
                     keys.iter()
                         .enumerate()
@@ -855,6 +855,7 @@ fn main() {
                     seed,
                     kind,
                 ),
+                #[cfg(not(feature = "frontier_narrow_screen"))]
                 "wide32" => run::<_, u128>(
                     keys.iter()
                         .enumerate()
@@ -872,6 +873,7 @@ fn main() {
                     seed,
                     kind,
                 ),
+                #[cfg(not(feature = "frontier_narrow_screen"))]
                 "large128" => run::<_, u32>(
                     keys.iter()
                         .enumerate()

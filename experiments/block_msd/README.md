@@ -33,6 +33,28 @@ The [independent strategy comparison](strategy_experiment/REPORT.md) implements
 and measures prefix writeback, carried boundaries, leaf batching, budgeted joint
 counts, two admission gates and the single-layer/deferred minority paths.
 
+## Iterating on the unified Pa experiment
+
+The release profile reuses incremental artifacts with 16 codegen units. Keep the
+same target directory and flags between edits; use `--jobs 6` on this six-vCPU
+host. `frontier_narrow_screen` compiles only the u8/u16 primitive and ID layouts
+in the benchmark harness, while retaining the same generic sorting code and full
+stable oracle:
+
+```sh
+RUSTFLAGS='-C target-cpu=native' cargo build \
+  --manifest-path experiments/block_msd/Cargo.toml --release --jobs 6 \
+  --bin frontier_experiment --features frontier_narrow_screen
+```
+
+Use that build for the first known-negative screen. A passing mechanism still
+needs a build without this feature, the full layout matrix, and the independent
+work, heap and safety checks. Freeze the source, build flags and copied ELF before
+timing. Historical stage manifests retain their own build settings, including
+older non-incremental builds; do not overwrite their ELF files or combine their
+measurements with new binaries. The failed scatter variants are archived in
+[pa_scatter](pa_scatter/REPORT.md) and removed from the active implementation.
+
 ## Reading the results
 
 - [Latest work-reduction report](work_reduction/REPORT.md): two-array cached kernel,
