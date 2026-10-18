@@ -36,9 +36,7 @@ pub enum PaExperiment {
     UnifiedPacked,
     UnifiedPackedContext,
     UnifiedPackedAggressive,
-    UnifiedCachedLeaf,
     UnifiedOddBlocks,
-    UnifiedOddCachedLeaf,
 }
 
 #[derive(Clone, Copy, PartialEq)]
@@ -71,7 +69,6 @@ struct Policy {
     local_workspace_threshold: usize,
     block: usize,
     sparse: SparseCompletion,
-    cached_leaf: bool,
 }
 
 pub fn sort_pa_experiment<T: Radixable<K>, K: RadixKey>(
@@ -96,27 +93,18 @@ where
     Converted<T, K>: NativeKey,
 {
     assert!(block > 0);
-    let cached_leaf = matches!(
-        experiment,
-        PaExperiment::UnifiedCachedLeaf | PaExperiment::UnifiedOddCachedLeaf
-    );
-    // Independent layout experiment: use the largest odd block capacity not
-    // exceeding the supplied limit. This changes block stride without adding
-    // record scratch; directory size still follows the actual block count.
-    let block = if matches!(
-        experiment,
-        PaExperiment::UnifiedOddBlocks | PaExperiment::UnifiedOddCachedLeaf
-    ) {
+    // PA caller-side capacity experiment: use the largest odd capacity within
+    // the supplied limit for scratch, directory and all recursive calls.
+    let block = if matches!(experiment, PaExperiment::UnifiedOddBlocks) {
         block - usize::from(block % 2 == 0)
     } else {
         block
     };
     let sparse = match experiment {
         PaExperiment::UnifiedPacked => SparseCompletion::Packed,
-        PaExperiment::UnifiedPackedContext
-        | PaExperiment::UnifiedCachedLeaf
-        | PaExperiment::UnifiedOddBlocks
-        | PaExperiment::UnifiedOddCachedLeaf => SparseCompletion::PackedContext,
+        PaExperiment::UnifiedPackedContext | PaExperiment::UnifiedOddBlocks => {
+            SparseCompletion::PackedContext
+        },
         PaExperiment::UnifiedPackedAggressive => {
             SparseCompletion::PackedAggressive
         },
@@ -128,15 +116,12 @@ where
         PaExperiment::UnifiedIdentity
         | PaExperiment::UnifiedPacked
         | PaExperiment::UnifiedPackedContext
-        | PaExperiment::UnifiedCachedLeaf
         | PaExperiment::UnifiedOddBlocks
-        | PaExperiment::UnifiedOddCachedLeaf
         | PaExperiment::UnifiedPackedAggressive => PaExperiment::UnifiedGroups,
         other => other,
     };
     let policy = Policy {
         sparse,
-        cached_leaf,
         terminal: matches!(
             experiment,
             PaExperiment::Terminal
@@ -523,10 +508,6 @@ fn visit<T: Radixable<K>, K: RadixKey>(
     }
     work! { stats.max_depth = stats.max_depth.max(depth); }
     if arr.len() <= 128 {
-        if policy.cached_leaf {
-            finish_cached_leaf::<T, K>(arr, stats, depth);
-            return;
-        }
         work! { stats.leaves += 1; stats.leaf_records += arr.len(); stats.leaf_lengths[arr.len()] += 1; }
         if policy.stable_leaf {
             arr.sort_by_key(|item| item.into_key_type());
@@ -919,45 +900,20 @@ fn partition<T: Radixable<K>, K: RadixKey, C: Classifier<Converted<T, K>>>(
             work! { stats.runs_records += end - start; }
             if end - start > 1 && remaining > 0 {
                 work! { stats.unresolved_records += end - start; }
-                if policy.cached_leaf && end - start <= 128 {
-                    finish_cached_leaf::<T, K>(
-                        &mut arr[start..end],
-                        stats,
-                        depth + 1,
-                    );
-                } else {
-                    visit::<T, K>(
-                        &mut arr[start..end],
-                        remaining,
-                        policy,
-                        end - start > parent_len / 2,
-                        stats,
-                        depth + 1,
-                        path + passes,
-                    );
-                }
+                visit::<T, K>(
+                    &mut arr[start..end],
+                    remaining,
+                    policy,
+                    end - start > parent_len / 2,
+                    stats,
+                    depth + 1,
+                    path + passes,
+                );
             }
             start = end;
         }
     }
     work! { stats.label_evals += label_evals.get(); }
-}
-
-#[inline(always)]
-fn finish_cached_leaf<T: Radixable<K>, K: RadixKey>(
-    arr: &mut [T],
-    stats: &mut Work,
-    depth: usize,
-) where
-    Converted<T, K>: NativeKey,
-{
-    work! {
-        stats.max_depth = stats.max_depth.max(depth);
-        stats.leaves += 1;
-        stats.leaf_records += arr.len();
-        stats.leaf_lengths[arr.len()] += 1;
-    }
-    super::leaf_cached::sort::<T, K>(arr);
 }
 
 #[inline(never)]

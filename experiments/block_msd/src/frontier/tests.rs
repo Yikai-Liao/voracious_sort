@@ -200,9 +200,7 @@ fn recursive_identity_and_payload_matrix() {
                 PaExperiment::UnifiedIdentity,
                 PaExperiment::UnifiedPacked,
                 PaExperiment::UnifiedPackedContext,
-                PaExperiment::UnifiedCachedLeaf,
                 PaExperiment::UnifiedOddBlocks,
-                PaExperiment::UnifiedOddCachedLeaf,
                 PaExperiment::UnifiedSampled,
                 PaExperiment::UnifiedReduced,
                 PaExperiment::UnifiedCandidate,
@@ -282,9 +280,7 @@ fn pa_new_policies_preserve_converted_float_order() {
         PaExperiment::UnifiedIdentity,
         PaExperiment::UnifiedPacked,
         PaExperiment::UnifiedPackedContext,
-        PaExperiment::UnifiedCachedLeaf,
         PaExperiment::UnifiedOddBlocks,
-        PaExperiment::UnifiedOddCachedLeaf,
         PaExperiment::UnifiedSampled,
         PaExperiment::UnifiedReduced,
         PaExperiment::UnifiedCandidate,
@@ -378,9 +374,7 @@ fn native_small_integer_widths() {
         PaExperiment::UnifiedIdentity,
         PaExperiment::UnifiedPacked,
         PaExperiment::UnifiedPackedContext,
-        PaExperiment::UnifiedCachedLeaf,
         PaExperiment::UnifiedOddBlocks,
-        PaExperiment::UnifiedOddCachedLeaf,
         PaExperiment::UnifiedSampled,
         PaExperiment::UnifiedReduced,
         PaExperiment::UnifiedCandidate,
@@ -458,9 +452,7 @@ fn block_tail_sizes_and_large_workspace() {
             PaExperiment::UnifiedIdentity,
             PaExperiment::UnifiedPacked,
             PaExperiment::UnifiedPackedContext,
-            PaExperiment::UnifiedCachedLeaf,
             PaExperiment::UnifiedOddBlocks,
-            PaExperiment::UnifiedOddCachedLeaf,
             PaExperiment::UnifiedSampled,
             PaExperiment::UnifiedReduced,
             PaExperiment::UnifiedCandidate,
@@ -736,6 +728,7 @@ fn structural_projection_bit_embeddings_and_frequency_preserve_stable_records()
                     PaExperiment::UnifiedIdentity,
                     PaExperiment::UnifiedPacked,
                     PaExperiment::UnifiedPackedContext,
+                    PaExperiment::UnifiedOddBlocks,
                 ] {
                     for block in [3, 64, 512] {
                         let mut actual = input.clone();
@@ -1021,49 +1014,6 @@ fn instruction_context_changes_execution_without_changing_any_sort_work() {
                     block
                 );
             }
-        }
-    }
-}
-
-#[cfg(feature = "frontier_work")]
-#[test]
-fn cached_leaf_keeps_every_distribution_and_logical_work_counter() {
-    let mut state = 42;
-    for sparse in [false, true] {
-        let input: Vec<Item> = (0..4097)
-            .map(|id| {
-                let raw = (random(&mut state) as u128) << 64
-                    | random(&mut state) as u128;
-                Item {
-                    key: if sparse {
-                        raw & 0x81000100010001000100010001000101
-                    } else {
-                        raw
-                    },
-                    id,
-                    payload: [id as u64, !(id as u64), id as u64 * 37],
-                }
-            })
-            .collect();
-        for block in [3, 64, 512] {
-            let mut reference = input.clone();
-            let mut cached = input.clone();
-            let before = sort_pa_with_threshold::<_, u128>(
-                &mut reference,
-                PaExperiment::UnifiedPackedContext,
-                block,
-                16 * 1024 * 1024,
-            );
-            let after = sort_pa_with_threshold::<_, u128>(
-                &mut cached,
-                PaExperiment::UnifiedCachedLeaf,
-                block,
-                16 * 1024 * 1024,
-            );
-            assert_eq!(before, after);
-            assert!(reference.iter().zip(&cached).all(|(a, b)| a.key == b.key
-                && a.id == b.id
-                && a.payload == b.payload));
         }
     }
 }

@@ -236,9 +236,7 @@ pub fn floats_main() {
     let seed = args.get(8).map_or(42, |s| s.parse().unwrap());
     assert!(methods.iter().all(|m| [
         "Pa_kernel",
-        "Pa_leaf_cached",
         "Pa_odd_blocks",
-        "Pa_odd_cached",
         "Pa_packed",
         "Pa_unified_groups_t16777216",
         "Rollercoaster",
@@ -253,7 +251,7 @@ pub fn floats_main() {
     assert!(["time", "memory", "work"].contains(&kind));
     assert_eq!(kind == "work", cfg!(feature = "frontier_work"));
     if cases.iter().any(|case| SPECIAL_CASES.contains(case)) {
-        assert!(methods.iter().all(|m| ["Pa_kernel", "Pa_leaf_cached", "Pa_odd_blocks", "Pa_odd_cached", "Pa_packed", "Pa_unified_groups_t16777216", "L_frozen"].contains(m)),
+        assert!(methods.iter().all(|m| ["Pa_kernel", "Pa_odd_blocks", "Pa_packed", "Pa_unified_groups_t16777216", "L_frozen"].contains(m)),
                 "NaN/zero total-key cases exclude comparators with partial-order leaves");
     }
     // Schema matches the inherited run() exactly; float-run.py checks it
@@ -395,9 +393,7 @@ mod float_tests {
                 for method in [
                     "Pa_unified_groups_t16777216",
                     "Pa_kernel",
-                    "Pa_leaf_cached",
                     "Pa_odd_blocks",
-                    "Pa_odd_cached",
                     "L_frozen",
                 ] {
                     let mut actual = input.clone();
