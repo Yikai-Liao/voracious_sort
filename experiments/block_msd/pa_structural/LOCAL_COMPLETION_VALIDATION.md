@@ -1,6 +1,6 @@
 # Stable local-completion validation
 
-Status: correctness passed; first native eight-cell float screen running. No full performance acceptance yet. The original 103 integer, 88 finite float and ordinary-ISA results from source `6fceaaa` remain a separate rejected cohort.
+Status: **both methods rejected by independently repeated float regressions**. The first native eight-cell screen completed, all eight method/cell signals repeated in independent confirmations, and two separate Work diagnostics completed. Remaining native/generic float and integer screens were stopped. Built executables for those stopped scopes have no performance conclusions.
 
 ## Implementation and contract
 
@@ -31,4 +31,39 @@ The copied metadata `local-*-binary.json` records complete source/extra-harness/
 
 The predeclared scope and reproduction commands are in [LOCAL_COMPLETION_PLAN.md](LOCAL_COMPLETION_PLAN.md) and `local-screen.py`. CPU 2, rotating/reversed paired slots, same-method A/A, restored inputs and complete-record oracles remain mandatory. Native and ordinary-ISA executables have separate cohorts. Independent reversed 16-repetition four-slot confirmations decide material original-PA signals. Work is collected separately, with no timing claims.
 
-Pending: first native B512 finite-float eight cells, confirmations, remaining representative floats/integers, then any justified larger acceptance scope. Built or frozen executables with no measurements have no performance conclusions.
+The first native screen contains 8 cells and 800 timed rows at n1,048,576, B512, seed42. Audits independently check both candidates against the same single ELF, row rotations, A/A and allocation identity. Every complete-record oracle passes. No compiler, test or second benchmark overlaps timing.
+
+| Layout / case | Local prefix / original PA | Local key / original PA |
+|---|---:|---:|
+
+| f32 / uniform | 1.1800 | 0.7733 |
+| f32 / sparse16 | 1.5633 | 1.5548 |
+| f64 / uniform | 1.1756 | 0.7924 |
+| f64 / sparse16 | 0.2928 | 0.3004 |
+| f32_id16 / uniform | 1.1547 | 0.8680 |
+| f32_id16 / sparse16 | 1.2712 | 1.3281 |
+| f64_id32 / uniform | 1.1139 | 0.9351 |
+| f64_id32 / sparse16 | 0.5669 | 0.5713 |
+
+These are paired median ratios. Local prefix triggers six material original-PA signals; local key triggers two. The reversed four-slot 16-repetition repeats confirm all eight, with all 16 paired repetitions slower in each case:
+
+| Method / layout / case | Median | p10 | p90 |
+|---|---:|---:|---:|
+| Pa_local_key / f32 / sparse16 | 1.5543 | 1.4163 | 1.6115 |
+| Pa_local_key / f32_id16 / sparse16 | 1.3045 | 1.1119 | 1.5190 |
+| Pa_local_prefix / f32 / sparse16 | 1.5374 | 1.4175 | 1.6339 |
+| Pa_local_prefix / f32 / uniform | 1.1773 | 1.1060 | 1.2386 |
+| Pa_local_prefix / f32_id16 / sparse16 | 1.3591 | 1.2394 | 1.5526 |
+| Pa_local_prefix / f32_id16 / uniform | 1.1301 | 1.0360 | 1.2127 |
+| Pa_local_prefix / f64 / uniform | 1.1522 | 1.0714 | 1.2506 |
+| Pa_local_prefix / f64_id32 / uniform | 1.1046 | 1.0405 | 1.1401 |
+
+Local key makes the four uniform cells faster than original PA in this small screen, including ratios 0.773 for f32 and 0.792 for f64. It still loses on sparse16 and is rejected as a general route. There is no full-matrix or ordinary-ISA claim for either method.
+
+## Separate Work and resources
+
+Two Work cells verify unchanged local-prefix logical geometry and expose the added physical cost. For f32 uniform, kernel/local-prefix both retain 187,722 leaves and 953,847 leaf records. Label evaluations grow from 4,476,754 to 6,573,903; scatter remains about 3,145,728; compact records grow from 1,949,184 to 2,090,496. Local key eliminates these leaves but scatters 4,194,301 records and compacts 3,139,071.
+
+For f32_id16 sparse16, the kernel scatters 2,097,152 records and compacts 1,847,808. Both new routes keep the same scatter count but double label evaluations to 4,194,304 and compact 3,079,168 records, with 256 dense child completions. Exact high-byte boundaries avoid a scan to rediscover those child boundaries, but the added histogram and dense-copy work more than offsets that saving in actual timing. Work wall times are excluded from performance conclusions. `heap_peak` and `allocs` are zero in Work mode because allocation tracking is disabled there; they are not memory-use measurements.
+
+The primary screen peaks at 197,812 KiB RSS. Confirmation peaks range from 41,776 to 116,228 KiB; Work peaks at 95,900–95,976 KiB. All processes report zero major faults and zero host swap-out. Host-wide swap-in increments are 80 pages in the primary screen, 0–1,574 pages per confirmation and 8 pages per Work command; these counters include unrelated processes. [local-rejected-integrity.json](local-rejected-integrity.json) records individual resources and raw/metadata/report hashes. Other machines remain unmeasured.

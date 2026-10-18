@@ -1,0 +1,75 @@
+{
+  "selection": {
+    "prefix": "local-confirm-prefix-f32id16-uniform",
+    "exclude": []
+  },
+  "candidate": "Pa_local_prefix",
+  "elf_sha256": "16e9b2f106712698cb35d33b06d2e82e42da6a2869957c751f23a8ef7c4bc5ee",
+  "cells": 1,
+  "rows": 64,
+  "comparisons": {
+    "Pa_unified_groups_t16777216": {
+      "median_wins": 0,
+      "p90_wins": 0,
+      "p10_losses": 1
+    }
+  },
+  "regression_signals": [
+    {
+      "cell": [
+        "f32_id16",
+        "uniform",
+        "1048576",
+        "512",
+        "42"
+      ],
+      "median": 1.1300731795242913,
+      "p10": 1.0359542226568554,
+      "p90": 1.2126624125030805,
+      "slower": 16,
+      "ms": 39.34137175,
+      "aa": {
+        "median": 0.9905756845461449,
+        "p10": 0.8083410510727,
+        "p90": 1.0844816549795064
+      }
+    }
+  ],
+  "results": [
+    {
+      "cell": [
+        "f32_id16",
+        "uniform",
+        "1048576",
+        "512",
+        "42"
+      ],
+      "source": "local-confirm-prefix-f32id16-uniform.csv",
+      "candidate_ms": 43.419245,
+      "Pa_unified_groups_t16777216": {
+        "median": 1.1300731795242913,
+        "p10": 1.0359542226568554,
+        "p90": 1.2126624125030805,
+        "slower": 16,
+        "ms": 39.34137175,
+        "aa": {
+          "median": 0.9905756845461449,
+          "p10": 0.8083410510727,
+          "p90": 1.0844816549795064
+        }
+      },
+      "Pa_local_prefix": {
+        "median": 1.0,
+        "p10": 1.0,
+        "p90": 1.0,
+        "slower": 0,
+        "ms": 43.419245,
+        "aa": {
+          "median": 1.0170923693831595,
+          "p10": 0.9054439660586893,
+          "p90": 1.1006652657860934
+        }
+      }
+    }
+  ]
+}

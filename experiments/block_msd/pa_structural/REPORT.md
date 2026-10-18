@@ -1,6 +1,6 @@
 # PA 优化交付报告
 
-当前实验源码为 `baaa505`（实现提交 `e86ca7a`），源文件指纹为 `f25c7179804be7a2b4cb85d3c93aeca3ab3cfc73c587c58e50c387b215966586`。新增 `Pa_local_prefix` 与 `Pa_local_key`，借鉴 Rollercoaster 的精确计数边界和 MSD 后局部 LSD 完成，正在执行独立小规模筛选。两条路线尚未通过完整性能验收，见 [LOCAL_COMPLETION_PLAN.md](LOCAL_COMPLETION_PLAN.md) 与 [LOCAL_COMPLETION_VALIDATION.md](LOCAL_COMPLETION_VALIDATION.md)。
+当前实验源码为 `baaa505`（实现提交 `e86ca7a`），源文件指纹为 `f25c7179804be7a2b4cb85d3c93aeca3ab3cfc73c587c58e50c387b215966586`。新增 `Pa_local_prefix` 与 `Pa_local_key`，借鉴 Rollercoaster 的精确计数边界和 MSD 后局部 LSD 完成，独立八场景筛选与反向复测已确认两条路线均有实质退化，已拒绝并停止扩展，见 [LOCAL_COMPLETION_PLAN.md](LOCAL_COMPLETION_PLAN.md) 与 [LOCAL_COMPLETION_VALIDATION.md](LOCAL_COMPLETION_VALIDATION.md)。
 
 上一轮 `6fceaaa` / `Pa_kernel` 的**整数验收已完成，整体候选被浮点复测拒绝**：f32 带身份/payload 的 sparse16/B512 独立复测仍慢 16.3%。下文的完整整数矩阵及浮点失败均属于该轮源码 `eca6b3cf68617eaec8de46fadb300e38cdcdc836fdd29700c62338daa07b7636`，不转用为新实验的通过证据。
 
