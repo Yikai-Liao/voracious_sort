@@ -36,6 +36,15 @@ pub enum PaExperiment {
     UnifiedPacked,
     UnifiedPackedContext,
     UnifiedPackedAggressive,
+    UnifiedLocalPrefix,
+    UnifiedLocalKey,
+}
+
+#[derive(Clone, Copy, PartialEq)]
+enum Completion {
+    Original,
+    LocalPrefix,
+    LocalKey,
 }
 
 #[derive(Clone, Copy, PartialEq)]
@@ -68,6 +77,7 @@ struct Policy {
     local_workspace_threshold: usize,
     block: usize,
     sparse: SparseCompletion,
+    completion: Completion,
 }
 
 pub fn sort_pa_experiment<T: Radixable<K>, K: RadixKey>(
@@ -92,9 +102,16 @@ where
     Converted<T, K>: NativeKey,
 {
     assert!(block > 0);
+    let completion = match experiment {
+        PaExperiment::UnifiedLocalPrefix => Completion::LocalPrefix,
+        PaExperiment::UnifiedLocalKey => Completion::LocalKey,
+        _ => Completion::Original,
+    };
     let sparse = match experiment {
         PaExperiment::UnifiedPacked => SparseCompletion::Packed,
-        PaExperiment::UnifiedPackedContext => SparseCompletion::PackedContext,
+        PaExperiment::UnifiedPackedContext
+        | PaExperiment::UnifiedLocalPrefix
+        | PaExperiment::UnifiedLocalKey => SparseCompletion::PackedContext,
         PaExperiment::UnifiedPackedAggressive => {
             SparseCompletion::PackedAggressive
         },
@@ -106,11 +123,14 @@ where
         PaExperiment::UnifiedIdentity
         | PaExperiment::UnifiedPacked
         | PaExperiment::UnifiedPackedContext
+        | PaExperiment::UnifiedLocalPrefix
+        | PaExperiment::UnifiedLocalKey
         | PaExperiment::UnifiedPackedAggressive => PaExperiment::UnifiedGroups,
         other => other,
     };
     let policy = Policy {
         sparse,
+        completion,
         terminal: matches!(
             experiment,
             PaExperiment::Terminal
@@ -647,6 +667,19 @@ fn visit<T: Radixable<K>, K: RadixKey>(
                 arr, selection, policy, stats, depth, path, cpu,
             );
         }
+    } else if policy.completion == Completion::LocalKey {
+        // Bits above cap are constant within this recursive key interval.
+        // Completing its full converted-key label avoids ordinary small leaves.
+        partition::<T, K, _>(
+            arr,
+            &Identity,
+            Some((p.union ^ p.intersection) & Converted::<T, K>::mask(cap)),
+            policy,
+            true,
+            stats,
+            depth,
+            path,
+        );
     } else if policy.sparse == SparseCompletion::Identity
         && sparse_byte_projection(p.union ^ p.intersection, cap)
     {
@@ -791,7 +824,17 @@ fn partition<T: Radixable<K>, K: RadixKey, C: Classifier<Converted<T, K>>>(
     // distribute owns and releases all scratch before the first recursive call.
     let prepared_mask =
         if policy.prepared_distribution { label_mask } else { None };
-    let passes = if let Some(mask) = prepared_mask {
+    let passes = if policy.completion != Completion::Original {
+        // Every classifier used by these two UnifiedGroups ablations supplies
+        // its exact or conservative variation mask during node preparation.
+        super::local_completion::distribute(
+            arr,
+            &label,
+            label_mask.expect("local completion needs prepared variation"),
+            policy.block,
+            stats,
+        )
+    } else if let Some(mask) = prepared_mask {
         if C::USE_COMPACT_RADIX {
             super::local_distribution::distribute_prepared_packed(
                 arr,
