@@ -1,5 +1,7 @@
 # Conservative PA hardware packing: final independent cohort
 
+The user requested completion of this last attempt and then stopping. This cohort is final: preserve its outcome and stop, without another candidate or threshold revision.
+
 Count-derived completion and its combination are rejected at67925bf. Their module, bucket-length API, policy flag, dispatch methods and tests are removed. This cohort keeps only `Pa_strict`: the6fceaaa checked hardware execution context, with selection requiring at least two saved physical record passes. The rule is a conservative empirical guard after a one-pass saving failed; it is not a throughput theorem. Original PA and the prior kernel remain same-program controls. Root library and frozen Block LSD are unchanged; the experimental block kernel is byte-identical to6fceaaa.
 
 No new completion scheduler, cached key, block capacity change, key sidecar or allocation lifecycle is introduced. Native, hardware-disabled and float correctness must precede timing. Validate stable identities/payloads, special IEEE bit patterns, B3/64/512, and cross-compile AArch64/RISC-V. Cross compilation is not a real-machine performance result.

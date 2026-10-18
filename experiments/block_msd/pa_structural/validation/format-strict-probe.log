@@ -1,0 +1,7 @@
+Warning: can't set `wrap_comments = false`, unstable features are only available in nightly channel.
+Warning: can't set `normalize_doc_attributes = false`, unstable features are only available in nightly channel.
+Warning: can't set `format_strings = true`, unstable features are only available in nightly channel.
+Warning: can't set `struct_lit_single_line = true`, unstable features are only available in nightly channel.
+Warning: can't set `fn_single_line = true`, unstable features are only available in nightly channel.
+Warning: can't set `overflow_delimited_expr = true`, unstable features are only available in nightly channel.
+Warning: can't set `inline_attribute_width = 80`, unstable features are only available in nightly channel.

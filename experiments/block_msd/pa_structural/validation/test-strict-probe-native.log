@@ -1,0 +1,7 @@
+
+running 1 test
+verified partial admission and one-pass rejection
+test partial_packing_requires_two_saved_prefix_passes ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.73s
+

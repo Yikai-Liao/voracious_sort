@@ -1,0 +1,74 @@
+[
+  {
+    "name": "native",
+    "command": [
+      "/root/.cargo/bin/rustc",
+      "--edition=2018",
+      "--test",
+      "tests/strict_projection.rs",
+      "--cfg",
+      "feature=\"frontier_work\"",
+      "--extern",
+      "block_msd_research=/root/code/voracious_sort-pa-execution/experiments/block_msd/target/strict-debug/debug/libblock_msd_research.rlib",
+      "--extern",
+      "voracious_radix_sort=/root/code/voracious_sort-pa-execution/experiments/block_msd/target/strict-debug/debug/deps/libvoracious_radix_sort-f3c704a631242adb.rlib",
+      "-L",
+      "dependency=/root/code/voracious_sort-pa-execution/experiments/block_msd/target/strict-debug/debug/deps",
+      "-o",
+      "/root/code/voracious_sort-pa-execution/experiments/block_msd/pa_structural/validation/strict-probe-native",
+      "-C",
+      "target-cpu=native"
+    ],
+    "features": "frontier_work",
+    "rustflags": "-C target-cpu=native",
+    "test_sha256": "f73702ef6f073b33ba01d574ddd4156c545af73f160e95ff89900b6e930bf030",
+    "binary_sha256": "309198f92118b4c029e4853b5be05929df81845473e3d665887de3bf0cad550d",
+    "artifacts": {
+      "voracious_radix_sort": {
+        "file": "/root/code/voracious_sort-pa-execution/experiments/block_msd/target/strict-debug/debug/deps/libvoracious_radix_sort-f3c704a631242adb.rlib",
+        "sha256": "328edfdd95b8974cb3a4c748cc419ce8cc5e9b67ae05e5dd30215e59e91834eb"
+      },
+      "block_msd_research": {
+        "file": "/root/code/voracious_sort-pa-execution/experiments/block_msd/target/strict-debug/debug/libblock_msd_research.rlib",
+        "sha256": "5a96f73f03944cfaa1eeb374238addf050fe231a8bde37e71dd9f00ed05aae2a"
+      }
+    },
+    "archived_binary": "/root/code/voracious_sort-pa-execution/experiments/block_msd/target/pa-structural/strict-probe-native"
+  },
+  {
+    "name": "disabled",
+    "command": [
+      "/root/.cargo/bin/rustc",
+      "--edition=2018",
+      "--test",
+      "tests/strict_projection.rs",
+      "--cfg",
+      "feature=\"frontier_work\"",
+      "--extern",
+      "block_msd_research=/root/code/voracious_sort-pa-execution/experiments/block_msd/target/execution-disabled/debug/libblock_msd_research.rlib",
+      "--extern",
+      "voracious_radix_sort=/root/code/voracious_sort-pa-execution/experiments/block_msd/target/execution-disabled/debug/deps/libvoracious_radix_sort-38581e9e3b19cdc4.rlib",
+      "-L",
+      "dependency=/root/code/voracious_sort-pa-execution/experiments/block_msd/target/execution-disabled/debug/deps",
+      "-o",
+      "/root/code/voracious_sort-pa-execution/experiments/block_msd/pa_structural/validation/strict-probe-disabled",
+      "--cfg",
+      "feature=\"projection_portable\""
+    ],
+    "features": "frontier_work,projection_portable",
+    "rustflags": "",
+    "test_sha256": "f73702ef6f073b33ba01d574ddd4156c545af73f160e95ff89900b6e930bf030",
+    "binary_sha256": "e52a5052eab3040b16c697b92083d4b4df44fc4f18c1b45b9c5479413b5003d1",
+    "artifacts": {
+      "voracious_radix_sort": {
+        "file": "/root/code/voracious_sort-pa-execution/experiments/block_msd/target/execution-disabled/debug/deps/libvoracious_radix_sort-38581e9e3b19cdc4.rlib",
+        "sha256": "950d5c9c66cdd83d9412580a1e4b8891a825603fd78b89677e29f8892568ebf0"
+      },
+      "block_msd_research": {
+        "file": "/root/code/voracious_sort-pa-execution/experiments/block_msd/target/execution-disabled/debug/libblock_msd_research.rlib",
+        "sha256": "9a8c34980bc867f38381d36f838188d21d1e8f21c851a953082f63b22c106bc1"
+      }
+    },
+    "archived_binary": "/root/code/voracious_sort-pa-execution/experiments/block_msd/target/pa-structural/strict-probe-disabled"
+  }
+]
