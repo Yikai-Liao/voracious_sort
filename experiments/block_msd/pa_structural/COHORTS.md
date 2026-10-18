@@ -25,4 +25,6 @@ Cohorts are not pooled across executable hashes. Historical names containing `fi
 
 | local-native/generic-* (baaa505) | New stable count-boundary/local-LSD variants from e86ca7a; correctness passed; eight-cell native float screen and eight independent confirmations reject both methods; two Work cells identify added classification/compaction. All larger scopes stopped. See LOCAL_COMPLETION_PLAN.md and LOCAL_COMPLETION_VALIDATION.md. |
 
+| leaf-layout-native-float-first (518c6f2) | PA bounded cached leaves and caller-side block-capacity ablations plus their combination. Native library61 and float6 correctness checks pass; first eight-cell native screen and independent repeats reject the combined candidate. Remaining scopes stopped; isolated capacity control is exploratory only. Existing Block LSD kernel code is unchanged. See LEAF_LAYOUT_VALIDATION.md. |
+
 The current source uses only a hardware token for compressed labels, delegates extraction to pinned hakmem, and otherwise keeps ordinary PA. Final validation requires its own immutable executables; historical hardware or software results are not transferred to it.

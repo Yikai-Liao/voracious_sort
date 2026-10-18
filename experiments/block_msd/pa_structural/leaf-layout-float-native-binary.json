@@ -1,0 +1,23 @@
+{
+  "source_hash_version": 2,
+  "source_commit": "518c6f271e27e3d54ac84cb0ea0d251d1e886873",
+  "sha256": "491f60d1490d92a2c6c50953a427dd665533295eef5ad881ea7e214dfd8944d6",
+  "source_sha256": "14aaf833d7cbc3ffa0efa22587db21dee5f5265a81ef1e1262f317675516d279",
+  "base": "745cea6ab21030710cb036f88fa757505ef1990b",
+  "rustflags": "-C target-cpu=native",
+  "features": "none",
+  "profile": "release",
+  "rustc": "rustc 1.98.1 (48a229cea 2026-09-01)\nbinary: rustc\ncommit-hash: 48a229ceaefd4985c50990b14116b6d856af0985\ncommit-date: 2026-09-01\nhost: x86_64-unknown-linux-gnu\nrelease: 1.98.1\nLLVM version: 22.1.8\n",
+  "cargo_incremental": true,
+  "extra_sources": {
+    "experiments/block_msd/pa_structural/float-bench/Cargo.toml": "cb7cb16bd98fa6bc663ae735324264204e63d8730cd4052a9a5ef103e36cd344",
+    "experiments/block_msd/pa_structural/float-bench/Cargo.lock": "93e8ed80cac2efd43fcbd324ee5c51f6c7b4492abb6bbcd7ccff097b3a6ddca3",
+    "experiments/block_msd/pa_structural/float-bench/src/main.rs": "e1eeea9af66997dbdf04baa39d305d4feb3d2f7115771e79f8d723fd905b517e",
+    "experiments/block_msd/pa_structural/float-bench/src/floats.rs": "42c1b5c753d93ea6b8424d52c2ef41afce183d41defed97780d8ddf05fdf32fa",
+    "experiments/block_msd/pa_structural/FLOAT_PLAN.md": "9b86e300d0dd6c2151740a36acf565f015f5c9f2f2141feb38b8f5765833c33d",
+    "experiments/block_msd/pa_structural/LEAF_LAYOUT_PLAN.md": "4b3c04464c25576f846abad54ab358a519f61ef5293735cc175e21817d7b0709",
+    "experiments/block_msd/pa_structural/leaf-layout-screen.py": "2cc8fc4c35a48cfa81275dd7a488f7a8ca625f4756dd9c96b0bc206552c07f1e",
+    "experiments/block_msd/pa_structural/float-run.py": "5a086a917da7f91ab30a4b93221d467900fdbf0f0913b48d7bd0cde794293e3a",
+    "experiments/block_msd/pa_structural/run.py": "31c4fb3a19f1f15059a43d033f869fad762bb1bf9801bf2fbbe95e4663577d72"
+  }
+}

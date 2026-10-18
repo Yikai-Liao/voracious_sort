@@ -1,0 +1,79 @@
+{
+  "source_commit": "518c6f271e27e3d54ac84cb0ea0d251d1e886873",
+  "source_sha256": "14aaf833d7cbc3ffa0efa22587db21dee5f5265a81ef1e1262f317675516d279",
+  "processes": [
+    {
+      "metadata": "pa_structural/measurements/leaf-confirm-combined-f32-uniform.json",
+      "rows": 64,
+      "rss_kib": 41500,
+      "major_faults": 0,
+      "host_swapin_pages": 0,
+      "host_swapout_pages": 0
+    },
+    {
+      "metadata": "pa_structural/measurements/leaf-confirm-combined-f32id16-sparse16.json",
+      "rows": 64,
+      "rss_kib": 64904,
+      "major_faults": 0,
+      "host_swapin_pages": 0,
+      "host_swapout_pages": 0
+    },
+    {
+      "metadata": "pa_structural/measurements/leaf-confirm-combined-f32id16-uniform.json",
+      "rows": 64,
+      "rss_kib": 64644,
+      "major_faults": 0,
+      "host_swapin_pages": 0,
+      "host_swapout_pages": 0
+    },
+    {
+      "metadata": "pa_structural/measurements/leaf-confirm-combined-f64-uniform.json",
+      "rows": 64,
+      "rss_kib": 41564,
+      "major_faults": 0,
+      "host_swapin_pages": 0,
+      "host_swapout_pages": 0
+    },
+    {
+      "metadata": "pa_structural/measurements/leaf-layout-native-float-first-b512.json",
+      "rows": 1600,
+      "rss_kib": 197784,
+      "major_faults": 0,
+      "host_swapin_pages": 118,
+      "host_swapout_pages": 0
+    }
+  ],
+  "files": {
+    "pa_structural/LEAF_LAYOUT_VALIDATION.md": "26e738dca31379ddd282d85db81fdccee09ca930128b97c99b326ec780c82195",
+    "pa_structural/leaf-confirm-combined-f32-uniformaudit.json": "fd5a40fd0ab226939389a607e925a4c88436cfabcc903ef0a63526c62c07af58",
+    "pa_structural/leaf-confirm-combined-f32id16-sparse16audit.json": "cd5fe938ac005aadf60fd18a3a8522a6f0d2ff1071fa97efd1dc1bdc1583dfdb",
+    "pa_structural/leaf-confirm-combined-f32id16-uniformaudit.json": "0dcee200f28e2a23b80f0528a2d253ffe0e5a53f44de527d6ac7c09ad9d255e0",
+    "pa_structural/leaf-confirm-combined-f64-uniformaudit.json": "246ba4fcf34b1bc0594b6b0b62e95839c804dd344ef28a394813520fa37102ce",
+    "pa_structural/leaf-layout-float-native-binary.json": "a5fd66be00a898bdea5f2e08c853f1f6b28524a16877d049627276d68029aad0",
+    "pa_structural/leaf-layout-native-float-first-b512audit.json": "a7cd651ca579540980143da22f9b0f5263eb0c69ad41beb990dc8ec181a35458",
+    "pa_structural/leaf-layout-native-float-first-b512summary.csv": "1b5dd14e765bbbb5d52dcc97133608241d90758789d80bb5947f9a01993b5006",
+    "pa_structural/leaf-layout-native-float-first-combined-audit.json": "1c372da52e69fe774c6284e59bd865eeca292d7d55ab1859a8caed543cc24155",
+    "pa_structural/leaf-layout-native-float-first-leaf-audit.json": "af597403d290d547394514507e31d11c2b84c8e6794fa63b47463f836defe3fb",
+    "pa_structural/leaf-layout-native-float-first-odd-audit.json": "a7cd651ca579540980143da22f9b0f5263eb0c69ad41beb990dc8ec181a35458",
+    "pa_structural/leaf-layout-screen.py": "2cc8fc4c35a48cfa81275dd7a488f7a8ca625f4756dd9c96b0bc206552c07f1e",
+    "pa_structural/measurements/leaf-confirm-combined-f32-uniform.csv": "8f5072dfbda2d0b49613e8ecb8002f521a2d702b8167395db0b34b02fab05f0d",
+    "pa_structural/measurements/leaf-confirm-combined-f32-uniform.json": "2b0d0c4ae946532174cd763122563e57bd9bc55f3e3c9a94cd8a2e06f2bc8f5e",
+    "pa_structural/measurements/leaf-confirm-combined-f32-uniform.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "pa_structural/measurements/leaf-confirm-combined-f32id16-sparse16.csv": "37369617a42bd7908777a244edaca5c4de058993719f9d1c650154a7d110eef6",
+    "pa_structural/measurements/leaf-confirm-combined-f32id16-sparse16.json": "6028855749ff9958a0dbd55067777948b1624fd0ff125d6d81f61ca276e3d9a9",
+    "pa_structural/measurements/leaf-confirm-combined-f32id16-sparse16.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "pa_structural/measurements/leaf-confirm-combined-f32id16-uniform.csv": "3003aef9f37eed805c342dc779b12085191a2b9bb6b9e75c36d7f02fab53f6dd",
+    "pa_structural/measurements/leaf-confirm-combined-f32id16-uniform.json": "fa85a48de5e40fdf83fc9c3c931655f3eff35fa17f1cba81da43aa4eeb4e7fda",
+    "pa_structural/measurements/leaf-confirm-combined-f32id16-uniform.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "pa_structural/measurements/leaf-confirm-combined-f64-uniform.csv": "8c02468d1a1e99ec76f590350293f17acc0b7f97f3532a60b05be7c767bc012d",
+    "pa_structural/measurements/leaf-confirm-combined-f64-uniform.json": "d0d78f38ceb44cf81736e6620061ed8b34f1599a2bf65e1cddee24eca1d3b39e",
+    "pa_structural/measurements/leaf-confirm-combined-f64-uniform.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "pa_structural/measurements/leaf-layout-native-float-first-b512.csv": "d01b27d1d8cf476c380611e538c4e94625c6834a518c5225eac42196a76917f5",
+    "pa_structural/measurements/leaf-layout-native-float-first-b512.json": "50b01de0e4e96ea06c8b9b058eacffd239db8d0eed4ee2710dd2195cef18a2e2",
+    "pa_structural/measurements/leaf-layout-native-float-first-b512.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "pa_structural/validation/build-leaf-layout-float-native.log": "e10d7605e4a9fb005add33f48f00e4407af513bc4b78846678b24f09a479eee8",
+    "pa_structural/validation/format-leaf.log": "f8d7a63d2a118fa218774ba66a90b94e6d214b88e30764eb06f39e2093f4d13e",
+    "pa_structural/validation/test-leaf-layout-float.log": "0ef2334e733faddb2537d7869321a6814a6f367d7987401768c7517595abab43",
+    "pa_structural/validation/test-leaf-layout-lib.log": "94b8aac3ac88f7a0ade37625bfb53825b3f6654d95aefe08a52a427509a524a8"
+  }
+}

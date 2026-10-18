@@ -1,6 +1,8 @@
 # PA 优化交付报告
 
-当前实验源码为 `baaa505`（实现提交 `e86ca7a`），源文件指纹为 `f25c7179804be7a2b4cb85d3c93aeca3ab3cfc73c587c58e50c387b215966586`。新增 `Pa_local_prefix` 与 `Pa_local_key`，借鉴 Rollercoaster 的精确计数边界和 MSD 后局部 LSD 完成，独立八场景筛选与反向复测已确认两条路线均有实质退化，已拒绝并停止扩展，见 [LOCAL_COMPLETION_PLAN.md](LOCAL_COMPLETION_PLAN.md) 与 [LOCAL_COMPLETION_VALIDATION.md](LOCAL_COMPLETION_VALIDATION.md)。
+当前 PA 实验源码为 `518c6f2`，源文件指纹 `14aaf833d7cbc3ffa0efa22587db21dee5f5265a81ef1e1262f317675516d279`。已移除失败的局部完成调度，回到 `6fceaaa` 的 PA 路线，独立检查小叶缓存收尾、PA 调用侧块容量及其组合。小叶路径保持原来的分区、叶长与全部 Work 计数；块容量实验仅调整 PA 传给既有内核的容量参数。Block LSD 内核实现未修改。native 61 项库测试和 6 项浮点 harness 测试通过；第一批 8 场景与独立复测确认组合候选在三个均匀输入场景实质退化，已拒绝并停止扩大筛选，见 [LEAF_LAYOUT_VALIDATION.md](LEAF_LAYOUT_VALIDATION.md)。
+
+前一轮 `baaa505` / `e86ca7a` 的 `Pa_local_prefix` 与 `Pa_local_key` 借鉴 Rollercoaster 的计数边界和 MSD 后局部 LSD 完成。八场景筛选与反向复测确认两条 PA 策略均有实质退化，已拒绝并从活动源码移除，见 [LOCAL_COMPLETION_VALIDATION.md](LOCAL_COMPLETION_VALIDATION.md)。这些结果说明新 PA 策略尚不能统一使用，不构成对未改动 Block LSD 内核的泛化性判断。
 
 上一轮 `6fceaaa` / `Pa_kernel` 的**整数验收已完成，整体候选被浮点复测拒绝**：f32 带身份/payload 的 sparse16/B512 独立复测仍慢 16.3%。下文的完整整数矩阵及浮点失败均属于该轮源码 `eca6b3cf68617eaec8de46fadb300e38cdcdc836fdd29700c62338daa07b7636`，不转用为新实验的通过证据。
 

@@ -1,0 +1,55 @@
+{
+  "selection": {
+    "prefix": "leaf-confirm-combined-f32id16-sparse16",
+    "exclude": []
+  },
+  "candidate": "Pa_odd_cached",
+  "elf_sha256": "491f60d1490d92a2c6c50953a427dd665533295eef5ad881ea7e214dfd8944d6",
+  "cells": 1,
+  "rows": 64,
+  "comparisons": {
+    "Pa_unified_groups_t16777216": {
+      "median_wins": 0,
+      "p90_wins": 0,
+      "p10_losses": 0
+    }
+  },
+  "regression_signals": [],
+  "results": [
+    {
+      "cell": [
+        "f32_id16",
+        "sparse16",
+        "1048576",
+        "512",
+        "42"
+      ],
+      "source": "leaf-confirm-combined-f32id16-sparse16.csv",
+      "candidate_ms": 18.42412025,
+      "Pa_unified_groups_t16777216": {
+        "median": 1.0688433843228564,
+        "p10": 0.9789973237276586,
+        "p90": 1.1261522883191124,
+        "slower": 13,
+        "ms": 17.181318,
+        "aa": {
+          "median": 1.0192767151425963,
+          "p10": 0.9552692367638929,
+          "p90": 1.1260896985416564
+        }
+      },
+      "Pa_odd_cached": {
+        "median": 1.0,
+        "p10": 1.0,
+        "p90": 1.0,
+        "slower": 0,
+        "ms": 18.42412025,
+        "aa": {
+          "median": 1.0281382287190781,
+          "p10": 0.9221149171637636,
+          "p90": 1.1108461681716086
+        }
+      }
+    }
+  ]
+}
