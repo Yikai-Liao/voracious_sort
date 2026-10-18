@@ -36,15 +36,9 @@ pub enum PaExperiment {
     UnifiedPacked,
     UnifiedPackedContext,
     UnifiedPackedAggressive,
-    UnifiedLocalPrefix,
-    UnifiedLocalKey,
-}
-
-#[derive(Clone, Copy, PartialEq)]
-enum Completion {
-    Original,
-    LocalPrefix,
-    LocalKey,
+    UnifiedCachedLeaf,
+    UnifiedOddBlocks,
+    UnifiedOddCachedLeaf,
 }
 
 #[derive(Clone, Copy, PartialEq)]
@@ -77,7 +71,7 @@ struct Policy {
     local_workspace_threshold: usize,
     block: usize,
     sparse: SparseCompletion,
-    completion: Completion,
+    cached_leaf: bool,
 }
 
 pub fn sort_pa_experiment<T: Radixable<K>, K: RadixKey>(
@@ -102,16 +96,27 @@ where
     Converted<T, K>: NativeKey,
 {
     assert!(block > 0);
-    let completion = match experiment {
-        PaExperiment::UnifiedLocalPrefix => Completion::LocalPrefix,
-        PaExperiment::UnifiedLocalKey => Completion::LocalKey,
-        _ => Completion::Original,
+    let cached_leaf = matches!(
+        experiment,
+        PaExperiment::UnifiedCachedLeaf | PaExperiment::UnifiedOddCachedLeaf
+    );
+    // Independent layout experiment: use the largest odd block capacity not
+    // exceeding the supplied limit. This changes block stride without adding
+    // record scratch; directory size still follows the actual block count.
+    let block = if matches!(
+        experiment,
+        PaExperiment::UnifiedOddBlocks | PaExperiment::UnifiedOddCachedLeaf
+    ) {
+        block - usize::from(block % 2 == 0)
+    } else {
+        block
     };
     let sparse = match experiment {
         PaExperiment::UnifiedPacked => SparseCompletion::Packed,
         PaExperiment::UnifiedPackedContext
-        | PaExperiment::UnifiedLocalPrefix
-        | PaExperiment::UnifiedLocalKey => SparseCompletion::PackedContext,
+        | PaExperiment::UnifiedCachedLeaf
+        | PaExperiment::UnifiedOddBlocks
+        | PaExperiment::UnifiedOddCachedLeaf => SparseCompletion::PackedContext,
         PaExperiment::UnifiedPackedAggressive => {
             SparseCompletion::PackedAggressive
         },
@@ -123,14 +128,15 @@ where
         PaExperiment::UnifiedIdentity
         | PaExperiment::UnifiedPacked
         | PaExperiment::UnifiedPackedContext
-        | PaExperiment::UnifiedLocalPrefix
-        | PaExperiment::UnifiedLocalKey
+        | PaExperiment::UnifiedCachedLeaf
+        | PaExperiment::UnifiedOddBlocks
+        | PaExperiment::UnifiedOddCachedLeaf
         | PaExperiment::UnifiedPackedAggressive => PaExperiment::UnifiedGroups,
         other => other,
     };
     let policy = Policy {
         sparse,
-        completion,
+        cached_leaf,
         terminal: matches!(
             experiment,
             PaExperiment::Terminal
@@ -517,6 +523,10 @@ fn visit<T: Radixable<K>, K: RadixKey>(
     }
     work! { stats.max_depth = stats.max_depth.max(depth); }
     if arr.len() <= 128 {
+        if policy.cached_leaf {
+            finish_cached_leaf::<T, K>(arr, stats, depth);
+            return;
+        }
         work! { stats.leaves += 1; stats.leaf_records += arr.len(); stats.leaf_lengths[arr.len()] += 1; }
         if policy.stable_leaf {
             arr.sort_by_key(|item| item.into_key_type());
@@ -667,19 +677,6 @@ fn visit<T: Radixable<K>, K: RadixKey>(
                 arr, selection, policy, stats, depth, path, cpu,
             );
         }
-    } else if policy.completion == Completion::LocalKey {
-        // Bits above cap are constant within this recursive key interval.
-        // Completing its full converted-key label avoids ordinary small leaves.
-        partition::<T, K, _>(
-            arr,
-            &Identity,
-            Some((p.union ^ p.intersection) & Converted::<T, K>::mask(cap)),
-            policy,
-            true,
-            stats,
-            depth,
-            path,
-        );
     } else if policy.sparse == SparseCompletion::Identity
         && sparse_byte_projection(p.union ^ p.intersection, cap)
     {
@@ -824,17 +821,7 @@ fn partition<T: Radixable<K>, K: RadixKey, C: Classifier<Converted<T, K>>>(
     // distribute owns and releases all scratch before the first recursive call.
     let prepared_mask =
         if policy.prepared_distribution { label_mask } else { None };
-    let passes = if policy.completion != Completion::Original {
-        // Every classifier used by these two UnifiedGroups ablations supplies
-        // its exact or conservative variation mask during node preparation.
-        super::local_completion::distribute(
-            arr,
-            &label,
-            label_mask.expect("local completion needs prepared variation"),
-            policy.block,
-            stats,
-        )
-    } else if let Some(mask) = prepared_mask {
+    let passes = if let Some(mask) = prepared_mask {
         if C::USE_COMPACT_RADIX {
             super::local_distribution::distribute_prepared_packed(
                 arr,
@@ -932,20 +919,45 @@ fn partition<T: Radixable<K>, K: RadixKey, C: Classifier<Converted<T, K>>>(
             work! { stats.runs_records += end - start; }
             if end - start > 1 && remaining > 0 {
                 work! { stats.unresolved_records += end - start; }
-                visit::<T, K>(
-                    &mut arr[start..end],
-                    remaining,
-                    policy,
-                    end - start > parent_len / 2,
-                    stats,
-                    depth + 1,
-                    path + passes,
-                );
+                if policy.cached_leaf && end - start <= 128 {
+                    finish_cached_leaf::<T, K>(
+                        &mut arr[start..end],
+                        stats,
+                        depth + 1,
+                    );
+                } else {
+                    visit::<T, K>(
+                        &mut arr[start..end],
+                        remaining,
+                        policy,
+                        end - start > parent_len / 2,
+                        stats,
+                        depth + 1,
+                        path + passes,
+                    );
+                }
             }
             start = end;
         }
     }
     work! { stats.label_evals += label_evals.get(); }
+}
+
+#[inline(always)]
+fn finish_cached_leaf<T: Radixable<K>, K: RadixKey>(
+    arr: &mut [T],
+    stats: &mut Work,
+    depth: usize,
+) where
+    Converted<T, K>: NativeKey,
+{
+    work! {
+        stats.max_depth = stats.max_depth.max(depth);
+        stats.leaves += 1;
+        stats.leaf_records += arr.len();
+        stats.leaf_lengths[arr.len()] += 1;
+    }
+    super::leaf_cached::sort::<T, K>(arr);
 }
 
 #[inline(never)]

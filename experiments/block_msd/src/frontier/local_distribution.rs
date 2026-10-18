@@ -327,7 +327,7 @@ fn distribute_impl<
     passes
 }
 
-pub(super) fn dense_fits<T>(length: usize, levels: usize, budget: usize) -> bool {
+fn dense_fits<T>(length: usize, levels: usize, budget: usize) -> bool {
     length
         .checked_mul(std::mem::size_of::<T>())
         .and_then(|bytes| {
@@ -406,12 +406,7 @@ fn finish_label<
 /// In each processed byte, every digit is (digit & v.byte) | c for one common
 /// c; removing c preserves order and equality in that byte. Unprocessed bytes
 /// need not be constant. Normalized active digits are at most v.byte.
-pub(super) fn block_bytes<
-    T: Copy,
-    U: NativeKey,
-    F: Labeler<T, U>,
-    const REDUCED: bool,
->(
+fn block_bytes<T: Copy, U: NativeKey, F: Labeler<T, U>, const REDUCED: bool>(
     arr: &mut [T],
     label: &F,
     levels: usize,

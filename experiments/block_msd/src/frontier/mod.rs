@@ -8,7 +8,7 @@ use std::{mem::MaybeUninit, ptr};
 use voracious_radix_sort::{RadixKey, Radixable};
 mod block;
 mod labeler;
-mod local_completion;
+mod leaf_cached;
 mod local_distribution;
 mod ordered_tiled;
 mod pa;
