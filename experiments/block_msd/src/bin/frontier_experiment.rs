@@ -307,7 +307,7 @@ const METHODS: &[&str] = &[
     "Pa_packed_aggressive",
     "Pa_packed",
     "Pa_kernel",
-    "Pa_odd_blocks",
+    "Pa_plan",
     "Pa_identity",
     "Pa_ref",
     "Pa_terminal",
@@ -493,7 +493,7 @@ where
             | "Pa_identity"
             | "Pa_packed"
             | "Pa_kernel"
-            | "Pa_odd_blocks"
+            | "Pa_plan"
     ) {
         local_workspace_threshold = 16 * 1024 * 1024;
     }
@@ -525,7 +525,7 @@ where
         "Pa_packed_aggressive"
         | "Pa_packed"
         | "Pa_kernel"
-        | "Pa_odd_blocks"
+        | "Pa_plan"
         | "Pa_identity"
         | "Pa_ref"
         | "Pa_terminal"
@@ -559,7 +559,7 @@ where
                 "Pa_packed_aggressive" => UnifiedPackedAggressive,
                 "Pa_packed" => UnifiedPacked,
                 "Pa_kernel" => UnifiedPackedContext,
-                "Pa_odd_blocks" => UnifiedOddBlocks,
+                "Pa_plan" => UnifiedPackedPlan,
                 "Pa_identity" => UnifiedIdentity,
                 "Pa_ref" => Reference,
                 "Pa_terminal" => Terminal,

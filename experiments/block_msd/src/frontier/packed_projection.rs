@@ -138,6 +138,7 @@ pub(super) struct Packed<
     L,
     I = hakmem::isa::Native,
     const CONTEXT: bool = false,
+    const PLAN: bool = false,
 > {
     mask: U,
     bits: usize,
@@ -146,8 +147,13 @@ pub(super) struct Packed<
     _label: PhantomData<L>,
 }
 
-impl<U: NativeKey, L: NativeKey, I: hakmem::isa::Isa, const CONTEXT: bool>
-    Packed<U, L, I, CONTEXT>
+impl<
+        U: NativeKey,
+        L: NativeKey,
+        I: hakmem::isa::Isa,
+        const CONTEXT: bool,
+        const PLAN: bool,
+    > Packed<U, L, I, CONTEXT, PLAN>
 {
     pub(super) fn with_isa(selection: Selection<U>, cpu: I) -> Self {
         assert!(selection.bits <= L::BITS && selection.bits <= 32);
@@ -177,11 +183,17 @@ impl<U: NativeKey, L: NativeKey> Packed<U, L> {
     }
 }
 
-impl<U: NativeKey, L: NativeKey, I: hakmem::isa::Isa, const CONTEXT: bool>
-    Classifier<U> for Packed<U, L, I, CONTEXT>
+impl<
+        U: NativeKey,
+        L: NativeKey,
+        I: hakmem::isa::Isa,
+        const CONTEXT: bool,
+        const PLAN: bool,
+    > Classifier<U> for Packed<U, L, I, CONTEXT, PLAN>
 {
     type Label = L;
     const USE_COMPACT_RADIX: bool = true;
+    const NORMALIZED: bool = PLAN;
     #[inline]
     fn label(&self, key: U) -> L {
         L::from_u128(self.gather(key) as u128)

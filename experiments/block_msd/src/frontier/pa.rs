@@ -36,7 +36,7 @@ pub enum PaExperiment {
     UnifiedPacked,
     UnifiedPackedContext,
     UnifiedPackedAggressive,
-    UnifiedOddBlocks,
+    UnifiedPackedPlan,
 }
 
 #[derive(Clone, Copy, PartialEq)]
@@ -45,6 +45,7 @@ enum SparseCompletion {
     Identity,
     Packed,
     PackedContext,
+    PackedPlan,
     PackedAggressive,
 }
 
@@ -93,18 +94,10 @@ where
     Converted<T, K>: NativeKey,
 {
     assert!(block > 0);
-    // PA caller-side capacity experiment: use the largest odd capacity within
-    // the supplied limit for scratch, directory and all recursive calls.
-    let block = if matches!(experiment, PaExperiment::UnifiedOddBlocks) {
-        block - usize::from(block % 2 == 0)
-    } else {
-        block
-    };
     let sparse = match experiment {
         PaExperiment::UnifiedPacked => SparseCompletion::Packed,
-        PaExperiment::UnifiedPackedContext | PaExperiment::UnifiedOddBlocks => {
-            SparseCompletion::PackedContext
-        },
+        PaExperiment::UnifiedPackedContext => SparseCompletion::PackedContext,
+        PaExperiment::UnifiedPackedPlan => SparseCompletion::PackedPlan,
         PaExperiment::UnifiedPackedAggressive => {
             SparseCompletion::PackedAggressive
         },
@@ -116,7 +109,7 @@ where
         PaExperiment::UnifiedIdentity
         | PaExperiment::UnifiedPacked
         | PaExperiment::UnifiedPackedContext
-        | PaExperiment::UnifiedOddBlocks
+        | PaExperiment::UnifiedPackedPlan
         | PaExperiment::UnifiedPackedAggressive => PaExperiment::UnifiedGroups,
         other => other,
     };
@@ -607,6 +600,7 @@ fn visit<T: Radixable<K>, K: RadixKey>(
         policy.sparse,
         SparseCompletion::Packed
             | SparseCompletion::PackedContext
+            | SparseCompletion::PackedPlan
             | SparseCompletion::PackedAggressive
     ) && approved_band.is_none()
     {
@@ -781,7 +775,7 @@ impl<U: NativeKey> Classifier<U> for EqualSplit<U> {
 
 fn partition<T: Radixable<K>, K: RadixKey, C: Classifier<Converted<T, K>>>(
     arr: &mut [T],
-    classifier: &C,
+    classifier: C,
     label_mask: Option<C::Label>,
     policy: Policy,
     terminal: bool,
@@ -890,7 +884,7 @@ fn partition<T: Radixable<K>, K: RadixKey, C: Classifier<Converted<T, K>>>(
             let (end, remaining) = label.in_context(|| {
                 let current = label.classify(&arr[start]);
                 let remaining =
-                    classifier.remaining(arr[start].into_key_type());
+                    label.classifier.remaining(arr[start].into_key_type());
                 let mut end = start + 1;
                 while end < arr.len() && label.classify(&arr[end]) == current {
                     end += 1;
@@ -929,12 +923,16 @@ fn partition_packed<T: Radixable<K>, K: RadixKey, L: NativeKey>(
     Converted<T, K>: NativeKey,
 {
     hakmem::isa::Isa::run(cpu, |cpu| {
-        if policy.sparse == SparseCompletion::PackedContext {
-            partition_packed_with_isa::<T, K, L, _, true>(
+        if policy.sparse == SparseCompletion::PackedPlan {
+            partition_packed_with_isa::<T, K, L, _, true, true>(
+                arr, selection, policy, stats, depth, path, cpu,
+            )
+        } else if policy.sparse == SparseCompletion::PackedContext {
+            partition_packed_with_isa::<T, K, L, _, true, false>(
                 arr, selection, policy, stats, depth, path, cpu,
             )
         } else {
-            partition_packed_with_isa::<T, K, L, _, false>(
+            partition_packed_with_isa::<T, K, L, _, false, false>(
                 arr, selection, policy, stats, depth, path, cpu,
             )
         }
@@ -947,6 +945,7 @@ fn partition_packed_with_isa<
     L: NativeKey,
     I: hakmem::isa::Isa,
     const CONTEXT: bool,
+    const PLAN: bool,
 >(
     arr: &mut [T],
     selection: super::packed_projection::Selection<Converted<T, K>>,
@@ -960,18 +959,27 @@ fn partition_packed_with_isa<
 {
     let terminal = selection.remaining == 0;
     let projection =
-        super::packed_projection::Packed::<_, L, _, CONTEXT>::with_isa(
+        super::packed_projection::Packed::<_, L, _, CONTEXT, PLAN>::with_isa(
             selection, cpu,
         );
     work! { stats.projection_nodes += 1; stats.projection_records += arr.len(); }
-    partition::<T, K, _>(
-        arr,
-        &projection,
-        Some(projection.variation()),
-        policy,
-        terminal,
-        stats,
-        depth,
-        path,
-    );
+    let variation = Some(projection.variation());
+    if PLAN {
+        // Give the hot record adapter the fixed plan itself. A borrowed plan
+        // behind another adapter permits record writes to force pointer reloads.
+        partition::<T, K, _>(
+            arr, projection, variation, policy, terminal, stats, depth, path,
+        );
+    } else {
+        partition::<T, K, _>(
+            arr,
+            &projection,
+            variation,
+            policy,
+            terminal,
+            stats,
+            depth,
+            path,
+        );
+    }
 }

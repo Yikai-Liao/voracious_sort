@@ -420,48 +420,58 @@ fn block_bytes<T: Copy, U: NativeKey, F: Labeler<T, U>, const REDUCED: bool>(
     } else {
         255
     };
-    if maximum < 255 {
+    if maximum < 255 && !F::NORMALIZED {
         let normalized = Masked { labeler: label, mask: variation };
-        let mut sorter = block::Sorter::new(arr, maximum + 1, block_size);
-        for byte in 0..levels {
-            if variation.byte(byte) != 0 {
-                if grouped && variation.byte(byte).is_power_of_two() {
-                    sorter.step_grouped(
-                        &normalized,
-                        byte,
-                        variation.byte(byte) as u8,
-                    );
-                } else {
-                    sorter.step(&normalized, byte);
-                }
-            }
-        }
-        sorter.compact();
-        work! {
-            stats.compact_records += sorter.compact_records;
-            stats.tail_records += sorter.tail_records;
-        }
+        block_steps(
+            arr,
+            &normalized,
+            levels,
+            variation,
+            maximum + 1,
+            block_size,
+            grouped,
+            stats,
+        );
     } else {
-        // Ordinary full-byte labels keep the original extraction hot loop.
-        let mut sorter = block::Sorter::new(arr, 256, block_size);
-        for byte in 0..levels {
-            if variation.byte(byte) != 0 {
-                if grouped && variation.byte(byte).is_power_of_two() {
-                    sorter.step_grouped(
-                        label,
-                        byte,
-                        variation.byte(byte) as u8,
-                    );
-                } else {
-                    sorter.step(label, byte);
-                }
+        block_steps(
+            arr,
+            label,
+            levels,
+            variation,
+            maximum + 1,
+            block_size,
+            grouped,
+            stats,
+        );
+    }
+}
+
+// Normalization selects the label adapter once; all callers retain the same
+// allocation, byte order, scatter and compaction protocol.
+fn block_steps<T: Copy, U: NativeKey, F: Labeler<T, U>>(
+    arr: &mut [T],
+    label: &F,
+    levels: usize,
+    variation: U,
+    radix: usize,
+    block_size: usize,
+    grouped: bool,
+    stats: &mut Work,
+) {
+    let mut sorter = block::Sorter::new(arr, radix, block_size);
+    for byte in 0..levels {
+        if variation.byte(byte) != 0 {
+            if grouped && variation.byte(byte).is_power_of_two() {
+                sorter.step_grouped(label, byte, variation.byte(byte) as u8);
+            } else {
+                sorter.step(label, byte);
             }
         }
-        sorter.compact();
-        work! {
-            stats.compact_records += sorter.compact_records;
-            stats.tail_records += sorter.tail_records;
-        }
+    }
+    sorter.compact();
+    work! {
+        stats.compact_records += sorter.compact_records;
+        stats.tail_records += sorter.tail_records;
     }
 }
 

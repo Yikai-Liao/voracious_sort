@@ -200,7 +200,7 @@ fn recursive_identity_and_payload_matrix() {
                 PaExperiment::UnifiedIdentity,
                 PaExperiment::UnifiedPacked,
                 PaExperiment::UnifiedPackedContext,
-                PaExperiment::UnifiedOddBlocks,
+                PaExperiment::UnifiedPackedPlan,
                 PaExperiment::UnifiedSampled,
                 PaExperiment::UnifiedReduced,
                 PaExperiment::UnifiedCandidate,
@@ -280,7 +280,7 @@ fn pa_new_policies_preserve_converted_float_order() {
         PaExperiment::UnifiedIdentity,
         PaExperiment::UnifiedPacked,
         PaExperiment::UnifiedPackedContext,
-        PaExperiment::UnifiedOddBlocks,
+        PaExperiment::UnifiedPackedPlan,
         PaExperiment::UnifiedSampled,
         PaExperiment::UnifiedReduced,
         PaExperiment::UnifiedCandidate,
@@ -374,7 +374,7 @@ fn native_small_integer_widths() {
         PaExperiment::UnifiedIdentity,
         PaExperiment::UnifiedPacked,
         PaExperiment::UnifiedPackedContext,
-        PaExperiment::UnifiedOddBlocks,
+        PaExperiment::UnifiedPackedPlan,
         PaExperiment::UnifiedSampled,
         PaExperiment::UnifiedReduced,
         PaExperiment::UnifiedCandidate,
@@ -452,7 +452,7 @@ fn block_tail_sizes_and_large_workspace() {
             PaExperiment::UnifiedIdentity,
             PaExperiment::UnifiedPacked,
             PaExperiment::UnifiedPackedContext,
-            PaExperiment::UnifiedOddBlocks,
+            PaExperiment::UnifiedPackedPlan,
             PaExperiment::UnifiedSampled,
             PaExperiment::UnifiedReduced,
             PaExperiment::UnifiedCandidate,
@@ -728,7 +728,7 @@ fn structural_projection_bit_embeddings_and_frequency_preserve_stable_records()
                     PaExperiment::UnifiedIdentity,
                     PaExperiment::UnifiedPacked,
                     PaExperiment::UnifiedPackedContext,
-                    PaExperiment::UnifiedOddBlocks,
+                    PaExperiment::UnifiedPackedPlan,
                 ] {
                     for block in [3, 64, 512] {
                         let mut actual = input.clone();
@@ -991,6 +991,7 @@ fn instruction_context_changes_execution_without_changing_any_sort_work() {
         for block in [3, 64, 512] {
             let mut scalar = input.clone();
             let mut context = input.clone();
+            let mut planned = input.clone();
             let before = sort_pa_with_threshold::<_, u128>(
                 &mut scalar,
                 PaExperiment::UnifiedPacked,
@@ -1003,8 +1004,15 @@ fn instruction_context_changes_execution_without_changing_any_sort_work() {
                 block,
                 16 * 1024 * 1024,
             );
+            let plan_work = sort_pa_with_threshold::<_, u128>(
+                &mut planned,
+                PaExperiment::UnifiedPackedPlan,
+                block,
+                16 * 1024 * 1024,
+            );
             assert_eq!(before, after, "q={q} block={block}");
-            for actual in [&scalar, &context] {
+            assert_eq!(after, plan_work, "owned plan q={q} block={block}");
+            for actual in [&scalar, &context, &planned] {
                 assert!(
                     actual.iter().zip(&expected).all(|(a, b)| {
                         a.key == b.key && a.id == b.id && a.payload == b.payload
