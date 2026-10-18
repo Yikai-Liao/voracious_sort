@@ -1,0 +1,68 @@
+{
+  "source_commit": "a34545b6541d49788d9a16e25974d6995e6653c9",
+  "source_sha256": "00cc7987003d5b6a6b615d6a1f1fb44f71b501f03ea94ddba2ffd21f46653b3a",
+  "processes": [
+    {
+      "metadata": "measurements/pa-plan-causal-seed20261025.json",
+      "rows": 96,
+      "rss_kib": 64552,
+      "major_faults": 0,
+      "host_swapin_pages": 5,
+      "host_swapout_pages": 0
+    },
+    {
+      "metadata": "measurements/pa-plan-causal-seed42.json",
+      "rows": 96,
+      "rss_kib": 64348,
+      "major_faults": 0,
+      "host_swapin_pages": 7,
+      "host_swapout_pages": 0
+    },
+    {
+      "metadata": "measurements/pa-plan-confirm-boundary-f32id16.json",
+      "rows": 64,
+      "rss_kib": 64712,
+      "major_faults": 0,
+      "host_swapin_pages": 4,
+      "host_swapout_pages": 0
+    },
+    {
+      "metadata": "measurements/pa-plan-original-boundary-f32id16.json",
+      "rows": 64,
+      "rss_kib": 65148,
+      "major_faults": 0,
+      "host_swapin_pages": 3,
+      "host_swapout_pages": 0
+    }
+  ],
+  "sha256": {
+    "measurements/pa-plan-causal-seed20261025.csv": "3f3b268f26529eeb33496394051910a402cd85148e6e7a546834a36ba92a7c10",
+    "measurements/pa-plan-causal-seed20261025.json": "34d9dd3e725ee4126d6a60728c3d202019271e6b93f168143a946c7afe13a6a9",
+    "measurements/pa-plan-causal-seed20261025.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "measurements/pa-plan-causal-seed42.csv": "b46fad37eb39bfa34e0c180018ad698aa4cdab0e6b9b17ec3f59b6329a0e67f4",
+    "measurements/pa-plan-causal-seed42.json": "ae1dd292d61713310579b465b5f0975b93f59e3cecddb0af7312fc44ea51360a",
+    "measurements/pa-plan-causal-seed42.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "measurements/pa-plan-confirm-boundary-f32id16.csv": "f394d1bf1a2182f6903d0f3679459dec5e0f46d48efa61853215f6d3ab761ac9",
+    "measurements/pa-plan-confirm-boundary-f32id16.json": "9fc177a5d60b34dca51defca73a6f46fb0592885d0efed1f361127a265d0e238",
+    "measurements/pa-plan-confirm-boundary-f32id16.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "measurements/pa-plan-original-boundary-f32id16.csv": "c0a88c275b77d939a015155b5e46719d2f0fd1087da23ddbb4204a055dc71410",
+    "measurements/pa-plan-original-boundary-f32id16.json": "77444eaaf805bb9d3fd7c78b698af94cd267c0b94b4b220e8cae40ccacc86437",
+    "measurements/pa-plan-original-boundary-f32id16.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "pa-plan-causal-seed20261025-kernel-audit.json": "c5569cace7e58ecff4a854dd771f0fc2bdb540ea65835b6d787ef1b2b1e5b11d",
+    "pa-plan-causal-seed20261025-plan-audit.json": "b568f9b5d26da470db465fd6837bc1e52478cfb006d0be70bbbcc3a8e6bb65fa",
+    "pa-plan-causal-seed20261025audit.json": "c5569cace7e58ecff4a854dd771f0fc2bdb540ea65835b6d787ef1b2b1e5b11d",
+    "pa-plan-causal-seed42-kernel-audit.json": "91679e2e892ab6edfe779907c47b0f03977fa5fe7132578d460cb6d2331faf12",
+    "pa-plan-causal-seed42-plan-audit.json": "69bdf83d65f09aa2943f492eaac2b5d5a9a9541547f3e79a178ae0b62d0f5f9f",
+    "pa-plan-causal-seed42audit.json": "91679e2e892ab6edfe779907c47b0f03977fa5fe7132578d460cb6d2331faf12",
+    "pa-plan-confirm-boundary-f32id16audit.json": "626e497ff729150082ccff359f8fec56ac1d7648e4c4d7d47dc6cde8064b19dc",
+    "pa-plan-float-native-binary.json": "9916dfe1fc83606ed7cadc4be086e756cdb752c25b1d6dc324b2a90e38f2240c",
+    "pa-plan-original-boundary-f32id16audit.json": "91f07f82d0fd0612ad98b472d75dab97cec5bf123f88ffe97117aa19beaaf54c",
+    "pa-plan-screen.py": "bf5993315adf4a1ff92af6acb7a217c2ab833fdabd51200ea89a0e5e2a2c2c8e",
+    "validation/build-pa-plan-float-native.log": "b4f5a9d3bbd6d25e39421efa6d6e6e1cdb5c54a324feb3809ad98016e12d9d4e",
+    "validation/check-pa-plan.log": "dd1593dc4e9e5db5821e890b8d44d98f898ed5d8b462bfac933599be8916da59",
+    "validation/pa-plan-borrowed-f32id16-byte0.txt": "e835cc0311251958958e1f9185d0a88f386f4f87737867dc1664d92ed5da2c76",
+    "validation/pa-plan-owned-f32id16-byte0.txt": "98e77089189e673d1514d6e4d410223325c9f419c7efb283f84956710c814ba3",
+    "validation/test-pa-plan-float.log": "c51fb0682ee07c920540d1c607340fd6aef8925068f3083f5015f9c2d4749914",
+    "validation/test-pa-plan-lib.log": "4fe17541a3f7e5261f6cb0dea23092bf97c7c56656680877a7338fb69f070583"
+  }
+}

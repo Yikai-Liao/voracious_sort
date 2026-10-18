@@ -1,6 +1,8 @@
 # PA 优化交付报告
 
-当前 PA 实验源码为 `17531ed`，源文件指纹 `6d39a251e5535fd619c7ba0a66e3b2381b378beda7b0e207e585852f0a21b52e`。已移除失败的局部完成调度与小叶缓存收尾；独立候选 `Pa_odd_blocks` 只在 PA 入口选择不超过给定上限的最大奇数块容量，沿用原来的分类、压紧准入、叶子排序和递归。给定 B64/512 时实际为63/511，记录 scratch 略减、目录可能略增，内存峰值仍需实测。Block LSD 内核实现未修改。native59项库测试与6项浮点 harness 测试通过，新种子8场景虽通过筛选，原失败种子42的独立复测仍慢18.3%，已拒绝并停止扩大筛选，见 [PA_CAPACITY_PLAN.md](PA_CAPACITY_PLAN.md)。
+当前 PA 实验源码为 `a34545b`，源文件指纹 `00cc7987003d5b6a6b615d6a1f1fb44f71b501f03ea94ddba2ffd21f46653b3a`。失败的局部完成、小叶缓存和奇数容量策略均已移除。新候选 `Pa_plan` 按值持有固定压紧分类计划，并省去已归一化标签的重复掩码；沿用原 `Pa_kernel` 的准入、分类、分发轮数、递归及叶子排序。Block LSD 搬运代码和块容量不变。native59项库测试与6项浮点 harness 测试通过，全部 Work 和叶长分布与旧路径一致。冻结 native ELF 的检查确认 PEXT 从内存掩码变为寄存器掩码；原失败边界的正反复测仍慢约14%，同程序的新旧压紧路径对照也未显示一致收益，已拒绝并停止扩大验证，见 [PA_PLAN_VALIDATION.md](PA_PLAN_VALIDATION.md)。
+
+上一容量候选 `17531ed` 已被原种子42的独立复测拒绝：f32_id16/sparse16/B512 慢18.3%，CPU 时间也重复。新种子八场景的局部通过没有覆盖这个边界；工作量和分配诊断见 [PA_CAPACITY_VALIDATION.md](PA_CAPACITY_VALIDATION.md)。
 
 小叶缓存及其组合的 `518c6f2` 阶段已被独立复测拒绝，保留在 [LEAF_LAYOUT_VALIDATION.md](LEAF_LAYOUT_VALIDATION.md)。该阶段的单独容量对照只提供探索线索，不转作当前候选的接受证据。
 
