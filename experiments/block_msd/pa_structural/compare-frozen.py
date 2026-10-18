@@ -3,11 +3,13 @@
 import argparse
 import csv
 import json
+import resource
 import statistics as st
 import subprocess
 import time
 from collections import defaultdict
-from run import ROOT, REPO, BASE, digest
+from pathlib import Path
+from run import ROOT, REPO, BASE, digest, source_hash
 from analyze import quantile
 
 p=argparse.ArgumentParser()
@@ -20,8 +22,9 @@ assert digest(old)==old_sha
 new=REPO/'experiments/block_msd/target/pa-structural'/a.binary
 frozen=json.loads(new.with_suffix(new.suffix+'.json').read_text())
 assert digest(new)==frozen['sha256']
+assert source_hash()==frozen['source_sha256']
 raw=ROOT/'measurements'
-metadata=dict(old_sha256=old_sha,old_source_commit='06331aa5f1e6fb20dac535bd405d8a68ab5a5ab3',new=frozen,order=['old','new','new','old'],commands=[])
+metadata=dict(old_sha256=old_sha,old_source_commit='06331aa5f1e6fb20dac535bd405d8a68ab5a5ab3',new=frozen,order=['old','new','new','old'],commands=[],vmstat_before=Path('/proc/vmstat').read_text())
 groups=[('guards','uniform,sparse','u32,u64,u128,wide32,large128'),
         ('leaf','deep_unique90','large128'),
         ('order','equal,sorted,reverse','u128,wide32')]
@@ -54,5 +57,8 @@ for cell,methods in samples.items():
         row[method]={'median':st.median(ratios),'p10':quantile(ratios,.1),'p90':quantile(ratios,.9)}
     results.append(row)
 metadata['results']=results
+usage=resource.getrusage(resource.RUSAGE_CHILDREN)
+metadata['usage']={k:getattr(usage,k) for k in ['ru_utime','ru_stime','ru_maxrss','ru_minflt','ru_majflt','ru_nivcsw']}
+metadata['vmstat_after']=Path('/proc/vmstat').read_text()
 (ROOT/'frozen-control.json').write_text(json.dumps(metadata,indent=2)+'\n')
 print(json.dumps(results,indent=2))

@@ -1,0 +1,7 @@
+portable-final-b64 35.05
+portable-final-b512 35.73
+portable-final-information 46.16
+L_frozen 28 cells {'Pa_packed': 7, 'Pa_unified_groups_t16777216': 17, 'Rollercoaster': 22}
+Pa_packed 28 cells {'L_frozen': 21, 'Pa_unified_groups_t16777216': 20, 'Rollercoaster': 18}
+Pa_unified_groups_t16777216 28 cells {'L_frozen': 11, 'Pa_packed': 8, 'Rollercoaster': 16}
+Rollercoaster 28 cells {'L_frozen': 6, 'Pa_packed': 10, 'Pa_unified_groups_t16777216': 12}
