@@ -1,6 +1,8 @@
 # PA 优化交付报告
 
-当前排序库源码为 `6fceaaa`，完整源文件指纹为 `eca6b3cf68617eaec8de46fadb300e38cdcdc836fdd29700c62338daa07b7636`，候选方法为 `Pa_kernel`。**整数验收已完成，整体候选被新增浮点复测拒绝**：f32 带身份/payload 的 sparse16/B512 场景独立复测仍慢 16.3%。整数证据包括当前源码的 native 原 103 场景、46 场景扩展、30 场景留出集、普通目标 46+7 场景、冻结旧 ELF 控制、内存与完整 Work 比较。整数成绩不能覆盖浮点失败。后续按用户要求移植 Rollercoaster 的局部完成与统计复用机制，使用新的源码与 ELF cohort。
+当前实验源码为 `baaa505`（实现提交 `e86ca7a`），源文件指纹为 `f25c7179804be7a2b4cb85d3c93aeca3ab3cfc73c587c58e50c387b215966586`。新增 `Pa_local_prefix` 与 `Pa_local_key`，借鉴 Rollercoaster 的精确计数边界和 MSD 后局部 LSD 完成，正在执行独立小规模筛选。两条路线尚未通过完整性能验收，见 [LOCAL_COMPLETION_PLAN.md](LOCAL_COMPLETION_PLAN.md) 与 [LOCAL_COMPLETION_VALIDATION.md](LOCAL_COMPLETION_VALIDATION.md)。
+
+上一轮 `6fceaaa` / `Pa_kernel` 的**整数验收已完成，整体候选被浮点复测拒绝**：f32 带身份/payload 的 sparse16/B512 独立复测仍慢 16.3%。下文的完整整数矩阵及浮点失败均属于该轮源码 `eca6b3cf68617eaec8de46fadb300e38cdcdc836fdd29700c62338daa07b7636`，不转用为新实验的通过证据。
 
 所有改动均在独立 worktree `/root/code/voracious_sort-pa-execution`，分支 `block-pa-execution`，限定于 `experiments/block_msd`。仓库根目录生产实现和 frozen Block LSD 源码未修改。
 
@@ -14,9 +16,9 @@
 
 不变量和代码生成原因见 [DESIGN.md](DESIGN.md)，库边界见 [LIBRARY.md](LIBRARY.md)。`Pa_packed` 保留未传播内核上下文的诊断路线，`Pa_packed_aggressive` 只用来重现旧的过度细分退化。
 
-## 当前证据
+## 上一轮 6fceaaa 的证据
 
-当前源码的 native 原矩阵为 103 cells、13,184 行，独立审计确认输入集合、轮换与单一 ELF。候选对原始 Rollercoaster 的配对中位数胜出 85/103（同 ELF 原 PA 为 82/103），p90 胜出 73/103；对 frozen Block LSD 中位数胜出 100/103、p90 胜出 89/103；对 Stable MSD 对应为 101/103、95/103。没有达到预设门槛的原 PA 实质退化信号。
+该轮源码的 native 原矩阵为 103 cells、13,184 行，独立审计确认输入集合、轮换与单一 ELF。候选对原始 Rollercoaster 的配对中位数胜出 85/103（同 ELF 原 PA 为 82/103），p90 胜出 73/103；对 frozen Block LSD 中位数胜出 100/103、p90 胜出 89/103；对 Stable MSD 对应为 101/103、95/103。没有达到预设门槛的原 PA 实质退化信号。
 
 native 46 场景扩展中，对原 PA 的中位数胜出 42/46；新种子的 30 场景留出集胜出 29/30，两者均无实质退化信号。17 场景的冻结旧 ELF ABBA 控制也未触发门槛。21 个独立 Work 场景中，`Pa_packed` 与 `Pa_kernel` 的全部计数及叶长分布一致；16 个内存场景、32 行测量中，候选峰值堆分配均未高于原 PA。完整整数证据与资源边界见 [VALIDATION_INLINE_FINAL.md](VALIDATION_INLINE_FINAL.md)。
 
@@ -24,7 +26,7 @@ native 46 场景扩展中，对原 PA 的中位数胜出 42/46；新种子的 30
 
 普通目标的冻结 ELF 为 `inline_generic`，无 native 编译标志。46 场景中，相对原 PA 的配对中位数胜出 40/46，相对原始 Rollercoaster 胜出 43/46，相对 frozen Block LSD 胜出 36/46；新增七场景对应为 5/7、6/7、7/7。没有达到预设门槛的原 PA 实质退化信号，但 large128/deep_unique90 有约 1.5% 的小幅重复损失。q64 独立复测与两个源码的 ABBA 控制也单独保存。完整数据、资源与不确定性见 [VALIDATION_INLINE_GENERIC.md](VALIDATION_INLINE_GENERIC.md)。
 
-最终源码已通过 native 59 项库测试、禁用硬件准入的 59 项库测试，两个配置各 4 项 runner 测试，以及 AArch64 / RISC-V 的库编译检查。跨编译不代表实际机器性能验证。
+该轮源码已通过 native 59 项库测试、禁用硬件准入的 59 项库测试，两个配置各 4 项 runner 测试，以及 AArch64 / RISC-V 的库编译检查。跨编译不代表实际机器性能验证。
 
 所有计时固定 CPU 2，串行运行，编译与测试不与计时重叠。每个 cell 采用相同数组分配、轮换和反向方法顺序，保留候选和原 PA 的 A/A 槽。配对中位数与 p10/p90 是描述性分位数。实质退化门槛预先设为候选/原 PA 中位数大于 1.05 且 p10 大于 1，并结合 A/A、独立复测判断。完整记录、身份、payload 和稳定性检查在计时外执行；原始 Rollercoaster 使用键序与完整记录多重集检查，仍是主要对照。修复稳定性的 Rollercoaster 只作独立诊断。
 

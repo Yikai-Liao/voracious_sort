@@ -23,4 +23,6 @@ Cohorts are not pooled across executable hashes. Historical names containing `fi
 | inline-final/native-screen/heldout/frozen/memory2/work | Same 6fceaaa source: native 103+46+30 cells, independent boundary repeats, frozen-original ABBA, 16 memory and 21 Work cells passed the single-machine integer acceptance. See VALIDATION_INLINE_FINAL.md. Float extension subsequently rejected the overall candidate. |
 | float-native/confirm/causal | Same 6fceaaa source with harness 6712845: native 88 finite + 16 special cells; a reversed repeat confirms f32_id16/sparse16/B512 slowdown of 1.1634x. Rejected overall; generic, holdout and planned sparse Work stopped. See FLOAT_VALIDATION.md. |
 
+| local-native/generic-* (baaa505) | New stable count-boundary/local-LSD variants from e86ca7a; correctness passed, small performance screen in progress. See LOCAL_COMPLETION_PLAN.md and LOCAL_COMPLETION_VALIDATION.md. |
+
 The current source uses only a hardware token for compressed labels, delegates extraction to pinned hakmem, and otherwise keeps ordinary PA. Final validation requires its own immutable executables; historical hardware or software results are not transferred to it.

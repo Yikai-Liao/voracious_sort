@@ -1,0 +1,18 @@
+{
+  "source_hash_version": 2,
+  "source_commit": "baaa505e28c8008a3c106850896056669e523b3b",
+  "sha256": "d84be081736da64c6ed2c94f8021c8aae9b9812bbfc8ceb05b82ddb8539c5700",
+  "source_sha256": "f25c7179804be7a2b4cb85d3c93aeca3ab3cfc73c587c58e50c387b215966586",
+  "base": "745cea6ab21030710cb036f88fa757505ef1990b",
+  "rustflags": "",
+  "features": "none",
+  "profile": "release",
+  "rustc": "rustc 1.98.1 (48a229cea 2026-09-01)\nbinary: rustc\ncommit-hash: 48a229ceaefd4985c50990b14116b6d856af0985\ncommit-date: 2026-09-01\nhost: x86_64-unknown-linux-gnu\nrelease: 1.98.1\nLLVM version: 22.1.8\n",
+  "cargo_incremental": true,
+  "extra_sources": {
+    "experiments/block_msd/pa_structural/LOCAL_COMPLETION_PLAN.md": "633741b90b62b8b3d1b0068e279c6428803d5789a7cfaa201690c29d700c3c4c",
+    "experiments/block_msd/pa_structural/local-screen.py": "c0d9922e210e051b68c09d5009a129eb040f86e256879d5281fd30fa6c520c41",
+    "experiments/block_msd/pa_structural/run.py": "31c4fb3a19f1f15059a43d033f869fad762bb1bf9801bf2fbbe95e4663577d72",
+    "experiments/block_msd/pa_structural/check-local-work.py": "72083c2222098f8ccff19cea65caa6a542b5defbf57a47ed856fbb9a2f698923"
+  }
+}
