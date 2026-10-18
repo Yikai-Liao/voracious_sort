@@ -1,0 +1,93 @@
+{
+  "source_commit": "1e3022752e50e39ed7a27cd4fe4b7a4d9a40b3c1",
+  "source_sha256": "47e2bc518ed9101674df2d44a27c33efaf9de59937a5771f5c938e6fb4f9399e",
+  "elf_sha256": "e413b34874b23b7177a129fbcea520f2d9ab1430be8dd7a39ccdd1fd5d57fe52",
+  "timed_processes": [
+    {
+      "name": "counted-native-boundary",
+      "rows": 192,
+      "sha256": "50955e3255cbcd78b57d0334bde2d7802d15f893c7e4d2ed4da7da69788a9071",
+      "returncode": 0,
+      "stderr_bytes": 0,
+      "usage": {
+        "ru_utime": 7.091589,
+        "ru_stime": 0.239872,
+        "ru_maxrss": 97272,
+        "ru_minflt": 27883,
+        "ru_majflt": 0,
+        "ru_nivcsw": 119
+      },
+      "host_pswpin_delta": 6,
+      "host_pswpout_delta": 0
+    },
+    {
+      "name": "counted-native-float-first-b512",
+      "rows": 1536,
+      "sha256": "bad572601a6a4751e94d5797b84140f301ab4e77cc814fddf6de3aa728379114",
+      "returncode": 0,
+      "stderr_bytes": 0,
+      "usage": {
+        "ru_utime": 79.353744,
+        "ru_stime": 1.58223,
+        "ru_maxrss": 197856,
+        "ru_minflt": 163073,
+        "ru_majflt": 0,
+        "ru_nivcsw": 1578
+      },
+      "host_pswpin_delta": 31,
+      "host_pswpout_delta": 0
+    },
+    {
+      "name": "counted-native-float-more-b64",
+      "rows": 1536,
+      "sha256": "c39b7be43cf21fd3ed46eaeae1cf33a4a576c3fd524718bd3cf3fe6796a39455",
+      "returncode": 0,
+      "stderr_bytes": 0,
+      "usage": {
+        "ru_utime": 82.280248,
+        "ru_stime": 1.470673,
+        "ru_maxrss": 197828,
+        "ru_minflt": 137796,
+        "ru_majflt": 0,
+        "ru_nivcsw": 1974
+      },
+      "host_pswpin_delta": 42,
+      "host_pswpout_delta": 0
+    },
+    {
+      "name": "counted-native-float-more-shape-b64",
+      "rows": 768,
+      "sha256": "b0a51a8e3252d3da6b492f65ad94dda033fd1939d1092a18120a45c711d2bbfb",
+      "returncode": 0,
+      "stderr_bytes": 0,
+      "usage": {
+        "ru_utime": 32.80797,
+        "ru_stime": 0.35573899999999997,
+        "ru_maxrss": 57760,
+        "ru_minflt": 60853,
+        "ru_majflt": 0,
+        "ru_nivcsw": 753
+      },
+      "host_pswpin_delta": 41,
+      "host_pswpout_delta": 0
+    },
+    {
+      "name": "counted-native-float-more-shape-b512",
+      "rows": 768,
+      "sha256": "3a66d6f1364e443b88bfa9b2cd39565ecd0d5fcd556f609efd30a5b61c350438",
+      "returncode": 0,
+      "stderr_bytes": 0,
+      "usage": {
+        "ru_utime": 29.654966,
+        "ru_stime": 0.44370699999999996,
+        "ru_maxrss": 57932,
+        "ru_minflt": 69027,
+        "ru_majflt": 0,
+        "ru_nivcsw": 624
+      },
+      "host_pswpin_delta": 16,
+      "host_pswpout_delta": 0
+    }
+  ],
+  "rows": 4800
+}

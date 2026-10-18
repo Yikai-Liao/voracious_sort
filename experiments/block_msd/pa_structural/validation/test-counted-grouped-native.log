@@ -1,0 +1,8 @@
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.06s
+{"command": ["/root/.cargo/bin/rustc", "--edition=2018", "--test", "/root/code/voracious_sort-pa-execution/experiments/block_msd/tests/counted_grouped.rs", "--cfg", "feature=\"frontier_work\"", "-C", "target-cpu=native", "-L", "dependency=/root/code/voracious_sort-pa-execution/experiments/block_msd/target/execution-work/debug/deps", "--extern", "block_msd_research=/root/code/voracious_sort-pa-execution/experiments/block_msd/target/execution-work/debug/libblock_msd_research.rlib", "--extern", "voracious_radix_sort=/root/code/voracious_sort-pa-execution/experiments/block_msd/target/execution-work/debug/deps/libvoracious_radix_sort-7f125cfb46aa57f5.rlib", "-o", "/root/code/voracious_sort-pa-execution/experiments/block_msd/target/execution-work/probes/counted_grouped_native"]}
+
+running 1 test
+test grouped_counted_completion_preserves_empty_buckets_and_stable_records ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.67s
+

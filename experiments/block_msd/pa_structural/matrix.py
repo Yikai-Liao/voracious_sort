@@ -10,8 +10,9 @@ p.add_argument('--candidate',default='Pa_packed')
 p.add_argument('--binary',default='final')
 p.add_argument('--prefix',default='final')
 p.add_argument('--reps',default='16')
+p.add_argument('--reference',default=BASE,help='duplicate BASE by default for paired A/A')
 a=p.parse_args()
-reference = BASE if a.candidate in ['Pa_packed', 'Pa_kernel'] else 'Pa_packed'
+reference = a.reference
 methods=','.join([a.candidate,BASE,reference,'Fa','Rollercoaster','L_frozen','stable_msd',a.candidate])
 shared='deep_skew,majority_prefix,deep_unique90,deep_unique98'
 cells=[

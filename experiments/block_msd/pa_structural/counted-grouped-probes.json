@@ -1,0 +1,54 @@
+[
+  {
+    "config": "native",
+    "features": "frontier_work",
+    "test_source_sha256": "83a1a85e98b6383074d428946e203dc82b33724730322c9161360b1b2aa34eef",
+    "binary_sha256": "82fd0e91e2453befd514420dc9f669d3e51871779b493d52715a804df4b5020f",
+    "library_sha256": "3c6e1eb50a73d15f0876d89cf5573a23e7e3c10687109b37d97acf0222d15d24",
+    "command": [
+      "/root/.cargo/bin/rustc",
+      "--edition=2018",
+      "--test",
+      "/root/code/voracious_sort-pa-execution/experiments/block_msd/tests/counted_grouped.rs",
+      "--cfg",
+      "feature=\"frontier_work\"",
+      "-C",
+      "target-cpu=native",
+      "-L",
+      "dependency=/root/code/voracious_sort-pa-execution/experiments/block_msd/target/execution-work/debug/deps",
+      "--extern",
+      "block_msd_research=/root/code/voracious_sort-pa-execution/experiments/block_msd/target/execution-work/debug/libblock_msd_research.rlib",
+      "--extern",
+      "voracious_radix_sort=/root/code/voracious_sort-pa-execution/experiments/block_msd/target/execution-work/debug/deps/libvoracious_radix_sort-7f125cfb46aa57f5.rlib",
+      "-o",
+      "/root/code/voracious_sort-pa-execution/experiments/block_msd/target/execution-work/probes/counted_grouped_native"
+    ],
+    "returncode": 0
+  },
+  {
+    "config": "disabled",
+    "features": "frontier_work,projection_portable",
+    "test_source_sha256": "83a1a85e98b6383074d428946e203dc82b33724730322c9161360b1b2aa34eef",
+    "binary_sha256": "1ccf6d7052e5138e228388c8e1075ddf6bd491af0cddbb95e0ab4bc315cf2584",
+    "library_sha256": "b08fc78783f1cb832e48e96b0e5505cb15a01ed3c15117e7b92ee51720acf119",
+    "command": [
+      "/root/.cargo/bin/rustc",
+      "--edition=2018",
+      "--test",
+      "/root/code/voracious_sort-pa-execution/experiments/block_msd/tests/counted_grouped.rs",
+      "--cfg",
+      "feature=\"frontier_work\"",
+      "-C",
+      "target-cpu=native",
+      "-L",
+      "dependency=/root/code/voracious_sort-pa-execution/experiments/block_msd/target/execution-disabled/debug/deps",
+      "--extern",
+      "block_msd_research=/root/code/voracious_sort-pa-execution/experiments/block_msd/target/execution-disabled/debug/libblock_msd_research.rlib",
+      "--extern",
+      "voracious_radix_sort=/root/code/voracious_sort-pa-execution/experiments/block_msd/target/execution-disabled/debug/deps/libvoracious_radix_sort-7f125cfb46aa57f5.rlib",
+      "-o",
+      "/root/code/voracious_sort-pa-execution/experiments/block_msd/target/execution-disabled/probes/counted_grouped_disabled"
+    ],
+    "returncode": 0
+  }
+]
