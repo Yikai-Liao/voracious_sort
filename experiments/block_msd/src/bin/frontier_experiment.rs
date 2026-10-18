@@ -304,9 +304,6 @@ const METHODS: &[&str] = &[
     "Reverse_only",
     "Reverse_stable",
     "Rollercoaster_repaired",
-    "Pa_packed_keyset",
-    "Pa_packed_keyset8",
-    "Pa_packed_keyset_binary",
     "Pa_packed_aggressive",
     "Pa_packed",
     "Pa_identity",
@@ -436,15 +433,6 @@ const CASES: &[&str] = &[
     "reverse",
     "equal",
     "few",
-    "alphabet2",
-    "alphabet4",
-    "alphabet8",
-    "alphabet16",
-    "alphabet32",
-    "alphabet64",
-    "alphabet4_noise",
-    "alphabet4_noise50",
-    "alphabet4_noise90",
     "common_high",
     "deep_skew",
     "deep_unique90",
@@ -525,10 +513,7 @@ where
             }
             return Default::default();
         },
-        "Pa_packed_keyset"
-        | "Pa_packed_keyset8"
-        | "Pa_packed_keyset_binary"
-        | "Pa_packed_aggressive"
+        "Pa_packed_aggressive"
         | "Pa_packed"
         | "Pa_identity"
         | "Pa_ref"
@@ -560,9 +545,6 @@ where
         | "Pa_unified_groups" => {
             use frontier::PaExperiment::*;
             let experiment = match method {
-                "Pa_packed_keyset" => UnifiedPackedKeySet,
-                "Pa_packed_keyset8" => UnifiedPackedKeySet8,
-                "Pa_packed_keyset_binary" => UnifiedPackedKeySetBinary,
                 "Pa_packed_aggressive" => UnifiedPackedAggressive,
                 "Pa_packed" => UnifiedPacked,
                 "Pa_identity" => UnifiedIdentity,
@@ -660,21 +642,6 @@ fn make_keys(n: usize, bits: usize, case: &str, seed: u64) -> Vec<u128> {
     if case.starts_with("deep_unique") {
         assert!(reserved <= bits, "distinct workload does not fit key width");
     }
-    let mut alphabet_state = seed ^ 0x5e72_7c3a_901b_d845;
-    let mut alphabet = [0u128; 64];
-    if case.starts_with("alphabet") {
-        for i in 0..alphabet.len() {
-            loop {
-                let key = (((random(&mut alphabet_state) as u128) << 64)
-                    | random(&mut alphabet_state) as u128)
-                    & mask;
-                if !alphabet[..i].contains(&key) {
-                    alphabet[i] = key;
-                    break;
-                }
-            }
-        }
-    }
     let mut keys: Vec<u128> = (0..n)
         .map(|i| {
             let r = ((random(&mut state) as u128) << 64
@@ -708,25 +675,6 @@ fn make_keys(n: usize, bits: usize, case: &str, seed: u64) -> Vec<u128> {
                         };
                         key | ((((logical >> j) & 1) as u128) << position)
                     })
-                },
-                _ if case.starts_with("alphabet") => {
-                    let count: usize =
-                        case[8..].split('_').next().unwrap().parse().unwrap();
-                    assert!(count > 0 && count <= alphabet.len());
-                    let noise = if case.ends_with("noise50") {
-                        5
-                    } else if case.ends_with("noise90") {
-                        9
-                    } else if case.ends_with("_noise") {
-                        1
-                    } else {
-                        0
-                    };
-                    if i % 10 < noise {
-                        r
-                    } else {
-                        alphabet[if i < count { i } else { r as usize % count }]
-                    }
                 },
                 "equal" => mask / 3,
                 "few" => (r % 8) * (mask / 9),
@@ -854,19 +802,6 @@ mod workload_tests {
                     case,
                     method
                 );
-            }
-        }
-    }
-
-    #[test]
-    fn alphabet_fixtures_have_exact_declared_cardinality() {
-        for bits in [32, 64, 128] {
-            for count in [2, 4, 8, 16, 32, 64] {
-                let mut keys =
-                    make_keys(8193, bits, &format!("alphabet{}", count), 42);
-                keys.sort_unstable();
-                keys.dedup();
-                assert_eq!(keys.len(), count);
             }
         }
     }
@@ -1012,8 +947,6 @@ fn run<T: Radixable<K> + Verified, K: RadixKey>(
                 cpu.to_string(),
                 peak.to_string(),
                 allocs.to_string(),
-                stats.keyset_nodes.to_string(),
-                stats.keyset_hits.to_string(),
                 stats.projection_nodes.to_string(),
                 stats.projection_records.to_string(),
                 stats.identity_nodes.to_string(),
@@ -1108,7 +1041,7 @@ fn main() {
     );
     let block = args.get(7).map_or(64, |s| s.parse().unwrap());
     let seed = args.get(8).map_or(0x123456789abcdef, |s| s.parse().unwrap());
-    println!("layout,case,n,record_bytes,seed,block,method,slot,rep,kind,wall_ns,cpu_ns,heap_peak,allocs,keyset_nodes,keyset_hits,projection_nodes,projection_records,identity_nodes,nodes,node_records,prepare_records,order_records,candidate_records,label_evals,scatter_records,dense_nodes,block_nodes,passes,compact_records,tail_records,runs_records,unresolved_records,leaves,leaf_records,max_depth,max_path_passes,frontier_nodes,equal_nodes,band_nodes,band_records,terminal_band_nodes,probe_records,instrumented,input_address,leaf_lengths");
+    println!("layout,case,n,record_bytes,seed,block,method,slot,rep,kind,wall_ns,cpu_ns,heap_peak,allocs,projection_nodes,projection_records,identity_nodes,nodes,node_records,prepare_records,order_records,candidate_records,label_evals,scatter_records,dense_nodes,block_nodes,passes,compact_records,tail_records,runs_records,unresolved_records,leaves,leaf_records,max_depth,max_path_passes,frontier_nodes,equal_nodes,band_nodes,band_records,terminal_band_nodes,probe_records,instrumented,input_address,leaf_lengths");
     for layout in layouts {
         for &case in &cases {
             let bits = match layout {

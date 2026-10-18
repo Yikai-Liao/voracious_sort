@@ -35,9 +35,6 @@ pub enum PaExperiment {
     UnifiedIdentity,
     UnifiedPacked,
     UnifiedPackedAggressive,
-    UnifiedPackedKeySet,
-    UnifiedPackedKeySet8,
-    UnifiedPackedKeySetBinary,
 }
 
 #[derive(Clone, Copy, PartialEq)]
@@ -46,14 +43,6 @@ enum SparseCompletion {
     Identity,
     Packed,
     PackedAggressive,
-}
-
-#[derive(Clone, Copy, PartialEq)]
-enum KeySetMode {
-    None,
-    Fingerprint8,
-    Fingerprint32,
-    Binary32,
 }
 
 #[derive(Clone, Copy)]
@@ -77,7 +66,6 @@ struct Policy {
     local_workspace_threshold: usize,
     block: usize,
     sparse: SparseCompletion,
-    keyset: KeySetMode,
 }
 
 pub fn sort_pa_experiment<T: Radixable<K>, K: RadixKey>(
@@ -102,17 +90,8 @@ where
     Converted<T, K>: NativeKey,
 {
     assert!(block > 0);
-    let keyset = match experiment {
-        PaExperiment::UnifiedPackedKeySet => KeySetMode::Fingerprint32,
-        PaExperiment::UnifiedPackedKeySet8 => KeySetMode::Fingerprint8,
-        PaExperiment::UnifiedPackedKeySetBinary => KeySetMode::Binary32,
-        _ => KeySetMode::None,
-    };
     let sparse = match experiment {
-        PaExperiment::UnifiedPacked
-        | PaExperiment::UnifiedPackedKeySet
-        | PaExperiment::UnifiedPackedKeySet8
-        | PaExperiment::UnifiedPackedKeySetBinary => SparseCompletion::Packed,
+        PaExperiment::UnifiedPacked => SparseCompletion::Packed,
         PaExperiment::UnifiedPackedAggressive => {
             SparseCompletion::PackedAggressive
         },
@@ -123,17 +102,11 @@ where
     let experiment = match experiment {
         PaExperiment::UnifiedIdentity
         | PaExperiment::UnifiedPacked
-        | PaExperiment::UnifiedPackedAggressive
-        | PaExperiment::UnifiedPackedKeySet
-        | PaExperiment::UnifiedPackedKeySet8
-        | PaExperiment::UnifiedPackedKeySetBinary => {
-            PaExperiment::UnifiedGroups
-        },
+        | PaExperiment::UnifiedPackedAggressive => PaExperiment::UnifiedGroups,
         other => other,
     };
     let policy = Policy {
         sparse,
-        keyset,
         terminal: matches!(
             experiment,
             PaExperiment::Terminal
@@ -636,33 +609,6 @@ fn visit<T: Radixable<K>, K: RadixKey>(
     } else {
         None
     };
-    // A tiny exact alphabet captures correlations that varying coordinates
-    // cannot compress. Keep the existing approved band and complete one-byte
-    // projection; their classification is already cheap.
-    if policy.keyset != KeySetMode::None
-        && approved_band.is_none()
-        && (heavy || depth == 0)
-        && width > coarse
-        && !packing.as_ref().map_or(false, |s| s.remaining == 0 && s.bits <= 8)
-    {
-        let complete = match policy.keyset {
-            KeySetMode::Fingerprint8 => try_partition_keyset::<T, K, 8, true>(
-                arr, cap, policy, stats, depth, path,
-            ),
-            KeySetMode::Fingerprint32 => {
-                try_partition_keyset::<T, K, 32, true>(
-                    arr, cap, policy, stats, depth, path,
-                )
-            },
-            KeySetMode::Binary32 => try_partition_keyset::<T, K, 32, false>(
-                arr, cap, policy, stats, depth, path,
-            ),
-            KeySetMode::None => false,
-        };
-        if complete {
-            return;
-        }
-    }
     if let Some((band, population, terminal_band)) = approved_band {
         work! { stats.band_nodes += 1; stats.band_records += population; stats.terminal_band_nodes += usize::from(terminal_band); }
         partition::<T, K, _>(
@@ -967,43 +913,4 @@ fn partition_packed<T: Radixable<K>, K: RadixKey, L: NativeKey>(
         depth,
         path,
     );
-}
-
-// The fixed dictionary and fingerprint table stay out of the visit frame.
-// Rejected samples/coverage proofs leave the input untouched.
-#[inline(never)]
-fn try_partition_keyset<
-    T: Radixable<K>,
-    K: RadixKey,
-    const N: usize,
-    const F: bool,
->(
-    arr: &mut [T],
-    cap: usize,
-    policy: Policy,
-    stats: &mut Work,
-    depth: usize,
-    path: usize,
-) -> bool
-where
-    Converted<T, K>: NativeKey,
-{
-    let approved = super::key_set::sample::<T, K, N, F>(arr, cap, stats)
-        .and_then(|set| set.approve::<T, K>(arr, stats));
-    let Some((set, covered)) = approved else {
-        return false;
-    };
-    work! {stats.keyset_nodes+=1;stats.keyset_hits+=covered;}
-    let terminal = covered == arr.len();
-    partition::<T, K, _>(
-        arr,
-        &set,
-        Some(set.variation()),
-        policy,
-        terminal,
-        stats,
-        depth,
-        path,
-    );
-    true
 }
