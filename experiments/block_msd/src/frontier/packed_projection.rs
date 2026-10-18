@@ -133,7 +133,12 @@ impl<U: NativeKey> Selection<U> {
     }
 }
 
-pub(super) struct Packed<U, L, I = hakmem::isa::Native> {
+pub(super) struct Packed<
+    U,
+    L,
+    I = hakmem::isa::Native,
+    const CONTEXT: bool = false,
+> {
     mask: U,
     bits: usize,
     remaining: usize,
@@ -141,7 +146,9 @@ pub(super) struct Packed<U, L, I = hakmem::isa::Native> {
     _label: PhantomData<L>,
 }
 
-impl<U: NativeKey, L: NativeKey, I: hakmem::isa::Isa> Packed<U, L, I> {
+impl<U: NativeKey, L: NativeKey, I: hakmem::isa::Isa, const CONTEXT: bool>
+    Packed<U, L, I, CONTEXT>
+{
     pub(super) fn with_isa(selection: Selection<U>, cpu: I) -> Self {
         assert!(selection.bits <= L::BITS && selection.bits <= 32);
         Self {
@@ -153,7 +160,7 @@ impl<U: NativeKey, L: NativeKey, I: hakmem::isa::Isa> Packed<U, L, I> {
         }
     }
 
-    #[inline]
+    #[inline(always)]
     fn gather(&self, key: U) -> u32 {
         key.pack_bits(self.mask, self.cpu)
     }
@@ -170,8 +177,8 @@ impl<U: NativeKey, L: NativeKey> Packed<U, L> {
     }
 }
 
-impl<U: NativeKey, L: NativeKey, I: hakmem::isa::Isa> Classifier<U>
-    for Packed<U, L, I>
+impl<U: NativeKey, L: NativeKey, I: hakmem::isa::Isa, const CONTEXT: bool>
+    Classifier<U> for Packed<U, L, I, CONTEXT>
 {
     type Label = L;
     const USE_COMPACT_RADIX: bool = true;
@@ -181,6 +188,14 @@ impl<U: NativeKey, L: NativeKey, I: hakmem::isa::Isa> Classifier<U>
     }
     fn remaining(&self, _: U) -> usize {
         self.remaining
+    }
+    #[inline(always)]
+    fn in_context<R>(&self, kernel: impl FnOnce() -> R) -> R {
+        if CONTEXT {
+            self.cpu.run(|_| kernel())
+        } else {
+            kernel()
+        }
     }
 }
 

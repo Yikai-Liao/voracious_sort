@@ -306,6 +306,9 @@ const METHODS: &[&str] = &[
     "Rollercoaster_repaired",
     "Pa_packed_aggressive",
     "Pa_packed",
+    "Pa_kernel",
+    "Pa_gallop",
+    "Pa_packed_gallop",
     "Pa_identity",
     "Pa_ref",
     "Pa_terminal",
@@ -485,7 +488,15 @@ where
     } else {
         method
     };
-    if matches!(method, "Pa_packed_aggressive" | "Pa_identity" | "Pa_packed") {
+    if matches!(
+        method,
+        "Pa_packed_aggressive"
+            | "Pa_identity"
+            | "Pa_packed"
+            | "Pa_kernel"
+            | "Pa_gallop"
+            | "Pa_packed_gallop"
+    ) {
         local_workspace_threshold = 16 * 1024 * 1024;
     }
     match method {
@@ -515,6 +526,9 @@ where
         },
         "Pa_packed_aggressive"
         | "Pa_packed"
+        | "Pa_kernel"
+        | "Pa_gallop"
+        | "Pa_packed_gallop"
         | "Pa_identity"
         | "Pa_ref"
         | "Pa_terminal"
@@ -547,6 +561,9 @@ where
             let experiment = match method {
                 "Pa_packed_aggressive" => UnifiedPackedAggressive,
                 "Pa_packed" => UnifiedPacked,
+                "Pa_kernel" => UnifiedPackedContext,
+                "Pa_gallop" => UnifiedGallop,
+                "Pa_packed_gallop" => UnifiedPackedGallop,
                 "Pa_identity" => UnifiedIdentity,
                 "Pa_ref" => Reference,
                 "Pa_terminal" => Terminal,

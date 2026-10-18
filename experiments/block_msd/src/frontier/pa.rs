@@ -34,6 +34,9 @@ pub enum PaExperiment {
     UnifiedGroups,
     UnifiedIdentity,
     UnifiedPacked,
+    UnifiedPackedContext,
+    UnifiedGallop,
+    UnifiedPackedGallop,
     UnifiedPackedAggressive,
 }
 
@@ -42,6 +45,7 @@ enum SparseCompletion {
     Recursive,
     Identity,
     Packed,
+    PackedContext,
     PackedAggressive,
 }
 
@@ -63,6 +67,7 @@ struct Policy {
     reduced_radix: bool,
     prepared_distribution: bool,
     grouped_scatter: bool,
+    exponential_runs: bool,
     local_workspace_threshold: usize,
     block: usize,
     sparse: SparseCompletion,
@@ -91,22 +96,33 @@ where
 {
     assert!(block > 0);
     let sparse = match experiment {
-        PaExperiment::UnifiedPacked => SparseCompletion::Packed,
+        PaExperiment::UnifiedPacked | PaExperiment::UnifiedPackedGallop => {
+            SparseCompletion::Packed
+        },
+        PaExperiment::UnifiedPackedContext => SparseCompletion::PackedContext,
         PaExperiment::UnifiedPackedAggressive => {
             SparseCompletion::PackedAggressive
         },
         PaExperiment::UnifiedIdentity => SparseCompletion::Identity,
         _ => SparseCompletion::Recursive,
     };
+    let exponential_runs = matches!(
+        experiment,
+        PaExperiment::UnifiedGallop | PaExperiment::UnifiedPackedGallop
+    );
     // Independent ablations inherit the complete frozen UnifiedGroups policy.
     let experiment = match experiment {
         PaExperiment::UnifiedIdentity
         | PaExperiment::UnifiedPacked
+        | PaExperiment::UnifiedPackedContext
+        | PaExperiment::UnifiedGallop
+        | PaExperiment::UnifiedPackedGallop
         | PaExperiment::UnifiedPackedAggressive => PaExperiment::UnifiedGroups,
         other => other,
     };
     let policy = Policy {
         sparse,
+        exponential_runs,
         terminal: matches!(
             experiment,
             PaExperiment::Terminal
@@ -590,7 +606,9 @@ fn visit<T: Radixable<K>, K: RadixKey>(
         });
     let packing = if matches!(
         policy.sparse,
-        SparseCompletion::Packed | SparseCompletion::PackedAggressive
+        SparseCompletion::Packed
+            | SparseCompletion::PackedContext
+            | SparseCompletion::PackedAggressive
     ) && approved_band.is_none()
     {
         super::packed_projection::hardware_gather().and_then(|cpu| {
@@ -776,9 +794,11 @@ fn partition<T: Radixable<K>, K: RadixKey, C: Classifier<Converted<T, K>>>(
 {
     #[cfg(feature = "frontier_work")]
     let label_evals = std::cell::Cell::new(0usize);
-    let label = |item: &T| {
-        work! { label_evals.set(label_evals.get() + 1); }
-        classifier.label(item.into_key_type())
+    let label = super::labeler::Classified::<T, K, C> {
+        classifier,
+        marker: std::marker::PhantomData,
+        #[cfg(feature = "frontier_work")]
+        evaluations: &label_evals,
     };
     // distribute owns and releases all scratch before the first recursive call.
     let prepared_mask =
@@ -864,16 +884,30 @@ fn partition<T: Radixable<K>, K: RadixKey, C: Classifier<Converted<T, K>>>(
         distribute(arr, &label, policy.block, stats)
     };
     work! { stats.max_path_passes = stats.max_path_passes.max(path + passes); }
-    if !terminal {
+    if !terminal && policy.exponential_runs {
+        visit_exponential_runs::<T, K, C, _>(
+            arr,
+            classifier,
+            &label,
+            policy,
+            stats,
+            depth,
+            path + passes,
+        );
+    } else if !terminal {
         let parent_len = arr.len();
         let mut start = 0;
         while start < arr.len() {
-            let current = label(&arr[start]);
-            let remaining = classifier.remaining(arr[start].into_key_type());
-            let mut end = start + 1;
-            while end < arr.len() && label(&arr[end]) == current {
-                end += 1;
-            }
+            let (end, remaining) = label.in_context(|| {
+                let current = label.classify(&arr[start]);
+                let remaining =
+                    classifier.remaining(arr[start].into_key_type());
+                let mut end = start + 1;
+                while end < arr.len() && label.classify(&arr[end]) == current {
+                    end += 1;
+                }
+                (end, remaining)
+            });
             work! { stats.runs_records += end - start; }
             if end - start > 1 && remaining > 0 {
                 work! { stats.unresolved_records += end - start; }
@@ -893,6 +927,47 @@ fn partition<T: Radixable<K>, K: RadixKey, C: Classifier<Converted<T, K>>>(
     work! { stats.label_evals += label_evals.get(); }
 }
 
+// Keep the library iterator and its state outside the ordinary partition frame.
+#[inline(never)]
+fn visit_exponential_runs<
+    T: Radixable<K>,
+    K: RadixKey,
+    C: Classifier<Converted<T, K>>,
+    F: Labeler<T, C::Label>,
+>(
+    arr: &mut [T],
+    classifier: &C,
+    label: &F,
+    policy: Policy,
+    stats: &mut Work,
+    depth: usize,
+    path: usize,
+) where
+    Converted<T, K>: NativeKey,
+{
+    use slice_group_by::GroupByMut;
+    let parent_len = arr.len();
+    let mut groups =
+        arr.exponential_group_by_key_mut(|item| label.classify(item));
+    while let Some(run) = label.in_context(|| groups.next()) {
+        let remaining = classifier.remaining(run[0].into_key_type());
+        work! { stats.runs_records += run.len(); }
+        if run.len() > 1 && remaining > 0 {
+            work! { stats.unresolved_records += run.len(); }
+            let heavy = run.len() > parent_len / 2;
+            visit::<T, K>(
+                run,
+                remaining,
+                policy,
+                heavy,
+                stats,
+                depth + 1,
+                path,
+            );
+        }
+    }
+}
+
 #[inline(never)]
 fn partition_packed<T: Radixable<K>, K: RadixKey, L: NativeKey>(
     arr: &mut [T],
@@ -906,9 +981,15 @@ fn partition_packed<T: Radixable<K>, K: RadixKey, L: NativeKey>(
     Converted<T, K>: NativeKey,
 {
     hakmem::isa::Isa::run(cpu, |cpu| {
-        partition_packed_with_isa::<T, K, L, _>(
-            arr, selection, policy, stats, depth, path, cpu,
-        )
+        if policy.sparse == SparseCompletion::PackedContext {
+            partition_packed_with_isa::<T, K, L, _, true>(
+                arr, selection, policy, stats, depth, path, cpu,
+            )
+        } else {
+            partition_packed_with_isa::<T, K, L, _, false>(
+                arr, selection, policy, stats, depth, path, cpu,
+            )
+        }
     });
 }
 
@@ -917,6 +998,7 @@ fn partition_packed_with_isa<
     K: RadixKey,
     L: NativeKey,
     I: hakmem::isa::Isa,
+    const CONTEXT: bool,
 >(
     arr: &mut [T],
     selection: super::packed_projection::Selection<Converted<T, K>>,
@@ -930,7 +1012,9 @@ fn partition_packed_with_isa<
 {
     let terminal = selection.remaining == 0;
     let projection =
-        super::packed_projection::Packed::<_, L, _>::with_isa(selection, cpu);
+        super::packed_projection::Packed::<_, L, _, CONTEXT>::with_isa(
+            selection, cpu,
+        );
     work! { stats.projection_nodes += 1; stats.projection_records += arr.len(); }
     partition::<T, K, _>(
         arr,

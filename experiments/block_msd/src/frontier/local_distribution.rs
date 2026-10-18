@@ -4,9 +4,10 @@
 //! originally active byte is still scattered once per record; local runs use
 //! the existing dense budget and oversized runs retain the block backend.
 
+use super::labeler::{Labeler, Masked};
 use super::{block, dense, work, NativeKey, Work};
 
-pub(super) fn distribute_local<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
+pub(super) fn distribute_local<T: Copy, U: NativeKey, F: Labeler<T, U>>(
     arr: &mut [T],
     label: &F,
     block_size: usize,
@@ -17,7 +18,7 @@ pub(super) fn distribute_local<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
     )
 }
 
-pub(super) fn distribute_cached<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
+pub(super) fn distribute_cached<T: Copy, U: NativeKey, F: Labeler<T, U>>(
     arr: &mut [T],
     label: &F,
     block_size: usize,
@@ -35,7 +36,7 @@ pub(super) fn distribute_cached<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
     )
 }
 
-pub(super) fn distribute_sampled<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
+pub(super) fn distribute_sampled<T: Copy, U: NativeKey, F: Labeler<T, U>>(
     arr: &mut [T],
     label: &F,
     block_size: usize,
@@ -56,7 +57,7 @@ pub(super) fn distribute_sampled<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
 /// Reuse a mask covering every varying bit of the observed labels. Extra bits
 /// are permitted; zero proves that every label is equal. Bits outside the mask
 /// must be constant throughout this partition.
-pub(super) fn distribute_prepared<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
+pub(super) fn distribute_prepared<T: Copy, U: NativeKey, F: Labeler<T, U>>(
     arr: &mut [T],
     label: &F,
     block_size: usize,
@@ -79,7 +80,7 @@ pub(super) fn distribute_prepared<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
 pub(super) fn distribute_prepared_sampled<
     T: Copy,
     U: NativeKey,
-    F: Fn(&T) -> U,
+    F: Labeler<T, U>,
 >(
     arr: &mut [T],
     label: &F,
@@ -103,7 +104,7 @@ pub(super) fn distribute_prepared_sampled<
 pub(super) fn distribute_prepared_grouped<
     T: Copy,
     U: NativeKey,
-    F: Fn(&T) -> U,
+    F: Labeler<T, U>,
 >(
     arr: &mut [T],
     label: &F,
@@ -128,7 +129,7 @@ pub(super) fn distribute_prepared_grouped<
 pub(super) fn distribute_prepared_packed<
     T: Copy,
     U: NativeKey,
-    F: Fn(&T) -> U,
+    F: Labeler<T, U>,
 >(
     arr: &mut [T],
     label: &F,
@@ -148,7 +149,7 @@ pub(super) fn distribute_prepared_packed<
     )
 }
 
-pub(super) fn distribute_reduced<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
+pub(super) fn distribute_reduced<T: Copy, U: NativeKey, F: Labeler<T, U>>(
     arr: &mut [T],
     label: &F,
     block_size: usize,
@@ -169,7 +170,7 @@ pub(super) fn distribute_reduced<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
 pub(super) fn distribute_sampled_reduced<
     T: Copy,
     U: NativeKey,
-    F: Fn(&T) -> U,
+    F: Labeler<T, U>,
 >(
     arr: &mut [T],
     label: &F,
@@ -191,7 +192,7 @@ pub(super) fn distribute_sampled_reduced<
 fn distribute_impl<
     T: Copy,
     U: NativeKey,
-    F: Fn(&T) -> U,
+    F: Labeler<T, U>,
     const CACHE_AWARE: bool,
     const SAMPLE_GUARD: bool,
     const REDUCED_RADIX: bool,
@@ -207,18 +208,18 @@ fn distribute_impl<
     if arr.len() < 2 {
         return 0;
     }
-    let variation = match label_mask {
+    let variation = label.in_context(|| match label_mask {
         Some(mask) => mask,
         None => {
-            let first = label(&arr[0]);
+            let first = label.classify(&arr[0]);
             let mut variation = U::from_u128(0);
             for item in arr.iter() {
-                variation |= label(item) ^ first;
+                variation |= label.classify(item) ^ first;
             }
             work! { stats.label_records += arr.len(); }
             variation
         },
-    };
+    });
     let levels = (U::BITS - variation.leading_zeros() as usize + 7) / 8;
     if levels == 0 {
         return 0;
@@ -254,9 +255,11 @@ fn distribute_impl<
             );
         }
         let mut lengths = [0usize; 256];
-        for item in arr.iter() {
-            lengths[label(item).byte(high_byte)] += 1;
-        }
+        label.in_context(|| {
+            for item in arr.iter() {
+                lengths[label.classify(item).byte(high_byte)] += 1;
+            }
+        });
         work! { stats.label_records += arr.len(); }
         if lengths
             .iter()
@@ -292,17 +295,20 @@ fn distribute_impl<
     let low_variation = variation & U::mask(high_byte * 8);
     let mut start = 0;
     while start < arr.len() {
-        let high = label(&arr[start]).byte(high_byte);
-        work! { stats.label_records += 1; }
-        let mut end = start + 1;
-        while end < arr.len() {
-            let next_high = label(&arr[end]).byte(high_byte);
+        let end = label.in_context(|| {
+            let high = label.classify(&arr[start]).byte(high_byte);
             work! { stats.label_records += 1; }
-            if next_high != high {
-                break;
+            let mut end = start + 1;
+            while end < arr.len() {
+                let next_high = label.classify(&arr[end]).byte(high_byte);
+                work! { stats.label_records += 1; }
+                if next_high != high {
+                    break;
+                }
+                end += 1;
             }
-            end += 1;
-        }
+            end
+        });
         finish_label::<T, U, F, REDUCED_RADIX>(
             &mut arr[start..end],
             label,
@@ -332,7 +338,7 @@ fn dense_fits<T>(length: usize, levels: usize, budget: usize) -> bool {
 
 /// Predict only whether to pay for the full histogram. A sample may reject a
 /// profitable split; every accepted split still needs the exact population check.
-fn sample_runs_fit_dense<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
+fn sample_runs_fit_dense<T: Copy, U: NativeKey, F: Labeler<T, U>>(
     arr: &[T],
     label: &F,
     high_byte: usize,
@@ -349,7 +355,7 @@ fn sample_runs_fit_dense<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
         // Equivalent to floor(i * span / 63), with unique indices from 0 to
         // span and no overflowing product even for a very large input.
         let index = i * stride + (i * remainder) / 63;
-        let length = &mut lengths[label(&arr[index]).byte(high_byte)];
+        let length = &mut lengths[label.classify(&arr[index]).byte(high_byte)];
         *length += 1;
         maximum = maximum.max(usize::from(*length));
     }
@@ -367,7 +373,7 @@ fn sample_runs_fit_dense<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
 fn finish_label<
     T: Copy,
     U: NativeKey,
-    F: Fn(&T) -> U,
+    F: Labeler<T, U>,
     const REDUCED_RADIX: bool,
 >(
     arr: &mut [T],
@@ -400,7 +406,7 @@ fn finish_label<
 /// In each processed byte, every digit is (digit & v.byte) | c for one common
 /// c; removing c preserves order and equality in that byte. Unprocessed bytes
 /// need not be constant. Normalized active digits are at most v.byte.
-fn block_bytes<T: Copy, U: NativeKey, F: Fn(&T) -> U, const REDUCED: bool>(
+fn block_bytes<T: Copy, U: NativeKey, F: Labeler<T, U>, const REDUCED: bool>(
     arr: &mut [T],
     label: &F,
     levels: usize,
@@ -415,7 +421,7 @@ fn block_bytes<T: Copy, U: NativeKey, F: Fn(&T) -> U, const REDUCED: bool>(
         255
     };
     if maximum < 255 {
-        let normalized = |item: &T| label(item) & variation;
+        let normalized = Masked { labeler: label, mask: variation };
         let mut sorter = block::Sorter::new(arr, maximum + 1, block_size);
         for byte in 0..levels {
             if variation.byte(byte) != 0 {

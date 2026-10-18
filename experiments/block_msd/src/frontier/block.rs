@@ -27,6 +27,7 @@
 
 //! Experiment copy of submitted_lsd::Sorter. Only digit extraction is generalized;
 //! the allocation, scatter, fixup and compact protocol is retained.
+use super::labeler::Labeler;
 use std::{marker::PhantomData, mem::MaybeUninit, ptr};
 #[derive(Clone, Copy)]
 struct Partial {
@@ -162,7 +163,7 @@ impl<'a, T: Copy> Sorter<'a, T> {
             .sum();
         assert_eq!(total, self.length);
     }
-    pub(super) fn step<U: super::NativeKey, F: Fn(&T) -> U>(
+    pub(super) fn step<U: super::NativeKey, F: Labeler<T, U>>(
         &mut self,
         label: &F,
         byte: usize,
@@ -171,7 +172,7 @@ impl<'a, T: Copy> Sorter<'a, T> {
     }
     /// Reorder writes within each input block while preserving each bucket's
     /// input order. All digit variation must be covered by this one-bit mask.
-    pub(super) fn step_grouped<U: super::NativeKey, F: Fn(&T) -> U>(
+    pub(super) fn step_grouped<U: super::NativeKey, F: Labeler<T, U>>(
         &mut self,
         label: &F,
         byte: usize,
@@ -180,7 +181,7 @@ impl<'a, T: Copy> Sorter<'a, T> {
         assert!(varying_bit.is_power_of_two() && byte < U::BITS / 8);
         self.step_impl(label, byte, Some(varying_bit));
     }
-    fn step_impl<U: super::NativeKey, F: Fn(&T) -> U>(
+    fn step_impl<U: super::NativeKey, F: Labeler<T, U>>(
         &mut self,
         label: &F,
         byte: usize,
@@ -266,72 +267,74 @@ impl<'a, T: Copy> Sorter<'a, T> {
     // Keep one scalar pass outside the sixteen-way byte dispatcher so the
     // compiler can inline record writes without expanding the whole step.
     #[inline(never)]
-    fn scatter<U: super::NativeKey, F: Fn(&T) -> U, const BYTE: usize>(
+    fn scatter<U: super::NativeKey, F: Labeler<T, U>, const BYTE: usize>(
         &mut self,
         label: &F,
         buckets: &mut [Bucket<T>],
         counts: &mut [usize],
     ) -> usize {
-        let mut output = self.radix_range;
-        let mut partial = 0;
-        for input in self.radix_range..self.fill {
-            let source = self.block(self.perm[input] as usize);
-            let length = self.length(input, &mut partial);
-            let mut write = |offset: usize| {
-                // SAFETY: the grouped and remainder loops visit exactly the
-                // initialized prefix. Recycling cannot overwrite an unread cell.
-                let value = unsafe { source.add(offset).read() };
-                let b = label(&value).byte(BYTE);
-                // SAFETY: next points to an unused cell in the output block.
-                // The bucket index is bounds-checked before the pointer write.
-                // An output block is recycled only after its input is consumed:
-                // after J reads, at most floor(J / block_size) new blocks have
-                // been reserved. Equality output == input requires consuming a
-                // full input block, and the reserved block is written only on
-                // the next element. See Lemma 1 of the paper.
-                let bucket = &mut buckets[b];
-                // Keep the destination cursor in a local: raw record stores
-                // can otherwise force a reload of the bucket cursor.
-                let next = bucket.next;
-                let end = bucket.end;
-                let next = unsafe {
-                    ptr::copy(source.add(offset), next, 1);
-                    next.add(1)
-                };
-                bucket.next = next;
-                if next == end {
-                    debug_assert!(output <= input);
-                    let out = self.block(self.perm[output] as usize);
-                    *bucket = Bucket {
-                        next: out,
-                        end: unsafe { out.add(self.block_size) },
+        label.in_context(|| {
+            let mut output = self.radix_range;
+            let mut partial = 0;
+            for input in self.radix_range..self.fill {
+                let source = self.block(self.perm[input] as usize);
+                let length = self.length(input, &mut partial);
+                let mut write = |offset: usize| {
+                    // SAFETY: the grouped and remainder loops visit exactly the
+                    // initialized prefix. Recycling cannot overwrite an unread cell.
+                    let value = unsafe { source.add(offset).read() };
+                    let b = label.classify(&value).byte(BYTE);
+                    // SAFETY: next points to an unused cell in the output block.
+                    // The bucket index is bounds-checked before the pointer write.
+                    // An output block is recycled only after its input is consumed:
+                    // after J reads, at most floor(J / block_size) new blocks have
+                    // been reserved. Equality output == input requires consuming a
+                    // full input block, and the reserved block is written only on
+                    // the next element. See Lemma 1 of the paper.
+                    let bucket = &mut buckets[b];
+                    // Keep the destination cursor in a local: raw record stores
+                    // can otherwise force a reload of the bucket cursor.
+                    let next = bucket.next;
+                    let end = bucket.end;
+                    let next = unsafe {
+                        ptr::copy(source.add(offset), next, 1);
+                        next.add(1)
                     };
-                    self.usage[output] = b as u8;
-                    counts[b] += 1;
-                    output += 1;
+                    bucket.next = next;
+                    if next == end {
+                        debug_assert!(output <= input);
+                        let out = self.block(self.perm[output] as usize);
+                        *bucket = Bucket {
+                            next: out,
+                            end: unsafe { out.add(self.block_size) },
+                        };
+                        self.usage[output] = b as u8;
+                        counts[b] += 1;
+                        output += 1;
+                    }
+                };
+                // Bound expansion by copy volume: at most four records and four
+                // machine words. The group size is constant after monomorphization.
+                let group = (4 * std::mem::size_of::<usize>()
+                    / std::mem::size_of::<T>().max(1))
+                .clamp(1, 4);
+                let complete = length - length % group;
+                for start in (0..complete).step_by(group) {
+                    for offset in 0..group {
+                        write(start + offset);
+                    }
                 }
-            };
-            // Bound expansion by copy volume: at most four records and four
-            // machine words. The group size is constant after monomorphization.
-            let group = (4 * std::mem::size_of::<usize>()
-                / std::mem::size_of::<T>().max(1))
-            .clamp(1, 4);
-            let complete = length - length % group;
-            for start in (0..complete).step_by(group) {
-                for offset in 0..group {
-                    write(start + offset);
+                for offset in complete..length {
+                    write(offset);
                 }
             }
-            for offset in complete..length {
-                write(offset);
-            }
-        }
-        output
+            output
+        })
     }
     // One body per record/label type; the native bit mask is prepared once,
     // outside the record loops, without sixteen additional const-byte bodies.
     #[inline(never)]
-    fn scatter_grouped<U: super::NativeKey, F: Fn(&T) -> U>(
+    fn scatter_grouped<U: super::NativeKey, F: Labeler<T, U>>(
         &mut self,
         label: &F,
         byte: usize,
@@ -339,45 +342,48 @@ impl<'a, T: Copy> Sorter<'a, T> {
         buckets: &mut [Bucket<T>],
         counts: &mut [usize],
     ) -> usize {
-        let mut first_digit = None;
-        let mut partial = 0;
-        for input in self.radix_range..self.fill {
-            if self.length(input, &mut partial) != 0 {
-                let source = self.block(self.perm[input] as usize);
-                // SAFETY: the chosen logical block has a live first cell.
-                first_digit = Some(label(unsafe { &*source }).byte(byte));
-                break;
+        label.in_context(|| {
+            let mut first_digit = None;
+            let mut partial = 0;
+            for input in self.radix_range..self.fill {
+                if self.length(input, &mut partial) != 0 {
+                    let source = self.block(self.perm[input] as usize);
+                    // SAFETY: the chosen logical block has a live first cell.
+                    first_digit =
+                        Some(label.classify(unsafe { &*source }).byte(byte));
+                    break;
+                }
             }
-        }
-        let Some(first_digit) = first_digit else {
-            return self.radix_range;
-        };
-        let low = first_digit & !usize::from(varying_bit);
-        let high = low | usize::from(varying_bit);
-        let key_bit = U::from_u128(u128::from(varying_bit) << (byte * 8));
-        let zero = U::from_u128(0);
-        let Bucket { next: mut next_low, end: mut end_low } = buckets[low];
-        let Bucket { next: mut next_high, end: mut end_high } = buckets[high];
-        let mut output = self.radix_range;
-        let mut partial = 0;
-        for input in self.radix_range..self.fill {
-            let source = self.block(self.perm[input] as usize);
-            let length = self.length(input, &mut partial);
-            for start in (0..length).step_by(usize::BITS as usize) {
-                let take = (length - start).min(usize::BITS as usize);
-                let mut high_bits = 0usize;
-                for offset in 0..take {
-                    // SAFETY: labels are evaluated once, in original order,
-                    // on the live prefix before any writes in this group.
-                    let is_high =
-                        label(unsafe { &*source.add(start + offset) })
+            let Some(first_digit) = first_digit else {
+                return self.radix_range;
+            };
+            let low = first_digit & !usize::from(varying_bit);
+            let high = low | usize::from(varying_bit);
+            let key_bit = U::from_u128(u128::from(varying_bit) << (byte * 8));
+            let zero = U::from_u128(0);
+            let Bucket { next: mut next_low, end: mut end_low } = buckets[low];
+            let Bucket { next: mut next_high, end: mut end_high } =
+                buckets[high];
+            let mut output = self.radix_range;
+            let mut partial = 0;
+            for input in self.radix_range..self.fill {
+                let source = self.block(self.perm[input] as usize);
+                let length = self.length(input, &mut partial);
+                for start in (0..length).step_by(usize::BITS as usize) {
+                    let take = (length - start).min(usize::BITS as usize);
+                    let mut high_bits = 0usize;
+                    for offset in 0..take {
+                        // SAFETY: labels are evaluated once, in original order,
+                        // on the live prefix before any writes in this group.
+                        let is_high = label
+                            .classify(unsafe { &*source.add(start + offset) })
                             & key_bit
                             != zero;
-                    high_bits |= usize::from(is_high) << offset;
-                }
-                // take is 1..=usize::BITS, so this never shifts by the width.
-                let live = usize::MAX >> (usize::BITS as usize - take);
-                macro_rules! copy_bucket {
+                        high_bits |= usize::from(is_high) << offset;
+                    }
+                    // take is 1..=usize::BITS, so this never shifts by the width.
+                    let live = usize::MAX >> (usize::BITS as usize - take);
+                    macro_rules! copy_bucket {
                     ($bits:expr, $bucket:ident, $next:ident, $end:ident) => {{
                         let mut selected = $bits;
                         while selected != 0 {
@@ -409,14 +415,15 @@ impl<'a, T: Copy> Sorter<'a, T> {
                         }
                     }};
                 }
-                copy_bucket!(live ^ high_bits, low, next_low, end_low);
-                copy_bucket!(high_bits, high, next_high, end_high);
+                    copy_bucket!(live ^ high_bits, low, next_low, end_low);
+                    copy_bucket!(high_bits, high, next_high, end_high);
+                }
             }
-        }
-        // The usual fixup still owns bucket ordering and partial-block state.
-        buckets[low] = Bucket { next: next_low, end: end_low };
-        buckets[high] = Bucket { next: next_high, end: end_high };
-        output
+            // The usual fixup still owns bucket ordering and partial-block state.
+            buckets[low] = Bucket { next: next_low, end: end_low };
+            buckets[high] = Bucket { next: next_high, end: end_high };
+            output
+        })
     }
     pub(super) fn compact(&mut self) {
         for i in 0..self.perm.len() {

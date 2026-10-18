@@ -7,11 +7,13 @@
 use std::{mem::MaybeUninit, ptr};
 use voracious_radix_sort::{RadixKey, Radixable};
 mod block;
+mod labeler;
 mod local_distribution;
 mod ordered_tiled;
 mod pa;
 mod packed_projection;
 mod prefix_band;
+use labeler::Labeler;
 pub use pa::{sort_pa_experiment, sort_pa_with_threshold, PaExperiment};
 #[cfg(test)]
 mod tests;
@@ -36,7 +38,7 @@ pub struct Config {
     pub block: usize,
 }
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq, Eq)]
 pub struct Work {
     pub projection_nodes: usize,
     pub projection_records: usize,
@@ -160,6 +162,11 @@ trait Classifier<U: NativeKey> {
     const USE_COMPACT_RADIX: bool = false;
     fn label(&self, key: U) -> Self::Label;
     fn remaining(&self, key: U) -> usize;
+
+    #[inline(always)]
+    fn in_context<R>(&self, kernel: impl FnOnce() -> R) -> R {
+        kernel()
+    }
 }
 
 struct Identity;
@@ -470,17 +477,20 @@ fn distribute_children<
     work! { stats.label_evals += label_evals.get(); }
 }
 
-fn distribute<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
+fn distribute<T: Copy, U: NativeKey, F: Labeler<T, U>>(
     arr: &mut [T],
     label: &F,
     block: usize,
     stats: &mut Work,
 ) -> usize {
-    let first = label(&arr[0]);
-    let mut variation = U::from_u128(0);
-    for item in arr.iter() {
-        variation |= label(item) ^ first;
-    }
+    let variation = label.in_context(|| {
+        let first = label.classify(&arr[0]);
+        let mut variation = U::from_u128(0);
+        for item in arr.iter() {
+            variation |= label.classify(item) ^ first;
+        }
+        variation
+    });
     work! { stats.label_records += arr.len(); }
     let levels = (U::BITS - variation.leading_zeros() as usize + 7) / 8;
     if levels == 0 {
@@ -514,57 +524,63 @@ fn distribute<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
     passes
 }
 
-fn dense<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
+fn dense<T: Copy, U: NativeKey, F: Labeler<T, U>>(
     arr: &mut [T],
     label: &F,
     levels: usize,
     variation: U,
     stats: &mut Work,
 ) {
-    let mut hist = vec![[0usize; 256]; levels];
-    for item in arr.iter() {
-        let key = label(item);
-        for i in 0..levels {
-            hist[i][key.byte(i)] += 1;
-        }
-    }
-    work! { stats.label_records += arr.len(); }
-    let mut scratch = vec![MaybeUninit::<T>::uninit(); arr.len()];
-    let input = arr.as_mut_ptr();
-    let buffer = scratch.as_mut_ptr().cast::<T>();
-    let mut in_buffer = false;
-    for i in 0..levels {
-        if variation.byte(i) == 0 {
-            continue;
-        }
-        let mut heads = [0usize; 256];
-        let mut ends = [0usize; 256];
-        let mut offset = 0;
-        for b in 0..256 {
-            heads[b] = offset;
-            offset += hist[i][b];
-            ends[b] = offset;
-        }
-        let (source, destination) =
-            if in_buffer { (buffer, input) } else { (input, buffer) };
-        // SAFETY: the source is initialized after the preceding complete pass;
-        // allocations are disjoint, every cursor stays inside its own bucket.
-        for j in 0..arr.len() {
-            let item = unsafe { &*source.add(j) };
-            let b = label(item).byte(i);
-            assert!(heads[b] < ends[b], "key changed during distribution");
-            unsafe {
-                ptr::copy_nonoverlapping(item, destination.add(heads[b]), 1);
+    label.in_context(|| {
+        let mut hist = vec![[0usize; 256]; levels];
+        for item in arr.iter() {
+            let key = label.classify(item);
+            for i in 0..levels {
+                hist[i][key.byte(i)] += 1;
             }
-            heads[b] += 1;
         }
-        assert_eq!(heads, ends, "key changed during distribution");
-        in_buffer = !in_buffer;
-    }
-    if in_buffer {
-        unsafe {
-            ptr::copy_nonoverlapping(buffer, input, arr.len());
+        work! { stats.label_records += arr.len(); }
+        let mut scratch = vec![MaybeUninit::<T>::uninit(); arr.len()];
+        let input = arr.as_mut_ptr();
+        let buffer = scratch.as_mut_ptr().cast::<T>();
+        let mut in_buffer = false;
+        for i in 0..levels {
+            if variation.byte(i) == 0 {
+                continue;
+            }
+            let mut heads = [0usize; 256];
+            let mut ends = [0usize; 256];
+            let mut offset = 0;
+            for b in 0..256 {
+                heads[b] = offset;
+                offset += hist[i][b];
+                ends[b] = offset;
+            }
+            let (source, destination) =
+                if in_buffer { (buffer, input) } else { (input, buffer) };
+            // SAFETY: the source is initialized after the preceding complete pass;
+            // allocations are disjoint, every cursor stays inside its own bucket.
+            for j in 0..arr.len() {
+                let item = unsafe { &*source.add(j) };
+                let b = label.classify(item).byte(i);
+                assert!(heads[b] < ends[b], "key changed during distribution");
+                unsafe {
+                    ptr::copy_nonoverlapping(
+                        item,
+                        destination.add(heads[b]),
+                        1,
+                    );
+                }
+                heads[b] += 1;
+            }
+            assert_eq!(heads, ends, "key changed during distribution");
+            in_buffer = !in_buffer;
         }
-        work! { stats.compact_records += arr.len(); }
-    }
+        if in_buffer {
+            unsafe {
+                ptr::copy_nonoverlapping(buffer, input, arr.len());
+            }
+            work! { stats.compact_records += arr.len(); }
+        }
+    })
 }
