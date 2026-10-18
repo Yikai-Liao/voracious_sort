@@ -127,7 +127,6 @@ pub trait NativeKey:
     fn count_ones(self) -> u32;
     fn byte(self, index: usize) -> usize;
     fn mask(bits: usize) -> Self;
-    fn to_u32(self) -> u32;
     fn to_u128(self) -> u128;
     /// Architecture selection and fallback belong to the dependency.
     fn pack_bits<I: hakmem::isa::Isa>(self, mask: Self, cpu: I) -> u32;
@@ -136,7 +135,6 @@ macro_rules! native {
     ($($t:ty),*) => {$(impl NativeKey for $t {
         const BITS:usize=<$t>::BITS as usize;
         #[inline] fn from_u128(x:u128)->Self { x as Self }
-        #[inline] fn to_u32(self)->u32 { self as u32 }
         #[inline] fn to_u128(self)->u128 { self as u128 }
         #[inline] fn pack_bits<I: hakmem::isa::Isa>(self, mask: Self, cpu: I)->u32 {
             cpu.pext(self, mask) as u32

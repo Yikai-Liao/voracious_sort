@@ -26,5 +26,6 @@ cf_work = []
 frontier_work = []
 frontier_narrow_screen = []
 
-# Exercise the dependency's portable extraction and dispatch implementation.
+# Disable hardware admission and keep the original PA route. The dependency's
+# portable primitive is exercised by isolated correctness tests only.
 projection_portable = ["hakmem/portable"]
