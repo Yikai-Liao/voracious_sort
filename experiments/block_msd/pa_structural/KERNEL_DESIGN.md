@@ -35,6 +35,23 @@ checked X86V3 token on eligible x86-64 builds. Without that token, or with
 hardware admission; it does not enable a production software-compression path.
 There are no newly introduced unsafe blocks in this execution change.
 
+## Nested write expansion
+
+The ordinary-target q64 screen exposed another boundary inside scatter: the
+per-record `write` closure was outlined and shared with an ordinary-target
+instantiation. Its body retained two u128 extraction-helper calls and software
+popcount even when its caller entered the checked ISA context. The u32 screen
+had not exercised this code shape. The rejected cohort is archived at 279c4e2.
+
+The write body now expands as a local macro in the kernel. This preserves its
+loads, copies, bucket cursor updates and recycling order, while removing the
+separate Rust function that lost the instruction context. Each expression
+argument is evaluated once. The outer scatter remains out of line; expansion
+is still bounded by the existing copy-volume unroll limit. No admission rule,
+bit budget or workspace threshold changes. Final generic inspection must check
+u128 masked scatter as well as u32 scatter before timing, and end-to-end
+confirmation determines whether the code-generation fix removes the slowdown.
+
 ## Sorting and ownership invariants
 
 The context change preserves label values, original-coordinate remainder caps,

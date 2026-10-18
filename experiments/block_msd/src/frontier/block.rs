@@ -279,7 +279,12 @@ impl<'a, T: Copy> Sorter<'a, T> {
             for input in self.radix_range..self.fill {
                 let source = self.block(self.perm[input] as usize);
                 let length = self.length(input, &mut partial);
-                let mut write = |offset: usize| {
+                // Expand the record write inside this ISA context. A nested
+                // closure can be outlined and shared with a generic-target
+                // instantiation, restoring per-record extraction helpers.
+                macro_rules! write {
+                    ($offset:expr) => {{
+                    let offset = $offset;
                     // SAFETY: the grouped and remainder loops visit exactly the
                     // initialized prefix. Recycling cannot overwrite an unread cell.
                     let value = unsafe { source.add(offset).read() };
@@ -312,7 +317,8 @@ impl<'a, T: Copy> Sorter<'a, T> {
                         counts[b] += 1;
                         output += 1;
                     }
-                };
+                    }};
+                }
                 // Bound expansion by copy volume: at most four records and four
                 // machine words. The group size is constant after monomorphization.
                 let group = (4 * std::mem::size_of::<usize>()
@@ -321,11 +327,11 @@ impl<'a, T: Copy> Sorter<'a, T> {
                 let complete = length - length % group;
                 for start in (0..complete).step_by(group) {
                     for offset in 0..group {
-                        write(start + offset);
+                        write!(start + offset);
                     }
                 }
                 for offset in complete..length {
-                    write(offset);
+                    write!(offset);
                 }
             }
             output
