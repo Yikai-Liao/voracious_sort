@@ -1,0 +1,44 @@
+{
+  "candidate": "Pa_packed",
+  "elf_sha256": "58f66bc97a1432d16117d95150e86ee880bc13566ffa82cff47c13818174accf",
+  "cells": 48,
+  "rows": 3456,
+  "comparisons": {
+    "L_frozen": {
+      "median_wins": 44,
+      "p90_wins": 42,
+      "p10_losses": 2
+    },
+    "Pa_unified_groups_t16777216": {
+      "median_wins": 35,
+      "p90_wins": 28,
+      "p10_losses": 1
+    },
+    "Rollercoaster": {
+      "median_wins": 37,
+      "p90_wins": 31,
+      "p10_losses": 7
+    }
+  },
+  "regression_signals": [
+    {
+      "cell": [
+        "u16_id8",
+        "uniform",
+        "1048576",
+        "512",
+        "42"
+      ],
+      "median": 1.0664793833620916,
+      "p10": 1.0077868495114448,
+      "p90": 1.2271394095895336,
+      "slower": 11,
+      "ms": 9.04273425,
+      "aa": {
+        "median": 1.0135691925703796,
+        "p10": 0.942553052157587,
+        "p90": 1.0240205369783397
+      }
+    }
+  ]
+}

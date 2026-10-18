@@ -47,10 +47,10 @@ def main():
     output.parent.mkdir(exist_ok=True)
     assert not output.exists(), f'refusing to overwrite {output}'
     command = ['taskset', '-c', a.cpu, str(binary), str(a.n), str(a.reps), a.methods, a.cases, a.layouts, a.kind, str(a.block), str(a.seed)]
-    meta = dict(command=command, args=vars(a), frozen=frozen, started_ns=time.time_ns(), meminfo_before=Path('/proc/meminfo').read_text(), load_before=Path('/proc/loadavg').read_text())
+    meta = dict(command=command, args=vars(a), frozen=frozen, started_ns=time.time_ns(), meminfo_before=Path('/proc/meminfo').read_text(), load_before=Path('/proc/loadavg').read_text(), vmstat_before=Path('/proc/vmstat').read_text())
     with output.open('w') as out, output.with_suffix('.stderr').open('w') as err:
         result = subprocess.run(command, cwd=REPO, stdout=out, stderr=err)
-    meta.update(returncode=result.returncode, ended_ns=time.time_ns(), meminfo_after=Path('/proc/meminfo').read_text(), load_after=Path('/proc/loadavg').read_text())
+    meta.update(returncode=result.returncode, ended_ns=time.time_ns(), meminfo_after=Path('/proc/meminfo').read_text(), load_after=Path('/proc/loadavg').read_text(), vmstat_after=Path('/proc/vmstat').read_text())
     usage = resource.getrusage(resource.RUSAGE_CHILDREN)
     meta['usage'] = {k: getattr(usage, k) for k in ['ru_utime','ru_stime','ru_maxrss','ru_minflt','ru_majflt','ru_nivcsw']}
     output.with_suffix('.json').write_text(json.dumps(meta, indent=2) + '\n')

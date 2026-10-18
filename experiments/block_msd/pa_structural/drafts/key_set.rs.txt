@@ -1,0 +1,137 @@
+//! Generalize one exact majority to a bounded ordered set of exact keys.
+//! Sampling controls cost; a complete scan certifies recursive shrinkage.
+use super::{work, Classifier, Converted, NativeKey, RadixKey, Radixable, Work};
+
+pub(super) struct KeySet<U, const CAPACITY: usize> {
+    keys: [U; CAPACITY],
+    len: usize,
+    mask: U,
+    remaining: usize,
+}
+
+impl<U: NativeKey, const CAPACITY: usize> KeySet<U, CAPACITY> {
+    #[inline]
+    fn position(&self, key: U) -> Result<usize, usize> {
+        self.keys[..self.len].binary_search(&(key & self.mask))
+    }
+
+    pub(super) fn approve<T: Radixable<K>, K: RadixKey>(
+        self, arr: &[T], stats: &mut Work,
+    ) -> Option<(Self, usize)>
+    where <T as Radixable<K>>::Key: RadixKey<Key=U> {
+        let mut covered = 0;
+        for item in arr {
+            covered += usize::from(self.position(item.into_key_type()).is_ok());
+        }
+        work! { stats.candidate_records += arr.len(); }
+        if covered > arr.len()/2 { Some((self, covered)) } else { None }
+    }
+
+    pub(super) fn variation(&self) -> u8 {
+        let maximum = (2*self.len) as u8;
+        u8::MAX >> maximum.leading_zeros()
+    }
+}
+
+impl<U: NativeKey, const CAPACITY: usize> Classifier<U> for KeySet<U, CAPACITY> {
+    type Label = u8;
+    const PACKED: bool = true;
+    #[inline]
+    fn label(&self, key: U) -> u8 {
+        match self.position(key) {
+            Ok(rank) => (2*rank+1) as u8,
+            Err(gap) => (2*gap) as u8,
+        }
+    }
+    fn remaining(&self, key: U) -> usize {
+        if self.position(key).is_ok() { 0 } else { self.remaining }
+    }
+}
+
+#[inline(never)]
+pub(super) fn sample<T: Radixable<K>, K: RadixKey, const CAPACITY: usize>(
+    arr: &[T], cap: usize, stats: &mut Work,
+) -> Option<KeySet<Converted<T,K>, CAPACITY>>
+where Converted<T,K>: NativeKey {
+    assert!(CAPACITY > 1 && CAPACITY <= 127);
+    let zero = Converted::<T,K>::from_u128(0);
+    let mask = Converted::<T,K>::mask(cap);
+    let mut samples = [zero;64];
+    let span = arr.len()-1;
+    for (i,slot) in samples.iter_mut().enumerate() {
+        *slot=arr[i*(span/63)+i*(span%63)/63].into_key_type() & mask;
+    }
+    work! { stats.probe_records += 64; }
+    samples.sort_unstable();
+    let distinct=1+samples.windows(2).filter(|p|p[0]!=p[1]).count();
+    let minimum=if distinct<=CAPACITY {1} else {3};
+    let mut keys=[zero;CAPACITY];
+    let mut len=0;
+    let mut support=0;
+    let mut start=0;
+    while start<samples.len() {
+        let mut end=start+1;
+        while end<samples.len() && samples[end]==samples[start] { end+=1; }
+        let count=end-start;
+        if count>=minimum {
+            if len==CAPACITY { return None; }
+            keys[len]=samples[start];len+=1;support+=count;
+        }
+        start=end;
+    }
+    // This classifier needs a separate exact coverage scan. Require a
+    // stronger sample signal than the scan-fused PrefixBand cost gate.
+    if len<2 || support<48 { return None; }
+    Some(KeySet { keys,len,mask,remaining:cap })
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    const CAPACITY: usize = 32;
+    #[test]
+    fn exact_keys_and_gaps_preserve_original_order_and_caps() {
+        for bits in 1..=8 {
+            let limit=1u16<<bits;
+            for step in 1..=limit/2 {
+                let mut keys=[0u16;CAPACITY];
+                let len=((limit-1)/step).min(CAPACITY as u16) as usize;
+                if len<2 { continue; }
+                for (i,key) in keys[..len].iter_mut().enumerate() { *key=(i as u16+1)*step; }
+                let set=KeySet { keys,len,mask:limit-1,remaining:bits };
+                let mut previous=0;
+                let mut max_unresolved=0;
+                for key in 0..limit {
+                    let label=set.label(key|0x8000);
+                    assert!(label>=previous);
+                    assert_eq!(label & !set.variation(),0);
+                    let hit=set.keys[..len].contains(&key);
+                    assert_eq!(label%2==1,hit);
+                    assert_eq!(set.remaining(key),if hit {0} else {bits});
+                    if !hit {max_unresolved+=1;}
+                    previous=label;
+                }
+                assert_eq!(max_unresolved,limit as usize-len);
+            }
+        }
+    }
+    #[test]
+    fn approval_requires_strict_majority_and_sampling_is_only_a_cost_gate() {
+        let make=||KeySet {keys:[3u16,5,0,0,0,0,0,0],len:2,mask:u16::MAX,remaining:16};
+        for n in [129,257,1025] {
+            for covered in [n/2,n/2+1,n] {
+                let input:Vec<_>=(0..n).map(|i|if i<covered {if i%2==0 {3} else {5}} else {1000+i as u16}).collect();
+                let approved=make().approve::<_,u16>(&input,&mut Work::default());
+                assert_eq!(approved.is_some(),covered>n/2);
+                if let Some((set,count))=approved {
+                    assert_eq!(count,covered);
+                    let mut gaps=[0usize;17];
+                    for key in input {if set.remaining(key)>0 {gaps[set.label(key) as usize]+=1;}}
+                    assert!(gaps.into_iter().all(|size|size<=n/2));
+                }
+            }
+        }
+        let random:Vec<u16>=(0..1025).map(|i|i as u16).collect();
+        assert!(sample::<_,u16,32>(&random,16,&mut Work::default()).is_none());
+    }
+}
