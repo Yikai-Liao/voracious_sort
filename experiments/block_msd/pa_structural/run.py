@@ -34,6 +34,10 @@ def main():
     p.add_argument('--cases', default='uniform,sparse')
     p.add_argument('--layouts', default='u32,u64,u128,wide32,large128')
     a = p.parse_args()
+    if 'reverse_unique' in a.cases.split(','):
+        bits = {'u8':8, 'u8_id8':8, 'u16':16, 'u16_id8':16, 'u32':32, 'small8':32, 'large128':32, 'u64':64, 'u128':128, 'wide32':128}
+        if any(a.n > (1 << bits[layout]) - 1 for layout in a.layouts.split(',')):
+            p.error('reverse_unique needs enough distinct key values for n; use wide layouts or reduce n')
     binary = REPO / 'experiments/block_msd/target/pa-structural' / a.binary
     frozen = json.loads(Path(str(binary) + '.json').read_text())
     assert frozen['sha256'] == digest(binary)

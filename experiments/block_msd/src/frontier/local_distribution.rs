@@ -123,6 +123,31 @@ pub(super) fn distribute_prepared_grouped<
     )
 }
 
+/// Compact projected digits also shrink the fixed bucket workspace when fewer
+/// than eight output bits vary. The dense admission budget remains unchanged.
+pub(super) fn distribute_prepared_packed<
+    T: Copy,
+    U: NativeKey,
+    F: Fn(&T) -> U,
+>(
+    arr: &mut [T],
+    label: &F,
+    block_size: usize,
+    workspace_threshold: usize,
+    label_mask: U,
+    stats: &mut Work,
+) -> usize {
+    distribute_impl::<T, U, F, true, true, true>(
+        arr,
+        label,
+        block_size,
+        workspace_threshold,
+        Some(label_mask),
+        true,
+        stats,
+    )
+}
+
 pub(super) fn distribute_reduced<T: Copy, U: NativeKey, F: Fn(&T) -> U>(
     arr: &mut [T],
     label: &F,

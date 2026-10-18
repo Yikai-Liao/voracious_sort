@@ -304,6 +304,9 @@ const METHODS: &[&str] = &[
     "Reverse_only",
     "Reverse_stable",
     "Rollercoaster_repaired",
+    "Pa_packed",
+    "Pa_runs",
+    "Pa_packed_runs",
     "Pa_identity",
     "Pa_projected",
     "Pa_local",
@@ -370,6 +373,50 @@ const METHODS: &[&str] = &[
 const CASES: &[&str] = &[
     "reverse_unique",
     "reverse_groups",
+    "project15_contig",
+    "project15_spaced",
+    "project15_cross",
+    "project15_spaced_skew",
+    "project16_contig",
+    "project16_spaced",
+    "project16_cross",
+    "project16_spaced_skew",
+    "project17_contig",
+    "project17_spaced",
+    "project17_cross",
+    "project17_spaced_skew",
+    "project23_contig",
+    "project23_spaced",
+    "project23_cross",
+    "project23_spaced_skew",
+    "project24_contig",
+    "project24_spaced",
+    "project24_cross",
+    "project24_spaced_skew",
+    "project25_contig",
+    "project25_spaced",
+    "project25_cross",
+    "project25_spaced_skew",
+    "project31_contig",
+    "project31_spaced",
+    "project31_cross",
+    "project31_spaced_skew",
+    "project32_contig",
+    "project32_spaced",
+    "project32_cross",
+    "project32_spaced_skew",
+    "project33_contig",
+    "project33_spaced",
+    "project33_cross",
+    "project33_spaced_skew",
+    "project63_contig",
+    "project63_spaced",
+    "project63_cross",
+    "project63_spaced_skew",
+    "project64_contig",
+    "project64_spaced",
+    "project64_cross",
+    "project64_spaced_skew",
     "project7_contig",
     "project8_contig",
     "project9_contig",
@@ -444,7 +491,13 @@ where
     };
     if matches!(
         method,
-        "Pa_identity" | "Pa_projected" | "Pa_local" | "Pa_projected_local"
+        "Pa_identity"
+            | "Pa_projected"
+            | "Pa_local"
+            | "Pa_projected_local"
+            | "Pa_packed"
+            | "Pa_runs"
+            | "Pa_packed_runs"
     ) {
         local_workspace_threshold = 16 * 1024 * 1024;
     }
@@ -473,7 +526,10 @@ where
             }
             return Default::default();
         },
-        "Pa_identity"
+        "Pa_packed"
+        | "Pa_runs"
+        | "Pa_packed_runs"
+        | "Pa_identity"
         | "Pa_projected"
         | "Pa_local"
         | "Pa_projected_local"
@@ -506,6 +562,9 @@ where
         | "Pa_unified_groups" => {
             use frontier::PaExperiment::*;
             let experiment = match method {
+                "Pa_packed" => UnifiedPacked,
+                "Pa_runs" => UnifiedRuns,
+                "Pa_packed_runs" => UnifiedPackedRuns,
                 "Pa_identity" => UnifiedIdentity,
                 "Pa_projected" => UnifiedProjected,
                 "Pa_local" => UnifiedLocal,
@@ -617,7 +676,8 @@ fn make_keys(n: usize, bits: usize, case: &str, seed: u64) -> Vec<u128> {
                 },
                 "reverse_groups" => (((n - 1 - i) / 16) as u128).min(mask),
                 _ if case.starts_with("project") => {
-                    let q: usize = case[7..8].parse().unwrap();
+                    let q: usize =
+                        case[7..].split('_').next().unwrap().parse().unwrap();
                     assert!(bits >= q);
                     let logical = if case.ends_with("_skew") && i % 10 != 0 {
                         0
@@ -741,11 +801,28 @@ mod workload_tests {
     #[test]
     fn descending_controls_preserve_duplicate_identity_and_payload() {
         for case in ["reverse", "reverse_unique", "reverse_groups"] {
-            let input: Vec<Wide> = make_keys(4097,128,case,42).into_iter().enumerate().map(|(id,key)| Wide {key,serial:id as u64,payload:[!(id as u64)]}).collect();
-            let mut expected = input.clone(); expected.sort_by_key(|x| x.key);
-            for method in ["Reverse_only","Reverse_stable","Rollercoaster_repaired"] {
-                let mut actual = input.clone(); execute::<_,u128>(&mut actual,method,64);
-                assert!(output_matches(&actual,&expected,method),"{case} {method}");
+            let input: Vec<Wide> = make_keys(4097, 128, case, 42)
+                .into_iter()
+                .enumerate()
+                .map(|(id, key)| Wide {
+                    key,
+                    serial: id as u64,
+                    payload: [!(id as u64)],
+                })
+                .collect();
+            let mut expected = input.clone();
+            expected.sort_by_key(|x| x.key);
+            for method in
+                ["Reverse_only", "Reverse_stable", "Rollercoaster_repaired"]
+            {
+                let mut actual = input.clone();
+                execute::<_, u128>(&mut actual, method, 64);
+                assert!(
+                    output_matches(&actual, &expected, method),
+                    "{} {}",
+                    case,
+                    method
+                );
             }
         }
     }

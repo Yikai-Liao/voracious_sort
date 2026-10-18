@@ -201,6 +201,9 @@ fn recursive_identity_and_payload_matrix() {
                 PaExperiment::UnifiedProjected,
                 PaExperiment::UnifiedLocal,
                 PaExperiment::UnifiedProjectedLocal,
+                PaExperiment::UnifiedPacked,
+                PaExperiment::UnifiedRuns,
+                PaExperiment::UnifiedPackedRuns,
                 PaExperiment::UnifiedSampled,
                 PaExperiment::UnifiedReduced,
                 PaExperiment::UnifiedCandidate,
@@ -281,6 +284,9 @@ fn pa_new_policies_preserve_converted_float_order() {
         PaExperiment::UnifiedProjected,
         PaExperiment::UnifiedLocal,
         PaExperiment::UnifiedProjectedLocal,
+        PaExperiment::UnifiedPacked,
+        PaExperiment::UnifiedRuns,
+        PaExperiment::UnifiedPackedRuns,
         PaExperiment::UnifiedSampled,
         PaExperiment::UnifiedReduced,
         PaExperiment::UnifiedCandidate,
@@ -375,6 +381,9 @@ fn native_small_integer_widths() {
         PaExperiment::UnifiedProjected,
         PaExperiment::UnifiedLocal,
         PaExperiment::UnifiedProjectedLocal,
+        PaExperiment::UnifiedPacked,
+        PaExperiment::UnifiedRuns,
+        PaExperiment::UnifiedPackedRuns,
         PaExperiment::UnifiedSampled,
         PaExperiment::UnifiedReduced,
         PaExperiment::UnifiedCandidate,
@@ -453,6 +462,9 @@ fn block_tail_sizes_and_large_workspace() {
             PaExperiment::UnifiedProjected,
             PaExperiment::UnifiedLocal,
             PaExperiment::UnifiedProjectedLocal,
+            PaExperiment::UnifiedPacked,
+            PaExperiment::UnifiedRuns,
+            PaExperiment::UnifiedPackedRuns,
             PaExperiment::UnifiedSampled,
             PaExperiment::UnifiedReduced,
             PaExperiment::UnifiedCandidate,
@@ -683,7 +695,9 @@ fn nested_band_rejection_keeps_the_original_interval() {
 fn structural_projection_bit_embeddings_and_frequency_preserve_stable_records()
 {
     let mut state = 20261018;
-    for q in [0usize, 1, 7, 8, 9, 16, 64, 128] {
+    for q in
+        [0usize, 1, 7, 8, 9, 15, 16, 17, 23, 24, 25, 31, 32, 33, 63, 64, 128]
+    {
         for embedding in 0..4 {
             let positions: Vec<_> = (0..q)
                 .map(|j| match embedding {
@@ -727,6 +741,9 @@ fn structural_projection_bit_embeddings_and_frequency_preserve_stable_records()
                     PaExperiment::UnifiedProjected,
                     PaExperiment::UnifiedLocal,
                     PaExperiment::UnifiedProjectedLocal,
+                    PaExperiment::UnifiedPacked,
+                    PaExperiment::UnifiedRuns,
+                    PaExperiment::UnifiedPackedRuns,
                 ] {
                     for block in [3, 64, 512] {
                         let mut actual = input.clone();

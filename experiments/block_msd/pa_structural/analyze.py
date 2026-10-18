@@ -43,6 +43,8 @@ def analyze(prefix):
                     row[other+'_median'] = st.median(ratios)
                     row[other+'_p10'] = quantile(ratios,.1)
                     row[other+'_p90'] = quantile(ratios,.9)
+                    cpu_ratios = [st.mean(int(rows[r,s]['cpu_ns']) for s in range(len(methods)) if methods[s] == method) / st.mean(int(rows[r,s]['cpu_ns']) for s in range(len(methods)) if methods[s] == other) for r in range(reps)]
+                    row[other+'_cpu_median'] = st.median(cpu_ratios)
                 slots = [s for s in range(len(methods)) if methods[s] == method]
                 if len(slots) == 2:
                     ratios = [int(rows[r,slots[1]]['wall_ns']) / int(rows[r,slots[0]]['wall_ns']) for r in range(reps)]
@@ -54,7 +56,7 @@ def analyze(prefix):
         w = csv.DictWriter(out,fieldnames=fields); w.writeheader(); w.writerows(results)
     for method in sorted(set(r['method'] for r in results)):
         group = [r for r in results if r['method'] == method]
-        comparisons = sorted(set(k[:-7] for r in group for k in r if k.endswith('_median') and k != 'aa_median' and k != method+'_median'))
+        comparisons = sorted(set(k[:-7] for r in group for k in r if k.endswith('_median') and not k.endswith('_cpu_median') and k != 'aa_median' and k != method+'_median'))
         print(method, len(group), 'cells', {other:sum(r.get(other+'_median',2)<1 for r in group) for other in comparisons})
 
 if __name__ == '__main__': analyze(sys.argv[1])

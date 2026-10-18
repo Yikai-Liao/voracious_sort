@@ -36,6 +36,9 @@ pub enum PaExperiment {
     UnifiedProjected,
     UnifiedLocal,
     UnifiedProjectedLocal,
+    UnifiedPacked,
+    UnifiedRuns,
+    UnifiedPackedRuns,
 }
 
 #[derive(Clone, Copy, PartialEq)]
@@ -43,6 +46,7 @@ enum SparseCompletion {
     Recursive,
     Identity,
     Projected,
+    Packed,
 }
 
 #[derive(Clone, Copy)]
@@ -66,6 +70,7 @@ struct Policy {
     local_workspace_threshold: usize,
     block: usize,
     sparse: SparseCompletion,
+    carry_runs: bool,
 }
 
 pub fn sort_pa_experiment<T: Radixable<K>, K: RadixKey>(
@@ -90,7 +95,14 @@ where
     Converted<T, K>: NativeKey,
 {
     assert!(block > 0);
+    let carry_runs = matches!(
+        experiment,
+        PaExperiment::UnifiedRuns | PaExperiment::UnifiedPackedRuns
+    );
     let sparse = match experiment {
+        PaExperiment::UnifiedPacked | PaExperiment::UnifiedPackedRuns => {
+            SparseCompletion::Packed
+        },
         PaExperiment::UnifiedIdentity => SparseCompletion::Identity,
         PaExperiment::UnifiedProjected
         | PaExperiment::UnifiedProjectedLocal => SparseCompletion::Projected,
@@ -109,11 +121,15 @@ where
         PaExperiment::UnifiedIdentity
         | PaExperiment::UnifiedProjected
         | PaExperiment::UnifiedLocal
-        | PaExperiment::UnifiedProjectedLocal => PaExperiment::UnifiedGroups,
+        | PaExperiment::UnifiedProjectedLocal
+        | PaExperiment::UnifiedPacked
+        | PaExperiment::UnifiedRuns
+        | PaExperiment::UnifiedPackedRuns => PaExperiment::UnifiedGroups,
         other => other,
     };
     let policy = Policy {
         sparse,
+        carry_runs,
         terminal: matches!(
             experiment,
             PaExperiment::Terminal
@@ -595,6 +611,17 @@ fn visit<T: Radixable<K>, K: RadixKey>(
             })
             .map(|band| (band, populations[0], false))
         });
+    let packing = if policy.sparse == SparseCompletion::Packed
+        && approved_band.is_none()
+    {
+        super::packed_projection::Selection::new(
+            p.union ^ p.intersection,
+            cap,
+            8 * bytes,
+        )
+    } else {
+        None
+    };
     if let Some((band, population, terminal_band)) = approved_band {
         work! { stats.band_nodes += 1; stats.band_records += population; stats.terminal_band_nodes += usize::from(terminal_band); }
         partition::<T, K, _>(
@@ -607,8 +634,26 @@ fn visit<T: Radixable<K>, K: RadixKey>(
             depth,
             path,
         );
-    } else if policy.sparse != SparseCompletion::Recursive
-        && sparse_byte_projection(p.union ^ p.intersection, cap)
+    } else if let Some(selection) = packing {
+        let bits = selection.bits;
+        // Keep the portable plan and its workspace outside the visit frame.
+        if bits <= 8 {
+            partition_packed::<T, K, u8>(
+                arr, selection, policy, stats, depth, path,
+            );
+        } else if bits <= 16 {
+            partition_packed::<T, K, u16>(
+                arr, selection, policy, stats, depth, path,
+            );
+        } else {
+            partition_packed::<T, K, u32>(
+                arr, selection, policy, stats, depth, path,
+            );
+        }
+    } else if matches!(
+        policy.sparse,
+        SparseCompletion::Identity | SparseCompletion::Projected
+    ) && sparse_byte_projection(p.union ^ p.intersection, cap)
     {
         if policy.sparse == SparseCompletion::Identity {
             work! { stats.identity_nodes += 1; }
@@ -739,6 +784,7 @@ struct EqualSplit<U> {
     width: usize,
 }
 impl<U: NativeKey> Classifier<U> for EqualSplit<U> {
+    type Label = U;
     fn label(&self, key: U) -> U {
         U::from_u128(match (key & self.mask).cmp(&self.pivot) {
             std::cmp::Ordering::Less => 0,
@@ -758,7 +804,7 @@ impl<U: NativeKey> Classifier<U> for EqualSplit<U> {
 fn partition<T: Radixable<K>, K: RadixKey, C: Classifier<Converted<T, K>>>(
     arr: &mut [T],
     classifier: &C,
-    label_mask: Option<Converted<T, K>>,
+    label_mask: Option<C::Label>,
     policy: Policy,
     terminal: bool,
     stats: &mut Work,
@@ -777,7 +823,16 @@ fn partition<T: Radixable<K>, K: RadixKey, C: Classifier<Converted<T, K>>>(
     let prepared_mask =
         if policy.prepared_distribution { label_mask } else { None };
     let passes = if let Some(mask) = prepared_mask {
-        if policy.grouped_scatter {
+        if C::PACKED {
+            super::local_distribution::distribute_prepared_packed(
+                arr,
+                &label,
+                policy.block,
+                policy.local_workspace_threshold,
+                mask,
+                stats,
+            )
+        } else if policy.grouped_scatter {
             super::local_distribution::distribute_prepared_grouped(
                 arr,
                 &label,
@@ -849,17 +904,108 @@ fn partition<T: Radixable<K>, K: RadixKey, C: Classifier<Converted<T, K>>>(
     };
     work! { stats.max_path_passes = stats.max_path_passes.max(path + passes); }
     if !terminal {
-        let parent_len = arr.len();
-        let mut start = 0;
-        while start < arr.len() {
-            let current = label(&arr[start]);
-            let remaining = classifier.remaining(arr[start].into_key_type());
-            let mut end = start + 1;
-            while end < arr.len() && label(&arr[end]) == current {
-                end += 1;
+        if policy.carry_runs {
+            recurse_carried::<T, K, C, _>(
+                arr,
+                classifier,
+                &label,
+                policy,
+                stats,
+                depth,
+                path + passes,
+            );
+        } else {
+            let parent_len = arr.len();
+            let mut start = 0;
+            while start < arr.len() {
+                let current = label(&arr[start]);
+                let remaining =
+                    classifier.remaining(arr[start].into_key_type());
+                let mut end = start + 1;
+                while end < arr.len() && label(&arr[end]) == current {
+                    end += 1;
+                }
+                work! { stats.runs_records += end - start; }
+                if end - start > 1 && remaining > 0 {
+                    work! { stats.unresolved_records += end - start; }
+                    visit::<T, K>(
+                        &mut arr[start..end],
+                        remaining,
+                        policy,
+                        end - start > parent_len / 2,
+                        stats,
+                        depth + 1,
+                        path + passes,
+                    );
+                }
+                start = end;
             }
-            work! { stats.runs_records += end - start; }
-            if end - start > 1 && remaining > 0 {
+        }
+    }
+    work! { stats.label_evals += label_evals.get(); }
+}
+
+#[inline(never)]
+fn partition_packed<T: Radixable<K>, K: RadixKey, L: NativeKey>(
+    arr: &mut [T],
+    selection: super::packed_projection::Selection<Converted<T, K>>,
+    policy: Policy,
+    stats: &mut Work,
+    depth: usize,
+    path: usize,
+) where
+    Converted<T, K>: NativeKey,
+{
+    let terminal = selection.remaining == 0;
+    let projection = super::packed_projection::Packed::<_, L>::new(selection);
+    work! { stats.projection_nodes += 1; stats.projection_records += arr.len(); }
+    partition::<T, K, _>(
+        arr,
+        &projection,
+        Some(projection.variation()),
+        policy,
+        terminal,
+        stats,
+        depth,
+        path,
+    );
+}
+
+// Carry the first label of the following run across the recursive call. That
+// item lies outside the mutated child slice. Singletons need no key/cap lookup.
+fn recurse_carried<
+    T: Radixable<K>,
+    K: RadixKey,
+    C: Classifier<Converted<T, K>>,
+    F: Fn(&T) -> C::Label,
+>(
+    arr: &mut [T],
+    classifier: &C,
+    label: &F,
+    policy: Policy,
+    stats: &mut Work,
+    depth: usize,
+    path: usize,
+) where
+    Converted<T, K>: NativeKey,
+{
+    let parent_len = arr.len();
+    let mut start = 0;
+    let mut current = label(&arr[0]);
+    while start < parent_len {
+        let mut end = start + 1;
+        let mut next = current;
+        while end < parent_len {
+            next = label(&arr[end]);
+            if next != current {
+                break;
+            }
+            end += 1;
+        }
+        work! { stats.runs_records += end - start; }
+        if end - start > 1 {
+            let remaining = classifier.remaining(arr[start].into_key_type());
+            if remaining > 0 {
                 work! { stats.unresolved_records += end - start; }
                 visit::<T, K>(
                     &mut arr[start..end],
@@ -868,11 +1014,11 @@ fn partition<T: Radixable<K>, K: RadixKey, C: Classifier<Converted<T, K>>>(
                     end - start > parent_len / 2,
                     stats,
                     depth + 1,
-                    path + passes,
+                    path,
                 );
             }
-            start = end;
         }
+        start = end;
+        current = next;
     }
-    work! { stats.label_evals += label_evals.get(); }
 }

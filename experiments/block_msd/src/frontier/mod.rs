@@ -10,6 +10,7 @@ mod block;
 mod local_distribution;
 mod ordered_tiled;
 mod pa;
+mod packed_projection;
 mod prefix_band;
 mod projection;
 pub use pa::{sort_pa_experiment, sort_pa_with_threshold, PaExperiment};
@@ -127,11 +128,31 @@ pub trait NativeKey:
     fn count_ones(self) -> u32;
     fn byte(self, index: usize) -> usize;
     fn mask(bits: usize) -> Self;
+    fn to_u32(self) -> u32;
+    fn to_u128(self) -> u128;
+    /// Optional target-specific implementation; None selects the portable plan.
+    fn extract_packed(self, mask: Self, lower_bits: u32) -> Option<u32>;
 }
 macro_rules! native {
     ($($t:ty),*) => {$(impl NativeKey for $t {
         const BITS:usize=<$t>::BITS as usize;
         #[inline] fn from_u128(x:u128)->Self { x as Self }
+        #[inline] fn to_u32(self)->u32 { self as u32 }
+        #[inline] fn to_u128(self)->u128 { self as u128 }
+        #[inline] fn extract_packed(self, mask: Self, lower_bits: u32)->Option<u32> {
+            #[cfg(all(target_arch="x86_64", target_feature="bmi2", not(feature="projection_portable")))]
+            {
+                // The feature is a compile-time target guarantee, never an
+                // assumption about machines running a portable build.
+                let low = unsafe { std::arch::x86_64::_pext_u64(self as u64, mask as u64) };
+                let high = if <$t>::BITS > 64 {
+                    unsafe { std::arch::x86_64::_pext_u64(((self as u128) >> 64) as u64, ((mask as u128) >> 64) as u64) }
+                } else { 0 };
+                return Some((low | (high << lower_bits)) as u32);
+            }
+            #[cfg(not(all(target_arch="x86_64", target_feature="bmi2", not(feature="projection_portable"))))]
+            { None }
+        }
         #[inline] fn leading_zeros(self)->u32 { self.leading_zeros() }
         #[inline] fn count_ones(self)->u32 { self.count_ones() }
         #[inline] fn byte(self,index:usize)->usize { ((self>>(index*8))&255) as usize }
@@ -148,12 +169,15 @@ fn mask(bits: usize) -> u128 {
 }
 
 trait Classifier<U: NativeKey> {
-    fn label(&self, key: U) -> U;
+    type Label: NativeKey;
+    const PACKED: bool = false;
+    fn label(&self, key: U) -> Self::Label;
     fn remaining(&self, key: U) -> usize;
 }
 
 struct Identity;
 impl<U: NativeKey> Classifier<U> for Identity {
+    type Label = U;
     #[inline]
     fn label(&self, key: U) -> U {
         key
@@ -169,6 +193,7 @@ struct Prefix<U> {
     mask: U,
 }
 impl<U: NativeKey> Classifier<U> for Prefix<U> {
+    type Label = U;
     #[inline]
     fn label(&self, key: U) -> U {
         (key >> self.low) & self.mask
@@ -213,6 +238,7 @@ impl<U: NativeKey> Frontier<U> {
     }
 }
 impl<U: NativeKey> Classifier<U> for Frontier<U> {
+    type Label = U;
     #[inline]
     fn label(&self, key: U) -> U {
         let key = key & self.local_mask;

@@ -53,6 +53,7 @@ impl<U: NativeKey> PrefixBand<U> {
 }
 
 impl<U: NativeKey> Classifier<U> for PrefixBand<U> {
+    type Label = U;
     #[inline]
     fn label(&self, key: U) -> U {
         let prefix = (key & self.mask) >> self.low;

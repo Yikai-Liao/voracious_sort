@@ -24,3 +24,6 @@ cf_phases = []
 cf_work = []
 frontier_work = []
 frontier_narrow_screen = []
+
+# Force the portable gather plan while keeping all other native code identical.
+projection_portable = []

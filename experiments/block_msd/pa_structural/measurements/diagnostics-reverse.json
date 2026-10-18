@@ -1,0 +1,52 @@
+{
+  "command": [
+    "taskset",
+    "-c",
+    "2",
+    "/root/code/voracious_sort-pa-structural/experiments/block_msd/target/pa-structural/general",
+    "1048576",
+    "12",
+    "Pa_unified_groups_t16777216,Rollercoaster,Reverse_only,Reverse_stable,Rollercoaster_repaired,Pa_unified_groups_t16777216",
+    "reverse,reverse_groups",
+    "u16_id8,wide32",
+    "time",
+    "64",
+    "42"
+  ],
+  "args": {
+    "name": "diagnostics-reverse",
+    "binary": "general",
+    "n": 1048576,
+    "reps": 12,
+    "block": 64,
+    "seed": 42,
+    "cpu": "2",
+    "kind": "time",
+    "methods": "Pa_unified_groups_t16777216,Rollercoaster,Reverse_only,Reverse_stable,Rollercoaster_repaired,Pa_unified_groups_t16777216",
+    "cases": "reverse,reverse_groups",
+    "layouts": "u16_id8,wide32"
+  },
+  "frozen": {
+    "sha256": "36b509ce9ba522537f72af0823470894185a63a819c8fe9fe4112992df43023e",
+    "source_sha256": "17acffa6c71d551d8956771e3c5a00a52e1ef5ed15e06db3e0b6c459fbafcfb3",
+    "base": "745cea6ab21030710cb036f88fa757505ef1990b",
+    "rustflags": "-C target-cpu=native",
+    "features": "",
+    "rustc": "rustc 1.98.1 (48a229cea 2026-09-01)\nbinary: rustc\ncommit-hash: 48a229ceaefd4985c50990b14116b6d856af0985\ncommit-date: 2026-09-01\nhost: x86_64-unknown-linux-gnu\nrelease: 1.98.1\nLLVM version: 22.1.8\n"
+  },
+  "started_ns": 1792287194873523293,
+  "meminfo_before": "MemTotal:       16344888 kB\nMemFree:         2755064 kB\nMemAvailable:   10757560 kB\nBuffers:         1307828 kB\nCached:          4361604 kB\nSwapCached:        14328 kB\nActive:          3363984 kB\nInactive:        5043544 kB\nActive(anon):    2384140 kB\nInactive(anon):   414548 kB\nActive(file):     979844 kB\nInactive(file):  4628996 kB\nUnevictable:           0 kB\nMlocked:               0 kB\nSwapTotal:      12366328 kB\nSwapFree:        6113620 kB\nZswap:                 0 kB\nZswapped:              0 kB\nDirty:               344 kB\nWriteback:             0 kB\nAnonPages:       2463252 kB\nMapped:           519416 kB\nShmem:             60668 kB\nKReclaimable:    2764028 kB\nSlab:            3133160 kB\nSReclaimable:    2764028 kB\nSUnreclaim:       369132 kB\nKernelStack:       13776 kB\nPageTables:        69072 kB\nSecPageTables:         0 kB\nNFS_Unstable:          0 kB\nBounce:                0 kB\nWritebackTmp:          0 kB\nCommitLimit:    20538772 kB\nCommitted_AS:   16134176 kB\nVmallocTotal:   34359738367 kB\nVmallocUsed:       83088 kB\nVmallocChunk:          0 kB\nPercpu:            64000 kB\nHardwareCorrupted:     0 kB\nAnonHugePages:   1081344 kB\nShmemHugePages:        0 kB\nShmemPmdMapped:        0 kB\nFileHugePages:         0 kB\nFilePmdMapped:         0 kB\nUnaccepted:            0 kB\nHugePages_Total:       0\nHugePages_Free:        0\nHugePages_Rsvd:        0\nHugePages_Surp:        0\nHugepagesize:       2048 kB\nHugetlb:               0 kB\nDirectMap4k:      245604 kB\nDirectMap2M:    10240000 kB\nDirectMap1G:     8388608 kB\n",
+  "load_before": "1.63 2.06 1.97 1/731 2197903\n",
+  "returncode": 0,
+  "ended_ns": 1792287206382814168,
+  "meminfo_after": "MemTotal:       16344888 kB\nMemFree:         2718996 kB\nMemAvailable:   10721580 kB\nBuffers:         1307840 kB\nCached:          4361676 kB\nSwapCached:        14328 kB\nActive:          3357784 kB\nInactive:        5043628 kB\nActive(anon):    2377936 kB\nInactive(anon):   414548 kB\nActive(file):     979848 kB\nInactive(file):  4629080 kB\nUnevictable:           0 kB\nMlocked:               0 kB\nSwapTotal:      12366328 kB\nSwapFree:        6113620 kB\nZswap:                 0 kB\nZswapped:              0 kB\nDirty:               304 kB\nWriteback:             0 kB\nAnonPages:       2457040 kB\nMapped:           519748 kB\nShmem:             60668 kB\nKReclaimable:    2764028 kB\nSlab:            3133160 kB\nSReclaimable:    2764028 kB\nSUnreclaim:       369132 kB\nKernelStack:       13664 kB\nPageTables:        68968 kB\nSecPageTables:         0 kB\nNFS_Unstable:          0 kB\nBounce:                0 kB\nWritebackTmp:          0 kB\nCommitLimit:    20538772 kB\nCommitted_AS:   16062888 kB\nVmallocTotal:   34359738367 kB\nVmallocUsed:       83072 kB\nVmallocChunk:          0 kB\nPercpu:            64000 kB\nHardwareCorrupted:     0 kB\nAnonHugePages:   1077248 kB\nShmemHugePages:        0 kB\nShmemPmdMapped:        0 kB\nFileHugePages:         0 kB\nFilePmdMapped:         0 kB\nUnaccepted:            0 kB\nHugePages_Total:       0\nHugePages_Free:        0\nHugePages_Rsvd:        0\nHugePages_Surp:        0\nHugepagesize:       2048 kB\nHugetlb:               0 kB\nDirectMap4k:      245604 kB\nDirectMap2M:    10240000 kB\nDirectMap1G:     8388608 kB\n",
+  "load_after": "1.53 2.03 1.95 1/726 2197970\n",
+  "usage": {
+    "ru_utime": 10.217984,
+    "ru_stime": 1.254264,
+    "ru_maxrss": 225756,
+    "ru_minflt": 88897,
+    "ru_majflt": 0,
+    "ru_nivcsw": 431
+  }
+}

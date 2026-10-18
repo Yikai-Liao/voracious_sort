@@ -35,3 +35,29 @@ Rollercoaster, frozen LSD and Stable MSD; new bit embedding/frequency and
 reverse identity controls. Separate work and allocation runs. No second
 machine is available in this workspace; portability remains unverified until
 an independent machine run is supplied.
+
+## Second screen: decisions from the first measurements
+
+The first 20-cell screen rejected forced local scheduling as a general change.
+The one-byte portable segment prototype also failed: primitive u32 sparse
+regressed by 2.28x (B64) / 2.60x (B512), and u128 sparse B512 remained 1.135x
+slower than frozen LSD. Those raw results are retained at commit a4ac2cc.
+
+The next independent hypotheses are:
+
+1. `Pa_packed`: highest-varying-bit projection with the existing size-based bit
+   budget (capped at 32 bits). Use actual u8/u16/u32 tags, finish complete tags,
+   and recurse under the lowest selected original bit for partial tags. Admit
+   when the selected coordinates occupy more original bytes than packed bytes;
+   dense masks stay on their original route. Compact low-bit digits use the
+   existing reduced-radix block implementation. A parallel portable gather is
+   always available; BMI2 extraction is compiled only for a target guaranteeing
+   BMI2. `projection_portable` forces portable extraction with all other native
+   compiler flags unchanged.
+2. `Pa_runs`: carry the already-observed first label of the next run and look
+   up the remaining key range only for nonsingleton runs. This removes actual
+   repeated classification work without changing scatter or compact work.
+3. `Pa_packed_runs`: measure the combination explicitly.
+
+The same retention thresholds apply. Each screen's metadata records its own
+source/ELF; the first and second screen timings must never be pooled.
