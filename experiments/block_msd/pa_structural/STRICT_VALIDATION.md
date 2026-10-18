@@ -8,7 +8,9 @@ Current-source native and hardware-disabled correctness each passed60 library te
 
 Native integer release built in5m47s, generic integer4m31s, native float2m55s and generic float2m14s. Six frozen executables share this source fingerprint; features/flags and20 additional source hashes are recorded in pa-strict-*-binary.json. Generic code-generation inspection found185 packed context bodies,667 direct PEXT instructions and0outlined extraction-helper calls, including both scatter guards. This static inspection is not performance evidence.
 
-All compilation, correctness and disassembly work finished before timing. Boundary and initial8 native float cells passed their screening gates; integer and generic screens are still pending. Full acceptance remains pending. Older accepted or rejected cohort measurements are not transferred.
+All compilation, correctness and disassembly work finished before timing. The boundary, eight native float cells and 26 native integer cells passed their screening gates. The integer audit covers 3,328 rows; the independent u64/uniform/B512/seed42 confirmation has 64 rows and no regression signal. Full acceptance remains pending; these screens do not establish a final performance result. Older cohorts are not transferred.
+
+The generic float screen stopped at 982 of 1,024 expected rows, without completion metadata. Its raw CSV and stderr are preserved as `validation/interrupted-strict-generic-float-first-b512.*` and are excluded from completed measurements. Generic integer screens and full matrices remain unrun.
 
 ## Boundary and first8 native float cells
 
