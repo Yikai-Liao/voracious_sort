@@ -7,6 +7,7 @@
 use std::{mem::MaybeUninit, ptr};
 use voracious_radix_sort::{RadixKey, Radixable};
 mod block;
+mod key_set;
 mod local_distribution;
 mod ordered_tiled;
 mod pa;
@@ -38,6 +39,8 @@ pub struct Config {
 
 #[derive(Debug)]
 pub struct Work {
+    pub keyset_nodes: usize,
+    pub keyset_hits: usize,
     pub projection_nodes: usize,
     pub projection_records: usize,
     pub identity_nodes: usize,
@@ -72,6 +75,8 @@ pub struct Work {
 impl Default for Work {
     fn default() -> Self {
         Self {
+            keyset_nodes: 0,
+            keyset_hits: 0,
             projection_nodes: 0,
             projection_records: 0,
             identity_nodes: 0,

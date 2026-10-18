@@ -197,6 +197,9 @@ fn recursive_identity_and_payload_matrix() {
                 PaExperiment::UnifiedReuse,
                 PaExperiment::UnifiedPrepared,
                 PaExperiment::UnifiedGroups,
+                PaExperiment::UnifiedPackedKeySet,
+                PaExperiment::UnifiedPackedKeySet8,
+                PaExperiment::UnifiedPackedKeySetBinary,
                 PaExperiment::UnifiedIdentity,
                 PaExperiment::UnifiedPacked,
                 PaExperiment::UnifiedPacked,
@@ -276,6 +279,9 @@ fn pa_new_policies_preserve_converted_float_order() {
         PaExperiment::UnifiedReuse,
         PaExperiment::UnifiedPrepared,
         PaExperiment::UnifiedGroups,
+        PaExperiment::UnifiedPackedKeySet,
+        PaExperiment::UnifiedPackedKeySet8,
+        PaExperiment::UnifiedPackedKeySetBinary,
         PaExperiment::UnifiedIdentity,
         PaExperiment::UnifiedPacked,
         PaExperiment::UnifiedPacked,
@@ -369,6 +375,9 @@ fn native_small_integer_widths() {
         PaExperiment::UnifiedReuse,
         PaExperiment::UnifiedPrepared,
         PaExperiment::UnifiedGroups,
+        PaExperiment::UnifiedPackedKeySet,
+        PaExperiment::UnifiedPackedKeySet8,
+        PaExperiment::UnifiedPackedKeySetBinary,
         PaExperiment::UnifiedIdentity,
         PaExperiment::UnifiedPacked,
         PaExperiment::UnifiedPacked,
@@ -446,6 +455,9 @@ fn block_tail_sizes_and_large_workspace() {
             PaExperiment::UnifiedReuse,
             PaExperiment::UnifiedPrepared,
             PaExperiment::UnifiedGroups,
+            PaExperiment::UnifiedPackedKeySet,
+            PaExperiment::UnifiedPackedKeySet8,
+            PaExperiment::UnifiedPackedKeySetBinary,
             PaExperiment::UnifiedIdentity,
             PaExperiment::UnifiedPacked,
             PaExperiment::UnifiedPacked,
@@ -721,6 +733,9 @@ fn structural_projection_bit_embeddings_and_frequency_preserve_stable_records()
                 let mut expected = input.clone();
                 expected.sort_by_key(|x| x.key);
                 for policy in [
+                    PaExperiment::UnifiedPackedKeySet,
+                    PaExperiment::UnifiedPackedKeySet8,
+                    PaExperiment::UnifiedPackedKeySetBinary,
                     PaExperiment::UnifiedIdentity,
                     PaExperiment::UnifiedPacked,
                     PaExperiment::UnifiedPacked,
@@ -891,6 +906,103 @@ fn bounded_projection_preserves_already_ordered_suffix_run_geometry() {
             assert!(actual.iter().zip(&expected).all(|(x, y)| x.key == y.key
                 && x.id == y.id
                 && x.payload == y.payload));
+        }
+    }
+}
+
+#[test]
+fn bounded_key_sets_sort_correlations_and_outlier_gaps_stably() {
+    let mut state = 42;
+    let mut palette = [0u128; 64];
+    for key in &mut palette {
+        *key =
+            ((random(&mut state) as u128) << 64) | random(&mut state) as u128;
+    }
+    for count in [2usize, 4, 8, 16, 32, 64] {
+        for noise in [false, true] {
+            let input: Vec<Item> = (0..4097)
+                .map(|id| {
+                    let raw = ((random(&mut state) as u128) << 64)
+                        | random(&mut state) as u128;
+                    let key = if noise && id % 10 == 0 {
+                        raw
+                    } else {
+                        palette[id % count]
+                    };
+                    Item {
+                        key,
+                        id,
+                        payload: [
+                            id as u64,
+                            !id as u64,
+                            (id as u64).wrapping_mul(123456789),
+                        ],
+                    }
+                })
+                .collect();
+            let mut expected = input.clone();
+            expected.sort_by_key(|x| x.key);
+            for policy in [
+                PaExperiment::UnifiedPackedKeySet,
+                PaExperiment::UnifiedPackedKeySet8,
+                PaExperiment::UnifiedPackedKeySetBinary,
+            ] {
+                for block in [3, 64, 512] {
+                    let mut actual = input.clone();
+                    sort_pa_with_threshold::<_, u128>(
+                        &mut actual,
+                        policy,
+                        block,
+                        16 * 1024 * 1024,
+                    );
+                    assert!(actual
+                        .iter()
+                        .zip(&expected)
+                        .all(|(a, b)| a.key == b.key
+                            && a.id == b.id
+                            && a.payload == b.payload));
+                }
+            }
+        }
+    }
+}
+
+#[test]
+#[cfg(feature = "frontier_work")]
+fn exact_key_sets_finish_correlated_full_width_keys_in_one_pass() {
+    let palette = [
+        0x1234567890abcdef_0123456789abcdefu128,
+        0x87654321fedcba98_76543210abcdef01,
+        0xdeadbeef98765432_1000200030004000,
+        0x1111222233334444_9999aaaabbbbcccc,
+    ];
+    let n = 65537;
+    let input: Vec<Item> = (0..n)
+        .map(|id| Item { key: palette[id % 4], id, payload: [id as u64; 3] })
+        .collect();
+    let mut expected = input.clone();
+    expected.sort_by_key(|x| x.key);
+    for policy in [
+        PaExperiment::UnifiedPackedKeySet,
+        PaExperiment::UnifiedPackedKeySet8,
+        PaExperiment::UnifiedPackedKeySetBinary,
+    ] {
+        for block in [3, 64, 512] {
+            let mut actual = input.clone();
+            let work = sort_pa_with_threshold::<_, u128>(
+                &mut actual,
+                policy,
+                block,
+                16 * 1024 * 1024,
+            );
+            assert_eq!(work.keyset_nodes, 1);
+            assert_eq!(work.keyset_hits, n);
+            assert_eq!(work.scatter_records, n);
+            assert_eq!(work.runs_records, 0);
+            assert_eq!(work.max_depth, 0);
+            assert!(actual.iter().zip(&expected).all(|(a, b)| a.key == b.key
+                && a.id == b.id
+                && a.payload == b.payload));
         }
     }
 }

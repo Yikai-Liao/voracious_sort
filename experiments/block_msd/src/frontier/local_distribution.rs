@@ -484,6 +484,8 @@ mod tests {
             };
         }
         compare!(
+            keyset_nodes,
+            keyset_hits,
             projection_nodes,
             projection_records,
             identity_nodes,
