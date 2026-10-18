@@ -1,0 +1,22 @@
+[
+  "pa_structural/float-bench/Cargo.toml",
+  "pa_structural/float-bench/Cargo.lock",
+  "pa_structural/float-bench/src/main.rs",
+  "pa_structural/float-bench/src/floats.rs",
+  "pa_structural/FLOAT_PLAN.md",
+  "pa_structural/STRICT_PLAN.md",
+  "pa_structural/strict-screen.py",
+  "pa_structural/float-run.py",
+  "pa_structural/run.py",
+  "pa_structural/matrix.py",
+  "pa_structural/float-matrix.py",
+  "pa_structural/portable-screen.py",
+  "pa_structural/holdout-final.py",
+  "pa_structural/compare-frozen.py",
+  "pa_structural/audit.py",
+  "pa_structural/analyze.py",
+  "pa_structural/check-strict-work.py",
+  "pa_structural/check-strict-memory.py",
+  "tests/strict_projection.rs",
+  "pa_structural/freeze.py"
+]

@@ -1,0 +1,420 @@
+00000000006639a0 0000000000000669 t <hakmem::isa::x86v3::X86V3 as hakmem::isa::Isa>::run::trampoline::<usize, <block_msd_research::frontier::packed_projection::Packed<u32, u8, hakmem::isa::x86v3::X86V3, true> as block_msd_research::frontier::Classifier<u32>>::in_context<usize, <block_msd_research::frontier::block::Sorter<u32>>::scatter<u8, block_msd_research::frontier::labeler::Masked<block_msd_research::frontier::labeler::Classified<u32, u32, block_msd_research::frontier::packed_projection::Packed<u32, u8, hakmem::isa::x86v3::X86V3, true>>, u8>, 0>::{closure#0}>::{closure#0}>
+
+/root/code/voracious_sort-pa-execution/experiments/block_msd/target/pa-structural/pa_strict_generic:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+00000000006639a0 <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment>:
+  6639a0:	55                   	push   %rbp
+  6639a1:	41 57                	push   %r15
+  6639a3:	41 56                	push   %r14
+  6639a5:	41 55                	push   %r13
+  6639a7:	41 54                	push   %r12
+  6639a9:	53                   	push   %rbx
+  6639aa:	48 83 ec 38          	sub    $0x38,%rsp
+  6639ae:	48 8b 17             	mov    (%rdi),%rdx
+  6639b1:	48 8b 0a             	mov    (%rdx),%rcx
+  6639b4:	48 8b 81 80 00 00 00 	mov    0x80(%rcx),%rax
+  6639bb:	48 8b 89 a8 00 00 00 	mov    0xa8(%rcx),%rcx
+  6639c2:	48 89 4c 24 20       	mov    %rcx,0x20(%rsp)
+  6639c7:	48 39 c8             	cmp    %rcx,%rax
+  6639ca:	0f 83 c4 05 00 00    	jae    663f94 <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x5f4>
+  6639d0:	4c 8b 4f 08          	mov    0x8(%rdi),%r9
+  6639d4:	4c 8b 57 10          	mov    0x10(%rdi),%r10
+  6639d8:	4c 8b 5f 18          	mov    0x18(%rdi),%r11
+  6639dc:	45 31 e4             	xor    %r12d,%r12d
+  6639df:	48 89 c7             	mov    %rax,%rdi
+  6639e2:	eb 24                	jmp    663a08 <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x68>
+  6639e4:	66 66 66 2e 0f 1f 84 	data16 data16 cs nopw 0x0(%rax,%rax,1)
+  6639eb:	00 00 00 00 00 
+  6639f0:	4c 8b 64 24 08       	mov    0x8(%rsp),%r12
+  6639f5:	48 8b 7c 24 18       	mov    0x18(%rsp),%rdi
+  6639fa:	48 ff c7             	inc    %rdi
+  6639fd:	48 3b 7c 24 20       	cmp    0x20(%rsp),%rdi
+  663a02:	0f 84 8c 05 00 00    	je     663f94 <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x5f4>
+  663a08:	48 8b 0a             	mov    (%rdx),%rcx
+  663a0b:	48 8b 71 28          	mov    0x28(%rcx),%rsi
+  663a0f:	48 39 f7             	cmp    %rsi,%rdi
+  663a12:	0f 83 e4 05 00 00    	jae    663ffc <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x65c>
+  663a18:	4c 8b 41 20          	mov    0x20(%rcx),%r8
+  663a1c:	48 89 7c 24 18       	mov    %rdi,0x18(%rsp)
+  663a21:	45 8b 2c b8          	mov    (%r8,%rdi,4),%r13d
+  663a25:	4c 39 ee             	cmp    %r13,%rsi
+  663a28:	0f 86 75 05 00 00    	jbe    663fa3 <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x603>
+  663a2e:	48 8b 69 78          	mov    0x78(%rcx),%rbp
+  663a32:	4c 8b 81 88 00 00 00 	mov    0x88(%rcx),%r8
+  663a39:	31 f6                	xor    %esi,%esi
+  663a3b:	4d 39 e8             	cmp    %r13,%r8
+  663a3e:	bb 00 00 00 00       	mov    $0x0,%ebx
+  663a43:	49 0f 46 d8          	cmovbe %r8,%rbx
+  663a47:	41 0f 97 c0          	seta   %r8b
+  663a4b:	4c 3b 61 70          	cmp    0x70(%rcx),%r12
+  663a4f:	73 2f                	jae    663a80 <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0xe0>
+  663a51:	4c 8b 71 68          	mov    0x68(%rcx),%r14
+  663a55:	4d 89 e7             	mov    %r12,%r15
+  663a58:	49 c1 e7 04          	shl    $0x4,%r15
+  663a5c:	48 8b 7c 24 18       	mov    0x18(%rsp),%rdi
+  663a61:	4b 39 3c 3e          	cmp    %rdi,(%r14,%r15,1)
+  663a65:	75 19                	jne    663a80 <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0xe0>
+  663a67:	4d 01 fe             	add    %r15,%r14
+  663a6a:	49 8b 7e 08          	mov    0x8(%r14),%rdi
+  663a6e:	49 ff c4             	inc    %r12
+  663a71:	eb 10                	jmp    663a83 <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0xe3>
+  663a73:	66 66 66 66 2e 0f 1f 	data16 data16 data16 cs nopw 0x0(%rax,%rax,1)
+  663a7a:	84 00 00 00 00 00 
+  663a80:	48 89 ef             	mov    %rbp,%rdi
+  663a83:	4c 89 64 24 08       	mov    %r12,0x8(%rsp)
+  663a88:	49 29 dd             	sub    %rbx,%r13
+  663a8b:	44 88 c6             	mov    %r8b,%sil
+  663a8e:	c1 e6 04             	shl    $0x4,%esi
+  663a91:	48 8b b4 0e 90 00 00 	mov    0x90(%rsi,%rcx,1),%rsi
+  663a98:	00 
+  663a99:	49 0f af ed          	imul   %r13,%rbp
+  663a9d:	48 89 7c 24 10       	mov    %rdi,0x10(%rsp)
+  663aa2:	49 89 fd             	mov    %rdi,%r13
+  663aa5:	49 c1 ed 02          	shr    $0x2,%r13
+  663aa9:	48 89 6c 24 30       	mov    %rbp,0x30(%rsp)
+  663aae:	48 89 74 24 28       	mov    %rsi,0x28(%rsp)
+  663ab3:	0f 84 a7 03 00 00    	je     663e60 <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x4c0>
+  663ab9:	48 8d 2c ae          	lea    (%rsi,%rbp,4),%rbp
+  663abd:	48 83 c5 0c          	add    $0xc,%rbp
+  663ac1:	eb 27                	jmp    663aea <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x14a>
+  663ac3:	66 66 66 66 2e 0f 1f 	data16 data16 data16 cs nopw 0x0(%rax,%rax,1)
+  663aca:	84 00 00 00 00 00 
+  663ad0:	49 8b 33             	mov    (%r11),%rsi
+  663ad3:	48 ff 04 ce          	incq   (%rsi,%rcx,8)
+  663ad7:	48 ff c0             	inc    %rax
+  663ada:	49 ff cd             	dec    %r13
+  663add:	48 83 c5 10          	add    $0x10,%rbp
+  663ae1:	4d 85 ed             	test   %r13,%r13
+  663ae4:	0f 84 76 03 00 00    	je     663e60 <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x4c0>
+  663aea:	8b 5d f4             	mov    -0xc(%rbp),%ebx
+  663aed:	49 8b 09             	mov    (%r9),%rcx
+  663af0:	48 8b 31             	mov    (%rcx),%rsi
+  663af3:	48 8b 36             	mov    (%rsi),%rsi
+  663af6:	c4 e2 62 f5 76 10    	pext   0x10(%rsi),%ebx,%esi
+  663afc:	0f b6 49 08          	movzbl 0x8(%rcx),%ecx
+  663b00:	21 f1                	and    %esi,%ecx
+  663b02:	49 8b 72 08          	mov    0x8(%r10),%rsi
+  663b06:	48 39 ce             	cmp    %rcx,%rsi
+  663b09:	0f 86 ad 04 00 00    	jbe    663fbc <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x61c>
+  663b0f:	4d 8b 02             	mov    (%r10),%r8
+  663b12:	41 89 cf             	mov    %ecx,%r15d
+  663b15:	41 c1 e7 04          	shl    $0x4,%r15d
+  663b19:	4b 8b 34 38          	mov    (%r8,%r15,1),%rsi
+  663b1d:	48 8d 7e 04          	lea    0x4(%rsi),%rdi
+  663b21:	4b 3b 7c 38 08       	cmp    0x8(%r8,%r15,1),%rdi
+  663b26:	89 1e                	mov    %ebx,(%rsi)
+  663b28:	4b 89 3c 38          	mov    %rdi,(%r8,%r15,1)
+  663b2c:	0f 85 93 00 00 00    	jne    663bc5 <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x225>
+  663b32:	48 8b 1a             	mov    (%rdx),%rbx
+  663b35:	48 8b 73 28          	mov    0x28(%rbx),%rsi
+  663b39:	48 39 f0             	cmp    %rsi,%rax
+  663b3c:	0f 83 8a 04 00 00    	jae    663fcc <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x62c>
+  663b42:	48 8b 7b 20          	mov    0x20(%rbx),%rdi
+  663b46:	44 8b 24 87          	mov    (%rdi,%rax,4),%r12d
+  663b4a:	4c 39 e6             	cmp    %r12,%rsi
+  663b4d:	0f 86 50 04 00 00    	jbe    663fa3 <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x603>
+  663b53:	4d 01 f8             	add    %r15,%r8
+  663b56:	48 8b 73 78          	mov    0x78(%rbx),%rsi
+  663b5a:	48 8b bb 88 00 00 00 	mov    0x88(%rbx),%rdi
+  663b61:	45 31 f6             	xor    %r14d,%r14d
+  663b64:	4c 39 e7             	cmp    %r12,%rdi
+  663b67:	41 0f 97 c6          	seta   %r14b
+  663b6b:	41 bf 00 00 00 00    	mov    $0x0,%r15d
+  663b71:	4c 0f 46 ff          	cmovbe %rdi,%r15
+  663b75:	4d 29 fc             	sub    %r15,%r12
+  663b78:	41 c1 e6 04          	shl    $0x4,%r14d
+  663b7c:	4c 0f af e6          	imul   %rsi,%r12
+  663b80:	49 c1 e4 02          	shl    $0x2,%r12
+  663b84:	4d 03 a4 1e 90 00 00 	add    0x90(%r14,%rbx,1),%r12
+  663b8b:	00 
+  663b8c:	49 8d 34 b4          	lea    (%r12,%rsi,4),%rsi
+  663b90:	4d 89 20             	mov    %r12,(%r8)
+  663b93:	49 89 70 08          	mov    %rsi,0x8(%r8)
+  663b97:	4c 8b 02             	mov    (%rdx),%r8
+  663b9a:	49 8b 70 58          	mov    0x58(%r8),%rsi
+  663b9e:	48 39 f0             	cmp    %rsi,%rax
+  663ba1:	0f 83 25 04 00 00    	jae    663fcc <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x62c>
+  663ba7:	49 8b 70 50          	mov    0x50(%r8),%rsi
+  663bab:	88 0c 06             	mov    %cl,(%rsi,%rax,1)
+  663bae:	49 8b 73 08          	mov    0x8(%r11),%rsi
+  663bb2:	48 39 ce             	cmp    %rcx,%rsi
+  663bb5:	0f 86 01 04 00 00    	jbe    663fbc <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x61c>
+  663bbb:	49 8b 33             	mov    (%r11),%rsi
+  663bbe:	48 ff 04 ce          	incq   (%rsi,%rcx,8)
+  663bc2:	48 ff c0             	inc    %rax
+  663bc5:	8b 5d f8             	mov    -0x8(%rbp),%ebx
+  663bc8:	49 8b 09             	mov    (%r9),%rcx
+  663bcb:	48 8b 31             	mov    (%rcx),%rsi
+  663bce:	48 8b 36             	mov    (%rsi),%rsi
+  663bd1:	c4 e2 62 f5 76 10    	pext   0x10(%rsi),%ebx,%esi
+  663bd7:	0f b6 49 08          	movzbl 0x8(%rcx),%ecx
+  663bdb:	21 f1                	and    %esi,%ecx
+  663bdd:	49 8b 72 08          	mov    0x8(%r10),%rsi
+  663be1:	48 39 ce             	cmp    %rcx,%rsi
+  663be4:	0f 86 d2 03 00 00    	jbe    663fbc <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x61c>
+  663bea:	4d 8b 02             	mov    (%r10),%r8
+  663bed:	41 89 cf             	mov    %ecx,%r15d
+  663bf0:	41 c1 e7 04          	shl    $0x4,%r15d
+  663bf4:	4b 8b 34 38          	mov    (%r8,%r15,1),%rsi
+  663bf8:	48 8d 7e 04          	lea    0x4(%rsi),%rdi
+  663bfc:	4b 3b 7c 38 08       	cmp    0x8(%r8,%r15,1),%rdi
+  663c01:	89 1e                	mov    %ebx,(%rsi)
+  663c03:	4b 89 3c 38          	mov    %rdi,(%r8,%r15,1)
+  663c07:	0f 85 93 00 00 00    	jne    663ca0 <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x300>
+  663c0d:	48 8b 1a             	mov    (%rdx),%rbx
+  663c10:	48 8b 73 28          	mov    0x28(%rbx),%rsi
+  663c14:	48 39 f0             	cmp    %rsi,%rax
+  663c17:	0f 83 af 03 00 00    	jae    663fcc <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x62c>
+  663c1d:	48 8b 7b 20          	mov    0x20(%rbx),%rdi
+  663c21:	44 8b 24 87          	mov    (%rdi,%rax,4),%r12d
+  663c25:	4c 39 e6             	cmp    %r12,%rsi
+  663c28:	0f 86 75 03 00 00    	jbe    663fa3 <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x603>
+  663c2e:	4d 01 f8             	add    %r15,%r8
+  663c31:	48 8b 73 78          	mov    0x78(%rbx),%rsi
+  663c35:	48 8b bb 88 00 00 00 	mov    0x88(%rbx),%rdi
+  663c3c:	45 31 f6             	xor    %r14d,%r14d
+  663c3f:	4c 39 e7             	cmp    %r12,%rdi
+  663c42:	41 0f 97 c6          	seta   %r14b
+  663c46:	41 bf 00 00 00 00    	mov    $0x0,%r15d
+  663c4c:	4c 0f 46 ff          	cmovbe %rdi,%r15
+  663c50:	4d 29 fc             	sub    %r15,%r12
+  663c53:	41 c1 e6 04          	shl    $0x4,%r14d
+  663c57:	4c 0f af e6          	imul   %rsi,%r12
+  663c5b:	49 c1 e4 02          	shl    $0x2,%r12
+  663c5f:	4d 03 a4 1e 90 00 00 	add    0x90(%r14,%rbx,1),%r12
+  663c66:	00 
+  663c67:	49 8d 34 b4          	lea    (%r12,%rsi,4),%rsi
+  663c6b:	4d 89 20             	mov    %r12,(%r8)
+  663c6e:	49 89 70 08          	mov    %rsi,0x8(%r8)
+  663c72:	4c 8b 02             	mov    (%rdx),%r8
+  663c75:	49 8b 70 58          	mov    0x58(%r8),%rsi
+  663c79:	48 39 f0             	cmp    %rsi,%rax
+  663c7c:	0f 83 4a 03 00 00    	jae    663fcc <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x62c>
+  663c82:	49 8b 70 50          	mov    0x50(%r8),%rsi
+  663c86:	88 0c 06             	mov    %cl,(%rsi,%rax,1)
+  663c89:	49 8b 73 08          	mov    0x8(%r11),%rsi
+  663c8d:	48 39 ce             	cmp    %rcx,%rsi
+  663c90:	0f 86 26 03 00 00    	jbe    663fbc <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x61c>
+  663c96:	49 8b 33             	mov    (%r11),%rsi
+  663c99:	48 ff 04 ce          	incq   (%rsi,%rcx,8)
+  663c9d:	48 ff c0             	inc    %rax
+  663ca0:	8b 5d fc             	mov    -0x4(%rbp),%ebx
+  663ca3:	49 8b 09             	mov    (%r9),%rcx
+  663ca6:	48 8b 31             	mov    (%rcx),%rsi
+  663ca9:	48 8b 36             	mov    (%rsi),%rsi
+  663cac:	c4 e2 62 f5 76 10    	pext   0x10(%rsi),%ebx,%esi
+  663cb2:	0f b6 49 08          	movzbl 0x8(%rcx),%ecx
+  663cb6:	21 f1                	and    %esi,%ecx
+  663cb8:	49 8b 72 08          	mov    0x8(%r10),%rsi
+  663cbc:	48 39 ce             	cmp    %rcx,%rsi
+  663cbf:	0f 86 f7 02 00 00    	jbe    663fbc <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x61c>
+  663cc5:	4d 8b 02             	mov    (%r10),%r8
+  663cc8:	41 89 cf             	mov    %ecx,%r15d
+  663ccb:	41 c1 e7 04          	shl    $0x4,%r15d
+  663ccf:	4b 8b 34 38          	mov    (%r8,%r15,1),%rsi
+  663cd3:	48 8d 7e 04          	lea    0x4(%rsi),%rdi
+  663cd7:	4b 3b 7c 38 08       	cmp    0x8(%r8,%r15,1),%rdi
+  663cdc:	89 1e                	mov    %ebx,(%rsi)
+  663cde:	4b 89 3c 38          	mov    %rdi,(%r8,%r15,1)
+  663ce2:	0f 85 93 00 00 00    	jne    663d7b <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x3db>
+  663ce8:	48 8b 1a             	mov    (%rdx),%rbx
+  663ceb:	48 8b 73 28          	mov    0x28(%rbx),%rsi
+  663cef:	48 39 f0             	cmp    %rsi,%rax
+  663cf2:	0f 83 d4 02 00 00    	jae    663fcc <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x62c>
+  663cf8:	48 8b 7b 20          	mov    0x20(%rbx),%rdi
+  663cfc:	44 8b 24 87          	mov    (%rdi,%rax,4),%r12d
+  663d00:	4c 39 e6             	cmp    %r12,%rsi
+  663d03:	0f 86 9a 02 00 00    	jbe    663fa3 <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x603>
+  663d09:	4d 01 f8             	add    %r15,%r8
+  663d0c:	48 8b 73 78          	mov    0x78(%rbx),%rsi
+  663d10:	48 8b bb 88 00 00 00 	mov    0x88(%rbx),%rdi
+  663d17:	45 31 f6             	xor    %r14d,%r14d
+  663d1a:	4c 39 e7             	cmp    %r12,%rdi
+  663d1d:	41 0f 97 c6          	seta   %r14b
+  663d21:	41 bf 00 00 00 00    	mov    $0x0,%r15d
+  663d27:	4c 0f 46 ff          	cmovbe %rdi,%r15
+  663d2b:	4d 29 fc             	sub    %r15,%r12
+  663d2e:	41 c1 e6 04          	shl    $0x4,%r14d
+  663d32:	4c 0f af e6          	imul   %rsi,%r12
+  663d36:	49 c1 e4 02          	shl    $0x2,%r12
+  663d3a:	4d 03 a4 1e 90 00 00 	add    0x90(%r14,%rbx,1),%r12
+  663d41:	00 
+  663d42:	49 8d 34 b4          	lea    (%r12,%rsi,4),%rsi
+  663d46:	4d 89 20             	mov    %r12,(%r8)
+  663d49:	49 89 70 08          	mov    %rsi,0x8(%r8)
+  663d4d:	4c 8b 02             	mov    (%rdx),%r8
+  663d50:	49 8b 70 58          	mov    0x58(%r8),%rsi
+  663d54:	48 39 f0             	cmp    %rsi,%rax
+  663d57:	0f 83 6f 02 00 00    	jae    663fcc <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x62c>
+  663d5d:	49 8b 70 50          	mov    0x50(%r8),%rsi
+  663d61:	88 0c 06             	mov    %cl,(%rsi,%rax,1)
+  663d64:	49 8b 73 08          	mov    0x8(%r11),%rsi
+  663d68:	48 39 ce             	cmp    %rcx,%rsi
+  663d6b:	0f 86 4b 02 00 00    	jbe    663fbc <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x61c>
+  663d71:	49 8b 33             	mov    (%r11),%rsi
+  663d74:	48 ff 04 ce          	incq   (%rsi,%rcx,8)
+  663d78:	48 ff c0             	inc    %rax
+  663d7b:	8b 5d 00             	mov    0x0(%rbp),%ebx
+  663d7e:	49 8b 09             	mov    (%r9),%rcx
+  663d81:	48 8b 31             	mov    (%rcx),%rsi
+  663d84:	48 8b 36             	mov    (%rsi),%rsi
+  663d87:	c4 e2 62 f5 76 10    	pext   0x10(%rsi),%ebx,%esi
+  663d8d:	0f b6 49 08          	movzbl 0x8(%rcx),%ecx
+  663d91:	21 f1                	and    %esi,%ecx
+  663d93:	49 8b 72 08          	mov    0x8(%r10),%rsi
+  663d97:	48 39 ce             	cmp    %rcx,%rsi
+  663d9a:	0f 86 1c 02 00 00    	jbe    663fbc <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x61c>
+  663da0:	4d 8b 02             	mov    (%r10),%r8
+  663da3:	41 89 cf             	mov    %ecx,%r15d
+  663da6:	41 c1 e7 04          	shl    $0x4,%r15d
+  663daa:	4b 8b 34 38          	mov    (%r8,%r15,1),%rsi
+  663dae:	48 8d 7e 04          	lea    0x4(%rsi),%rdi
+  663db2:	4b 3b 7c 38 08       	cmp    0x8(%r8,%r15,1),%rdi
+  663db7:	89 1e                	mov    %ebx,(%rsi)
+  663db9:	4b 89 3c 38          	mov    %rdi,(%r8,%r15,1)
+  663dbd:	0f 85 17 fd ff ff    	jne    663ada <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x13a>
+  663dc3:	48 8b 1a             	mov    (%rdx),%rbx
+  663dc6:	48 8b 73 28          	mov    0x28(%rbx),%rsi
+  663dca:	48 39 f0             	cmp    %rsi,%rax
+  663dcd:	0f 83 f9 01 00 00    	jae    663fcc <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x62c>
+  663dd3:	48 8b 7b 20          	mov    0x20(%rbx),%rdi
+  663dd7:	44 8b 24 87          	mov    (%rdi,%rax,4),%r12d
+  663ddb:	4c 39 e6             	cmp    %r12,%rsi
+  663dde:	0f 86 bf 01 00 00    	jbe    663fa3 <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x603>
+  663de4:	4d 01 f8             	add    %r15,%r8
+  663de7:	48 8b 73 78          	mov    0x78(%rbx),%rsi
+  663deb:	48 8b bb 88 00 00 00 	mov    0x88(%rbx),%rdi
+  663df2:	45 31 f6             	xor    %r14d,%r14d
+  663df5:	4c 39 e7             	cmp    %r12,%rdi
+  663df8:	41 0f 97 c6          	seta   %r14b
+  663dfc:	41 bf 00 00 00 00    	mov    $0x0,%r15d
+  663e02:	4c 0f 46 ff          	cmovbe %rdi,%r15
+  663e06:	4d 29 fc             	sub    %r15,%r12
+  663e09:	41 c1 e6 04          	shl    $0x4,%r14d
+  663e0d:	4c 0f af e6          	imul   %rsi,%r12
+  663e11:	49 c1 e4 02          	shl    $0x2,%r12
+  663e15:	4d 03 a4 1e 90 00 00 	add    0x90(%r14,%rbx,1),%r12
+  663e1c:	00 
+  663e1d:	49 8d 34 b4          	lea    (%r12,%rsi,4),%rsi
+  663e21:	4d 89 20             	mov    %r12,(%r8)
+  663e24:	49 89 70 08          	mov    %rsi,0x8(%r8)
+  663e28:	4c 8b 02             	mov    (%rdx),%r8
+  663e2b:	49 8b 70 58          	mov    0x58(%r8),%rsi
+  663e2f:	48 39 f0             	cmp    %rsi,%rax
+  663e32:	0f 83 94 01 00 00    	jae    663fcc <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x62c>
+  663e38:	49 8b 70 50          	mov    0x50(%r8),%rsi
+  663e3c:	88 0c 06             	mov    %cl,(%rsi,%rax,1)
+  663e3f:	49 8b 73 08          	mov    0x8(%r11),%rsi
+  663e43:	48 39 ce             	cmp    %rcx,%rsi
+  663e46:	0f 87 84 fc ff ff    	ja     663ad0 <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x130>
+  663e4c:	e9 6b 01 00 00       	jmp    663fbc <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x61c>
+  663e51:	66 66 66 66 66 66 2e 	data16 data16 data16 data16 data16 cs nopw 0x0(%rax,%rax,1)
+  663e58:	0f 1f 84 00 00 00 00 
+  663e5f:	00 
+  663e60:	48 8b 4c 24 10       	mov    0x10(%rsp),%rcx
+  663e65:	49 89 cd             	mov    %rcx,%r13
+  663e68:	49 83 e5 fc          	and    $0xfffffffffffffffc,%r13
+  663e6c:	49 39 cd             	cmp    %rcx,%r13
+  663e6f:	0f 84 7b fb ff ff    	je     6639f0 <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x50>
+  663e75:	48 8b 4c 24 30       	mov    0x30(%rsp),%rcx
+  663e7a:	48 8b 74 24 28       	mov    0x28(%rsp),%rsi
+  663e7f:	4c 8d 3c 8e          	lea    (%rsi,%rcx,4),%r15
+  663e83:	eb 21                	jmp    663ea6 <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x506>
+  663e85:	66 66 2e 0f 1f 84 00 	data16 cs nopw 0x0(%rax,%rax,1)
+  663e8c:	00 00 00 00 
+  663e90:	4c 8b 64 24 08       	mov    0x8(%rsp),%r12
+  663e95:	48 8b 7c 24 10       	mov    0x10(%rsp),%rdi
+  663e9a:	49 ff c5             	inc    %r13
+  663e9d:	49 39 fd             	cmp    %rdi,%r13
+  663ea0:	0f 83 4f fb ff ff    	jae    6639f5 <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x55>
+  663ea6:	47 8b 04 af          	mov    (%r15,%r13,4),%r8d
+  663eaa:	49 8b 09             	mov    (%r9),%rcx
+  663ead:	48 8b 31             	mov    (%rcx),%rsi
+  663eb0:	48 8b 36             	mov    (%rsi),%rsi
+  663eb3:	c4 e2 3a f5 76 10    	pext   0x10(%rsi),%r8d,%esi
+  663eb9:	0f b6 49 08          	movzbl 0x8(%rcx),%ecx
+  663ebd:	21 f1                	and    %esi,%ecx
+  663ebf:	49 8b 72 08          	mov    0x8(%r10),%rsi
+  663ec3:	48 39 ce             	cmp    %rcx,%rsi
+  663ec6:	0f 86 10 01 00 00    	jbe    663fdc <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x63c>
+  663ecc:	4d 8b 22             	mov    (%r10),%r12
+  663ecf:	89 cd                	mov    %ecx,%ebp
+  663ed1:	c1 e5 04             	shl    $0x4,%ebp
+  663ed4:	49 8b 34 2c          	mov    (%r12,%rbp,1),%rsi
+  663ed8:	48 8d 5e 04          	lea    0x4(%rsi),%rbx
+  663edc:	49 3b 5c 2c 08       	cmp    0x8(%r12,%rbp,1),%rbx
+  663ee1:	44 89 06             	mov    %r8d,(%rsi)
+  663ee4:	49 89 1c 2c          	mov    %rbx,(%r12,%rbp,1)
+  663ee8:	75 a6                	jne    663e90 <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x4f0>
+  663eea:	4c 8b 02             	mov    (%rdx),%r8
+  663eed:	49 8b 70 28          	mov    0x28(%r8),%rsi
+  663ef1:	48 39 f0             	cmp    %rsi,%rax
+  663ef4:	0f 83 f2 00 00 00    	jae    663fec <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x64c>
+  663efa:	49 8b 58 20          	mov    0x20(%r8),%rbx
+  663efe:	8b 1c 83             	mov    (%rbx,%rax,4),%ebx
+  663f01:	48 39 de             	cmp    %rbx,%rsi
+  663f04:	0f 86 99 00 00 00    	jbe    663fa3 <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x603>
+  663f0a:	49 01 ec             	add    %rbp,%r12
+  663f0d:	49 8b 70 78          	mov    0x78(%r8),%rsi
+  663f11:	49 8b a8 88 00 00 00 	mov    0x88(%r8),%rbp
+  663f18:	45 31 f6             	xor    %r14d,%r14d
+  663f1b:	48 39 dd             	cmp    %rbx,%rbp
+  663f1e:	41 0f 97 c6          	seta   %r14b
+  663f22:	bf 00 00 00 00       	mov    $0x0,%edi
+  663f27:	48 0f 46 fd          	cmovbe %rbp,%rdi
+  663f2b:	48 29 fb             	sub    %rdi,%rbx
+  663f2e:	41 c1 e6 04          	shl    $0x4,%r14d
+  663f32:	48 0f af de          	imul   %rsi,%rbx
+  663f36:	48 c1 e3 02          	shl    $0x2,%rbx
+  663f3a:	4b 03 9c 06 90 00 00 	add    0x90(%r14,%r8,1),%rbx
+  663f41:	00 
+  663f42:	48 8d 34 b3          	lea    (%rbx,%rsi,4),%rsi
+  663f46:	49 89 1c 24          	mov    %rbx,(%r12)
+  663f4a:	49 89 74 24 08       	mov    %rsi,0x8(%r12)
+  663f4f:	4c 8b 02             	mov    (%rdx),%r8
+  663f52:	49 8b 70 58          	mov    0x58(%r8),%rsi
+  663f56:	48 39 f0             	cmp    %rsi,%rax
+  663f59:	0f 83 8d 00 00 00    	jae    663fec <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x64c>
+  663f5f:	49 8b 70 50          	mov    0x50(%r8),%rsi
+  663f63:	88 0c 06             	mov    %cl,(%rsi,%rax,1)
+  663f66:	49 8b 73 08          	mov    0x8(%r11),%rsi
+  663f6a:	48 39 ce             	cmp    %rcx,%rsi
+  663f6d:	4c 8b 64 24 08       	mov    0x8(%rsp),%r12
+  663f72:	48 8b 7c 24 10       	mov    0x10(%rsp),%rdi
+  663f77:	76 63                	jbe    663fdc <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x63c>
+  663f79:	49 8b 33             	mov    (%r11),%rsi
+  663f7c:	48 ff 04 ce          	incq   (%rsi,%rcx,8)
+  663f80:	48 ff c0             	inc    %rax
+  663f83:	49 ff c5             	inc    %r13
+  663f86:	49 39 fd             	cmp    %rdi,%r13
+  663f89:	0f 82 17 ff ff ff    	jb     663ea6 <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x506>
+  663f8f:	e9 61 fa ff ff       	jmp    6639f5 <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedmhBH_Kb1_EINtB1t_10ClassifiermE10in_contextjNCINvMNtB1t_5blockINtB3x_6SortermE7scatterhINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedmmB2v_EhEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x55>
+  663f94:	48 83 c4 38          	add    $0x38,%rsp
+  663f98:	5b                   	pop    %rbx
+  663f99:	41 5c                	pop    %r12
+  663f9b:	41 5d                	pop    %r13
+  663f9d:	41 5e                	pop    %r14
+  663f9f:	41 5f                	pop    %r15
+  663fa1:	5d                   	pop    %rbp
+  663fa2:	c3                   	ret
+  663fa3:	48 8d 3d 55 15 9c ff 	lea    -0x63eaab(%rip),%rdi        # 254ff <anon.b03a42b70064a0efbc4144cd01f217d1.0.llvm.5778692724253383634+0xf3>
+  663faa:	48 8d 15 97 5e 0f 00 	lea    0xf5e97(%rip),%rdx        # 759e48 <anon.b03a42b70064a0efbc4144cd01f217d1.2.llvm.5778692724253383634+0x370>
+  663fb1:	be 2c 00 00 00       	mov    $0x2c,%esi
+  663fb6:	ff 15 8c b8 0f 00    	call   *0xfb88c(%rip)        # 75f848 <_DYNAMIC+0x290>
+  663fbc:	48 8d 15 f5 5d 0f 00 	lea    0xf5df5(%rip),%rdx        # 759db8 <anon.b03a42b70064a0efbc4144cd01f217d1.2.llvm.5778692724253383634+0x2e0>
+  663fc3:	48 89 cf             	mov    %rcx,%rdi
+  663fc6:	ff 15 94 b8 0f 00    	call   *0xfb894(%rip)        # 75f860 <_DYNAMIC+0x2a8>
+  663fcc:	48 8d 15 e5 5d 0f 00 	lea    0xf5de5(%rip),%rdx        # 759db8 <anon.b03a42b70064a0efbc4144cd01f217d1.2.llvm.5778692724253383634+0x2e0>
+  663fd3:	48 89 c7             	mov    %rax,%rdi
+  663fd6:	ff 15 84 b8 0f 00    	call   *0xfb884(%rip)        # 75f860 <_DYNAMIC+0x2a8>
+  663fdc:	48 8d 15 bd 5d 0f 00 	lea    0xf5dbd(%rip),%rdx        # 759da0 <anon.b03a42b70064a0efbc4144cd01f217d1.2.llvm.5778692724253383634+0x2c8>
+  663fe3:	48 89 cf             	mov    %rcx,%rdi
+  663fe6:	ff 15 74 b8 0f 00    	call   *0xfb874(%rip)        # 75f860 <_DYNAMIC+0x2a8>
+  663fec:	48 8d 15 ad 5d 0f 00 	lea    0xf5dad(%rip),%rdx        # 759da0 <anon.b03a42b70064a0efbc4144cd01f217d1.2.llvm.5778692724253383634+0x2c8>
+  663ff3:	48 89 c7             	mov    %rax,%rdi
+  663ff6:	ff 15 64 b8 0f 00    	call   *0xfb864(%rip)        # 75f860 <_DYNAMIC+0x2a8>
+  663ffc:	48 8d 15 85 5d 0f 00 	lea    0xf5d85(%rip),%rdx        # 759d88 <anon.b03a42b70064a0efbc4144cd01f217d1.2.llvm.5778692724253383634+0x2b0>
+  664003:	ff 15 57 b8 0f 00    	call   *0xfb857(%rip)        # 75f860 <_DYNAMIC+0x2a8>
