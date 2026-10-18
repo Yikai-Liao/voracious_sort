@@ -1,0 +1,44 @@
+library-backends-b64-0-native 12.64
+library-backends-b64-1-portable 14.04
+library-backends-b64-2-portable 14.09
+library-backends-b64-3-native 11.97
+library-backends-b512-0-native 12.45
+library-backends-b512-1-portable 14.26
+library-backends-b512-2-portable 13.99
+library-backends-b512-3-native 12.13
+library-backends-information-0-native 45.05
+library-backends-information-1-portable 50.69
+library-backends-information-2-portable 51.66
+library-backends-information-3-native 45.44
+u32 uniform B64 base/hw/sw_ms 15.606 16.002 14.207 sw/hw 0.914
+u32 sparse B64 base/hw/sw_ms 5.568 5.496 5.003 sw/hw 0.905
+u64 uniform B64 base/hw/sw_ms 18.807 17.965 17.652 sw/hw 1.025
+u64 sparse B64 base/hw/sw_ms 13.554 12.987 13.394 sw/hw 1.015
+u128 uniform B64 base/hw/sw_ms 37.674 37.085 34.729 sw/hw 0.966
+u128 sparse B64 base/hw/sw_ms 81.984 16.542 71.73 sw/hw 4.312
+wide32 uniform B64 base/hw/sw_ms 52.954 53.319 53.554 sw/hw 1.013
+wide32 sparse B64 base/hw/sw_ms 111.408 22.999 71.406 sw/hw 3.143
+u32 uniform B512 base/hw/sw_ms 12.946 12.806 13.317 sw/hw 1.034
+u32 sparse B512 base/hw/sw_ms 3.891 3.756 3.693 sw/hw 0.969
+u64 uniform B512 base/hw/sw_ms 17.252 16.94 16.852 sw/hw 1.003
+u64 sparse B512 base/hw/sw_ms 10.477 10.367 10.479 sw/hw 1.001
+u128 uniform B512 base/hw/sw_ms 33.044 33.019 34.466 sw/hw 1.052
+u128 sparse B512 base/hw/sw_ms 84.238 20.813 70.643 sw/hw 3.428
+wide32 uniform B512 base/hw/sw_ms 60.739 60.518 64.779 sw/hw 1.034
+wide32 sparse B512 base/hw/sw_ms 118.1 26.202 70.156 sw/hw 2.672
+u128 project7_spaced B64 base/hw/sw_ms 20.305 3.667 17.951 sw/hw 5.055
+u128 project8_spaced B64 base/hw/sw_ms 21.131 3.087 17.517 sw/hw 5.733
+u128 project9_spaced B64 base/hw/sw_ms 22.537 5.859 33.148 sw/hw 5.71
+u128 project16_spaced B64 base/hw/sw_ms 33.957 6.11 34.477 sw/hw 5.803
+u128 project24_spaced B64 base/hw/sw_ms 24.323 9.323 49.407 sw/hw 5.291
+u128 project32_spaced B64 base/hw/sw_ms 19.351 19.458 21.298 sw/hw 1.1
+u128 project64_spaced B64 base/hw/sw_ms 11.498 11.576 11.408 sw/hw 0.971
+u128 project8_cross B64 base/hw/sw_ms 2.369 3.096 3.624 sw/hw 1.161
+wide32 project7_spaced B64 base/hw/sw_ms 23.025 3.303 17.369 sw/hw 5.451
+wide32 project8_spaced B64 base/hw/sw_ms 26.597 3.322 16.93 sw/hw 5.127
+wide32 project9_spaced B64 base/hw/sw_ms 27.854 4.384 31.805 sw/hw 7.43
+wide32 project16_spaced B64 base/hw/sw_ms 38.139 5.308 30.881 sw/hw 5.915
+wide32 project24_spaced B64 base/hw/sw_ms 28.437 7.053 47.017 sw/hw 6.698
+wide32 project32_spaced B64 base/hw/sw_ms 22.91 22.998 23.283 sw/hw 1.028
+wide32 project64_spaced B64 base/hw/sw_ms 14.122 14.333 15.29 sw/hw 1.079
+wide32 project8_cross B64 base/hw/sw_ms 4.201 3.221 3.359 sw/hw 1.08

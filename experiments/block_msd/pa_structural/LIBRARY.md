@@ -8,6 +8,8 @@ Admission now uses the conservative representation-cost rule on every target: ge
 
 Verified source coverage in the pinned release: runtime x86-64 instruction-set dispatch and portable implementations elsewhere. The release does not provide an ARM SVE2 BitPerm BEXT backend or a RISC-V multi-bit compression backend. Cross-compilation checks establish buildability, not real-machine speed. No local ARM/RISC-V intrinsic branch is added to fill that gap.
 
+The user explicitly selected hakmem after the comparison with bitkit. For a future upstream contribution, its existing batch dispatch, u128 support and backend-law/codegen checks fit PA better; this is an engineering fit judgment, not a prediction about maintainer response or PR acceptance. Candidate topics are a genuinely measured ARM backend or an optional prepared-mask API for repeated gathers. Neither is part of this change.
+
 Primary sources:
 
 - [hakmem ISA API](https://docs.rs/hakmem/0.2.0/hakmem/isa/index.html)
