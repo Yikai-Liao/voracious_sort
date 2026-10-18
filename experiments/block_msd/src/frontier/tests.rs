@@ -199,11 +199,7 @@ fn recursive_identity_and_payload_matrix() {
                 PaExperiment::UnifiedGroups,
                 PaExperiment::UnifiedIdentity,
                 PaExperiment::UnifiedPacked,
-                PaExperiment::UnifiedRuns,
-                PaExperiment::UnifiedPackedRuns,
-                PaExperiment::UnifiedNarrow,
-                PaExperiment::UnifiedPackedNarrow,
-                PaExperiment::UnifiedPackedNarrowRuns,
+                PaExperiment::UnifiedPacked,
                 PaExperiment::UnifiedSampled,
                 PaExperiment::UnifiedReduced,
                 PaExperiment::UnifiedCandidate,
@@ -282,11 +278,7 @@ fn pa_new_policies_preserve_converted_float_order() {
         PaExperiment::UnifiedGroups,
         PaExperiment::UnifiedIdentity,
         PaExperiment::UnifiedPacked,
-        PaExperiment::UnifiedRuns,
-        PaExperiment::UnifiedPackedRuns,
-        PaExperiment::UnifiedNarrow,
-        PaExperiment::UnifiedPackedNarrow,
-        PaExperiment::UnifiedPackedNarrowRuns,
+        PaExperiment::UnifiedPacked,
         PaExperiment::UnifiedSampled,
         PaExperiment::UnifiedReduced,
         PaExperiment::UnifiedCandidate,
@@ -379,11 +371,7 @@ fn native_small_integer_widths() {
         PaExperiment::UnifiedGroups,
         PaExperiment::UnifiedIdentity,
         PaExperiment::UnifiedPacked,
-        PaExperiment::UnifiedRuns,
-        PaExperiment::UnifiedPackedRuns,
-        PaExperiment::UnifiedNarrow,
-        PaExperiment::UnifiedPackedNarrow,
-        PaExperiment::UnifiedPackedNarrowRuns,
+        PaExperiment::UnifiedPacked,
         PaExperiment::UnifiedSampled,
         PaExperiment::UnifiedReduced,
         PaExperiment::UnifiedCandidate,
@@ -460,11 +448,7 @@ fn block_tail_sizes_and_large_workspace() {
             PaExperiment::UnifiedGroups,
             PaExperiment::UnifiedIdentity,
             PaExperiment::UnifiedPacked,
-            PaExperiment::UnifiedRuns,
-            PaExperiment::UnifiedPackedRuns,
-            PaExperiment::UnifiedNarrow,
-            PaExperiment::UnifiedPackedNarrow,
-            PaExperiment::UnifiedPackedNarrowRuns,
+            PaExperiment::UnifiedPacked,
             PaExperiment::UnifiedSampled,
             PaExperiment::UnifiedReduced,
             PaExperiment::UnifiedCandidate,
@@ -739,11 +723,7 @@ fn structural_projection_bit_embeddings_and_frequency_preserve_stable_records()
                 for policy in [
                     PaExperiment::UnifiedIdentity,
                     PaExperiment::UnifiedPacked,
-                    PaExperiment::UnifiedRuns,
-                    PaExperiment::UnifiedPackedRuns,
-                    PaExperiment::UnifiedNarrow,
-                    PaExperiment::UnifiedPackedNarrow,
-                    PaExperiment::UnifiedPackedNarrowRuns,
+                    PaExperiment::UnifiedPacked,
                 ] {
                     for block in [3, 64, 512] {
                         let mut actual = input.clone();
@@ -848,7 +828,7 @@ fn complete_multi_byte_projections_consume_information_in_one_node() {
             let mut actual = input.clone();
             let work = sort_pa_with_threshold::<_, u128>(
                 &mut actual,
-                PaExperiment::UnifiedPackedNarrowRuns,
+                PaExperiment::UnifiedPacked,
                 block,
                 16 * 1024 * 1024,
             );
@@ -865,36 +845,52 @@ fn complete_multi_byte_projections_consume_information_in_one_node() {
 
 #[test]
 #[cfg(feature = "frontier_work")]
-fn carried_boundaries_reduce_label_evaluations_without_extra_scatter_or_compact(
-) {
+fn bounded_projection_preserves_already_ordered_suffix_run_geometry() {
     let mut state = 42;
-    let input: Vec<Item> = (0..65_537)
-        .map(|id| Item {
-            key: ((random(&mut state) as u128) << 64)
-                | random(&mut state) as u128,
-            id,
-            payload: [id as u64; 3],
+    let input: Vec<Item> = (0..65537)
+        .map(|id| {
+            let high = if id % 10 == 0 {
+                (random(&mut state) & 255) as u128
+            } else {
+                0
+            };
+            Item { key: (high << 24) | id as u128, id, payload: [id as u64; 3] }
         })
         .collect();
-    let mut reference = input.clone();
-    let mut carried = input.clone();
-    let base = sort_pa_with_threshold::<_, u128>(
-        &mut reference,
-        PaExperiment::UnifiedGroups,
-        64,
-        16 * 1024 * 1024,
-    );
-    let work = sort_pa_with_threshold::<_, u128>(
-        &mut carried,
-        PaExperiment::UnifiedRuns,
-        64,
-        16 * 1024 * 1024,
-    );
-    assert_eq!(work.scatter_records, base.scatter_records);
-    assert_eq!(work.compact_records, base.compact_records);
-    assert_eq!(work.prepare_records, base.prepare_records);
-    assert!(work.label_evals < base.label_evals);
-    assert!(carried.iter().zip(&reference).all(|(a, b)| a.key == b.key
-        && a.id == b.id
-        && a.payload == b.payload));
+    let mut expected = input.clone();
+    expected.sort_by_key(|x| x.key);
+    for block in [64, 512] {
+        let mut old = input.clone();
+        let mut bounded = input.clone();
+        let mut aggressive = input.clone();
+        let a = sort_pa_with_threshold::<_, u128>(
+            &mut old,
+            PaExperiment::UnifiedGroups,
+            block,
+            16 * 1024 * 1024,
+        );
+        let b = sort_pa_with_threshold::<_, u128>(
+            &mut bounded,
+            PaExperiment::UnifiedPacked,
+            block,
+            16 * 1024 * 1024,
+        );
+        let c = sort_pa_with_threshold::<_, u128>(
+            &mut aggressive,
+            PaExperiment::UnifiedPackedAggressive,
+            block,
+            16 * 1024 * 1024,
+        );
+        assert_eq!(b.projection_nodes, 0);
+        assert_eq!(a.scatter_records, b.scatter_records);
+        assert_eq!(a.prepare_records, b.prepare_records);
+        assert_eq!(a.leaves, b.leaves);
+        assert_eq!(a.leaf_lengths, b.leaf_lengths);
+        assert!(c.leaves > a.leaves + 1000);
+        for actual in [old, bounded, aggressive] {
+            assert!(actual.iter().zip(&expected).all(|(x, y)| x.key == y.key
+                && x.id == y.id
+                && x.payload == y.payload));
+        }
+    }
 }

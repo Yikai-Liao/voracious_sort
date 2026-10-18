@@ -31,7 +31,7 @@ def main():
     p.add_argument('--seed', type=int, default=42)
     p.add_argument('--cpu', default='2')
     p.add_argument('--kind', default='time', choices=['time', 'work', 'memory'])
-    p.add_argument('--methods', default=f'{BASE},Pa_packed,Pa_narrow,Pa_packed_narrow,Pa_packed_narrow_runs,Rollercoaster,L_frozen,{BASE}')
+    p.add_argument('--methods', default=f'{BASE},Pa_packed,Pa_packed_aggressive,Rollercoaster,L_frozen,{BASE}')
     p.add_argument('--cases', default='uniform,sparse')
     p.add_argument('--layouts', default='u32,u64,u128,wide32,large128')
     a = p.parse_args()

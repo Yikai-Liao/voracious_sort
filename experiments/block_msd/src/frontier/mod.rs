@@ -38,7 +38,6 @@ pub struct Config {
 
 #[derive(Debug)]
 pub struct Work {
-    pub narrow_nodes: usize,
     pub projection_nodes: usize,
     pub projection_records: usize,
     pub identity_nodes: usize,
@@ -73,7 +72,6 @@ pub struct Work {
 impl Default for Work {
     fn default() -> Self {
         Self {
-            narrow_nodes: 0,
             projection_nodes: 0,
             projection_records: 0,
             identity_nodes: 0,
@@ -171,7 +169,7 @@ fn mask(bits: usize) -> u128 {
 
 trait Classifier<U: NativeKey> {
     type Label: NativeKey;
-    const PACKED: bool = false;
+    const USE_COMPACT_RADIX: bool = false;
     fn label(&self, key: U) -> Self::Label;
     fn remaining(&self, key: U) -> usize;
 }

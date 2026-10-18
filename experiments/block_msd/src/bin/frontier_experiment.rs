@@ -304,12 +304,8 @@ const METHODS: &[&str] = &[
     "Reverse_only",
     "Reverse_stable",
     "Rollercoaster_repaired",
-    "Pa_narrow",
-    "Pa_packed_narrow",
-    "Pa_packed_narrow_runs",
+    "Pa_packed_aggressive",
     "Pa_packed",
-    "Pa_runs",
-    "Pa_packed_runs",
     "Pa_identity",
     "Pa_ref",
     "Pa_terminal",
@@ -489,16 +485,7 @@ where
     } else {
         method
     };
-    if matches!(
-        method,
-        "Pa_identity"
-            | "Pa_packed"
-            | "Pa_runs"
-            | "Pa_packed_runs"
-            | "Pa_narrow"
-            | "Pa_packed_narrow"
-            | "Pa_packed_narrow_runs"
-    ) {
+    if matches!(method, "Pa_packed_aggressive" | "Pa_identity" | "Pa_packed") {
         local_workspace_threshold = 16 * 1024 * 1024;
     }
     match method {
@@ -526,12 +513,8 @@ where
             }
             return Default::default();
         },
-        "Pa_narrow"
-        | "Pa_packed_narrow"
-        | "Pa_packed_narrow_runs"
+        "Pa_packed_aggressive"
         | "Pa_packed"
-        | "Pa_runs"
-        | "Pa_packed_runs"
         | "Pa_identity"
         | "Pa_ref"
         | "Pa_terminal"
@@ -562,12 +545,8 @@ where
         | "Pa_unified_groups" => {
             use frontier::PaExperiment::*;
             let experiment = match method {
-                "Pa_narrow" => UnifiedNarrow,
-                "Pa_packed_narrow" => UnifiedPackedNarrow,
-                "Pa_packed_narrow_runs" => UnifiedPackedNarrowRuns,
+                "Pa_packed_aggressive" => UnifiedPackedAggressive,
                 "Pa_packed" => UnifiedPacked,
-                "Pa_runs" => UnifiedRuns,
-                "Pa_packed_runs" => UnifiedPackedRuns,
                 "Pa_identity" => UnifiedIdentity,
                 "Pa_ref" => Reference,
                 "Pa_terminal" => Terminal,
@@ -968,7 +947,6 @@ fn run<T: Radixable<K> + Verified, K: RadixKey>(
                 cpu.to_string(),
                 peak.to_string(),
                 allocs.to_string(),
-                stats.narrow_nodes.to_string(),
                 stats.projection_nodes.to_string(),
                 stats.projection_records.to_string(),
                 stats.identity_nodes.to_string(),
@@ -1063,7 +1041,7 @@ fn main() {
     );
     let block = args.get(7).map_or(64, |s| s.parse().unwrap());
     let seed = args.get(8).map_or(0x123456789abcdef, |s| s.parse().unwrap());
-    println!("layout,case,n,record_bytes,seed,block,method,slot,rep,kind,wall_ns,cpu_ns,heap_peak,allocs,narrow_nodes,projection_nodes,projection_records,identity_nodes,nodes,node_records,prepare_records,order_records,candidate_records,label_evals,scatter_records,dense_nodes,block_nodes,passes,compact_records,tail_records,runs_records,unresolved_records,leaves,leaf_records,max_depth,max_path_passes,frontier_nodes,equal_nodes,band_nodes,band_records,terminal_band_nodes,probe_records,instrumented,input_address,leaf_lengths");
+    println!("layout,case,n,record_bytes,seed,block,method,slot,rep,kind,wall_ns,cpu_ns,heap_peak,allocs,projection_nodes,projection_records,identity_nodes,nodes,node_records,prepare_records,order_records,candidate_records,label_evals,scatter_records,dense_nodes,block_nodes,passes,compact_records,tail_records,runs_records,unresolved_records,leaves,leaf_records,max_depth,max_path_passes,frontier_nodes,equal_nodes,band_nodes,band_records,terminal_band_nodes,probe_records,instrumented,input_address,leaf_lengths");
     for layout in layouts {
         for &case in &cases {
             let bits = match layout {

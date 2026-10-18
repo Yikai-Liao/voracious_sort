@@ -1,0 +1,29 @@
+{
+  "candidate": "Pa_packed",
+  "elf_sha256": "bf6cdc46bef3574009a972b2b9924b639dc601d43e1bd40fd23daa3886f326d3",
+  "cells": 53,
+  "rows": 3816,
+  "comparisons": {
+    "L_frozen": {
+      "median_wins": 47,
+      "p90_wins": 45,
+      "p10_losses": 4
+    },
+    "Pa_packed_aggressive": {
+      "median_wins": 12,
+      "p90_wins": 1,
+      "p10_losses": 2
+    },
+    "Pa_unified_groups_t16777216": {
+      "median_wins": 39,
+      "p90_wins": 29,
+      "p10_losses": 1
+    },
+    "Rollercoaster": {
+      "median_wins": 42,
+      "p90_wins": 35,
+      "p10_losses": 6
+    }
+  },
+  "regression_signals": []
+}

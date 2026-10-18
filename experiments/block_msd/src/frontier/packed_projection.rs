@@ -13,6 +13,51 @@ impl<U: NativeKey> Selection<U> {
         let variation = variation & U::mask(cap);
         let q = variation.count_ones() as usize;
         let width = U::BITS - variation.leading_zeros() as usize;
+        if q == 0 || q == width || budget == 0 {
+            return None;
+        }
+        let raw = variation.to_u128();
+        let low = width.saturating_sub(budget);
+        let prefix = if low == 0 { raw } else { raw & !((1u128 << low) - 1) };
+        let active_bytes = |mask: u128| {
+            (0..U::BITS / 8)
+                .filter(|&byte| (mask >> (byte * 8)) & 255 != 0)
+                .count()
+        };
+        // A complete tag must not add a whole-record pass over the ordinary
+        // first node. Otherwise already-ordered children could make the extra
+        // passes pure regression.
+        let complete =
+            q <= budget && q <= 32 && (q + 7) / 8 <= active_bytes(prefix);
+        // Partial compression keeps exactly the ordinary prefix's partition.
+        // Spending holes on lower bits changes fanout and can turn ordered
+        // large runs into tens of thousands of costly small leaves.
+        let selected = if complete { raw } else { prefix };
+        let bits = selected.count_ones() as usize;
+        if bits == 0 || bits > 32 || active_bytes(selected) <= (bits + 7) / 8 {
+            return None;
+        }
+        Some(Self {
+            mask: U::from_u128(selected),
+            bits,
+            remaining: if selected == raw {
+                0
+            } else {
+                selected.trailing_zeros() as usize
+            },
+        })
+    }
+
+    // Diagnostic only: preserve the earlier cohort's information-budget
+    // policy so work counters can reproduce its observed tiny-leaf regression.
+    pub(super) fn aggressive(
+        variation: U,
+        cap: usize,
+        budget: usize,
+    ) -> Option<Self> {
+        let variation = variation & U::mask(cap);
+        let q = variation.count_ones() as usize;
+        let width = U::BITS - variation.leading_zeros() as usize;
         // Dense coordinates cannot remove a hole or improve the frontier.
         if q == 0 || q == width {
             return None;
@@ -160,7 +205,7 @@ impl<U: NativeKey, L: NativeKey> Packed<U, L> {
 
 impl<U: NativeKey, L: NativeKey> Classifier<U> for Packed<U, L> {
     type Label = L;
-    const PACKED: bool = true;
+    const USE_COMPACT_RADIX: bool = true;
     #[inline]
     fn label(&self, key: U) -> L {
         L::from_u128(self.gather(key) as u128)
@@ -247,6 +292,50 @@ mod tests {
                         key | ((((label >> j) & 1) as u16) << p)
                     });
                 assert_eq!(projection.label(key), label as u8);
+            }
+        }
+    }
+}
+
+#[cfg(test)]
+mod bounded_tests {
+    use super::*;
+    #[test]
+    fn partial_tags_keep_the_old_partition_and_never_add_a_root_pass() {
+        assert!(Selection::<u32>::aggressive(0xff01ffff, 32, 24).is_some());
+        assert!(Selection::<u32>::new(0xff01ffff, 32, 24).is_none());
+        // A complete three-byte tag must not replace a one-byte root whose
+        // already-ordered suffix could otherwise return without moving again.
+        assert!(Selection::<u128>::new(
+            (0xfu128 << 124) | ((1 << 20) - 1),
+            128,
+            24
+        )
+        .is_none());
+        let mut state = 42u128;
+        for budget in [8usize, 16, 24, 32] {
+            for _ in 0..10000 {
+                state = state.wrapping_mul(0xda942042e4dd58b5).wrapping_add(1);
+                let variation = state ^ (state >> 17);
+                let Some(s) = Selection::<u128>::new(variation, 128, budget)
+                else {
+                    continue;
+                };
+                let width = 128 - variation.leading_zeros() as usize;
+                let low = width.saturating_sub(budget);
+                let prefix = if low == 0 {
+                    variation
+                } else {
+                    variation & !((1u128 << low) - 1)
+                };
+                let passes =
+                    (0..16).filter(|&b| (prefix >> (8 * b)) & 255 != 0).count();
+                assert!((s.bits + 7) / 8 <= passes);
+                if s.remaining > 0 {
+                    assert_eq!(s.mask, prefix);
+                } else {
+                    assert_eq!(s.mask, variation);
+                }
             }
         }
     }

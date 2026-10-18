@@ -34,11 +34,7 @@ pub enum PaExperiment {
     UnifiedGroups,
     UnifiedIdentity,
     UnifiedPacked,
-    UnifiedRuns,
-    UnifiedPackedRuns,
-    UnifiedNarrow,
-    UnifiedPackedNarrow,
-    UnifiedPackedNarrowRuns,
+    UnifiedPackedAggressive,
 }
 
 #[derive(Clone, Copy, PartialEq)]
@@ -46,6 +42,7 @@ enum SparseCompletion {
     Recursive,
     Identity,
     Packed,
+    PackedAggressive,
 }
 
 #[derive(Clone, Copy)]
@@ -69,8 +66,6 @@ struct Policy {
     local_workspace_threshold: usize,
     block: usize,
     sparse: SparseCompletion,
-    carry_runs: bool,
-    narrow_labels: bool,
 }
 
 pub fn sort_pa_experiment<T: Radixable<K>, K: RadixKey>(
@@ -95,41 +90,23 @@ where
     Converted<T, K>: NativeKey,
 {
     assert!(block > 0);
-    let carry_runs = matches!(
-        experiment,
-        PaExperiment::UnifiedRuns
-            | PaExperiment::UnifiedPackedRuns
-            | PaExperiment::UnifiedPackedNarrowRuns
-    );
     let sparse = match experiment {
-        PaExperiment::UnifiedPacked
-        | PaExperiment::UnifiedPackedRuns
-        | PaExperiment::UnifiedPackedNarrow
-        | PaExperiment::UnifiedPackedNarrowRuns => SparseCompletion::Packed,
+        PaExperiment::UnifiedPacked => SparseCompletion::Packed,
+        PaExperiment::UnifiedPackedAggressive => {
+            SparseCompletion::PackedAggressive
+        },
         PaExperiment::UnifiedIdentity => SparseCompletion::Identity,
         _ => SparseCompletion::Recursive,
     };
-    let narrow_labels = matches!(
-        experiment,
-        PaExperiment::UnifiedNarrow
-            | PaExperiment::UnifiedPackedNarrow
-            | PaExperiment::UnifiedPackedNarrowRuns
-    );
     // Independent ablations inherit the complete frozen UnifiedGroups policy.
     let experiment = match experiment {
         PaExperiment::UnifiedIdentity
         | PaExperiment::UnifiedPacked
-        | PaExperiment::UnifiedRuns
-        | PaExperiment::UnifiedPackedRuns
-        | PaExperiment::UnifiedNarrow
-        | PaExperiment::UnifiedPackedNarrow
-        | PaExperiment::UnifiedPackedNarrowRuns => PaExperiment::UnifiedGroups,
+        | PaExperiment::UnifiedPackedAggressive => PaExperiment::UnifiedGroups,
         other => other,
     };
     let policy = Policy {
         sparse,
-        carry_runs,
-        narrow_labels,
         terminal: matches!(
             experiment,
             PaExperiment::Terminal
@@ -611,14 +588,24 @@ fn visit<T: Radixable<K>, K: RadixKey>(
             })
             .map(|band| (band, populations[0], false))
         });
-    let packing = if policy.sparse == SparseCompletion::Packed
-        && approved_band.is_none()
+    let packing = if matches!(
+        policy.sparse,
+        SparseCompletion::Packed | SparseCompletion::PackedAggressive
+    ) && approved_band.is_none()
     {
-        super::packed_projection::Selection::new(
-            p.union ^ p.intersection,
-            cap,
-            8 * bytes,
-        )
+        if policy.sparse == SparseCompletion::PackedAggressive {
+            super::packed_projection::Selection::aggressive(
+                p.union ^ p.intersection,
+                cap,
+                8 * bytes,
+            )
+        } else {
+            super::packed_projection::Selection::new(
+                p.union ^ p.intersection,
+                cap,
+                8 * bytes,
+            )
+        }
     } else {
         None
     };
@@ -771,82 +758,7 @@ impl<U: NativeKey> Classifier<U> for EqualSplit<U> {
     }
 }
 
-// A variation mask proves that all discarded label bits are constant in
-// this node. Narrowing therefore preserves label order, ties and remaining cap.
-// It also enables the existing compact bucket workspace for small alphabets.
-struct NarrowLabel<'a, C, L> {
-    inner: &'a C,
-    _label: std::marker::PhantomData<L>,
-}
-impl<U: NativeKey, C: Classifier<U>, L: NativeKey> Classifier<U>
-    for NarrowLabel<'_, C, L>
-{
-    type Label = L;
-    const PACKED: bool = true;
-    #[inline]
-    fn label(&self, key: U) -> L {
-        L::from_u128(self.inner.label(key).to_u32() as u128)
-    }
-    fn remaining(&self, key: U) -> usize {
-        self.inner.remaining(key)
-    }
-}
-
 fn partition<T: Radixable<K>, K: RadixKey, C: Classifier<Converted<T, K>>>(
-    arr: &mut [T],
-    classifier: &C,
-    label_mask: Option<C::Label>,
-    policy: Policy,
-    terminal: bool,
-    stats: &mut Work,
-    depth: usize,
-    path: usize,
-) where
-    Converted<T, K>: NativeKey,
-{
-    if policy.narrow_labels && !C::PACKED {
-        if let Some(mask) = label_mask {
-            let width = C::Label::BITS - mask.leading_zeros() as usize;
-            macro_rules! narrow {
-                ($label:ty) => {{
-                    let narrow = NarrowLabel::<_, $label> {
-                        inner: classifier,
-                        _label: std::marker::PhantomData,
-                    };
-                    work! { stats.narrow_nodes += 1; }
-                    return partition_impl::<T, K, _>(
-                        arr,
-                        &narrow,
-                        Some(<$label as NativeKey>::from_u128(mask.to_u128())),
-                        policy,
-                        terminal,
-                        stats,
-                        depth,
-                        path,
-                    );
-                }};
-            }
-            if width <= 8 && C::Label::BITS > 8 {
-                narrow!(u8);
-            }
-            if width <= 16 && C::Label::BITS > 16 {
-                narrow!(u16);
-            }
-            if width <= 32 && C::Label::BITS > 32 {
-                narrow!(u32);
-            }
-        }
-    }
-    partition_impl::<T, K, C>(
-        arr, classifier, label_mask, policy, terminal, stats, depth, path,
-    )
-}
-
-fn partition_impl<
-    T: Radixable<K>,
-    K: RadixKey,
-    C: Classifier<Converted<T, K>>,
->(
     arr: &mut [T],
     classifier: &C,
     label_mask: Option<C::Label>,
@@ -868,7 +780,7 @@ fn partition_impl<
     let prepared_mask =
         if policy.prepared_distribution { label_mask } else { None };
     let passes = if let Some(mask) = prepared_mask {
-        if C::PACKED {
+        if C::USE_COMPACT_RADIX {
             super::local_distribution::distribute_prepared_packed(
                 arr,
                 &label,
@@ -949,42 +861,29 @@ fn partition_impl<
     };
     work! { stats.max_path_passes = stats.max_path_passes.max(path + passes); }
     if !terminal {
-        if policy.carry_runs {
-            recurse_carried::<T, K, C, _>(
-                arr,
-                classifier,
-                &label,
-                policy,
-                stats,
-                depth,
-                path + passes,
-            );
-        } else {
-            let parent_len = arr.len();
-            let mut start = 0;
-            while start < arr.len() {
-                let current = label(&arr[start]);
-                let remaining =
-                    classifier.remaining(arr[start].into_key_type());
-                let mut end = start + 1;
-                while end < arr.len() && label(&arr[end]) == current {
-                    end += 1;
-                }
-                work! { stats.runs_records += end - start; }
-                if end - start > 1 && remaining > 0 {
-                    work! { stats.unresolved_records += end - start; }
-                    visit::<T, K>(
-                        &mut arr[start..end],
-                        remaining,
-                        policy,
-                        end - start > parent_len / 2,
-                        stats,
-                        depth + 1,
-                        path + passes,
-                    );
-                }
-                start = end;
+        let parent_len = arr.len();
+        let mut start = 0;
+        while start < arr.len() {
+            let current = label(&arr[start]);
+            let remaining = classifier.remaining(arr[start].into_key_type());
+            let mut end = start + 1;
+            while end < arr.len() && label(&arr[end]) == current {
+                end += 1;
             }
+            work! { stats.runs_records += end - start; }
+            if end - start > 1 && remaining > 0 {
+                work! { stats.unresolved_records += end - start; }
+                visit::<T, K>(
+                    &mut arr[start..end],
+                    remaining,
+                    policy,
+                    end - start > parent_len / 2,
+                    stats,
+                    depth + 1,
+                    path + passes,
+                );
+            }
+            start = end;
         }
     }
     work! { stats.label_evals += label_evals.get(); }
@@ -1014,56 +913,4 @@ fn partition_packed<T: Radixable<K>, K: RadixKey, L: NativeKey>(
         depth,
         path,
     );
-}
-
-// Carry the first label of the following run across the recursive call. That
-// item lies outside the mutated child slice. Singletons need no key/cap lookup.
-fn recurse_carried<
-    T: Radixable<K>,
-    K: RadixKey,
-    C: Classifier<Converted<T, K>>,
-    F: Fn(&T) -> C::Label,
->(
-    arr: &mut [T],
-    classifier: &C,
-    label: &F,
-    policy: Policy,
-    stats: &mut Work,
-    depth: usize,
-    path: usize,
-) where
-    Converted<T, K>: NativeKey,
-{
-    let parent_len = arr.len();
-    let mut start = 0;
-    let mut current = label(&arr[0]);
-    while start < parent_len {
-        let mut end = start + 1;
-        let mut next = current;
-        while end < parent_len {
-            next = label(&arr[end]);
-            if next != current {
-                break;
-            }
-            end += 1;
-        }
-        work! { stats.runs_records += end - start; }
-        if end - start > 1 {
-            let remaining = classifier.remaining(arr[start].into_key_type());
-            if remaining > 0 {
-                work! { stats.unresolved_records += end - start; }
-                visit::<T, K>(
-                    &mut arr[start..end],
-                    remaining,
-                    policy,
-                    end - start > parent_len / 2,
-                    stats,
-                    depth + 1,
-                    path,
-                );
-            }
-        }
-        start = end;
-        current = next;
-    }
 }
