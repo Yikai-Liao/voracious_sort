@@ -137,7 +137,6 @@ pub(super) struct Packed<U, L, I = hakmem::isa::Native> {
     mask: U,
     bits: usize,
     remaining: usize,
-    field_shift: Option<usize>,
     cpu: I,
     _label: PhantomData<L>,
 }
@@ -145,16 +144,10 @@ pub(super) struct Packed<U, L, I = hakmem::isa::Native> {
 impl<U: NativeKey, L: NativeKey, I: hakmem::isa::Isa> Packed<U, L, I> {
     pub(super) fn with_isa(selection: Selection<U>, cpu: I) -> Self {
         assert!(selection.bits <= L::BITS && selection.bits <= 32);
-        let raw = selection.mask.to_u128();
-        let shift = raw.trailing_zeros() as usize;
-        let field_shift = (raw != 0
-            && raw >> shift == (1u128 << selection.bits) - 1)
-            .then_some(shift);
         Self {
             mask: selection.mask,
             bits: selection.bits,
             remaining: selection.remaining,
-            field_shift,
             cpu,
             _label: PhantomData,
         }
@@ -162,9 +155,6 @@ impl<U: NativeKey, L: NativeKey, I: hakmem::isa::Isa> Packed<U, L, I> {
 
     #[inline]
     fn gather(&self, key: U) -> u32 {
-        if let Some(shift) = self.field_shift {
-            return (key >> shift).to_u32() & ((1u64 << self.bits) - 1) as u32;
-        }
         key.pack_bits(self.mask, self.cpu)
     }
 
