@@ -5,7 +5,7 @@ use std::{
     sync::atomic::{AtomicBool, AtomicUsize, Ordering},
     time::Instant,
 };
-use voracious_radix_sort::{RadixKey, Radixable};
+use voracious_radix_sort::{rollercoaster_sort, RadixKey, Radixable};
 struct Alloc;
 static TRACK: AtomicBool = AtomicBool::new(false);
 static LIVE: AtomicUsize = AtomicUsize::new(0);
@@ -89,30 +89,62 @@ impl Radixable<u32> for Large {
 }
 trait Verified {
     fn same(&self, b: &Self) -> bool;
+    fn identity_order(&self) -> u128;
+    fn key_order(&self) -> u128;
 }
 impl Verified for u8 {
     fn same(&self, b: &Self) -> bool {
         self == b
+    }
+    fn identity_order(&self) -> u128 {
+        *self as u128
+    }
+    fn key_order(&self) -> u128 {
+        *self as u128
     }
 }
 impl Verified for u16 {
     fn same(&self, b: &Self) -> bool {
         self == b
     }
+    fn identity_order(&self) -> u128 {
+        *self as u128
+    }
+    fn key_order(&self) -> u128 {
+        *self as u128
+    }
 }
 impl Verified for u32 {
     fn same(&self, b: &Self) -> bool {
         self == b
+    }
+    fn identity_order(&self) -> u128 {
+        *self as u128
+    }
+    fn key_order(&self) -> u128 {
+        *self as u128
     }
 }
 impl Verified for u64 {
     fn same(&self, b: &Self) -> bool {
         self == b
     }
+    fn identity_order(&self) -> u128 {
+        *self as u128
+    }
+    fn key_order(&self) -> u128 {
+        *self as u128
+    }
 }
 impl Verified for u128 {
     fn same(&self, b: &Self) -> bool {
         self == b
+    }
+    fn identity_order(&self) -> u128 {
+        *self
+    }
+    fn key_order(&self) -> u128 {
+        *self
     }
 }
 impl Verified for Wide {
@@ -121,12 +153,24 @@ impl Verified for Wide {
             && self.serial == b.serial
             && self.payload == b.payload
     }
+    fn identity_order(&self) -> u128 {
+        self.serial as u128
+    }
+    fn key_order(&self) -> u128 {
+        self.key
+    }
 }
 impl Verified for Large {
     fn same(&self, b: &Self) -> bool {
         self.key == b.key
             && self.serial == b.serial
             && self.payload == b.payload
+    }
+    fn identity_order(&self) -> u128 {
+        self.serial as u128
+    }
+    fn key_order(&self) -> u128 {
+        self.key as u128
     }
 }
 fn random(s: &mut u64) -> u64 {
@@ -161,6 +205,12 @@ impl Verified for Small {
     fn same(&self, b: &Self) -> bool {
         self.key == b.key && self.serial == b.serial
     }
+    fn identity_order(&self) -> u128 {
+        self.serial as u128
+    }
+    fn key_order(&self) -> u128 {
+        self.key as u128
+    }
 }
 
 #[derive(Clone, Copy, Debug)]
@@ -193,6 +243,12 @@ impl Verified for Small8 {
     fn same(&self, b: &Self) -> bool {
         self.key == b.key && self.serial == b.serial
     }
+    fn identity_order(&self) -> u128 {
+        self.serial as u128
+    }
+    fn key_order(&self) -> u128 {
+        self.key as u128
+    }
 }
 impl PartialEq for Small16 {
     fn eq(&self, b: &Self) -> bool {
@@ -214,6 +270,33 @@ impl Verified for Small16 {
     fn same(&self, b: &Self) -> bool {
         self.key == b.key && self.serial == b.serial
     }
+    fn identity_order(&self) -> u128 {
+        self.serial as u128
+    }
+    fn key_order(&self) -> u128 {
+        self.key as u128
+    }
+}
+
+fn output_matches<T: Verified + Copy>(
+    actual: &[T],
+    expected: &[T],
+    method: &str,
+) -> bool {
+    if actual.len() != expected.len() {
+        return false;
+    }
+    if method != "Rollercoaster" {
+        return actual.iter().zip(expected).all(|(a, b)| a.same(b));
+    }
+    if !actual.windows(2).all(|pair| pair[0].key_order() <= pair[1].key_order()) {
+        return false;
+    }
+    let mut actual_by_id = actual.to_vec();
+    let mut expected_by_id = expected.to_vec();
+    actual_by_id.sort_unstable_by_key(|item| item.identity_order());
+    expected_by_id.sort_unstable_by_key(|item| item.identity_order());
+    actual_by_id.iter().zip(&expected_by_id).all(|(a, b)| a.same(b))
 }
 
 const METHODS: &[&str] = &[
@@ -258,6 +341,7 @@ const METHODS: &[&str] = &[
     "Pa_unified_groups_t16777216",
     "L",
     "L_frozen",
+    "Rollercoaster",
     "H1",
     "H2",
     "H3",
@@ -402,6 +486,10 @@ where
             block_msd_research::submitted_lsd::block_lsd_stable_radixsort::<T, K>(
                 arr, 8, block,
             );
+            return Default::default();
+        },
+        "Rollercoaster" => {
+            rollercoaster_sort::<T, K>(arr, 8);
             return Default::default();
         },
         "best_msd" => {
@@ -549,7 +637,7 @@ mod workload_tests {
             let mut actual = input.clone();
             execute::<_, u16>(&mut actual, method, 17);
             assert!(
-                actual.iter().zip(&expected).all(|(a, b)| a.same(b)),
+                output_matches(&actual, &expected, method),
                 "{}",
                 method
             );
@@ -611,7 +699,7 @@ fn run<T: Radixable<K> + Verified, K: RadixKey>(
         actual.copy_from_slice(&input);
         execute::<T, K>(&mut actual, method, block);
         assert!(
-            actual.iter().zip(&expected).all(|(a, b)| a.same(b)),
+            output_matches(&actual, &expected, method),
             "warmup {} {} {}",
             layout,
             case,
@@ -656,7 +744,7 @@ fn run<T: Radixable<K> + Verified, K: RadixKey>(
                 cpu = cpu_ns() - c;
             }
             assert!(
-                actual.iter().zip(&expected).all(|(a, b)| a.same(b)),
+                output_matches(&actual, &expected, method),
                 "{} {} {} rep {}",
                 layout,
                 case,
