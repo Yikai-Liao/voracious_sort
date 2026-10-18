@@ -1,0 +1,25 @@
+{
+  "source_hash_version": 2,
+  "source_commit": "c3f4169d493e8ea0b6315fa5bd2ff851e5490faf",
+  "sha256": "d3697a8b804ea77f91e80ac904e6fe2821a6478c92a531565a74a17dc590a636",
+  "source_sha256": "47e2bc518ed9101674df2d44a27c33efaf9de59937a5771f5c938e6fb4f9399e",
+  "base": "745cea6ab21030710cb036f88fa757505ef1990b",
+  "rustflags": "",
+  "features": "none",
+  "profile": "release",
+  "rustc": "rustc 1.98.1 (48a229cea 2026-09-01)\nbinary: rustc\ncommit-hash: 48a229ceaefd4985c50990b14116b6d856af0985\ncommit-date: 2026-09-01\nhost: x86_64-unknown-linux-gnu\nrelease: 1.98.1\nLLVM version: 22.1.8\n",
+  "cargo_incremental": true,
+  "extra_sources": {
+    "experiments/block_msd/pa_structural/float-bench/Cargo.toml": "cb7cb16bd98fa6bc663ae735324264204e63d8730cd4052a9a5ef103e36cd344",
+    "experiments/block_msd/pa_structural/float-bench/Cargo.lock": "93e8ed80cac2efd43fcbd324ee5c51f6c7b4492abb6bbcd7ccff097b3a6ddca3",
+    "experiments/block_msd/pa_structural/float-bench/src/main.rs": "e1eeea9af66997dbdf04baa39d305d4feb3d2f7115771e79f8d723fd905b517e",
+    "experiments/block_msd/pa_structural/float-bench/src/floats.rs": "f1b8d6ba3caaa0b93fa40064efbb26ee0371d585ea6ce283eccfabfdd3661d0f",
+    "experiments/block_msd/pa_structural/FLOAT_PLAN.md": "9b86e300d0dd6c2151740a36acf565f015f5c9f2f2141feb38b8f5765833c33d",
+    "experiments/block_msd/pa_structural/COUNTED_PLAN.md": "90b636b213ad2e70ba042f8fe780e1b5b12ee3d87e5e36e6e8f2672c80986e54",
+    "experiments/block_msd/pa_structural/counted-screen.py": "f412f3d70b62bf7f9827d6320e083677be8c973eaba2d91eae91c706a56d7930",
+    "experiments/block_msd/pa_structural/float-run.py": "5a086a917da7f91ab30a4b93221d467900fdbf0f0913b48d7bd0cde794293e3a",
+    "experiments/block_msd/pa_structural/run.py": "31c4fb3a19f1f15059a43d033f869fad762bb1bf9801bf2fbbe95e4663577d72",
+    "experiments/block_msd/pa_structural/matrix.py": "3e974a1789d48f7c4ab5d847c2fc7468e061ff8041fc5fc440352a4b3dc94ed9",
+    "experiments/block_msd/tests/counted_grouped.rs": "a8f3b8dca2b8476ddce647c66c25ee476ef2633cbfc731f69da7045b8ad771c3"
+  }
+}
