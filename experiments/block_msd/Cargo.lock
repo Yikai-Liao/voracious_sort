@@ -6,8 +6,15 @@ version = 4
 name = "block_msd_research"
 version = "0.0.0"
 dependencies = [
+ "hakmem",
  "voracious_radix_sort",
 ]
+
+[[package]]
+name = "hakmem"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6f8e6570e16cd3b35c9e23f040f1346b8294d6dd6aa0c3993700b8f3742236be"
 
 [[package]]
 name = "voracious_radix_sort"

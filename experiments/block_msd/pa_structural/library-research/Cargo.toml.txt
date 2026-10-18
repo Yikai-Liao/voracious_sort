@@ -1,0 +1,8 @@
+[package]
+name = "library-gather-probe"
+version = "0.0.0"
+edition = "2021"
+[workspace]
+[dependencies]
+bitkit = { version = "=3.2.3", features = ["runtime-detect"] }
+hakmem = { version = "=0.2.0", default-features = false }

@@ -5,6 +5,7 @@ edition = "2018"
 publish = false
 [dependencies]
 voracious_radix_sort = { path = "../.." }
+hakmem = { version = "=0.2.0", default-features = false }
 [profile.release]
 # Keep source locations for profiling without retaining full type/local DWARF
 # in every monomorphized benchmark body and copied evidence executable.
@@ -25,5 +26,5 @@ cf_work = []
 frontier_work = []
 frontier_narrow_screen = []
 
-# Force the portable gather plan while keeping all other native code identical.
-projection_portable = []
+# Exercise the dependency's portable extraction and dispatch implementation.
+projection_portable = ["hakmem/portable"]

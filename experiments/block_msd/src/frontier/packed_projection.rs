@@ -37,13 +37,12 @@ impl<U: NativeKey> Selection<U> {
         if bits == 0 || bits > 32 || active_bytes(selected) <= (bits + 7) / 8 {
             return None;
         }
-        if !U::HAS_PACKED_INSTRUCTION {
+        {
             let field = selected >> selected.trailing_zeros();
             let contiguous = field == (1u128 << bits) - 1;
-            // A single field needs only a shift. Arbitrary software gathers
-            // failed to amortize against scalar classifiers or when merely
-            // replacing a partial prefix. Full multiword completion retains
-            // the measured benefit of removing wide-key child processing.
+            // Keep admission independent of the instruction set. Full
+            // multiword completion can avoid wide-key child processing;
+            // scalar and partial gathers have not amortized portable cost.
             if !contiguous
                 && (U::BITS <= usize::BITS as usize || selected != raw)
             {
@@ -109,106 +108,39 @@ impl<U: NativeKey> Selection<U> {
     }
 }
 
-pub(super) struct Packed<U, L> {
+pub(super) struct Packed<U, L, I = hakmem::isa::Native> {
     mask: U,
-    moves: [U; 7],
-    segments: usize,
-    shifts: [usize; 2],
-    masks: [u32; 2],
-    lower_bits: u32,
     bits: usize,
     remaining: usize,
+    field_shift: Option<usize>,
+    cpu: I,
     _label: PhantomData<L>,
 }
 
-impl<U: NativeKey, L: NativeKey> Packed<U, L> {
-    pub(super) fn new(selection: Selection<U>) -> Self {
+impl<U: NativeKey, L: NativeKey, I: hakmem::isa::Isa> Packed<U, L, I> {
+    pub(super) fn with_isa(selection: Selection<U>, cpu: I) -> Self {
         assert!(selection.bits <= L::BITS && selection.bits <= 32);
-        // Precompute a portable parallel bit gather. A move of distance 2^i
-        // packs the selected bits over the corresponding holes. All u128 work
-        // is node setup; per-record arithmetic retains the original key width.
         let raw = selection.mask.to_u128();
-        let mut mask = raw;
-        let mut holes = (!mask) << 1;
-        let mut moves = [U::from_u128(0); 7];
-        for (stage, movement) in moves.iter_mut().enumerate() {
-            let mut prefix = holes ^ (holes << 1);
-            for shift in [2, 4, 8, 16, 32, 64] {
-                prefix ^= prefix << shift;
-            }
-            let moving = prefix & mask;
-            *movement = U::from_u128(moving);
-            mask = (mask ^ moving) | (moving >> (1 << stage));
-            holes &= !prefix;
-        }
-        let mut source = 0;
-        let mut rank = 0;
-        let mut segments = 0;
-        let mut shifts = [0; 2];
-        let mut masks = [0; 2];
-        while source < U::BITS {
-            if raw & (1u128 << source) == 0 {
-                source += 1;
-                continue;
-            }
-            let start = source;
-            while source < U::BITS && raw & (1u128 << source) != 0 {
-                source += 1;
-            }
-            let length = source - start;
-            if segments < 2 {
-                shifts[segments] = start - rank;
-                masks[segments] = (((1u64 << length) - 1) << rank) as u32;
-            }
-            segments += 1;
-            rank += length;
-        }
+        let shift = raw.trailing_zeros() as usize;
+        let field_shift = (raw != 0
+            && raw >> shift == (1u128 << selection.bits) - 1)
+            .then_some(shift);
         Self {
-            segments,
-            shifts,
-            masks,
             mask: selection.mask,
-            moves,
-            lower_bits: (raw as u64).count_ones(),
             bits: selection.bits,
             remaining: selection.remaining,
+            field_shift,
+            cpu,
             _label: PhantomData,
         }
     }
 
     #[inline]
     fn gather(&self, key: U) -> u32 {
-        if let Some(label) = key.extract_packed(self.mask, self.lower_bits) {
-            return label;
+        if let Some(shift) = self.field_shift {
+            return (key >> shift).to_u32() & ((1u64 << self.bits) - 1) as u32;
         }
-        // Contiguous fields and two-field keys need fewer operations than a
-        // full portable parallel gather. The other path has fixed shifts.
-        if self.segments <= 2 {
-            let first = (key >> self.shifts[0]).to_u32() & self.masks[0];
-            return if self.segments <= 1 {
-                first
-            } else {
-                first | ((key >> self.shifts[1]).to_u32() & self.masks[1])
-            };
-        }
-        let mut packed = key & self.mask;
-        macro_rules! gather {
-            ($stage:literal, $distance:literal) => {
-                if $distance < U::BITS {
-                    let moving = packed & self.moves[$stage];
-                    packed = packed ^ moving;
-                    packed |= moving >> $distance;
-                }
-            };
-        }
-        gather!(0, 1);
-        gather!(1, 2);
-        gather!(2, 4);
-        gather!(3, 8);
-        gather!(4, 16);
-        gather!(5, 32);
-        gather!(6, 64);
-        packed.to_u32()
+        key.pack_bits(self.mask, self.cpu)
     }
 
     pub(super) fn variation(&self) -> L {
@@ -216,7 +148,16 @@ impl<U: NativeKey, L: NativeKey> Packed<U, L> {
     }
 }
 
-impl<U: NativeKey, L: NativeKey> Classifier<U> for Packed<U, L> {
+#[cfg(test)]
+impl<U: NativeKey, L: NativeKey> Packed<U, L> {
+    fn new(selection: Selection<U>) -> Self {
+        Self::with_isa(selection, hakmem::isa::Native)
+    }
+}
+
+impl<U: NativeKey, L: NativeKey, I: hakmem::isa::Isa> Classifier<U>
+    for Packed<U, L, I>
+{
     type Label = L;
     const USE_COMPACT_RADIX: bool = true;
     #[inline]
@@ -316,19 +257,10 @@ mod bounded_tests {
     #[test]
     fn software_gather_preserves_scalar_and_partial_prefix_routes() {
         let scalar = Selection::<u32>::new((1 << 18) | 1, 32, 24);
-        assert_eq!(
-            scalar.is_some(),
-            <u32 as NativeKey>::HAS_PACKED_INSTRUCTION
-        );
+        assert!(scalar.is_none());
         let mask = (0..32).fold(0u128, |v, j| v | (1u128 << (j * 127 / 31)));
         let partial = Selection::new(mask, 128, 24);
-        assert_eq!(
-            partial.is_some(),
-            <u128 as NativeKey>::HAS_PACKED_INSTRUCTION
-        );
-        if let Some(partial) = partial {
-            assert!(partial.remaining > 0);
-        }
+        assert!(partial.is_none());
         let wide = [0, 18, 36, 54, 72, 90, 108, 126]
             .iter()
             .fold(0u128, |mask, bit| mask | (1u128 << bit));
@@ -376,6 +308,59 @@ mod bounded_tests {
                     assert_eq!(s.mask, variation);
                 }
             }
+        }
+    }
+}
+
+#[cfg(test)]
+mod dependency_tests {
+    use super::*;
+    use hakmem::isa::Isa;
+
+    fn check<I: Isa>(cpu: I) {
+        let masks = [
+            0u128,
+            1,
+            1 << 127,
+            (1 << 63) | (1 << 64),
+            u32::MAX as u128,
+            (u32::MAX as u128) << 96,
+            (0..24).fold(0, |m, j| m | (1 << (j * 127 / 23))),
+        ];
+        let mut state = 42u128;
+        for mask in masks {
+            let projection = Packed::<_, u32, _>::with_isa(
+                Selection {
+                    mask,
+                    bits: mask.count_ones() as usize,
+                    remaining: 0,
+                },
+                cpu,
+            );
+            for _ in 0..1024 {
+                state = state.wrapping_mul(0xda942042e4dd58b5).wrapping_add(1);
+                let mut expected = 0u32;
+                let mut rank = 0;
+                for bit in 0..128 {
+                    if mask & (1 << bit) != 0 {
+                        expected |= (((state >> bit) & 1) as u32) << rank;
+                        rank += 1;
+                    }
+                }
+                assert_eq!(
+                    projection.label(state),
+                    expected,
+                    "backend={cpu:?} mask={mask:x}"
+                );
+                assert_eq!(projection.label(state | !mask), expected);
+            }
+        }
+    }
+
+    #[test]
+    fn library_dispatch_preserves_projection_across_every_available_backend() {
+        for level in hakmem::isa::available() {
+            hakmem::dispatch!(level, |cpu| check(cpu));
         }
     }
 }

@@ -15,6 +15,7 @@ from analyze import quantile
 p=argparse.ArgumentParser()
 p.add_argument('--binary', required=True)
 p.add_argument('--candidate', default='Pa_packed')
+p.add_argument('--prefix', default='frozen-control')
 a=p.parse_args()
 old=REPO.parent/'voracious_sort-pa-unified/experiments/block_msd/target/pa-comparator/time'
 old_sha='ef8dd60c19eedf6246fa62595bba3814b71c7e24a509988a6896bbc0b3c68c43'
@@ -33,7 +34,7 @@ for group,cases,layouts in groups:
     for outer,which in enumerate(metadata['order']):
         methods=','.join([BASE,BASE]) if which=='old' else ','.join([a.candidate,BASE,BASE,a.candidate])
         command=['taskset','-c','2',str(old if which=='old' else new),'1048576','8',methods,cases,layouts,'time','512','42']
-        path=raw/f'frozen-control-{group}-{outer}-{which}.csv'
+        path=raw/f'{a.prefix}-{group}-{outer}-{which}.csv'
         assert not path.exists(),path
         started=time.time_ns()
         with path.open('w') as out:
@@ -60,5 +61,5 @@ metadata['results']=results
 usage=resource.getrusage(resource.RUSAGE_CHILDREN)
 metadata['usage']={k:getattr(usage,k) for k in ['ru_utime','ru_stime','ru_maxrss','ru_minflt','ru_majflt','ru_nivcsw']}
 metadata['vmstat_after']=Path('/proc/vmstat').read_text()
-(ROOT/'frozen-control.json').write_text(json.dumps(metadata,indent=2)+'\n')
+(ROOT/(a.prefix+'.json')).write_text(json.dumps(metadata,indent=2)+'\n')
 print(json.dumps(results,indent=2))

@@ -122,7 +122,6 @@ pub trait NativeKey:
     + std::ops::Add<Output = Self>
 {
     const BITS: usize;
-    const HAS_PACKED_INSTRUCTION: bool = false;
     fn from_u128(x: u128) -> Self;
     fn leading_zeros(self) -> u32;
     fn count_ones(self) -> u32;
@@ -130,30 +129,19 @@ pub trait NativeKey:
     fn mask(bits: usize) -> Self;
     fn to_u32(self) -> u32;
     fn to_u128(self) -> u128;
-    /// Optional target-specific implementation; None selects the portable plan.
-    fn extract_packed(self, mask: Self, lower_bits: u32) -> Option<u32>;
+    /// Architecture selection and fallback belong to the dependency.
+    fn pack_bits<I: hakmem::isa::Isa>(self, mask: Self, cpu: I) -> u32;
 }
 macro_rules! native {
     ($($t:ty),*) => {$(impl NativeKey for $t {
         const BITS:usize=<$t>::BITS as usize;
-        const HAS_PACKED_INSTRUCTION:bool=cfg!(all(target_arch="x86_64", target_feature="bmi2", not(feature="projection_portable")));
         #[inline] fn from_u128(x:u128)->Self { x as Self }
         #[inline] fn to_u32(self)->u32 { self as u32 }
         #[inline] fn to_u128(self)->u128 { self as u128 }
-        #[inline] fn extract_packed(self, mask: Self, lower_bits: u32)->Option<u32> {
-            #[cfg(all(target_arch="x86_64", target_feature="bmi2", not(feature="projection_portable")))]
-            {
-                // The feature is a compile-time target guarantee, never an
-                // assumption about machines running a portable build.
-                let low = unsafe { std::arch::x86_64::_pext_u64(self as u64, mask as u64) };
-                let high = if <$t>::BITS > 64 {
-                    unsafe { std::arch::x86_64::_pext_u64(((self as u128) >> 64) as u64, ((mask as u128) >> 64) as u64) }
-                } else { 0 };
-                return Some((low | (high << lower_bits)) as u32);
-            }
-            #[cfg(not(all(target_arch="x86_64", target_feature="bmi2", not(feature="projection_portable"))))]
-            { let _ = (self, mask, lower_bits); None }
+        #[inline] fn pack_bits<I: hakmem::isa::Isa>(self, mask: Self, cpu: I)->u32 {
+            cpu.pext(self, mask) as u32
         }
+
         #[inline] fn leading_zeros(self)->u32 { self.leading_zeros() }
         #[inline] fn count_ones(self)->u32 { self.count_ones() }
         #[inline] fn byte(self,index:usize)->usize { ((self>>(index*8))&255) as usize }

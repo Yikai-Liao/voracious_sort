@@ -900,8 +900,32 @@ fn partition_packed<T: Radixable<K>, K: RadixKey, L: NativeKey>(
 ) where
     Converted<T, K>: NativeKey,
 {
+    hakmem::dispatch!(|cpu| {
+        partition_packed_with_isa::<T, K, L, _>(
+            arr, selection, policy, stats, depth, path, cpu,
+        )
+    });
+}
+
+fn partition_packed_with_isa<
+    T: Radixable<K>,
+    K: RadixKey,
+    L: NativeKey,
+    I: hakmem::isa::Isa,
+>(
+    arr: &mut [T],
+    selection: super::packed_projection::Selection<Converted<T, K>>,
+    policy: Policy,
+    stats: &mut Work,
+    depth: usize,
+    path: usize,
+    cpu: I,
+) where
+    Converted<T, K>: NativeKey,
+{
     let terminal = selection.remaining == 0;
-    let projection = super::packed_projection::Packed::<_, L>::new(selection);
+    let projection =
+        super::packed_projection::Packed::<_, L, _>::with_isa(selection, cpu);
     work! { stats.projection_nodes += 1; stats.projection_records += arr.len(); }
     partition::<T, K, _>(
         arr,
