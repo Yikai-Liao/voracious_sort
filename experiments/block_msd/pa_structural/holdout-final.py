@@ -7,8 +7,9 @@ from run import ROOT, BASE
 p=argparse.ArgumentParser()
 p.add_argument('--binary',default='library_native')
 p.add_argument('--prefix',default='heldout-library')
+p.add_argument('--candidate',default='Pa_packed')
 a=p.parse_args()
-methods=','.join(['Pa_packed',BASE,'Rollercoaster','L_frozen',BASE,'Pa_packed'])
+methods=','.join([a.candidate,BASE,'Rollercoaster','L_frozen',BASE,a.candidate])
 def run(name, **kw):
     command=[sys.executable,str(ROOT/'run.py'),a.prefix+'-'+name,
              '--binary',a.binary,'--methods',methods,'--reps','12','--seed','20261020']

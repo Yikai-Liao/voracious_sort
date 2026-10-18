@@ -200,8 +200,6 @@ fn recursive_identity_and_payload_matrix() {
                 PaExperiment::UnifiedIdentity,
                 PaExperiment::UnifiedPacked,
                 PaExperiment::UnifiedPackedContext,
-                PaExperiment::UnifiedGallop,
-                PaExperiment::UnifiedPackedGallop,
                 PaExperiment::UnifiedSampled,
                 PaExperiment::UnifiedReduced,
                 PaExperiment::UnifiedCandidate,
@@ -281,8 +279,6 @@ fn pa_new_policies_preserve_converted_float_order() {
         PaExperiment::UnifiedIdentity,
         PaExperiment::UnifiedPacked,
         PaExperiment::UnifiedPackedContext,
-        PaExperiment::UnifiedGallop,
-        PaExperiment::UnifiedPackedGallop,
         PaExperiment::UnifiedSampled,
         PaExperiment::UnifiedReduced,
         PaExperiment::UnifiedCandidate,
@@ -376,8 +372,6 @@ fn native_small_integer_widths() {
         PaExperiment::UnifiedIdentity,
         PaExperiment::UnifiedPacked,
         PaExperiment::UnifiedPackedContext,
-        PaExperiment::UnifiedGallop,
-        PaExperiment::UnifiedPackedGallop,
         PaExperiment::UnifiedSampled,
         PaExperiment::UnifiedReduced,
         PaExperiment::UnifiedCandidate,
@@ -455,8 +449,6 @@ fn block_tail_sizes_and_large_workspace() {
             PaExperiment::UnifiedIdentity,
             PaExperiment::UnifiedPacked,
             PaExperiment::UnifiedPackedContext,
-            PaExperiment::UnifiedGallop,
-            PaExperiment::UnifiedPackedGallop,
             PaExperiment::UnifiedSampled,
             PaExperiment::UnifiedReduced,
             PaExperiment::UnifiedCandidate,
@@ -1018,61 +1010,5 @@ fn instruction_context_changes_execution_without_changing_any_sort_work() {
                 );
             }
         }
-    }
-}
-
-#[test]
-#[cfg(feature = "frontier_work")]
-fn library_boundaries_skip_long_run_scans_with_identical_children() {
-    let mut state = 42;
-    let input: Vec<Item> = (0..8193)
-        .map(|id| {
-            let logical = u128::from(random(&mut state));
-            Item {
-                key: ((logical & 7) << 96) | ((logical >> 3) & 255),
-                id,
-                payload: [id as u64; 3],
-            }
-        })
-        .collect();
-    let mut expected = input.clone();
-    expected.sort_by_key(|item| item.key);
-    for block in [3, 64, 512] {
-        let mut old = input.clone();
-        let mut gallop = input.clone();
-        let a = sort_pa_with_threshold::<_, u128>(
-            &mut old,
-            PaExperiment::UnifiedGroups,
-            block,
-            16 * 1024 * 1024,
-        );
-        let b = sort_pa_with_threshold::<_, u128>(
-            &mut gallop,
-            PaExperiment::UnifiedGallop,
-            block,
-            16 * 1024 * 1024,
-        );
-        assert_eq!(
-            (
-                a.nodes,
-                a.scatter_records,
-                a.prepare_records,
-                a.runs_records,
-                a.unresolved_records,
-                a.leaf_lengths
-            ),
-            (
-                b.nodes,
-                b.scatter_records,
-                b.prepare_records,
-                b.runs_records,
-                b.unresolved_records,
-                b.leaf_lengths
-            )
-        );
-        assert!(b.label_evals + input.len() / 2 < a.label_evals);
-        assert!(gallop.iter().zip(&expected).all(|(x, y)| {
-            x.key == y.key && x.id == y.id && x.payload == y.payload
-        }));
     }
 }

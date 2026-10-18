@@ -7,7 +7,6 @@ name = "block_msd_research"
 version = "0.0.0"
 dependencies = [
  "hakmem",
- "slice-group-by",
  "voracious_radix_sort",
 ]
 
@@ -16,12 +15,6 @@ name = "hakmem"
 version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6f8e6570e16cd3b35c9e23f040f1346b8294d6dd6aa0c3993700b8f3742236be"
-
-[[package]]
-name = "slice-group-by"
-version = "0.3.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "826167069c09b99d56f31e9ae5c99049e932a98c9dc2dac47645b08dbbf76ba7"
 
 [[package]]
 name = "voracious_radix_sort"

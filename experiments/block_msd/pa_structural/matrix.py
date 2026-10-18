@@ -11,7 +11,7 @@ p.add_argument('--binary',default='final')
 p.add_argument('--prefix',default='final')
 p.add_argument('--reps',default='16')
 a=p.parse_args()
-reference = BASE if a.candidate == 'Pa_packed' else 'Pa_packed'
+reference = BASE if a.candidate in ['Pa_packed', 'Pa_kernel'] else 'Pa_packed'
 methods=','.join([a.candidate,BASE,reference,'Fa','Rollercoaster','L_frozen','stable_msd',a.candidate])
 shared='deep_skew,majority_prefix,deep_unique90,deep_unique98'
 cells=[

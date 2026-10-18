@@ -35,8 +35,6 @@ pub enum PaExperiment {
     UnifiedIdentity,
     UnifiedPacked,
     UnifiedPackedContext,
-    UnifiedGallop,
-    UnifiedPackedGallop,
     UnifiedPackedAggressive,
 }
 
@@ -67,7 +65,6 @@ struct Policy {
     reduced_radix: bool,
     prepared_distribution: bool,
     grouped_scatter: bool,
-    exponential_runs: bool,
     local_workspace_threshold: usize,
     block: usize,
     sparse: SparseCompletion,
@@ -96,9 +93,7 @@ where
 {
     assert!(block > 0);
     let sparse = match experiment {
-        PaExperiment::UnifiedPacked | PaExperiment::UnifiedPackedGallop => {
-            SparseCompletion::Packed
-        },
+        PaExperiment::UnifiedPacked => SparseCompletion::Packed,
         PaExperiment::UnifiedPackedContext => SparseCompletion::PackedContext,
         PaExperiment::UnifiedPackedAggressive => {
             SparseCompletion::PackedAggressive
@@ -106,23 +101,16 @@ where
         PaExperiment::UnifiedIdentity => SparseCompletion::Identity,
         _ => SparseCompletion::Recursive,
     };
-    let exponential_runs = matches!(
-        experiment,
-        PaExperiment::UnifiedGallop | PaExperiment::UnifiedPackedGallop
-    );
     // Independent ablations inherit the complete frozen UnifiedGroups policy.
     let experiment = match experiment {
         PaExperiment::UnifiedIdentity
         | PaExperiment::UnifiedPacked
         | PaExperiment::UnifiedPackedContext
-        | PaExperiment::UnifiedGallop
-        | PaExperiment::UnifiedPackedGallop
         | PaExperiment::UnifiedPackedAggressive => PaExperiment::UnifiedGroups,
         other => other,
     };
     let policy = Policy {
         sparse,
-        exponential_runs,
         terminal: matches!(
             experiment,
             PaExperiment::Terminal
@@ -884,17 +872,7 @@ fn partition<T: Radixable<K>, K: RadixKey, C: Classifier<Converted<T, K>>>(
         distribute(arr, &label, policy.block, stats)
     };
     work! { stats.max_path_passes = stats.max_path_passes.max(path + passes); }
-    if !terminal && policy.exponential_runs {
-        visit_exponential_runs::<T, K, C, _>(
-            arr,
-            classifier,
-            &label,
-            policy,
-            stats,
-            depth,
-            path + passes,
-        );
-    } else if !terminal {
+    if !terminal {
         let parent_len = arr.len();
         let mut start = 0;
         while start < arr.len() {
@@ -925,47 +903,6 @@ fn partition<T: Radixable<K>, K: RadixKey, C: Classifier<Converted<T, K>>>(
         }
     }
     work! { stats.label_evals += label_evals.get(); }
-}
-
-// Keep the library iterator and its state outside the ordinary partition frame.
-#[inline(never)]
-fn visit_exponential_runs<
-    T: Radixable<K>,
-    K: RadixKey,
-    C: Classifier<Converted<T, K>>,
-    F: Labeler<T, C::Label>,
->(
-    arr: &mut [T],
-    classifier: &C,
-    label: &F,
-    policy: Policy,
-    stats: &mut Work,
-    depth: usize,
-    path: usize,
-) where
-    Converted<T, K>: NativeKey,
-{
-    use slice_group_by::GroupByMut;
-    let parent_len = arr.len();
-    let mut groups =
-        arr.exponential_group_by_key_mut(|item| label.classify(item));
-    while let Some(run) = label.in_context(|| groups.next()) {
-        let remaining = classifier.remaining(run[0].into_key_type());
-        work! { stats.runs_records += run.len(); }
-        if run.len() > 1 && remaining > 0 {
-            work! { stats.unresolved_records += run.len(); }
-            let heavy = run.len() > parent_len / 2;
-            visit::<T, K>(
-                run,
-                remaining,
-                policy,
-                heavy,
-                stats,
-                depth + 1,
-                path,
-            );
-        }
-    }
 }
 
 #[inline(never)]

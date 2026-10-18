@@ -7,8 +7,9 @@ from run import ROOT, BASE
 p=argparse.ArgumentParser()
 p.add_argument('--binary',default='validated_portable')
 p.add_argument('--prefix',default='software-validated')
+p.add_argument('--candidate',default='Pa_packed')
 a=p.parse_args()
-methods=','.join(['Pa_packed',BASE,'Rollercoaster','L_frozen',BASE,'Pa_packed'])
+methods=','.join([a.candidate,BASE,'Rollercoaster','L_frozen',BASE,a.candidate])
 for block in [64,512]:
     subprocess.run([sys.executable,str(ROOT/'run.py'),f'{a.prefix}-b{block}',
                     '--binary',a.binary,'--methods',methods,
