@@ -1,0 +1,236 @@
+[
+  {
+    "file": "counted-native-boundary.csv",
+    "sha256": "50955e3255cbcd78b57d0334bde2d7802d15f893c7e4d2ed4da7da69788a9071",
+    "state": "complete",
+    "rows": 192,
+    "kind": "time",
+    "elf": "e413b34874b23b7177a129fbcea520f2d9ab1430be8dd7a39ccdd1fd5d57fe52",
+    "source": "47e2bc518ed9101674df2d44a27c33efaf9de59937a5771f5c938e6fb4f9399e",
+    "usage": {
+      "ru_utime": 7.091589,
+      "ru_stime": 0.239872,
+      "ru_maxrss": 97272,
+      "ru_minflt": 27883,
+      "ru_majflt": 0,
+      "ru_nivcsw": 119
+    },
+    "host_swapin_pages": 6,
+    "host_swapout_pages": 0
+  },
+  {
+    "file": "counted-native-float-first-b512.csv",
+    "sha256": "bad572601a6a4751e94d5797b84140f301ab4e77cc814fddf6de3aa728379114",
+    "state": "complete",
+    "rows": 1536,
+    "kind": "time",
+    "elf": "e413b34874b23b7177a129fbcea520f2d9ab1430be8dd7a39ccdd1fd5d57fe52",
+    "source": "47e2bc518ed9101674df2d44a27c33efaf9de59937a5771f5c938e6fb4f9399e",
+    "usage": {
+      "ru_utime": 79.353744,
+      "ru_stime": 1.58223,
+      "ru_maxrss": 197856,
+      "ru_minflt": 163073,
+      "ru_majflt": 0,
+      "ru_nivcsw": 1578
+    },
+    "host_swapin_pages": 31,
+    "host_swapout_pages": 0
+  },
+  {
+    "file": "counted-native-float-more-b64.csv",
+    "sha256": "c39b7be43cf21fd3ed46eaeae1cf33a4a576c3fd524718bd3cf3fe6796a39455",
+    "state": "complete",
+    "rows": 1536,
+    "kind": "time",
+    "elf": "e413b34874b23b7177a129fbcea520f2d9ab1430be8dd7a39ccdd1fd5d57fe52",
+    "source": "47e2bc518ed9101674df2d44a27c33efaf9de59937a5771f5c938e6fb4f9399e",
+    "usage": {
+      "ru_utime": 82.280248,
+      "ru_stime": 1.470673,
+      "ru_maxrss": 197828,
+      "ru_minflt": 137796,
+      "ru_majflt": 0,
+      "ru_nivcsw": 1974
+    },
+    "host_swapin_pages": 42,
+    "host_swapout_pages": 0
+  },
+  {
+    "file": "counted-native-float-more-shape-b512.csv",
+    "sha256": "3a66d6f1364e443b88bfa9b2cd39565ecd0d5fcd556f609efd30a5b61c350438",
+    "state": "complete",
+    "rows": 768,
+    "kind": "time",
+    "elf": "e413b34874b23b7177a129fbcea520f2d9ab1430be8dd7a39ccdd1fd5d57fe52",
+    "source": "47e2bc518ed9101674df2d44a27c33efaf9de59937a5771f5c938e6fb4f9399e",
+    "usage": {
+      "ru_utime": 29.654966,
+      "ru_stime": 0.44370699999999996,
+      "ru_maxrss": 57932,
+      "ru_minflt": 69027,
+      "ru_majflt": 0,
+      "ru_nivcsw": 624
+    },
+    "host_swapin_pages": 16,
+    "host_swapout_pages": 0
+  },
+  {
+    "file": "counted-native-float-more-shape-b64.csv",
+    "sha256": "b0a51a8e3252d3da6b492f65ad94dda033fd1939d1092a18120a45c711d2bbfb",
+    "state": "complete",
+    "rows": 768,
+    "kind": "time",
+    "elf": "e413b34874b23b7177a129fbcea520f2d9ab1430be8dd7a39ccdd1fd5d57fe52",
+    "source": "47e2bc518ed9101674df2d44a27c33efaf9de59937a5771f5c938e6fb4f9399e",
+    "usage": {
+      "ru_utime": 32.80797,
+      "ru_stime": 0.35573899999999997,
+      "ru_maxrss": 57760,
+      "ru_minflt": 60853,
+      "ru_majflt": 0,
+      "ru_nivcsw": 753
+    },
+    "host_swapin_pages": 41,
+    "host_swapout_pages": 0
+  },
+  {
+    "file": "counted-native-integer-confirm-u32-uniform-b64-seed42-key.csv",
+    "sha256": "dde03a1d6361b9c07d35e38f73ae141524b8d648db51b80d0be7c5b93c536639",
+    "state": "complete",
+    "rows": 64,
+    "kind": "time",
+    "elf": "d8ad1f4c134cded4194a75c7e553d8e25cfd2a628fd181530b55894871142840",
+    "source": "47e2bc518ed9101674df2d44a27c33efaf9de59937a5771f5c938e6fb4f9399e",
+    "usage": {
+      "ru_utime": 1.1517249999999999,
+      "ru_stime": 0.020017999999999998,
+      "ru_maxrss": 61388,
+      "ru_minflt": 3630,
+      "ru_majflt": 0,
+      "ru_nivcsw": 121
+    },
+    "host_swapin_pages": 0,
+    "host_swapout_pages": 0
+  },
+  {
+    "file": "counted-native-integer-confirm-u32-uniform-b64-seed42-strict-combined.csv",
+    "sha256": "e2ceb2b71e9d8724b525d64d9cf97ff9811e390dec5eff8b82f33cd1251dabbd",
+    "state": "complete",
+    "rows": 64,
+    "kind": "time",
+    "elf": "d8ad1f4c134cded4194a75c7e553d8e25cfd2a628fd181530b55894871142840",
+    "source": "47e2bc518ed9101674df2d44a27c33efaf9de59937a5771f5c938e6fb4f9399e",
+    "usage": {
+      "ru_utime": 1.120312,
+      "ru_stime": 0.023996,
+      "ru_maxrss": 61392,
+      "ru_minflt": 3626,
+      "ru_majflt": 0,
+      "ru_nivcsw": 132
+    },
+    "host_swapin_pages": 0,
+    "host_swapout_pages": 0
+  },
+  {
+    "file": "counted-native-integer-screen-deep-b64.csv",
+    "sha256": "96fc77a1b4ecd53ed66b78faa6132423e95eb72b0ee5758aa2fc02170f074a6d",
+    "state": "complete",
+    "rows": 192,
+    "kind": "time",
+    "elf": "d8ad1f4c134cded4194a75c7e553d8e25cfd2a628fd181530b55894871142840",
+    "source": "47e2bc518ed9101674df2d44a27c33efaf9de59937a5771f5c938e6fb4f9399e",
+    "usage": {
+      "ru_utime": 52.384078,
+      "ru_stime": 1.390214,
+      "ru_maxrss": 684464,
+      "ru_minflt": 24854,
+      "ru_majflt": 0,
+      "ru_nivcsw": 2174
+    },
+    "host_swapin_pages": 33,
+    "host_swapout_pages": 0
+  },
+  {
+    "file": "counted-native-integer-screen-main-b512-incomplete.csv",
+    "sha256": "120ddca21235d3ddc6597734e1ddb2a92416dcac1ebac74b7aa6971c0ac90841",
+    "state": "incomplete; excluded from conclusions",
+    "rows": 568
+  },
+  {
+    "file": "counted-native-integer-screen-main-b64.csv",
+    "sha256": "f70821afc7dc26ae1c4003dd6bcb9c7365b3b61e41aecc8bd831746d43891282",
+    "state": "complete",
+    "rows": 1920,
+    "kind": "time",
+    "elf": "d8ad1f4c134cded4194a75c7e553d8e25cfd2a628fd181530b55894871142840",
+    "source": "47e2bc518ed9101674df2d44a27c33efaf9de59937a5771f5c938e6fb4f9399e",
+    "usage": {
+      "ru_utime": 152.261389,
+      "ru_stime": 4.235664,
+      "ru_maxrss": 685768,
+      "ru_minflt": 149736,
+      "ru_majflt": 1,
+      "ru_nivcsw": 3096
+    },
+    "host_swapin_pages": 320,
+    "host_swapout_pages": 0
+  },
+  {
+    "file": "counted-native-integer-screen-q64-b64.csv",
+    "sha256": "29de1882999392d4aba4e9c4a9fdbfc397fb15a0c27c017e9161132e396ccd81",
+    "state": "complete",
+    "rows": 384,
+    "kind": "time",
+    "elf": "d8ad1f4c134cded4194a75c7e553d8e25cfd2a628fd181530b55894871142840",
+    "source": "47e2bc518ed9101674df2d44a27c33efaf9de59937a5771f5c938e6fb4f9399e",
+    "usage": {
+      "ru_utime": 20.880296,
+      "ru_stime": 0.21972699999999998,
+      "ru_maxrss": 61336,
+      "ru_minflt": 38495,
+      "ru_majflt": 0,
+      "ru_nivcsw": 441
+    },
+    "host_swapin_pages": 4,
+    "host_swapout_pages": 0
+  },
+  {
+    "file": "counted-rejected-work-f32.csv",
+    "sha256": "af8cd122fe2abc01ee85103878682097266ec7e3c54a3302a85e86becebe3a34",
+    "state": "complete",
+    "rows": 10,
+    "kind": "work",
+    "elf": "df94413597d9892ea1fecce34e420431ef9f9c877ac89c5979e0150693321c00",
+    "source": "47e2bc518ed9101674df2d44a27c33efaf9de59937a5771f5c938e6fb4f9399e",
+    "usage": {
+      "ru_utime": 24.133532,
+      "ru_stime": 0.039619,
+      "ru_maxrss": 94460,
+      "ru_minflt": 6032,
+      "ru_majflt": 0,
+      "ru_nivcsw": 5552
+    },
+    "host_swapin_pages": 11,
+    "host_swapout_pages": 0
+  },
+  {
+    "file": "counted-rejected-work-u32.csv",
+    "sha256": "03f2a4c493f103e75fa198350ef4e784945cb2cfba4c68c9bb01d328bf8d55b8",
+    "state": "complete",
+    "rows": 5,
+    "kind": "work",
+    "elf": "b0e4dd3231c95b809dc7e2def07bf3d9748d7915ff821cc9ea528efe0b944079",
+    "source": "47e2bc518ed9101674df2d44a27c33efaf9de59937a5771f5c938e6fb4f9399e",
+    "usage": {
+      "ru_utime": 10.34837,
+      "ru_stime": 0.042588999999999995,
+      "ru_maxrss": 179200,
+      "ru_minflt": 3020,
+      "ru_majflt": 0,
+      "ru_nivcsw": 5627
+    },
+    "host_swapin_pages": 4,
+    "host_swapout_pages": 0
+  }
+]

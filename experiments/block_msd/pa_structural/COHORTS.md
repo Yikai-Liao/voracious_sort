@@ -34,3 +34,5 @@ Cohorts are not pooled across executable hashes. Historical names containing `fi
 The current source uses only a hardware token for compressed labels, delegates extraction to pinned hakmem, and otherwise keeps ordinary PA. Final validation requires its own immutable executables; historical hardware or software results are not transferred to it.
 
 | counted- (current) | Independent conservative-packing and count-derived completion; correctness passed, small performance gates pending. Prior evidence is not acceptance for this source. |
+
+- Counted completion rejected after13 complete native integer cells and two independent confirmations; [COUNTED_VALIDATION.md](COUNTED_VALIDATION.md). B512 partial data excluded. Conservative packing remains a separate unvalidated candidate.

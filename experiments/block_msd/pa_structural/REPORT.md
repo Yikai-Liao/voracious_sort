@@ -1,6 +1,6 @@
 # PA 优化交付报告
 
-当前 PA 源码正在筛选 `Pa_strict`、`Pa_counted_key` 和两者组合。失败的按值分类计划已移除。前者要求压紧至少省去两轮物理分发；后者从分发完成后的目录元数据取得精确桶长，仅在完整剩余键比原前缀多至多一个活跃字节时，用既有稳定 Block LSD 与预算内 dense LSD 完成。新增接口不改变 scatter/fixup/compact 算法。native 62 项库测试与 6 项浮点测试通过；性能尚未验收，完整原 103 场景、浮点和普通 ISA 验证均不能沿用历史结果。预先声明的筛选与空间边界见 [COUNTED_PLAN.md](COUNTED_PLAN.md)。
+计数完成路径及其组合已被独立整数复测淘汰：u32 uniform/B64 分别比原 PA 慢约33%与22%。浮点改善不能覆盖这一退化。当前将移除计数模块和桶长接口，仅保留保守硬件压紧作为待验证候选；完整验收不沿用历史结果。证据与停止范围见 [COUNTED_VALIDATION.md](COUNTED_VALIDATION.md)。
 
 上一候选 `Pa_plan` 的寄存器掩码 PEXT 有代码生成证据，但原失败边界的正反复测仍慢约14%，同程序的新旧压紧路径对照也未显示一致收益，已拒绝并停止扩大验证，见 [PA_PLAN_VALIDATION.md](PA_PLAN_VALIDATION.md)。
 

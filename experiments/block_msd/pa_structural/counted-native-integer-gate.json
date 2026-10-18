@@ -1,0 +1,87 @@
+{
+  "scope": "counted native integer screen, seed20261026, reps=16; independent seed42 confirmation on u32/uniform/n=1048576/B64",
+  "binary": "pa_counted_native",
+  "binary_sha256": "d8ad1f4c134cded4194a75c7e553d8e25cfd2a628fd181530b55894871142840",
+  "source_sha256": "47e2bc518ed9101674df2d44a27c33efaf9de59937a5771f5c938e6fb4f9399e",
+  "complete_groups": {
+    "main-b64": {
+      "cells": 10,
+      "rows": 1920,
+      "audits": {
+        "strict": "pa_structural/counted-native-integer-screen-main-b64-strict-audit.json",
+        "key": "pa_structural/counted-native-integer-screen-main-b64-key-audit.json",
+        "combined": "pa_structural/counted-native-integer-screen-main-b64-combined-audit.json"
+      }
+    },
+    "deep-b64": {
+      "cells": 1,
+      "rows": 192,
+      "audits": {
+        "strict": "pa_structural/counted-native-integer-screen-deep-b64-strict-audit.json",
+        "key": "pa_structural/counted-native-integer-screen-deep-b64-key-audit.json",
+        "combined": "pa_structural/counted-native-integer-screen-deep-b64-combined-audit.json"
+      }
+    },
+    "q64-b64": {
+      "cells": 2,
+      "rows": 384,
+      "audits": {
+        "strict": "pa_structural/counted-native-integer-screen-q64-b64-strict-audit.json",
+        "key": "pa_structural/counted-native-integer-screen-q64-b64-key-audit.json",
+        "combined": "pa_structural/counted-native-integer-screen-q64-b64-combined-audit.json"
+      }
+    }
+  },
+  "confirmed_seed42": {
+    "key": {
+      "candidate": "Pa_counted_key",
+      "audit": "pa_structural/counted-native-integer-confirm-u32-uniform-b64-seed42-keyaudit.json",
+      "cell": [
+        "u32",
+        "uniform",
+        "1048576",
+        "64",
+        "42"
+      ],
+      "median_ratio_vs_BASE": 1.3293449942495625,
+      "p10_ratio_vs_BASE": 1.1693005179563878,
+      "p90_ratio_vs_BASE": 1.3949943627764478,
+      "slower_reps": 16,
+      "aa": {
+        "median": 1.0027678956466848,
+        "p10": 0.9660869682983627,
+        "p90": 1.0514313664505992
+      },
+      "rejected": true
+    },
+    "strict-combined": {
+      "candidate": "Pa_strict_counted",
+      "audit": "pa_structural/counted-native-integer-confirm-u32-uniform-b64-seed42-strict-combinedaudit.json",
+      "cell": [
+        "u32",
+        "uniform",
+        "1048576",
+        "64",
+        "42"
+      ],
+      "median_ratio_vs_BASE": 1.2226312898602676,
+      "p10_ratio_vs_BASE": 1.1361961027836456,
+      "p90_ratio_vs_BASE": 1.2945020347840481,
+      "slower_reps": 15,
+      "aa": {
+        "median": 1.0337792892994768,
+        "p10": 0.9367957803038647,
+        "p90": 1.2611855399340346
+      },
+      "rejected": true
+    }
+  },
+  "gate": "HOLD; Pa_counted_key loss confirmed, reject it and Pa_strict_counted; Pa_strict has no >1.05 median-and-p10 signal in completed B64 groups but remains a separate candidate requiring fresh frozen-source validation",
+  "interrupted_group": {
+    "state": "incomplete_interrupted",
+    "raw_csv": "pa_structural/measurements/counted-native-integer-screen-main-b512-incomplete.csv",
+    "rows_excluding_header": 568,
+    "expected_rows_for_group": 1920,
+    "audit": "not_validated"
+  }
+}
