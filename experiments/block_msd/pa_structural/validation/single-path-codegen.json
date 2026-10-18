@@ -1,0 +1,39 @@
+{
+  "hw_single_native": {
+    "symbol": "00000000004bf490 0000000000000630 t <block_msd_research::frontier::block::Sorter<u32>>::scatter::<u8, block_msd_research::frontier::pa::partition<u32, u32, block_msd_research::frontier::packed_projection::Packed<u32, u8, hakmem::isa::x86v3::X86V3>>::{closure#0}, 0>",
+    "calls": [
+      "4bfa1d:\tff 15 45 dd 1c 00    \tcall   *0x1cdd45(%rip)        # 68d768 <_DYNAMIC+0x268>",
+      "4bfa48:\tff 15 fa de 1c 00    \tcall   *0x1cdefa(%rip)        # 68d948 <_DYNAMIC+0x448>",
+      "4bfa5b:\tff 15 07 dd 1c 00    \tcall   *0x1cdd07(%rip)        # 68d768 <_DYNAMIC+0x268>",
+      "4bfa6b:\tff 15 f7 dc 1c 00    \tcall   *0x1cdcf7(%rip)        # 68d768 <_DYNAMIC+0x268>",
+      "4bfa80:\tff 15 e2 dc 1c 00    \tcall   *0x1cdce2(%rip)        # 68d768 <_DYNAMIC+0x268>",
+      "4bfa95:\tff 15 cd dc 1c 00    \tcall   *0x1cdccd(%rip)        # 68d768 <_DYNAMIC+0x268>",
+      "4bfaa8:\tff 15 ba dc 1c 00    \tcall   *0x1cdcba(%rip)        # 68d768 <_DYNAMIC+0x268>",
+      "4bfaba:\tff 15 a8 dc 1c 00    \tcall   *0x1cdca8(%rip)        # 68d768 <_DYNAMIC+0x268>"
+    ],
+    "pext_instruction_lines": [
+      "4bf653:\tc4 42 02 f5 50 10    \tpext   0x10(%r8),%r15d,%r10d",
+      "4bf709:\tc4 42 02 f5 50 10    \tpext   0x10(%r8),%r15d,%r10d",
+      "4bf7bf:\tc4 42 02 f5 50 10    \tpext   0x10(%r8),%r15d,%r10d",
+      "4bf874:\tc4 42 02 f5 50 10    \tpext   0x10(%r8),%r15d,%r10d",
+      "4bf974:\tc4 42 02 f5 50 10    \tpext   0x10(%r8),%r15d,%r10d"
+    ]
+  },
+  "hw_single_generic": {
+    "symbol": "00000000004b7ab0 0000000000000660 t <block_msd_research::frontier::block::Sorter<u32>>::scatter::<u8, block_msd_research::frontier::pa::partition<u32, u32, block_msd_research::frontier::packed_projection::Packed<u32, u8, hakmem::isa::x86v3::X86V3>>::{closure#0}, 0>",
+    "calls": [
+      "4b7c69:\te8 c2 5c 09 00       \tcall   54d930 <_RNvNtNtCs2fFU9HvNXfU_6hakmem3x864bmi28pext_u32>",
+      "4b7d2c:\te8 ff 5b 09 00       \tcall   54d930 <_RNvNtNtCs2fFU9HvNXfU_6hakmem3x864bmi28pext_u32>",
+      "4b7def:\te8 3c 5b 09 00       \tcall   54d930 <_RNvNtNtCs2fFU9HvNXfU_6hakmem3x864bmi28pext_u32>",
+      "4b7eb1:\te8 7a 5a 09 00       \tcall   54d930 <_RNvNtNtCs2fFU9HvNXfU_6hakmem3x864bmi28pext_u32>",
+      "4b7fc0:\te8 6b 59 09 00       \tcall   54d930 <_RNvNtNtCs2fFU9HvNXfU_6hakmem3x864bmi28pext_u32>",
+      "4b80b1:\tff 15 61 cd 17 00    \tcall   *0x17cd61(%rip)        # 634e18 <_DYNAMIC+0x430>",
+      "4b80c3:\tff 15 c7 cb 17 00    \tcall   *0x17cbc7(%rip)        # 634c90 <_DYNAMIC+0x2a8>",
+      "4b80d3:\tff 15 b7 cb 17 00    \tcall   *0x17cbb7(%rip)        # 634c90 <_DYNAMIC+0x2a8>",
+      "4b80e8:\tff 15 a2 cb 17 00    \tcall   *0x17cba2(%rip)        # 634c90 <_DYNAMIC+0x2a8>",
+      "4b80fa:\tff 15 90 cb 17 00    \tcall   *0x17cb90(%rip)        # 634c90 <_DYNAMIC+0x2a8>",
+      "4b810a:\tff 15 80 cb 17 00    \tcall   *0x17cb80(%rip)        # 634c90 <_DYNAMIC+0x2a8>"
+    ],
+    "pext_instruction_lines": []
+  }
+}
