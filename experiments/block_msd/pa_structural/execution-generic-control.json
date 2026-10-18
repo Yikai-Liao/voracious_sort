@@ -1,0 +1,303 @@
+{
+  "target": "generic",
+  "started_ns": 1792296379094778855,
+  "runs": [
+    {
+      "file": "execution-generic-control-b64-0-old.csv",
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/root/code/voracious_sort-pa-structural/experiments/block_msd/target/pa-structural/hw_single_generic",
+        "1048576",
+        "8",
+        "Pa_unified_groups_t16777216,Pa_packed,Pa_packed,Pa_unified_groups_t16777216",
+        "sparse,uniform",
+        "u32",
+        "time",
+        "64",
+        "42"
+      ],
+      "started_ns": 1792296379418124828,
+      "ended_ns": 1792296380614699123
+    },
+    {
+      "file": "execution-generic-control-b64-1-new.csv",
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/root/code/voracious_sort-pa-execution/experiments/block_msd/target/pa-structural/execution_generic",
+        "1048576",
+        "8",
+        "Pa_unified_groups_t16777216,Pa_kernel,Pa_kernel,Pa_unified_groups_t16777216",
+        "sparse,uniform",
+        "u32",
+        "time",
+        "64",
+        "42"
+      ],
+      "started_ns": 1792296380619218676,
+      "ended_ns": 1792296381606384813
+    },
+    {
+      "file": "execution-generic-control-b64-2-new.csv",
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/root/code/voracious_sort-pa-execution/experiments/block_msd/target/pa-structural/execution_generic",
+        "1048576",
+        "8",
+        "Pa_unified_groups_t16777216,Pa_kernel,Pa_kernel,Pa_unified_groups_t16777216",
+        "sparse,uniform",
+        "u32",
+        "time",
+        "64",
+        "42"
+      ],
+      "started_ns": 1792296381608645437,
+      "ended_ns": 1792296382590865091
+    },
+    {
+      "file": "execution-generic-control-b64-3-old.csv",
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/root/code/voracious_sort-pa-structural/experiments/block_msd/target/pa-structural/hw_single_generic",
+        "1048576",
+        "8",
+        "Pa_unified_groups_t16777216,Pa_packed,Pa_packed,Pa_unified_groups_t16777216",
+        "sparse,uniform",
+        "u32",
+        "time",
+        "64",
+        "42"
+      ],
+      "started_ns": 1792296382592886822,
+      "ended_ns": 1792296383683689368
+    },
+    {
+      "file": "execution-generic-control-b512-0-old.csv",
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/root/code/voracious_sort-pa-structural/experiments/block_msd/target/pa-structural/hw_single_generic",
+        "1048576",
+        "8",
+        "Pa_unified_groups_t16777216,Pa_packed,Pa_packed,Pa_unified_groups_t16777216",
+        "sparse,uniform",
+        "u32",
+        "time",
+        "512",
+        "42"
+      ],
+      "started_ns": 1792296383689021962,
+      "ended_ns": 1792296384703809233
+    },
+    {
+      "file": "execution-generic-control-b512-1-new.csv",
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/root/code/voracious_sort-pa-execution/experiments/block_msd/target/pa-structural/execution_generic",
+        "1048576",
+        "8",
+        "Pa_unified_groups_t16777216,Pa_kernel,Pa_kernel,Pa_unified_groups_t16777216",
+        "sparse,uniform",
+        "u32",
+        "time",
+        "512",
+        "42"
+      ],
+      "started_ns": 1792296384706894999,
+      "ended_ns": 1792296385627495083
+    },
+    {
+      "file": "execution-generic-control-b512-2-new.csv",
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/root/code/voracious_sort-pa-execution/experiments/block_msd/target/pa-structural/execution_generic",
+        "1048576",
+        "8",
+        "Pa_unified_groups_t16777216,Pa_kernel,Pa_kernel,Pa_unified_groups_t16777216",
+        "sparse,uniform",
+        "u32",
+        "time",
+        "512",
+        "42"
+      ],
+      "started_ns": 1792296385630790626,
+      "ended_ns": 1792296386461217924
+    },
+    {
+      "file": "execution-generic-control-b512-3-old.csv",
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/root/code/voracious_sort-pa-structural/experiments/block_msd/target/pa-structural/hw_single_generic",
+        "1048576",
+        "8",
+        "Pa_unified_groups_t16777216,Pa_packed,Pa_packed,Pa_unified_groups_t16777216",
+        "sparse,uniform",
+        "u32",
+        "time",
+        "512",
+        "42"
+      ],
+      "started_ns": 1792296386465501189,
+      "ended_ns": 1792296387537183043
+    }
+  ],
+  "old": {
+    "source_hash_version": 2,
+    "source_commit": "5f6d211d1e295b1dcb1204be95cf8826f0a7274d",
+    "sha256": "51fffcb9e6816588c821a648aeb6eecc22db7a97802039cbe6e8e9fb8a4d0fc4",
+    "source_sha256": "11cc76cf079e83b14d8f33671f516da611a4e0d845bf82db020f4fd28a9a7c3a",
+    "base": "745cea6ab21030710cb036f88fa757505ef1990b",
+    "rustflags": "",
+    "features": "",
+    "profile": "release",
+    "rustc": "rustc 1.98.1 (48a229cea 2026-09-01)\nbinary: rustc\ncommit-hash: 48a229ceaefd4985c50990b14116b6d856af0985\ncommit-date: 2026-09-01\nhost: x86_64-unknown-linux-gnu\nrelease: 1.98.1\nLLVM version: 22.1.8\n"
+  },
+  "new": {
+    "source_hash_version": 2,
+    "source_commit": "d2669f1343f8f208cd4a2ebaa0e738a66844e50f",
+    "sha256": "268fd281840824f6b101d688a9730a756e1168fc6fb8a319f287e3a13b58ce72",
+    "source_sha256": "a9a6153cf7c9ad9dc030e351f46cf423b1f5a4c2940d093cdfc2c76362da400b",
+    "base": "745cea6ab21030710cb036f88fa757505ef1990b",
+    "rustflags": "",
+    "features": "",
+    "profile": "release",
+    "rustc": "rustc 1.98.1 (48a229cea 2026-09-01)\nbinary: rustc\ncommit-hash: 48a229ceaefd4985c50990b14116b6d856af0985\ncommit-date: 2026-09-01\nhost: x86_64-unknown-linux-gnu\nrelease: 1.98.1\nLLVM version: 22.1.8\n"
+  },
+  "results": [
+    {
+      "cell": [
+        "u32",
+        "sparse",
+        "1048576",
+        "64",
+        "42"
+      ],
+      "medians_ms": {
+        "old:Pa_unified_groups_t16777216": 6.61751025,
+        "old:Pa_packed": 13.66101825,
+        "new:Pa_unified_groups_t16777216": 7.5158255,
+        "new:Pa_kernel": 5.2449175
+      },
+      "new:Pa_unified_groups_t16777216": {
+        "median": 1.1338487032857385,
+        "p10": 0.9817696257537846,
+        "p90": 1.4834665545847074
+      },
+      "new:Pa_kernel": {
+        "median": 0.7932631717199781,
+        "p10": 0.6211516674803648,
+        "p90": 1.0810750258404367
+      },
+      "old:Pa_packed": {
+        "median": 2.0140953844197362,
+        "p10": 1.8847678300771356,
+        "p90": 2.382664474882436
+      }
+    },
+    {
+      "cell": [
+        "u32",
+        "uniform",
+        "1048576",
+        "64",
+        "42"
+      ],
+      "medians_ms": {
+        "old:Pa_unified_groups_t16777216": 13.4393455,
+        "old:Pa_packed": 13.45811225,
+        "new:Pa_unified_groups_t16777216": 12.746152,
+        "new:Pa_kernel": 13.15678275
+      },
+      "new:Pa_unified_groups_t16777216": {
+        "median": 0.9960124965306812,
+        "p10": 0.6824986525524424,
+        "p90": 1.1197290832869242
+      },
+      "new:Pa_kernel": {
+        "median": 1.0171601871523213,
+        "p10": 0.6900655983274873,
+        "p90": 1.0910826608579176
+      },
+      "old:Pa_packed": {
+        "median": 0.9901741054528017,
+        "p10": 0.9122556430093629,
+        "p90": 1.0346456315478973
+      }
+    },
+    {
+      "cell": [
+        "u32",
+        "sparse",
+        "1048576",
+        "512",
+        "42"
+      ],
+      "medians_ms": {
+        "old:Pa_unified_groups_t16777216": 4.82417725,
+        "old:Pa_packed": 12.4637375,
+        "new:Pa_unified_groups_t16777216": 5.043959,
+        "new:Pa_kernel": 3.46909025
+      },
+      "new:Pa_unified_groups_t16777216": {
+        "median": 1.0110894841025933,
+        "p10": 0.8244840887664143,
+        "p90": 1.2234438349129304
+      },
+      "new:Pa_kernel": {
+        "median": 0.7235031923273967,
+        "p10": 0.5710378714785278,
+        "p90": 0.8509301489090181
+      },
+      "old:Pa_packed": {
+        "median": 2.543986492068977,
+        "p10": 2.1255779026122927,
+        "p90": 2.6917007607710692
+      }
+    },
+    {
+      "cell": [
+        "u32",
+        "uniform",
+        "1048576",
+        "512",
+        "42"
+      ],
+      "medians_ms": {
+        "old:Pa_unified_groups_t16777216": 12.51705325,
+        "old:Pa_packed": 12.56183725,
+        "new:Pa_unified_groups_t16777216": 11.80018975,
+        "new:Pa_kernel": 12.29523875
+      },
+      "new:Pa_unified_groups_t16777216": {
+        "median": 0.9558990599628354,
+        "p10": 0.8952375811431403,
+        "p90": 1.0862029261692907
+      },
+      "new:Pa_kernel": {
+        "median": 0.9491453086396309,
+        "p10": 0.8973603532325067,
+        "p90": 1.0828127974354858
+      },
+      "old:Pa_packed": {
+        "median": 1.0021194727942713,
+        "p10": 0.9800817942619671,
+        "p90": 1.1420727320742126
+      }
+    }
+  ],
+  "ended_ns": 1792296387539601522
+}

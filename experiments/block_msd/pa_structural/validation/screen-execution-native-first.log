@@ -1,0 +1,9 @@
+execution-native-first-u32-b64 3.5
+execution-native-first-u32-b512 3.53
+L_frozen 4 cells {'Pa_gallop': 2, 'Pa_kernel': 0, 'Pa_packed': 0, 'Pa_packed_gallop': 2, 'Pa_unified_groups_t16777216': 0, 'Rollercoaster': 4}
+Pa_gallop 4 cells {'L_frozen': 2, 'Pa_kernel': 0, 'Pa_packed': 0, 'Pa_packed_gallop': 1, 'Pa_unified_groups_t16777216': 1, 'Rollercoaster': 2}
+Pa_kernel 4 cells {'L_frozen': 4, 'Pa_gallop': 4, 'Pa_packed': 2, 'Pa_packed_gallop': 3, 'Pa_unified_groups_t16777216': 2, 'Rollercoaster': 4}
+Pa_packed 4 cells {'L_frozen': 4, 'Pa_gallop': 4, 'Pa_kernel': 2, 'Pa_packed_gallop': 3, 'Pa_unified_groups_t16777216': 4, 'Rollercoaster': 4}
+Pa_packed_gallop 4 cells {'L_frozen': 2, 'Pa_gallop': 3, 'Pa_kernel': 1, 'Pa_packed': 1, 'Pa_unified_groups_t16777216': 2, 'Rollercoaster': 2}
+Pa_unified_groups_t16777216 4 cells {'L_frozen': 4, 'Pa_gallop': 3, 'Pa_kernel': 2, 'Pa_packed': 0, 'Pa_packed_gallop': 2, 'Rollercoaster': 4}
+Rollercoaster 4 cells {'L_frozen': 0, 'Pa_gallop': 2, 'Pa_kernel': 0, 'Pa_packed': 0, 'Pa_packed_gallop': 2, 'Pa_unified_groups_t16777216': 0}

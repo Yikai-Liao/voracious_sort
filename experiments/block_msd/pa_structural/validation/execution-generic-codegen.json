@@ -1,0 +1,43 @@
+{
+  "elf_sha256": "268fd281840824f6b101d688a9730a756e1168fc6fb8a319f287e3a13b58ce72",
+  "symbols": {
+    "execution-generic-u32-scatter-scalar": {
+      "symbol": "0000000000590e80 000000000000065d t <block_msd_research::frontier::block::Sorter<u32>>::scatter::<u8, block_msd_research::frontier::labeler::Classified<u32, u32, block_msd_research::frontier::packed_projection::Packed<u32, u8, hakmem::isa::x86v3::X86V3>>, 0>",
+      "pext": [],
+      "extraction_calls": [
+        "591036:\te8 35 23 0f 00       \tcall   683370 <_RNvNtNtCs2fFU9HvNXfU_6hakmem3x864bmi28pext_u32>",
+        "5910f6:\te8 75 22 0f 00       \tcall   683370 <_RNvNtNtCs2fFU9HvNXfU_6hakmem3x864bmi28pext_u32>",
+        "5911b6:\te8 b5 21 0f 00       \tcall   683370 <_RNvNtNtCs2fFU9HvNXfU_6hakmem3x864bmi28pext_u32>",
+        "591275:\te8 f6 20 0f 00       \tcall   683370 <_RNvNtNtCs2fFU9HvNXfU_6hakmem3x864bmi28pext_u32>",
+        "59138d:\te8 de 1f 0f 00       \tcall   683370 <_RNvNtNtCs2fFU9HvNXfU_6hakmem3x864bmi28pext_u32>"
+      ]
+    },
+    "execution-generic-u32-scatter-context": {
+      "symbol": "0000000000647fa0 0000000000000665 t <hakmem::isa::x86v3::X86V3 as hakmem::isa::Isa>::run::trampoline::<usize, <block_msd_research::frontier::packed_projection::Packed<u32, u8, hakmem::isa::x86v3::X86V3, true> as block_msd_research::frontier::Classifier<u32>>::in_context<usize, <block_msd_research::frontier::block::Sorter<u32>>::scatter<u8, block_msd_research::frontier::labeler::Classified<u32, u32, block_msd_research::frontier::packed_projection::Packed<u32, u8, hakmem::isa::x86v3::X86V3, true>>, 0>::{closure#0}>::{closure#0}>",
+      "pext": [
+        "6480e4:\tc4 62 02 f5 41 10    \tpext   0x10(%rcx),%r15d,%r8d",
+        "6481c3:\tc4 62 02 f5 41 10    \tpext   0x10(%rcx),%r15d,%r8d",
+        "6482a2:\tc4 62 02 f5 41 10    \tpext   0x10(%rcx),%r15d,%r8d",
+        "648381:\tc4 62 02 f5 41 10    \tpext   0x10(%rcx),%r15d,%r8d",
+        "6484b5:\tc4 e2 62 f5 69 10    \tpext   0x10(%rcx),%ebx,%ebp"
+      ],
+      "extraction_calls": []
+    },
+    "execution-generic-u32-dense-scalar": {
+      "symbol": "00000000003cf610 00000000000007cf t block_msd_research::frontier::dense::<u32, u8, block_msd_research::frontier::labeler::Classified<u32, u32, block_msd_research::frontier::packed_projection::Packed<u32, u8, hakmem::isa::x86v3::X86V3>>>",
+      "pext": [],
+      "extraction_calls": [
+        "3cf89b:\te8 00 e6 01 00       \tcall   3edea0 <_RNvNtNtCs2fFU9HvNXfU_6hakmem3x864bmi28pext_u32.llvm.16707188544469008941>",
+        "3cfa9b:\te8 00 e4 01 00       \tcall   3edea0 <_RNvNtNtCs2fFU9HvNXfU_6hakmem3x864bmi28pext_u32.llvm.16707188544469008941>"
+      ]
+    },
+    "execution-generic-u32-dense-context": {
+      "symbol": "00000000003e1cd0 000000000000068b t <hakmem::isa::x86v3::X86V3 as hakmem::isa::Isa>::run::trampoline::<(), <block_msd_research::frontier::packed_projection::Packed<u32, u8, hakmem::isa::x86v3::X86V3, true> as block_msd_research::frontier::Classifier<u32>>::in_context<(), block_msd_research::frontier::dense<u32, u8, block_msd_research::frontier::labeler::Classified<u32, u32, block_msd_research::frontier::packed_projection::Packed<u32, u8, hakmem::isa::x86v3::X86V3, true>>>::{closure#0}>::{closure#0}>",
+      "pext": [
+        "3e1f46:\tc4 42 32 f5 40 10    \tpext   0x10(%r8),%r9d,%r8d",
+        "3e2199:\tc4 42 42 f5 40 10    \tpext   0x10(%r8),%edi,%r8d"
+      ],
+      "extraction_calls": []
+    }
+  }
+}

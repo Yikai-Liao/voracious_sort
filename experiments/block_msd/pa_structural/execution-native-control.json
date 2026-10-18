@@ -1,0 +1,303 @@
+{
+  "target": "native",
+  "started_ns": 1792296387619991681,
+  "runs": [
+    {
+      "file": "execution-native-control-b64-0-old.csv",
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/root/code/voracious_sort-pa-structural/experiments/block_msd/target/pa-structural/hw_single_native",
+        "1048576",
+        "8",
+        "Pa_unified_groups_t16777216,Pa_packed,Pa_packed,Pa_unified_groups_t16777216",
+        "sparse,uniform",
+        "u32",
+        "time",
+        "64",
+        "42"
+      ],
+      "started_ns": 1792296387910260864,
+      "ended_ns": 1792296388804392690
+    },
+    {
+      "file": "execution-native-control-b64-1-new.csv",
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/root/code/voracious_sort-pa-execution/experiments/block_msd/target/pa-structural/execution_native",
+        "1048576",
+        "8",
+        "Pa_unified_groups_t16777216,Pa_kernel,Pa_kernel,Pa_unified_groups_t16777216",
+        "sparse,uniform",
+        "u32",
+        "time",
+        "64",
+        "42"
+      ],
+      "started_ns": 1792296388806470096,
+      "ended_ns": 1792296389650407009
+    },
+    {
+      "file": "execution-native-control-b64-2-new.csv",
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/root/code/voracious_sort-pa-execution/experiments/block_msd/target/pa-structural/execution_native",
+        "1048576",
+        "8",
+        "Pa_unified_groups_t16777216,Pa_kernel,Pa_kernel,Pa_unified_groups_t16777216",
+        "sparse,uniform",
+        "u32",
+        "time",
+        "64",
+        "42"
+      ],
+      "started_ns": 1792296389652749312,
+      "ended_ns": 1792296390488445311
+    },
+    {
+      "file": "execution-native-control-b64-3-old.csv",
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/root/code/voracious_sort-pa-structural/experiments/block_msd/target/pa-structural/hw_single_native",
+        "1048576",
+        "8",
+        "Pa_unified_groups_t16777216,Pa_packed,Pa_packed,Pa_unified_groups_t16777216",
+        "sparse,uniform",
+        "u32",
+        "time",
+        "64",
+        "42"
+      ],
+      "started_ns": 1792296390490470607,
+      "ended_ns": 1792296391372569807
+    },
+    {
+      "file": "execution-native-control-b512-0-old.csv",
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/root/code/voracious_sort-pa-structural/experiments/block_msd/target/pa-structural/hw_single_native",
+        "1048576",
+        "8",
+        "Pa_unified_groups_t16777216,Pa_packed,Pa_packed,Pa_unified_groups_t16777216",
+        "sparse,uniform",
+        "u32",
+        "time",
+        "512",
+        "42"
+      ],
+      "started_ns": 1792296391374657271,
+      "ended_ns": 1792296392239421990
+    },
+    {
+      "file": "execution-native-control-b512-1-new.csv",
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/root/code/voracious_sort-pa-execution/experiments/block_msd/target/pa-structural/execution_native",
+        "1048576",
+        "8",
+        "Pa_unified_groups_t16777216,Pa_kernel,Pa_kernel,Pa_unified_groups_t16777216",
+        "sparse,uniform",
+        "u32",
+        "time",
+        "512",
+        "42"
+      ],
+      "started_ns": 1792296392241325248,
+      "ended_ns": 1792296393081228586
+    },
+    {
+      "file": "execution-native-control-b512-2-new.csv",
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/root/code/voracious_sort-pa-execution/experiments/block_msd/target/pa-structural/execution_native",
+        "1048576",
+        "8",
+        "Pa_unified_groups_t16777216,Pa_kernel,Pa_kernel,Pa_unified_groups_t16777216",
+        "sparse,uniform",
+        "u32",
+        "time",
+        "512",
+        "42"
+      ],
+      "started_ns": 1792296393083283380,
+      "ended_ns": 1792296393929739678
+    },
+    {
+      "file": "execution-native-control-b512-3-old.csv",
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/root/code/voracious_sort-pa-structural/experiments/block_msd/target/pa-structural/hw_single_native",
+        "1048576",
+        "8",
+        "Pa_unified_groups_t16777216,Pa_packed,Pa_packed,Pa_unified_groups_t16777216",
+        "sparse,uniform",
+        "u32",
+        "time",
+        "512",
+        "42"
+      ],
+      "started_ns": 1792296393931784097,
+      "ended_ns": 1792296394809731630
+    }
+  ],
+  "old": {
+    "source_hash_version": 2,
+    "source_commit": "5f6d211d1e295b1dcb1204be95cf8826f0a7274d",
+    "sha256": "2c859d2183a832313b14398bd0adde3519763c2a4b99180fae1278c6a7b8d562",
+    "source_sha256": "11cc76cf079e83b14d8f33671f516da611a4e0d845bf82db020f4fd28a9a7c3a",
+    "base": "745cea6ab21030710cb036f88fa757505ef1990b",
+    "rustflags": "-C target-cpu=native",
+    "features": "",
+    "profile": "release",
+    "rustc": "rustc 1.98.1 (48a229cea 2026-09-01)\nbinary: rustc\ncommit-hash: 48a229ceaefd4985c50990b14116b6d856af0985\ncommit-date: 2026-09-01\nhost: x86_64-unknown-linux-gnu\nrelease: 1.98.1\nLLVM version: 22.1.8\n"
+  },
+  "new": {
+    "source_hash_version": 2,
+    "source_commit": "d2669f1343f8f208cd4a2ebaa0e738a66844e50f",
+    "sha256": "5722ae642bb8bb004b79b675a26635b3a283e5f43d8faa1882ecbbd1786e3130",
+    "source_sha256": "a9a6153cf7c9ad9dc030e351f46cf423b1f5a4c2940d093cdfc2c76362da400b",
+    "base": "745cea6ab21030710cb036f88fa757505ef1990b",
+    "rustflags": "-C target-cpu=native",
+    "features": "",
+    "profile": "release",
+    "rustc": "rustc 1.98.1 (48a229cea 2026-09-01)\nbinary: rustc\ncommit-hash: 48a229ceaefd4985c50990b14116b6d856af0985\ncommit-date: 2026-09-01\nhost: x86_64-unknown-linux-gnu\nrelease: 1.98.1\nLLVM version: 22.1.8\n"
+  },
+  "results": [
+    {
+      "cell": [
+        "u32",
+        "sparse",
+        "1048576",
+        "64",
+        "42"
+      ],
+      "medians_ms": {
+        "old:Pa_unified_groups_t16777216": 5.3084855,
+        "old:Pa_packed": 4.35805025,
+        "new:Pa_unified_groups_t16777216": 5.14583425,
+        "new:Pa_kernel": 3.743566
+      },
+      "new:Pa_unified_groups_t16777216": {
+        "median": 1.001527857503245,
+        "p10": 0.912745606839352,
+        "p90": 1.2271693966135533
+      },
+      "new:Pa_kernel": {
+        "median": 0.7146792512032277,
+        "p10": 0.6631712220763202,
+        "p90": 0.8376725919674661
+      },
+      "old:Pa_packed": {
+        "median": 0.8429323772879006,
+        "p10": 0.8127606266171081,
+        "p90": 0.8859634794868778
+      }
+    },
+    {
+      "cell": [
+        "u32",
+        "uniform",
+        "1048576",
+        "64",
+        "42"
+      ],
+      "medians_ms": {
+        "old:Pa_unified_groups_t16777216": 12.666163,
+        "old:Pa_packed": 12.491263,
+        "new:Pa_unified_groups_t16777216": 10.82563175,
+        "new:Pa_kernel": 11.0044435
+      },
+      "new:Pa_unified_groups_t16777216": {
+        "median": 0.8686464460955372,
+        "p10": 0.8104997034881041,
+        "p90": 0.9831888691875262
+      },
+      "new:Pa_kernel": {
+        "median": 0.8705393689220196,
+        "p10": 0.8163296629223736,
+        "p90": 0.9352198815041013
+      },
+      "old:Pa_packed": {
+        "median": 0.995123162905262,
+        "p10": 0.9697181383352613,
+        "p90": 1.0404010041768885
+      }
+    },
+    {
+      "cell": [
+        "u32",
+        "sparse",
+        "1048576",
+        "512",
+        "42"
+      ],
+      "medians_ms": {
+        "old:Pa_unified_groups_t16777216": 4.23178175,
+        "old:Pa_packed": 3.3062125,
+        "new:Pa_unified_groups_t16777216": 4.080027,
+        "new:Pa_kernel": 2.78633175
+      },
+      "new:Pa_unified_groups_t16777216": {
+        "median": 1.0027092367279633,
+        "p10": 0.8556857276213112,
+        "p90": 1.1150821532778485
+      },
+      "new:Pa_kernel": {
+        "median": 0.6699894917340139,
+        "p10": 0.595476866551592,
+        "p90": 0.7599221058874737
+      },
+      "old:Pa_packed": {
+        "median": 0.8067388742750194,
+        "p10": 0.7136176260440037,
+        "p90": 0.857087629291764
+      }
+    },
+    {
+      "cell": [
+        "u32",
+        "uniform",
+        "1048576",
+        "512",
+        "42"
+      ],
+      "medians_ms": {
+        "old:Pa_unified_groups_t16777216": 12.31516425,
+        "old:Pa_packed": 12.514887,
+        "new:Pa_unified_groups_t16777216": 12.4841055,
+        "new:Pa_kernel": 12.37263825
+      },
+      "new:Pa_unified_groups_t16777216": {
+        "median": 1.0095325082940139,
+        "p10": 0.904390756007954,
+        "p90": 1.1168487624169312
+      },
+      "new:Pa_kernel": {
+        "median": 0.9992858877615447,
+        "p10": 0.9291569085641043,
+        "p90": 1.189391929997173
+      },
+      "old:Pa_packed": {
+        "median": 1.0095673738643096,
+        "p10": 0.963137967889895,
+        "p90": 1.0755741759038036
+      }
+    }
+  ],
+  "ended_ns": 1792296394811904128
+}
