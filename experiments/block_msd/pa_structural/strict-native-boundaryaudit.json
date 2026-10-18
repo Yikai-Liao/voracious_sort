@@ -1,0 +1,96 @@
+{
+  "selection": {
+    "prefix": "strict-native-boundary",
+    "exclude": []
+  },
+  "candidate": "Pa_strict",
+  "elf_sha256": "d80122ad0e7c2b7f171f0c30751fb3ec4971ad6040cb960c6d1615db08150622",
+  "cells": 1,
+  "rows": 128,
+  "comparisons": {
+    "L_frozen": {
+      "median_wins": 1,
+      "p90_wins": 1,
+      "p10_losses": 0
+    },
+    "Pa_kernel": {
+      "median_wins": 1,
+      "p90_wins": 0,
+      "p10_losses": 0
+    },
+    "Pa_unified_groups_t16777216": {
+      "median_wins": 0,
+      "p90_wins": 0,
+      "p10_losses": 0
+    },
+    "Rollercoaster": {
+      "median_wins": 1,
+      "p90_wins": 1,
+      "p10_losses": 0
+    }
+  },
+  "regression_signals": [],
+  "results": [
+    {
+      "cell": [
+        "f32_id16",
+        "sparse16",
+        "1048576",
+        "512",
+        "42"
+      ],
+      "source": "strict-native-boundary-b512.csv",
+      "candidate_ms": 19.08830425,
+      "Pa_strict": {
+        "median": 1.0,
+        "p10": 1.0,
+        "p90": 1.0,
+        "slower": 0,
+        "ms": 19.08830425,
+        "aa": {
+          "median": 1.0165636069017234,
+          "p10": 0.8771032302765257,
+          "p90": 1.1791811271568058
+        }
+      },
+      "Pa_unified_groups_t16777216": {
+        "median": 1.0284281247968696,
+        "p10": 0.9165772192128014,
+        "p90": 1.1503761678181146,
+        "slower": 9,
+        "ms": 17.7763265,
+        "aa": {
+          "median": 1.0218370713729963,
+          "p10": 0.8880047970269607,
+          "p90": 1.1961698679856252
+        }
+      },
+      "Pa_kernel": {
+        "median": 0.8932239263986825,
+        "p10": 0.8014411376175888,
+        "p90": 1.0328756841863909,
+        "slower": 3,
+        "ms": 20.29543,
+        "aa": {
+          "median": 0.9471400820766172,
+          "p10": 0.8241157214380443,
+          "p90": 1.0903605408025212
+        }
+      },
+      "Rollercoaster": {
+        "median": 0.7254115310623337,
+        "p10": 0.6010956453382256,
+        "p90": 0.8637486810918962,
+        "slower": 0,
+        "ms": 26.2280975
+      },
+      "L_frozen": {
+        "median": 0.5256598264865482,
+        "p10": 0.4828416976431722,
+        "p90": 0.5654093516015375,
+        "slower": 0,
+        "ms": 35.120874
+      }
+    }
+  ]
+}
