@@ -2,6 +2,36 @@
 use super::{Classifier, NativeKey};
 use std::marker::PhantomData;
 
+// hakmem 0.2 has no architecture-neutral query for hardware PEXT. Keep this
+// compatibility boundary here: X86V3 is the library's checked BMI2-capable
+// token. Other targets have no token, and PA retains its ordinary classifier.
+#[cfg(all(
+    target_arch = "x86_64",
+    target_feature = "sse2",
+    not(feature = "projection_portable")
+))]
+mod hardware {
+    pub type Isa = hakmem::isa::X86V3;
+    #[inline]
+    pub fn detect() -> Option<Isa> {
+        Isa::detect()
+    }
+}
+#[cfg(not(all(
+    target_arch = "x86_64",
+    target_feature = "sse2",
+    not(feature = "projection_portable")
+)))]
+mod hardware {
+    // Signature only; detect never constructs a software extraction token.
+    pub type Isa = hakmem::isa::Native;
+    #[inline]
+    pub fn detect() -> Option<Isa> {
+        None
+    }
+}
+pub(super) use hardware::{detect as hardware_gather, Isa as GatherIsa};
+
 pub(super) struct Selection<U> {
     mask: U,
     pub bits: usize,
@@ -27,27 +57,22 @@ impl<U: NativeKey> Selection<U> {
         // A complete tag must not add a whole-record pass over the ordinary
         // first node. Otherwise already-ordered children could make the extra
         // passes pure regression.
-        let complete =
-            q <= budget && q <= 32 && (q + 7) / 8 <= active_bytes(prefix);
+        let prefix_passes = active_bytes(prefix >> low);
+        let complete = q <= budget && q <= 32 && (q + 7) / 8 <= prefix_passes;
         // Partial compression keeps exactly the ordinary prefix's partition.
         // Spending holes on lower bits changes fanout and can turn ordered
         // large runs into tens of thousands of costly small leaves.
         let selected = if complete { raw } else { prefix };
         let bits = selected.count_ones() as usize;
-        if bits == 0 || bits > 32 || active_bytes(selected) <= (bits + 7) / 8 {
+        if bits == 0 || bits > 32 {
             return None;
         }
-        {
-            let field = selected >> selected.trailing_zeros();
-            let contiguous = field == (1u128 << bits) - 1;
-            // Keep admission independent of the instruction set. Full
-            // multiword completion can avoid wide-key child processing;
-            // scalar and partial gathers have not amortized portable cost.
-            if !contiguous
-                && (U::BITS <= usize::BITS as usize || selected != raw)
-            {
-                return None;
-            }
+        // If the old prefix already covers the whole variation, a same-pass
+        // tag only changes representation. Count its shifted label bytes,
+        // not the original key's byte boundaries. Partial tags also need an
+        // actual pass reduction because they preserve the old child geometry.
+        if (!complete || prefix == raw) && (bits + 7) / 8 >= prefix_passes {
+            return None;
         }
         Some(Self {
             mask: U::from_u128(selected),
@@ -255,21 +280,19 @@ mod tests {
 mod bounded_tests {
     use super::*;
     #[test]
-    fn software_gather_preserves_scalar_and_partial_prefix_routes() {
+    fn selection_requires_useful_original_label_work() {
         let scalar = Selection::<u32>::new((1 << 18) | 1, 32, 24);
-        assert!(scalar.is_none());
+        assert_eq!(scalar.unwrap().bits, 2);
         let mask = (0..32).fold(0u128, |v, j| v | (1u128 << (j * 127 / 31)));
         let partial = Selection::new(mask, 128, 24);
-        assert!(partial.is_none());
+        assert!(partial.unwrap().remaining > 0);
         let wide = [0, 18, 36, 54, 72, 90, 108, 126]
             .iter()
             .fold(0u128, |mask, bit| mask | (1u128 << bit));
         let full = Selection::new(wide, 128, 24).unwrap();
         assert_eq!(full.remaining, 0);
         assert_eq!(full.bits, 8);
-        let field = Selection::new(0xffu128 << 60, 128, 24).unwrap();
-        assert_eq!(field.bits, 8);
-        assert_eq!(field.remaining, 0);
+        assert!(Selection::new(0xffu128 << 60, 128, 24).is_none());
     }
     #[test]
     fn partial_tags_keep_the_old_partition_and_never_add_a_root_pass() {
@@ -299,8 +322,9 @@ mod bounded_tests {
                 } else {
                     variation & !((1u128 << low) - 1)
                 };
-                let passes =
-                    (0..16).filter(|&b| (prefix >> (8 * b)) & 255 != 0).count();
+                let passes = (0..16)
+                    .filter(|&b| ((prefix >> low) >> (8 * b)) & 255 != 0)
+                    .count();
                 assert!((s.bits + 7) / 8 <= passes);
                 if s.remaining > 0 {
                     assert_eq!(s.mask, prefix);

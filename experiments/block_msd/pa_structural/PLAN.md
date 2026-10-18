@@ -1,5 +1,8 @@
 # PA structural experiments
 
+Current steering: use hakmem 0.2.0 and never fall back to software compression. Missing hardware retains ordinary PA. The sections below record successive experiment plans, including rejected cohorts; current dependency boundary is in LIBRARY.md and final acceptance belongs in REPORT.md.
+
+
 Base: `745cea6ab21030710cb036f88fa757505ef1990b`. Worktree:
 `/root/code/voracious_sort-pa-structural`, branch `block-pa-structural`.
 

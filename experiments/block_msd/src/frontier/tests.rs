@@ -199,7 +199,6 @@ fn recursive_identity_and_payload_matrix() {
                 PaExperiment::UnifiedGroups,
                 PaExperiment::UnifiedIdentity,
                 PaExperiment::UnifiedPacked,
-                PaExperiment::UnifiedPacked,
                 PaExperiment::UnifiedSampled,
                 PaExperiment::UnifiedReduced,
                 PaExperiment::UnifiedCandidate,
@@ -277,7 +276,6 @@ fn pa_new_policies_preserve_converted_float_order() {
         PaExperiment::UnifiedPrepared,
         PaExperiment::UnifiedGroups,
         PaExperiment::UnifiedIdentity,
-        PaExperiment::UnifiedPacked,
         PaExperiment::UnifiedPacked,
         PaExperiment::UnifiedSampled,
         PaExperiment::UnifiedReduced,
@@ -371,7 +369,6 @@ fn native_small_integer_widths() {
         PaExperiment::UnifiedGroups,
         PaExperiment::UnifiedIdentity,
         PaExperiment::UnifiedPacked,
-        PaExperiment::UnifiedPacked,
         PaExperiment::UnifiedSampled,
         PaExperiment::UnifiedReduced,
         PaExperiment::UnifiedCandidate,
@@ -447,7 +444,6 @@ fn block_tail_sizes_and_large_workspace() {
             PaExperiment::UnifiedPrepared,
             PaExperiment::UnifiedGroups,
             PaExperiment::UnifiedIdentity,
-            PaExperiment::UnifiedPacked,
             PaExperiment::UnifiedPacked,
             PaExperiment::UnifiedSampled,
             PaExperiment::UnifiedReduced,
@@ -720,11 +716,9 @@ fn structural_projection_bit_embeddings_and_frequency_preserve_stable_records()
                     .collect();
                 let mut expected = input.clone();
                 expected.sort_by_key(|x| x.key);
-                for policy in [
-                    PaExperiment::UnifiedIdentity,
-                    PaExperiment::UnifiedPacked,
-                    PaExperiment::UnifiedPacked,
-                ] {
+                for policy in
+                    [PaExperiment::UnifiedIdentity, PaExperiment::UnifiedPacked]
+                {
                     for block in [3, 64, 512] {
                         let mut actual = input.clone();
                         sort_pa_with_threshold::<_, u128>(
@@ -757,6 +751,9 @@ fn structural_projection_bit_embeddings_and_frequency_preserve_stable_records()
 #[test]
 #[cfg(feature = "frontier_work")]
 fn complete_byte_projection_eliminates_sparse_recursion_and_seven_passes() {
+    if super::packed_projection::hardware_gather().is_none() {
+        return;
+    }
     let positions = [0, 18, 36, 54, 72, 90, 108, 126];
     let input: Vec<Item> = (0usize..16_384)
         .map(|id| Item {
@@ -800,6 +797,9 @@ fn complete_byte_projection_eliminates_sparse_recursion_and_seven_passes() {
 #[test]
 #[cfg(feature = "frontier_work")]
 fn complete_multi_byte_projections_consume_information_in_one_node() {
+    if super::packed_projection::hardware_gather().is_none() {
+        return;
+    }
     let n = 65_537usize;
     for q in [7usize, 8, 9, 16, 17, 24] {
         let positions: Vec<_> = (0..q).map(|j| j * 127 / (q - 1)).collect();
@@ -886,11 +886,76 @@ fn bounded_projection_preserves_already_ordered_suffix_run_geometry() {
         assert_eq!(a.prepare_records, b.prepare_records);
         assert_eq!(a.leaves, b.leaves);
         assert_eq!(a.leaf_lengths, b.leaf_lengths);
-        assert!(c.leaves > a.leaves + 1000);
+        if super::packed_projection::hardware_gather().is_some() {
+            assert!(c.leaves > a.leaves + 1000);
+        } else {
+            assert_eq!(c.scatter_records, a.scatter_records);
+            assert_eq!(c.leaves, a.leaves);
+        }
         for actual in [old, bounded, aggressive] {
             assert!(actual.iter().zip(&expected).all(|(x, y)| x.key == y.key
                 && x.id == y.id
                 && x.payload == y.payload));
         }
+    }
+}
+
+#[test]
+#[cfg(feature = "frontier_work")]
+fn missing_hardware_keeps_the_entire_original_pa_route() {
+    if super::packed_projection::hardware_gather().is_some() {
+        return;
+    }
+    let mut state = 42;
+    for q in [8usize, 9, 16, 24, 32] {
+        let input: Vec<Item> = (0..16385)
+            .map(|id| {
+                let logical = random(&mut state);
+                Item {
+                    key: (0..q).fold(0, |key, j| {
+                        key | ((((logical >> j) & 1) as u128)
+                            << (j * 127 / (q - 1)))
+                    }),
+                    id,
+                    payload: [id as u64; 3],
+                }
+            })
+            .collect();
+        let mut old = input.clone();
+        let mut candidate = input;
+        let a = sort_pa_with_threshold::<_, u128>(
+            &mut old,
+            PaExperiment::UnifiedGroups,
+            64,
+            16 * 1024 * 1024,
+        );
+        let b = sort_pa_with_threshold::<_, u128>(
+            &mut candidate,
+            PaExperiment::UnifiedPacked,
+            64,
+            16 * 1024 * 1024,
+        );
+        assert_eq!(b.projection_nodes, 0);
+        assert_eq!(
+            (
+                a.nodes,
+                a.prepare_records,
+                a.label_evals,
+                a.scatter_records,
+                a.passes,
+                a.leaf_lengths
+            ),
+            (
+                b.nodes,
+                b.prepare_records,
+                b.label_evals,
+                b.scatter_records,
+                b.passes,
+                b.leaf_lengths
+            )
+        );
+        assert!(old.iter().zip(&candidate).all(|(a, b)| a.key == b.key
+            && a.id == b.id
+            && a.payload == b.payload));
     }
 }

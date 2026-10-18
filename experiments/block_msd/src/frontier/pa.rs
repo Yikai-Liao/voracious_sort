@@ -593,19 +593,23 @@ fn visit<T: Radixable<K>, K: RadixKey>(
         SparseCompletion::Packed | SparseCompletion::PackedAggressive
     ) && approved_band.is_none()
     {
-        if policy.sparse == SparseCompletion::PackedAggressive {
-            super::packed_projection::Selection::aggressive(
-                p.union ^ p.intersection,
-                cap,
-                8 * bytes,
-            )
-        } else {
-            super::packed_projection::Selection::new(
-                p.union ^ p.intersection,
-                cap,
-                8 * bytes,
-            )
-        }
+        super::packed_projection::hardware_gather().and_then(|cpu| {
+            let selection =
+                if policy.sparse == SparseCompletion::PackedAggressive {
+                    super::packed_projection::Selection::aggressive(
+                        p.union ^ p.intersection,
+                        cap,
+                        8 * bytes,
+                    )
+                } else {
+                    super::packed_projection::Selection::new(
+                        p.union ^ p.intersection,
+                        cap,
+                        8 * bytes,
+                    )
+                };
+            selection.map(|selection| (selection, cpu))
+        })
     } else {
         None
     };
@@ -621,20 +625,20 @@ fn visit<T: Radixable<K>, K: RadixKey>(
             depth,
             path,
         );
-    } else if let Some(selection) = packing {
+    } else if let Some((selection, cpu)) = packing {
         let bits = selection.bits;
-        // Keep the portable plan and its workspace outside the visit frame.
+        // Keep the projection classifier and workspace outside the visit frame.
         if bits <= 8 {
             partition_packed::<T, K, u8>(
-                arr, selection, policy, stats, depth, path,
+                arr, selection, policy, stats, depth, path, cpu,
             );
         } else if bits <= 16 {
             partition_packed::<T, K, u16>(
-                arr, selection, policy, stats, depth, path,
+                arr, selection, policy, stats, depth, path, cpu,
             );
         } else {
             partition_packed::<T, K, u32>(
-                arr, selection, policy, stats, depth, path,
+                arr, selection, policy, stats, depth, path, cpu,
             );
         }
     } else if policy.sparse == SparseCompletion::Identity
@@ -897,10 +901,11 @@ fn partition_packed<T: Radixable<K>, K: RadixKey, L: NativeKey>(
     stats: &mut Work,
     depth: usize,
     path: usize,
+    cpu: super::packed_projection::GatherIsa,
 ) where
     Converted<T, K>: NativeKey,
 {
-    hakmem::dispatch!(|cpu| {
+    hakmem::isa::Isa::run(cpu, |cpu| {
         partition_packed_with_isa::<T, K, L, _>(
             arr, selection, policy, stats, depth, path, cpu,
         )
