@@ -32,3 +32,5 @@ Cohorts are not pooled across executable hashes. Historical names containing `fi
 | pa-plan-* (a34545b) | Value-owned packed classification plan; rejected capacity rule removed. Native library59 and float6 checks pass, exact Work/leaf geometry equality established. Assembly shows register PEXT masks. Original-seed positive/reversed repeats reject the candidate (~1.138x vs original PA). Same-ELF two-seed diagnostics show no consistent gain vs borrowed packed kernel. Larger scopes stopped. See PA_PLAN_VALIDATION.md. |
 
 The current source uses only a hardware token for compressed labels, delegates extraction to pinned hakmem, and otherwise keeps ordinary PA. Final validation requires its own immutable executables; historical hardware or software results are not transferred to it.
+
+| counted- (current) | Independent conservative-packing and count-derived completion; correctness passed, small performance gates pending. Prior evidence is not acceptance for this source. |

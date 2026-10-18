@@ -36,7 +36,9 @@ pub enum PaExperiment {
     UnifiedPacked,
     UnifiedPackedContext,
     UnifiedPackedAggressive,
-    UnifiedPackedPlan,
+    UnifiedStrict,
+    UnifiedCountedKey,
+    UnifiedStrictCounted,
 }
 
 #[derive(Clone, Copy, PartialEq)]
@@ -45,8 +47,8 @@ enum SparseCompletion {
     Identity,
     Packed,
     PackedContext,
-    PackedPlan,
     PackedAggressive,
+    Conservative,
 }
 
 #[derive(Clone, Copy)]
@@ -70,6 +72,7 @@ struct Policy {
     local_workspace_threshold: usize,
     block: usize,
     sparse: SparseCompletion,
+    counted_completion: bool,
 }
 
 pub fn sort_pa_experiment<T: Radixable<K>, K: RadixKey>(
@@ -94,10 +97,16 @@ where
     Converted<T, K>: NativeKey,
 {
     assert!(block > 0);
+    let counted_completion = matches!(
+        experiment,
+        PaExperiment::UnifiedCountedKey | PaExperiment::UnifiedStrictCounted
+    );
     let sparse = match experiment {
+        PaExperiment::UnifiedStrict | PaExperiment::UnifiedStrictCounted => {
+            SparseCompletion::Conservative
+        },
         PaExperiment::UnifiedPacked => SparseCompletion::Packed,
         PaExperiment::UnifiedPackedContext => SparseCompletion::PackedContext,
-        PaExperiment::UnifiedPackedPlan => SparseCompletion::PackedPlan,
         PaExperiment::UnifiedPackedAggressive => {
             SparseCompletion::PackedAggressive
         },
@@ -109,12 +118,15 @@ where
         PaExperiment::UnifiedIdentity
         | PaExperiment::UnifiedPacked
         | PaExperiment::UnifiedPackedContext
-        | PaExperiment::UnifiedPackedPlan
-        | PaExperiment::UnifiedPackedAggressive => PaExperiment::UnifiedGroups,
+        | PaExperiment::UnifiedPackedAggressive
+        | PaExperiment::UnifiedStrict
+        | PaExperiment::UnifiedCountedKey
+        | PaExperiment::UnifiedStrictCounted => PaExperiment::UnifiedGroups,
         other => other,
     };
     let policy = Policy {
         sparse,
+        counted_completion,
         terminal: matches!(
             experiment,
             PaExperiment::Terminal
@@ -600,25 +612,30 @@ fn visit<T: Radixable<K>, K: RadixKey>(
         policy.sparse,
         SparseCompletion::Packed
             | SparseCompletion::PackedContext
-            | SparseCompletion::PackedPlan
             | SparseCompletion::PackedAggressive
+            | SparseCompletion::Conservative
     ) && approved_band.is_none()
     {
         super::packed_projection::hardware_gather().and_then(|cpu| {
-            let selection =
-                if policy.sparse == SparseCompletion::PackedAggressive {
-                    super::packed_projection::Selection::aggressive(
-                        p.union ^ p.intersection,
-                        cap,
-                        8 * bytes,
-                    )
-                } else {
-                    super::packed_projection::Selection::new(
-                        p.union ^ p.intersection,
-                        cap,
-                        8 * bytes,
-                    )
-                };
+            let selection = if policy.sparse == SparseCompletion::Conservative {
+                super::packed_projection::Selection::conservative(
+                    p.union ^ p.intersection,
+                    cap,
+                    8 * bytes,
+                )
+            } else if policy.sparse == SparseCompletion::PackedAggressive {
+                super::packed_projection::Selection::aggressive(
+                    p.union ^ p.intersection,
+                    cap,
+                    8 * bytes,
+                )
+            } else {
+                super::packed_projection::Selection::new(
+                    p.union ^ p.intersection,
+                    cap,
+                    8 * bytes,
+                )
+            };
             selection.map(|selection| (selection, cpu))
         })
     } else {
@@ -715,6 +732,40 @@ fn visit<T: Radixable<K>, K: RadixKey>(
             );
         }
     } else {
+        let variation =
+            (p.union ^ p.intersection) & Converted::<T, K>::mask(cap);
+        let prefix = variation >> (width - coarse);
+        let active_bytes = |key: Converted<T, K>| {
+            (0..Converted::<T, K>::BITS / 8)
+                .filter(|&b| key.byte(b) != 0)
+                .count()
+        };
+        // Finish the full key only when it adds at most one active byte to
+        // this prefix. Wide random keys retain the original comparison leaves.
+        if policy.counted_completion
+            && active_bytes(variation) <= active_bytes(prefix) + 1
+        {
+            #[cfg(feature = "frontier_work")]
+            let evaluations = std::cell::Cell::new(0);
+            let label = super::labeler::Classified::<T, K, Identity> {
+                classifier: &Identity,
+                marker: std::marker::PhantomData,
+                #[cfg(feature = "frontier_work")]
+                evaluations: &evaluations,
+            };
+            let passes = super::counted_completion::distribute(
+                arr,
+                &label,
+                variation,
+                policy.block,
+                stats,
+            );
+            work! {
+                stats.label_evals += evaluations.get();
+                stats.max_path_passes = stats.max_path_passes.max(path + passes);
+            }
+            return;
+        }
         let classifier = Prefix {
             low: width - coarse,
             mask: Converted::<T, K>::mask(coarse),
@@ -775,7 +826,7 @@ impl<U: NativeKey> Classifier<U> for EqualSplit<U> {
 
 fn partition<T: Radixable<K>, K: RadixKey, C: Classifier<Converted<T, K>>>(
     arr: &mut [T],
-    classifier: C,
+    classifier: &C,
     label_mask: Option<C::Label>,
     policy: Policy,
     terminal: bool,
@@ -884,7 +935,7 @@ fn partition<T: Radixable<K>, K: RadixKey, C: Classifier<Converted<T, K>>>(
             let (end, remaining) = label.in_context(|| {
                 let current = label.classify(&arr[start]);
                 let remaining =
-                    label.classifier.remaining(arr[start].into_key_type());
+                    classifier.remaining(arr[start].into_key_type());
                 let mut end = start + 1;
                 while end < arr.len() && label.classify(&arr[end]) == current {
                     end += 1;
@@ -923,16 +974,15 @@ fn partition_packed<T: Radixable<K>, K: RadixKey, L: NativeKey>(
     Converted<T, K>: NativeKey,
 {
     hakmem::isa::Isa::run(cpu, |cpu| {
-        if policy.sparse == SparseCompletion::PackedPlan {
-            partition_packed_with_isa::<T, K, L, _, true, true>(
-                arr, selection, policy, stats, depth, path, cpu,
-            )
-        } else if policy.sparse == SparseCompletion::PackedContext {
-            partition_packed_with_isa::<T, K, L, _, true, false>(
+        if matches!(
+            policy.sparse,
+            SparseCompletion::PackedContext | SparseCompletion::Conservative
+        ) {
+            partition_packed_with_isa::<T, K, L, _, true>(
                 arr, selection, policy, stats, depth, path, cpu,
             )
         } else {
-            partition_packed_with_isa::<T, K, L, _, false, false>(
+            partition_packed_with_isa::<T, K, L, _, false>(
                 arr, selection, policy, stats, depth, path, cpu,
             )
         }
@@ -945,7 +995,6 @@ fn partition_packed_with_isa<
     L: NativeKey,
     I: hakmem::isa::Isa,
     const CONTEXT: bool,
-    const PLAN: bool,
 >(
     arr: &mut [T],
     selection: super::packed_projection::Selection<Converted<T, K>>,
@@ -959,27 +1008,18 @@ fn partition_packed_with_isa<
 {
     let terminal = selection.remaining == 0;
     let projection =
-        super::packed_projection::Packed::<_, L, _, CONTEXT, PLAN>::with_isa(
+        super::packed_projection::Packed::<_, L, _, CONTEXT>::with_isa(
             selection, cpu,
         );
     work! { stats.projection_nodes += 1; stats.projection_records += arr.len(); }
-    let variation = Some(projection.variation());
-    if PLAN {
-        // Give the hot record adapter the fixed plan itself. A borrowed plan
-        // behind another adapter permits record writes to force pointer reloads.
-        partition::<T, K, _>(
-            arr, projection, variation, policy, terminal, stats, depth, path,
-        );
-    } else {
-        partition::<T, K, _>(
-            arr,
-            &projection,
-            variation,
-            policy,
-            terminal,
-            stats,
-            depth,
-            path,
-        );
-    }
+    partition::<T, K, _>(
+        arr,
+        &projection,
+        Some(projection.variation()),
+        policy,
+        terminal,
+        stats,
+        depth,
+        path,
+    );
 }

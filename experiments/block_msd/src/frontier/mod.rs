@@ -7,6 +7,7 @@
 use std::{mem::MaybeUninit, ptr};
 use voracious_radix_sort::{RadixKey, Radixable};
 mod block;
+mod counted_completion;
 mod labeler;
 mod local_distribution;
 mod ordered_tiled;
@@ -160,32 +161,12 @@ fn mask(bits: usize) -> u128 {
 trait Classifier<U: NativeKey> {
     type Label: NativeKey;
     const USE_COMPACT_RADIX: bool = false;
-    const NORMALIZED: bool = false;
     fn label(&self, key: U) -> Self::Label;
     fn remaining(&self, key: U) -> usize;
 
     #[inline(always)]
     fn in_context<R>(&self, kernel: impl FnOnce() -> R) -> R {
         kernel()
-    }
-}
-
-// A borrowed classifier retains the existing adapter layout. Packed plans can
-// instead be moved into that adapter without changing the distribution API.
-impl<U: NativeKey, C: Classifier<U>> Classifier<U> for &C {
-    type Label = C::Label;
-    const USE_COMPACT_RADIX: bool = C::USE_COMPACT_RADIX;
-    const NORMALIZED: bool = C::NORMALIZED;
-    #[inline(always)]
-    fn label(&self, key: U) -> Self::Label {
-        (**self).label(key)
-    }
-    fn remaining(&self, key: U) -> usize {
-        (**self).remaining(key)
-    }
-    #[inline(always)]
-    fn in_context<R>(&self, kernel: impl FnOnce() -> R) -> R {
-        (**self).in_context(kernel)
     }
 }
 

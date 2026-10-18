@@ -170,6 +170,26 @@ impl<'a, T: Copy> Sorter<'a, T> {
     ) {
         self.step_impl(label, byte, None);
     }
+    /// Perform the same stable pass and expose its exact bucket lengths.
+    /// The final partial block already records each bucket's full-block range.
+    pub(super) fn step_with_lengths<U: super::NativeKey, F: Labeler<T, U>>(
+        &mut self,
+        label: &F,
+        byte: usize,
+        grouped_bit: Option<u8>,
+    ) -> [usize; 256] {
+        assert!(self.radix_range <= 256);
+        self.step_impl(label, byte, grouped_bit);
+        let mut lengths = [0; 256];
+        let mut start = self.radix_range;
+        for (length, partial) in lengths.iter_mut().zip(&self.partials) {
+            *length =
+                (partial.index - start) * self.block_size + partial.length;
+            start = partial.index + 1;
+        }
+        debug_assert_eq!(lengths.iter().sum::<usize>(), self.length);
+        lengths
+    }
     /// Reorder writes within each input block while preserving each bucket's
     /// input order. All digit variation must be covered by this one-bit mask.
     pub(super) fn step_grouped<U: super::NativeKey, F: Labeler<T, U>>(

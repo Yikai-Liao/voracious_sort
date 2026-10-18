@@ -4,9 +4,6 @@ use std::marker::PhantomData;
 use voracious_radix_sort::{RadixKey, Radixable};
 
 pub(super) trait Labeler<T, U> {
-    // Every byte processed by prepared distribution is already zero outside
-    // its declared variation. Unprocessed bytes need not be zero.
-    const NORMALIZED: bool = false;
     fn classify(&self, record: &T) -> U;
 
     #[inline(always)]
@@ -24,8 +21,8 @@ impl<T, U, F: Fn(&T) -> U> Labeler<T, U> for F {
 }
 
 pub(super) struct Classified<'a, T, K, C> {
-    pub classifier: C,
-    pub marker: PhantomData<(&'a (), fn(T, K))>,
+    pub classifier: &'a C,
+    pub marker: PhantomData<fn(T, K)>,
     #[cfg(feature = "frontier_work")]
     pub evaluations: &'a std::cell::Cell<usize>,
 }
@@ -35,8 +32,6 @@ impl<T: Radixable<K>, K: RadixKey, C: Classifier<Converted<T, K>>>
 where
     Converted<T, K>: NativeKey,
 {
-    const NORMALIZED: bool = C::NORMALIZED;
-
     #[inline(always)]
     fn classify(&self, record: &T) -> C::Label {
         #[cfg(feature = "frontier_work")]

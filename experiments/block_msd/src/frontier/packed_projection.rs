@@ -85,8 +85,31 @@ impl<U: NativeKey> Selection<U> {
         })
     }
 
-    // Diagnostic only: preserve the earlier cohort's information-budget
-    // policy so work counters can reproduce its observed tiny-leaf regression.
+    pub(super) fn conservative(
+        variation: U,
+        cap: usize,
+        budget: usize,
+    ) -> Option<Self> {
+        let selection = Self::new(variation, cap, budget)?;
+        let raw = variation & U::mask(cap);
+        let baseline = if selection.remaining == 0 {
+            raw
+        } else {
+            raw >> (U::BITS - raw.leading_zeros() as usize)
+                .saturating_sub(budget)
+        };
+        let original_passes =
+            (0..U::BITS / 8).filter(|&byte| baseline.byte(byte) != 0).count();
+        // One removed pass did not amortize denser bucket writes and gathering
+        // in the independent float cohorts. Require two saved physical passes;
+        // full labels compare against the entire original key remainder.
+        if (selection.bits + 7) / 8 + 1 >= original_passes {
+            return None;
+        }
+        Some(selection)
+    }
+
+    // Preserve the earlier over-partitioning policy for diagnostic controls.
     pub(super) fn aggressive(
         variation: U,
         cap: usize,
@@ -138,7 +161,6 @@ pub(super) struct Packed<
     L,
     I = hakmem::isa::Native,
     const CONTEXT: bool = false,
-    const PLAN: bool = false,
 > {
     mask: U,
     bits: usize,
@@ -147,13 +169,8 @@ pub(super) struct Packed<
     _label: PhantomData<L>,
 }
 
-impl<
-        U: NativeKey,
-        L: NativeKey,
-        I: hakmem::isa::Isa,
-        const CONTEXT: bool,
-        const PLAN: bool,
-    > Packed<U, L, I, CONTEXT, PLAN>
+impl<U: NativeKey, L: NativeKey, I: hakmem::isa::Isa, const CONTEXT: bool>
+    Packed<U, L, I, CONTEXT>
 {
     pub(super) fn with_isa(selection: Selection<U>, cpu: I) -> Self {
         assert!(selection.bits <= L::BITS && selection.bits <= 32);
@@ -183,17 +200,11 @@ impl<U: NativeKey, L: NativeKey> Packed<U, L> {
     }
 }
 
-impl<
-        U: NativeKey,
-        L: NativeKey,
-        I: hakmem::isa::Isa,
-        const CONTEXT: bool,
-        const PLAN: bool,
-    > Classifier<U> for Packed<U, L, I, CONTEXT, PLAN>
+impl<U: NativeKey, L: NativeKey, I: hakmem::isa::Isa, const CONTEXT: bool>
+    Classifier<U> for Packed<U, L, I, CONTEXT>
 {
     type Label = L;
     const USE_COMPACT_RADIX: bool = true;
-    const NORMALIZED: bool = PLAN;
     #[inline]
     fn label(&self, key: U) -> L {
         L::from_u128(self.gather(key) as u128)
@@ -403,5 +414,26 @@ mod dependency_tests {
         for level in hakmem::isa::available() {
             hakmem::dispatch!(level, |cpu| check(cpu));
         }
+    }
+}
+
+#[cfg(test)]
+mod conservative_tests {
+    use super::*;
+    #[test]
+    fn admission_reserves_more_than_one_removed_record_pass() {
+        let mask = |q: usize, high: usize| {
+            (0..q).fold(0u128, |m, b| m | (1 << (b * high / (q - 1))))
+        };
+        let short = mask(16, 22);
+        assert!(Selection::new(short, 128, 24).is_some());
+        assert!(Selection::conservative(short, 128, 24).is_none());
+        for variation in [mask(16, 51), mask(16, 127), mask(8, 31)] {
+            let selection =
+                Selection::conservative(variation, 128, 24).unwrap();
+            assert_eq!(selection.remaining, 0);
+            assert_eq!(selection.bits, variation.count_ones() as usize);
+        }
+        assert!(Selection::conservative(0xffffu128, 128, 24).is_none());
     }
 }

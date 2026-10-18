@@ -1,0 +1,32 @@
+[
+  {
+    "seed": 42,
+    "n": 1048576,
+    "layout": "f32_id16",
+    "case": "sparse16",
+    "original_active_digits": [
+      64,
+      32,
+      32
+    ],
+    "packed_active_digits": [
+      256,
+      256
+    ]
+  },
+  {
+    "seed": 20261025,
+    "n": 1048576,
+    "layout": "f32_id16",
+    "case": "sparse16",
+    "original_active_digits": [
+      64,
+      32,
+      32
+    ],
+    "packed_active_digits": [
+      256,
+      256
+    ]
+  }
+]

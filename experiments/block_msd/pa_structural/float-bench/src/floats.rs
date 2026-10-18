@@ -235,8 +235,7 @@ pub fn floats_main() {
     let block = args.get(7).map_or(64, |s| s.parse().unwrap());
     let seed = args.get(8).map_or(42, |s| s.parse().unwrap());
     assert!(methods.iter().all(|m| [
-        "Pa_kernel",
-        "Pa_plan",
+        "Pa_kernel", "Pa_strict", "Pa_counted_key", "Pa_strict_counted",
         "Pa_packed",
         "Pa_unified_groups_t16777216",
         "Rollercoaster",
@@ -251,7 +250,7 @@ pub fn floats_main() {
     assert!(["time", "memory", "work"].contains(&kind));
     assert_eq!(kind == "work", cfg!(feature = "frontier_work"));
     if cases.iter().any(|case| SPECIAL_CASES.contains(case)) {
-        assert!(methods.iter().all(|m| ["Pa_kernel", "Pa_plan", "Pa_packed", "Pa_unified_groups_t16777216", "L_frozen"].contains(m)),
+        assert!(methods.iter().all(|m| ["Pa_kernel", "Pa_strict", "Pa_counted_key", "Pa_strict_counted", "Pa_packed", "Pa_unified_groups_t16777216", "L_frozen"].contains(m)),
                 "NaN/zero total-key cases exclude comparators with partial-order leaves");
     }
     // Schema matches the inherited run() exactly; float-run.py checks it
@@ -390,12 +389,9 @@ mod float_tests {
                     .collect();
                 let mut expected64 = input64.clone();
                 expected64.sort_by_key(|record| record.into_key_type());
-                for method in [
-                    "Pa_unified_groups_t16777216",
-                    "Pa_kernel",
-                    "Pa_plan",
-                    "L_frozen",
-                ] {
+                for method in
+                    ["Pa_unified_groups_t16777216", "Pa_kernel", "Pa_strict", "Pa_counted_key", "Pa_strict_counted", "L_frozen"]
+                {
                     let mut actual = input.clone();
                     execute::<_, f32>(&mut actual, method, block);
                     assert!(
