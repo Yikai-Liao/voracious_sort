@@ -1,0 +1,255 @@
+11 files, 7416 paired rows, 103 cells; source and ELF consistent
+{
+  "Fa": {
+    "faster_cells": 102,
+    "tied_cells": 0,
+    "slower_cells": 1,
+    "ratio_median_across_cells_descriptive_only": 0.34443945548130017,
+    "worst_cells": [
+      {
+        "n": 1048576,
+        "block": 512,
+        "seed": 42,
+        "layout": "wide32",
+        "case": "deep_unique90",
+        "candidate_over_Fa_wall_median": 1.0034642072736768,
+        "candidate_over_Fa_wall_p10": 0.9685188687893733,
+        "candidate_over_Fa_wall_p90": 1.1272944534946756,
+        "candidate_slower_than_Fa_reps": 7
+      },
+      {
+        "n": 1048576,
+        "block": 64,
+        "seed": 42,
+        "layout": "wide32",
+        "case": "deep_unique90",
+        "candidate_over_Fa_wall_median": 0.9155603262191547,
+        "candidate_over_Fa_wall_p10": 0.8240967753391625,
+        "candidate_over_Fa_wall_p90": 0.9720193080377246,
+        "candidate_slower_than_Fa_reps": 1
+      },
+      {
+        "n": 1048576,
+        "block": 64,
+        "seed": 42,
+        "layout": "large128",
+        "case": "uniform",
+        "candidate_over_Fa_wall_median": 0.9040116138250863,
+        "candidate_over_Fa_wall_p10": 0.8905318872306085,
+        "candidate_over_Fa_wall_p90": 0.9261276998596286,
+        "candidate_slower_than_Fa_reps": 0
+      },
+      {
+        "n": 1048576,
+        "block": 512,
+        "seed": 42,
+        "layout": "large128",
+        "case": "deep_unique90",
+        "candidate_over_Fa_wall_median": 0.8603921016844819,
+        "candidate_over_Fa_wall_p10": 0.8203938022413809,
+        "candidate_over_Fa_wall_p90": 0.9056358663918549,
+        "candidate_slower_than_Fa_reps": 0
+      },
+      {
+        "n": 1048576,
+        "block": 512,
+        "seed": 42,
+        "layout": "large128",
+        "case": "majority_prefix",
+        "candidate_over_Fa_wall_median": 0.8165435058062926,
+        "candidate_over_Fa_wall_p10": 0.7451674738996337,
+        "candidate_over_Fa_wall_p90": 0.8317929399720556,
+        "candidate_slower_than_Fa_reps": 0
+      }
+    ]
+  },
+  "Rollercoaster": {
+    "faster_cells": 76,
+    "tied_cells": 0,
+    "slower_cells": 27,
+    "ratio_median_across_cells_descriptive_only": 0.8333714107318009,
+    "worst_cells": [
+      {
+        "n": 16384,
+        "block": 64,
+        "seed": 42,
+        "layout": "u16",
+        "case": "reverse",
+        "candidate_over_Rollercoaster_wall_median": 7.465969465122193,
+        "candidate_over_Rollercoaster_wall_p10": 4.247698785883498,
+        "candidate_over_Rollercoaster_wall_p90": 8.087343831062638,
+        "candidate_slower_than_Rollercoaster_reps": 11
+      },
+      {
+        "n": 1048576,
+        "block": 64,
+        "seed": 42,
+        "layout": "u16",
+        "case": "reverse",
+        "candidate_over_Rollercoaster_wall_median": 3.5866389961957896,
+        "candidate_over_Rollercoaster_wall_p10": 3.534952117425212,
+        "candidate_over_Rollercoaster_wall_p90": 3.6675164449878044,
+        "candidate_slower_than_Rollercoaster_reps": 12
+      },
+      {
+        "n": 16384,
+        "block": 64,
+        "seed": 42,
+        "layout": "u128",
+        "case": "reverse",
+        "candidate_over_Rollercoaster_wall_median": 1.701812743742023,
+        "candidate_over_Rollercoaster_wall_p10": 1.2204277692086853,
+        "candidate_over_Rollercoaster_wall_p90": 2.265446343437555,
+        "candidate_slower_than_Rollercoaster_reps": 12
+      },
+      {
+        "n": 16384,
+        "block": 64,
+        "seed": 42,
+        "layout": "u8",
+        "case": "reverse",
+        "candidate_over_Rollercoaster_wall_median": 1.564398095576335,
+        "candidate_over_Rollercoaster_wall_p10": 1.5079084114468067,
+        "candidate_over_Rollercoaster_wall_p90": 1.8564949423608925,
+        "candidate_slower_than_Rollercoaster_reps": 12
+      },
+      {
+        "n": 1048576,
+        "block": 64,
+        "seed": 42,
+        "layout": "u64",
+        "case": "uniform",
+        "candidate_over_Rollercoaster_wall_median": 1.4278199515459582,
+        "candidate_over_Rollercoaster_wall_p10": 1.265683933689141,
+        "candidate_over_Rollercoaster_wall_p90": 1.6494519339069094,
+        "candidate_slower_than_Rollercoaster_reps": 12
+      }
+    ]
+  },
+  "L_frozen": {
+    "faster_cells": 91,
+    "tied_cells": 0,
+    "slower_cells": 12,
+    "ratio_median_across_cells_descriptive_only": 0.5475517096530075,
+    "worst_cells": [
+      {
+        "n": 1048576,
+        "block": 512,
+        "seed": 42,
+        "layout": "u128",
+        "case": "sparse",
+        "candidate_over_L_frozen_wall_median": 2.6939876338121698,
+        "candidate_over_L_frozen_wall_p10": 2.1834542945837887,
+        "candidate_over_L_frozen_wall_p90": 2.8168062844933752,
+        "candidate_slower_than_L_frozen_reps": 12
+      },
+      {
+        "n": 1048576,
+        "block": 512,
+        "seed": 42,
+        "layout": "wide32",
+        "case": "sparse",
+        "candidate_over_L_frozen_wall_median": 2.0187285821389143,
+        "candidate_over_L_frozen_wall_p10": 1.829628027947511,
+        "candidate_over_L_frozen_wall_p90": 2.279133621888028,
+        "candidate_slower_than_L_frozen_reps": 12
+      },
+      {
+        "n": 1048576,
+        "block": 64,
+        "seed": 42,
+        "layout": "u128",
+        "case": "sparse",
+        "candidate_over_L_frozen_wall_median": 1.5438819028057331,
+        "candidate_over_L_frozen_wall_p10": 1.4200188863473198,
+        "candidate_over_L_frozen_wall_p90": 1.7031235848852868,
+        "candidate_slower_than_L_frozen_reps": 12
+      },
+      {
+        "n": 1048576,
+        "block": 64,
+        "seed": 42,
+        "layout": "wide32",
+        "case": "sparse",
+        "candidate_over_L_frozen_wall_median": 1.4400638196029691,
+        "candidate_over_L_frozen_wall_p10": 1.2044440725945895,
+        "candidate_over_L_frozen_wall_p90": 1.554802669499408,
+        "candidate_slower_than_L_frozen_reps": 12
+      },
+      {
+        "n": 262144,
+        "block": 64,
+        "seed": 42,
+        "layout": "u128",
+        "case": "deep_unique90",
+        "candidate_over_L_frozen_wall_median": 1.1791211374732131,
+        "candidate_over_L_frozen_wall_p10": 1.0615991622946097,
+        "candidate_over_L_frozen_wall_p90": 1.2641835100550516,
+        "candidate_slower_than_L_frozen_reps": 11
+      }
+    ]
+  },
+  "stable_msd": {
+    "faster_cells": 100,
+    "tied_cells": 0,
+    "slower_cells": 3,
+    "ratio_median_across_cells_descriptive_only": 0.4133793512851661,
+    "worst_cells": [
+      {
+        "n": 16384,
+        "block": 64,
+        "seed": 42,
+        "layout": "u128",
+        "case": "sorted",
+        "candidate_over_stable_msd_wall_median": 1.0690211326315533,
+        "candidate_over_stable_msd_wall_p10": 0.976510893504771,
+        "candidate_over_stable_msd_wall_p90": 1.5668852112003964,
+        "candidate_slower_than_stable_msd_reps": 8
+      },
+      {
+        "n": 1048576,
+        "block": 64,
+        "seed": 42,
+        "layout": "wide32",
+        "case": "equal",
+        "candidate_over_stable_msd_wall_median": 1.0226381036267722,
+        "candidate_over_stable_msd_wall_p10": 0.9832923466643192,
+        "candidate_over_stable_msd_wall_p90": 1.0490414797845098,
+        "candidate_slower_than_stable_msd_reps": 9
+      },
+      {
+        "n": 1048576,
+        "block": 64,
+        "seed": 42,
+        "layout": "wide32",
+        "case": "sorted",
+        "candidate_over_stable_msd_wall_median": 1.0058943106028342,
+        "candidate_over_stable_msd_wall_p10": 0.9119018898179767,
+        "candidate_over_stable_msd_wall_p90": 1.032180287463613,
+        "candidate_slower_than_stable_msd_reps": 6
+      },
+      {
+        "n": 16384,
+        "block": 64,
+        "seed": 42,
+        "layout": "wide32",
+        "case": "sorted",
+        "candidate_over_stable_msd_wall_median": 0.979510855456605,
+        "candidate_over_stable_msd_wall_p10": 0.9390575439713482,
+        "candidate_over_stable_msd_wall_p90": 1.0610715558568442,
+        "candidate_slower_than_stable_msd_reps": 5
+      },
+      {
+        "n": 1048576,
+        "block": 64,
+        "seed": 42,
+        "layout": "u128",
+        "case": "sorted",
+        "candidate_over_stable_msd_wall_median": 0.9602807682304093,
+        "candidate_over_stable_msd_wall_p10": 0.8939069136992364,
+        "candidate_over_stable_msd_wall_p90": 1.0426848917461187,
+        "candidate_slower_than_stable_msd_reps": 3
+      }
+    ]
+  }
+}

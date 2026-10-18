@@ -1,0 +1,36 @@
+{
+  "command": [
+    "taskset",
+    "-c",
+    "2",
+    "/root/code/voracious_sort-pa-unified/experiments/block_msd/target/pa-comparator/time",
+    "16384",
+    "12",
+    "Pa_unified_groups_t16777216,Fa,Rollercoaster,L_frozen,stable_msd,Pa_unified_groups_t16777216",
+    "equal,sorted,reverse",
+    "u8,u16,u128,wide32",
+    "time",
+    "64",
+    "42"
+  ],
+  "started_ns": 1792285216621102382,
+  "pid": 2159287,
+  "binary": "/root/code/voracious_sort-pa-unified/experiments/block_msd/target/pa-comparator/time",
+  "binary_sha256": "ef8dd60c19eedf6246fa62595bba3814b71c7e24a509988a6896bbc0b3c68c43",
+  "source_commit": "06331aa5f1e6fb20dac535bd405d8a68ab5a5ab3",
+  "meminfo_before": "MemTotal:       16344888 kB\nMemFree:         1790824 kB\nMemAvailable:   10983128 kB\nBuffers:         1460432 kB\nCached:          5310212 kB\nSwapCached:        13688 kB\nActive:          4584468 kB\nInactive:        4747024 kB\nActive(anon):    2281428 kB\nInactive(anon):   346272 kB\nActive(file):    2303040 kB\nInactive(file):  4400752 kB\nUnevictable:           0 kB\nMlocked:               0 kB\nSwapTotal:      12366328 kB\nSwapFree:        6164612 kB\nZswap:                 0 kB\nZswapped:              0 kB\nDirty:              1204 kB\nWriteback:             0 kB\nAnonPages:       2330608 kB\nMapped:           464540 kB\nShmem:             66932 kB\nKReclaimable:    2826116 kB\nSlab:            3201428 kB\nSReclaimable:    2826116 kB\nSUnreclaim:       375312 kB\nKernelStack:       13312 kB\nPageTables:        66580 kB\nSecPageTables:         0 kB\nNFS_Unstable:          0 kB\nBounce:                0 kB\nWritebackTmp:          0 kB\nCommitLimit:    20538772 kB\nCommitted_AS:   15918600 kB\nVmallocTotal:   34359738367 kB\nVmallocUsed:       82704 kB\nVmallocChunk:          0 kB\nPercpu:            64000 kB\nHardwareCorrupted:     0 kB\nAnonHugePages:   1007616 kB\nShmemHugePages:        0 kB\nShmemPmdMapped:        0 kB\nFileHugePages:         0 kB\nFilePmdMapped:         0 kB\nUnaccepted:            0 kB\nHugePages_Total:       0\nHugePages_Free:        0\nHugePages_Rsvd:        0\nHugePages_Surp:        0\nHugepagesize:       2048 kB\nHugetlb:               0 kB\nDirectMap4k:      245604 kB\nDirectMap2M:    10240000 kB\nDirectMap1G:     8388608 kB\n",
+  "load_before": "1.47 1.74 1.94 1/704 2159287\n",
+  "ended_ns": 1792285216759515107,
+  "returncode": 0,
+  "meminfo_after": "MemTotal:       16344888 kB\nMemFree:         1787688 kB\nMemAvailable:   10979992 kB\nBuffers:         1460432 kB\nCached:          5310212 kB\nSwapCached:        13688 kB\nActive:          4584760 kB\nInactive:        4747024 kB\nActive(anon):    2281720 kB\nInactive(anon):   346272 kB\nActive(file):    2303040 kB\nInactive(file):  4400752 kB\nUnevictable:           0 kB\nMlocked:               0 kB\nSwapTotal:      12366328 kB\nSwapFree:        6164612 kB\nZswap:                 0 kB\nZswapped:              0 kB\nDirty:              1204 kB\nWriteback:             0 kB\nAnonPages:       2330920 kB\nMapped:           464812 kB\nShmem:             66932 kB\nKReclaimable:    2826116 kB\nSlab:            3201428 kB\nSReclaimable:    2826116 kB\nSUnreclaim:       375312 kB\nKernelStack:       13312 kB\nPageTables:        66632 kB\nSecPageTables:         0 kB\nNFS_Unstable:          0 kB\nBounce:                0 kB\nWritebackTmp:          0 kB\nCommitLimit:    20538772 kB\nCommitted_AS:   15918600 kB\nVmallocTotal:   34359738367 kB\nVmallocUsed:       82704 kB\nVmallocChunk:          0 kB\nPercpu:            64000 kB\nHardwareCorrupted:     0 kB\nAnonHugePages:   1007616 kB\nShmemHugePages:        0 kB\nShmemPmdMapped:        0 kB\nFileHugePages:         0 kB\nFilePmdMapped:         0 kB\nUnaccepted:            0 kB\nHugePages_Total:       0\nHugePages_Free:        0\nHugePages_Rsvd:        0\nHugePages_Surp:        0\nHugepagesize:       2048 kB\nHugetlb:               0 kB\nDirectMap4k:      245604 kB\nDirectMap2M:    10240000 kB\nDirectMap1G:     8388608 kB\n",
+  "load_after": "1.47 1.74 1.94 1/704 2159288\n",
+  "child_usage": {
+    "ru_utime": 0.080805,
+    "ru_stime": 0.056562999999999995,
+    "ru_maxrss": 12912,
+    "ru_minflt": 14549,
+    "ru_majflt": 0,
+    "ru_nvcsw": 1,
+    "ru_nivcsw": 4
+  }
+}

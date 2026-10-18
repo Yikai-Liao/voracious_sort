@@ -1,0 +1,30 @@
+{
+  "source_commit": "06331aa5f1e6fb20dac535bd405d8a68ab5a5ab3",
+  "source_file": "experiments/block_msd/src/bin/frontier_experiment.rs",
+  "source_sha256": "e104dd9072e28d69e63ebcd578b115311888f51b0061574fba1f8776c0909773",
+  "binary": "/root/code/voracious_sort-pa-unified/experiments/block_msd/target/pa-comparator/time",
+  "binary_sha256": "ef8dd60c19eedf6246fa62595bba3814b71c7e24a509988a6896bbc0b3c68c43",
+  "binary_bytes": 32675832,
+  "cargo": "/root/.cargo/bin/cargo build --manifest-path experiments/block_msd/Cargo.toml --release --locked --offline --jobs 6 --bin frontier_experiment",
+  "environment": {
+    "CARGO_INCREMENTAL": "1",
+    "RUSTFLAGS": "-C target-cpu=native"
+  },
+  "release_profile": {
+    "opt_level": 3,
+    "debug": "line-tables-only",
+    "codegen_units": 16,
+    "lto": false
+  },
+  "time_features": [],
+  "runner_methods": [
+    "Pa_unified_groups_t16777216",
+    "Fa",
+    "Rollercoaster",
+    "L_frozen",
+    "stable_msd",
+    "Pa_unified_groups_t16777216"
+  ],
+  "comparison_cell_count": 103,
+  "repetitions_per_cell": 12
+}
