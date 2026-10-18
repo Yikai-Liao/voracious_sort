@@ -1,0 +1,11 @@
+{
+  "source_hash_version": 2,
+  "source_commit": "5f6d211d1e295b1dcb1204be95cf8826f0a7274d",
+  "sha256": "51fffcb9e6816588c821a648aeb6eecc22db7a97802039cbe6e8e9fb8a4d0fc4",
+  "source_sha256": "11cc76cf079e83b14d8f33671f516da611a4e0d845bf82db020f4fd28a9a7c3a",
+  "base": "745cea6ab21030710cb036f88fa757505ef1990b",
+  "rustflags": "",
+  "features": "",
+  "profile": "release",
+  "rustc": "rustc 1.98.1 (48a229cea 2026-09-01)\nbinary: rustc\ncommit-hash: 48a229ceaefd4985c50990b14116b6d856af0985\ncommit-date: 2026-09-01\nhost: x86_64-unknown-linux-gnu\nrelease: 1.98.1\nLLVM version: 22.1.8\n"
+}

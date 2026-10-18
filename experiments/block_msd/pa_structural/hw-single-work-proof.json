@@ -1,0 +1,20 @@
+{
+  "Pa_packed": {
+    "projection_nodes": 1,
+    "nodes": 1,
+    "prepare_records": 1048576,
+    "label_evals": 1048576,
+    "scatter_records": 1048576,
+    "leaves": 0,
+    "leaf_records": 0
+  },
+  "Pa_unified_groups_t16777216": {
+    "projection_nodes": 0,
+    "nodes": 1,
+    "prepare_records": 1048576,
+    "label_evals": 2097154,
+    "scatter_records": 2097152,
+    "leaves": 0,
+    "leaf_records": 0
+  }
+}

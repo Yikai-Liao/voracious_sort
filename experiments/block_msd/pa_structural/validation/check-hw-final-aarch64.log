@@ -1,0 +1,484 @@
+    Blocking waiting for file lock on build directory
+warning: unexpected `cfg` condition value: `8`
+   --> /root/code/voracious_sort-pa-structural/src/traits/dispatcher.rs:198:7
+    |
+198 | #[cfg(target_pointer_width = "8")]
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+    = note: `#[warn(unexpected_cfgs)]` on by default
+help: `8` is an expected value for `target_has_atomic`
+    |
+198 - #[cfg(target_pointer_width = "8")]
+198 + #[cfg(target_has_atomic = "8")]
+    |
+help: `8` is an expected value for `target_has_atomic_load_store`
+    |
+198 - #[cfg(target_pointer_width = "8")]
+198 + #[cfg(target_has_atomic_load_store = "8")]
+    |
+help: `8` is an expected value for `target_has_atomic_primitive_alignment`
+    |
+198 - #[cfg(target_pointer_width = "8")]
+198 + #[cfg(target_has_atomic_primitive_alignment = "8")]
+    |
+
+warning: unexpected `cfg` condition value: `128`
+   --> /root/code/voracious_sort-pa-structural/src/traits/dispatcher.rs:418:7
+    |
+418 | #[cfg(target_pointer_width = "128")]
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+help: `128` is an expected value for `target_has_atomic`
+    |
+418 - #[cfg(target_pointer_width = "128")]
+418 + #[cfg(target_has_atomic = "128")]
+    |
+help: `128` is an expected value for `target_has_atomic_load_store`
+    |
+418 - #[cfg(target_pointer_width = "128")]
+418 + #[cfg(target_has_atomic_load_store = "128")]
+    |
+help: `128` is an expected value for `target_has_atomic_primitive_alignment`
+    |
+418 - #[cfg(target_pointer_width = "128")]
+418 + #[cfg(target_has_atomic_primitive_alignment = "128")]
+    |
+
+warning: unexpected `cfg` condition value: `8`
+   --> /root/code/voracious_sort-pa-structural/src/traits/dispatcher.rs:467:7
+    |
+467 | #[cfg(target_pointer_width = "8")]
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+help: `8` is an expected value for `target_has_atomic`
+    |
+467 - #[cfg(target_pointer_width = "8")]
+467 + #[cfg(target_has_atomic = "8")]
+    |
+help: `8` is an expected value for `target_has_atomic_load_store`
+    |
+467 - #[cfg(target_pointer_width = "8")]
+467 + #[cfg(target_has_atomic_load_store = "8")]
+    |
+help: `8` is an expected value for `target_has_atomic_primitive_alignment`
+    |
+467 - #[cfg(target_pointer_width = "8")]
+467 + #[cfg(target_has_atomic_primitive_alignment = "8")]
+    |
+
+warning: unexpected `cfg` condition value: `128`
+   --> /root/code/voracious_sort-pa-structural/src/traits/dispatcher.rs:678:7
+    |
+678 | #[cfg(target_pointer_width = "128")]
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+help: `128` is an expected value for `target_has_atomic`
+    |
+678 - #[cfg(target_pointer_width = "128")]
+678 + #[cfg(target_has_atomic = "128")]
+    |
+help: `128` is an expected value for `target_has_atomic_load_store`
+    |
+678 - #[cfg(target_pointer_width = "128")]
+678 + #[cfg(target_has_atomic_load_store = "128")]
+    |
+help: `128` is an expected value for `target_has_atomic_primitive_alignment`
+    |
+678 - #[cfg(target_pointer_width = "128")]
+678 + #[cfg(target_has_atomic_primitive_alignment = "128")]
+    |
+
+warning: unexpected `cfg` condition value: `8`
+   --> /root/code/voracious_sort-pa-structural/src/traits/radix_key.rs:127:7
+    |
+127 | #[cfg(target_pointer_width = "8")]
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+help: `8` is an expected value for `target_has_atomic`
+    |
+127 - #[cfg(target_pointer_width = "8")]
+127 + #[cfg(target_has_atomic = "8")]
+    |
+help: `8` is an expected value for `target_has_atomic_load_store`
+    |
+127 - #[cfg(target_pointer_width = "8")]
+127 + #[cfg(target_has_atomic_load_store = "8")]
+    |
+help: `8` is an expected value for `target_has_atomic_primitive_alignment`
+    |
+127 - #[cfg(target_pointer_width = "8")]
+127 + #[cfg(target_has_atomic_primitive_alignment = "8")]
+    |
+
+warning: unexpected `cfg` condition value: `128`
+   --> /root/code/voracious_sort-pa-structural/src/traits/radix_key.rs:259:7
+    |
+259 | #[cfg(target_pointer_width = "128")]
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+help: `128` is an expected value for `target_has_atomic`
+    |
+259 - #[cfg(target_pointer_width = "128")]
+259 + #[cfg(target_has_atomic = "128")]
+    |
+help: `128` is an expected value for `target_has_atomic_load_store`
+    |
+259 - #[cfg(target_pointer_width = "128")]
+259 + #[cfg(target_has_atomic_load_store = "128")]
+    |
+help: `128` is an expected value for `target_has_atomic_primitive_alignment`
+    |
+259 - #[cfg(target_pointer_width = "128")]
+259 + #[cfg(target_has_atomic_primitive_alignment = "128")]
+    |
+
+warning: unexpected `cfg` condition value: `8`
+   --> /root/code/voracious_sort-pa-structural/src/traits/radix_key.rs:292:7
+    |
+292 | #[cfg(target_pointer_width = "8")]
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+help: `8` is an expected value for `target_has_atomic`
+    |
+292 - #[cfg(target_pointer_width = "8")]
+292 + #[cfg(target_has_atomic = "8")]
+    |
+help: `8` is an expected value for `target_has_atomic_load_store`
+    |
+292 - #[cfg(target_pointer_width = "8")]
+292 + #[cfg(target_has_atomic_load_store = "8")]
+    |
+help: `8` is an expected value for `target_has_atomic_primitive_alignment`
+    |
+292 - #[cfg(target_pointer_width = "8")]
+292 + #[cfg(target_has_atomic_primitive_alignment = "8")]
+    |
+
+warning: unexpected `cfg` condition value: `128`
+   --> /root/code/voracious_sort-pa-structural/src/traits/radix_key.rs:426:7
+    |
+426 | #[cfg(target_pointer_width = "128")]
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+help: `128` is an expected value for `target_has_atomic`
+    |
+426 - #[cfg(target_pointer_width = "128")]
+426 + #[cfg(target_has_atomic = "128")]
+    |
+help: `128` is an expected value for `target_has_atomic_load_store`
+    |
+426 - #[cfg(target_pointer_width = "128")]
+426 + #[cfg(target_has_atomic_load_store = "128")]
+    |
+help: `128` is an expected value for `target_has_atomic_primitive_alignment`
+    |
+426 - #[cfg(target_pointer_width = "128")]
+426 + #[cfg(target_has_atomic_primitive_alignment = "128")]
+    |
+
+warning: unexpected `cfg` condition value: `8`
+  --> /root/code/voracious_sort-pa-structural/src/types/isize.rs:12:7
+   |
+12 | #[cfg(target_pointer_width = "8")]
+   |       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+help: `8` is an expected value for `target_has_atomic`
+   |
+12 - #[cfg(target_pointer_width = "8")]
+12 + #[cfg(target_has_atomic = "8")]
+   |
+help: `8` is an expected value for `target_has_atomic_load_store`
+   |
+12 - #[cfg(target_pointer_width = "8")]
+12 + #[cfg(target_has_atomic_load_store = "8")]
+   |
+help: `8` is an expected value for `target_has_atomic_primitive_alignment`
+   |
+12 - #[cfg(target_pointer_width = "8")]
+12 + #[cfg(target_has_atomic_primitive_alignment = "8")]
+   |
+
+warning: unexpected `cfg` condition value: `128`
+   --> /root/code/voracious_sort-pa-structural/src/types/isize.rs:904:7
+    |
+904 | #[cfg(target_pointer_width = "128")]
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+help: `128` is an expected value for `target_has_atomic`
+    |
+904 - #[cfg(target_pointer_width = "128")]
+904 + #[cfg(target_has_atomic = "128")]
+    |
+help: `128` is an expected value for `target_has_atomic_load_store`
+    |
+904 - #[cfg(target_pointer_width = "128")]
+904 + #[cfg(target_has_atomic_load_store = "128")]
+    |
+help: `128` is an expected value for `target_has_atomic_primitive_alignment`
+    |
+904 - #[cfg(target_pointer_width = "128")]
+904 + #[cfg(target_has_atomic_primitive_alignment = "128")]
+    |
+
+warning: unused import: `super::super::sorts::rollercoaster_sort::rollercoaster_sort_heu`
+ --> /root/code/voracious_sort-pa-structural/src/types/isize.rs:4:5
+  |
+4 | use super::super::sorts::rollercoaster_sort::rollercoaster_sort_heu;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused import: `super::super::sorts::lsd_sort::lsd_radixsort_heu`
+ --> /root/code/voracious_sort-pa-structural/src/types/isize.rs:5:5
+  |
+5 | use super::super::sorts::lsd_sort::lsd_radixsort_heu;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unexpected `cfg` condition value: `8`
+  --> /root/code/voracious_sort-pa-structural/src/types/usize.rs:11:7
+   |
+11 | #[cfg(target_pointer_width = "8")]
+   |       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+help: `8` is an expected value for `target_has_atomic`
+   |
+11 - #[cfg(target_pointer_width = "8")]
+11 + #[cfg(target_has_atomic = "8")]
+   |
+help: `8` is an expected value for `target_has_atomic_load_store`
+   |
+11 - #[cfg(target_pointer_width = "8")]
+11 + #[cfg(target_has_atomic_load_store = "8")]
+   |
+help: `8` is an expected value for `target_has_atomic_primitive_alignment`
+   |
+11 - #[cfg(target_pointer_width = "8")]
+11 + #[cfg(target_has_atomic_primitive_alignment = "8")]
+   |
+
+warning: unexpected `cfg` condition value: `128`
+   --> /root/code/voracious_sort-pa-structural/src/types/usize.rs:904:7
+    |
+904 | #[cfg(target_pointer_width = "128")]
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+help: `128` is an expected value for `target_has_atomic`
+    |
+904 - #[cfg(target_pointer_width = "128")]
+904 + #[cfg(target_has_atomic = "128")]
+    |
+help: `128` is an expected value for `target_has_atomic_load_store`
+    |
+904 - #[cfg(target_pointer_width = "128")]
+904 + #[cfg(target_has_atomic_load_store = "128")]
+    |
+help: `128` is an expected value for `target_has_atomic_primitive_alignment`
+    |
+904 - #[cfg(target_pointer_width = "128")]
+904 + #[cfg(target_has_atomic_primitive_alignment = "128")]
+    |
+
+warning: unused import: `super::super::sorts::lsd_sort::lsd_radixsort_heu`
+ --> /root/code/voracious_sort-pa-structural/src/types/usize.rs:4:5
+  |
+4 | use super::super::sorts::lsd_sort::lsd_radixsort_heu;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: struct `StructBool` is never constructed
+ --> /root/code/voracious_sort-pa-structural/src/types/custom.rs:8:12
+  |
+8 | pub struct StructBool {
+  |            ^^^^^^^^^^
+  |
+  = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: struct `StructChar` is never constructed
+  --> /root/code/voracious_sort-pa-structural/src/types/custom.rs:29:12
+   |
+29 | pub struct StructChar {
+   |            ^^^^^^^^^^
+
+warning: struct `StructF32` is never constructed
+  --> /root/code/voracious_sort-pa-structural/src/types/custom.rs:50:12
+   |
+50 | pub struct StructF32 {
+   |            ^^^^^^^^^
+
+warning: struct `StructF64` is never constructed
+  --> /root/code/voracious_sort-pa-structural/src/types/custom.rs:71:12
+   |
+71 | pub struct StructF64 {
+   |            ^^^^^^^^^
+
+warning: struct `StructU8` is never constructed
+  --> /root/code/voracious_sort-pa-structural/src/types/custom.rs:92:12
+   |
+92 | pub struct StructU8 {
+   |            ^^^^^^^^
+
+warning: struct `StructU16` is never constructed
+   --> /root/code/voracious_sort-pa-structural/src/types/custom.rs:113:12
+    |
+113 | pub struct StructU16 {
+    |            ^^^^^^^^^
+
+warning: struct `StructU32` is never constructed
+   --> /root/code/voracious_sort-pa-structural/src/types/custom.rs:134:12
+    |
+134 | pub struct StructU32 {
+    |            ^^^^^^^^^
+
+warning: struct `StructU64` is never constructed
+   --> /root/code/voracious_sort-pa-structural/src/types/custom.rs:155:12
+    |
+155 | pub struct StructU64 {
+    |            ^^^^^^^^^
+
+warning: struct `StructU128` is never constructed
+   --> /root/code/voracious_sort-pa-structural/src/types/custom.rs:176:12
+    |
+176 | pub struct StructU128 {
+    |            ^^^^^^^^^^
+
+warning: struct `StructI8` is never constructed
+   --> /root/code/voracious_sort-pa-structural/src/types/custom.rs:197:12
+    |
+197 | pub struct StructI8 {
+    |            ^^^^^^^^
+
+warning: struct `StructI16` is never constructed
+   --> /root/code/voracious_sort-pa-structural/src/types/custom.rs:218:12
+    |
+218 | pub struct StructI16 {
+    |            ^^^^^^^^^
+
+warning: struct `StructI32` is never constructed
+   --> /root/code/voracious_sort-pa-structural/src/types/custom.rs:239:12
+    |
+239 | pub struct StructI32 {
+    |            ^^^^^^^^^
+
+warning: struct `StructI64` is never constructed
+   --> /root/code/voracious_sort-pa-structural/src/types/custom.rs:260:12
+    |
+260 | pub struct StructI64 {
+    |            ^^^^^^^^^
+
+warning: struct `StructI128` is never constructed
+   --> /root/code/voracious_sort-pa-structural/src/types/custom.rs:281:12
+    |
+281 | pub struct StructI128 {
+    |            ^^^^^^^^^^
+
+warning: struct `StructIsize` is never constructed
+   --> /root/code/voracious_sort-pa-structural/src/types/custom.rs:302:12
+    |
+302 | pub struct StructIsize {
+    |            ^^^^^^^^^^^
+
+warning: struct `StructUsize` is never constructed
+   --> /root/code/voracious_sort-pa-structural/src/types/custom.rs:323:12
+    |
+323 | pub struct StructUsize {
+    |            ^^^^^^^^^^^
+
+warning: `voracious_radix_sort` (lib) generated 31 warnings (run `cargo fix --lib -p voracious_radix_sort` to apply 3 suggestions)
+    Checking block_msd_research v0.0.0 (/root/code/voracious_sort-pa-structural/experiments/block_msd)
+warning: unused import: `work_reduction::Work`
+ --> src/reduction_node.rs:8:13
+  |
+8 | use super::{work_reduction::Work, Stats};
+  |             ^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused import: `work_reduction::Work`
+ --> src/reduction_stream.rs:5:33
+  |
+5 | use super::{insertion_sort_key, work_reduction::Work};
+  |                                 ^^^^^^^^^^^^^^^^^^^^
+
+warning: unused variable: `sigma`
+   --> src/reduction_stream.rs:679:9
+    |
+679 |     let sigma = 1usize << width;
+    |         ^^^^^ help: if this is intentional, prefix it with an underscore: `_sigma`
+    |
+    = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: methods `peek` and `read` are never used
+   --> src/lib.rs:125:8
+    |
+115 | impl Stream {
+    | ----------- methods in this implementation
+...
+125 |     fn peek<T: Copy>(&self, arena: &mut Arena<T>, mut ahead: usize) -> T {
+    |        ^^^^
+...
+295 |     fn read<T: Copy>(&mut self, arena: &mut Arena<T>) -> T {
+    |        ^^^^
+    |
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `explore_simple_forward` is never used
+   --> src/stable_baseline/verge.rs:480:8
+    |
+480 | pub fn explore_simple_forward<T: PartialOrd>(arr: &mut [T]) -> Orientation {
+    |        ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: function `only_one_bucket_filled` is never used
+  --> src/stable_baseline/../frozen_lsd/utils.rs:62:8
+   |
+62 | pub fn only_one_bucket_filled(histogram: &[usize]) -> bool {
+   |        ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: function `offset_from_bits` is never used
+  --> src/stable_baseline/../frozen_lsd/utils.rs:78:8
+   |
+78 | pub fn offset_from_bits<T, K>(
+   |        ^^^^^^^^^^^^^^^^
+
+warning: function `compute_offset` is never used
+   --> src/stable_baseline/../frozen_lsd/utils.rs:114:8
+    |
+114 | pub fn compute_offset<T: Radixable<K> + Copy, K: RadixKey>(
+    |        ^^^^^^^^^^^^^^
+
+warning: function `compute_max_level` is never used
+   --> src/stable_baseline/../frozen_lsd/utils.rs:131:8
+    |
+131 | pub fn compute_max_level(bits: usize, offset: usize, radix: usize) -> usize {
+    |        ^^^^^^^^^^^^^^^^^
+
+warning: function `get_empty_histograms` is never used
+   --> src/stable_baseline/../frozen_lsd/utils.rs:141:8
+    |
+141 | pub fn get_empty_histograms(
+    |        ^^^^^^^^^^^^^^^^^^^^
+
+warning: function `get_partial_histograms` is never used
+   --> src/stable_baseline/../frozen_lsd/utils.rs:184:8
+    |
+184 | pub fn get_partial_histograms<T: Radixable<K>, K: RadixKey>(
+    |        ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: function `get_full_histograms` is never used
+   --> src/stable_baseline/../frozen_lsd/utils.rs:388:8
+    |
+388 | pub fn get_full_histograms<T, K>(arr: &mut [T], p: &Params) -> Vec<Vec<usize>>
+    |        ^^^^^^^^^^^^^^^^^^^
+
+warning: `block_msd_research` (lib) generated 12 warnings (run `cargo fix --lib -p block_msd_research` to apply 3 suggestions)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 3.22s

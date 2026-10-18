@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Force software gather while retaining the native compiler target."""
+"""Screen guard inputs and projection bit-count boundaries in one frozen executable."""
 import subprocess
 import sys
 import argparse
