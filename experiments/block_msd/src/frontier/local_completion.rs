@@ -174,7 +174,11 @@ mod tests {
             .map(|id| Record {
                 // A mostly shared high byte forces a second MSD split. Every
                 // child then has a conservative constant middle byte.
-                key: if id % 10 == 0 { id << 24 } else { id << 16 | id % 8 },
+                key: if id % 10 == 0 {
+                    (id % 255 + 1) << 24 | id << 8
+                } else {
+                    id % 128
+                },
                 id,
                 payload: [u64::from(id), !u64::from(id)],
             })
@@ -182,8 +186,15 @@ mod tests {
         let mut expected = actual.clone();
         expected.sort_by_key(|record| record.key);
         let label = Guarded(Cell::new(false));
-        distribute(&mut actual, &label, u32::MAX, 3, &mut Work::default());
+        let mut stats = Work::default();
+        distribute(&mut actual, &label, u32::MAX, 3, &mut stats);
         assert_eq!(actual, expected);
         assert!(!label.0.get());
+        #[cfg(feature = "frontier_work")]
+        {
+            assert!(stats.block_nodes >= 2);
+            assert!(stats.dense_nodes > 0);
+            assert!(stats.scatter_records < 4 * actual.len());
+        }
     }
 }
