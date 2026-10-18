@@ -1,0 +1,105 @@
+{
+  "disposition": "rejected",
+  "source_sha256": "eca6b3cf68617eaec8de46fadb300e38cdcdc836fdd29700c62338daa07b7636",
+  "reason": "confirmed f32_id16/sparse16/B512 native regression",
+  "runs": [
+    {
+      "file": "float-causal-dense-b64.csv",
+      "kind": "work",
+      "rows": 12,
+      "elf_sha256": "d5d940f909c9c931023a86173913bb294bd141a5eb1fb3b9f70978fccbdba148",
+      "maxrss_KiB": 94308,
+      "major_faults": 0,
+      "host_pswpin_pages": 60,
+      "host_pswpout_pages": 0
+    },
+    {
+      "file": "float-causal-sparse-b512.csv",
+      "kind": "work",
+      "rows": 3,
+      "elf_sha256": "d5d940f909c9c931023a86173913bb294bd141a5eb1fb3b9f70978fccbdba148",
+      "maxrss_KiB": 94344,
+      "major_faults": 0,
+      "host_pswpin_pages": 7,
+      "host_pswpout_pages": 0
+    },
+    {
+      "file": "float-confirm-native-f32id16-sparse16-b512.csv",
+      "kind": "time",
+      "rows": 64,
+      "elf_sha256": "58fd68daeefcbf91ba99f136a525489d969c419910be923126eb96427619058b",
+      "maxrss_KiB": 64532,
+      "major_faults": 0,
+      "host_pswpin_pages": 1,
+      "host_pswpout_pages": 0
+    },
+    {
+      "file": "float-native-finite-b512.csv",
+      "kind": "time",
+      "rows": 4312,
+      "elf_sha256": "58fd68daeefcbf91ba99f136a525489d969c419910be923126eb96427619058b",
+      "maxrss_KiB": 382064,
+      "major_faults": 0,
+      "host_pswpin_pages": 1716,
+      "host_pswpout_pages": 0
+    },
+    {
+      "file": "float-native-finite-b64.csv",
+      "kind": "time",
+      "rows": 4312,
+      "elf_sha256": "58fd68daeefcbf91ba99f136a525489d969c419910be923126eb96427619058b",
+      "maxrss_KiB": 381996,
+      "major_faults": 0,
+      "host_pswpin_pages": 1066,
+      "host_pswpout_pages": 0
+    },
+    {
+      "file": "float-native-special-b512.csv",
+      "kind": "time",
+      "rows": 400,
+      "elf_sha256": "58fd68daeefcbf91ba99f136a525489d969c419910be923126eb96427619058b",
+      "maxrss_KiB": 131720,
+      "major_faults": 0,
+      "host_pswpin_pages": 17,
+      "host_pswpout_pages": 0
+    },
+    {
+      "file": "float-native-special-b64.csv",
+      "kind": "time",
+      "rows": 400,
+      "elf_sha256": "58fd68daeefcbf91ba99f136a525489d969c419910be923126eb96427619058b",
+      "maxrss_KiB": 131676,
+      "major_faults": 0,
+      "host_pswpin_pages": 88,
+      "host_pswpout_pages": 0
+    }
+  ],
+  "files": {
+    "measurements/float-causal-dense-b64.csv": "422cf577ffba43d228a33082f8fe8a03d356f1ca162c7858921387e733607132",
+    "measurements/float-causal-dense-b64.json": "1669dc1c3439f7c50977e2603330f2484601c94afd19ab7963e81473eb7efadf",
+    "measurements/float-causal-dense-b64.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "measurements/float-causal-sparse-b512.csv": "56933439bdbb8231e528a28358bfd5840d1f1d55e1aeb7dd1bca8a31bee509f6",
+    "measurements/float-causal-sparse-b512.json": "642dbc2b014b083c9c3308a410308c0c0bf953db73e43c2d9707b09d8f38c428",
+    "measurements/float-causal-sparse-b512.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "measurements/float-confirm-native-f32id16-sparse16-b512.csv": "9bb265837a04e1d43f53e557e34efe79a15ebae687866ca7b8bcb2904e00c683",
+    "measurements/float-confirm-native-f32id16-sparse16-b512.json": "0d2b4d9b471c8b9fa9d26d08e8bec50c5be729864751bf83ea118b1d65397064",
+    "measurements/float-confirm-native-f32id16-sparse16-b512.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "measurements/float-native-finite-b512.csv": "baf5d3bc9539cb94b780ed1948f7951a35729abfaf3e2a60b0c4005900aeb33b",
+    "measurements/float-native-finite-b512.json": "bb9f9fb65bb0aae0eb0dc854f25ca70db8eb6c66ea713543e26bf08fe5d6e166",
+    "measurements/float-native-finite-b512.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "measurements/float-native-finite-b64.csv": "b2e678f16bda35e4e44b2869943814f2065c8225929cb57ea8eafa4ff9b7057a",
+    "measurements/float-native-finite-b64.json": "6abd5ae37065e0c7017a30ccfc272b7900e51c1e3bf5c8fe95aa49b0e139031b",
+    "measurements/float-native-finite-b64.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "measurements/float-native-special-b512.csv": "6e4ef117674c7e966ef02dfba2f62649da94291ce5fdc66b92be302e2b5509af",
+    "measurements/float-native-special-b512.json": "b6e64eace33a8fe5f95f8cd40f589777f2c285cdd66e70f82ddc1636d60277c5",
+    "measurements/float-native-special-b512.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "measurements/float-native-special-b64.csv": "4454e0d8f9187412006de5a726b1a21fb7b8c4ee1f2053f5ca61b596042b0f77",
+    "measurements/float-native-special-b64.json": "a9011f301526e7931b1f8aa3779313e7f2700fb5fc80abc577cb04a6529d59c8",
+    "measurements/float-native-special-b64.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "unrun": [
+    "generic",
+    "holdout",
+    "planned 12-cell sparse Work"
+  ]
+}

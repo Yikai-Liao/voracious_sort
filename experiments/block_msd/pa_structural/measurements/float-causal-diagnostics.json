@@ -1,0 +1,423 @@
+{
+  "binary": "float_work",
+  "sha256": "d5d940f909c9c931023a86173913bb294bd141a5eb1fb3b9f70978fccbdba148",
+  "source_sha256": "eca6b3cf68617eaec8de46fadb300e38cdcdc836fdd29700c62338daa07b7636",
+  "runs": [
+    {
+      "name": "float-causal-dense-b64",
+      "returncode": 0,
+      "stderr_bytes": 0,
+      "rows": 12,
+      "cells": [
+        {
+          "cell": [
+            "f32",
+            "uniform",
+            "1048576",
+            "64",
+            "42"
+          ],
+          "methods": {
+            "Pa_unified_groups_t16777216": {
+              "nodes": 1,
+              "node_records": 1048576,
+              "prepare_records": 1048576,
+              "order_records": 386,
+              "label_evals": 4476754,
+              "scatter_records": 3145728,
+              "compact_records": 2061248,
+              "tail_records": 0,
+              "runs_records": 1048576,
+              "leaves": 187722,
+              "leaf_records": 953847,
+              "projection_nodes": 0,
+              "projection_records": 0,
+              "max_depth": 1,
+              "max_path_passes": 3,
+              "leaf_lengths": "2:47155;3:31295;4:23416;5:18177;6:15084;7:12794;8:10666;9:8634;10:6904;11:4981;12:3530;13:2234;14:1346;15:766;16:392;17:199;18:86;19:39;20:12;21:9;22:2;23:1"
+            },
+            "Pa_kernel": {
+              "nodes": 1,
+              "node_records": 1048576,
+              "prepare_records": 1048576,
+              "order_records": 386,
+              "label_evals": 4476754,
+              "scatter_records": 3145728,
+              "compact_records": 2061248,
+              "tail_records": 0,
+              "runs_records": 1048576,
+              "leaves": 187722,
+              "leaf_records": 953847,
+              "projection_nodes": 0,
+              "projection_records": 0,
+              "max_depth": 1,
+              "max_path_passes": 3,
+              "leaf_lengths": "2:47155;3:31295;4:23416;5:18177;6:15084;7:12794;8:10666;9:8634;10:6904;11:4981;12:3530;13:2234;14:1346;15:766;16:392;17:199;18:86;19:39;20:12;21:9;22:2;23:1"
+            }
+          }
+        },
+        {
+          "cell": [
+            "f32",
+            "normal12",
+            "1048576",
+            "64",
+            "42"
+          ],
+          "methods": {
+            "Pa_unified_groups_t16777216": {
+              "nodes": 1,
+              "node_records": 1048576,
+              "prepare_records": 1048576,
+              "order_records": 386,
+              "label_evals": 4540005,
+              "scatter_records": 3145728,
+              "compact_records": 2064320,
+              "tail_records": 0,
+              "runs_records": 1048576,
+              "leaves": 230200,
+              "leaf_records": 933074,
+              "projection_nodes": 0,
+              "projection_records": 0,
+              "max_depth": 1,
+              "max_path_passes": 3,
+              "leaf_lengths": "2:66805;3:49211;4:37031;5:27338;6:19235;7:12680;8:8125;9:4690;10:2513;11:1315;12:687;13:328;14:151;15:55;16:22;17:10;18:3;19:1"
+            },
+            "Pa_kernel": {
+              "nodes": 1,
+              "node_records": 1048576,
+              "prepare_records": 1048576,
+              "order_records": 386,
+              "label_evals": 4540005,
+              "scatter_records": 3145728,
+              "compact_records": 2064320,
+              "tail_records": 0,
+              "runs_records": 1048576,
+              "leaves": 230200,
+              "leaf_records": 933074,
+              "projection_nodes": 0,
+              "projection_records": 0,
+              "max_depth": 1,
+              "max_path_passes": 3,
+              "leaf_lengths": "2:66805;3:49211;4:37031;5:27338;6:19235;7:12680;8:8125;9:4690;10:2513;11:1315;12:687;13:328;14:151;15:55;16:22;17:10;18:3;19:1"
+            }
+          }
+        },
+        {
+          "cell": [
+            "f32",
+            "subnormal",
+            "1048576",
+            "64",
+            "42"
+          ],
+          "methods": {
+            "Pa_unified_groups_t16777216": {
+              "nodes": 1,
+              "node_records": 1048576,
+              "prepare_records": 1048576,
+              "order_records": 386,
+              "label_evals": 4259839,
+              "scatter_records": 3145728,
+              "compact_records": 2064384,
+              "tail_records": 0,
+              "runs_records": 1048576,
+              "leaves": 65536,
+              "leaf_records": 1048576,
+              "projection_nodes": 0,
+              "projection_records": 0,
+              "max_depth": 1,
+              "max_path_passes": 3,
+              "leaf_lengths": "2:1;3:7;4:19;5:78;6:161;7:390;8:741;9:1355;10:2329;11:3226;12:4357;13:5256;14:6143;15:6604;16:6498;17:6043;18:5464;19:4630;20:3656;21:2760;22:1952;23:1410;24:980;25:585;26:399;27:222;28:138;29:69;30:32;31:8;32:14;33:4;34:2;35:2;39:1"
+            },
+            "Pa_kernel": {
+              "nodes": 1,
+              "node_records": 1048576,
+              "prepare_records": 1048576,
+              "order_records": 386,
+              "label_evals": 4259839,
+              "scatter_records": 3145728,
+              "compact_records": 2064384,
+              "tail_records": 0,
+              "runs_records": 1048576,
+              "leaves": 65536,
+              "leaf_records": 1048576,
+              "projection_nodes": 0,
+              "projection_records": 0,
+              "max_depth": 1,
+              "max_path_passes": 3,
+              "leaf_lengths": "2:1;3:7;4:19;5:78;6:161;7:390;8:741;9:1355;10:2329;11:3226;12:4357;13:5256;14:6143;15:6604;16:6498;17:6043;18:5464;19:4630;20:3656;21:2760;22:1952;23:1410;24:980;25:585;26:399;27:222;28:138;29:69;30:32;31:8;32:14;33:4;34:2;35:2;39:1"
+            }
+          }
+        },
+        {
+          "cell": [
+            "f64",
+            "uniform",
+            "1048576",
+            "64",
+            "42"
+          ],
+          "methods": {
+            "Pa_unified_groups_t16777216": {
+              "nodes": 1,
+              "node_records": 1048576,
+              "prepare_records": 1048576,
+              "order_records": 386,
+              "label_evals": 4254167,
+              "scatter_records": 3145728,
+              "compact_records": 2062976,
+              "tail_records": 0,
+              "runs_records": 1048576,
+              "leaves": 48094,
+              "leaf_records": 1036806,
+              "projection_nodes": 0,
+              "projection_records": 0,
+              "max_depth": 1,
+              "max_path_passes": 3,
+              "leaf_lengths": "2:5995;3:3910;4:2950;5:2322;6:1963;7:1703;8:1537;9:1283;10:1154;11:1015;12:919;13:875;14:857;15:846;16:852;17:829;18:776;19:656;20:582;21:500;22:415;23:346;24:350;25:310;26:346;27:382;28:413;29:455;30:497;31:551;32:546;33:538;34:542;35:526;36:467;37:474;38:429;39:372;40:303;41:233;42:153;43:144;44:88;45:83;46:74;47:59;48:45;49:52;50:45;51:53;52:76;53:82;54:98;55:114;56:141;57:179;58:212;59:225;60:237;61:307;62:305;63:329;64:364;65:340;66:370;67:361;68:348;69:377;70:354;71:325;72:308;73:250;74:225;75:208;76:208;77:171;78:136;79:130;80:96;81:88;82:66;83:66;84:36;85:39;86:34;87:25;88:8;89:12;90:3;91:3;92:11;93:1;94:6;95:3;99:1;101:1"
+            },
+            "Pa_kernel": {
+              "nodes": 1,
+              "node_records": 1048576,
+              "prepare_records": 1048576,
+              "order_records": 386,
+              "label_evals": 4254167,
+              "scatter_records": 3145728,
+              "compact_records": 2062976,
+              "tail_records": 0,
+              "runs_records": 1048576,
+              "leaves": 48094,
+              "leaf_records": 1036806,
+              "projection_nodes": 0,
+              "projection_records": 0,
+              "max_depth": 1,
+              "max_path_passes": 3,
+              "leaf_lengths": "2:5995;3:3910;4:2950;5:2322;6:1963;7:1703;8:1537;9:1283;10:1154;11:1015;12:919;13:875;14:857;15:846;16:852;17:829;18:776;19:656;20:582;21:500;22:415;23:346;24:350;25:310;26:346;27:382;28:413;29:455;30:497;31:551;32:546;33:538;34:542;35:526;36:467;37:474;38:429;39:372;40:303;41:233;42:153;43:144;44:88;45:83;46:74;47:59;48:45;49:52;50:45;51:53;52:76;53:82;54:98;55:114;56:141;57:179;58:212;59:225;60:237;61:307;62:305;63:329;64:364;65:340;66:370;67:361;68:348;69:377;70:354;71:325;72:308;73:250;74:225;75:208;76:208;77:171;78:136;79:130;80:96;81:88;82:66;83:66;84:36;85:39;86:34;87:25;88:8;89:12;90:3;91:3;92:11;93:1;94:6;95:3;99:1;101:1"
+            }
+          }
+        },
+        {
+          "cell": [
+            "f64",
+            "normal12",
+            "1048576",
+            "64",
+            "42"
+          ],
+          "methods": {
+            "Pa_unified_groups_t16777216": {
+              "nodes": 1,
+              "node_records": 1048576,
+              "prepare_records": 1048576,
+              "order_records": 386,
+              "label_evals": 4264822,
+              "scatter_records": 3145728,
+              "compact_records": 2072192,
+              "tail_records": 0,
+              "runs_records": 1048576,
+              "leaves": 57870,
+              "leaf_records": 1035927,
+              "projection_nodes": 0,
+              "projection_records": 0,
+              "max_depth": 1,
+              "max_path_passes": 3,
+              "leaf_lengths": "2:6428;3:4341;4:3224;5:2681;6:2226;7:1917;8:1628;9:1528;10:1457;11:1414;12:1366;13:1235;14:1183;15:1073;16:1016;17:1014;18:906;19:942;20:924;21:983;22:969;23:978;24:1011;25:957;26:879;27:843;28:791;29:826;30:684;31:720;32:651;33:662;34:637;35:643;36:616;37:627;38:606;39:576;40:567;41:542;42:501;43:528;44:464;45:433;46:375;47:355;48:355;49:286;50:263;51:233;52:216;53:188;54:172;55:163;56:131;57:127;58:115;59:82;60:84;61:86;62:73;63:51;64:57;65:39;66:47;67:21;68:17;69:27;70:26;71:20;72:12;73:13;74:8;75:11;76:6;77:7;78:1;79:2;81:1;84:1;85:1;89:1"
+            },
+            "Pa_kernel": {
+              "nodes": 1,
+              "node_records": 1048576,
+              "prepare_records": 1048576,
+              "order_records": 386,
+              "label_evals": 4264822,
+              "scatter_records": 3145728,
+              "compact_records": 2072192,
+              "tail_records": 0,
+              "runs_records": 1048576,
+              "leaves": 57870,
+              "leaf_records": 1035927,
+              "projection_nodes": 0,
+              "projection_records": 0,
+              "max_depth": 1,
+              "max_path_passes": 3,
+              "leaf_lengths": "2:6428;3:4341;4:3224;5:2681;6:2226;7:1917;8:1628;9:1528;10:1457;11:1414;12:1366;13:1235;14:1183;15:1073;16:1016;17:1014;18:906;19:942;20:924;21:983;22:969;23:978;24:1011;25:957;26:879;27:843;28:791;29:826;30:684;31:720;32:651;33:662;34:637;35:643;36:616;37:627;38:606;39:576;40:567;41:542;42:501;43:528;44:464;45:433;46:375;47:355;48:355;49:286;50:263;51:233;52:216;53:188;54:172;55:163;56:131;57:127;58:115;59:82;60:84;61:86;62:73;63:51;64:57;65:39;66:47;67:21;68:17;69:27;70:26;71:20;72:12;73:13;74:8;75:11;76:6;77:7;78:1;79:2;81:1;84:1;85:1;89:1"
+            }
+          }
+        },
+        {
+          "cell": [
+            "f64",
+            "subnormal",
+            "1048576",
+            "64",
+            "42"
+          ],
+          "methods": {
+            "Pa_unified_groups_t16777216": {
+              "nodes": 3970,
+              "node_records": 1593461,
+              "prepare_records": 1593461,
+              "order_records": 1458314,
+              "label_evals": 6255501,
+              "scatter_records": 3690613,
+              "compact_records": 2583477,
+              "tail_records": 0,
+              "runs_records": 1593461,
+              "leaves": 106793,
+              "leaf_records": 728826,
+              "projection_nodes": 0,
+              "projection_records": 0,
+              "max_depth": 2,
+              "max_path_passes": 4,
+              "leaf_lengths": "2:85066;3:15261;4:2014;5:211;6:17;7:1;87:1;89:1;90:1;91:1;92:2;93:2;94:3;95:6;96:8;97:7;98:7;99:12;100:15;101:16;102:13;103:27;104:25;105:31;106:43;107:58;108:59;109:70;110:76;111:105;112:107;113:100;114:127;115:148;116:188;117:177;118:195;119:210;120:241;121:247;122:247;123:269;124:293;125:267;126:270;127:266;128:282"
+            },
+            "Pa_kernel": {
+              "nodes": 3970,
+              "node_records": 1593461,
+              "prepare_records": 1593461,
+              "order_records": 1458314,
+              "label_evals": 6255501,
+              "scatter_records": 3690613,
+              "compact_records": 2583477,
+              "tail_records": 0,
+              "runs_records": 1593461,
+              "leaves": 106793,
+              "leaf_records": 728826,
+              "projection_nodes": 0,
+              "projection_records": 0,
+              "max_depth": 2,
+              "max_path_passes": 4,
+              "leaf_lengths": "2:85066;3:15261;4:2014;5:211;6:17;7:1;87:1;89:1;90:1;91:1;92:2;93:2;94:3;95:6;96:8;97:7;98:7;99:12;100:15;101:16;102:13;103:27;104:25;105:31;106:43;107:58;108:59;109:70;110:76;111:105;112:107;113:100;114:127;115:148;116:188;117:177;118:195;119:210;120:241;121:247;122:247;123:269;124:293;125:267;126:270;127:266;128:282"
+            }
+          }
+        }
+      ],
+      "kind": "work",
+      "fullrecord_oracle": "passed (returncode 0)",
+      "work_fields": [
+        "nodes",
+        "node_records",
+        "prepare_records",
+        "order_records",
+        "label_evals",
+        "scatter_records",
+        "compact_records",
+        "tail_records",
+        "runs_records",
+        "leaves",
+        "leaf_records",
+        "projection_nodes",
+        "projection_records",
+        "max_depth",
+        "max_path_passes",
+        "leaf_lengths"
+      ],
+      "packed_kernel_parity": []
+    },
+    {
+      "name": "float-causal-sparse-b512",
+      "returncode": 0,
+      "stderr_bytes": 0,
+      "rows": 3,
+      "cells": [
+        {
+          "cell": [
+            "f32_id16",
+            "sparse16",
+            "1048576",
+            "512",
+            "42"
+          ],
+          "methods": {
+            "Pa_unified_groups_t16777216": {
+              "nodes": 1,
+              "node_records": 1048576,
+              "prepare_records": 1048576,
+              "order_records": 386,
+              "label_evals": 3145728,
+              "scatter_records": 3145728,
+              "compact_records": 1980928,
+              "tail_records": 0,
+              "runs_records": 0,
+              "leaves": 0,
+              "leaf_records": 0,
+              "projection_nodes": 0,
+              "projection_records": 0,
+              "max_depth": 0,
+              "max_path_passes": 3,
+              "leaf_lengths": ""
+            },
+            "Pa_packed": {
+              "nodes": 1,
+              "node_records": 1048576,
+              "prepare_records": 1048576,
+              "order_records": 386,
+              "label_evals": 2097152,
+              "scatter_records": 2097152,
+              "compact_records": 1847808,
+              "tail_records": 0,
+              "runs_records": 0,
+              "leaves": 0,
+              "leaf_records": 0,
+              "projection_nodes": 1,
+              "projection_records": 1048576,
+              "max_depth": 0,
+              "max_path_passes": 2,
+              "leaf_lengths": ""
+            },
+            "Pa_kernel": {
+              "nodes": 1,
+              "node_records": 1048576,
+              "prepare_records": 1048576,
+              "order_records": 386,
+              "label_evals": 2097152,
+              "scatter_records": 2097152,
+              "compact_records": 1847808,
+              "tail_records": 0,
+              "runs_records": 0,
+              "leaves": 0,
+              "leaf_records": 0,
+              "projection_nodes": 1,
+              "projection_records": 1048576,
+              "max_depth": 0,
+              "max_path_passes": 2,
+              "leaf_lengths": ""
+            }
+          }
+        }
+      ],
+      "kind": "work",
+      "fullrecord_oracle": "passed (returncode 0)",
+      "work_fields": [
+        "nodes",
+        "node_records",
+        "prepare_records",
+        "order_records",
+        "label_evals",
+        "scatter_records",
+        "compact_records",
+        "tail_records",
+        "runs_records",
+        "leaves",
+        "leaf_records",
+        "projection_nodes",
+        "projection_records",
+        "max_depth",
+        "max_path_passes",
+        "leaf_lengths"
+      ],
+      "packed_kernel_parity": [
+        {
+          "cell": [
+            "f32_id16",
+            "sparse16",
+            "1048576",
+            "512",
+            "42"
+          ],
+          "Pa_packed_equals_Pa_kernel": true
+        }
+      ]
+    }
+  ]
+}

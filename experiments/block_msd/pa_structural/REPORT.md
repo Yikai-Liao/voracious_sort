@@ -1,6 +1,6 @@
 # PA 优化交付报告
 
-当前排序库源码为 `6fceaaa`，完整源文件指纹为 `eca6b3cf68617eaec8de46fadb300e38cdcdc836fdd29700c62338daa07b7636`，候选方法为 `Pa_kernel`。**整数验收已完成，新增浮点补测仍在运行**。整数证据包括当前源码的 native 原 103 场景、46 场景扩展、30 场景留出集、普通目标 46+7 场景、冻结旧 ELF 控制、内存与完整 Work 比较。历史 103 场景结果不作为当前源码的验收证据。
+当前排序库源码为 `6fceaaa`，完整源文件指纹为 `eca6b3cf68617eaec8de46fadb300e38cdcdc836fdd29700c62338daa07b7636`，候选方法为 `Pa_kernel`。**整数验收已完成，整体候选被新增浮点复测拒绝**：f32 带身份/payload 的 sparse16/B512 场景独立复测仍慢 16.3%。整数证据包括当前源码的 native 原 103 场景、46 场景扩展、30 场景留出集、普通目标 46+7 场景、冻结旧 ELF 控制、内存与完整 Work 比较。整数成绩不能覆盖浮点失败。后续按用户要求移植 Rollercoaster 的局部完成与统计复用机制，使用新的源码与 ELF cohort。
 
 所有改动均在独立 worktree `/root/code/voracious_sort-pa-execution`，分支 `block-pa-execution`，限定于 `experiments/block_msd`。仓库根目录生产实现和 frozen Block LSD 源码未修改。
 
@@ -30,7 +30,7 @@ native 46 场景扩展中，对原 PA 的中位数胜出 42/46；新种子的 30
 
 本机为六 vCPU 的 KVM Xeon Gold 6140，存在其他服务和 zram swap；每次运行的资源快照均保存。其他机器与微架构的性能尚未验证。
 
-浮点扩展方案见 [FLOAT_PLAN.md](FLOAT_PLAN.md)。其独立 harness 直接包含现有 runner，排序库源码保持当前指纹；常规有限值与特殊位模式分别计时和校验，不把 NaN/无穷诊断扩展为公共 API 保证。
+浮点扩展方案见 [FLOAT_PLAN.md](FLOAT_PLAN.md)，完成与停止范围见 [FLOAT_VALIDATION.md](FLOAT_VALIDATION.md)。native 有限值 88 场景对原 PA 中位数胜出 61/88，对 Rollercoaster 为 32/88，未形成多数优势；特殊位模式另有 16 场景。整体拒绝后，普通目标、留出集和原计划的 Work 矩阵未运行。独立 harness 直接包含现有 runner；不把 NaN/无穷诊断扩展为公共 API 保证。
 
 ## 失败实验与历史边界
 
