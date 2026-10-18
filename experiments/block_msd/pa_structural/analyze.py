@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """Validate complete paired cells and summarize ratios without pooling timings."""
+import argparse
 import collections
 import csv
 import json
 from pathlib import Path
 import statistics as st
-import sys
 
 ROOT = Path(__file__).resolve().parent
 
@@ -15,10 +15,12 @@ def quantile(values, q):
     lo = int(at)
     return values[lo] + (values[min(lo + 1, len(values) - 1)] - values[lo]) * (at - lo)
 
-def analyze(prefix):
+def analyze(prefix, exclude=()):
     results = []
     hashes = set()
     for path in sorted((ROOT/'measurements').glob(prefix+'*.csv')):
+        if any(path.name.startswith(value) for value in exclude):
+            continue
         meta = json.loads(path.with_suffix('.json').read_text())
         assert meta['returncode'] == 0
         assert meta['args']['kind'] == 'time'
@@ -59,4 +61,9 @@ def analyze(prefix):
         comparisons = sorted(set(k[:-7] for r in group for k in r if k.endswith('_median') and not k.endswith('_cpu_median') and k != 'aa_median' and k != method+'_median'))
         print(method, len(group), 'cells', {other:sum(r.get(other+'_median',2)<1 for r in group) for other in comparisons})
 
-if __name__ == '__main__': analyze(sys.argv[1])
+if __name__ == '__main__':
+    p = argparse.ArgumentParser()
+    p.add_argument('prefix')
+    p.add_argument('--exclude', action='append', default=[])
+    a = p.parse_args()
+    analyze(a.prefix, a.exclude)

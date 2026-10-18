@@ -7,9 +7,11 @@ BASE='Pa_unified_groups_t16777216'
 def percentile(xs,p):
     xs=sorted(xs);x=(len(xs)-1)*p;i=int(x)
     return xs[i]+(x-i)*(xs[min(i+1,len(xs)-1)]-xs[i])
-def audit(prefix,candidate,expected):
+def audit(prefix,candidate,expected,exclude=()):
     cells={}; hashes=set();total=0
     for path in sorted((ROOT/'measurements').glob(prefix+'*.csv')):
+        if any(path.name.startswith(value) for value in exclude):
+            continue
         meta=json.loads(path.with_suffix('.json').read_text())
         assert meta['returncode']==0 and meta['args']['kind']=='time'
         assert path.with_suffix('.stderr').stat().st_size==0
@@ -54,8 +56,8 @@ def audit(prefix,candidate,expected):
     names=sorted(set(name for r in cells.values() for name in r if isinstance(r[name],dict)))
     comparisons={name:{'median_wins':sum(r[name]['median']<1 for r in cells.values() if name in r),'p90_wins':sum(r[name]['p90']<1 for r in cells.values() if name in r),'p10_losses':sum(r[name]['p10']>1 for r in cells.values() if name in r)} for name in names if name!=candidate}
     regressions=[dict(cell=key,**r[BASE]) for key,r in cells.items() if BASE in r and r[BASE]['median']>1.05 and r[BASE]['p10']>1]
-    report={'candidate':candidate,'elf_sha256':next(iter(hashes)),'cells':len(cells),'rows':total,'comparisons':comparisons,'regression_signals':regressions,'results':[dict(cell=key,**r) for key,r in cells.items()]}
+    report={'selection':{'prefix':prefix,'exclude':list(exclude)},'candidate':candidate,'elf_sha256':next(iter(hashes)),'cells':len(cells),'rows':total,'comparisons':comparisons,'regression_signals':regressions,'results':[dict(cell=key,**r) for key,r in cells.items()]}
     (ROOT/(prefix+'audit.json')).write_text(json.dumps(report,indent=2)+'\n')
     print(json.dumps({k:v for k,v in report.items() if k!='results'},indent=2))
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('prefix');p.add_argument('--candidate',default='Pa_packed');p.add_argument('--cells',type=int);a=p.parse_args();audit(a.prefix,a.candidate,a.cells)
+    p=argparse.ArgumentParser();p.add_argument('prefix');p.add_argument('--candidate',default='Pa_packed');p.add_argument('--cells',type=int);p.add_argument('--exclude',action='append',default=[]);a=p.parse_args();audit(a.prefix,a.candidate,a.cells,a.exclude)

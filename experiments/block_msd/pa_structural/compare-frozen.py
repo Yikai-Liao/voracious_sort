@@ -37,14 +37,21 @@ for group,cases,layouts in groups:
         path=raw/f'{a.prefix}-{group}-{outer}-{which}.csv'
         assert not path.exists(),path
         started=time.time_ns()
-        with path.open('w') as out:
-            subprocess.run(command,check=True,cwd=REPO,stdout=out)
-        metadata['commands'].append(dict(command=command,file=path.name,started_ns=started,ended_ns=time.time_ns()))
+        with path.open('w') as out, path.with_suffix('.stderr').open('w') as err:
+            completed=subprocess.run(command,cwd=REPO,stdout=out,stderr=err)
+        ended=time.time_ns()
+        assert completed.returncode == 0, (command, completed.returncode)
+        assert path.with_suffix('.stderr').stat().st_size == 0, path.with_suffix('.stderr')
+        metadata['commands'].append(dict(command=command,file=path.name,sha256=digest(path),returncode=completed.returncode,started_ns=started,ended_ns=ended))
         grouped=defaultdict(list)
-        for row in csv.DictReader(path.open()):
+        rows=list(csv.DictReader(path.open()))
+        expected_cells=len(cases.split(','))*len(layouts.split(','))
+        assert len(rows)==expected_cells*8*len(methods.split(',')), (path,len(rows))
+        for row in rows:
             assert row['kind']=='time' and row['instrumented']=='false'
             cell=tuple(row[k] for k in ('layout','case','n','block','seed'))
             grouped[cell,row['method'],int(row['rep'])].append(int(row['wall_ns']))
+        assert len({cell for cell,method,rep in grouped})==expected_cells
         for (cell,method,rep),times in grouped.items():
             samples[cell][which+':'+method].append(st.mean(times))
     print(group,flush=True)

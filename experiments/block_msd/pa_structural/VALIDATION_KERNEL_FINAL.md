@@ -20,7 +20,7 @@ For methods other than the explicitly unstable `Rollercoaster` and `Reverse_only
 | `Rollercoaster` | 39/46 | 36/46 | 3/46 |
 | `L_frozen` | 34/46 | 33/46 | 10/46 |
 
-The cellwise duplicate-slot A/A median ratios for `Pa_kernel` had median 1.0032, p10 0.9760, and p90 1.0262 over 46 cells. The baseline's corresponding values were 0.9904, 0.9663, and 1.0137. These values describe slot variation in this shared guest; they are not confidence intervals. The generic screen did not include `stable_msd`, so no LSD comparison is claimed.
+The cellwise duplicate-slot A/A median ratios for `Pa_kernel` had median 1.0032, p10 0.9760, and p90 1.0262 over 46 cells. The baseline's corresponding values were 0.9904, 0.9663, and 1.0137. These values describe slot variation in this shared guest; they are not confidence intervals. The generic screen includes frozen Block LSD (`L_frozen`); it does not include the separate Stable MSD (`stable_msd`) comparator.
 
 One cell crossed the pre-set material-regression threshold (candidate/baseline median above 1.05 and p10 above 1): `u128`, `project64_spaced`, `n=262,144`, block 64, seed 42. In the 12-repetition screen, `Pa_kernel` was 1.5565x the frozen PA median, with p10 1.5134 and p90 1.5913; it was slower in all 12 paired repetitions. Candidate A/A in that cell was median 0.9863, p10 0.9708, and p90 1.0008.
 

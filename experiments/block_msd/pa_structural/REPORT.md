@@ -1,3 +1,5 @@
+Current source `6fceaaa` passes its generic 46-cell screen plus seven additions without a material original-PA regression. A small repeated large128 loss and the wide32/B512 q64 uncertainty remain documented. This is a local checkpoint: native final-source validation is pending. See [VALIDATION_INLINE_GENERIC.md](VALIDATION_INLINE_GENERIC.md).
+
 Current continuation: kernel-context source `9bba819` is **rejected** by its generic 46-cell screen and independent u128 q64 confirmation (1.55x old PA). The native full matrix and further extensions were stopped. See [VALIDATION_KERNEL_FINAL.md](VALIDATION_KERNEL_FINAL.md) for this exact cohort. Historical results below remain attached to their own source and executables.
 
 # PA 优化当前交付状态
