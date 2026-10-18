@@ -1,0 +1,4 @@
+
+thread 'main' (2383924) panicked at src/bin/frontier_experiment.rs:1021:5:
+assertion failed: methods.iter().all(|m| METHODS.contains(m))
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace

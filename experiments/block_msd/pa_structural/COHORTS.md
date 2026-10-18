@@ -19,6 +19,7 @@ Cohorts are not pooled across executable hashes. Historical names containing `fi
 | single-final-, 08e5691 | 5f6d211 native original 103 cells completed without a material original-PA regression; ordinary-target sparse failure independently confirmed. Rejected overall. |
 | execution-*-first/control, e39428b | d2669f1 kernel context passes four u32 cells per target and ABBA checkpoint control; direct library grouping regresses uniform and is removed. Local screen only. |
 | kernel-generic-/kernel-final- and extensions | 9bba819 ordinary-target 46-cell validation and independent q64 confirmation; rejected by a reproducible 1.55x slowdown. Native extensions stopped. See VALIDATION_KERNEL_FINAL.md. |
-| inline-smoke/confirm/generic/nested-control | 6fceaaa generic 46+7 cells, independent q64 repeats and two-cell executable ABBA; original-PA material gate passed locally. Native acceptance pending. |
+| inline-smoke/confirm/generic/nested-control | 6fceaaa generic 46+7 cells, independent q64 repeats and two-cell executable ABBA; original-PA material gate passed locally, with a small repeated loss. |
+| inline-final/native-screen/heldout/frozen/memory2/work | Same 6fceaaa source: native 103+46+30 cells, independent boundary repeats, frozen-original ABBA, 16 memory and 21 Work cells passed the single-machine integer acceptance. See VALIDATION_INLINE_FINAL.md. Float extension still pending. |
 
 The current source uses only a hardware token for compressed labels, delegates extraction to pinned hakmem, and otherwise keeps ordinary PA. Final validation requires its own immutable executables; historical hardware or software results are not transferred to it.

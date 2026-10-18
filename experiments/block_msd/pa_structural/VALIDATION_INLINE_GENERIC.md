@@ -1,6 +1,6 @@
 # `Pa_kernel` generic-target validation
 
-Status: **generic screen passed its original-PA material-regression gate, with one small repeatable loss in an added cell**. This is not a full acceptance result: native, holdout, frozen-control, memory, and work scopes have not run for this source. All results below are for the immutable generic ELF only.
+Status at this checkpoint: **generic screen passed its original-PA material-regression gate, with one small repeatable loss in an added cell**. All results below are for the immutable generic ELF only. Native, holdout, frozen-control, memory and Work were pending at this stage; their subsequent results for the same source are in [VALIDATION_INLINE_FINAL.md](VALIDATION_INLINE_FINAL.md).
 
 ## Source, binary, machine, and oracle
 
@@ -82,4 +82,4 @@ All nine run processes across smoke, confirmation, 46-cell screen, and seven-cel
 
 Raw CSV, metadata, and stderr are preserved under `measurements/inline-smoke-q64-*`, `inline-confirm-q64-*`, `inline-generic-*`, `inline-generic-extra-*`, and `inline-nested-control-*`. The ABBA aggregate is `inline-nested-control.json`. Audits and summaries are `inline-smoke-q64-audit.json`, `inline-confirm-q64-audit.json`, `inline-generic-audit.json`, and `inline-generic-extra-audit.json`, with matching summary CSVs. The generic 46-cell audit explicitly excludes the extra prefix; the seven-cell audit includes only that prefix.
 
-No native matrix, native information/target screen, holdout, frozen-ELF control, memory matrix, or work-counter comparison was run for this source in this stage. Native, memory, work, Stable MSD, and other-machine performance remain unverified.
+No native matrix, native information/target screen, holdout, frozen-ELF control, memory matrix, or work-counter comparison was run in this generic stage. The later integer report covers those separate cohorts. Other-machine performance remains unverified.
