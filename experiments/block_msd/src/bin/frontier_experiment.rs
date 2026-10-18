@@ -661,7 +661,7 @@ fn make_keys(n: usize, bits: usize, case: &str, seed: u64) -> Vec<u128> {
                     let logical = if case.ends_with("_skew") && i % 10 != 0 {
                         0
                     } else {
-                        r as usize & ((1 << q) - 1)
+                        r & if q == 128 { u128::MAX } else { (1u128 << q) - 1 }
                     };
                     (0..q).fold(0, |key, j| {
                         let position = if case.contains("_contig") {
@@ -755,6 +755,26 @@ fn make_keys(n: usize, bits: usize, case: &str, seed: u64) -> Vec<u128> {
 #[cfg(test)]
 mod workload_tests {
     use super::*;
+    #[test]
+    fn wide_information_fixtures_vary_every_declared_coordinate() {
+        for bits in [64, 128] {
+            for q in [32, 33, 63, 64] {
+                let input =
+                    make_keys(4097, bits, &format!("project{q}_spaced"), 42);
+                let union = input.iter().fold(0, |v, &key| v | key);
+                let intersection =
+                    input.iter().fold(u128::MAX, |v, &key| v & key);
+                let expected = (0..q).fold(0u128, |v, j| {
+                    v | (1u128 << (j * (bits - 1) / (q - 1)))
+                });
+                assert_eq!(
+                    union ^ intersection,
+                    expected,
+                    "bits={bits}, q={q}"
+                );
+            }
+        }
+    }
     #[test]
     fn registered_methods_execute_and_preserve_records() {
         let input: Vec<Small16> = make_keys(513, 16, "uniform", 42)
