@@ -43,6 +43,8 @@ def main():
     frozen = json.loads(Path(str(binary) + '.json').read_text())
     assert frozen['sha256'] == digest(binary)
     assert frozen['source_sha256'] == source_hash(), 'source differs from frozen executable'
+    for path, sha256 in frozen.get('extra_sources', {}).items():
+        assert digest(REPO/path) == sha256, f'extra source differs from frozen executable: {path}'
     output = ROOT / 'measurements' / f'{a.name}.csv'
     output.parent.mkdir(exist_ok=True)
     assert not output.exists(), f'refusing to overwrite {output}'

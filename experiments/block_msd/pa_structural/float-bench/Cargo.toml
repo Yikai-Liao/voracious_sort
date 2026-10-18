@@ -1,0 +1,19 @@
+[package]
+name = "pa_float_evidence"
+version = "0.0.0"
+edition = "2018"
+publish = false
+
+[dependencies]
+block_msd_research = { path = "../.." }
+voracious_radix_sort = { path = "../../../.." }
+
+[features]
+frontier_work = ["block_msd_research/frontier_work"]
+projection_portable = ["block_msd_research/projection_portable"]
+frontier_narrow_screen = []
+
+[profile.release]
+debug = "line-tables-only"
+incremental = true
+codegen-units = 16
