@@ -61,3 +61,21 @@ The next independent hypotheses are:
 
 The same retention thresholds apply. Each screen's metadata records its own
 source/ELF; the first and second screen timings must never be pooled.
+
+## Third screen: bound the label representation itself
+
+`Pa_narrow` uses the exact covering label-variation mask to truncate constant
+high label bits into u8/u16/u32, preserving the original classifier's remaining
+key cap. The small label also uses the existing reduced-radix workspace. This
+applies to ordinary prefixes and the bounded PrefixBand alphabet, even when
+the original converted key is wide. It changes no information budget or
+physical scheduling threshold. `Pa_packed_narrow` combines it with projection;
+`Pa_packed_narrow_runs` additionally carries run-boundary labels. The first
+screen's failed specialized byte projection and forced-local policies were
+removed from the active implementation; their source and evidence remain at
+a4ac2cc. Pa_identity remains a diagnostic control.
+
+Seven-slot runs use 14 repetitions, eight-slot runs use 16, so each slot sees a
+complete rotation in both directions. This changes repetition counts, not the
+103 original input cells. Forced portable-gather timing retains the other
+native compiler flags; it is not a claim that that entire ELF is portable.

@@ -33,19 +33,18 @@ pub enum PaExperiment {
     UnifiedPrepared,
     UnifiedGroups,
     UnifiedIdentity,
-    UnifiedProjected,
-    UnifiedLocal,
-    UnifiedProjectedLocal,
     UnifiedPacked,
     UnifiedRuns,
     UnifiedPackedRuns,
+    UnifiedNarrow,
+    UnifiedPackedNarrow,
+    UnifiedPackedNarrowRuns,
 }
 
 #[derive(Clone, Copy, PartialEq)]
 enum SparseCompletion {
     Recursive,
     Identity,
-    Projected,
     Packed,
 }
 
@@ -71,6 +70,7 @@ struct Policy {
     block: usize,
     sparse: SparseCompletion,
     carry_runs: bool,
+    narrow_labels: bool,
 }
 
 pub fn sort_pa_experiment<T: Radixable<K>, K: RadixKey>(
@@ -97,39 +97,39 @@ where
     assert!(block > 0);
     let carry_runs = matches!(
         experiment,
-        PaExperiment::UnifiedRuns | PaExperiment::UnifiedPackedRuns
+        PaExperiment::UnifiedRuns
+            | PaExperiment::UnifiedPackedRuns
+            | PaExperiment::UnifiedPackedNarrowRuns
     );
     let sparse = match experiment {
-        PaExperiment::UnifiedPacked | PaExperiment::UnifiedPackedRuns => {
-            SparseCompletion::Packed
-        },
+        PaExperiment::UnifiedPacked
+        | PaExperiment::UnifiedPackedRuns
+        | PaExperiment::UnifiedPackedNarrow
+        | PaExperiment::UnifiedPackedNarrowRuns => SparseCompletion::Packed,
         PaExperiment::UnifiedIdentity => SparseCompletion::Identity,
-        PaExperiment::UnifiedProjected
-        | PaExperiment::UnifiedProjectedLocal => SparseCompletion::Projected,
         _ => SparseCompletion::Recursive,
     };
-    let local_workspace_threshold = if matches!(
+    let narrow_labels = matches!(
         experiment,
-        PaExperiment::UnifiedLocal | PaExperiment::UnifiedProjectedLocal
-    ) {
-        0
-    } else {
-        local_workspace_threshold
-    };
+        PaExperiment::UnifiedNarrow
+            | PaExperiment::UnifiedPackedNarrow
+            | PaExperiment::UnifiedPackedNarrowRuns
+    );
     // Independent ablations inherit the complete frozen UnifiedGroups policy.
     let experiment = match experiment {
         PaExperiment::UnifiedIdentity
-        | PaExperiment::UnifiedProjected
-        | PaExperiment::UnifiedLocal
-        | PaExperiment::UnifiedProjectedLocal
         | PaExperiment::UnifiedPacked
         | PaExperiment::UnifiedRuns
-        | PaExperiment::UnifiedPackedRuns => PaExperiment::UnifiedGroups,
+        | PaExperiment::UnifiedPackedRuns
+        | PaExperiment::UnifiedNarrow
+        | PaExperiment::UnifiedPackedNarrow
+        | PaExperiment::UnifiedPackedNarrowRuns => PaExperiment::UnifiedGroups,
         other => other,
     };
     let policy = Policy {
         sparse,
         carry_runs,
+        narrow_labels,
         terminal: matches!(
             experiment,
             PaExperiment::Terminal
@@ -650,50 +650,20 @@ fn visit<T: Radixable<K>, K: RadixKey>(
                 arr, selection, policy, stats, depth, path,
             );
         }
-    } else if matches!(
-        policy.sparse,
-        SparseCompletion::Identity | SparseCompletion::Projected
-    ) && sparse_byte_projection(p.union ^ p.intersection, cap)
+    } else if policy.sparse == SparseCompletion::Identity
+        && sparse_byte_projection(p.union ^ p.intersection, cap)
     {
-        if policy.sparse == SparseCompletion::Identity {
-            work! { stats.identity_nodes += 1; }
-            partition::<T, K, _>(
-                arr,
-                &Identity,
-                Some(p.union ^ p.intersection),
-                policy,
-                true,
-                stats,
-                depth,
-                path,
-            );
-        } else {
-            // A complete projection preserves both order and equality. This
-            // terminal uses an actual u8 label without widening narrow keys.
-            let projection = super::projection::ByteProjection::new(
-                (p.union ^ p.intersection) & Converted::<T, K>::mask(cap),
-            );
-            #[cfg(feature = "frontier_work")]
-            let evals = std::cell::Cell::new(0);
-            let label = |item: &T| {
-                work! { evals.set(evals.get() + 1); }
-                projection.label(item.into_key_type())
-            };
-            let passes = super::local_distribution::distribute_prepared_grouped(
-                arr,
-                &label,
-                policy.block,
-                policy.local_workspace_threshold,
-                projection.variation(),
-                stats,
-            );
-            work! {
-                stats.projection_nodes += 1;
-                stats.projection_records += arr.len();
-                stats.label_evals += evals.get();
-                stats.max_path_passes = stats.max_path_passes.max(path + passes);
-            }
-        }
+        work! { stats.identity_nodes += 1; }
+        partition::<T, K, _>(
+            arr,
+            &Identity,
+            Some(p.union ^ p.intersection),
+            policy,
+            true,
+            stats,
+            depth,
+            path,
+        );
     } else if policy.terminal && coarse == width && !(policy.probe && use_skew)
     {
         partition::<T, K, _>(
@@ -801,7 +771,82 @@ impl<U: NativeKey> Classifier<U> for EqualSplit<U> {
     }
 }
 
+// A variation mask proves that all discarded label bits are constant in
+// this node. Narrowing therefore preserves label order, ties and remaining cap.
+// It also enables the existing compact bucket workspace for small alphabets.
+struct NarrowLabel<'a, C, L> {
+    inner: &'a C,
+    _label: std::marker::PhantomData<L>,
+}
+impl<U: NativeKey, C: Classifier<U>, L: NativeKey> Classifier<U>
+    for NarrowLabel<'_, C, L>
+{
+    type Label = L;
+    const PACKED: bool = true;
+    #[inline]
+    fn label(&self, key: U) -> L {
+        L::from_u128(self.inner.label(key).to_u32() as u128)
+    }
+    fn remaining(&self, key: U) -> usize {
+        self.inner.remaining(key)
+    }
+}
+
 fn partition<T: Radixable<K>, K: RadixKey, C: Classifier<Converted<T, K>>>(
+    arr: &mut [T],
+    classifier: &C,
+    label_mask: Option<C::Label>,
+    policy: Policy,
+    terminal: bool,
+    stats: &mut Work,
+    depth: usize,
+    path: usize,
+) where
+    Converted<T, K>: NativeKey,
+{
+    if policy.narrow_labels && !C::PACKED {
+        if let Some(mask) = label_mask {
+            let width = C::Label::BITS - mask.leading_zeros() as usize;
+            macro_rules! narrow {
+                ($label:ty) => {{
+                    let narrow = NarrowLabel::<_, $label> {
+                        inner: classifier,
+                        _label: std::marker::PhantomData,
+                    };
+                    work! { stats.narrow_nodes += 1; }
+                    return partition_impl::<T, K, _>(
+                        arr,
+                        &narrow,
+                        Some(<$label as NativeKey>::from_u128(mask.to_u128())),
+                        policy,
+                        terminal,
+                        stats,
+                        depth,
+                        path,
+                    );
+                }};
+            }
+            if width <= 8 && C::Label::BITS > 8 {
+                narrow!(u8);
+            }
+            if width <= 16 && C::Label::BITS > 16 {
+                narrow!(u16);
+            }
+            if width <= 32 && C::Label::BITS > 32 {
+                narrow!(u32);
+            }
+        }
+    }
+    partition_impl::<T, K, C>(
+        arr, classifier, label_mask, policy, terminal, stats, depth, path,
+    )
+}
+
+fn partition_impl<
+    T: Radixable<K>,
+    K: RadixKey,
+    C: Classifier<Converted<T, K>>,
+>(
     arr: &mut [T],
     classifier: &C,
     label_mask: Option<C::Label>,

@@ -484,6 +484,7 @@ mod tests {
             };
         }
         compare!(
+            narrow_nodes,
             projection_nodes,
             projection_records,
             identity_nodes,

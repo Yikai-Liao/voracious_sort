@@ -54,6 +54,9 @@ impl<U: NativeKey> Selection<U> {
 pub(super) struct Packed<U, L> {
     mask: U,
     moves: [U; 7],
+    segments: usize,
+    shifts: [usize; 2],
+    masks: [u32; 2],
     lower_bits: u32,
     bits: usize,
     remaining: usize,
@@ -80,7 +83,32 @@ impl<U: NativeKey, L: NativeKey> Packed<U, L> {
             mask = (mask ^ moving) | (moving >> (1 << stage));
             holes &= !prefix;
         }
+        let mut source = 0;
+        let mut rank = 0;
+        let mut segments = 0;
+        let mut shifts = [0; 2];
+        let mut masks = [0; 2];
+        while source < U::BITS {
+            if raw & (1u128 << source) == 0 {
+                source += 1;
+                continue;
+            }
+            let start = source;
+            while source < U::BITS && raw & (1u128 << source) != 0 {
+                source += 1;
+            }
+            let length = source - start;
+            if segments < 2 {
+                shifts[segments] = start - rank;
+                masks[segments] = (((1u64 << length) - 1) << rank) as u32;
+            }
+            segments += 1;
+            rank += length;
+        }
         Self {
+            segments,
+            shifts,
+            masks,
             mask: selection.mask,
             moves,
             lower_bits: (raw as u64).count_ones(),
@@ -94,6 +122,16 @@ impl<U: NativeKey, L: NativeKey> Packed<U, L> {
     fn gather(&self, key: U) -> u32 {
         if let Some(label) = key.extract_packed(self.mask, self.lower_bits) {
             return label;
+        }
+        // Contiguous fields and two-field keys need fewer operations than a
+        // full portable parallel gather. The other path has fixed shifts.
+        if self.segments <= 2 {
+            let first = (key >> self.shifts[0]).to_u32() & self.masks[0];
+            return if self.segments <= 1 {
+                first
+            } else {
+                first | ((key >> self.shifts[1]).to_u32() & self.masks[1])
+            };
         }
         let mut packed = key & self.mask;
         macro_rules! gather {
