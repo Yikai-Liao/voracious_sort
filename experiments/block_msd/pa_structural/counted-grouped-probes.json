@@ -2,8 +2,8 @@
   {
     "config": "native",
     "features": "frontier_work",
-    "test_source_sha256": "83a1a85e98b6383074d428946e203dc82b33724730322c9161360b1b2aa34eef",
-    "binary_sha256": "82fd0e91e2453befd514420dc9f669d3e51871779b493d52715a804df4b5020f",
+    "test_source_sha256": "a8f3b8dca2b8476ddce647c66c25ee476ef2633cbfc731f69da7045b8ad771c3",
+    "binary_sha256": "6ada5bf52fc1b5ca517791d02e3b05e7569e8bf5cff3b1b26b31763b69dd0211",
     "library_sha256": "3c6e1eb50a73d15f0876d89cf5573a23e7e3c10687109b37d97acf0222d15d24",
     "command": [
       "/root/.cargo/bin/rustc",
@@ -23,13 +23,15 @@
       "-o",
       "/root/code/voracious_sort-pa-execution/experiments/block_msd/target/execution-work/probes/counted_grouped_native"
     ],
-    "returncode": 0
+    "returncode": 0,
+    "previous_test_source_sha256": "83a1a85e98b6383074d428946e203dc82b33724730322c9161360b1b2aa34eef",
+    "latest_log": "pa_structural/validation/test-counted-grouped-formatted-native.log"
   },
   {
     "config": "disabled",
     "features": "frontier_work,projection_portable",
-    "test_source_sha256": "83a1a85e98b6383074d428946e203dc82b33724730322c9161360b1b2aa34eef",
-    "binary_sha256": "1ccf6d7052e5138e228388c8e1075ddf6bd491af0cddbb95e0ab4bc315cf2584",
+    "test_source_sha256": "a8f3b8dca2b8476ddce647c66c25ee476ef2633cbfc731f69da7045b8ad771c3",
+    "binary_sha256": "25190ab5ae710a8b92476e28b09f11aef122625e41dbe173992baa3975f16387",
     "library_sha256": "b08fc78783f1cb832e48e96b0e5505cb15a01ed3c15117e7b92ee51720acf119",
     "command": [
       "/root/.cargo/bin/rustc",
@@ -49,6 +51,8 @@
       "-o",
       "/root/code/voracious_sort-pa-execution/experiments/block_msd/target/execution-disabled/probes/counted_grouped_disabled"
     ],
-    "returncode": 0
+    "returncode": 0,
+    "previous_test_source_sha256": "83a1a85e98b6383074d428946e203dc82b33724730322c9161360b1b2aa34eef",
+    "latest_log": "pa_structural/validation/test-counted-grouped-formatted-disabled.log"
   }
 ]

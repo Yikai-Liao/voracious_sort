@@ -22,7 +22,8 @@ fn grouped_counted_completion_preserves_empty_buckets_and_stable_records() {
     // Eight-byte records use grouped scatter. The highest varying byte has
     // one bit, while nonzero constant bits leave many empty digit buckets.
     // At these lengths the root exceeds even B512's dense-workspace budget.
-    for (length, block) in [(65537, 3), (65537, 17), (65537, 64), (262145, 512)] {
+    for (length, block) in [(65537, 3), (65537, 17), (65537, 64), (262145, 512)]
+    {
         let mut state = 0x9e37_79b9u32;
         let mut actual: Vec<_> = (0..length)
             .map(|identity| {
