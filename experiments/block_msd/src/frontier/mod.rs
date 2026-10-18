@@ -122,6 +122,7 @@ pub trait NativeKey:
     + std::ops::Add<Output = Self>
 {
     const BITS: usize;
+    const HAS_PACKED_INSTRUCTION: bool = false;
     fn from_u128(x: u128) -> Self;
     fn leading_zeros(self) -> u32;
     fn count_ones(self) -> u32;
@@ -135,6 +136,7 @@ pub trait NativeKey:
 macro_rules! native {
     ($($t:ty),*) => {$(impl NativeKey for $t {
         const BITS:usize=<$t>::BITS as usize;
+        const HAS_PACKED_INSTRUCTION:bool=cfg!(all(target_arch="x86_64", target_feature="bmi2", not(feature="projection_portable")));
         #[inline] fn from_u128(x:u128)->Self { x as Self }
         #[inline] fn to_u32(self)->u32 { self as u32 }
         #[inline] fn to_u128(self)->u128 { self as u128 }
@@ -150,7 +152,7 @@ macro_rules! native {
                 return Some((low | (high << lower_bits)) as u32);
             }
             #[cfg(not(all(target_arch="x86_64", target_feature="bmi2", not(feature="projection_portable"))))]
-            { None }
+            { let _ = (self, mask, lower_bits); None }
         }
         #[inline] fn leading_zeros(self)->u32 { self.leading_zeros() }
         #[inline] fn count_ones(self)->u32 { self.count_ones() }

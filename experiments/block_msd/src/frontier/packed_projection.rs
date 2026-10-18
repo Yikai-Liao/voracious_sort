@@ -37,6 +37,19 @@ impl<U: NativeKey> Selection<U> {
         if bits == 0 || bits > 32 || active_bytes(selected) <= (bits + 7) / 8 {
             return None;
         }
+        if !U::HAS_PACKED_INSTRUCTION {
+            let field = selected >> selected.trailing_zeros();
+            let contiguous = field == (1u128 << bits) - 1;
+            // A single field needs only a shift. Arbitrary software gathers
+            // failed to amortize against scalar classifiers or when merely
+            // replacing a partial prefix. Full multiword completion retains
+            // the measured benefit of removing wide-key child processing.
+            if !contiguous
+                && (U::BITS <= usize::BITS as usize || selected != raw)
+            {
+                return None;
+            }
+        }
         Some(Self {
             mask: U::from_u128(selected),
             bits,
@@ -300,6 +313,32 @@ mod tests {
 #[cfg(test)]
 mod bounded_tests {
     use super::*;
+    #[test]
+    fn software_gather_preserves_scalar_and_partial_prefix_routes() {
+        let scalar = Selection::<u32>::new((1 << 18) | 1, 32, 24);
+        assert_eq!(
+            scalar.is_some(),
+            <u32 as NativeKey>::HAS_PACKED_INSTRUCTION
+        );
+        let mask = (0..32).fold(0u128, |v, j| v | (1u128 << (j * 127 / 31)));
+        let partial = Selection::new(mask, 128, 24);
+        assert_eq!(
+            partial.is_some(),
+            <u128 as NativeKey>::HAS_PACKED_INSTRUCTION
+        );
+        if let Some(partial) = partial {
+            assert!(partial.remaining > 0);
+        }
+        let wide = [0, 18, 36, 54, 72, 90, 108, 126]
+            .iter()
+            .fold(0u128, |mask, bit| mask | (1u128 << bit));
+        let full = Selection::new(wide, 128, 24).unwrap();
+        assert_eq!(full.remaining, 0);
+        assert_eq!(full.bits, 8);
+        let field = Selection::new(0xffu128 << 60, 128, 24).unwrap();
+        assert_eq!(field.bits, 8);
+        assert_eq!(field.remaining, 0);
+    }
     #[test]
     fn partial_tags_keep_the_old_partition_and_never_add_a_root_pass() {
         assert!(Selection::<u32>::aggressive(0xff01ffff, 32, 24).is_some());
