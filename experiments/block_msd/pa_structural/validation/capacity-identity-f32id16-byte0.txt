@@ -1,0 +1,310 @@
+000000000006b710 000000000000050f t <block_msd_research::frontier::block::Sorter<pa_float_evidence::measured::Float32Record>>::scatter::<u32, block_msd_research::frontier::labeler::Classified<pa_float_evidence::measured::Float32Record, f32, block_msd_research::frontier::Identity>, 0>
+
+target/pa-structural/pa_capacity_float_native:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+000000000006b710 <_RINvMNtNtCshF7ILMGCxfd_18block_msd_research8frontier5blockINtB3_6SorterNtNtCse2eQ7QjVlgx_17pa_float_evidence8measured13Float32RecordE7scattermINtNtB5_7labeler10ClassifiedB17_fNtB5_8IdentityEKj0_EB1b_>:
+   6b710:	55                   	push   rbp
+   6b711:	41 57                	push   r15
+   6b713:	41 56                	push   r14
+   6b715:	41 55                	push   r13
+   6b717:	41 54                	push   r12
+   6b719:	53                   	push   rbx
+   6b71a:	48 81 ec 88 00 00 00 	sub    rsp,0x88
+   6b721:	4c 89 44 24 08       	mov    QWORD PTR [rsp+0x8],r8
+   6b726:	48 89 4c 24 48       	mov    QWORD PTR [rsp+0x48],rcx
+   6b72b:	48 8b 87 80 00 00 00 	mov    rax,QWORD PTR [rdi+0x80]
+   6b732:	48 8b 8f a8 00 00 00 	mov    rcx,QWORD PTR [rdi+0xa8]
+   6b739:	48 89 4c 24 70       	mov    QWORD PTR [rsp+0x70],rcx
+   6b73e:	48 39 c8             	cmp    rax,rcx
+   6b741:	0f 83 18 04 00 00    	jae    6bb5f <_RINvMNtNtCshF7ILMGCxfd_18block_msd_research8frontier5blockINtB3_6SorterNtNtCse2eQ7QjVlgx_17pa_float_evidence8measured13Float32RecordE7scattermINtNtB5_7labeler10ClassifiedB17_fNtB5_8IdentityEKj0_EB1b_+0x44f>
+   6b747:	49 89 f1             	mov    r9,rsi
+   6b74a:	48 8b 4f 20          	mov    rcx,QWORD PTR [rdi+0x20]
+   6b74e:	48 89 4c 24 30       	mov    QWORD PTR [rsp+0x30],rcx
+   6b753:	48 8b 77 28          	mov    rsi,QWORD PTR [rdi+0x28]
+   6b757:	4c 8b bf 88 00 00 00 	mov    r15,QWORD PTR [rdi+0x88]
+   6b75e:	48 8b 8f a0 00 00 00 	mov    rcx,QWORD PTR [rdi+0xa0]
+   6b765:	48 89 4c 24 28       	mov    QWORD PTR [rsp+0x28],rcx
+   6b76a:	48 8b 8f 90 00 00 00 	mov    rcx,QWORD PTR [rdi+0x90]
+   6b771:	48 89 4c 24 20       	mov    QWORD PTR [rsp+0x20],rcx
+   6b776:	4c 8b 47 78          	mov    r8,QWORD PTR [rdi+0x78]
+   6b77a:	48 8b 4f 70          	mov    rcx,QWORD PTR [rdi+0x70]
+   6b77e:	48 89 4c 24 68       	mov    QWORD PTR [rsp+0x68],rcx
+   6b783:	4c 8b 57 68          	mov    r10,QWORD PTR [rdi+0x68]
+   6b787:	48 8b 4f 58          	mov    rcx,QWORD PTR [rdi+0x58]
+   6b78b:	48 89 0c 24          	mov    QWORD PTR [rsp],rcx
+   6b78f:	48 8b 4f 50          	mov    rcx,QWORD PTR [rdi+0x50]
+   6b793:	48 89 4c 24 40       	mov    QWORD PTR [rsp+0x40],rcx
+   6b798:	48 39 f0             	cmp    rax,rsi
+   6b79b:	48 89 f1             	mov    rcx,rsi
+   6b79e:	48 0f 47 c8          	cmova  rcx,rax
+   6b7a2:	48 89 4c 24 50       	mov    QWORD PTR [rsp+0x50],rcx
+   6b7a7:	4c 89 44 24 10       	mov    QWORD PTR [rsp+0x10],r8
+   6b7ac:	49 c1 e0 04          	shl    r8,0x4
+   6b7b0:	4c 89 44 24 18       	mov    QWORD PTR [rsp+0x18],r8
+   6b7b5:	31 ff                	xor    edi,edi
+   6b7b7:	49 89 c0             	mov    r8,rax
+   6b7ba:	4c 89 54 24 60       	mov    QWORD PTR [rsp+0x60],r10
+   6b7bf:	eb 2c                	jmp    6b7ed <_RINvMNtNtCshF7ILMGCxfd_18block_msd_research8frontier5blockINtB3_6SorterNtNtCse2eQ7QjVlgx_17pa_float_evidence8measured13Float32RecordE7scattermINtNtB5_7labeler10ClassifiedB17_fNtB5_8IdentityEKj0_EB1b_+0xdd>
+   6b7c1:	66 66 66 66 66 66 2e 	data16 data16 data16 data16 data16 cs nop WORD PTR [rax+rax*1+0x0]
+   6b7c8:	0f 1f 84 00 00 00 00 
+   6b7cf:	00 
+   6b7d0:	4c 8b 44 24 58       	mov    r8,QWORD PTR [rsp+0x58]
+   6b7d5:	49 ff c0             	inc    r8
+   6b7d8:	4c 3b 44 24 70       	cmp    r8,QWORD PTR [rsp+0x70]
+   6b7dd:	4c 8b 54 24 60       	mov    r10,QWORD PTR [rsp+0x60]
+   6b7e2:	48 8b 7c 24 38       	mov    rdi,QWORD PTR [rsp+0x38]
+   6b7e7:	0f 84 72 03 00 00    	je     6bb5f <_RINvMNtNtCshF7ILMGCxfd_18block_msd_research8frontier5blockINtB3_6SorterNtNtCse2eQ7QjVlgx_17pa_float_evidence8measured13Float32RecordE7scattermINtNtB5_7labeler10ClassifiedB17_fNtB5_8IdentityEKj0_EB1b_+0x44f>
+   6b7ed:	4c 3b 44 24 50       	cmp    r8,QWORD PTR [rsp+0x50]
+   6b7f2:	0f 84 15 04 00 00    	je     6bc0d <_RINvMNtNtCshF7ILMGCxfd_18block_msd_research8frontier5blockINtB3_6SorterNtNtCse2eQ7QjVlgx_17pa_float_evidence8measured13Float32RecordE7scattermINtNtB5_7labeler10ClassifiedB17_fNtB5_8IdentityEKj0_EB1b_+0x4fd>
+   6b7f8:	48 8b 4c 24 30       	mov    rcx,QWORD PTR [rsp+0x30]
+   6b7fd:	42 8b 1c 81          	mov    ebx,DWORD PTR [rcx+r8*4]
+   6b801:	48 39 de             	cmp    rsi,rbx
+   6b804:	0f 86 67 03 00 00    	jbe    6bb71 <_RINvMNtNtCshF7ILMGCxfd_18block_msd_research8frontier5blockINtB3_6SorterNtNtCse2eQ7QjVlgx_17pa_float_evidence8measured13Float32RecordE7scattermINtNtB5_7labeler10ClassifiedB17_fNtB5_8IdentityEKj0_EB1b_+0x461>
+   6b80a:	4c 89 44 24 58       	mov    QWORD PTR [rsp+0x58],r8
+   6b80f:	49 39 df             	cmp    r15,rbx
+   6b812:	49 89 f8             	mov    r8,rdi
+   6b815:	bf 00 00 00 00       	mov    edi,0x0
+   6b81a:	49 0f 46 ff          	cmovbe rdi,r15
+   6b81e:	4c 8b 6c 24 20       	mov    r13,QWORD PTR [rsp+0x20]
+   6b823:	4c 0f 47 6c 24 28    	cmova  r13,QWORD PTR [rsp+0x28]
+   6b829:	4c 3b 44 24 68       	cmp    r8,QWORD PTR [rsp+0x68]
+   6b82e:	73 30                	jae    6b860 <_RINvMNtNtCshF7ILMGCxfd_18block_msd_research8frontier5blockINtB3_6SorterNtNtCse2eQ7QjVlgx_17pa_float_evidence8measured13Float32RecordE7scattermINtNtB5_7labeler10ClassifiedB17_fNtB5_8IdentityEKj0_EB1b_+0x150>
+   6b830:	4c 89 c1             	mov    rcx,r8
+   6b833:	48 c1 e1 04          	shl    rcx,0x4
+   6b837:	4c 8b 5c 24 58       	mov    r11,QWORD PTR [rsp+0x58]
+   6b83c:	4d 39 1c 0a          	cmp    QWORD PTR [r10+rcx*1],r11
+   6b840:	75 1e                	jne    6b860 <_RINvMNtNtCshF7ILMGCxfd_18block_msd_research8frontier5blockINtB3_6SorterNtNtCse2eQ7QjVlgx_17pa_float_evidence8measured13Float32RecordE7scattermINtNtB5_7labeler10ClassifiedB17_fNtB5_8IdentityEKj0_EB1b_+0x150>
+   6b842:	4c 01 d1             	add    rcx,r10
+   6b845:	4c 8b 51 08          	mov    r10,QWORD PTR [rcx+0x8]
+   6b849:	49 ff c0             	inc    r8
+   6b84c:	4c 89 44 24 38       	mov    QWORD PTR [rsp+0x38],r8
+   6b851:	eb 17                	jmp    6b86a <_RINvMNtNtCshF7ILMGCxfd_18block_msd_research8frontier5blockINtB3_6SorterNtNtCse2eQ7QjVlgx_17pa_float_evidence8measured13Float32RecordE7scattermINtNtB5_7labeler10ClassifiedB17_fNtB5_8IdentityEKj0_EB1b_+0x15a>
+   6b853:	66 66 66 66 2e 0f 1f 	data16 data16 data16 cs nop WORD PTR [rax+rax*1+0x0]
+   6b85a:	84 00 00 00 00 00 
+   6b860:	4c 89 44 24 38       	mov    QWORD PTR [rsp+0x38],r8
+   6b865:	4c 8b 54 24 10       	mov    r10,QWORD PTR [rsp+0x10]
+   6b86a:	48 29 fb             	sub    rbx,rdi
+   6b86d:	4c 89 d7             	mov    rdi,r10
+   6b870:	48 d1 ef             	shr    rdi,1
+   6b873:	48 89 9c 24 80 00 00 	mov    QWORD PTR [rsp+0x80],rbx
+   6b87a:	00 
+   6b87b:	48 89 7c 24 78       	mov    QWORD PTR [rsp+0x78],rdi
+   6b880:	0f 84 ca 01 00 00    	je     6ba50 <_RINvMNtNtCshF7ILMGCxfd_18block_msd_research8frontier5blockINtB3_6SorterNtNtCse2eQ7QjVlgx_17pa_float_evidence8measured13Float32RecordE7scattermINtNtB5_7labeler10ClassifiedB17_fNtB5_8IdentityEKj0_EB1b_+0x340>
+   6b886:	48 8b 4c 24 18       	mov    rcx,QWORD PTR [rsp+0x18]
+   6b88b:	48 0f af cb          	imul   rcx,rbx
+   6b88f:	4e 8d 24 29          	lea    r12,[rcx+r13*1]
+   6b893:	49 83 c4 10          	add    r12,0x10
+   6b897:	48 89 fb             	mov    rbx,rdi
+   6b89a:	eb 14                	jmp    6b8b0 <_RINvMNtNtCshF7ILMGCxfd_18block_msd_research8frontier5blockINtB3_6SorterNtNtCse2eQ7QjVlgx_17pa_float_evidence8measured13Float32RecordE7scattermINtNtB5_7labeler10ClassifiedB17_fNtB5_8IdentityEKj0_EB1b_+0x1a0>
+   6b89c:	0f 1f 40 00          	nop    DWORD PTR [rax+0x0]
+   6b8a0:	48 ff cb             	dec    rbx
+   6b8a3:	49 83 c4 20          	add    r12,0x20
+   6b8a7:	48 85 db             	test   rbx,rbx
+   6b8aa:	0f 84 a0 01 00 00    	je     6ba50 <_RINvMNtNtCshF7ILMGCxfd_18block_msd_research8frontier5blockINtB3_6SorterNtNtCse2eQ7QjVlgx_17pa_float_evidence8measured13Float32RecordE7scattermINtNtB5_7labeler10ClassifiedB17_fNtB5_8IdentityEKj0_EB1b_+0x340>
+   6b8b0:	41 8b 4c 24 f0       	mov    ecx,DWORD PTR [r12-0x10]
+   6b8b5:	41 89 ce             	mov    r14d,ecx
+   6b8b8:	41 81 ce 00 00 00 80 	or     r14d,0x80000000
+   6b8bf:	85 c9                	test   ecx,ecx
+   6b8c1:	f7 d1                	not    ecx
+   6b8c3:	44 0f 48 f1          	cmovs  r14d,ecx
+   6b8c7:	41 0f b6 fe          	movzx  edi,r14b
+   6b8cb:	48 39 fa             	cmp    rdx,rdi
+   6b8ce:	0f 86 b6 02 00 00    	jbe    6bb8a <_RINvMNtNtCshF7ILMGCxfd_18block_msd_research8frontier5blockINtB3_6SorterNtNtCse2eQ7QjVlgx_17pa_float_evidence8measured13Float32RecordE7scattermINtNtB5_7labeler10ClassifiedB17_fNtB5_8IdentityEKj0_EB1b_+0x47a>
+   6b8d4:	49 8d 4c 24 f0       	lea    rcx,[r12-0x10]
+   6b8d9:	41 89 fb             	mov    r11d,edi
+   6b8dc:	41 c1 e3 04          	shl    r11d,0x4
+   6b8e0:	4f 8b 04 19          	mov    r8,QWORD PTR [r9+r11*1]
+   6b8e4:	c5 f8 10 01          	vmovups xmm0,XMMWORD PTR [rcx]
+   6b8e8:	49 8d 48 10          	lea    rcx,[r8+0x10]
+   6b8ec:	4b 3b 4c 19 08       	cmp    rcx,QWORD PTR [r9+r11*1+0x8]
+   6b8f1:	c4 c1 78 11 00       	vmovups XMMWORD PTR [r8],xmm0
+   6b8f6:	4b 89 0c 19          	mov    QWORD PTR [r9+r11*1],rcx
+   6b8fa:	75 7b                	jne    6b977 <_RINvMNtNtCshF7ILMGCxfd_18block_msd_research8frontier5blockINtB3_6SorterNtNtCse2eQ7QjVlgx_17pa_float_evidence8measured13Float32RecordE7scattermINtNtB5_7labeler10ClassifiedB17_fNtB5_8IdentityEKj0_EB1b_+0x267>
+   6b8fc:	48 39 f0             	cmp    rax,rsi
+   6b8ff:	0f 83 ae 02 00 00    	jae    6bbb3 <_RINvMNtNtCshF7ILMGCxfd_18block_msd_research8frontier5blockINtB3_6SorterNtNtCse2eQ7QjVlgx_17pa_float_evidence8measured13Float32RecordE7scattermINtNtB5_7labeler10ClassifiedB17_fNtB5_8IdentityEKj0_EB1b_+0x4a3>
+   6b905:	48 8b 4c 24 30       	mov    rcx,QWORD PTR [rsp+0x30]
+   6b90a:	8b 0c 81             	mov    ecx,DWORD PTR [rcx+rax*4]
+   6b90d:	48 39 ce             	cmp    rsi,rcx
+   6b910:	0f 86 5b 02 00 00    	jbe    6bb71 <_RINvMNtNtCshF7ILMGCxfd_18block_msd_research8frontier5blockINtB3_6SorterNtNtCse2eQ7QjVlgx_17pa_float_evidence8measured13Float32RecordE7scattermINtNtB5_7labeler10ClassifiedB17_fNtB5_8IdentityEKj0_EB1b_+0x461>
+   6b916:	4d 01 cb             	add    r11,r9
+   6b919:	49 39 cf             	cmp    r15,rcx
+   6b91c:	41 b8 00 00 00 00    	mov    r8d,0x0
+   6b922:	4d 0f 46 c7          	cmovbe r8,r15
+   6b926:	48 8b 6c 24 20       	mov    rbp,QWORD PTR [rsp+0x20]
+   6b92b:	48 0f 47 6c 24 28    	cmova  rbp,QWORD PTR [rsp+0x28]
+   6b931:	4c 29 c1             	sub    rcx,r8
+   6b934:	48 0f af 4c 24 10    	imul   rcx,QWORD PTR [rsp+0x10]
+   6b93a:	48 c1 e1 04          	shl    rcx,0x4
+   6b93e:	48 01 e9             	add    rcx,rbp
+   6b941:	49 89 0b             	mov    QWORD PTR [r11],rcx
+   6b944:	48 03 4c 24 18       	add    rcx,QWORD PTR [rsp+0x18]
+   6b949:	49 89 4b 08          	mov    QWORD PTR [r11+0x8],rcx
+   6b94d:	48 3b 04 24          	cmp    rax,QWORD PTR [rsp]
+   6b951:	0f 83 6c 02 00 00    	jae    6bbc3 <_RINvMNtNtCshF7ILMGCxfd_18block_msd_research8frontier5blockINtB3_6SorterNtNtCse2eQ7QjVlgx_17pa_float_evidence8measured13Float32RecordE7scattermINtNtB5_7labeler10ClassifiedB17_fNtB5_8IdentityEKj0_EB1b_+0x4b3>
+   6b957:	48 8b 4c 24 40       	mov    rcx,QWORD PTR [rsp+0x40]
+   6b95c:	44 88 34 01          	mov    BYTE PTR [rcx+rax*1],r14b
+   6b960:	48 39 7c 24 08       	cmp    QWORD PTR [rsp+0x8],rdi
+   6b965:	0f 86 6c 02 00 00    	jbe    6bbd7 <_RINvMNtNtCshF7ILMGCxfd_18block_msd_research8frontier5blockINtB3_6SorterNtNtCse2eQ7QjVlgx_17pa_float_evidence8measured13Float32RecordE7scattermINtNtB5_7labeler10ClassifiedB17_fNtB5_8IdentityEKj0_EB1b_+0x4c7>
+   6b96b:	48 8b 4c 24 48       	mov    rcx,QWORD PTR [rsp+0x48]
+   6b970:	48 ff 04 f9          	inc    QWORD PTR [rcx+rdi*8]
+   6b974:	48 ff c0             	inc    rax
+   6b977:	41 8b 0c 24          	mov    ecx,DWORD PTR [r12]
+   6b97b:	41 89 ce             	mov    r14d,ecx
+   6b97e:	41 81 ce 00 00 00 80 	or     r14d,0x80000000
+   6b985:	85 c9                	test   ecx,ecx
+   6b987:	f7 d1                	not    ecx
+   6b989:	44 0f 48 f1          	cmovs  r14d,ecx
+   6b98d:	41 0f b6 fe          	movzx  edi,r14b
+   6b991:	48 39 fa             	cmp    rdx,rdi
+   6b994:	0f 86 f0 01 00 00    	jbe    6bb8a <_RINvMNtNtCshF7ILMGCxfd_18block_msd_research8frontier5blockINtB3_6SorterNtNtCse2eQ7QjVlgx_17pa_float_evidence8measured13Float32RecordE7scattermINtNtB5_7labeler10ClassifiedB17_fNtB5_8IdentityEKj0_EB1b_+0x47a>
+   6b99a:	41 89 fb             	mov    r11d,edi
+   6b99d:	41 c1 e3 04          	shl    r11d,0x4
+   6b9a1:	4b 8b 0c 19          	mov    rcx,QWORD PTR [r9+r11*1]
+   6b9a5:	c4 c1 78 10 04 24    	vmovups xmm0,XMMWORD PTR [r12]
+   6b9ab:	4c 8d 41 10          	lea    r8,[rcx+0x10]
+   6b9af:	4f 3b 44 19 08       	cmp    r8,QWORD PTR [r9+r11*1+0x8]
+   6b9b4:	c5 f8 11 01          	vmovups XMMWORD PTR [rcx],xmm0
+   6b9b8:	4f 89 04 19          	mov    QWORD PTR [r9+r11*1],r8
+   6b9bc:	0f 85 de fe ff ff    	jne    6b8a0 <_RINvMNtNtCshF7ILMGCxfd_18block_msd_research8frontier5blockINtB3_6SorterNtNtCse2eQ7QjVlgx_17pa_float_evidence8measured13Float32RecordE7scattermINtNtB5_7labeler10ClassifiedB17_fNtB5_8IdentityEKj0_EB1b_+0x190>
+   6b9c2:	48 39 f0             	cmp    rax,rsi
+   6b9c5:	0f 83 e8 01 00 00    	jae    6bbb3 <_RINvMNtNtCshF7ILMGCxfd_18block_msd_research8frontier5blockINtB3_6SorterNtNtCse2eQ7QjVlgx_17pa_float_evidence8measured13Float32RecordE7scattermINtNtB5_7labeler10ClassifiedB17_fNtB5_8IdentityEKj0_EB1b_+0x4a3>
+   6b9cb:	48 8b 4c 24 30       	mov    rcx,QWORD PTR [rsp+0x30]
+   6b9d0:	8b 0c 81             	mov    ecx,DWORD PTR [rcx+rax*4]
+   6b9d3:	48 39 ce             	cmp    rsi,rcx
+   6b9d6:	0f 86 95 01 00 00    	jbe    6bb71 <_RINvMNtNtCshF7ILMGCxfd_18block_msd_research8frontier5blockINtB3_6SorterNtNtCse2eQ7QjVlgx_17pa_float_evidence8measured13Float32RecordE7scattermINtNtB5_7labeler10ClassifiedB17_fNtB5_8IdentityEKj0_EB1b_+0x461>
+   6b9dc:	4d 01 cb             	add    r11,r9
+   6b9df:	49 39 cf             	cmp    r15,rcx
+   6b9e2:	41 b8 00 00 00 00    	mov    r8d,0x0
+   6b9e8:	4d 0f 46 c7          	cmovbe r8,r15
+   6b9ec:	48 8b 6c 24 20       	mov    rbp,QWORD PTR [rsp+0x20]
+   6b9f1:	48 0f 47 6c 24 28    	cmova  rbp,QWORD PTR [rsp+0x28]
+   6b9f7:	4c 29 c1             	sub    rcx,r8
+   6b9fa:	48 0f af 4c 24 10    	imul   rcx,QWORD PTR [rsp+0x10]
+   6ba00:	48 c1 e1 04          	shl    rcx,0x4
+   6ba04:	48 01 e9             	add    rcx,rbp
+   6ba07:	49 89 0b             	mov    QWORD PTR [r11],rcx
+   6ba0a:	48 03 4c 24 18       	add    rcx,QWORD PTR [rsp+0x18]
+   6ba0f:	49 89 4b 08          	mov    QWORD PTR [r11+0x8],rcx
+   6ba13:	48 3b 04 24          	cmp    rax,QWORD PTR [rsp]
+   6ba17:	0f 83 a6 01 00 00    	jae    6bbc3 <_RINvMNtNtCshF7ILMGCxfd_18block_msd_research8frontier5blockINtB3_6SorterNtNtCse2eQ7QjVlgx_17pa_float_evidence8measured13Float32RecordE7scattermINtNtB5_7labeler10ClassifiedB17_fNtB5_8IdentityEKj0_EB1b_+0x4b3>
+   6ba1d:	48 8b 4c 24 40       	mov    rcx,QWORD PTR [rsp+0x40]
+   6ba22:	44 88 34 01          	mov    BYTE PTR [rcx+rax*1],r14b
+   6ba26:	48 39 7c 24 08       	cmp    QWORD PTR [rsp+0x8],rdi
+   6ba2b:	0f 86 a6 01 00 00    	jbe    6bbd7 <_RINvMNtNtCshF7ILMGCxfd_18block_msd_research8frontier5blockINtB3_6SorterNtNtCse2eQ7QjVlgx_17pa_float_evidence8measured13Float32RecordE7scattermINtNtB5_7labeler10ClassifiedB17_fNtB5_8IdentityEKj0_EB1b_+0x4c7>
+   6ba31:	48 8b 4c 24 48       	mov    rcx,QWORD PTR [rsp+0x48]
+   6ba36:	48 ff 04 f9          	inc    QWORD PTR [rcx+rdi*8]
+   6ba3a:	48 ff c0             	inc    rax
+   6ba3d:	e9 5e fe ff ff       	jmp    6b8a0 <_RINvMNtNtCshF7ILMGCxfd_18block_msd_research8frontier5blockINtB3_6SorterNtNtCse2eQ7QjVlgx_17pa_float_evidence8measured13Float32RecordE7scattermINtNtB5_7labeler10ClassifiedB17_fNtB5_8IdentityEKj0_EB1b_+0x190>
+   6ba42:	66 66 66 66 66 2e 0f 	data16 data16 data16 data16 cs nop WORD PTR [rax+rax*1+0x0]
+   6ba49:	1f 84 00 00 00 00 00 
+   6ba50:	4c 89 d7             	mov    rdi,r10
+   6ba53:	48 83 e7 fe          	and    rdi,0xfffffffffffffffe
+   6ba57:	4c 39 d7             	cmp    rdi,r10
+   6ba5a:	0f 84 70 fd ff ff    	je     6b7d0 <_RINvMNtNtCshF7ILMGCxfd_18block_msd_research8frontier5blockINtB3_6SorterNtNtCse2eQ7QjVlgx_17pa_float_evidence8measured13Float32RecordE7scattermINtNtB5_7labeler10ClassifiedB17_fNtB5_8IdentityEKj0_EB1b_+0xc0>
+   6ba60:	48 8b 8c 24 80 00 00 	mov    rcx,QWORD PTR [rsp+0x80]
+   6ba67:	00 
+   6ba68:	48 0f af 4c 24 18    	imul   rcx,QWORD PTR [rsp+0x18]
+   6ba6e:	4c 8b 44 24 78       	mov    r8,QWORD PTR [rsp+0x78]
+   6ba73:	49 c1 e0 05          	shl    r8,0x5
+   6ba77:	4d 01 c5             	add    r13,r8
+   6ba7a:	49 01 cd             	add    r13,rcx
+   6ba7d:	eb 1d                	jmp    6ba9c <_RINvMNtNtCshF7ILMGCxfd_18block_msd_research8frontier5blockINtB3_6SorterNtNtCse2eQ7QjVlgx_17pa_float_evidence8measured13Float32RecordE7scattermINtNtB5_7labeler10ClassifiedB17_fNtB5_8IdentityEKj0_EB1b_+0x38c>
+   6ba7f:	90                   	nop
+   6ba80:	48 8b 4c 24 48       	mov    rcx,QWORD PTR [rsp+0x48]
+   6ba85:	4a ff 04 d9          	inc    QWORD PTR [rcx+r11*8]
+   6ba89:	48 ff c0             	inc    rax
+   6ba8c:	48 ff c7             	inc    rdi
+   6ba8f:	49 83 c5 10          	add    r13,0x10
+   6ba93:	4c 39 d7             	cmp    rdi,r10
+   6ba96:	0f 83 34 fd ff ff    	jae    6b7d0 <_RINvMNtNtCshF7ILMGCxfd_18block_msd_research8frontier5blockINtB3_6SorterNtNtCse2eQ7QjVlgx_17pa_float_evidence8measured13Float32RecordE7scattermINtNtB5_7labeler10ClassifiedB17_fNtB5_8IdentityEKj0_EB1b_+0xc0>
+   6ba9c:	41 8b 4d 00          	mov    ecx,DWORD PTR [r13+0x0]
+   6baa0:	89 cb                	mov    ebx,ecx
+   6baa2:	81 cb 00 00 00 80    	or     ebx,0x80000000
+   6baa8:	85 c9                	test   ecx,ecx
+   6baaa:	f7 d1                	not    ecx
+   6baac:	0f 48 d9             	cmovs  ebx,ecx
+   6baaf:	44 0f b6 db          	movzx  r11d,bl
+   6bab3:	4c 39 da             	cmp    rdx,r11
+   6bab6:	0f 86 e1 00 00 00    	jbe    6bb9d <_RINvMNtNtCshF7ILMGCxfd_18block_msd_research8frontier5blockINtB3_6SorterNtNtCse2eQ7QjVlgx_17pa_float_evidence8measured13Float32RecordE7scattermINtNtB5_7labeler10ClassifiedB17_fNtB5_8IdentityEKj0_EB1b_+0x48d>
+   6babc:	45 89 de             	mov    r14d,r11d
+   6babf:	41 c1 e6 04          	shl    r14d,0x4
+   6bac3:	4b 8b 0c 31          	mov    rcx,QWORD PTR [r9+r14*1]
+   6bac7:	c4 c1 78 10 45 00    	vmovups xmm0,XMMWORD PTR [r13+0x0]
+   6bacd:	4c 8d 61 10          	lea    r12,[rcx+0x10]
+   6bad1:	4f 3b 64 31 08       	cmp    r12,QWORD PTR [r9+r14*1+0x8]
+   6bad6:	c5 f8 11 01          	vmovups XMMWORD PTR [rcx],xmm0
+   6bada:	4f 89 24 31          	mov    QWORD PTR [r9+r14*1],r12
+   6bade:	75 ac                	jne    6ba8c <_RINvMNtNtCshF7ILMGCxfd_18block_msd_research8frontier5blockINtB3_6SorterNtNtCse2eQ7QjVlgx_17pa_float_evidence8measured13Float32RecordE7scattermINtNtB5_7labeler10ClassifiedB17_fNtB5_8IdentityEKj0_EB1b_+0x37c>
+   6bae0:	48 39 f0             	cmp    rax,rsi
+   6bae3:	0f 83 00 01 00 00    	jae    6bbe9 <_RINvMNtNtCshF7ILMGCxfd_18block_msd_research8frontier5blockINtB3_6SorterNtNtCse2eQ7QjVlgx_17pa_float_evidence8measured13Float32RecordE7scattermINtNtB5_7labeler10ClassifiedB17_fNtB5_8IdentityEKj0_EB1b_+0x4d9>
+   6bae9:	48 8b 4c 24 30       	mov    rcx,QWORD PTR [rsp+0x30]
+   6baee:	8b 0c 81             	mov    ecx,DWORD PTR [rcx+rax*4]
+   6baf1:	48 39 ce             	cmp    rsi,rcx
+   6baf4:	76 7b                	jbe    6bb71 <_RINvMNtNtCshF7ILMGCxfd_18block_msd_research8frontier5blockINtB3_6SorterNtNtCse2eQ7QjVlgx_17pa_float_evidence8measured13Float32RecordE7scattermINtNtB5_7labeler10ClassifiedB17_fNtB5_8IdentityEKj0_EB1b_+0x461>
+   6baf6:	4d 01 ce             	add    r14,r9
+   6baf9:	49 39 cf             	cmp    r15,rcx
+   6bafc:	41 bc 00 00 00 00    	mov    r12d,0x0
+   6bb02:	4d 0f 46 e7          	cmovbe r12,r15
+   6bb06:	4c 8b 44 24 20       	mov    r8,QWORD PTR [rsp+0x20]
+   6bb0b:	4c 0f 47 44 24 28    	cmova  r8,QWORD PTR [rsp+0x28]
+   6bb11:	4c 29 e1             	sub    rcx,r12
+   6bb14:	48 0f af 4c 24 10    	imul   rcx,QWORD PTR [rsp+0x10]
+   6bb1a:	48 c1 e1 04          	shl    rcx,0x4
+   6bb1e:	4c 01 c1             	add    rcx,r8
+   6bb21:	49 89 0e             	mov    QWORD PTR [r14],rcx
+   6bb24:	48 03 4c 24 18       	add    rcx,QWORD PTR [rsp+0x18]
+   6bb29:	49 89 4e 08          	mov    QWORD PTR [r14+0x8],rcx
+   6bb2d:	48 3b 04 24          	cmp    rax,QWORD PTR [rsp]
+   6bb31:	0f 83 c2 00 00 00    	jae    6bbf9 <_RINvMNtNtCshF7ILMGCxfd_18block_msd_research8frontier5blockINtB3_6SorterNtNtCse2eQ7QjVlgx_17pa_float_evidence8measured13Float32RecordE7scattermINtNtB5_7labeler10ClassifiedB17_fNtB5_8IdentityEKj0_EB1b_+0x4e9>
+   6bb37:	48 8b 4c 24 40       	mov    rcx,QWORD PTR [rsp+0x40]
+   6bb3c:	88 1c 01             	mov    BYTE PTR [rcx+rax*1],bl
+   6bb3f:	4c 39 5c 24 08       	cmp    QWORD PTR [rsp+0x8],r11
+   6bb44:	0f 87 36 ff ff ff    	ja     6ba80 <_RINvMNtNtCshF7ILMGCxfd_18block_msd_research8frontier5blockINtB3_6SorterNtNtCse2eQ7QjVlgx_17pa_float_evidence8measured13Float32RecordE7scattermINtNtB5_7labeler10ClassifiedB17_fNtB5_8IdentityEKj0_EB1b_+0x370>
+   6bb4a:	48 8d 15 4f be 32 00 	lea    rdx,[rip+0x32be4f]        # 3979a0 <anon.4aca8f9d757838d48735adead75c67b6.2.llvm.14666029414560545349+0x268>
+   6bb51:	4c 89 df             	mov    rdi,r11
+   6bb54:	48 8b 74 24 08       	mov    rsi,QWORD PTR [rsp+0x8]
+   6bb59:	ff 15 91 49 34 00    	call   QWORD PTR [rip+0x344991]        # 3b04f0 <_DYNAMIC+0x2a8>
+   6bb5f:	48 81 c4 88 00 00 00 	add    rsp,0x88
+   6bb66:	5b                   	pop    rbx
+   6bb67:	41 5c                	pop    r12
+   6bb69:	41 5d                	pop    r13
+   6bb6b:	41 5e                	pop    r14
+   6bb6d:	41 5f                	pop    r15
+   6bb6f:	5d                   	pop    rbp
+   6bb70:	c3                   	ret
+   6bb71:	48 8d 3d 5d 4d fb ff 	lea    rdi,[rip+0xfffffffffffb4d5d]        # 208d5 <anon.f549a15b4a6001d2d2f3ea90b14d4567.115.llvm.2470088189087500585+0x1f2>
+   6bb78:	48 8d 15 c9 be 32 00 	lea    rdx,[rip+0x32bec9]        # 397a48 <anon.4aca8f9d757838d48735adead75c67b6.2.llvm.14666029414560545349+0x310>
+   6bb7f:	be 2c 00 00 00       	mov    esi,0x2c
+   6bb84:	ff 15 1e 49 34 00    	call   QWORD PTR [rip+0x34491e]        # 3b04a8 <_DYNAMIC+0x260>
+   6bb8a:	48 8d 05 27 be 32 00 	lea    rax,[rip+0x32be27]        # 3979b8 <anon.4aca8f9d757838d48735adead75c67b6.2.llvm.14666029414560545349+0x280>
+   6bb91:	48 89 d6             	mov    rsi,rdx
+   6bb94:	48 89 c2             	mov    rdx,rax
+   6bb97:	ff 15 53 49 34 00    	call   QWORD PTR [rip+0x344953]        # 3b04f0 <_DYNAMIC+0x2a8>
+   6bb9d:	48 8d 05 fc bd 32 00 	lea    rax,[rip+0x32bdfc]        # 3979a0 <anon.4aca8f9d757838d48735adead75c67b6.2.llvm.14666029414560545349+0x268>
+   6bba4:	4c 89 df             	mov    rdi,r11
+   6bba7:	48 89 d6             	mov    rsi,rdx
+   6bbaa:	48 89 c2             	mov    rdx,rax
+   6bbad:	ff 15 3d 49 34 00    	call   QWORD PTR [rip+0x34493d]        # 3b04f0 <_DYNAMIC+0x2a8>
+   6bbb3:	48 8d 15 fe bd 32 00 	lea    rdx,[rip+0x32bdfe]        # 3979b8 <anon.4aca8f9d757838d48735adead75c67b6.2.llvm.14666029414560545349+0x280>
+   6bbba:	48 89 c7             	mov    rdi,rax
+   6bbbd:	ff 15 2d 49 34 00    	call   QWORD PTR [rip+0x34492d]        # 3b04f0 <_DYNAMIC+0x2a8>
+   6bbc3:	48 8d 15 ee bd 32 00 	lea    rdx,[rip+0x32bdee]        # 3979b8 <anon.4aca8f9d757838d48735adead75c67b6.2.llvm.14666029414560545349+0x280>
+   6bbca:	48 89 c7             	mov    rdi,rax
+   6bbcd:	48 8b 34 24          	mov    rsi,QWORD PTR [rsp]
+   6bbd1:	ff 15 19 49 34 00    	call   QWORD PTR [rip+0x344919]        # 3b04f0 <_DYNAMIC+0x2a8>
+   6bbd7:	48 8d 15 da bd 32 00 	lea    rdx,[rip+0x32bdda]        # 3979b8 <anon.4aca8f9d757838d48735adead75c67b6.2.llvm.14666029414560545349+0x280>
+   6bbde:	48 8b 74 24 08       	mov    rsi,QWORD PTR [rsp+0x8]
+   6bbe3:	ff 15 07 49 34 00    	call   QWORD PTR [rip+0x344907]        # 3b04f0 <_DYNAMIC+0x2a8>
+   6bbe9:	48 8d 15 b0 bd 32 00 	lea    rdx,[rip+0x32bdb0]        # 3979a0 <anon.4aca8f9d757838d48735adead75c67b6.2.llvm.14666029414560545349+0x268>
+   6bbf0:	48 89 c7             	mov    rdi,rax
+   6bbf3:	ff 15 f7 48 34 00    	call   QWORD PTR [rip+0x3448f7]        # 3b04f0 <_DYNAMIC+0x2a8>
+   6bbf9:	48 8d 15 a0 bd 32 00 	lea    rdx,[rip+0x32bda0]        # 3979a0 <anon.4aca8f9d757838d48735adead75c67b6.2.llvm.14666029414560545349+0x268>
+   6bc00:	48 89 c7             	mov    rdi,rax
+   6bc03:	48 8b 34 24          	mov    rsi,QWORD PTR [rsp]
+   6bc07:	ff 15 e3 48 34 00    	call   QWORD PTR [rip+0x3448e3]        # 3b04f0 <_DYNAMIC+0x2a8>
+   6bc0d:	48 8d 15 74 bd 32 00 	lea    rdx,[rip+0x32bd74]        # 397988 <anon.4aca8f9d757838d48735adead75c67b6.2.llvm.14666029414560545349+0x250>
+   6bc14:	48 8b 7c 24 50       	mov    rdi,QWORD PTR [rsp+0x50]
+   6bc19:	ff 15 d1 48 34 00    	call   QWORD PTR [rip+0x3448d1]        # 3b04f0 <_DYNAMIC+0x2a8>

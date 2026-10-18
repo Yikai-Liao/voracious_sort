@@ -27,4 +27,6 @@ Cohorts are not pooled across executable hashes. Historical names containing `fi
 
 | leaf-layout-native-float-first (518c6f2) | PA bounded cached leaves and caller-side block-capacity ablations plus their combination. Native library61 and float6 correctness checks pass; first eight-cell native screen and independent repeats reject the combined candidate. Remaining scopes stopped; isolated capacity control is exploratory only. Existing Block LSD kernel code is unchanged. See LEAF_LAYOUT_VALIDATION.md. |
 
+| pa-capacity-native-float-first (17531ed) | Standalone PA caller-capacity candidate after removal of failed leaf code. Native library59 and float6 tests pass; independent seed20261024 eight-cell screen passes, but the original seed42 boundary repeat confirms1.183x regression. Rejected; larger scopes stopped. Existing kernel and PA classification/leaf rules unchanged. See PA_CAPACITY_PLAN.md. |
+
 The current source uses only a hardware token for compressed labels, delegates extraction to pinned hakmem, and otherwise keeps ordinary PA. Final validation requires its own immutable executables; historical hardware or software results are not transferred to it.

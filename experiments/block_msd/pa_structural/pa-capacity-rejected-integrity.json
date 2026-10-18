@@ -1,0 +1,95 @@
+{
+  "source_commit": "17531ed9414c7107f6e0c4bfab6677a37a585c11",
+  "source_sha256": "6d39a251e5535fd619c7ba0a66e3b2381b378beda7b0e207e585852f0a21b52e",
+  "processes": [
+    {
+      "metadata": "measurements/pa-capacity-memory-seed20261024.json",
+      "kind": "memory",
+      "rows": 6,
+      "rss_kib": 73580,
+      "major_faults": 0,
+      "host_swapin_pages": 0,
+      "host_swapout_pages": 0
+    },
+    {
+      "metadata": "measurements/pa-capacity-memory-seed42.json",
+      "kind": "memory",
+      "rows": 6,
+      "rss_kib": 74012,
+      "major_faults": 0,
+      "host_swapin_pages": 0,
+      "host_swapout_pages": 0
+    },
+    {
+      "metadata": "measurements/pa-capacity-native-float-first-b512.json",
+      "kind": "time",
+      "rows": 1024,
+      "rss_kib": 197904,
+      "major_faults": 0,
+      "host_swapin_pages": 25,
+      "host_swapout_pages": 0
+    },
+    {
+      "metadata": "measurements/pa-capacity-original-boundary-f32id16.json",
+      "kind": "time",
+      "rows": 64,
+      "rss_kib": 64328,
+      "major_faults": 0,
+      "host_swapin_pages": 1,
+      "host_swapout_pages": 0
+    },
+    {
+      "metadata": "measurements/pa-capacity-work-seed20261024.json",
+      "kind": "work",
+      "rows": 6,
+      "rss_kib": 94184,
+      "major_faults": 0,
+      "host_swapin_pages": 31,
+      "host_swapout_pages": 0
+    },
+    {
+      "metadata": "measurements/pa-capacity-work-seed42.json",
+      "kind": "work",
+      "rows": 6,
+      "rss_kib": 94236,
+      "major_faults": 0,
+      "host_swapin_pages": 4,
+      "host_swapout_pages": 0
+    }
+  ],
+  "sha256": {
+    "measurements/pa-capacity-memory-seed20261024.csv": "d606d0bc7de0baf8fcfa1177c6ccbd54af179d4a134121b97fee9a5a79f14f35",
+    "measurements/pa-capacity-memory-seed20261024.json": "b8eca3308c9d7dc7e142ea44d7550097ea2da6593a444ddd2240bd6d817cfbec",
+    "measurements/pa-capacity-memory-seed20261024.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "measurements/pa-capacity-memory-seed42.csv": "7f9309be3c18a74bf84ed3e96442893f8f7479669b20e3dcb2945486402e6638",
+    "measurements/pa-capacity-memory-seed42.json": "3716bd6e2394abd23d84261a5491ff060efb6d1bc640e2bb096e671dd71fa256",
+    "measurements/pa-capacity-memory-seed42.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "measurements/pa-capacity-native-float-first-b512.csv": "94ecc19553b4aa27255b8852c1a9568e3c8b92cff242c0ebebf96f372c599994",
+    "measurements/pa-capacity-native-float-first-b512.json": "2aa76508eb444a04f614cd6aba68a6470ae1ea61fea26e624f7ad088aafc793a",
+    "measurements/pa-capacity-native-float-first-b512.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "measurements/pa-capacity-original-boundary-f32id16.csv": "3f9e367b91119a92002bec09220e57cbbd0af88bf760d50859cdf472960e6469",
+    "measurements/pa-capacity-original-boundary-f32id16.json": "b60541d306231557006cb6037b03f7163ce3ef7805152ba079e5db847038cf7c",
+    "measurements/pa-capacity-original-boundary-f32id16.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "measurements/pa-capacity-work-seed20261024.csv": "e4eea599e4042a949d5460196ba64e85eab535aa8abfb0fc02c5818b1b9637e2",
+    "measurements/pa-capacity-work-seed20261024.json": "13ca611660ecf28db4acb07731a64d7911cccfdbd89b37e435b6e3e1b54dbb46",
+    "measurements/pa-capacity-work-seed20261024.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "measurements/pa-capacity-work-seed42.csv": "5948b0ef163ba2b34dd6d5b74d10d909df6a71b1dd4ffb0ac5956ecef6aebe57",
+    "measurements/pa-capacity-work-seed42.json": "6aa37819747567449a5ea04174820e564e5f17dc697ea27ee18155dc5add5be3",
+    "measurements/pa-capacity-work-seed42.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "pa-capacity-causal-diagnostics.json": "38a06a4bbc48845cc70434d056c1a5fa841d9098a92f093295ba61cdc0f03a91",
+    "pa-capacity-float-native-binary.json": "8ae1e2587104c58870d2f24b04dab1ebe0ce49cc281ed78c66614320d2c8e468",
+    "pa-capacity-float-work-binary.json": "db788a94836dbb8856b08279c833cb0852bf2faa37a737e67a5c7fceb5733e07",
+    "pa-capacity-native-float-first-b512audit.json": "5ce6ad516479fe31979f1956092cfb3035729a256e66a1bd2d5a5eeb391733fc",
+    "pa-capacity-native-float-first-b512summary.csv": "4b8a46404f0eae19dc66052ba5118d313c4c697e7f119665dcf87571dc4856df",
+    "pa-capacity-original-boundary-f32id16audit.json": "b923ba3010d8749dc52e6021cea0dc37ff87e2e63433110f697dfa995108049f",
+    "pa-capacity-screen.py": "a980762a01b8c49f425e7ffa89f2feb5b63ad38d53415e427f2362d42ffddd2c",
+    "validation/build-pa-capacity-float-native-final.log": "88f40e2c49f81b61b09642f360652e8f74072459782422d5f1b663cad16f062e",
+    "validation/build-pa-capacity-float-native.log": "64bce107b5dc6a7c0135a149cac8223b29eb29b02820182eae43971c4bc4b0a8",
+    "validation/build-pa-capacity-float-work.log": "bce321c574b14b6137243f4bd6a64397466bcb7abd4f8ebb2d090b5c0dc0c322",
+    "validation/capacity-identity-f32id16-byte0.txt": "0145a2fdc64aee5491a946a26d73fdde7986e5060d1d4b26ea075d69d2855e9f",
+    "validation/capacity-packed-f32id16-byte0.txt": "a5f9b39b7590ec230f71e4548402ddf8690463af61e6021cc799a2eda88eb0f2",
+    "validation/format-pa-capacity.log": "15b197c6e549c7c2eeaf53411bb0e15be0dfa5a242053caa7cb8a22949446169",
+    "validation/test-pa-capacity-float.log": "d297ff3183d8c031b177bc141ef0aefc2413969250d9d16263f32e9db4085653",
+    "validation/test-pa-capacity-lib.log": "b6491ea863336a3354f0999e5cf6c330dad0f265f08ab3724427ce9683d9da1f"
+  }
+}

@@ -1,0 +1,7 @@
+layout,case,n,record_bytes,seed,block,method,slot,rep,kind,wall_ns,cpu_ns,heap_peak,allocs,projection_nodes,projection_records,identity_nodes,nodes,node_records,prepare_records,order_records,candidate_records,label_evals,scatter_records,dense_nodes,block_nodes,passes,compact_records,tail_records,runs_records,unresolved_records,leaves,leaf_records,max_depth,max_path_passes,frontier_nodes,equal_nodes,band_nodes,band_records,terminal_band_nodes,probe_records,instrumented,input_address,leaf_lengths
+f32,sparse16,1048576,4,42,512,Pa_unified_groups_t16777216,0,0,memory,0,0,1083904,14,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,false,93893178188080,
+f32,sparse16,1048576,4,42,512,Pa_kernel,1,0,memory,0,0,1083904,11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,false,93893178188080,
+f32,sparse16,1048576,4,42,512,Pa_odd_blocks,2,0,memory,0,0,1081892,11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,false,93893178188080,
+f32_id16,sparse16,1048576,16,42,512,Pa_unified_groups_t16777216,0,0,memory,0,0,4229632,14,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,false,140014449483792,
+f32_id16,sparse16,1048576,16,42,512,Pa_kernel,1,0,memory,0,0,4229632,11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,false,140014449483792,
+f32_id16,sparse16,1048576,16,42,512,Pa_odd_blocks,2,0,memory,0,0,4221476,11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,false,140014449483792,

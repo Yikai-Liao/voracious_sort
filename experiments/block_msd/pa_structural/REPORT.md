@@ -1,6 +1,8 @@
 # PA 优化交付报告
 
-当前 PA 实验源码为 `518c6f2`，源文件指纹 `14aaf833d7cbc3ffa0efa22587db21dee5f5265a81ef1e1262f317675516d279`。已移除失败的局部完成调度，回到 `6fceaaa` 的 PA 路线，独立检查小叶缓存收尾、PA 调用侧块容量及其组合。小叶路径保持原来的分区、叶长与全部 Work 计数；块容量实验仅调整 PA 传给既有内核的容量参数。Block LSD 内核实现未修改。native 61 项库测试和 6 项浮点 harness 测试通过；第一批 8 场景与独立复测确认组合候选在三个均匀输入场景实质退化，已拒绝并停止扩大筛选，见 [LEAF_LAYOUT_VALIDATION.md](LEAF_LAYOUT_VALIDATION.md)。
+当前 PA 实验源码为 `17531ed`，源文件指纹 `6d39a251e5535fd619c7ba0a66e3b2381b378beda7b0e207e585852f0a21b52e`。已移除失败的局部完成调度与小叶缓存收尾；独立候选 `Pa_odd_blocks` 只在 PA 入口选择不超过给定上限的最大奇数块容量，沿用原来的分类、压紧准入、叶子排序和递归。给定 B64/512 时实际为63/511，记录 scratch 略减、目录可能略增，内存峰值仍需实测。Block LSD 内核实现未修改。native59项库测试与6项浮点 harness 测试通过，新种子8场景虽通过筛选，原失败种子42的独立复测仍慢18.3%，已拒绝并停止扩大筛选，见 [PA_CAPACITY_PLAN.md](PA_CAPACITY_PLAN.md)。
+
+小叶缓存及其组合的 `518c6f2` 阶段已被独立复测拒绝，保留在 [LEAF_LAYOUT_VALIDATION.md](LEAF_LAYOUT_VALIDATION.md)。该阶段的单独容量对照只提供探索线索，不转作当前候选的接受证据。
 
 前一轮 `baaa505` / `e86ca7a` 的 `Pa_local_prefix` 与 `Pa_local_key` 借鉴 Rollercoaster 的计数边界和 MSD 后局部 LSD 完成。八场景筛选与反向复测确认两条 PA 策略均有实质退化，已拒绝并从活动源码移除，见 [LOCAL_COMPLETION_VALIDATION.md](LOCAL_COMPLETION_VALIDATION.md)。这些结果说明新 PA 策略尚不能统一使用，不构成对未改动 Block LSD 内核的泛化性判断。
 

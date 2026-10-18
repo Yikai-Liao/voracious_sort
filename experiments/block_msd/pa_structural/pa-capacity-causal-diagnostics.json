@@ -1,0 +1,866 @@
+{
+  "work": [
+    {
+      "run": "pa-capacity-work-seed42",
+      "cell": [
+        "f32",
+        "sparse16",
+        "42"
+      ],
+      "methods": {
+        "Pa_unified_groups_t16777216": {
+          "layout": "f32",
+          "case": "sparse16",
+          "n": 1048576,
+          "record_bytes": 4,
+          "seed": 42,
+          "block": 512,
+          "heap_peak": 0,
+          "allocs": 0,
+          "projection_nodes": 0,
+          "projection_records": 0,
+          "identity_nodes": 0,
+          "nodes": 1,
+          "node_records": 1048576,
+          "prepare_records": 1048576,
+          "order_records": 386,
+          "candidate_records": 0,
+          "label_evals": 3145728,
+          "scatter_records": 3145728,
+          "dense_nodes": 0,
+          "block_nodes": 1,
+          "passes": 3,
+          "compact_records": 1980928,
+          "tail_records": 0,
+          "runs_records": 0,
+          "unresolved_records": 0,
+          "leaves": 0,
+          "leaf_records": 0,
+          "max_depth": 0,
+          "max_path_passes": 3,
+          "frontier_nodes": 0,
+          "equal_nodes": 0,
+          "band_nodes": 0,
+          "band_records": 0,
+          "terminal_band_nodes": 0,
+          "probe_records": 64,
+          "leaf_lengths": ""
+        },
+        "Pa_kernel": {
+          "layout": "f32",
+          "case": "sparse16",
+          "n": 1048576,
+          "record_bytes": 4,
+          "seed": 42,
+          "block": 512,
+          "heap_peak": 0,
+          "allocs": 0,
+          "projection_nodes": 1,
+          "projection_records": 1048576,
+          "identity_nodes": 0,
+          "nodes": 1,
+          "node_records": 1048576,
+          "prepare_records": 1048576,
+          "order_records": 386,
+          "candidate_records": 0,
+          "label_evals": 2097152,
+          "scatter_records": 2097152,
+          "dense_nodes": 0,
+          "block_nodes": 1,
+          "passes": 2,
+          "compact_records": 1847808,
+          "tail_records": 0,
+          "runs_records": 0,
+          "unresolved_records": 0,
+          "leaves": 0,
+          "leaf_records": 0,
+          "max_depth": 0,
+          "max_path_passes": 2,
+          "frontier_nodes": 0,
+          "equal_nodes": 0,
+          "band_nodes": 0,
+          "band_records": 0,
+          "terminal_band_nodes": 0,
+          "probe_records": 64,
+          "leaf_lengths": ""
+        },
+        "Pa_odd_blocks": {
+          "layout": "f32",
+          "case": "sparse16",
+          "n": 1048576,
+          "record_bytes": 4,
+          "seed": 42,
+          "block": 512,
+          "heap_peak": 0,
+          "allocs": 0,
+          "projection_nodes": 1,
+          "projection_records": 1048576,
+          "identity_nodes": 0,
+          "nodes": 1,
+          "node_records": 1048576,
+          "prepare_records": 1048576,
+          "order_records": 386,
+          "candidate_records": 0,
+          "label_evals": 2097152,
+          "scatter_records": 2097152,
+          "dense_nodes": 0,
+          "block_nodes": 1,
+          "passes": 2,
+          "compact_records": 1846758,
+          "tail_records": 4,
+          "runs_records": 0,
+          "unresolved_records": 0,
+          "leaves": 0,
+          "leaf_records": 0,
+          "max_depth": 0,
+          "max_path_passes": 2,
+          "frontier_nodes": 0,
+          "equal_nodes": 0,
+          "band_nodes": 0,
+          "band_records": 0,
+          "terminal_band_nodes": 0,
+          "probe_records": 64,
+          "leaf_lengths": ""
+        }
+      },
+      "odd_vs_base_diff": {
+        "projection_nodes": [
+          0,
+          1
+        ],
+        "projection_records": [
+          0,
+          1048576
+        ],
+        "label_evals": [
+          3145728,
+          2097152
+        ],
+        "scatter_records": [
+          3145728,
+          2097152
+        ],
+        "passes": [
+          3,
+          2
+        ],
+        "compact_records": [
+          1980928,
+          1846758
+        ],
+        "tail_records": [
+          0,
+          4
+        ],
+        "max_path_passes": [
+          3,
+          2
+        ]
+      },
+      "kernel_vs_base_diff": {
+        "projection_nodes": [
+          0,
+          1
+        ],
+        "projection_records": [
+          0,
+          1048576
+        ],
+        "label_evals": [
+          3145728,
+          2097152
+        ],
+        "scatter_records": [
+          3145728,
+          2097152
+        ],
+        "passes": [
+          3,
+          2
+        ],
+        "compact_records": [
+          1980928,
+          1847808
+        ],
+        "max_path_passes": [
+          3,
+          2
+        ]
+      }
+    },
+    {
+      "run": "pa-capacity-work-seed42",
+      "cell": [
+        "f32_id16",
+        "sparse16",
+        "42"
+      ],
+      "methods": {
+        "Pa_unified_groups_t16777216": {
+          "layout": "f32_id16",
+          "case": "sparse16",
+          "n": 1048576,
+          "record_bytes": 16,
+          "seed": 42,
+          "block": 512,
+          "heap_peak": 0,
+          "allocs": 0,
+          "projection_nodes": 0,
+          "projection_records": 0,
+          "identity_nodes": 0,
+          "nodes": 1,
+          "node_records": 1048576,
+          "prepare_records": 1048576,
+          "order_records": 386,
+          "candidate_records": 0,
+          "label_evals": 3145728,
+          "scatter_records": 3145728,
+          "dense_nodes": 0,
+          "block_nodes": 1,
+          "passes": 3,
+          "compact_records": 1980928,
+          "tail_records": 0,
+          "runs_records": 0,
+          "unresolved_records": 0,
+          "leaves": 0,
+          "leaf_records": 0,
+          "max_depth": 0,
+          "max_path_passes": 3,
+          "frontier_nodes": 0,
+          "equal_nodes": 0,
+          "band_nodes": 0,
+          "band_records": 0,
+          "terminal_band_nodes": 0,
+          "probe_records": 64,
+          "leaf_lengths": ""
+        },
+        "Pa_kernel": {
+          "layout": "f32_id16",
+          "case": "sparse16",
+          "n": 1048576,
+          "record_bytes": 16,
+          "seed": 42,
+          "block": 512,
+          "heap_peak": 0,
+          "allocs": 0,
+          "projection_nodes": 1,
+          "projection_records": 1048576,
+          "identity_nodes": 0,
+          "nodes": 1,
+          "node_records": 1048576,
+          "prepare_records": 1048576,
+          "order_records": 386,
+          "candidate_records": 0,
+          "label_evals": 2097152,
+          "scatter_records": 2097152,
+          "dense_nodes": 0,
+          "block_nodes": 1,
+          "passes": 2,
+          "compact_records": 1847808,
+          "tail_records": 0,
+          "runs_records": 0,
+          "unresolved_records": 0,
+          "leaves": 0,
+          "leaf_records": 0,
+          "max_depth": 0,
+          "max_path_passes": 2,
+          "frontier_nodes": 0,
+          "equal_nodes": 0,
+          "band_nodes": 0,
+          "band_records": 0,
+          "terminal_band_nodes": 0,
+          "probe_records": 64,
+          "leaf_lengths": ""
+        },
+        "Pa_odd_blocks": {
+          "layout": "f32_id16",
+          "case": "sparse16",
+          "n": 1048576,
+          "record_bytes": 16,
+          "seed": 42,
+          "block": 512,
+          "heap_peak": 0,
+          "allocs": 0,
+          "projection_nodes": 1,
+          "projection_records": 1048576,
+          "identity_nodes": 0,
+          "nodes": 1,
+          "node_records": 1048576,
+          "prepare_records": 1048576,
+          "order_records": 386,
+          "candidate_records": 0,
+          "label_evals": 2097152,
+          "scatter_records": 2097152,
+          "dense_nodes": 0,
+          "block_nodes": 1,
+          "passes": 2,
+          "compact_records": 1846758,
+          "tail_records": 4,
+          "runs_records": 0,
+          "unresolved_records": 0,
+          "leaves": 0,
+          "leaf_records": 0,
+          "max_depth": 0,
+          "max_path_passes": 2,
+          "frontier_nodes": 0,
+          "equal_nodes": 0,
+          "band_nodes": 0,
+          "band_records": 0,
+          "terminal_band_nodes": 0,
+          "probe_records": 64,
+          "leaf_lengths": ""
+        }
+      },
+      "odd_vs_base_diff": {
+        "projection_nodes": [
+          0,
+          1
+        ],
+        "projection_records": [
+          0,
+          1048576
+        ],
+        "label_evals": [
+          3145728,
+          2097152
+        ],
+        "scatter_records": [
+          3145728,
+          2097152
+        ],
+        "passes": [
+          3,
+          2
+        ],
+        "compact_records": [
+          1980928,
+          1846758
+        ],
+        "tail_records": [
+          0,
+          4
+        ],
+        "max_path_passes": [
+          3,
+          2
+        ]
+      },
+      "kernel_vs_base_diff": {
+        "projection_nodes": [
+          0,
+          1
+        ],
+        "projection_records": [
+          0,
+          1048576
+        ],
+        "label_evals": [
+          3145728,
+          2097152
+        ],
+        "scatter_records": [
+          3145728,
+          2097152
+        ],
+        "passes": [
+          3,
+          2
+        ],
+        "compact_records": [
+          1980928,
+          1847808
+        ],
+        "max_path_passes": [
+          3,
+          2
+        ]
+      }
+    },
+    {
+      "run": "pa-capacity-work-seed20261024",
+      "cell": [
+        "f32",
+        "sparse16",
+        "20261024"
+      ],
+      "methods": {
+        "Pa_unified_groups_t16777216": {
+          "layout": "f32",
+          "case": "sparse16",
+          "n": 1048576,
+          "record_bytes": 4,
+          "seed": 20261024,
+          "block": 512,
+          "heap_peak": 0,
+          "allocs": 0,
+          "projection_nodes": 0,
+          "projection_records": 0,
+          "identity_nodes": 0,
+          "nodes": 1,
+          "node_records": 1048576,
+          "prepare_records": 1048576,
+          "order_records": 386,
+          "candidate_records": 0,
+          "label_evals": 3145728,
+          "scatter_records": 3145728,
+          "dense_nodes": 0,
+          "block_nodes": 1,
+          "passes": 3,
+          "compact_records": 1968128,
+          "tail_records": 0,
+          "runs_records": 0,
+          "unresolved_records": 0,
+          "leaves": 0,
+          "leaf_records": 0,
+          "max_depth": 0,
+          "max_path_passes": 3,
+          "frontier_nodes": 0,
+          "equal_nodes": 0,
+          "band_nodes": 0,
+          "band_records": 0,
+          "terminal_band_nodes": 0,
+          "probe_records": 64,
+          "leaf_lengths": ""
+        },
+        "Pa_kernel": {
+          "layout": "f32",
+          "case": "sparse16",
+          "n": 1048576,
+          "record_bytes": 4,
+          "seed": 20261024,
+          "block": 512,
+          "heap_peak": 0,
+          "allocs": 0,
+          "projection_nodes": 1,
+          "projection_records": 1048576,
+          "identity_nodes": 0,
+          "nodes": 1,
+          "node_records": 1048576,
+          "prepare_records": 1048576,
+          "order_records": 386,
+          "candidate_records": 0,
+          "label_evals": 2097152,
+          "scatter_records": 2097152,
+          "dense_nodes": 0,
+          "block_nodes": 1,
+          "passes": 2,
+          "compact_records": 1835520,
+          "tail_records": 0,
+          "runs_records": 0,
+          "unresolved_records": 0,
+          "leaves": 0,
+          "leaf_records": 0,
+          "max_depth": 0,
+          "max_path_passes": 2,
+          "frontier_nodes": 0,
+          "equal_nodes": 0,
+          "band_nodes": 0,
+          "band_records": 0,
+          "terminal_band_nodes": 0,
+          "probe_records": 64,
+          "leaf_lengths": ""
+        },
+        "Pa_odd_blocks": {
+          "layout": "f32",
+          "case": "sparse16",
+          "n": 1048576,
+          "record_bytes": 4,
+          "seed": 20261024,
+          "block": 512,
+          "heap_peak": 0,
+          "allocs": 0,
+          "projection_nodes": 1,
+          "projection_records": 1048576,
+          "identity_nodes": 0,
+          "nodes": 1,
+          "node_records": 1048576,
+          "prepare_records": 1048576,
+          "order_records": 386,
+          "candidate_records": 0,
+          "label_evals": 2097152,
+          "scatter_records": 2097152,
+          "dense_nodes": 0,
+          "block_nodes": 1,
+          "passes": 2,
+          "compact_records": 1840626,
+          "tail_records": 4,
+          "runs_records": 0,
+          "unresolved_records": 0,
+          "leaves": 0,
+          "leaf_records": 0,
+          "max_depth": 0,
+          "max_path_passes": 2,
+          "frontier_nodes": 0,
+          "equal_nodes": 0,
+          "band_nodes": 0,
+          "band_records": 0,
+          "terminal_band_nodes": 0,
+          "probe_records": 64,
+          "leaf_lengths": ""
+        }
+      },
+      "odd_vs_base_diff": {
+        "projection_nodes": [
+          0,
+          1
+        ],
+        "projection_records": [
+          0,
+          1048576
+        ],
+        "label_evals": [
+          3145728,
+          2097152
+        ],
+        "scatter_records": [
+          3145728,
+          2097152
+        ],
+        "passes": [
+          3,
+          2
+        ],
+        "compact_records": [
+          1968128,
+          1840626
+        ],
+        "tail_records": [
+          0,
+          4
+        ],
+        "max_path_passes": [
+          3,
+          2
+        ]
+      },
+      "kernel_vs_base_diff": {
+        "projection_nodes": [
+          0,
+          1
+        ],
+        "projection_records": [
+          0,
+          1048576
+        ],
+        "label_evals": [
+          3145728,
+          2097152
+        ],
+        "scatter_records": [
+          3145728,
+          2097152
+        ],
+        "passes": [
+          3,
+          2
+        ],
+        "compact_records": [
+          1968128,
+          1835520
+        ],
+        "max_path_passes": [
+          3,
+          2
+        ]
+      }
+    },
+    {
+      "run": "pa-capacity-work-seed20261024",
+      "cell": [
+        "f32_id16",
+        "sparse16",
+        "20261024"
+      ],
+      "methods": {
+        "Pa_unified_groups_t16777216": {
+          "layout": "f32_id16",
+          "case": "sparse16",
+          "n": 1048576,
+          "record_bytes": 16,
+          "seed": 20261024,
+          "block": 512,
+          "heap_peak": 0,
+          "allocs": 0,
+          "projection_nodes": 0,
+          "projection_records": 0,
+          "identity_nodes": 0,
+          "nodes": 1,
+          "node_records": 1048576,
+          "prepare_records": 1048576,
+          "order_records": 386,
+          "candidate_records": 0,
+          "label_evals": 3145728,
+          "scatter_records": 3145728,
+          "dense_nodes": 0,
+          "block_nodes": 1,
+          "passes": 3,
+          "compact_records": 1968128,
+          "tail_records": 0,
+          "runs_records": 0,
+          "unresolved_records": 0,
+          "leaves": 0,
+          "leaf_records": 0,
+          "max_depth": 0,
+          "max_path_passes": 3,
+          "frontier_nodes": 0,
+          "equal_nodes": 0,
+          "band_nodes": 0,
+          "band_records": 0,
+          "terminal_band_nodes": 0,
+          "probe_records": 64,
+          "leaf_lengths": ""
+        },
+        "Pa_kernel": {
+          "layout": "f32_id16",
+          "case": "sparse16",
+          "n": 1048576,
+          "record_bytes": 16,
+          "seed": 20261024,
+          "block": 512,
+          "heap_peak": 0,
+          "allocs": 0,
+          "projection_nodes": 1,
+          "projection_records": 1048576,
+          "identity_nodes": 0,
+          "nodes": 1,
+          "node_records": 1048576,
+          "prepare_records": 1048576,
+          "order_records": 386,
+          "candidate_records": 0,
+          "label_evals": 2097152,
+          "scatter_records": 2097152,
+          "dense_nodes": 0,
+          "block_nodes": 1,
+          "passes": 2,
+          "compact_records": 1835520,
+          "tail_records": 0,
+          "runs_records": 0,
+          "unresolved_records": 0,
+          "leaves": 0,
+          "leaf_records": 0,
+          "max_depth": 0,
+          "max_path_passes": 2,
+          "frontier_nodes": 0,
+          "equal_nodes": 0,
+          "band_nodes": 0,
+          "band_records": 0,
+          "terminal_band_nodes": 0,
+          "probe_records": 64,
+          "leaf_lengths": ""
+        },
+        "Pa_odd_blocks": {
+          "layout": "f32_id16",
+          "case": "sparse16",
+          "n": 1048576,
+          "record_bytes": 16,
+          "seed": 20261024,
+          "block": 512,
+          "heap_peak": 0,
+          "allocs": 0,
+          "projection_nodes": 1,
+          "projection_records": 1048576,
+          "identity_nodes": 0,
+          "nodes": 1,
+          "node_records": 1048576,
+          "prepare_records": 1048576,
+          "order_records": 386,
+          "candidate_records": 0,
+          "label_evals": 2097152,
+          "scatter_records": 2097152,
+          "dense_nodes": 0,
+          "block_nodes": 1,
+          "passes": 2,
+          "compact_records": 1840626,
+          "tail_records": 4,
+          "runs_records": 0,
+          "unresolved_records": 0,
+          "leaves": 0,
+          "leaf_records": 0,
+          "max_depth": 0,
+          "max_path_passes": 2,
+          "frontier_nodes": 0,
+          "equal_nodes": 0,
+          "band_nodes": 0,
+          "band_records": 0,
+          "terminal_band_nodes": 0,
+          "probe_records": 64,
+          "leaf_lengths": ""
+        }
+      },
+      "odd_vs_base_diff": {
+        "projection_nodes": [
+          0,
+          1
+        ],
+        "projection_records": [
+          0,
+          1048576
+        ],
+        "label_evals": [
+          3145728,
+          2097152
+        ],
+        "scatter_records": [
+          3145728,
+          2097152
+        ],
+        "passes": [
+          3,
+          2
+        ],
+        "compact_records": [
+          1968128,
+          1840626
+        ],
+        "tail_records": [
+          0,
+          4
+        ],
+        "max_path_passes": [
+          3,
+          2
+        ]
+      },
+      "kernel_vs_base_diff": {
+        "projection_nodes": [
+          0,
+          1
+        ],
+        "projection_records": [
+          0,
+          1048576
+        ],
+        "label_evals": [
+          3145728,
+          2097152
+        ],
+        "scatter_records": [
+          3145728,
+          2097152
+        ],
+        "passes": [
+          3,
+          2
+        ],
+        "compact_records": [
+          1968128,
+          1835520
+        ],
+        "max_path_passes": [
+          3,
+          2
+        ]
+      }
+    }
+  ],
+  "memory": [
+    {
+      "run": "pa-capacity-memory-seed42",
+      "layout": "f32",
+      "case": "sparse16",
+      "seed": "42",
+      "method": "Pa_unified_groups_t16777216",
+      "heap_peak": 1083904,
+      "allocs": 14
+    },
+    {
+      "run": "pa-capacity-memory-seed42",
+      "layout": "f32",
+      "case": "sparse16",
+      "seed": "42",
+      "method": "Pa_kernel",
+      "heap_peak": 1083904,
+      "allocs": 11
+    },
+    {
+      "run": "pa-capacity-memory-seed42",
+      "layout": "f32",
+      "case": "sparse16",
+      "seed": "42",
+      "method": "Pa_odd_blocks",
+      "heap_peak": 1081892,
+      "allocs": 11
+    },
+    {
+      "run": "pa-capacity-memory-seed42",
+      "layout": "f32_id16",
+      "case": "sparse16",
+      "seed": "42",
+      "method": "Pa_unified_groups_t16777216",
+      "heap_peak": 4229632,
+      "allocs": 14
+    },
+    {
+      "run": "pa-capacity-memory-seed42",
+      "layout": "f32_id16",
+      "case": "sparse16",
+      "seed": "42",
+      "method": "Pa_kernel",
+      "heap_peak": 4229632,
+      "allocs": 11
+    },
+    {
+      "run": "pa-capacity-memory-seed42",
+      "layout": "f32_id16",
+      "case": "sparse16",
+      "seed": "42",
+      "method": "Pa_odd_blocks",
+      "heap_peak": 4221476,
+      "allocs": 11
+    },
+    {
+      "run": "pa-capacity-memory-seed20261024",
+      "layout": "f32",
+      "case": "sparse16",
+      "seed": "20261024",
+      "method": "Pa_unified_groups_t16777216",
+      "heap_peak": 1083904,
+      "allocs": 14
+    },
+    {
+      "run": "pa-capacity-memory-seed20261024",
+      "layout": "f32",
+      "case": "sparse16",
+      "seed": "20261024",
+      "method": "Pa_kernel",
+      "heap_peak": 1083904,
+      "allocs": 11
+    },
+    {
+      "run": "pa-capacity-memory-seed20261024",
+      "layout": "f32",
+      "case": "sparse16",
+      "seed": "20261024",
+      "method": "Pa_odd_blocks",
+      "heap_peak": 1081892,
+      "allocs": 11
+    },
+    {
+      "run": "pa-capacity-memory-seed20261024",
+      "layout": "f32_id16",
+      "case": "sparse16",
+      "seed": "20261024",
+      "method": "Pa_unified_groups_t16777216",
+      "heap_peak": 4229632,
+      "allocs": 14
+    },
+    {
+      "run": "pa-capacity-memory-seed20261024",
+      "layout": "f32_id16",
+      "case": "sparse16",
+      "seed": "20261024",
+      "method": "Pa_kernel",
+      "heap_peak": 4229632,
+      "allocs": 11
+    },
+    {
+      "run": "pa-capacity-memory-seed20261024",
+      "layout": "f32_id16",
+      "case": "sparse16",
+      "seed": "20261024",
+      "method": "Pa_odd_blocks",
+      "heap_peak": 4221476,
+      "allocs": 11
+    }
+  ]
+}
