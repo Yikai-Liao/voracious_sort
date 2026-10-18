@@ -1,0 +1,33 @@
+// Uncompiled proposal. Production sources and frozen executables are unchanged.
+// Precondition: labels are nondecreasing and start < records.len().
+fn ordered_run_end<T, L: Eq, F: Fn(&T) -> L>(
+    records: &[T],
+    start: usize,
+    current: &L,
+    label: &F,
+) -> usize {
+    let remaining = records.len() - start;
+    let mut known_match = 0;
+    let mut probe = 1;
+    while probe < remaining {
+        if label(&records[start + probe]) != *current {
+            break;
+        }
+        known_match = probe;
+        probe = probe.saturating_mul(2).min(remaining);
+    }
+
+    // probe is either a known different label or the one-past-end position.
+    // Neither position is evaluated by the binary search.
+    let mut low = known_match + 1;
+    let mut high = probe.min(remaining);
+    while low < high {
+        let middle = low + (high - low) / 2;
+        if label(&records[start + middle]) == *current {
+            low = middle + 1;
+        } else {
+            high = middle;
+        }
+    }
+    start + low
+}
