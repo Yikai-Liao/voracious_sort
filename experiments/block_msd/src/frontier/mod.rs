@@ -11,6 +11,7 @@ mod local_distribution;
 mod ordered_tiled;
 mod pa;
 mod prefix_band;
+mod projection;
 pub use pa::{sort_pa_experiment, sort_pa_with_threshold, PaExperiment};
 #[cfg(test)]
 mod tests;
@@ -37,6 +38,9 @@ pub struct Config {
 
 #[derive(Debug)]
 pub struct Work {
+    pub projection_nodes: usize,
+    pub projection_records: usize,
+    pub identity_nodes: usize,
     pub nodes: usize,
     pub node_records: usize,
     pub prepare_records: usize,
@@ -68,6 +72,9 @@ pub struct Work {
 impl Default for Work {
     fn default() -> Self {
         Self {
+            projection_nodes: 0,
+            projection_records: 0,
+            identity_nodes: 0,
             nodes: 0,
             node_records: 0,
             prepare_records: 0,

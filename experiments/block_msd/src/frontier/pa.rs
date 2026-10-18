@@ -32,6 +32,17 @@ pub enum PaExperiment {
     UnifiedReuse,
     UnifiedPrepared,
     UnifiedGroups,
+    UnifiedIdentity,
+    UnifiedProjected,
+    UnifiedLocal,
+    UnifiedProjectedLocal,
+}
+
+#[derive(Clone, Copy, PartialEq)]
+enum SparseCompletion {
+    Recursive,
+    Identity,
+    Projected,
 }
 
 #[derive(Clone, Copy)]
@@ -54,6 +65,7 @@ struct Policy {
     grouped_scatter: bool,
     local_workspace_threshold: usize,
     block: usize,
+    sparse: SparseCompletion,
 }
 
 pub fn sort_pa_experiment<T: Radixable<K>, K: RadixKey>(
@@ -78,7 +90,30 @@ where
     Converted<T, K>: NativeKey,
 {
     assert!(block > 0);
+    let sparse = match experiment {
+        PaExperiment::UnifiedIdentity => SparseCompletion::Identity,
+        PaExperiment::UnifiedProjected
+        | PaExperiment::UnifiedProjectedLocal => SparseCompletion::Projected,
+        _ => SparseCompletion::Recursive,
+    };
+    let local_workspace_threshold = if matches!(
+        experiment,
+        PaExperiment::UnifiedLocal | PaExperiment::UnifiedProjectedLocal
+    ) {
+        0
+    } else {
+        local_workspace_threshold
+    };
+    // Independent ablations inherit the complete frozen UnifiedGroups policy.
+    let experiment = match experiment {
+        PaExperiment::UnifiedIdentity
+        | PaExperiment::UnifiedProjected
+        | PaExperiment::UnifiedLocal
+        | PaExperiment::UnifiedProjectedLocal => PaExperiment::UnifiedGroups,
+        other => other,
+    };
     let policy = Policy {
+        sparse,
         terminal: matches!(
             experiment,
             PaExperiment::Terminal
@@ -572,6 +607,48 @@ fn visit<T: Radixable<K>, K: RadixKey>(
             depth,
             path,
         );
+    } else if policy.sparse != SparseCompletion::Recursive
+        && sparse_byte_projection(p.union ^ p.intersection, cap)
+    {
+        if policy.sparse == SparseCompletion::Identity {
+            work! { stats.identity_nodes += 1; }
+            partition::<T, K, _>(
+                arr,
+                &Identity,
+                Some(p.union ^ p.intersection),
+                policy,
+                true,
+                stats,
+                depth,
+                path,
+            );
+        } else {
+            // A complete projection preserves both order and equality. This
+            // terminal uses an actual u8 label without widening narrow keys.
+            let projection = super::projection::ByteProjection::new(
+                (p.union ^ p.intersection) & Converted::<T, K>::mask(cap),
+            );
+            #[cfg(feature = "frontier_work")]
+            let evals = std::cell::Cell::new(0);
+            let label = |item: &T| {
+                work! { evals.set(evals.get() + 1); }
+                projection.label(item.into_key_type())
+            };
+            let passes = super::local_distribution::distribute_prepared_grouped(
+                arr,
+                &label,
+                policy.block,
+                policy.local_workspace_threshold,
+                projection.variation(),
+                stats,
+            );
+            work! {
+                stats.projection_nodes += 1;
+                stats.projection_records += arr.len();
+                stats.label_evals += evals.get();
+                stats.max_path_passes = stats.max_path_passes.max(path + passes);
+            }
+        }
     } else if policy.terminal && coarse == width && !(policy.probe && use_skew)
     {
         partition::<T, K, _>(
@@ -639,6 +716,18 @@ fn visit<T: Radixable<K>, K: RadixKey>(
             path,
         );
     }
+}
+
+// Only cross-byte masks can save a radix pass. Low population count bounds
+// the full label at one byte; it is not an estimate of Shannon entropy.
+fn sparse_byte_projection<U: NativeKey>(variation: U, cap: usize) -> bool {
+    let variation = variation & U::mask(cap);
+    variation.count_ones() <= 8
+        && (0..U::BITS / 8)
+            .filter(|&byte| variation.byte(byte) != 0)
+            .take(2)
+            .count()
+            == 2
 }
 
 // A majority certificate guarantees each unresolved side is smaller than half

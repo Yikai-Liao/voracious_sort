@@ -459,6 +459,9 @@ mod tests {
             };
         }
         compare!(
+            projection_nodes,
+            projection_records,
+            identity_nodes,
             nodes,
             node_records,
             prepare_records,

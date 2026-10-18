@@ -197,6 +197,10 @@ fn recursive_identity_and_payload_matrix() {
                 PaExperiment::UnifiedReuse,
                 PaExperiment::UnifiedPrepared,
                 PaExperiment::UnifiedGroups,
+                PaExperiment::UnifiedIdentity,
+                PaExperiment::UnifiedProjected,
+                PaExperiment::UnifiedLocal,
+                PaExperiment::UnifiedProjectedLocal,
                 PaExperiment::UnifiedSampled,
                 PaExperiment::UnifiedReduced,
                 PaExperiment::UnifiedCandidate,
@@ -273,6 +277,10 @@ fn pa_new_policies_preserve_converted_float_order() {
         PaExperiment::UnifiedReuse,
         PaExperiment::UnifiedPrepared,
         PaExperiment::UnifiedGroups,
+        PaExperiment::UnifiedIdentity,
+        PaExperiment::UnifiedProjected,
+        PaExperiment::UnifiedLocal,
+        PaExperiment::UnifiedProjectedLocal,
         PaExperiment::UnifiedSampled,
         PaExperiment::UnifiedReduced,
         PaExperiment::UnifiedCandidate,
@@ -363,6 +371,10 @@ fn native_small_integer_widths() {
         PaExperiment::UnifiedReuse,
         PaExperiment::UnifiedPrepared,
         PaExperiment::UnifiedGroups,
+        PaExperiment::UnifiedIdentity,
+        PaExperiment::UnifiedProjected,
+        PaExperiment::UnifiedLocal,
+        PaExperiment::UnifiedProjectedLocal,
         PaExperiment::UnifiedSampled,
         PaExperiment::UnifiedReduced,
         PaExperiment::UnifiedCandidate,
@@ -437,6 +449,10 @@ fn block_tail_sizes_and_large_workspace() {
             PaExperiment::UnifiedReuse,
             PaExperiment::UnifiedPrepared,
             PaExperiment::UnifiedGroups,
+            PaExperiment::UnifiedIdentity,
+            PaExperiment::UnifiedProjected,
+            PaExperiment::UnifiedLocal,
+            PaExperiment::UnifiedProjectedLocal,
             PaExperiment::UnifiedSampled,
             PaExperiment::UnifiedReduced,
             PaExperiment::UnifiedCandidate,
@@ -661,4 +677,112 @@ fn nested_band_rejection_keeps_the_original_interval() {
         && a.payload == b.payload));
     assert!(work.band_nodes > 0);
     assert_eq!(work.terminal_band_nodes, 0);
+}
+
+#[test]
+fn structural_projection_bit_embeddings_and_frequency_preserve_stable_records()
+{
+    let mut state = 20261018;
+    for q in [0usize, 1, 7, 8, 9, 16, 64, 128] {
+        for embedding in 0..4 {
+            let positions: Vec<_> = (0..q)
+                .map(|j| match embedding {
+                    0 => j,
+                    1 => 128 - q + j,
+                    2 if q > 1 => j * 127 / (q - 1),
+                    _ => 64usize.saturating_sub(q / 2) + j,
+                })
+                .collect();
+            if positions.iter().any(|&p| p >= 128) {
+                continue;
+            }
+            for skew in [false, true] {
+                let input: Vec<Item> = (0..1025)
+                    .map(|id| {
+                        let raw = ((random(&mut state) as u128) << 64)
+                            | random(&mut state) as u128;
+                        let logical =
+                            if skew && id % 10 != 0 { 0 } else { raw };
+                        let key = positions
+                            .iter()
+                            .enumerate()
+                            .fold(0u128, |key, (j, &p)| {
+                                key | (((logical >> j) & 1) << p)
+                            });
+                        Item {
+                            key,
+                            id,
+                            payload: [
+                                id as u64,
+                                !id as u64,
+                                (id as u64).wrapping_mul(123456789),
+                            ],
+                        }
+                    })
+                    .collect();
+                let mut expected = input.clone();
+                expected.sort_by_key(|x| x.key);
+                for policy in [
+                    PaExperiment::UnifiedIdentity,
+                    PaExperiment::UnifiedProjected,
+                    PaExperiment::UnifiedLocal,
+                    PaExperiment::UnifiedProjectedLocal,
+                ] {
+                    for block in [3, 64, 512] {
+                        let mut actual = input.clone();
+                        sort_pa_with_threshold::<_, u128>(
+                            &mut actual,
+                            policy,
+                            block,
+                            16 * 1024 * 1024,
+                        );
+                        assert!(actual.iter().zip(&expected).all(|(a,b)| a.key == b.key && a.id == b.id && a.payload == b.payload), "q={q} embedding={embedding} skew={skew} block={block} policy={policy:?}");
+                    }
+                }
+            }
+        }
+    }
+}
+
+#[test]
+#[cfg(feature = "frontier_work")]
+fn complete_byte_projection_eliminates_sparse_recursion_and_seven_passes() {
+    let positions = [0, 18, 36, 54, 72, 90, 108, 126];
+    let input: Vec<Item> = (0usize..16_384)
+        .map(|id| Item {
+            key: positions.iter().enumerate().fold(0, |x, (j, &p)| {
+                x | ((((id.wrapping_mul(73) >> j) & 1) as u128) << p)
+            }),
+            id,
+            payload: [id as u64; 3],
+        })
+        .collect();
+    for block in [64, 512] {
+        let mut projected = input.clone();
+        let work = sort_pa_with_threshold::<_, u128>(
+            &mut projected,
+            PaExperiment::UnifiedProjected,
+            block,
+            16 * 1024 * 1024,
+        );
+        assert_eq!(work.nodes, 1);
+        assert_eq!(work.projection_nodes, 1);
+        assert_eq!(work.scatter_records, input.len());
+        assert_eq!(work.max_path_passes, 1);
+        assert_eq!(work.runs_records, 0);
+        assert_eq!(work.max_depth, 0);
+        let mut identity = input.clone();
+        let work = sort_pa_with_threshold::<_, u128>(
+            &mut identity,
+            PaExperiment::UnifiedIdentity,
+            block,
+            16 * 1024 * 1024,
+        );
+        assert_eq!(work.identity_nodes, 1);
+        assert_eq!(work.scatter_records, 8 * input.len());
+        assert_eq!(work.runs_records, 0);
+        assert!(identity.iter().zip(&projected).all(|(a, b)| a.key == b.key
+            && a.id == b.id
+            && a.payload == b.payload));
+    }
 }

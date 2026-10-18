@@ -286,10 +286,11 @@ fn output_matches<T: Verified + Copy>(
     if actual.len() != expected.len() {
         return false;
     }
-    if method != "Rollercoaster" {
+    if !matches!(method, "Rollercoaster" | "Reverse_only") {
         return actual.iter().zip(expected).all(|(a, b)| a.same(b));
     }
-    if !actual.windows(2).all(|pair| pair[0].key_order() <= pair[1].key_order()) {
+    if !actual.windows(2).all(|pair| pair[0].key_order() <= pair[1].key_order())
+    {
         return false;
     }
     let mut actual_by_id = actual.to_vec();
@@ -300,6 +301,13 @@ fn output_matches<T: Verified + Copy>(
 }
 
 const METHODS: &[&str] = &[
+    "Reverse_only",
+    "Reverse_stable",
+    "Rollercoaster_repaired",
+    "Pa_identity",
+    "Pa_projected",
+    "Pa_local",
+    "Pa_projected_local",
     "Pa_ref",
     "Pa_terminal",
     "Pa_ordered",
@@ -360,6 +368,23 @@ const METHODS: &[&str] = &[
     "stable_msd",
 ];
 const CASES: &[&str] = &[
+    "reverse_unique",
+    "reverse_groups",
+    "project7_contig",
+    "project8_contig",
+    "project9_contig",
+    "project7_high",
+    "project8_high",
+    "project9_high",
+    "project7_spaced",
+    "project8_spaced",
+    "project9_spaced",
+    "project7_cross",
+    "project8_cross",
+    "project9_cross",
+    "project7_spaced_skew",
+    "project8_spaced_skew",
+    "project9_spaced_skew",
     "uniform",
     "sorted",
     "reverse",
@@ -417,8 +442,42 @@ where
     } else {
         method
     };
+    if matches!(
+        method,
+        "Pa_identity" | "Pa_projected" | "Pa_local" | "Pa_projected_local"
+    ) {
+        local_workspace_threshold = 16 * 1024 * 1024;
+    }
     match method {
-        "Pa_ref"
+        "Reverse_only" => {
+            arr.reverse();
+            return Default::default();
+        },
+        "Reverse_stable" | "Rollercoaster_repaired" => {
+            if method == "Reverse_stable" {
+                arr.reverse();
+            } else {
+                rollercoaster_sort::<T, K>(arr, 8);
+            }
+            // Restricted to descending input by main(). Rollercoaster's
+            // descending fast path reverses ties; apply the same stable repair.
+            let mut start = 0;
+            while start < arr.len() {
+                let key = arr[start].into_key_type();
+                let mut end = start + 1;
+                while end < arr.len() && arr[end].into_key_type() == key {
+                    end += 1;
+                }
+                arr[start..end].reverse();
+                start = end;
+            }
+            return Default::default();
+        },
+        "Pa_identity"
+        | "Pa_projected"
+        | "Pa_local"
+        | "Pa_projected_local"
+        | "Pa_ref"
         | "Pa_terminal"
         | "Pa_ordered"
         | "Pa_lean"
@@ -447,6 +506,10 @@ where
         | "Pa_unified_groups" => {
             use frontier::PaExperiment::*;
             let experiment = match method {
+                "Pa_identity" => UnifiedIdentity,
+                "Pa_projected" => UnifiedProjected,
+                "Pa_local" => UnifiedLocal,
+                "Pa_projected_local" => UnifiedProjectedLocal,
                 "Pa_ref" => Reference,
                 "Pa_terminal" => Terminal,
                 "Pa_ordered" => Ordered,
@@ -548,6 +611,32 @@ fn make_keys(n: usize, bits: usize, case: &str, seed: u64) -> Vec<u128> {
                 & mask;
             match case {
                 "uniform" | "sorted" | "reverse" => r,
+                "reverse_unique" => {
+                    assert!(n as u128 <= mask);
+                    (n - 1 - i) as u128
+                },
+                "reverse_groups" => (((n - 1 - i) / 16) as u128).min(mask),
+                _ if case.starts_with("project") => {
+                    let q: usize = case[7..8].parse().unwrap();
+                    assert!(bits >= q);
+                    let logical = if case.ends_with("_skew") && i % 10 != 0 {
+                        0
+                    } else {
+                        r as usize & ((1 << q) - 1)
+                    };
+                    (0..q).fold(0, |key, j| {
+                        let position = if case.contains("_contig") {
+                            j
+                        } else if case.contains("_high") {
+                            bits - q + j
+                        } else if case.contains("_cross") {
+                            bits / 2 - q / 2 + j
+                        } else {
+                            j * (bits - 1) / (q - 1)
+                        };
+                        key | ((((logical >> j) & 1) as u128) << position)
+                    })
+                },
                 "equal" => mask / 3,
                 "few" => (r % 8) * (mask / 9),
                 "common_high" => (mask & !0xfffff) | (r & 0xfffff),
@@ -609,7 +698,10 @@ fn make_keys(n: usize, bits: usize, case: &str, seed: u64) -> Vec<u128> {
         keys.sort();
     } else if case == "reverse" {
         keys.sort_by(|a, b| b.cmp(a));
-    } else if case != "outlier_first" && case != "equal" {
+    } else if case != "outlier_first"
+        && case != "equal"
+        && !case.starts_with("reverse_")
+    {
         for i in (1..n).rev() {
             let j = random(&mut state) as usize % (i + 1);
             keys.swap(i, j);
@@ -634,13 +726,27 @@ mod workload_tests {
         let mut expected = input.clone();
         expected.sort_by_key(|record| record.key);
         for &method in METHODS {
+            if matches!(
+                method,
+                "Reverse_only" | "Reverse_stable" | "Rollercoaster_repaired"
+            ) {
+                continue;
+            }
             let mut actual = input.clone();
             execute::<_, u16>(&mut actual, method, 17);
-            assert!(
-                output_matches(&actual, &expected, method),
-                "{}",
-                method
-            );
+            assert!(output_matches(&actual, &expected, method), "{}", method);
+        }
+    }
+
+    #[test]
+    fn descending_controls_preserve_duplicate_identity_and_payload() {
+        for case in ["reverse", "reverse_unique", "reverse_groups"] {
+            let input: Vec<Wide> = make_keys(4097,128,case,42).into_iter().enumerate().map(|(id,key)| Wide {key,serial:id as u64,payload:[!(id as u64)]}).collect();
+            let mut expected = input.clone(); expected.sort_by_key(|x| x.key);
+            for method in ["Reverse_only","Reverse_stable","Rollercoaster_repaired"] {
+                let mut actual = input.clone(); execute::<_,u128>(&mut actual,method,64);
+                assert!(output_matches(&actual,&expected,method),"{case} {method}");
+            }
         }
     }
 
@@ -785,6 +891,9 @@ fn run<T: Radixable<K> + Verified, K: RadixKey>(
                 cpu.to_string(),
                 peak.to_string(),
                 allocs.to_string(),
+                stats.projection_nodes.to_string(),
+                stats.projection_records.to_string(),
+                stats.identity_nodes.to_string(),
                 stats.nodes.to_string(),
                 stats.node_records.to_string(),
                 stats.prepare_records.to_string(),
@@ -834,6 +943,20 @@ fn main() {
         .split(',')
         .collect();
     assert!(cases.iter().all(|c| CASES.contains(c)));
+    if methods.iter().any(|m| {
+        matches!(
+            *m,
+            "Reverse_only" | "Reverse_stable" | "Rollercoaster_repaired"
+        )
+    }) {
+        assert!(
+            cases.iter().all(|c| matches!(
+                *c,
+                "reverse" | "reverse_unique" | "reverse_groups"
+            )),
+            "reverse diagnostics require descending inputs"
+        );
+    }
     let default_layouts = if cfg!(feature = "frontier_narrow_screen") {
         "u8,u16,u32,u64,u8_id8,u16_id8,small8"
     } else {
@@ -862,7 +985,7 @@ fn main() {
     );
     let block = args.get(7).map_or(64, |s| s.parse().unwrap());
     let seed = args.get(8).map_or(0x123456789abcdef, |s| s.parse().unwrap());
-    println!("layout,case,n,record_bytes,seed,block,method,slot,rep,kind,wall_ns,cpu_ns,heap_peak,allocs,nodes,node_records,prepare_records,order_records,candidate_records,label_evals,scatter_records,dense_nodes,block_nodes,passes,compact_records,tail_records,runs_records,unresolved_records,leaves,leaf_records,max_depth,max_path_passes,frontier_nodes,equal_nodes,band_nodes,band_records,terminal_band_nodes,probe_records,instrumented,input_address,leaf_lengths");
+    println!("layout,case,n,record_bytes,seed,block,method,slot,rep,kind,wall_ns,cpu_ns,heap_peak,allocs,projection_nodes,projection_records,identity_nodes,nodes,node_records,prepare_records,order_records,candidate_records,label_evals,scatter_records,dense_nodes,block_nodes,passes,compact_records,tail_records,runs_records,unresolved_records,leaves,leaf_records,max_depth,max_path_passes,frontier_nodes,equal_nodes,band_nodes,band_records,terminal_band_nodes,probe_records,instrumented,input_address,leaf_lengths");
     for layout in layouts {
         for &case in &cases {
             let bits = match layout {
