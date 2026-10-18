@@ -9,9 +9,9 @@ p=argparse.ArgumentParser()
 p.add_argument('--candidate',default='Pa_projected')
 p.add_argument('--binary',default='final')
 p.add_argument('--prefix',default='final')
-p.add_argument('--reps',default='12')
+p.add_argument('--reps',default='16')
 a=p.parse_args()
-methods=','.join([a.candidate,BASE,'Fa','Rollercoaster','L_frozen','stable_msd',a.candidate])
+methods=','.join([a.candidate,BASE,'Pa_packed','Fa','Rollercoaster','L_frozen','stable_msd',a.candidate])
 shared='deep_skew,majority_prefix,deep_unique90,deep_unique98'
 cells=[
 ('guards-b64-s42',dict(cases='uniform,sparse',layouts='u8,u16,u32,u64,u128,u8_id8,u16_id8,small8,wide32,large128')),
