@@ -36,3 +36,5 @@ The current source uses only a hardware token for compressed labels, delegates e
 | counted- (current) | Independent conservative-packing and count-derived completion; correctness passed, small performance gates pending. Prior evidence is not acceptance for this source. |
 
 - Counted completion rejected after13 complete native integer cells and two independent confirmations; [COUNTED_VALIDATION.md](COUNTED_VALIDATION.md). B512 partial data excluded. Conservative packing remains a separate unvalidated candidate.
+
+- Independent conservative packing cohort: failed counted completion and bucket-length API removed; [STRICT_PLAN.md](STRICT_PLAN.md) declares fresh-source screens and final acceptance. Pending correctness/builds; no prior acceptance transferred.

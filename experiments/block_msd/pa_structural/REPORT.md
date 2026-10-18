@@ -1,6 +1,6 @@
 # PA 优化交付报告
 
-计数完成路径及其组合已被独立整数复测淘汰：u32 uniform/B64 分别比原 PA 慢约33%与22%。浮点改善不能覆盖这一退化。当前将移除计数模块和桶长接口，仅保留保守硬件压紧作为待验证候选；完整验收不沿用历史结果。证据与停止范围见 [COUNTED_VALIDATION.md](COUNTED_VALIDATION.md)。
+计数完成路径及其组合已被独立整数复测淘汰：u32 uniform/B64 分别比原 PA 慢约33%与22%。浮点改善不能覆盖这一退化。计数模块和桶长接口已移除，仅保留保守硬件压紧作为待验证候选；完整验收不沿用历史结果。证据与停止范围见 [COUNTED_VALIDATION.md](COUNTED_VALIDATION.md)，新一轮验收见 [STRICT_PLAN.md](STRICT_PLAN.md)。
 
 上一候选 `Pa_plan` 的寄存器掩码 PEXT 有代码生成证据，但原失败边界的正反复测仍慢约14%，同程序的新旧压紧路径对照也未显示一致收益，已拒绝并停止扩大验证，见 [PA_PLAN_VALIDATION.md](PA_PLAN_VALIDATION.md)。
 

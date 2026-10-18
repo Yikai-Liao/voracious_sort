@@ -37,8 +37,6 @@ pub enum PaExperiment {
     UnifiedPackedContext,
     UnifiedPackedAggressive,
     UnifiedStrict,
-    UnifiedCountedKey,
-    UnifiedStrictCounted,
 }
 
 #[derive(Clone, Copy, PartialEq)]
@@ -72,7 +70,6 @@ struct Policy {
     local_workspace_threshold: usize,
     block: usize,
     sparse: SparseCompletion,
-    counted_completion: bool,
 }
 
 pub fn sort_pa_experiment<T: Radixable<K>, K: RadixKey>(
@@ -97,14 +94,8 @@ where
     Converted<T, K>: NativeKey,
 {
     assert!(block > 0);
-    let counted_completion = matches!(
-        experiment,
-        PaExperiment::UnifiedCountedKey | PaExperiment::UnifiedStrictCounted
-    );
     let sparse = match experiment {
-        PaExperiment::UnifiedStrict | PaExperiment::UnifiedStrictCounted => {
-            SparseCompletion::Conservative
-        },
+        PaExperiment::UnifiedStrict => SparseCompletion::Conservative,
         PaExperiment::UnifiedPacked => SparseCompletion::Packed,
         PaExperiment::UnifiedPackedContext => SparseCompletion::PackedContext,
         PaExperiment::UnifiedPackedAggressive => {
@@ -119,14 +110,11 @@ where
         | PaExperiment::UnifiedPacked
         | PaExperiment::UnifiedPackedContext
         | PaExperiment::UnifiedPackedAggressive
-        | PaExperiment::UnifiedStrict
-        | PaExperiment::UnifiedCountedKey
-        | PaExperiment::UnifiedStrictCounted => PaExperiment::UnifiedGroups,
+        | PaExperiment::UnifiedStrict => PaExperiment::UnifiedGroups,
         other => other,
     };
     let policy = Policy {
         sparse,
-        counted_completion,
         terminal: matches!(
             experiment,
             PaExperiment::Terminal
@@ -732,40 +720,6 @@ fn visit<T: Radixable<K>, K: RadixKey>(
             );
         }
     } else {
-        let variation =
-            (p.union ^ p.intersection) & Converted::<T, K>::mask(cap);
-        let prefix = variation >> (width - coarse);
-        let active_bytes = |key: Converted<T, K>| {
-            (0..Converted::<T, K>::BITS / 8)
-                .filter(|&b| key.byte(b) != 0)
-                .count()
-        };
-        // Finish the full key only when it adds at most one active byte to
-        // this prefix. Wide random keys retain the original comparison leaves.
-        if policy.counted_completion
-            && active_bytes(variation) <= active_bytes(prefix) + 1
-        {
-            #[cfg(feature = "frontier_work")]
-            let evaluations = std::cell::Cell::new(0);
-            let label = super::labeler::Classified::<T, K, Identity> {
-                classifier: &Identity,
-                marker: std::marker::PhantomData,
-                #[cfg(feature = "frontier_work")]
-                evaluations: &evaluations,
-            };
-            let passes = super::counted_completion::distribute(
-                arr,
-                &label,
-                variation,
-                policy.block,
-                stats,
-            );
-            work! {
-                stats.label_evals += evaluations.get();
-                stats.max_path_passes = stats.max_path_passes.max(path + passes);
-            }
-            return;
-        }
         let classifier = Prefix {
             low: width - coarse,
             mask: Converted::<T, K>::mask(coarse),
