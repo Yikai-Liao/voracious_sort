@@ -16,5 +16,8 @@ Cohorts are not pooled across executable hashes. Historical names containing `fi
 | library-backends, 44e2cc1 | Whole-sort old PA/software/hardware ABBA at 33377af; five software and one hardware signals. Rejected. |
 | hwonly-screen-, 4f53e58 | Hardware-only 16 guard cells; u32 sparse regression. Rejected. Overlapping information/confirmation fragments excluded. |
 | hw-simple-u32-, 31ff0d2 | Two isolated repeated controls show removing the field branch fixes u32 sparse regression. Local checkpoint. |
+| single-final-, 08e5691 | 5f6d211 native original 103 cells completed without a material original-PA regression; ordinary-target sparse failure independently confirmed. Rejected overall. |
+| execution-*-first/control, e39428b | d2669f1 kernel context passes four u32 cells per target and ABBA checkpoint control; direct library grouping regresses uniform and is removed. Local screen only. |
+| kernel-generic-/kernel-final- and extensions | 9bba819 ordinary-target 46-cell validation and independent q64 confirmation; rejected by a reproducible 1.55x slowdown. Native extensions stopped. See VALIDATION_KERNEL_FINAL.md. |
 
 The current source uses only a hardware token for compressed labels, delegates extraction to pinned hakmem, and otherwise keeps ordinary PA. Final validation requires its own immutable executables; historical hardware or software results are not transferred to it.

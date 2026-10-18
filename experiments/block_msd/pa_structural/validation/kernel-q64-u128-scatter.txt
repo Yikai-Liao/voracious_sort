@@ -1,0 +1,128 @@
+0000000000695d90 00000000000001d9 t <hakmem::isa::x86v3::X86V3 as hakmem::isa::Isa>::run::trampoline::<usize, <block_msd_research::frontier::packed_projection::Packed<u128, u16, hakmem::isa::x86v3::X86V3, true> as block_msd_research::frontier::Classifier<u128>>::in_context<usize, <block_msd_research::frontier::block::Sorter<u128>>::scatter<u16, block_msd_research::frontier::labeler::Masked<block_msd_research::frontier::labeler::Classified<u128, u128, block_msd_research::frontier::packed_projection::Packed<u128, u16, hakmem::isa::x86v3::X86V3, true>>, u16>, 0>::{closure#0}>::{closure#0}>
+
+experiments/block_msd/target/pa-structural/kernel_final_generic:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000695d90 <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedotBH_Kb1_EINtB1t_10ClassifieroE10in_contextjNCINvMNtB1t_5blockINtB3x_6SorteroE7scattertINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedooB2v_EtEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment>:
+  695d90:	55                   	push   %rbp
+  695d91:	41 57                	push   %r15
+  695d93:	41 56                	push   %r14
+  695d95:	41 55                	push   %r13
+  695d97:	41 54                	push   %r12
+  695d99:	53                   	push   %rbx
+  695d9a:	48 83 ec 78          	sub    $0x78,%rsp
+  695d9e:	4c 8b 07             	mov    (%rdi),%r8
+  695da1:	c5 f8 10 47 08       	vmovups 0x8(%rdi),%xmm0
+  695da6:	c5 f8 29 44 24 30    	vmovaps %xmm0,0x30(%rsp)
+  695dac:	48 8b 47 18          	mov    0x18(%rdi),%rax
+  695db0:	48 89 44 24 18       	mov    %rax,0x18(%rsp)
+  695db5:	49 8b 00             	mov    (%r8),%rax
+  695db8:	48 8b 98 80 00 00 00 	mov    0x80(%rax),%rbx
+  695dbf:	48 89 5c 24 08       	mov    %rbx,0x8(%rsp)
+  695dc4:	48 8b 80 a8 00 00 00 	mov    0xa8(%rax),%rax
+  695dcb:	48 89 44 24 10       	mov    %rax,0x10(%rsp)
+  695dd0:	48 39 c3             	cmp    %rax,%rbx
+  695dd3:	0f 83 55 01 00 00    	jae    695f2e <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedotBH_Kb1_EINtB1t_10ClassifieroE10in_contextjNCINvMNtB1t_5blockINtB3x_6SorteroE7scattertINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedooB2v_EtEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x19e>
+  695dd9:	45 31 c9             	xor    %r9d,%r9d
+  695ddc:	4c 8d 74 24 40       	lea    0x40(%rsp),%r14
+  695de1:	eb 22                	jmp    695e05 <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedotBH_Kb1_EINtB1t_10ClassifieroE10in_contextjNCINvMNtB1t_5blockINtB3x_6SorteroE7scattertINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedooB2v_EtEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x75>
+  695de3:	66 66 66 66 2e 0f 1f 	data16 data16 data16 cs nopw 0x0(%rax,%rax,1)
+  695dea:	84 00 00 00 00 00 
+  695df0:	48 ff c3             	inc    %rbx
+  695df3:	48 3b 5c 24 10       	cmp    0x10(%rsp),%rbx
+  695df8:	4d 89 e8             	mov    %r13,%r8
+  695dfb:	4c 8b 0c 24          	mov    (%rsp),%r9
+  695dff:	0f 84 24 01 00 00    	je     695f29 <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedotBH_Kb1_EINtB1t_10ClassifieroE10in_contextjNCINvMNtB1t_5blockINtB3x_6SorteroE7scattertINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedooB2v_EtEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x199>
+  695e05:	48 89 5c 24 20       	mov    %rbx,0x20(%rsp)
+  695e0a:	49 8b 00             	mov    (%r8),%rax
+  695e0d:	48 8b 70 28          	mov    0x28(%rax),%rsi
+  695e11:	48 39 f3             	cmp    %rsi,%rbx
+  695e14:	0f 83 3f 01 00 00    	jae    695f59 <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedotBH_Kb1_EINtB1t_10ClassifieroE10in_contextjNCINvMNtB1t_5blockINtB3x_6SorteroE7scattertINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedooB2v_EtEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x1c9>
+  695e1a:	48 8b 48 20          	mov    0x20(%rax),%rcx
+  695e1e:	8b 0c 99             	mov    (%rcx,%rbx,4),%ecx
+  695e21:	48 39 ce             	cmp    %rcx,%rsi
+  695e24:	0f 86 16 01 00 00    	jbe    695f40 <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedotBH_Kb1_EINtB1t_10ClassifieroE10in_contextjNCINvMNtB1t_5blockINtB3x_6SorteroE7scattertINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedooB2v_EtEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x1b0>
+  695e2a:	4c 8b 60 78          	mov    0x78(%rax),%r12
+  695e2e:	48 8b 90 88 00 00 00 	mov    0x88(%rax),%rdx
+  695e35:	31 f6                	xor    %esi,%esi
+  695e37:	48 39 ca             	cmp    %rcx,%rdx
+  695e3a:	bf 00 00 00 00       	mov    $0x0,%edi
+  695e3f:	48 0f 46 fa          	cmovbe %rdx,%rdi
+  695e43:	40 0f 97 c6          	seta   %sil
+  695e47:	48 29 f9             	sub    %rdi,%rcx
+  695e4a:	c1 e6 04             	shl    $0x4,%esi
+  695e4d:	49 0f af cc          	imul   %r12,%rcx
+  695e51:	48 c1 e1 04          	shl    $0x4,%rcx
+  695e55:	48 03 8c 06 90 00 00 	add    0x90(%rsi,%rax,1),%rcx
+  695e5c:	00 
+  695e5d:	48 89 4c 24 28       	mov    %rcx,0x28(%rsp)
+  695e62:	4c 3b 48 70          	cmp    0x70(%rax),%r9
+  695e66:	73 28                	jae    695e90 <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedotBH_Kb1_EINtB1t_10ClassifieroE10in_contextjNCINvMNtB1t_5blockINtB3x_6SorteroE7scattertINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedooB2v_EtEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x100>
+  695e68:	48 8b 40 68          	mov    0x68(%rax),%rax
+  695e6c:	4c 89 c9             	mov    %r9,%rcx
+  695e6f:	48 c1 e1 04          	shl    $0x4,%rcx
+  695e73:	48 39 1c 08          	cmp    %rbx,(%rax,%rcx,1)
+  695e77:	75 17                	jne    695e90 <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedotBH_Kb1_EINtB1t_10ClassifieroE10in_contextjNCINvMNtB1t_5blockINtB3x_6SorteroE7scattertINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedooB2v_EtEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x100>
+  695e79:	48 01 c8             	add    %rcx,%rax
+  695e7c:	49 ff c1             	inc    %r9
+  695e7f:	4c 89 0c 24          	mov    %r9,(%rsp)
+  695e83:	4c 8b 60 08          	mov    0x8(%rax),%r12
+  695e87:	eb 0b                	jmp    695e94 <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedotBH_Kb1_EINtB1t_10ClassifieroE10in_contextjNCINvMNtB1t_5blockINtB3x_6SorteroE7scattertINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedooB2v_EtEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x104>
+  695e89:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+  695e90:	4c 89 0c 24          	mov    %r9,(%rsp)
+  695e94:	48 8d 44 24 28       	lea    0x28(%rsp),%rax
+  695e99:	48 89 44 24 40       	mov    %rax,0x40(%rsp)
+  695e9e:	c5 f8 28 44 24 30    	vmovaps 0x30(%rsp),%xmm0
+  695ea4:	c5 f8 11 44 24 48    	vmovups %xmm0,0x48(%rsp)
+  695eaa:	48 8d 44 24 08       	lea    0x8(%rsp),%rax
+  695eaf:	48 89 44 24 58       	mov    %rax,0x58(%rsp)
+  695eb4:	48 8d 44 24 20       	lea    0x20(%rsp),%rax
+  695eb9:	48 89 44 24 60       	mov    %rax,0x60(%rsp)
+  695ebe:	4d 89 c5             	mov    %r8,%r13
+  695ec1:	4c 89 44 24 68       	mov    %r8,0x68(%rsp)
+  695ec6:	48 8b 44 24 18       	mov    0x18(%rsp),%rax
+  695ecb:	48 89 44 24 70       	mov    %rax,0x70(%rsp)
+  695ed0:	4c 89 e5             	mov    %r12,%rbp
+  695ed3:	48 d1 ed             	shr    $1,%rbp
+  695ed6:	74 28                	je     695f00 <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedotBH_Kb1_EINtB1t_10ClassifieroE10in_contextjNCINvMNtB1t_5blockINtB3x_6SorteroE7scattertINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedooB2v_EtEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x170>
+  695ed8:	45 31 ff             	xor    %r15d,%r15d
+  695edb:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+  695ee0:	4c 89 f7             	mov    %r14,%rdi
+  695ee3:	4c 89 fe             	mov    %r15,%rsi
+  695ee6:	e8 d5 d4 01 00       	call   6b33c0 <_RNCNCINvMNtNtCs68GEFBdcamz_18block_msd_research8frontier5blockINtB7_6SorteroE7scattertINtNtB9_7labeler6MaskedINtB1p_10ClassifiedooINtNtB9_17packed_projection6PackedotNtNtNtCs2fFU9HvNXfU_6hakmem3isa5x86v35X86V3EEtEKj0_E00CsfapEdXq4OJe_19frontier_experiment>
+  695eeb:	49 8d 77 01          	lea    0x1(%r15),%rsi
+  695eef:	4c 89 f7             	mov    %r14,%rdi
+  695ef2:	e8 c9 d4 01 00       	call   6b33c0 <_RNCNCINvMNtNtCs68GEFBdcamz_18block_msd_research8frontier5blockINtB7_6SorteroE7scattertINtNtB9_7labeler6MaskedINtB1p_10ClassifiedooINtNtB9_17packed_projection6PackedotNtNtNtCs2fFU9HvNXfU_6hakmem3isa5x86v35X86V3EEtEKj0_E00CsfapEdXq4OJe_19frontier_experiment>
+  695ef7:	49 83 c7 02          	add    $0x2,%r15
+  695efb:	48 ff cd             	dec    %rbp
+  695efe:	75 e0                	jne    695ee0 <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedotBH_Kb1_EINtB1t_10ClassifieroE10in_contextjNCINvMNtB1t_5blockINtB3x_6SorteroE7scattertINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedooB2v_EtEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x150>
+  695f00:	4c 89 e6             	mov    %r12,%rsi
+  695f03:	48 83 e6 fe          	and    $0xfffffffffffffffe,%rsi
+  695f07:	4c 39 e6             	cmp    %r12,%rsi
+  695f0a:	0f 84 e0 fe ff ff    	je     695df0 <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedotBH_Kb1_EINtB1t_10ClassifieroE10in_contextjNCINvMNtB1t_5blockINtB3x_6SorteroE7scattertINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedooB2v_EtEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x60>
+  695f10:	4c 8d 7e 01          	lea    0x1(%rsi),%r15
+  695f14:	4c 89 f7             	mov    %r14,%rdi
+  695f17:	e8 a4 d4 01 00       	call   6b33c0 <_RNCNCINvMNtNtCs68GEFBdcamz_18block_msd_research8frontier5blockINtB7_6SorteroE7scattertINtNtB9_7labeler6MaskedINtB1p_10ClassifiedooINtNtB9_17packed_projection6PackedotNtNtNtCs2fFU9HvNXfU_6hakmem3isa5x86v35X86V3EEtEKj0_E00CsfapEdXq4OJe_19frontier_experiment>
+  695f1c:	4c 89 fe             	mov    %r15,%rsi
+  695f1f:	4d 39 e7             	cmp    %r12,%r15
+  695f22:	72 ec                	jb     695f10 <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedotBH_Kb1_EINtB1t_10ClassifieroE10in_contextjNCINvMNtB1t_5blockINtB3x_6SorteroE7scattertINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedooB2v_EtEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x180>
+  695f24:	e9 c7 fe ff ff       	jmp    695df0 <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinejNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedotBH_Kb1_EINtB1t_10ClassifieroE10in_contextjNCINvMNtB1t_5blockINtB3x_6SorteroE7scattertINtNtB1t_7labeler6MaskedINtB4b_10ClassifiedooB2v_EtEKj0_E0E0ECsfapEdXq4OJe_19frontier_experiment+0x60>
+  695f29:	48 8b 5c 24 08       	mov    0x8(%rsp),%rbx
+  695f2e:	48 89 d8             	mov    %rbx,%rax
+  695f31:	48 83 c4 78          	add    $0x78,%rsp
+  695f35:	5b                   	pop    %rbx
+  695f36:	41 5c                	pop    %r12
+  695f38:	41 5d                	pop    %r13
+  695f3a:	41 5e                	pop    %r14
+  695f3c:	41 5f                	pop    %r15
+  695f3e:	5d                   	pop    %rbp
+  695f3f:	c3                   	ret
+  695f40:	48 8d 3d 70 87 9a ff 	lea    -0x657890(%rip),%rdi        # 3e6b7 <anon.b03a42b70064a0efbc4144cd01f217d1.0.llvm.5052952609580064392+0xf3>
+  695f47:	48 8d 15 fa 03 09 00 	lea    0x903fa(%rip),%rdx        # 726348 <anon.b03a42b70064a0efbc4144cd01f217d1.2.llvm.5052952609580064392+0x3a0>
+  695f4e:	be 2c 00 00 00       	mov    $0x2c,%esi
+  695f53:	ff 15 9f 56 09 00    	call   *0x9569f(%rip)        # 72b5f8 <_DYNAMIC+0x2d0>
+  695f59:	48 8d 15 f8 02 09 00 	lea    0x902f8(%rip),%rdx        # 726258 <anon.b03a42b70064a0efbc4144cd01f217d1.2.llvm.5052952609580064392+0x2b0>
+  695f60:	48 89 df             	mov    %rbx,%rdi
+  695f63:	ff 15 27 56 09 00    	call   *0x95627(%rip)        # 72b590 <_DYNAMIC+0x268>

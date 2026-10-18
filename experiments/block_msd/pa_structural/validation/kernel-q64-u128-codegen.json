@@ -1,0 +1,87 @@
+{
+  "scatter": {
+    "symbol": "0000000000695d90 00000000000001d9 t <hakmem::isa::x86v3::X86V3 as hakmem::isa::Isa>::run::trampoline::<usize, <block_msd_research::frontier::packed_projection::Packed<u128, u16, hakmem::isa::x86v3::X86V3, true> as block_msd_research::frontier::Classifier<u128>>::in_context<usize, <block_msd_research::frontier::block::Sorter<u128>>::scatter<u16, block_msd_research::frontier::labeler::Masked<block_msd_research::frontier::labeler::Classified<u128, u128, block_msd_research::frontier::packed_projection::Packed<u128, u16, hakmem::isa::x86v3::X86V3, true>>, u16>, 0>::{closure#0}>::{closure#0}>",
+    "pext": [],
+    "popcnt": [],
+    "calls": [
+      "695ee6:\te8 d5 d4 01 00       \tcall   6b33c0 <_RNCNCINvMNtNtCs68GEFBdcamz_18block_msd_research8frontier5blockINtB7_6SorteroE7scattertINtNtB9_7labeler6MaskedINtB1p_10ClassifiedooINtNtB9_17packed_projection6PackedotNtNtNtCs2fFU9HvNXfU_6hakmem3isa5x86v35X86V3EEtEKj0_E00CsfapEdXq4OJe_19frontier_experiment>",
+      "695ef2:\te8 c9 d4 01 00       \tcall   6b33c0 <_RNCNCINvMNtNtCs68GEFBdcamz_18block_msd_research8frontier5blockINtB7_6SorteroE7scattertINtNtB9_7labeler6MaskedINtB1p_10ClassifiedooINtNtB9_17packed_projection6PackedotNtNtNtCs2fFU9HvNXfU_6hakmem3isa5x86v35X86V3EEtEKj0_E00CsfapEdXq4OJe_19frontier_experiment>",
+      "695f17:\te8 a4 d4 01 00       \tcall   6b33c0 <_RNCNCINvMNtNtCs68GEFBdcamz_18block_msd_research8frontier5blockINtB7_6SorteroE7scattertINtNtB9_7labeler6MaskedINtB1p_10ClassifiedooINtNtB9_17packed_projection6PackedotNtNtNtCs2fFU9HvNXfU_6hakmem3isa5x86v35X86V3EEtEKj0_E00CsfapEdXq4OJe_19frontier_experiment>",
+      "695f53:\tff 15 9f 56 09 00    \tcall   *0x9569f(%rip)        # 72b5f8 <_DYNAMIC+0x2d0>",
+      "695f63:\tff 15 27 56 09 00    \tcall   *0x95627(%rip)        # 72b590 <_DYNAMIC+0x268>"
+    ]
+  },
+  "dense": {
+    "symbol": "000000000018b880 00000000000006f3 t <hakmem::isa::x86v3::X86V3 as hakmem::isa::Isa>::run::trampoline::<(), <block_msd_research::frontier::packed_projection::Packed<u128, u16, hakmem::isa::x86v3::X86V3, true> as block_msd_research::frontier::Classifier<u128>>::in_context<(), block_msd_research::frontier::dense<u128, u16, block_msd_research::frontier::labeler::Classified<u128, u128, block_msd_research::frontier::packed_projection::Packed<u128, u16, hakmem::isa::x86v3::X86V3, true>>>::{closure#0}>::{closure#0}>",
+    "pext": [
+      "18bb1a:\tc4 e2 c2 f5 fe       \tpext   %rsi,%rdi,%rdi",
+      "18bb1f:\tc4 e2 ba f5 52 08    \tpext   0x8(%rdx),%r8,%rdx",
+      "18bd70:\tc4 62 ba f5 c7       \tpext   %rdi,%r8,%r8",
+      "18bd75:\tc4 e2 b2 f5 76 08    \tpext   0x8(%rsi),%r9,%rsi"
+    ],
+    "popcnt": [
+      "18bb25:\tf3 48 0f b8 f6       \tpopcnt %rsi,%rsi",
+      "18bd7b:\tf3 48 0f b8 ff       \tpopcnt %rdi,%rdi"
+    ],
+    "calls": [
+      "18b8c7:\tff 15 db fc 59 00    \tcall   *0x59fcdb(%rip)        # 72b5a8 <memset@GLIBC_2.2.5>",
+      "18b8fc:\tff 15 e6 fc 59 00    \tcall   *0x59fce6(%rip)        # 72b5e8 <_DYNAMIC+0x2c0>",
+      "18b91f:\tff 15 73 fc 59 00    \tcall   *0x59fc73(%rip)        # 72b598 <_DYNAMIC+0x270>",
+      "18b928:\tff 15 72 fc 59 00    \tcall   *0x59fc72(%rip)        # 72b5a0 <malloc@GLIBC_2.2.5>",
+      "18b9db:\t41 ff d4             \tcall   *%r12",
+      "18b9ed:\t41 ff d4             \tcall   *%r12",
+      "18b9ff:\t41 ff d4             \tcall   *%r12",
+      "18ba11:\t41 ff d4             \tcall   *%r12",
+      "18ba4b:\t41 ff d4             \tcall   *%r12",
+      "18ba8c:\tff 15 36 fb 59 00    \tcall   *0x59fb36(%rip)        # 72b5c8 <memcpy@GLIBC_2.14>",
+      "18bbd9:\tff 15 09 fa 59 00    \tcall   *0x59fa09(%rip)        # 72b5e8 <_DYNAMIC+0x2c0>",
+      "18bbe9:\tff 15 a9 f9 59 00    \tcall   *0x59f9a9(%rip)        # 72b598 <_DYNAMIC+0x270>",
+      "18bbf2:\tff 15 a8 f9 59 00    \tcall   *0x59f9a8(%rip)        # 72b5a0 <malloc@GLIBC_2.2.5>",
+      "18bcd4:\t41 ff d5             \tcall   *%r13",
+      "18bce3:\t41 ff d5             \tcall   *%r13",
+      "18bdf8:\t41 ff d3             \tcall   *%r11",
+      "18be3a:\tff 15 88 f7 59 00    \tcall   *0x59f788(%rip)        # 72b5c8 <memcpy@GLIBC_2.14>",
+      "18be65:\tff 15 45 f7 59 00    \tcall   *0x59f745(%rip)        # 72b5b0 <free@GLIBC_2.2.5>",
+      "18bec6:\tff 15 04 f7 59 00    \tcall   *0x59f704(%rip)        # 72b5d0 <_DYNAMIC+0x2a8>",
+      "18bed9:\tff 15 09 f7 59 00    \tcall   *0x59f709(%rip)        # 72b5e8 <_DYNAMIC+0x2c0>",
+      "18bf02:\te8 8a cb f4 ff       \tcall   d8a91 <_RINvNtCsgxBkk5gSRhY_4core9panicking13assert_failedAjj100_BM_ECsfapEdXq4OJe_19frontier_experiment>",
+      "18bf3b:\tff 15 6f f6 59 00    \tcall   *0x59f66f(%rip)        # 72b5b0 <free@GLIBC_2.2.5>",
+      "18bf65:\tff 15 45 f6 59 00    \tcall   *0x59f645(%rip)        # 72b5b0 <free@GLIBC_2.2.5>",
+      "18bf6e:\te8 6d 4c 58 00       \tcall   710be0 <_Unwind_Resume@plt>"
+    ]
+  },
+  "boundary": {
+    "symbol": "0000000000292050 00000000000000d8 t <hakmem::isa::x86v3::X86V3 as hakmem::isa::Isa>::run::trampoline::<(usize, usize), <block_msd_research::frontier::packed_projection::Packed<u128, u16, hakmem::isa::x86v3::X86V3, true> as block_msd_research::frontier::Classifier<u128>>::in_context<(usize, usize), block_msd_research::frontier::pa::partition<u128, u128, block_msd_research::frontier::packed_projection::Packed<u128, u16, hakmem::isa::x86v3::X86V3, true>>::{closure#0}>::{closure#0}>",
+    "pext": [
+      "292091:\tc4 62 ba f5 c1       \tpext   %rcx,%r8,%r8",
+      "292096:\tc4 e2 b2 f5 d7       \tpext   %rdi,%r9,%rdx",
+      "2920df:\tc4 62 8a f5 f7       \tpext   %rdi,%r14,%r14",
+      "2920f7:\tc4 e2 e2 f5 d9       \tpext   %rcx,%rbx,%rbx"
+    ],
+    "popcnt": [
+      "29209b:\tf3 4c 0f b8 c9       \tpopcnt %rcx,%r9"
+    ],
+    "calls": [
+      "292122:\tff 15 68 94 49 00    \tcall   *0x499468(%rip)        # 72b590 <_DYNAMIC+0x268>"
+    ]
+  },
+  "variation": {
+    "symbol": "00000000001840c0 0000000000000116 t <hakmem::isa::x86v3::X86V3 as hakmem::isa::Isa>::run::trampoline::<u16, <block_msd_research::frontier::packed_projection::Packed<u128, u16, hakmem::isa::x86v3::X86V3, true> as block_msd_research::frontier::Classifier<u128>>::in_context<u16, block_msd_research::frontier::distribute<u128, u16, block_msd_research::frontier::labeler::Classified<u128, u128, block_msd_research::frontier::packed_projection::Packed<u128, u16, hakmem::isa::x86v3::X86V3, true>>>::{closure#0}>::{closure#0}>",
+    "pext": [
+      "1840e9:\tc4 62 ea f5 d1       \tpext   %rcx,%rdx,%r10",
+      "1840ee:\tc4 c2 c2 f5 c0       \tpext   %r8,%rdi,%rax",
+      "184147:\tc4 42 8a f5 f0       \tpext   %r8,%r14,%r14",
+      "184159:\tc4 e2 e2 f5 d9       \tpext   %rcx,%rbx,%rbx",
+      "184162:\tc4 42 82 f5 f8       \tpext   %r8,%r15,%r15",
+      "18417f:\tc4 e2 fa f5 c1       \tpext   %rcx,%rax,%rax",
+      "18419e:\tc4 c2 ca f5 f0       \tpext   %r8,%rsi,%rsi",
+      "1841b3:\tc4 e2 b2 f5 c9       \tpext   %rcx,%r9,%rcx"
+    ],
+    "popcnt": [
+      "1840f3:\tf3 48 0f b8 f9       \tpopcnt %rcx,%rdi"
+    ],
+    "calls": [
+      "1841d0:\tff 15 ba 73 5a 00    \tcall   *0x5a73ba(%rip)        # 72b590 <_DYNAMIC+0x268>"
+    ]
+  }
+}

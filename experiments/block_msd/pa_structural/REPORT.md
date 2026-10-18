@@ -1,3 +1,5 @@
+Current continuation: kernel-context source `9bba819` is **rejected** by its generic 46-cell screen and independent u128 q64 confirmation (1.55x old PA). The native full matrix and further extensions were stopped. See [VALIDATION_KERNEL_FINAL.md](VALIDATION_KERNEL_FINAL.md) for this exact cohort. Historical results below remain attached to their own source and executables.
+
 # PA 优化当前交付状态
 
 当前硬件单路径检查点已完成本机 native 原 103 场景，但普通编译目标仍有重复的大幅退化，整体不接受。完整结果见 [VALIDATION_SINGLE_PATH.md](VALIDATION_SINGLE_PATH.md)；此前局部修正的范围见 [HARDWARE_CHECKPOINT.md](HARDWARE_CHECKPOINT.md)。

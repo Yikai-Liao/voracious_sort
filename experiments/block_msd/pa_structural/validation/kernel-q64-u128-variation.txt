@@ -1,0 +1,86 @@
+00000000001840c0 0000000000000116 t <hakmem::isa::x86v3::X86V3 as hakmem::isa::Isa>::run::trampoline::<u16, <block_msd_research::frontier::packed_projection::Packed<u128, u16, hakmem::isa::x86v3::X86V3, true> as block_msd_research::frontier::Classifier<u128>>::in_context<u16, block_msd_research::frontier::distribute<u128, u16, block_msd_research::frontier::labeler::Classified<u128, u128, block_msd_research::frontier::packed_projection::Packed<u128, u16, hakmem::isa::x86v3::X86V3, true>>>::{closure#0}>::{closure#0}>
+
+experiments/block_msd/target/pa-structural/kernel_final_generic:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+00000000001840c0 <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinetNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedotBH_Kb1_EINtB1t_10ClassifieroE10in_contexttNCINvB1t_10distributeotINtNtB1t_7labeler10ClassifiedooB2v_EE0E0ECsfapEdXq4OJe_19frontier_experiment>:
+  1840c0:	41 57                	push   %r15
+  1840c2:	41 56                	push   %r14
+  1840c4:	53                   	push   %rbx
+  1840c5:	4c 8b 4e 08          	mov    0x8(%rsi),%r9
+  1840c9:	4d 85 c9             	test   %r9,%r9
+  1840cc:	0f 84 f3 00 00 00    	je     1841c5 <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinetNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedotBH_Kb1_EINtB1t_10ClassifieroE10in_contexttNCINvB1t_10distributeotINtNtB1t_7labeler10ClassifiedooB2v_EE0E0ECsfapEdXq4OJe_19frontier_experiment+0x105>
+  1840d2:	48 8b 36             	mov    (%rsi),%rsi
+  1840d5:	48 8b 07             	mov    (%rdi),%rax
+  1840d8:	48 8b 00             	mov    (%rax),%rax
+  1840db:	48 8b 16             	mov    (%rsi),%rdx
+  1840de:	48 8b 7e 08          	mov    0x8(%rsi),%rdi
+  1840e2:	48 8b 08             	mov    (%rax),%rcx
+  1840e5:	4c 8b 40 08          	mov    0x8(%rax),%r8
+  1840e9:	c4 62 ea f5 d1       	pext   %rcx,%rdx,%r10
+  1840ee:	c4 c2 c2 f5 c0       	pext   %r8,%rdi,%rax
+  1840f3:	f3 48 0f b8 f9       	popcnt %rcx,%rdi
+  1840f8:	c4 62 c1 f7 d8       	shlx   %rdi,%rax,%r11
+  1840fd:	31 c0                	xor    %eax,%eax
+  1840ff:	40 f6 c7 40          	test   $0x40,%dil
+  184103:	ba 00 00 00 00       	mov    $0x0,%edx
+  184108:	49 0f 44 d3          	cmove  %r11,%rdx
+  18410c:	4c 09 d2             	or     %r10,%rdx
+  18410f:	41 b2 3c             	mov    $0x3c,%r10b
+  184112:	c4 42 a8 f5 d9       	bzhi   %r10,%r9,%r11
+  184117:	49 83 fb 01          	cmp    $0x1,%r11
+  18411b:	74 7a                	je     184197 <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinetNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedotBH_Kb1_EINtB1t_10ClassifieroE10in_contexttNCINvB1t_10distributeotINtNtB1t_7labeler10ClassifiedooB2v_EE0E0ECsfapEdXq4OJe_19frontier_experiment+0xd7>
+  18411d:	49 ff c9             	dec    %r9
+  184120:	c4 42 a8 f5 c9       	bzhi   %r10,%r9,%r9
+  184125:	49 ff c1             	inc    %r9
+  184128:	4d 89 ca             	mov    %r9,%r10
+  18412b:	49 83 e2 fe          	and    $0xfffffffffffffffe,%r10
+  18412f:	45 31 db             	xor    %r11d,%r11d
+  184132:	31 c0                	xor    %eax,%eax
+  184134:	66 66 66 2e 0f 1f 84 	data16 data16 cs nopw 0x0(%rax,%rax,1)
+  18413b:	00 00 00 00 00 
+  184140:	48 8b 1e             	mov    (%rsi),%rbx
+  184143:	4c 8b 76 08          	mov    0x8(%rsi),%r14
+  184147:	c4 42 8a f5 f0       	pext   %r8,%r14,%r14
+  18414c:	c4 42 c1 f7 f6       	shlx   %rdi,%r14,%r14
+  184151:	40 f6 c7 40          	test   $0x40,%dil
+  184155:	4d 0f 45 f3          	cmovne %r11,%r14
+  184159:	c4 e2 e2 f5 d9       	pext   %rcx,%rbx,%rbx
+  18415e:	4c 8b 7e 18          	mov    0x18(%rsi),%r15
+  184162:	c4 42 82 f5 f8       	pext   %r8,%r15,%r15
+  184167:	c4 42 c1 f7 ff       	shlx   %rdi,%r15,%r15
+  18416c:	4d 0f 45 fb          	cmovne %r11,%r15
+  184170:	44 09 f3             	or     %r14d,%ebx
+  184173:	31 d3                	xor    %edx,%ebx
+  184175:	09 c3                	or     %eax,%ebx
+  184177:	48 8b 46 10          	mov    0x10(%rsi),%rax
+  18417b:	48 83 c6 20          	add    $0x20,%rsi
+  18417f:	c4 e2 fa f5 c1       	pext   %rcx,%rax,%rax
+  184184:	44 09 f8             	or     %r15d,%eax
+  184187:	31 d0                	xor    %edx,%eax
+  184189:	09 d8                	or     %ebx,%eax
+  18418b:	49 83 c2 fe          	add    $0xfffffffffffffffe,%r10
+  18418f:	75 af                	jne    184140 <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinetNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedotBH_Kb1_EINtB1t_10ClassifieroE10in_contexttNCINvB1t_10distributeotINtNtB1t_7labeler10ClassifiedooB2v_EE0E0ECsfapEdXq4OJe_19frontier_experiment+0x80>
+  184191:	41 f6 c1 01          	test   $0x1,%r9b
+  184195:	74 28                	je     1841bf <_RINvNvXs1_NtNtCs2fFU9HvNXfU_6hakmem3isa5x86v3NtB8_5X86V3NtBa_3Isa3run10trampolinetNCINvXs0_NtNtCs68GEFBdcamz_18block_msd_research8frontier17packed_projectionINtB1r_6PackedotBH_Kb1_EINtB1t_10ClassifieroE10in_contexttNCINvB1t_10distributeotINtNtB1t_7labeler10ClassifiedooB2v_EE0E0ECsfapEdXq4OJe_19frontier_experiment+0xff>
+  184197:	4c 8b 0e             	mov    (%rsi),%r9
+  18419a:	48 8b 76 08          	mov    0x8(%rsi),%rsi
+  18419e:	c4 c2 ca f5 f0       	pext   %r8,%rsi,%rsi
+  1841a3:	c4 e2 c1 f7 f6       	shlx   %rdi,%rsi,%rsi
+  1841a8:	45 31 c0             	xor    %r8d,%r8d
+  1841ab:	40 f6 c7 40          	test   $0x40,%dil
+  1841af:	4c 0f 44 c6          	cmove  %rsi,%r8
+  1841b3:	c4 e2 b2 f5 c9       	pext   %rcx,%r9,%rcx
+  1841b8:	44 09 c1             	or     %r8d,%ecx
+  1841bb:	31 ca                	xor    %ecx,%edx
+  1841bd:	09 d0                	or     %edx,%eax
+  1841bf:	5b                   	pop    %rbx
+  1841c0:	41 5e                	pop    %r14
+  1841c2:	41 5f                	pop    %r15
+  1841c4:	c3                   	ret
+  1841c5:	48 8d 15 6c ec 58 00 	lea    0x58ec6c(%rip),%rdx        # 712e38 <anon.c5a84e8da1be067e2535658c80e71312.8.llvm.13517067848738217414>
+  1841cc:	31 ff                	xor    %edi,%edi
+  1841ce:	31 f6                	xor    %esi,%esi
+  1841d0:	ff 15 ba 73 5a 00    	call   *0x5a73ba(%rip)        # 72b590 <_DYNAMIC+0x268>
