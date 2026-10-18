@@ -1,0 +1,1 @@
+The confirmation process was mistakenly launched before the information cohort had finished (about 1.5 seconds overlap). Both files are excluded from timing summaries. Guard B64/B512 files completed before this overlap and remain valid. The information process was stopped; its partial raw output is retained only here.

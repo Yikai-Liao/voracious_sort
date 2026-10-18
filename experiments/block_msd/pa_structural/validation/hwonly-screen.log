@@ -1,0 +1,27 @@
+hwonly-screen-b64 35.09
+hwonly-screen-b512 35.29
+Traceback (most recent call last):
+  File "/root/code/voracious_sort-pa-structural/experiments/block_msd/pa_structural/run.py", line 61, in <module>
+    main()
+    ~~~~^^
+  File "/root/code/voracious_sort-pa-structural/experiments/block_msd/pa_structural/run.py", line 57, in main
+    result.check_returncode()
+    ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.13/subprocess.py", line 508, in check_returncode
+    raise CalledProcessError(self.returncode, self.args, self.stdout,
+                             self.stderr)
+subprocess.CalledProcessError: Command '['taskset', '-c', '2', '/root/code/voracious_sort-pa-structural/experiments/block_msd/target/pa-structural/hwonly_native', '262144', '12', 'Pa_packed,Pa_unified_groups_t16777216,Rollercoaster,L_frozen,Pa_unified_groups_t16777216,Pa_packed', 'project7_spaced,project8_spaced,project9_spaced,project16_spaced,project24_spaced,project32_spaced,project33_spaced,project64_spaced,project8_cross,project16_cross', 'u64,u128,wide32', 'time', '64', '42']' died with <Signals.SIGTERM: 15>.
+Traceback (most recent call last):
+  File "/root/code/voracious_sort-pa-structural/experiments/block_msd/pa_structural/portable-screen.py", line 17, in <module>
+    subprocess.run([sys.executable,str(ROOT/'run.py'),a.prefix+'-information',
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    '--binary',a.binary,'--methods',methods,'--n','262144',
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    '--reps','12','--layouts','u64,u128,wide32',
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    '--cases','project7_spaced,project8_spaced,project9_spaced,project16_spaced,project24_spaced,project32_spaced,project33_spaced,project64_spaced,project8_cross,project16_cross'],check=True)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/subprocess.py", line 577, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/usr/bin/python3', '/root/code/voracious_sort-pa-structural/experiments/block_msd/pa_structural/run.py', 'hwonly-screen-information', '--binary', 'hwonly_native', '--methods', 'Pa_packed,Pa_unified_groups_t16777216,Rollercoaster,L_frozen,Pa_unified_groups_t16777216,Pa_packed', '--n', '262144', '--reps', '12', '--layouts', 'u64,u128,wide32', '--cases', 'project7_spaced,project8_spaced,project9_spaced,project16_spaced,project24_spaced,project32_spaced,project33_spaced,project64_spaced,project8_cross,project16_cross']' returned non-zero exit status 1.
