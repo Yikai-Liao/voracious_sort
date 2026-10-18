@@ -1,0 +1,586 @@
+{
+  "old_sha256": "ef8dd60c19eedf6246fa62595bba3814b71c7e24a509988a6896bbc0b3c68c43",
+  "old_source_commit": "06331aa5f1e6fb20dac535bd405d8a68ab5a5ab3",
+  "new": {
+    "source_hash_version": 2,
+    "source_commit": "6fdea75b954dac9a9ce13897ad8813994a2a8dae",
+    "sha256": "7ade3b4de838968ec792d4f58c40af0a6b95084a512cea9d8e399553b2adf1ec",
+    "source_sha256": "6b1d283b61eb5399fd9def654881b70e790003a621f01930aca5abdc023bcc7b",
+    "base": "745cea6ab21030710cb036f88fa757505ef1990b",
+    "rustflags": "-C target-cpu=native",
+    "features": "",
+    "profile": "release",
+    "rustc": "rustc 1.98.1 (48a229cea 2026-09-01)\nbinary: rustc\ncommit-hash: 48a229ceaefd4985c50990b14116b6d856af0985\ncommit-date: 2026-09-01\nhost: x86_64-unknown-linux-gnu\nrelease: 1.98.1\nLLVM version: 22.1.8\n"
+  },
+  "order": [
+    "old",
+    "new",
+    "new",
+    "old"
+  ],
+  "commands": [
+    {
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/root/code/voracious_sort-pa-unified/experiments/block_msd/target/pa-comparator/time",
+        "1048576",
+        "8",
+        "Pa_unified_groups_t16777216,Pa_unified_groups_t16777216",
+        "uniform,sparse",
+        "u32,u64,u128,wide32,large128",
+        "time",
+        "512",
+        "42"
+      ],
+      "file": "frozen-control-guards-0-old.csv",
+      "started_ns": 1792291681878549932,
+      "ended_ns": 1792291699386187859
+    },
+    {
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/root/code/voracious_sort-pa-structural/experiments/block_msd/target/pa-structural/validated_native",
+        "1048576",
+        "8",
+        "Pa_packed,Pa_unified_groups_t16777216,Pa_unified_groups_t16777216,Pa_packed",
+        "uniform,sparse",
+        "u32,u64,u128,wide32,large128",
+        "time",
+        "512",
+        "42"
+      ],
+      "file": "frozen-control-guards-1-new.csv",
+      "started_ns": 1792291699397820193,
+      "ended_ns": 1792291727477572101
+    },
+    {
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/root/code/voracious_sort-pa-structural/experiments/block_msd/target/pa-structural/validated_native",
+        "1048576",
+        "8",
+        "Pa_packed,Pa_unified_groups_t16777216,Pa_unified_groups_t16777216,Pa_packed",
+        "uniform,sparse",
+        "u32,u64,u128,wide32,large128",
+        "time",
+        "512",
+        "42"
+      ],
+      "file": "frozen-control-guards-2-new.csv",
+      "started_ns": 1792291727490548445,
+      "ended_ns": 1792291755757173924
+    },
+    {
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/root/code/voracious_sort-pa-unified/experiments/block_msd/target/pa-comparator/time",
+        "1048576",
+        "8",
+        "Pa_unified_groups_t16777216,Pa_unified_groups_t16777216",
+        "uniform,sparse",
+        "u32,u64,u128,wide32,large128",
+        "time",
+        "512",
+        "42"
+      ],
+      "file": "frozen-control-guards-3-old.csv",
+      "started_ns": 1792291755763733596,
+      "ended_ns": 1792291773096591643
+    },
+    {
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/root/code/voracious_sort-pa-unified/experiments/block_msd/target/pa-comparator/time",
+        "1048576",
+        "8",
+        "Pa_unified_groups_t16777216,Pa_unified_groups_t16777216",
+        "deep_unique90",
+        "large128",
+        "time",
+        "512",
+        "42"
+      ],
+      "file": "frozen-control-leaf-0-old.csv",
+      "started_ns": 1792291773102133153,
+      "ended_ns": 1792291778198397774
+    },
+    {
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/root/code/voracious_sort-pa-structural/experiments/block_msd/target/pa-structural/validated_native",
+        "1048576",
+        "8",
+        "Pa_packed,Pa_unified_groups_t16777216,Pa_unified_groups_t16777216,Pa_packed",
+        "deep_unique90",
+        "large128",
+        "time",
+        "512",
+        "42"
+      ],
+      "file": "frozen-control-leaf-1-new.csv",
+      "started_ns": 1792291778199477917,
+      "ended_ns": 1792291787883885981
+    },
+    {
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/root/code/voracious_sort-pa-structural/experiments/block_msd/target/pa-structural/validated_native",
+        "1048576",
+        "8",
+        "Pa_packed,Pa_unified_groups_t16777216,Pa_unified_groups_t16777216,Pa_packed",
+        "deep_unique90",
+        "large128",
+        "time",
+        "512",
+        "42"
+      ],
+      "file": "frozen-control-leaf-2-new.csv",
+      "started_ns": 1792291787885477998,
+      "ended_ns": 1792291797671894980
+    },
+    {
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/root/code/voracious_sort-pa-unified/experiments/block_msd/target/pa-comparator/time",
+        "1048576",
+        "8",
+        "Pa_unified_groups_t16777216,Pa_unified_groups_t16777216",
+        "deep_unique90",
+        "large128",
+        "time",
+        "512",
+        "42"
+      ],
+      "file": "frozen-control-leaf-3-old.csv",
+      "started_ns": 1792291797673098972,
+      "ended_ns": 1792291802977523037
+    },
+    {
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/root/code/voracious_sort-pa-unified/experiments/block_msd/target/pa-comparator/time",
+        "1048576",
+        "8",
+        "Pa_unified_groups_t16777216,Pa_unified_groups_t16777216",
+        "equal,sorted,reverse",
+        "u128,wide32",
+        "time",
+        "512",
+        "42"
+      ],
+      "file": "frozen-control-order-0-old.csv",
+      "started_ns": 1792291802978538894,
+      "ended_ns": 1792291805236422680
+    },
+    {
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/root/code/voracious_sort-pa-structural/experiments/block_msd/target/pa-structural/validated_native",
+        "1048576",
+        "8",
+        "Pa_packed,Pa_unified_groups_t16777216,Pa_unified_groups_t16777216,Pa_packed",
+        "equal,sorted,reverse",
+        "u128,wide32",
+        "time",
+        "512",
+        "42"
+      ],
+      "file": "frozen-control-order-1-new.csv",
+      "started_ns": 1792291805240329582,
+      "ended_ns": 1792291809005974004
+    },
+    {
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/root/code/voracious_sort-pa-structural/experiments/block_msd/target/pa-structural/validated_native",
+        "1048576",
+        "8",
+        "Pa_packed,Pa_unified_groups_t16777216,Pa_unified_groups_t16777216,Pa_packed",
+        "equal,sorted,reverse",
+        "u128,wide32",
+        "time",
+        "512",
+        "42"
+      ],
+      "file": "frozen-control-order-2-new.csv",
+      "started_ns": 1792291809011803813,
+      "ended_ns": 1792291812905917954
+    },
+    {
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/root/code/voracious_sort-pa-unified/experiments/block_msd/target/pa-comparator/time",
+        "1048576",
+        "8",
+        "Pa_unified_groups_t16777216,Pa_unified_groups_t16777216",
+        "equal,sorted,reverse",
+        "u128,wide32",
+        "time",
+        "512",
+        "42"
+      ],
+      "file": "frozen-control-order-3-old.csv",
+      "started_ns": 1792291812911901804,
+      "ended_ns": 1792291815074370668
+    }
+  ],
+  "vmstat_before": "nr_free_pages 941339\nnr_zone_inactive_anon 154098\nnr_zone_active_anon 531330\nnr_zone_inactive_file 895182\nnr_zone_active_file 627181\nnr_zone_unevictable 0\nnr_zone_write_pending 67\nnr_mlock 0\nnr_bounce 0\nnr_zspages 444410\nnr_free_cma 0\nnr_unaccepted 0\nnuma_hit 4205796810\nnuma_miss 0\nnuma_foreign 0\nnuma_interleave 1529\nnuma_local 4205796810\nnuma_other 0\nnr_inactive_anon 154098\nnr_active_anon 531330\nnr_inactive_file 895182\nnr_active_file 627181\nnr_unevictable 0\nnr_slab_reclaimable 355279\nnr_slab_unreclaimable 67215\nnr_isolated_anon 0\nnr_isolated_file 0\nworkingset_nodes 296176\nworkingset_refault_anon 164178\nworkingset_refault_file 10557199\nworkingset_activate_anon 88849\nworkingset_activate_file 2721437\nworkingset_restore_anon 86693\nworkingset_restore_file 677142\nworkingset_nodereclaim 156836\nnr_anon_pages 633659\nnr_mapped 105578\nnr_file_pages 1538243\nnr_dirty 67\nnr_writeback 0\nnr_writeback_temp 0\nnr_shmem 14924\nnr_shmem_hugepages 0\nnr_shmem_pmdmapped 0\nnr_file_hugepages 0\nnr_file_pmdmapped 0\nnr_anon_transparent_hugepages 634\nnr_vmscan_write 1932977\nnr_vmscan_immediate_reclaim 0\nnr_dirtied 36073718\nnr_written 33147450\nnr_throttled_written 0\nnr_kernel_misc_reclaimable 0\nnr_foll_pin_acquired 41\nnr_foll_pin_released 41\nnr_kernel_stack 13776\nnr_page_table_pages 17269\nnr_sec_page_table_pages 0\nnr_iommu_pages 0\nnr_swapcached 976\npgpromote_success 0\npgpromote_candidate 0\npgdemote_kswapd 0\npgdemote_direct 0\npgdemote_khugepaged 0\nnr_dirty_threshold 484201\nnr_dirty_background_threshold 241805\nnr_memmap_pages 0\nnr_memmap_boot_pages 65536\npgpgin 83184752\npgpgout 215310878\npswpin 235590\npswpout 1821220\npgalloc_dma 512\npgalloc_dma32 699977541\npgalloc_normal 5188101914\npgalloc_movable 0\npgalloc_device 0\nallocstall_dma 0\nallocstall_dma32 0\nallocstall_normal 1669\nallocstall_movable 24923\nallocstall_device 0\npgskip_dma 0\npgskip_dma32 1\npgskip_normal 12\npgskip_movable 0\npgskip_device 0\npgfree 5908169815\npgactivate 375077\npgdeactivate 0\npglazyfree 53457\npgfault 3898618648\npgmajfault 424007\npglazyfreed 0\npgrefill 18417242\npgreuse 153283016\npgsteal_kswapd 33462830\npgsteal_direct 1873946\npgsteal_khugepaged 41063\npgscan_kswapd 34063548\npgscan_direct 2026418\npgscan_khugepaged 45925\npgscan_direct_throttle 0\npgscan_anon 2504556\npgscan_file 33631335\npgsteal_anon 1902261\npgsteal_file 33475578\nzone_reclaim_success 0\nzone_reclaim_failed 0\npginodesteal 1008\nslabs_scanned 26575879\nkswapd_inodesteal 429378\nkswapd_low_wmark_hit_quickly 3615\nkswapd_high_wmark_hit_quickly 72\npageoutrun 5200\npgrotated 17610\ndrop_pagecache 0\ndrop_slab 0\noom_kill 0\nnuma_pte_updates 0\nnuma_huge_pte_updates 0\nnuma_hint_faults 0\nnuma_hint_faults_local 0\nnuma_pages_migrated 0\npgmigrate_success 19059860\npgmigrate_fail 184265\nthp_migration_success 0\nthp_migration_fail 0\nthp_migration_split 0\ncompact_migrate_scanned 213771291\ncompact_free_scanned 1707158128\ncompact_isolated 38615263\ncompact_stall 740\ncompact_fail 659\ncompact_success 81\ncompact_daemon_wake 4780\ncompact_daemon_migrate_scanned 213437720\ncompact_daemon_free_scanned 1704760126\nhtlb_buddy_alloc_success 0\nhtlb_buddy_alloc_fail 0\nunevictable_pgs_culled 135220\nunevictable_pgs_scanned 0\nunevictable_pgs_rescued 119337\nunevictable_pgs_mlocked 119391\nunevictable_pgs_munlocked 119391\nunevictable_pgs_cleared 0\nunevictable_pgs_stranded 0\nthp_fault_alloc 3161367\nthp_fault_fallback 142033\nthp_fault_fallback_charge 0\nthp_collapse_alloc 8103\nthp_collapse_alloc_failed 3\nthp_file_alloc 0\nthp_file_fallback 0\nthp_file_fallback_charge 0\nthp_file_mapped 0\nthp_split_page 1075\nthp_split_page_failed 0\nthp_deferred_split_page 351393\nthp_underused_split_page 0\nthp_split_pmd 416571\nthp_scan_exceed_none_pte 11875\nthp_scan_exceed_swap_pte 12774\nthp_scan_exceed_share_pte 857\nthp_split_pud 0\nthp_zero_page_alloc 1\nthp_zero_page_alloc_failed 0\nthp_swpout 856\nthp_swpout_fallback 0\nballoon_inflate 0\nballoon_deflate 0\nballoon_migrate 0\nswap_ra 13591\nswap_ra_hit 11372\nswpin_zero 12641\nswpout_zero 77452\nksm_swpin_copy 0\ncow_ksm 0\nzswpin 0\nzswpout 0\nzswpwb 0\ndirect_map_level2_splits 86\ndirect_map_level3_splits 5\nnr_unstable 0\n",
+  "results": [
+    {
+      "cell": [
+        "u32",
+        "uniform",
+        "1048576",
+        "512",
+        "42"
+      ],
+      "new:Pa_unified_groups_t16777216": {
+        "median": 0.9695264702600455,
+        "p10": 0.8745726866132661,
+        "p90": 1.1826854683597354
+      },
+      "new:Pa_packed": {
+        "median": 0.982720983850066,
+        "p10": 0.8714710152104892,
+        "p90": 1.1695829376236286
+      }
+    },
+    {
+      "cell": [
+        "u32",
+        "sparse",
+        "1048576",
+        "512",
+        "42"
+      ],
+      "new:Pa_unified_groups_t16777216": {
+        "median": 1.0017372550420687,
+        "p10": 0.8278964485019379,
+        "p90": 1.2983537692855358
+      },
+      "new:Pa_packed": {
+        "median": 0.874800097974518,
+        "p10": 0.7375013734162131,
+        "p90": 1.1799508319713239
+      }
+    },
+    {
+      "cell": [
+        "u64",
+        "uniform",
+        "1048576",
+        "512",
+        "42"
+      ],
+      "new:Pa_unified_groups_t16777216": {
+        "median": 1.0752043023744382,
+        "p10": 0.9278040024526908,
+        "p90": 1.262989467704629
+      },
+      "new:Pa_packed": {
+        "median": 1.0607825253972374,
+        "p10": 0.8978052122140683,
+        "p90": 1.2837670926835099
+      }
+    },
+    {
+      "cell": [
+        "u64",
+        "sparse",
+        "1048576",
+        "512",
+        "42"
+      ],
+      "new:Pa_unified_groups_t16777216": {
+        "median": 1.0436381505901786,
+        "p10": 0.924870665951471,
+        "p90": 1.2448272359359023
+      },
+      "new:Pa_packed": {
+        "median": 0.4334743026661427,
+        "p10": 0.35790698321567305,
+        "p90": 0.5056235883642817
+      }
+    },
+    {
+      "cell": [
+        "u128",
+        "uniform",
+        "1048576",
+        "512",
+        "42"
+      ],
+      "new:Pa_unified_groups_t16777216": {
+        "median": 0.9257119131999436,
+        "p10": 0.8540784263361265,
+        "p90": 1.0435165658814818
+      },
+      "new:Pa_packed": {
+        "median": 0.945972375872131,
+        "p10": 0.866403233662097,
+        "p90": 1.0489201208091148
+      }
+    },
+    {
+      "cell": [
+        "u128",
+        "sparse",
+        "1048576",
+        "512",
+        "42"
+      ],
+      "new:Pa_unified_groups_t16777216": {
+        "median": 0.8421216534943259,
+        "p10": 0.7716197550486652,
+        "p90": 1.0125972515914543
+      },
+      "new:Pa_packed": {
+        "median": 0.1544406023132785,
+        "p10": 0.14056831573021672,
+        "p90": 0.17920415222852426
+      }
+    },
+    {
+      "cell": [
+        "wide32",
+        "uniform",
+        "1048576",
+        "512",
+        "42"
+      ],
+      "new:Pa_unified_groups_t16777216": {
+        "median": 1.0027980953847269,
+        "p10": 0.9170715134397034,
+        "p90": 1.0914992466711655
+      },
+      "new:Pa_packed": {
+        "median": 0.9791608743170795,
+        "p10": 0.8788633655042686,
+        "p90": 1.102281458587003
+      }
+    },
+    {
+      "cell": [
+        "wide32",
+        "sparse",
+        "1048576",
+        "512",
+        "42"
+      ],
+      "new:Pa_unified_groups_t16777216": {
+        "median": 1.0083589306136211,
+        "p10": 0.8943990653748554,
+        "p90": 1.0875540194963151
+      },
+      "new:Pa_packed": {
+        "median": 0.2402916788275232,
+        "p10": 0.21309557590827993,
+        "p90": 0.2597450613223319
+      }
+    },
+    {
+      "cell": [
+        "large128",
+        "uniform",
+        "1048576",
+        "512",
+        "42"
+      ],
+      "new:Pa_unified_groups_t16777216": {
+        "median": 0.9737194666172073,
+        "p10": 0.9520710348470416,
+        "p90": 1.0417010107287306
+      },
+      "new:Pa_packed": {
+        "median": 0.9738466096266227,
+        "p10": 0.9463654706030398,
+        "p90": 1.0502201737809647
+      }
+    },
+    {
+      "cell": [
+        "large128",
+        "sparse",
+        "1048576",
+        "512",
+        "42"
+      ],
+      "new:Pa_unified_groups_t16777216": {
+        "median": 0.9952808115990406,
+        "p10": 0.9132799264618388,
+        "p90": 1.042185931932293
+      },
+      "new:Pa_packed": {
+        "median": 0.7393474891067593,
+        "p10": 0.6752083499799554,
+        "p90": 0.7929771420607541
+      }
+    },
+    {
+      "cell": [
+        "large128",
+        "deep_unique90",
+        "1048576",
+        "512",
+        "42"
+      ],
+      "new:Pa_unified_groups_t16777216": {
+        "median": 1.0122371782631583,
+        "p10": 0.9624447341768032,
+        "p90": 1.0530076681132154
+      },
+      "new:Pa_packed": {
+        "median": 1.011410535578281,
+        "p10": 0.9584927220894918,
+        "p90": 1.038274123734247
+      }
+    },
+    {
+      "cell": [
+        "u128",
+        "equal",
+        "1048576",
+        "512",
+        "42"
+      ],
+      "new:Pa_unified_groups_t16777216": {
+        "median": 0.9827128891714083,
+        "p10": 0.9014190662863266,
+        "p90": 1.0781084962199712
+      },
+      "new:Pa_packed": {
+        "median": 0.9959166830857471,
+        "p10": 0.8923655853017992,
+        "p90": 1.0855060821068787
+      }
+    },
+    {
+      "cell": [
+        "u128",
+        "sorted",
+        "1048576",
+        "512",
+        "42"
+      ],
+      "new:Pa_unified_groups_t16777216": {
+        "median": 1.0013680869090695,
+        "p10": 0.9100971039143593,
+        "p90": 1.102408965427399
+      },
+      "new:Pa_packed": {
+        "median": 1.034443681448034,
+        "p10": 0.9213446246189827,
+        "p90": 1.0889291174663722
+      }
+    },
+    {
+      "cell": [
+        "u128",
+        "reverse",
+        "1048576",
+        "512",
+        "42"
+      ],
+      "new:Pa_unified_groups_t16777216": {
+        "median": 0.9342735614257882,
+        "p10": 0.7755510949968607,
+        "p90": 1.1292745636940285
+      },
+      "new:Pa_packed": {
+        "median": 0.8996816831863939,
+        "p10": 0.802285384066245,
+        "p90": 1.1108462069050886
+      }
+    },
+    {
+      "cell": [
+        "wide32",
+        "equal",
+        "1048576",
+        "512",
+        "42"
+      ],
+      "new:Pa_unified_groups_t16777216": {
+        "median": 1.0194845889075101,
+        "p10": 0.9732450771377121,
+        "p90": 1.0449736541371162
+      },
+      "new:Pa_packed": {
+        "median": 1.029033250949118,
+        "p10": 0.9775939578857181,
+        "p90": 1.0662224930157784
+      }
+    },
+    {
+      "cell": [
+        "wide32",
+        "sorted",
+        "1048576",
+        "512",
+        "42"
+      ],
+      "new:Pa_unified_groups_t16777216": {
+        "median": 0.9749789517405758,
+        "p10": 0.9352243517267268,
+        "p90": 1.1099108827817838
+      },
+      "new:Pa_packed": {
+        "median": 0.9801532923114518,
+        "p10": 0.9197081285685353,
+        "p90": 1.068254124144585
+      }
+    },
+    {
+      "cell": [
+        "wide32",
+        "reverse",
+        "1048576",
+        "512",
+        "42"
+      ],
+      "new:Pa_unified_groups_t16777216": {
+        "median": 0.9733846604210108,
+        "p10": 0.9314026745971693,
+        "p90": 1.0571697292929265
+      },
+      "new:Pa_packed": {
+        "median": 0.9674275352243793,
+        "p10": 0.9346286266567507,
+        "p90": 1.0630604001596526
+      }
+    }
+  ],
+  "usage": {
+    "ru_utime": 128.757608,
+    "ru_stime": 4.200636,
+    "ru_maxrss": 436608,
+    "ru_minflt": 199161,
+    "ru_majflt": 0,
+    "ru_nivcsw": 2174
+  },
+  "vmstat_after": "nr_free_pages 928875\nnr_zone_inactive_anon 154098\nnr_zone_active_anon 530324\nnr_zone_inactive_file 895952\nnr_zone_active_file 628039\nnr_zone_unevictable 0\nnr_zone_write_pending 7\nnr_mlock 0\nnr_bounce 0\nnr_zspages 444410\nnr_free_cma 0\nnr_unaccepted 0\nnuma_hit 4206540961\nnuma_miss 0\nnuma_foreign 0\nnuma_interleave 1529\nnuma_local 4206540961\nnuma_other 0\nnr_inactive_anon 154098\nnr_active_anon 530324\nnr_inactive_file 895952\nnr_active_file 628039\nnr_unevictable 0\nnr_slab_reclaimable 355296\nnr_slab_unreclaimable 67223\nnr_isolated_anon 0\nnr_isolated_file 0\nworkingset_nodes 296134\nworkingset_refault_anon 164191\nworkingset_refault_file 10558493\nworkingset_activate_anon 88849\nworkingset_activate_file 2722137\nworkingset_restore_anon 86693\nworkingset_restore_file 677782\nworkingset_nodereclaim 156836\nnr_anon_pages 632911\nnr_mapped 104956\nnr_file_pages 1539329\nnr_dirty 7\nnr_writeback 0\nnr_writeback_temp 0\nnr_shmem 14385\nnr_shmem_hugepages 0\nnr_shmem_pmdmapped 0\nnr_file_hugepages 0\nnr_file_pmdmapped 0\nnr_anon_transparent_hugepages 633\nnr_vmscan_write 1932977\nnr_vmscan_immediate_reclaim 0\nnr_dirtied 36078717\nnr_written 33152053\nnr_throttled_written 0\nnr_kernel_misc_reclaimable 0\nnr_foll_pin_acquired 41\nnr_foll_pin_released 41\nnr_kernel_stack 13680\nnr_page_table_pages 17328\nnr_sec_page_table_pages 0\nnr_iommu_pages 0\nnr_swapcached 976\npgpromote_success 0\npgpromote_candidate 0\npgdemote_kswapd 0\npgdemote_direct 0\npgdemote_khugepaged 0\nnr_dirty_threshold 482034\nnr_dirty_background_threshold 240723\nnr_memmap_pages 0\nnr_memmap_boot_pages 65536\npgpgin 83190064\npgpgout 215331866\npswpin 235640\npswpout 1821220\npgalloc_dma 512\npgalloc_dma32 699983173\npgalloc_normal 5192185907\npgalloc_movable 0\npgalloc_device 0\nallocstall_dma 0\nallocstall_dma32 0\nallocstall_normal 1669\nallocstall_movable 24923\nallocstall_device 0\npgskip_dma 0\npgskip_dma32 1\npgskip_normal 12\npgskip_movable 0\npgskip_device 0\npgfree 5912258862\npgactivate 375077\npgdeactivate 0\npglazyfree 53628\npgfault 3899354365\npgmajfault 424109\npglazyfreed 0\npgrefill 18417242\npgreuse 153315192\npgsteal_kswapd 33462830\npgsteal_direct 1873946\npgsteal_khugepaged 41063\npgscan_kswapd 34063548\npgscan_direct 2026418\npgscan_khugepaged 45925\npgscan_direct_throttle 0\npgscan_anon 2504556\npgscan_file 33631335\npgsteal_anon 1902261\npgsteal_file 33475578\nzone_reclaim_success 0\nzone_reclaim_failed 0\npginodesteal 1008\nslabs_scanned 26575879\nkswapd_inodesteal 429378\nkswapd_low_wmark_hit_quickly 3615\nkswapd_high_wmark_hit_quickly 72\npageoutrun 5200\npgrotated 17610\ndrop_pagecache 0\ndrop_slab 0\noom_kill 0\nnuma_pte_updates 0\nnuma_huge_pte_updates 0\nnuma_hint_faults 0\nnuma_hint_faults_local 0\nnuma_pages_migrated 0\npgmigrate_success 19059860\npgmigrate_fail 184265\nthp_migration_success 0\nthp_migration_fail 0\nthp_migration_split 0\ncompact_migrate_scanned 213771291\ncompact_free_scanned 1707158128\ncompact_isolated 38615263\ncompact_stall 740\ncompact_fail 659\ncompact_success 81\ncompact_daemon_wake 4780\ncompact_daemon_migrate_scanned 213437720\ncompact_daemon_free_scanned 1704760126\nhtlb_buddy_alloc_success 0\nhtlb_buddy_alloc_fail 0\nunevictable_pgs_culled 135220\nunevictable_pgs_scanned 0\nunevictable_pgs_rescued 119337\nunevictable_pgs_mlocked 119391\nunevictable_pgs_munlocked 119391\nunevictable_pgs_cleared 0\nunevictable_pgs_stranded 0\nthp_fault_alloc 3167872\nthp_fault_fallback 142033\nthp_fault_fallback_charge 0\nthp_collapse_alloc 8103\nthp_collapse_alloc_failed 3\nthp_file_alloc 0\nthp_file_fallback 0\nthp_file_fallback_charge 0\nthp_file_mapped 0\nthp_split_page 1075\nthp_split_page_failed 0\nthp_deferred_split_page 351422\nthp_underused_split_page 0\nthp_split_pmd 416617\nthp_scan_exceed_none_pte 11875\nthp_scan_exceed_swap_pte 12878\nthp_scan_exceed_share_pte 857\nthp_split_pud 0\nthp_zero_page_alloc 1\nthp_zero_page_alloc_failed 0\nthp_swpout 856\nthp_swpout_fallback 0\nballoon_inflate 0\nballoon_deflate 0\nballoon_migrate 0\nswap_ra 13591\nswap_ra_hit 11372\nswpin_zero 12641\nswpout_zero 77452\nksm_swpin_copy 0\ncow_ksm 0\nzswpin 0\nzswpout 0\nzswpwb 0\ndirect_map_level2_splits 86\ndirect_map_level3_splits 5\nnr_unstable 0\n"
+}

@@ -1,0 +1,7 @@
+software-validated-b64 35.12
+software-validated-b512 35.67
+software-validated-information 110.5
+L_frozen 46 cells {'Pa_packed': 17, 'Pa_unified_groups_t16777216': 30, 'Rollercoaster': 33}
+Pa_packed 46 cells {'L_frozen': 29, 'Pa_unified_groups_t16777216': 30, 'Rollercoaster': 26}
+Pa_unified_groups_t16777216 46 cells {'L_frozen': 16, 'Pa_packed': 16, 'Rollercoaster': 22}
+Rollercoaster 46 cells {'L_frozen': 13, 'Pa_packed': 20, 'Pa_unified_groups_t16777216': 24}

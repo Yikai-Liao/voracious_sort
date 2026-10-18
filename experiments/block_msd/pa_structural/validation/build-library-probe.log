@@ -1,0 +1,9 @@
+    Updating crates.io index
+     Locking 2 packages to latest compatible versions
+ Downloading crates ...
+  Downloaded bitkit v3.2.3
+  Downloaded hakmem v0.2.0
+   Compiling hakmem v0.2.0
+   Compiling bitkit v3.2.3
+   Compiling library-gather-probe v0.0.0 (/root/code/voracious_sort-pa-structural/experiments/block_msd/target/library-gather-probe)
+    Finished `release` profile [optimized] target(s) in 9.67s
