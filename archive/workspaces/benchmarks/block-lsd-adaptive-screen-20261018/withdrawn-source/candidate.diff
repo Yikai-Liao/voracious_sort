@@ -1,0 +1,444 @@
+diff --git a/src/sorts/block_lsd_stable_sort.rs b/src/sorts/block_lsd_stable_sort.rs
+index a7ea44d..087948f 100644
+--- a/src/sorts/block_lsd_stable_sort.rs
++++ b/src/sorts/block_lsd_stable_sort.rs
+@@ -93,37 +93,41 @@ pub fn block_lsd_stable_radixsort<T, K>(
+         return;
+     }
+     let first_key = arr[0].into_key_type();
+-    let first_different =
++    let (equal_prefix, first_different) =
+         match first_different_key::<T, K>(&arr[1..], first_key) {
+             Some(key) => key,
+             None => return,
+         };
+     let descending = first_different < first_key;
+-    let (ordered, has_equal_keys) = if descending {
+-        check_order::<T, K, true>(arr)
++    let (ordered_prefix, has_equal_keys) = if descending {
++        check_order::<T, K, true>(&arr[equal_prefix..])
+     } else {
+-        check_order::<T, K, false>(arr)
++        check_order::<T, K, false>(&arr[equal_prefix..])
+     };
++    let ordered = ordered_prefix == arr.len() - equal_prefix;
++    // The orientation scan already proved this prefix equal. Recheck only its
++    // last key and the remaining suffix; retain the skipped ties for reversal.
++    let has_equal_keys = has_equal_keys || equal_prefix > 0;
+     if ordered && !descending {
+         return;
+     }
+     if ordered {
+-        // Reversal also reverses each equal-key group. Reverse those groups
+-        // again to retain their original payload order.
+-        arr.reverse();
+-        if !has_equal_keys {
+-            return;
+-        }
+-        let mut start = 0;
+-        while start < arr.len() {
+-            let key = arr[start].into_key_type();
+-            let mut end = start + 1;
+-            while end < arr.len() && arr[end].into_key_type() == key {
+-                end += 1;
+-            }
+-            arr[start..end].reverse();
+-            start = end;
+-        }
++        reverse_ordered::<T, K>(arr, has_equal_keys);
++        return;
++    }
++    // The ascending prefix is already known. A descending first change is
++    // itself the first ascending inversion, regardless of the later scan.
++    let inversion = equal_prefix + if descending { 1 } else { ordered_prefix };
++    if repair_single_displaced::<T, K>(arr, inversion) {
++        return;
++    }
++    if merge_two_runs::<T, K>(
++        arr,
++        equal_prefix + ordered_prefix,
++        descending,
++        has_equal_keys,
++        scratch_len,
++    ) {
+         return;
+     }
+     let dummy = arr[0];
+@@ -216,9 +220,9 @@ pub fn block_lsd_stable_radixsort<T, K>(
+ fn first_different_key<T: Radixable<K>, K: RadixKey>(
+     arr: &[T],
+     first: <<T as Radixable<K>>::Key as RadixKey>::Key,
+-) -> Option<<<T as Radixable<K>>::Key as RadixKey>::Key> {
++) -> Option<(usize, <<T as Radixable<K>>::Key as RadixKey>::Key)> {
+     let mut chunks = arr.chunks_exact(4);
+-    for chunk in &mut chunks {
++    for (index, chunk) in chunks.by_ref().enumerate() {
+         let mut equal = true;
+         for item in chunk {
+             equal &= item.into_key_type() == first;
+@@ -226,29 +230,39 @@ fn first_different_key<T: Radixable<K>, K: RadixKey>(
+         if !equal {
+             return chunk
+                 .iter()
+-                .map(|item| item.into_key_type())
+-                .find(|&key| key != first);
++                .enumerate()
++                .map(|(offset, item)| {
++                    (index * 4 + offset, item.into_key_type())
++                })
++                .find(|&(_, key)| key != first);
+         }
+     }
+-    chunks
+-        .remainder()
++    let remainder = chunks.remainder();
++    let start = arr.len() - remainder.len();
++    remainder
+         .iter()
+-        .map(|item| item.into_key_type())
+-        .find(|&key| key != first)
++        .enumerate()
++        .map(|(offset, item)| (start + offset, item.into_key_type()))
++        .find(|&(_, key)| key != first)
+ }
+ 
+ // Check independent adjacent pairs in fixed groups. This avoids a serial
+-// previous-key dependency, and needs equality tracking only for
+-// descending runs.
++// previous-key dependency, and needs equality tracking only for descending
++// runs. Return the first violating right index, or len when fully ordered.
+ fn check_order<T: Radixable<K>, K: RadixKey, const DESCENDING: bool>(
+     arr: &[T],
+-) -> (bool, bool) {
++) -> (usize, bool) {
++    if arr.len() < 2 {
++        return (arr.len(), false);
++    }
+     let pairs = arr.len() - 1;
+     let complete = pairs - pairs % 4;
+     let mut left_chunks = arr[..pairs].chunks_exact(4);
+     let right_chunks = arr[1..].chunks_exact(4);
+     let mut has_equal_keys = false;
+-    for (left, right) in left_chunks.by_ref().zip(right_chunks) {
++    for (index, (left, right)) in
++        left_chunks.by_ref().zip(right_chunks).enumerate()
++    {
+         let mut ordered = true;
+         for offset in 0..4 {
+             let left = left[offset].into_key_type();
+@@ -259,21 +273,202 @@ fn check_order<T: Radixable<K>, K: RadixKey, const DESCENDING: bool>(
+             }
+         }
+         if !ordered {
+-            return (false, false);
++            for offset in 0..4 {
++                let left = left[offset].into_key_type();
++                let right = right[offset].into_key_type();
++                let violation =
++                    if DESCENDING { left < right } else { left > right };
++                if violation {
++                    return (index * 4 + offset + 1, has_equal_keys);
++                }
++            }
++            unreachable!("inconsistent key extraction");
+         }
+     }
+-    for pair in arr[complete..].windows(2) {
++    for (offset, pair) in arr[complete..].windows(2).enumerate() {
+         let left = pair[0].into_key_type();
+         let right = pair[1].into_key_type();
+         let out_of_order = if DESCENDING { left < right } else { left > right };
+         if out_of_order {
+-            return (false, false);
++            return (complete + offset + 1, has_equal_keys);
+         }
+         if DESCENDING {
+             has_equal_keys |= left == right;
+         }
+     }
+-    (true, has_equal_keys)
++    (arr.len(), has_equal_keys)
++}
++
++// At the first ascending inversion only one of its two records can be the
++// single displaced record. Verify the remaining order before rotating. These
++// paths use no heap, and preserve ties by inserting a right-moving record
++// before later equals and a left-moving record after earlier equals.
++fn repair_single_displaced<T: Radixable<K>, K: RadixKey>(
++    arr: &mut [T],
++    inversion: usize,
++) -> bool {
++    let left = inversion - 1;
++    if (inversion + 1 == arr.len()
++        || arr[left].into_key_type() <= arr[inversion + 1].into_key_type())
++        && check_order::<T, K, false>(&arr[inversion + 1..]).0
++            == arr.len() - inversion - 1
++    {
++        let key = arr[inversion].into_key_type();
++        let destination = arr[..inversion]
++            .partition_point(|item| item.into_key_type() <= key);
++        arr[destination..=inversion].rotate_right(1);
++        return true;
++    }
++    if (left == 0
++        || arr[left - 1].into_key_type() <= arr[inversion].into_key_type())
++        && check_order::<T, K, false>(&arr[inversion..]).0
++            == arr.len() - inversion
++    {
++        let key = arr[left].into_key_type();
++        let destination = inversion
++            + arr[inversion..]
++                .partition_point(|item| item.into_key_type() < key);
++        arr[left..destination].rotate_left(1);
++        return true;
++    }
++    false
++}
++
++// Reversal also reverses each equal-key group. Reverse those groups again
++// to retain the original payload order of this nonincreasing run.
++fn reverse_ordered<T: Radixable<K>, K: RadixKey>(
++    arr: &mut [T],
++    has_equal_keys: bool,
++) {
++    arr.reverse();
++    if has_equal_keys {
++        let mut start = 0;
++        while start < arr.len() {
++            let key = arr[start].into_key_type();
++            let mut end = start + 1;
++            while end < arr.len() && arr[end].into_key_type() == key {
++                end += 1;
++            }
++            arr[start..end].reverse();
++            start = end;
++        }
++    }
++}
++
++// The first monotone run is already proved. Verify the complete second run
++// before mutation; ordinary random inputs reject after a few comparisons.
++// The merge buffer shares the radix path's scratch allowance and is allocated
++// only after both runs are known, so the two paths never retain heap together.
++fn merge_two_runs<T: Radixable<K>, K: RadixKey>(
++    arr: &mut [T],
++    split: usize,
++    first_descending: bool,
++    first_has_equal_keys: bool,
++    scratch_len: usize,
++) -> bool {
++    let first = arr[split].into_key_type();
++    let (second_descending, second_has_equal_keys) =
++        match first_different_key::<T, K>(&arr[split + 1..], first) {
++            None => (false, true),
++            Some((equal_prefix, key)) => {
++                let suffix = &arr[split + equal_prefix..];
++                let descending = key < first;
++                let (end, ties) = if descending {
++                    check_order::<T, K, true>(suffix)
++                } else {
++                    check_order::<T, K, false>(suffix)
++                };
++                if end != suffix.len() {
++                    return false;
++                }
++                (descending, ties || equal_prefix > 0)
++            },
++        };
++    if first_descending {
++        reverse_ordered::<T, K>(&mut arr[..split], first_has_equal_keys);
++    }
++    if second_descending {
++        reverse_ordered::<T, K>(&mut arr[split..], second_has_equal_keys);
++    }
++    if arr[split - 1].into_key_type() <= arr[split].into_key_type() {
++        return true;
++    }
++    let capacity = scratch_len.min(split).min(arr.len() - split);
++    let mut buffer = Vec::with_capacity(capacity);
++    merge_bounded::<T, K>(arr, split, &mut buffer);
++    true
++}
++
++// Merge adjacent sorted runs stably. Buffer a complete shorter run when it
++// fits; otherwise split the longer run, partition the other at the same key,
++// and rotate their middle parts. Lower/upper bounds keep equal keys from the
++// original left run ahead of those from the original right run. Recursive
++// calls reuse one buffer and shrink the longer run, bounding stack depth.
++fn merge_bounded<T: Radixable<K>, K: RadixKey>(
++    arr: &mut [T],
++    mid: usize,
++    buffer: &mut Vec<T>,
++) {
++    if mid == 0
++        || mid == arr.len()
++        || arr[mid - 1].into_key_type() <= arr[mid].into_key_type()
++    {
++        return;
++    }
++    let right_len = arr.len() - mid;
++    if mid <= right_len && mid <= buffer.capacity() {
++        buffer.clear();
++        buffer.extend_from_slice(&arr[..mid]);
++        let (mut left, mut right, mut output) = (0, mid, 0);
++        while left < mid && right < arr.len() {
++            if buffer[left].into_key_type() <= arr[right].into_key_type() {
++                arr[output] = buffer[left];
++                left += 1;
++            } else {
++                arr[output] = arr[right];
++                right += 1;
++            }
++            output += 1;
++        }
++        arr[output..output + mid - left].copy_from_slice(&buffer[left..]);
++        return;
++    }
++    if right_len <= buffer.capacity() {
++        buffer.clear();
++        buffer.extend_from_slice(&arr[mid..]);
++        let (mut left, mut right, mut output) = (mid, right_len, arr.len());
++        while left > 0 && right > 0 {
++            output -= 1;
++            if arr[left - 1].into_key_type() > buffer[right - 1].into_key_type()
++            {
++                left -= 1;
++                arr[output] = arr[left];
++            } else {
++                right -= 1;
++                arr[output] = buffer[right];
++            }
++        }
++        arr[..right].copy_from_slice(&buffer[..right]);
++        return;
++    }
++    let (left_cut, right_cut) = if mid >= right_len {
++        let left_cut = mid / 2;
++        let key = arr[left_cut].into_key_type();
++        let right_cut =
++            mid + arr[mid..].partition_point(|item| item.into_key_type() < key);
++        (left_cut, right_cut)
++    } else {
++        let right_cut = mid + right_len / 2;
++        let key = arr[right_cut].into_key_type();
++        let left_cut =
++            arr[..mid].partition_point(|item| item.into_key_type() <= key);
++        (left_cut, right_cut)
++    };
++    arr[left_cut..right_cut].rotate_left(mid - left_cut);
++    let new_mid = left_cut + right_cut - mid;
++    let (left, right) = arr.split_at_mut(new_mid);
++    merge_bounded::<T, K>(left, left_cut, buffer);
++    merge_bounded::<T, K>(right, mid - left_cut, buffer);
+ }
+ 
+ // Stable ping-pong scatter. Every raw write stays within the allocation;
+diff --git a/tests/block_lsd.rs b/tests/block_lsd.rs
+index 52cfa39..4f65b09 100644
+--- a/tests/block_lsd.rs
++++ b/tests/block_lsd.rs
+@@ -41,6 +41,104 @@ fn check_records<T: Radixable<K> + std::fmt::Debug + PartialEq, K: RadixKey>(
+     assert_eq!(arr, expected, "radix={}, block_size={}", radix, block_size);
+ }
+ 
++#[test]
++fn test_sort_block_lsd_equal_prefix_order_checks() {
++    // The first change can fall inside a four-key chunk or its tail. Skipping
++    // the known prefix must still preserve its equal-key payload order when
++    // reversing, and must not skip a later violation of the chosen direction.
++    for first_change in [1, 2, 3, 4, 5, 127, 128, 255, 256, 511, 512] {
++        for pattern in 0..4 {
++            let mut input: Vec<_> = (0..513)
++                .map(|position| Record {
++                    key: if position < first_change {
++                        42
++                    } else if pattern % 2 == 0 {
++                        43
++                    } else {
++                        41
++                    },
++                    position,
++                })
++                .collect();
++            if pattern >= 2 {
++                input.last_mut().unwrap().key =
++                    if pattern == 2 { 41 } else { 43 };
++            }
++            for radix in [1, 4, 8] {
++                for block_size in [1, 31, 512] {
++                    check_records(&input, radix, block_size);
++                }
++            }
++        }
++    }
++}
++
++#[test]
++fn test_sort_block_lsd_displaced_records() {
++    for n in [129, 257, 513] {
++        for group in [1, 4, 32] {
++            let sorted: Vec<_> = (0..n)
++                .map(|position| Record {
++                    key: (position / group) as u128,
++                    position,
++                })
++                .collect();
++            let positions = [0, 1, n / 4, n / 2, n - 2, n - 1];
++            for from in positions {
++                for to in positions {
++                    let mut input = sorted.clone();
++                    if from < to {
++                        input[from..=to].rotate_left(1);
++                    } else {
++                        input[to..=from].rotate_right(1);
++                    }
++                    for radix in [1, 4, 8] {
++                        for block_size in [1, 31, 512] {
++                            check_records(&input, radix, block_size);
++                        }
++                    }
++                    // A second displacement must either satisfy the same
++                    // complete-order proof or fall back to the radix path.
++                    input[n / 3..].rotate_right(1);
++                    check_records(&input, 8, 31);
++                }
++            }
++        }
++    }
++}
++
++#[test]
++fn test_sort_block_lsd_two_monotone_runs() {
++    for n in [129, 257, 1025, 4099] {
++        for split in [1, n / 4, n / 2, n - 1] {
++            for group in [1, 7, 257] {
++                for directions in 0..4 {
++                    let mut input: Vec<_> = (0..n)
++                        .map(|position| Record {
++                            key: ((position * 37 + 13) % group) as u128,
++                            position,
++                        })
++                        .collect();
++                    let (left, right) = input.split_at_mut(split);
++                    left.sort_by_key(|item| item.key);
++                    right.sort_by_key(|item| item.key);
++                    if directions & 1 != 0 {
++                        left.reverse();
++                    }
++                    if directions & 2 != 0 {
++                        right.reverse();
++                    }
++                    for radix in [1, 4, 8] {
++                        for block_size in [1, 3, 31] {
++                            check_records(&input, radix, block_size);
++                        }
++                    }
++                }
++            }
++        }
++    }
++}
++
+ #[test]
+ fn test_sort_block_lsd_records() {
+     let mut state = 0x123456789abcdefu128;

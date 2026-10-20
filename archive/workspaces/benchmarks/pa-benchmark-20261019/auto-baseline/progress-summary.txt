@@ -1,0 +1,38 @@
+complete PA cells: 296
+block_auto 1M cells 207 median faster 107 1.5x slower 19
+u32 uniform_numeric 25.488 8.535 2.986
+u64 uniform_numeric 32.012 11.127 2.877
+i32 normal 25.034 9.084 2.756
+u32 normal 24.314 9.446 2.574
+f32 uniform_numeric 25.214 10.985 2.295
+u64 normal 29.253 13.007 2.249
+f32 normal 24.049 11.49 2.093
+f32 low_bits_constant 9.945 4.965 2.003
+lsd 1M cells 205 median faster 151 1.5x slower 37
+f32 push_middle 13.444 1.839 7.31
+f32 push_front 14.892 2.336 6.374
+f32 organ_pipe 15.465 2.876 5.377
+f64 push_front 16.494 3.19 5.17
+f64 organ_pipe 25.222 4.931 5.115
+f64 push_middle 15.218 2.98 5.106
+record32 push_front 51.21 10.948 4.677
+u64 organ_pipe 17.884 3.839 4.659
+std 1M cells 207 median faster 166 1.5x slower 27
+record32 push_front 51.21 11.166 4.586
+record32 push_middle 50.521 12.032 4.199
+record128 push_front 122.506 32.085 3.818
+u128 push_middle 22.693 6.91 3.284
+record32 organ_pipe 57.723 17.609 3.278
+i64 push_middle 12.066 3.697 3.264
+i64 organ_pipe 19.942 6.245 3.193
+u64 push_middle 11.787 3.738 3.154
+timsort 1M cells 207 median faster 163 1.5x slower 30
+record32 push_middle 50.521 5.734 8.811
+record128 push_middle 139.333 19.961 6.98
+u128 push_middle 22.693 3.41 6.656
+record32 push_front 51.21 7.959 6.434
+i64 push_middle 12.066 1.937 6.23
+u128 push_front 23.057 3.966 5.814
+i64 push_front 12.706 2.186 5.814
+u64 push_middle 11.787 2.105 5.598
+strict worst [{'kind': 'u128', 'dist': 'reverse_nearly_sorted', 'n': 262144, 'ratio': 1.1966775088689787, 'min': 0.8922619932441092, 'max': 1.8844277800297258, 'aa_min': 1.082948791351942, 'aa_max': 2.1172718100445165}, {'kind': 'i32', 'dist': 'few_unique', 'n': 1048576, 'ratio': 1.1572662885317393, 'min': 0.9265693655601137, 'max': 1.393075848334548, 'aa_min': 0.7924092103024961, 'aa_max': 1.3302468431713206}, {'kind': 'u128', 'dist': 'all_equal', 'n': 128, 'ratio': 1.1504305622928974, 'min': 0.6556851339914022, 'max': 1.4179527298669403, 'aa_min': 0.7212479645738906, 'aa_max': 1.3261093684880125}, {'kind': 'f32', 'dist': 'high_only', 'n': 1048576, 'ratio': 1.1362304965270167, 'min': 0.9191901683074437, 'max': 1.4087804510683213, 'aa_min': 0.913613953976451, 'aa_max': 1.1804482661242401}, {'kind': 'i64', 'dist': 'reversed', 'n': 1048576, 'ratio': 1.1348759777852326, 'min': 0.8414422757705362, 'max': 1.2823425734726654, 'aa_min': 0.9946297415186831, 'aa_max': 1.2389583136624664}, {'kind': 'i32', 'dist': 'organ_pipe', 'n': 128, 'ratio': 1.131731085487449, 'min': 1.0299591237761765, 'max': 1.3246579583962141, 'aa_min': 0.867305449646414, 'aa_max': 1.3531401088765576}, {'kind': 'u128', 'dist': 'high_only', 'n': 1048576, 'ratio': 1.110529239536412, 'min': 0.9601230220119715, 'max': 1.3349504428486194, 'aa_min': 0.8739776788545826, 'aa_max': 1.0994239877888363}, {'kind': 'i32', 'dist': 'push_front', 'n': 262144, 'ratio': 1.0843590117255022, 'min': 0.8014163630519692, 'max': 1.3528942456455204, 'aa_min': 0.8799125925538276, 'aa_max': 1.0396453385289963}]

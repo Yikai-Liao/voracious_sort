@@ -1,0 +1,3 @@
+{
+  "reason": "Confirmed f32 all-equal median regression 61.75 percent and f64 all-equal 30.46 percent, all six pairs slower beyond same-case AA envelope. Reject the enumerated-index implementation; complete 109-condition timing retained, memory stopped after rejection."
+}

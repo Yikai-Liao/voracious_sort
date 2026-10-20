@@ -1,0 +1,42 @@
+[
+  {
+    "kind": "u64",
+    "dist": "nearly_sorted",
+    "n": 16384
+  },
+  {
+    "kind": "u64",
+    "dist": "nearly_sorted",
+    "n": 1024
+  },
+  {
+    "kind": "u128",
+    "dist": "nearly_sorted",
+    "n": 1024
+  },
+  {
+    "kind": "u128",
+    "dist": "uniform",
+    "n": 1024
+  },
+  {
+    "kind": "f64",
+    "dist": "uniform",
+    "n": 1024
+  },
+  {
+    "kind": "i32",
+    "dist": "uniform",
+    "n": 1024
+  },
+  {
+    "kind": "u32",
+    "dist": "nearly_sorted",
+    "n": 1024
+  },
+  {
+    "kind": "record128",
+    "dist": "nearly_sorted",
+    "n": 1024
+  }
+]

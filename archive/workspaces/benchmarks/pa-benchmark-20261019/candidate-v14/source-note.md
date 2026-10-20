@@ -1,0 +1,1 @@
+V14: original PA entry, recursion signatures and recursive body restored, apart from the exact constant-tail terminal proof. Interval admission/completion stays external. A rejected exact interval proof reuses the ordinary fallback; no const-generic order-check handoff. Pure radix only.

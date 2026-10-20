@@ -1,0 +1,69 @@
+{
+  "time_observations": 112170,
+  "memory_observations": 56085,
+  "algorithm_cases": 18695,
+  "input_cases": 1045,
+  "primary_input_cases": 1035,
+  "all_block_rust_std_and_timsort_outputs_match": true,
+  "all_paired_input_digests_match": true,
+  "all_block_policy_allocations_within_implementation_bound": true,
+  "comparator_failure_cases": 238,
+  "comparator_failure_cases_by_algorithm": {
+    "dlsd": 56,
+    "lsd": 10,
+    "lsd_aa": 10,
+    "lsd_core": 28,
+    "lsd_plain": 42,
+    "thiel": 92
+  },
+  "aa_samples": 6270,
+  "aa_median_ratio": 0.9972804559577007,
+  "aa_absolute_change_percent_median": 5.530228110619239,
+  "aa_absolute_change_percent_p90": 22.709582697765352,
+  "aa_absolute_change_percent_p95": 31.70044284320308,
+  "aa_by_primary_size": {
+    "128": {
+      "samples": 1242,
+      "median_ratio": 1.006665755622299,
+      "absolute_change_percent_median": 6.760803401526672,
+      "absolute_change_percent_p95": 34.094135193911576
+    },
+    "1024": {
+      "samples": 1242,
+      "median_ratio": 0.9957694033936536,
+      "absolute_change_percent_median": 6.610577381620697,
+      "absolute_change_percent_p95": 33.89375786396301
+    },
+    "16384": {
+      "samples": 1242,
+      "median_ratio": 0.9934269954206933,
+      "absolute_change_percent_median": 5.415098127042506,
+      "absolute_change_percent_p95": 32.63525764741582
+    },
+    "262144": {
+      "samples": 1242,
+      "median_ratio": 0.9985065815480353,
+      "absolute_change_percent_median": 4.89930301837359,
+      "absolute_change_percent_p95": 34.014809881967196
+    },
+    "1048576": {
+      "samples": 1242,
+      "median_ratio": 0.9965093024492617,
+      "absolute_change_percent_median": 4.572366034964665,
+      "absolute_change_percent_p95": 24.19487761331358
+    }
+  },
+  "process_failures": 0,
+  "processes": 2090,
+  "max_final_process_swap_kib": 0,
+  "max_process_rss_kib": 710016,
+  "process_major_faults": 0,
+  "key_order_failure_cases": 0,
+  "fingerprint_failure_cases": 0,
+  "global_swap_traffic_pages": {
+    "pswpin": 2553,
+    "pswpout": 0
+  },
+  "exclusions": "No primary observations removed. All baseline validity failures retained. Documented unsupported comparator/type cells are N/A; warmup/pilot observations are separate from primary data.",
+  "sqrt_policy_large_u64_log_log_slope": 0.48880246330364885
+}

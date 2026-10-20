@@ -1,0 +1,9 @@
+{
+  "plot_fits.py": "480f158946d5df468f606e59011e0e9a0bf4bb68656b0899af62c7d8cc69a13f",
+  "fits/result.json": "eff6a1778306ab9e999c3d493d1f7bb5e2429354445531e6980a57b99c79c76b",
+  "fits/tier-result.json": "3e49e1eb54aee66efeb700dc801022fe0419c19a2a12e284c6b1d51dbde765e4",
+  "fits/tier-selected-conditions.csv": "8106222b0562bbbeffb4d9e4236af53bec9d7c168e4688251e93a873c7e5d4bb",
+  "fits/alpha-profile.csv": "5e93e6caa5447dbab14be66a8779e6399b401708dd56bb4f40b4cd411da237d1",
+  "fits/cross-validation-folds.csv": "414909c9536ac801f0d13e9e73dfa0274bccbd67eab7dd5dfe299f1f23ba63bb",
+  "fits/cross-validation-summary.csv": "c25ad0ec7a33525d8660362abefe6ee0dd4edc573ccc3ade73eabe1bef043721"
+}

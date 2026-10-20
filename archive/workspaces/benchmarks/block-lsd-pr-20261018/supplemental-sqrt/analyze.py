@@ -1,0 +1,129 @@
+#!/usr/bin/env python3
+"""Audit the expanded campaign and summarize only within-campaign pairs."""
+from collections import defaultdict
+import csv
+import hashlib
+import json
+from pathlib import Path
+import re
+import statistics
+
+import numpy as np
+
+ROOT=Path(__file__).resolve().parent
+DATA=ROOT.parent/"data"
+KEY=("kind","dist","n","algorithm")
+
+
+def read(name):
+    return [json.loads(line) for line in (DATA/name).read_text().splitlines()]
+
+
+def write(name,rows):
+    fields=list(dict.fromkeys(k for r in rows for k in r))
+    with (DATA/name).open("w",newline="") as f:
+        writer=csv.DictWriter(f,fieldnames=fields);writer.writeheader();writer.writerows(rows)
+
+
+def main():
+    timing=read("supplemental-sqrt-time.jsonl");memory=read("supplemental-sqrt-memory.jsonl")
+    assert len(timing)==16350,len(timing)
+    assert len(memory)==8175,len(memory)
+    manifest=json.loads((ROOT/"manifest.json").read_text())
+    assert hashlib.sha256((ROOT.parent/"manifest.json").read_bytes()).hexdigest()==manifest["initial_manifest_sha256"]
+    for name,digest in manifest["files"].items():
+        assert hashlib.sha256((ROOT/name).read_bytes()).hexdigest()==digest,name
+    initial_digests={}
+    for row in read("primary.jsonl"):
+        key=tuple(row[k] for k in ["kind","dist","n","pair"])
+        if key in initial_digests:assert initial_digests[key]==row["input_digest"]
+        initial_digests[key]=row["input_digest"]
+    tg,mg=defaultdict(list),defaultdict(list)
+    indexed={}
+    for rows,groups in [(timing,tg),(memory,mg)]:
+        for r in rows:
+            key=tuple(r[k] for k in ["kind","dist","n","pair"])
+            assert r["input_digest"]==initial_digests[key],r
+            if r["algorithm"].startswith("block_") or r["algorithm"] in ["std","timsort"]:
+                assert r["valid"] and r["ordered"] and r["preserved"],r
+            groups[tuple(r[k] for k in KEY)].append(r)
+    for r in timing:
+        key=tuple(r[k] for k in KEY)+(r["pair"],r["order"])
+        assert key not in indexed,key
+        indexed[key]=r
+    assert tg.keys()==mg.keys() and len(tg)==2725
+    summaries=[];aa=[];equal_block_ratios=[]
+    comparators=["block_fixed_512","block_fixed_bytes_4096","block_balanced_1","lsd","std","timsort"]
+    for key,observations in sorted(tg.items()):
+        allocated=mg[key]
+        assert len(observations)==6 and len(allocated)==3,key
+        assert len({(r["pair"],r["order"]) for r in observations})==6,key
+        assert len({r["pair"] for r in allocated})==3,key
+        first=observations[0]
+        row={k:first[k] for k in KEY+("bytes_per_record","radix","block","group","campaign","policy_family","policy_parameter")}
+        row.update(block_bytes=first["block"]*first["bytes_per_record"],n_time=6,n_memory=3,
+            full_stable_output_matches=all(r["valid"] for r in observations+allocated),
+            key_order_matches=all(r["ordered"] for r in observations+allocated),
+            fingerprint_preserved=all(r["preserved"] for r in observations+allocated))
+        for values,metric in [(observations,"ns"),(allocated,"peak_bytes")]:
+            numbers=[r[metric] for r in values]
+            row.update({"median_"+metric:statistics.median(numbers),"min_"+metric:min(numbers),"max_"+metric:max(numbers)})
+        for comparator in comparators:
+            pairs=[indexed[key[:3]+(comparator,r["pair"],r["order"])] for r in observations]
+            ratios=[r["ns"]/other["ns"] for r,other in zip(observations,pairs)]
+            row["ratio_vs_"+comparator]=statistics.median(ratios)
+            row["ratio_vs_"+comparator+"_min"]=min(ratios)
+            row["ratio_vs_"+comparator+"_max"]=max(ratios)
+            row["pair_valid_vs_"+comparator]=all(r["valid"] and other["valid"] for r,other in zip(observations,pairs))
+            if key[3]=="lsd_aa" and comparator=="lsd":aa.extend(ratios)
+            if (comparator=="block_fixed_512" and first["policy_family"]=="byte_normalized_sqrt"
+                and first["n"]==1048576 and first["block"]==512):
+                equal_block_ratios.extend(ratios)
+        if key[3].startswith("block_"):
+            bound=512*row["block"]*row["bytes_per_record"]+9*(row["n"]//row["block"])+66*256
+            row["block_heap_upper_bytes"]=bound
+            assert all(r["peak_bytes"]<=bound for r in allocated),(key,bound)
+        summaries.append(row)
+    spanning={};byte_spanning={}
+    for kind in sorted({r["kind"] for r in summaries}):
+        spanning[kind]={}
+        for family in ["space_balanced_sqrt","byte_normalized_sqrt"]:
+            blocks=[r["block"] for r in summaries if r["kind"]==kind and r["dist"]=="uniform" and r["n"]==1048576 and r["policy_family"]==family]
+            assert min(blocks)<512<max(blocks),(kind,family,blocks)
+            spanning[kind][family]=[min(blocks),max(blocks)]
+        normalized=[r["block_bytes"] for r in summaries if r["kind"]==kind and r["dist"]=="uniform" and r["n"]==1048576 and r["policy_family"]=="byte_normalized_sqrt"]
+        assert min(normalized)<4096<max(normalized),(kind,normalized)
+        byte_spanning[kind]=[min(normalized),max(normalized)]
+    processes=read("supplemental-sqrt-time-processes.jsonl")+read("supplemental-sqrt-memory-processes.jsonl")
+    assert len(processes)==218
+    assert all(p["returncode"]==0 for p in processes)
+    swaps=[int(re.search(r"VmSwap:\s+(\d+)",p["stderr"]).group(1)) for p in processes]
+    resources=[list(map(int,re.search(r"RESOURCE (\d+) (\d+) (\d+) (\d+)",p["stderr"]).groups())) for p in processes]
+    assert max(swaps)==0 and all(r[3]==0 for r in resources)
+    failures=[r for r in summaries if not r["full_stable_output_matches"]]
+    audit=dict(time_observations=len(timing),memory_observations=len(memory),input_cases=109,algorithm_cases=len(summaries),
+        all_block_rust_std_and_timsort_outputs_match=True,all_inputs_match_initial_campaign=True,
+        all_block_allocations_within_bound=True,block_ranges_at_1048576=spanning,
+        normalized_block_byte_ranges_at_1048576=byte_spanning,
+        comparator_failure_cases=len(failures),key_order_failure_cases=sum(not r["key_order_matches"] for r in summaries),
+        fingerprint_failure_cases=sum(not r["fingerprint_preserved"] for r in summaries),
+        aa_samples=len(aa),aa_median_ratio=statistics.median(aa),
+        aa_absolute_change_percent_median=float(np.median(np.abs(np.array(aa)-1))*100),
+        aa_absolute_change_percent_p95=float(np.quantile(np.abs(np.array(aa)-1),.95)*100),
+        equal_block_normalized_vs_fixed_512=dict(samples=len(equal_block_ratios),
+            median_ratio=statistics.median(equal_block_ratios),
+            absolute_change_percent_median=float(np.median(np.abs(np.array(equal_block_ratios)-1))*100),
+            absolute_change_percent_p95=float(np.quantile(np.abs(np.array(equal_block_ratios)-1),.95)*100)),
+        processes=len(processes),process_failures=0,max_final_process_swap_kib=max(swaps),
+        max_process_rss_kib=max(r[0] for r in resources),
+        total_process_major_faults=sum(r[1] for r in resources),
+        total_process_swaps=sum(r[2] for r in resources),
+        global_swap_traffic_pages={k:sum(p["vmstat_delta"][k] for p in processes) for k in ["pswpin","pswpout"]},
+        coverage=manifest["coverage"],exclusions="No supplemental observations removed; preflight remains separate")
+    write("supplemental-sqrt-timing.csv",timing);write("supplemental-sqrt-memory.csv",memory)
+    write("supplemental-sqrt-summary.csv",summaries);write("supplemental-sqrt-validation-failures.csv",failures)
+    (DATA/"supplemental-sqrt-audit.json").write_text(json.dumps(audit,indent=2)+"\n")
+    print(json.dumps(audit,indent=2))
+
+
+if __name__=="__main__":main()

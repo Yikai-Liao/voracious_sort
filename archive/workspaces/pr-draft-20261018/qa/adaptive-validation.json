@@ -1,0 +1,28 @@
+{
+  "base_commit": "e649c6af49d6bfdde896ca40cad387235fce4bfa",
+  "working_tree_changes": true,
+  "manual_kernel_body_byte_identical": true,
+  "default_release": {
+    "unit": 10,
+    "integration": 5,
+    "doctests": 4,
+    "ignored_doctests": 1,
+    "failed": 0
+  },
+  "format_pass": true,
+  "diff_check_pass": true,
+  "source_sha256": {
+    "README.md": "1616648a95d02218da9fd4339267866f52737d089847986459c1edfc1a426b89",
+    "src/sorts/block_lsd_stable_sort.rs": "a205dd49b63965405d4855323ddc2a3df0a41d0e326c971c6ac3e479bfee50a4",
+    "src/sorts/block_lsd_stable_sort/tests.rs": "7d449f2956ebfcb6b110178bb2ca2cefd9f283299d657e7d39a11882e042a6c6",
+    "tests/block_lsd.rs": "62afcc33ba7dc7ba669d4f56a9dd7499c01504f777e0673f1df4a8929a600afa",
+    "src/lib.rs": "9082deeded07b54f0b06a7f9f9f54060f2235b3b39dd58ecd159a7dea1486647"
+  },
+  "all_features_release": {
+    "unit": 98,
+    "integration": 5,
+    "doctests": 4,
+    "ignored_doctests": 1,
+    "failed": 0
+  }
+}

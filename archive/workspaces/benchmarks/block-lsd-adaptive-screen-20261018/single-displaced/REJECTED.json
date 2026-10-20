@@ -1,0 +1,4 @@
+{
+  "reason": "User correctly rejected a dedicated single-displaced-record path as too narrow and benchmark-specific. Candidate is withdrawn regardless of timings; complete timing and partial memory observations are retained only as experiment history.",
+  "utc": "2026-10-18T15:19:43Z"
+}

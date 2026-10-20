@@ -1,0 +1,158 @@
+[
+  {
+    "file": "figures/01-algorithm-comparison.pdf",
+    "sha256": "82572a2b5e1df1ab6cf95151a48156a794f49bd4884fc05433c937ccd453cd21",
+    "pages": [
+      {
+        "width_mm": 183.00000559488933,
+        "height_mm": 280.0000064425998,
+        "fonts": [
+          [
+            42,
+            "ttf",
+            "Type0",
+            "EUCIJB+DejaVuSans-Bold",
+            "F3",
+            "Identity-H",
+            0
+          ],
+          [
+            49,
+            "ttf",
+            "Type0",
+            "BKNLGB+DejaVuSans",
+            "F1",
+            "Identity-H",
+            0
+          ],
+          [
+            56,
+            "ttf",
+            "Type0",
+            "DQIFZV+DejaVuSans",
+            "F2",
+            "Identity-H",
+            0
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "file": "figures/01b-efficiency-overview.pdf",
+    "sha256": "70e3ead38a3fe5ce5f11a0d692855a258e34aa3ceb899ff3bd65bbbac2ad40bb",
+    "pages": [
+      {
+        "width_mm": 183.00000559488933,
+        "height_mm": 230.00000067816842,
+        "fonts": [
+          [
+            15,
+            "ttf",
+            "Type0",
+            "EYIZPP+DejaVuSans-Bold",
+            "F2",
+            "Identity-H",
+            0
+          ],
+          [
+            22,
+            "ttf",
+            "Type0",
+            "CFRTUF+DejaVuSans",
+            "F1",
+            "Identity-H",
+            0
+          ],
+          [
+            29,
+            "ttf",
+            "Type0",
+            "EEZAWI+DejaVuSans",
+            "F3",
+            "Identity-H",
+            0
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "file": "figures/02-policy-selection.pdf",
+    "sha256": "fd80a41907c29641acac519f8b817bb6b1e3923e839eccc2a9cb7c0c76a9441b",
+    "pages": [
+      {
+        "width_mm": 183.00000559488933,
+        "height_mm": 204.99999779595268,
+        "fonts": [
+          [
+            22,
+            "ttf",
+            "Type0",
+            "EPEJPU+DejaVuSans-Bold",
+            "F2",
+            "Identity-H",
+            0
+          ],
+          [
+            29,
+            "ttf",
+            "Type0",
+            "GEIWGK+DejaVuSans",
+            "F1",
+            "Identity-H",
+            0
+          ],
+          [
+            36,
+            "ttf",
+            "Type0",
+            "MTBWKR+DejaVuSans",
+            "F3",
+            "Identity-H",
+            0
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "file": "figures/curve-and-tier-fitting.pdf",
+    "sha256": "675917f2f2550d4fbc9082ba71d2514b9b43593ba47d8191f4ac4b654228c38f",
+    "pages": [
+      {
+        "width_mm": 183.00000559488933,
+        "height_mm": 174.99999864366316,
+        "fonts": [
+          [
+            19,
+            "ttf",
+            "Type0",
+            "BHPUCF+DejaVuSans-Bold",
+            "F2",
+            "Identity-H",
+            0
+          ],
+          [
+            26,
+            "ttf",
+            "Type0",
+            "DKDQJW+DejaVuSans",
+            "F1",
+            "Identity-H",
+            0
+          ],
+          [
+            33,
+            "ttf",
+            "Type0",
+            "DEOWHK+DejaVuSans",
+            "F3",
+            "Identity-H",
+            0
+          ]
+        ]
+      }
+    ]
+  }
+]

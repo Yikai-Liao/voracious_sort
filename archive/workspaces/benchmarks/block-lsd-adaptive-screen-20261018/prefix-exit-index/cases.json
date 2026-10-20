@@ -1,0 +1,77 @@
+[
+  {
+    "kind": "u64",
+    "dist": "uniform",
+    "n": 1048576
+  },
+  {
+    "kind": "u64",
+    "dist": "all_equal",
+    "n": 1048576
+  },
+  {
+    "kind": "u64",
+    "dist": "late_difference",
+    "n": 1048576
+  },
+  {
+    "kind": "u64",
+    "dist": "sorted",
+    "n": 1048576
+  },
+  {
+    "kind": "u64",
+    "dist": "reversed",
+    "n": 1048576
+  },
+  {
+    "kind": "f32",
+    "dist": "uniform",
+    "n": 1048576
+  },
+  {
+    "kind": "f32",
+    "dist": "all_equal",
+    "n": 1048576
+  },
+  {
+    "kind": "f32",
+    "dist": "late_difference",
+    "n": 1048576
+  },
+  {
+    "kind": "f32",
+    "dist": "sorted",
+    "n": 1048576
+  },
+  {
+    "kind": "f32",
+    "dist": "reversed",
+    "n": 1048576
+  },
+  {
+    "kind": "f64",
+    "dist": "uniform",
+    "n": 1048576
+  },
+  {
+    "kind": "f64",
+    "dist": "all_equal",
+    "n": 1048576
+  },
+  {
+    "kind": "f64",
+    "dist": "late_difference",
+    "n": 1048576
+  },
+  {
+    "kind": "f64",
+    "dist": "sorted",
+    "n": 1048576
+  },
+  {
+    "kind": "f64",
+    "dist": "reversed",
+    "n": 1048576
+  }
+]

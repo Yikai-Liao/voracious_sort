@@ -1,0 +1,20 @@
+{
+  "candidate": "block_balanced_4__floor_bytes_1024",
+  "methods": "Use original, expanded, retained prefix, then missing-only, in that fixed priority. Pool equal arguments within a campaign only. Each time ratio uses same-campaign controls. Memory source and matching input identity are explicit.",
+  "heatmap": "Completed 109-condition screen; normalize each workload to fastest tested Block argument before group GM. No global min-max.",
+  "source_sha256": {
+    "data/original-timing.csv": "9196ce1f11f4e794fba616210d831406a568d4246491e1828d8aec5d19ccaf28",
+    "data/original-memory.csv": "6f7e00cac0a200090ff1f7ee2462cf455d5637a108c440a81211db7ab1c5fd67",
+    "data/supplemental-sqrt-timing.csv": "7968a9c4a4ba35060910d3c5e8c4aae22db4e6283d46679c6bacb10f5a7d55fe",
+    "data/supplemental-sqrt-memory.csv": "832a693cf95ca40f09502ddef4c2da0ed3b4378b070327ba8a5a240bb46eca4d",
+    "validation/data/time.jsonl": "9d104fdac0416df28658047ddf17d942933b5d7a07501cd81740d4e274cba8a7",
+    "missing-only/data/time.jsonl": "af90b6204c3330b026bcaaf64ad73d11f776cd9467f6cccb2addbedfbfe989e3",
+    "missing-only/data/memory.jsonl": "a8177fe17e59e11a0911ac4b4a0744b81f8e101e7ad0d1603dbcb1d681f95404",
+    "missing-only/coverage-before.csv": "8233019a282219d3497829059c1881dd1dcd7208f5fdb3c787f62515ce69fb86",
+    "data/policy-floor-screen-conditions.csv": "bec2016dcd010686362a78836c5f99bd28c480377f864acd8502ffb0b0ffa817",
+    "evaluate_reuse.py": "bd09f5c861d336830babceef5b7da9780b2721e9b35474d7cd8d1985e3d80e91",
+    "validation/data/time-processes.jsonl": "2f6c33ac1ba65f33eba15c32be92edcd948eea5793e22f87232832e678e540d6",
+    "missing-only/data/time-processes.jsonl": "8dfaaa7af212f32662579405f2005cfc8cd1c32b49a44e637ce7e33d5fbdb992",
+    "missing-only/data/memory-processes.jsonl": "fbb863bafc8ff2dff472bc752d45f5806778618458270be45b1e46632e17e6a6"
+  }
+}

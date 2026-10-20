@@ -1,0 +1,252 @@
+{
+  "status": "PASS",
+  "final_stage": "radix-v16-diagnostic",
+  "stages": [
+    {
+      "stage": "adaptive-v10-final-gate",
+      "cells": 76,
+      "rows": 912,
+      "seconds": 98.0502097606659,
+      "files": 139
+    },
+    {
+      "stage": "adaptive-v10-frontier-stress",
+      "cells": 20,
+      "rows": 120,
+      "seconds": 19.81995987892151,
+      "files": 139
+    },
+    {
+      "stage": "adaptive-v10-screen",
+      "cells": 54,
+      "rows": 324,
+      "seconds": 39.64451599121094,
+      "files": 139
+    },
+    {
+      "stage": "adaptive-v10-small-aa",
+      "cells": 8,
+      "rows": 96,
+      "seconds": 0.480363130569458,
+      "files": 139
+    },
+    {
+      "stage": "adaptive-v10-small-ablation",
+      "cells": 8,
+      "rows": 96,
+      "seconds": 0.45053935050964355,
+      "files": 139
+    },
+    {
+      "stage": "adaptive-v11-small-ablation",
+      "cells": 36,
+      "rows": 432,
+      "seconds": 2.432647943496704,
+      "files": 139
+    },
+    {
+      "stage": "adaptive-v5-screen",
+      "cells": 42,
+      "rows": 252,
+      "seconds": 35.353606939315796,
+      "files": 139
+    },
+    {
+      "stage": "adaptive-v6-screen",
+      "cells": 42,
+      "rows": 252,
+      "seconds": 35.29416298866272,
+      "files": 139
+    },
+    {
+      "stage": "adaptive-v6-small-ablation",
+      "cells": 10,
+      "rows": 120,
+      "seconds": 0.7022247314453125,
+      "files": 139
+    },
+    {
+      "stage": "adaptive-v7-frontier-stress",
+      "cells": 20,
+      "rows": 120,
+      "seconds": 21.35940957069397,
+      "files": 139
+    },
+    {
+      "stage": "adaptive-v7-screen",
+      "cells": 42,
+      "rows": 252,
+      "seconds": 36.003979206085205,
+      "files": 139
+    },
+    {
+      "stage": "adaptive-v8-frontier-stress",
+      "cells": 20,
+      "rows": 120,
+      "seconds": 19.95042610168457,
+      "files": 139
+    },
+    {
+      "stage": "adaptive-v8-screen",
+      "cells": 42,
+      "rows": 252,
+      "seconds": 35.080055236816406,
+      "files": 139
+    },
+    {
+      "stage": "adaptive-v9-frontier-stress",
+      "cells": 20,
+      "rows": 120,
+      "seconds": 19.715654611587524,
+      "files": 139
+    },
+    {
+      "stage": "adaptive-v9-screen",
+      "cells": 42,
+      "rows": 252,
+      "seconds": 35.183881521224976,
+      "files": 139
+    },
+    {
+      "stage": "adaptive-v9-small-ablation",
+      "cells": 20,
+      "rows": 240,
+      "seconds": 1.4718842506408691,
+      "files": 139
+    },
+    {
+      "stage": "interval-broad",
+      "cells": 33,
+      "rows": 198,
+      "seconds": 27.071660041809082,
+      "files": 138
+    },
+    {
+      "stage": "interval-target",
+      "cells": 6,
+      "rows": 36,
+      "seconds": 3.3324058055877686,
+      "files": 138
+    },
+    {
+      "stage": "interval-v2-broad",
+      "cells": 33,
+      "rows": 198,
+      "seconds": 26.761523723602295,
+      "files": 138
+    },
+    {
+      "stage": "interval-v2-target",
+      "cells": 6,
+      "rows": 36,
+      "seconds": 3.1140828132629395,
+      "files": 138
+    },
+    {
+      "stage": "interval-v3-broad",
+      "cells": 23,
+      "rows": 138,
+      "seconds": 21.829233169555664,
+      "files": 138
+    },
+    {
+      "stage": "interval-v3-target",
+      "cells": 4,
+      "rows": 24,
+      "seconds": 2.1324198246002197,
+      "files": 138
+    },
+    {
+      "stage": "interval-v4-broad",
+      "cells": 23,
+      "rows": 138,
+      "seconds": 21.51867914199829,
+      "files": 138
+    },
+    {
+      "stage": "interval-v4-recheck1",
+      "cells": 5,
+      "rows": 30,
+      "seconds": 1.4761791229248047,
+      "files": 138
+    },
+    {
+      "stage": "interval-v4-recheck2",
+      "cells": 5,
+      "rows": 30,
+      "seconds": 1.460540771484375,
+      "files": 138
+    },
+    {
+      "stage": "interval-v4-target",
+      "cells": 4,
+      "rows": 24,
+      "seconds": 2.0284860134124756,
+      "files": 138
+    },
+    {
+      "stage": "radix-v13-broad",
+      "cells": 42,
+      "rows": 504,
+      "seconds": 42.588021755218506,
+      "files": 138
+    },
+    {
+      "stage": "radix-v13-target",
+      "cells": 26,
+      "rows": 156,
+      "seconds": 27.659245014190674,
+      "files": 138
+    },
+    {
+      "stage": "radix-v14-gate",
+      "cells": 67,
+      "rows": 804,
+      "seconds": 87.04443264007568,
+      "files": 138
+    },
+    {
+      "stage": "radix-v15-diagnostic",
+      "cells": 14,
+      "rows": 168,
+      "seconds": 12.546020746231079,
+      "files": 138
+    },
+    {
+      "stage": "radix-v16-diagnostic",
+      "cells": 14,
+      "rows": 168,
+      "seconds": 12.833191871643066,
+      "files": 138
+    },
+    {
+      "stage": "runs-v5-broad",
+      "cells": 23,
+      "rows": 138,
+      "seconds": 21.519484996795654,
+      "files": 139
+    },
+    {
+      "stage": "runs-v5-recheck",
+      "cells": 4,
+      "rows": 24,
+      "seconds": 1.5405397415161133,
+      "files": 139
+    },
+    {
+      "stage": "runs-v5-target",
+      "cells": 15,
+      "rows": 90,
+      "seconds": 11.877801656723022,
+      "files": 139
+    }
+  ],
+  "candidate_only_rows": 6864,
+  "final_schedule_matches_saved_1045": false,
+  "final_methods": [
+    "pa_radix",
+    "pa_radix"
+  ],
+  "current_frontier_source_matches_frozen": true,
+  "note": "Hash, input/output oracle and resource audit. No algorithms executed."
+}

@@ -1,0 +1,116 @@
+{
+  "input_conditions": 1045,
+  "all_candidate_outputs_match": true,
+  "all_inputs_match_original": true,
+  "all_candidate_heap_measurements_within_bound": true,
+  "time_source_conditions": {
+    "original": 764,
+    "prefix": 178,
+    "missing": 32,
+    "expanded": 71
+  },
+  "memory_source_conditions": {
+    "original": 764,
+    "missing": 210,
+    "expanded": 71
+  },
+  "missing_only_time_conditions": 32,
+  "missing_only_memory_conditions": 210,
+  "missing_only_time_observations": 768,
+  "missing_only_memory_observations": 630,
+  "interrupted_prefix_conditions": 884,
+  "interrupted_prefix_time_observations": 58266,
+  "no_cross_campaign_time_pairs": true,
+  "aa_by_campaign": {
+    "original": {
+      "samples": 6270,
+      "median_ratio": 0.9972804559577007,
+      "absolute_change_percent_median": 5.530228110619239,
+      "absolute_change_percent_p95": 31.70044284320308
+    },
+    "expanded": {
+      "samples": 654,
+      "median_ratio": 0.997690435370945,
+      "absolute_change_percent_median": 5.003577765675016,
+      "absolute_change_percent_p95": 28.860605678940843
+    },
+    "prefix": {
+      "samples": 5304,
+      "median_ratio": 1.0022396360317152,
+      "absolute_change_percent_median": 5.383405948144215,
+      "absolute_change_percent_p95": 30.4905392110117
+    }
+  },
+  "internal_selection_conditions": 109,
+  "internal_selection_formulas": 111,
+  "overall_1m": [
+    {
+      "comparator": "lsd",
+      "conditions": 205,
+      "less": 196,
+      "equal": 0,
+      "more": 9,
+      "gm_paired_time_ratio": 0.6761669271557481,
+      "faster_1_5x": 133,
+      "slower_1_5x": 43,
+      "faster_2x": 92,
+      "slower_2x": 30,
+      "all_six_pairs_faster": 146,
+      "all_six_pairs_slower": 47
+    },
+    {
+      "comparator": "std",
+      "conditions": 207,
+      "less": 207,
+      "equal": 0,
+      "more": 0,
+      "gm_paired_time_ratio": 0.5713925085977258,
+      "faster_1_5x": 127,
+      "slower_1_5x": 43,
+      "faster_2x": 108,
+      "slower_2x": 29,
+      "all_six_pairs_faster": 143,
+      "all_six_pairs_slower": 52
+    },
+    {
+      "comparator": "timsort",
+      "conditions": 207,
+      "less": 185,
+      "equal": 0,
+      "more": 22,
+      "gm_paired_time_ratio": 0.30927960703751234,
+      "faster_1_5x": 136,
+      "slower_1_5x": 37,
+      "faster_2x": 124,
+      "slower_2x": 28,
+      "all_six_pairs_faster": 149,
+      "all_six_pairs_slower": 47
+    }
+  ],
+  "large_effect_aa_screen_1m_lsd": {
+    "conditions": 205,
+    "assessable": 185,
+    "not_assessable": 20,
+    "large_gain_beyond_observed_envelope": 113,
+    "large_loss_beyond_observed_envelope": 38,
+    "rule": "Median factor at least 1.5, and every candidate/control pair lies beyond the full symmetric A/A envelope for the same condition and campaign. Descriptive screening only; not a significance test."
+  },
+  "aa_for_1m_lsd_compared_conditions": {
+    "observations": 1110,
+    "absolute_change_percent_median": 4.664827663365301,
+    "absolute_change_percent_p95": 23.189414658442043,
+    "symmetric_factor_p95": 1.2638446841854538
+  },
+  "retained_and_missing_processes": {
+    "count": 1126,
+    "failures": 0,
+    "max_final_process_swap_kib": 0,
+    "max_rss_kib": 710044,
+    "total_major_faults": 0,
+    "total_process_swaps": 0,
+    "global_swap_traffic_pages": {
+      "pswpin": 822,
+      "pswpout": 0
+    }
+  }
+}

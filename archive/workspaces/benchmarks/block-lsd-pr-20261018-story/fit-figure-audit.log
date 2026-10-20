@@ -1,0 +1,4 @@
+<frozen importlib._bootstrap>:491: RuntimeWarning: The global interpreter lock (GIL) has been enabled to load module 'pymupdf._extra', which has not declared that it can run safely without the GIL. To override this behavior and keep the GIL disabled (at your own risk), run with PYTHON_GIL=0 or -Xgil=0.
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+curve-and-tier-fitting glyph 0 collision 0
+Automated blocking gates passed; inspect every panel and review warnings.

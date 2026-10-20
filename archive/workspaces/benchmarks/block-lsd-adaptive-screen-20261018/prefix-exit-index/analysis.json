@@ -1,0 +1,13 @@
+{
+  "conditions": 15,
+  "time_observations": 270,
+  "memory_observations": 135,
+  "geometric_mean_ratio": 1.0029222332997865,
+  "all_six_faster_beyond_aa": 1,
+  "all_six_slower_beyond_aa": 2,
+  "source_sha256": {
+    "manifest.json": "c6bf0b504cac84e65406b8735f6299f0272d2bea613298914b4fc2509d02ac9a",
+    "time.jsonl": "280578d8d9dddb05d469fa247e80e9d7c81aa9798af56e31d8c76043ff1eb9f1",
+    "analyze_screen.py": "fa4943d8f5eb89ff9ba26a42f1895dfcea0534054e4ec70701e4fba38408d053"
+  }
+}

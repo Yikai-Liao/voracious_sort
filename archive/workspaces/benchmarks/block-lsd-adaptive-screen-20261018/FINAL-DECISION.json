@@ -1,0 +1,10 @@
+{
+  "status": "rejected_all",
+  "final_stage": "prefix-exit-index",
+  "reason": "两个局部前缀复用实现都造成了明确的浮点全相等退化；最后实现的 f32 中位耗时约为原版 1.98 倍、f64 约 1.24 倍，因此全部撤回。",
+  "original_commit": "e649c6af49d6bfdde896ca40cad387235fce4bfa",
+  "original_branch": "origin/archive/block-lsd-original-20261018",
+  "candidate_worktree_restored_to_original": true,
+  "main_worktree_clean": true,
+  "utc": "2026-10-18T15:36:05Z"
+}

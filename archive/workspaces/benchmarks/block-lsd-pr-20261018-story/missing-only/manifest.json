@@ -1,0 +1,2212 @@
+{
+  "created_utc": "2026-10-18T14:41:34Z",
+  "candidate": "block_balanced_4__floor_bytes_1024",
+  "formula": "max(1,1024//s,ceil(4*sqrt(9*n/(512*s))))",
+  "input_conditions": 1045,
+  "time_missing_conditions": 32,
+  "memory_missing_conditions": 210,
+  "time_methods": [
+    "candidate",
+    "lsd",
+    "std",
+    "timsort"
+  ],
+  "time_control_rationale": "Only the 32 missing candidate conditions carry three same-batch comparator controls, so external algorithm ratios remain paired. No other strategy or algorithm matrix rerun.",
+  "memory_methods": [
+    "candidate"
+  ],
+  "time_cases": [
+    {
+      "kind": "f32",
+      "dist": "alternating",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "f32",
+      "dist": "sawtooth",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "f64",
+      "dist": "low_bits_constant",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "f64",
+      "dist": "sorted",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "f64",
+      "dist": "uniform_numeric",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "i32",
+      "dist": "push_middle",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "i32",
+      "dist": "reversed",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "i32",
+      "dist": "sqrt_keys",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "i32",
+      "dist": "uniform_numeric",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "i32",
+      "dist": "zipf",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "i64",
+      "dist": "late_difference",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "i64",
+      "dist": "reverse_nearly_sorted",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record128",
+      "dist": "few_unique",
+      "n": 262144,
+      "block": 24,
+      "bytes_per_record": 128,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record128",
+      "dist": "low_bits_constant",
+      "n": 262144,
+      "block": 24,
+      "bytes_per_record": 128,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record128",
+      "dist": "low_bits_constant",
+      "n": 1048576,
+      "block": 48,
+      "bytes_per_record": 128,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record128",
+      "dist": "normal",
+      "n": 262144,
+      "block": 24,
+      "bytes_per_record": 128,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record128",
+      "dist": "reverse_nearly_sorted",
+      "n": 1048576,
+      "block": 48,
+      "bytes_per_record": 128,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record128",
+      "dist": "reversed",
+      "n": 262144,
+      "block": 24,
+      "bytes_per_record": 128,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record128",
+      "dist": "uniform_numeric",
+      "n": 1048576,
+      "block": 48,
+      "bytes_per_record": 128,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record32",
+      "dist": "few_unique",
+      "n": 262144,
+      "block": 48,
+      "bytes_per_record": 32,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record32",
+      "dist": "late_difference",
+      "n": 262144,
+      "block": 48,
+      "bytes_per_record": 32,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record32",
+      "dist": "organ_pipe",
+      "n": 262144,
+      "block": 48,
+      "bytes_per_record": 32,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record32",
+      "dist": "reversed",
+      "n": 1048576,
+      "block": 96,
+      "bytes_per_record": 32,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record32",
+      "dist": "sqrt_keys",
+      "n": 262144,
+      "block": 48,
+      "bytes_per_record": 32,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u128",
+      "dist": "high_only",
+      "n": 262144,
+      "block": 68,
+      "bytes_per_record": 16,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u128",
+      "dist": "low_bits_constant",
+      "n": 1048576,
+      "block": 136,
+      "bytes_per_record": 16,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u128",
+      "dist": "nearly_sorted",
+      "n": 262144,
+      "block": 68,
+      "bytes_per_record": 16,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u128",
+      "dist": "normal",
+      "n": 262144,
+      "block": 68,
+      "bytes_per_record": 16,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u128",
+      "dist": "sqrt_keys",
+      "n": 1048576,
+      "block": 136,
+      "bytes_per_record": 16,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u64",
+      "dist": "high_only",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u64",
+      "dist": "low_bits_constant",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u64",
+      "dist": "sqrt_keys",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "missing",
+      "memory_source": "missing"
+    }
+  ],
+  "memory_cases": [
+    {
+      "kind": "f32",
+      "dist": "all_equal",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "f32",
+      "dist": "almost_sorted",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "f32",
+      "dist": "alternating",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "f32",
+      "dist": "few_unique",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "f32",
+      "dist": "high_only",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "f32",
+      "dist": "late_difference",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "f32",
+      "dist": "low_bits_constant",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "f32",
+      "dist": "push_middle",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "f32",
+      "dist": "reverse_nearly_sorted",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "f32",
+      "dist": "reversed",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "f32",
+      "dist": "sawtooth",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "f32",
+      "dist": "sorted",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "f32",
+      "dist": "sqrt_keys",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "f32",
+      "dist": "uniform_narrow",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "f32",
+      "dist": "uniform_numeric",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "f32",
+      "dist": "zipf",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "f64",
+      "dist": "all_equal",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "f64",
+      "dist": "almost_sorted",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "f64",
+      "dist": "alternating",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "f64",
+      "dist": "few_unique",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "f64",
+      "dist": "high_only",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "f64",
+      "dist": "late_difference",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "f64",
+      "dist": "low_bits_constant",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "f64",
+      "dist": "push_middle",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "f64",
+      "dist": "reverse_nearly_sorted",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "f64",
+      "dist": "reversed",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "f64",
+      "dist": "sawtooth",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "f64",
+      "dist": "sorted",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "f64",
+      "dist": "sqrt_keys",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "f64",
+      "dist": "uniform_narrow",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "f64",
+      "dist": "uniform_numeric",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "f64",
+      "dist": "zipf",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "i32",
+      "dist": "all_equal",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "i32",
+      "dist": "almost_sorted",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "i32",
+      "dist": "alternating",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "i32",
+      "dist": "few_unique",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "i32",
+      "dist": "high_only",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "i32",
+      "dist": "late_difference",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "i32",
+      "dist": "low_bits_constant",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "i32",
+      "dist": "push_middle",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "i32",
+      "dist": "reverse_nearly_sorted",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "i32",
+      "dist": "reversed",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "i32",
+      "dist": "sawtooth",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "i32",
+      "dist": "sorted",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "i32",
+      "dist": "sqrt_keys",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "i32",
+      "dist": "uniform_narrow",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "i32",
+      "dist": "uniform_numeric",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "i32",
+      "dist": "zipf",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "i64",
+      "dist": "all_equal",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "i64",
+      "dist": "almost_sorted",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "i64",
+      "dist": "alternating",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "i64",
+      "dist": "few_unique",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "i64",
+      "dist": "high_only",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "i64",
+      "dist": "late_difference",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "i64",
+      "dist": "low_bits_constant",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "i64",
+      "dist": "push_middle",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "i64",
+      "dist": "reverse_nearly_sorted",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "i64",
+      "dist": "reversed",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "i64",
+      "dist": "sawtooth",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "i64",
+      "dist": "sorted",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "i64",
+      "dist": "sqrt_keys",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "i64",
+      "dist": "uniform_narrow",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "i64",
+      "dist": "uniform_numeric",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "i64",
+      "dist": "zipf",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record128",
+      "dist": "all_equal",
+      "n": 262144,
+      "block": 24,
+      "bytes_per_record": 128,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record128",
+      "dist": "all_equal",
+      "n": 1048576,
+      "block": 48,
+      "bytes_per_record": 128,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record128",
+      "dist": "almost_sorted",
+      "n": 262144,
+      "block": 24,
+      "bytes_per_record": 128,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record128",
+      "dist": "almost_sorted",
+      "n": 1048576,
+      "block": 48,
+      "bytes_per_record": 128,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record128",
+      "dist": "alternating",
+      "n": 262144,
+      "block": 24,
+      "bytes_per_record": 128,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record128",
+      "dist": "alternating",
+      "n": 1048576,
+      "block": 48,
+      "bytes_per_record": 128,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record128",
+      "dist": "common_prefix",
+      "n": 262144,
+      "block": 24,
+      "bytes_per_record": 128,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record128",
+      "dist": "few_unique",
+      "n": 262144,
+      "block": 24,
+      "bytes_per_record": 128,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record128",
+      "dist": "few_unique",
+      "n": 1048576,
+      "block": 48,
+      "bytes_per_record": 128,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record128",
+      "dist": "high_only",
+      "n": 262144,
+      "block": 24,
+      "bytes_per_record": 128,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record128",
+      "dist": "high_only",
+      "n": 1048576,
+      "block": 48,
+      "bytes_per_record": 128,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record128",
+      "dist": "late_difference",
+      "n": 262144,
+      "block": 24,
+      "bytes_per_record": 128,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record128",
+      "dist": "late_difference",
+      "n": 1048576,
+      "block": 48,
+      "bytes_per_record": 128,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record128",
+      "dist": "low_bits_constant",
+      "n": 262144,
+      "block": 24,
+      "bytes_per_record": 128,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record128",
+      "dist": "low_bits_constant",
+      "n": 1048576,
+      "block": 48,
+      "bytes_per_record": 128,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record128",
+      "dist": "nearly_sorted",
+      "n": 262144,
+      "block": 24,
+      "bytes_per_record": 128,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record128",
+      "dist": "normal",
+      "n": 262144,
+      "block": 24,
+      "bytes_per_record": 128,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record128",
+      "dist": "organ_pipe",
+      "n": 262144,
+      "block": 24,
+      "bytes_per_record": 128,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record128",
+      "dist": "push_front",
+      "n": 262144,
+      "block": 24,
+      "bytes_per_record": 128,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record128",
+      "dist": "push_middle",
+      "n": 262144,
+      "block": 24,
+      "bytes_per_record": 128,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record128",
+      "dist": "push_middle",
+      "n": 1048576,
+      "block": 48,
+      "bytes_per_record": 128,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record128",
+      "dist": "reverse_nearly_sorted",
+      "n": 262144,
+      "block": 24,
+      "bytes_per_record": 128,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record128",
+      "dist": "reverse_nearly_sorted",
+      "n": 1048576,
+      "block": 48,
+      "bytes_per_record": 128,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record128",
+      "dist": "reversed",
+      "n": 262144,
+      "block": 24,
+      "bytes_per_record": 128,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record128",
+      "dist": "reversed",
+      "n": 1048576,
+      "block": 48,
+      "bytes_per_record": 128,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record128",
+      "dist": "sawtooth",
+      "n": 262144,
+      "block": 24,
+      "bytes_per_record": 128,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record128",
+      "dist": "sawtooth",
+      "n": 1048576,
+      "block": 48,
+      "bytes_per_record": 128,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record128",
+      "dist": "skew95",
+      "n": 262144,
+      "block": 24,
+      "bytes_per_record": 128,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record128",
+      "dist": "sorted",
+      "n": 262144,
+      "block": 24,
+      "bytes_per_record": 128,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record128",
+      "dist": "sorted",
+      "n": 1048576,
+      "block": 48,
+      "bytes_per_record": 128,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record128",
+      "dist": "sqrt_keys",
+      "n": 262144,
+      "block": 24,
+      "bytes_per_record": 128,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record128",
+      "dist": "sqrt_keys",
+      "n": 1048576,
+      "block": 48,
+      "bytes_per_record": 128,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record128",
+      "dist": "uniform_narrow",
+      "n": 262144,
+      "block": 24,
+      "bytes_per_record": 128,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record128",
+      "dist": "uniform_narrow",
+      "n": 1048576,
+      "block": 48,
+      "bytes_per_record": 128,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record128",
+      "dist": "uniform_numeric",
+      "n": 262144,
+      "block": 24,
+      "bytes_per_record": 128,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record128",
+      "dist": "uniform_numeric",
+      "n": 1048576,
+      "block": 48,
+      "bytes_per_record": 128,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record128",
+      "dist": "zipf",
+      "n": 262144,
+      "block": 24,
+      "bytes_per_record": 128,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record128",
+      "dist": "zipf",
+      "n": 1048576,
+      "block": 48,
+      "bytes_per_record": 128,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record32",
+      "dist": "all_equal",
+      "n": 262144,
+      "block": 48,
+      "bytes_per_record": 32,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record32",
+      "dist": "all_equal",
+      "n": 1048576,
+      "block": 96,
+      "bytes_per_record": 32,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record32",
+      "dist": "almost_sorted",
+      "n": 262144,
+      "block": 48,
+      "bytes_per_record": 32,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record32",
+      "dist": "almost_sorted",
+      "n": 1048576,
+      "block": 96,
+      "bytes_per_record": 32,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record32",
+      "dist": "alternating",
+      "n": 262144,
+      "block": 48,
+      "bytes_per_record": 32,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record32",
+      "dist": "alternating",
+      "n": 1048576,
+      "block": 96,
+      "bytes_per_record": 32,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record32",
+      "dist": "common_prefix",
+      "n": 262144,
+      "block": 48,
+      "bytes_per_record": 32,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record32",
+      "dist": "few_unique",
+      "n": 262144,
+      "block": 48,
+      "bytes_per_record": 32,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record32",
+      "dist": "few_unique",
+      "n": 1048576,
+      "block": 96,
+      "bytes_per_record": 32,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record32",
+      "dist": "high_only",
+      "n": 262144,
+      "block": 48,
+      "bytes_per_record": 32,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record32",
+      "dist": "high_only",
+      "n": 1048576,
+      "block": 96,
+      "bytes_per_record": 32,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record32",
+      "dist": "late_difference",
+      "n": 262144,
+      "block": 48,
+      "bytes_per_record": 32,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record32",
+      "dist": "late_difference",
+      "n": 1048576,
+      "block": 96,
+      "bytes_per_record": 32,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record32",
+      "dist": "low_bits_constant",
+      "n": 262144,
+      "block": 48,
+      "bytes_per_record": 32,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record32",
+      "dist": "low_bits_constant",
+      "n": 1048576,
+      "block": 96,
+      "bytes_per_record": 32,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record32",
+      "dist": "nearly_sorted",
+      "n": 262144,
+      "block": 48,
+      "bytes_per_record": 32,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record32",
+      "dist": "normal",
+      "n": 262144,
+      "block": 48,
+      "bytes_per_record": 32,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record32",
+      "dist": "organ_pipe",
+      "n": 262144,
+      "block": 48,
+      "bytes_per_record": 32,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record32",
+      "dist": "push_front",
+      "n": 262144,
+      "block": 48,
+      "bytes_per_record": 32,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record32",
+      "dist": "push_middle",
+      "n": 262144,
+      "block": 48,
+      "bytes_per_record": 32,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record32",
+      "dist": "push_middle",
+      "n": 1048576,
+      "block": 96,
+      "bytes_per_record": 32,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record32",
+      "dist": "reverse_nearly_sorted",
+      "n": 262144,
+      "block": 48,
+      "bytes_per_record": 32,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record32",
+      "dist": "reverse_nearly_sorted",
+      "n": 1048576,
+      "block": 96,
+      "bytes_per_record": 32,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record32",
+      "dist": "reversed",
+      "n": 262144,
+      "block": 48,
+      "bytes_per_record": 32,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record32",
+      "dist": "reversed",
+      "n": 1048576,
+      "block": 96,
+      "bytes_per_record": 32,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record32",
+      "dist": "sawtooth",
+      "n": 262144,
+      "block": 48,
+      "bytes_per_record": 32,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record32",
+      "dist": "sawtooth",
+      "n": 1048576,
+      "block": 96,
+      "bytes_per_record": 32,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record32",
+      "dist": "skew95",
+      "n": 262144,
+      "block": 48,
+      "bytes_per_record": 32,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record32",
+      "dist": "sorted",
+      "n": 262144,
+      "block": 48,
+      "bytes_per_record": 32,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record32",
+      "dist": "sorted",
+      "n": 1048576,
+      "block": 96,
+      "bytes_per_record": 32,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record32",
+      "dist": "sqrt_keys",
+      "n": 262144,
+      "block": 48,
+      "bytes_per_record": 32,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record32",
+      "dist": "sqrt_keys",
+      "n": 1048576,
+      "block": 96,
+      "bytes_per_record": 32,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record32",
+      "dist": "uniform_narrow",
+      "n": 262144,
+      "block": 48,
+      "bytes_per_record": 32,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record32",
+      "dist": "uniform_narrow",
+      "n": 1048576,
+      "block": 96,
+      "bytes_per_record": 32,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record32",
+      "dist": "uniform_numeric",
+      "n": 262144,
+      "block": 48,
+      "bytes_per_record": 32,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record32",
+      "dist": "uniform_numeric",
+      "n": 1048576,
+      "block": 96,
+      "bytes_per_record": 32,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record32",
+      "dist": "zipf",
+      "n": 262144,
+      "block": 48,
+      "bytes_per_record": 32,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "record32",
+      "dist": "zipf",
+      "n": 1048576,
+      "block": 96,
+      "bytes_per_record": 32,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u128",
+      "dist": "all_equal",
+      "n": 262144,
+      "block": 68,
+      "bytes_per_record": 16,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u128",
+      "dist": "all_equal",
+      "n": 1048576,
+      "block": 136,
+      "bytes_per_record": 16,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u128",
+      "dist": "almost_sorted",
+      "n": 262144,
+      "block": 68,
+      "bytes_per_record": 16,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u128",
+      "dist": "almost_sorted",
+      "n": 1048576,
+      "block": 136,
+      "bytes_per_record": 16,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u128",
+      "dist": "alternating",
+      "n": 262144,
+      "block": 68,
+      "bytes_per_record": 16,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u128",
+      "dist": "alternating",
+      "n": 1048576,
+      "block": 136,
+      "bytes_per_record": 16,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u128",
+      "dist": "common_prefix",
+      "n": 262144,
+      "block": 68,
+      "bytes_per_record": 16,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u128",
+      "dist": "few_unique",
+      "n": 262144,
+      "block": 68,
+      "bytes_per_record": 16,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u128",
+      "dist": "few_unique",
+      "n": 1048576,
+      "block": 136,
+      "bytes_per_record": 16,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u128",
+      "dist": "high_only",
+      "n": 262144,
+      "block": 68,
+      "bytes_per_record": 16,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u128",
+      "dist": "high_only",
+      "n": 1048576,
+      "block": 136,
+      "bytes_per_record": 16,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u128",
+      "dist": "late_difference",
+      "n": 262144,
+      "block": 68,
+      "bytes_per_record": 16,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u128",
+      "dist": "late_difference",
+      "n": 1048576,
+      "block": 136,
+      "bytes_per_record": 16,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u128",
+      "dist": "low_bits_constant",
+      "n": 262144,
+      "block": 68,
+      "bytes_per_record": 16,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u128",
+      "dist": "low_bits_constant",
+      "n": 1048576,
+      "block": 136,
+      "bytes_per_record": 16,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u128",
+      "dist": "nearly_sorted",
+      "n": 262144,
+      "block": 68,
+      "bytes_per_record": 16,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u128",
+      "dist": "normal",
+      "n": 262144,
+      "block": 68,
+      "bytes_per_record": 16,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u128",
+      "dist": "organ_pipe",
+      "n": 262144,
+      "block": 68,
+      "bytes_per_record": 16,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u128",
+      "dist": "push_front",
+      "n": 262144,
+      "block": 68,
+      "bytes_per_record": 16,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u128",
+      "dist": "push_middle",
+      "n": 262144,
+      "block": 68,
+      "bytes_per_record": 16,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u128",
+      "dist": "push_middle",
+      "n": 1048576,
+      "block": 136,
+      "bytes_per_record": 16,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u128",
+      "dist": "reverse_nearly_sorted",
+      "n": 262144,
+      "block": 68,
+      "bytes_per_record": 16,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u128",
+      "dist": "reverse_nearly_sorted",
+      "n": 1048576,
+      "block": 136,
+      "bytes_per_record": 16,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u128",
+      "dist": "reversed",
+      "n": 262144,
+      "block": 68,
+      "bytes_per_record": 16,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u128",
+      "dist": "reversed",
+      "n": 1048576,
+      "block": 136,
+      "bytes_per_record": 16,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u128",
+      "dist": "sawtooth",
+      "n": 262144,
+      "block": 68,
+      "bytes_per_record": 16,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u128",
+      "dist": "sawtooth",
+      "n": 1048576,
+      "block": 136,
+      "bytes_per_record": 16,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u128",
+      "dist": "skew95",
+      "n": 262144,
+      "block": 68,
+      "bytes_per_record": 16,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u128",
+      "dist": "sorted",
+      "n": 262144,
+      "block": 68,
+      "bytes_per_record": 16,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u128",
+      "dist": "sorted",
+      "n": 1048576,
+      "block": 136,
+      "bytes_per_record": 16,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u128",
+      "dist": "sqrt_keys",
+      "n": 262144,
+      "block": 68,
+      "bytes_per_record": 16,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u128",
+      "dist": "sqrt_keys",
+      "n": 1048576,
+      "block": 136,
+      "bytes_per_record": 16,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u128",
+      "dist": "uniform_narrow",
+      "n": 262144,
+      "block": 68,
+      "bytes_per_record": 16,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u128",
+      "dist": "uniform_narrow",
+      "n": 1048576,
+      "block": 136,
+      "bytes_per_record": 16,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u128",
+      "dist": "uniform_numeric",
+      "n": 262144,
+      "block": 68,
+      "bytes_per_record": 16,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u128",
+      "dist": "uniform_numeric",
+      "n": 1048576,
+      "block": 136,
+      "bytes_per_record": 16,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u128",
+      "dist": "zipf",
+      "n": 262144,
+      "block": 68,
+      "bytes_per_record": 16,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u128",
+      "dist": "zipf",
+      "n": 1048576,
+      "block": 136,
+      "bytes_per_record": 16,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u32",
+      "dist": "all_equal",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u32",
+      "dist": "almost_sorted",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u32",
+      "dist": "alternating",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u32",
+      "dist": "few_unique",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u32",
+      "dist": "high_only",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u32",
+      "dist": "late_difference",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u32",
+      "dist": "low_bits_constant",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u32",
+      "dist": "push_middle",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u32",
+      "dist": "reverse_nearly_sorted",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u32",
+      "dist": "reversed",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u32",
+      "dist": "sawtooth",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u32",
+      "dist": "sorted",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u32",
+      "dist": "sqrt_keys",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u32",
+      "dist": "uniform_narrow",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u32",
+      "dist": "uniform_numeric",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u32",
+      "dist": "zipf",
+      "n": 1048576,
+      "block": 272,
+      "bytes_per_record": 4,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u64",
+      "dist": "all_equal",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u64",
+      "dist": "almost_sorted",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u64",
+      "dist": "alternating",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u64",
+      "dist": "few_unique",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u64",
+      "dist": "high_only",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u64",
+      "dist": "late_difference",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u64",
+      "dist": "low_bits_constant",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u64",
+      "dist": "push_middle",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u64",
+      "dist": "reverse_nearly_sorted",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u64",
+      "dist": "reversed",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u64",
+      "dist": "sawtooth",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u64",
+      "dist": "sorted",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u64",
+      "dist": "sqrt_keys",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "missing",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u64",
+      "dist": "uniform_narrow",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u64",
+      "dist": "uniform_numeric",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    },
+    {
+      "kind": "u64",
+      "dist": "zipf",
+      "n": 1048576,
+      "block": 192,
+      "bytes_per_record": 8,
+      "time_source": "prefix",
+      "memory_source": "missing"
+    }
+  ],
+  "time_replicates": 6,
+  "memory_replicates": 3,
+  "sources": {
+    "data/summary.csv": "d734ac437c1935add83259f0e30de60b85d99c4802d6ca7c3aec4a40805e7f9c",
+    "data/supplemental-sqrt-summary.csv": "ee57389c4ebafc3e9e42e392b2b50449e7d920ac1613fdfaa4de0cc507dec646",
+    "validation/data/time.jsonl": "9d104fdac0416df28658047ddf17d942933b5d7a07501cd81740d4e274cba8a7"
+  },
+  "binaries": {
+    "benchmark-time": "452e059c4c071a3e3644c7e9573245d84a5ca582a899dd9ba7217b2568b77489",
+    "benchmark-memory": "cbea899921bb773aa8e919163c705599110cd4feda619d7267eba23cd4337d7b"
+  },
+  "driver_sha256": "da7af0cf5b88ce13cc830285de0f2c9678d9d5fcc8ccd81a4a33771942a1588c"
+}

@@ -1,0 +1,35 @@
+{
+  "summary.csv": {
+    "source_bundle": "block-lsd-pr-20261018",
+    "sha256": "d734ac437c1935add83259f0e30de60b85d99c4802d6ca7c3aec4a40805e7f9c",
+    "bytes": 7220276
+  },
+  "supplemental-sqrt-summary.csv": {
+    "source_bundle": "block-lsd-pr-20261018",
+    "sha256": "ee57389c4ebafc3e9e42e392b2b50449e7d920ac1613fdfaa4de0cc507dec646",
+    "bytes": 1468091
+  },
+  "supplemental-sqrt-timing.csv": {
+    "source_bundle": "block-lsd-pr-20261018",
+    "sha256": "7968a9c4a4ba35060910d3c5e8c4aae22db4e6283d46679c6bacb10f5a7d55fe",
+    "bytes": 3264271
+  },
+  "original-timing.csv": {
+    "source_bundle": "block-lsd-pr-20261018",
+    "source_file": "data/timing.csv",
+    "sha256": "9196ce1f11f4e794fba616210d831406a568d4246491e1828d8aec5d19ccaf28",
+    "bytes": 17329605
+  },
+  "original-memory.csv": {
+    "source_bundle": "block-lsd-pr-20261018",
+    "source_file": "data/memory.csv",
+    "sha256": "6f7e00cac0a200090ff1f7ee2462cf455d5637a108c440a81211db7ab1c5fd67",
+    "bytes": 8293558
+  },
+  "supplemental-sqrt-memory.csv": {
+    "source_bundle": "block-lsd-pr-20261018",
+    "source_file": "data/supplemental-sqrt-memory.csv",
+    "sha256": "832a693cf95ca40f09502ddef4c2da0ed3b4378b070327ba8a5a240bb46eca4d",
+    "bytes": 1591754
+  }
+}

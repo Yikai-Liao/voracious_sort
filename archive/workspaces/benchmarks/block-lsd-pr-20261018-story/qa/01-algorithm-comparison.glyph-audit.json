@@ -1,0 +1,10 @@
+{
+  "pdf": "/root/code/voracious_sort-workspaces/benchmarks/block-lsd-pr-20261018-story/figures/01-algorithm-comparison.pdf",
+  "auditable": true,
+  "minimum_required_pt": 5.0,
+  "minimum_found_pt": 5.8,
+  "text_run_count": 55,
+  "below_minimum_count": 0,
+  "below_minimum": [],
+  "warnings": []
+}

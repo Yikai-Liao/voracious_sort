@@ -1,0 +1,12 @@
+{
+  "reason": "User added minimum-element and minimum-byte floor question; retained discovery data identifies c=4 + 1 KiB floor as an additional finalist. Restart complete matrix with c=4 and c=8 measured together, preserving this prefix as interrupted preflight only.",
+  "terminated_processes": {
+    "2846834": "/root/code/voracious_sort-workspaces/benchmarks/block-lsd-pr-20261018-story/validation/benchmark-time time record128 common_prefix 1048576 7640891576956012809 8 512 3 block_balanced_8:96,block_fixed_128:128,block_fixed_bytes_1024:8,block_normalized_2:16,block_fixed_bytes_4096:32,lsd:512,std:512,timsort:512,lsd_aa:512,lsd_plain:512,lsd_core:512,dlsd:512,thiel:512 ",
+    "2846833": "/usr/bin/time -f RESOURCE %M %F %W %x /root/code/voracious_sort-workspaces/benchmarks/block-lsd-pr-20261018-story/validation/benchmark-time time record128 common_prefix 1048576 7640891576956012809 8 512 3 block_balanced_8:96,block_fixed_128:128,block_fixed_bytes_1024:8,block_normalized_2:16,block_fixed_bytes_4096:32,lsd:512,std:512,timsort:512,lsd_aa:512,lsd_plain:512,lsd_core:512,dlsd:512,thiel:512 ",
+    "2844508": "/root/code/voracious_sort-workspaces/benchmarks/block-lsd-pr-20261018/.venv/bin/python run.py time ",
+    "2844501": "bash complete.sh "
+  },
+  "remaining_processes": [],
+  "complete_case_process_records": 107,
+  "formal_results_used": false
+}

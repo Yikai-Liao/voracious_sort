@@ -1,0 +1,5 @@
+{
+  "reason": "User selected inherited c4 + min1KiB as the PA default; stop the obsolete fixed512 matrix",
+  "completed_cells": 26,
+  "status": "partial; not full matrix acceptance"
+}

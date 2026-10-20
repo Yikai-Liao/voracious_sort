@@ -1,0 +1,38 @@
+complete PA cells: 1045
+block_auto 1M cells 207 median faster 107 1.5x slower 19
+u32 uniform_numeric 25.488 8.535 2.986
+u64 uniform_numeric 32.012 11.127 2.877
+i32 normal 25.034 9.084 2.756
+u32 normal 24.314 9.446 2.574
+f32 uniform_numeric 25.214 10.985 2.295
+u64 normal 29.253 13.007 2.249
+f32 normal 24.049 11.49 2.093
+f32 low_bits_constant 9.945 4.965 2.003
+lsd 1M cells 205 median faster 151 1.5x slower 37
+f32 push_middle 13.444 1.839 7.31
+f32 push_front 14.892 2.336 6.374
+f32 organ_pipe 15.465 2.876 5.377
+f64 push_front 16.494 3.19 5.17
+f64 organ_pipe 25.222 4.931 5.115
+f64 push_middle 15.218 2.98 5.106
+record32 push_front 51.21 10.948 4.677
+u64 organ_pipe 17.884 3.839 4.659
+std 1M cells 207 median faster 166 1.5x slower 27
+record32 push_front 51.21 11.166 4.586
+record32 push_middle 50.521 12.032 4.199
+record128 push_front 122.506 32.085 3.818
+u128 push_middle 22.693 6.91 3.284
+record32 organ_pipe 57.723 17.609 3.278
+i64 push_middle 12.066 3.697 3.264
+i64 organ_pipe 19.942 6.245 3.193
+u64 push_middle 11.787 3.738 3.154
+timsort 1M cells 207 median faster 163 1.5x slower 30
+record32 push_middle 50.521 5.734 8.811
+record128 push_middle 139.333 19.961 6.98
+u128 push_middle 22.693 3.41 6.656
+record32 push_front 51.21 7.959 6.434
+i64 push_middle 12.066 1.937 6.23
+u128 push_front 23.057 3.966 5.814
+i64 push_front 12.706 2.186 5.814
+u64 push_middle 11.787 2.105 5.598
+strict worst [{'kind': 'i32', 'dist': 'normal', 'n': 128, 'ratio': 1.3298267695947716, 'min': 0.9513232186526054, 'max': 1.9906987389784596, 'aa_min': 0.7788153860529593, 'aa_max': 1.7409223893976304}, {'kind': 'u32', 'dist': 'reverse_nearly_sorted', 'n': 16384, 'ratio': 1.2324989662688846, 'min': 0.9529104396423862, 'max': 2.083936871106939, 'aa_min': 0.7798059094188601, 'aa_max': 1.09469140118526}, {'kind': 'u128', 'dist': 'reverse_nearly_sorted', 'n': 262144, 'ratio': 1.1966775088689787, 'min': 0.8922619932441092, 'max': 1.8844277800297258, 'aa_min': 1.082948791351942, 'aa_max': 2.1172718100445165}, {'kind': 'i32', 'dist': 'few_unique', 'n': 1048576, 'ratio': 1.1572662885317393, 'min': 0.9265693655601137, 'max': 1.393075848334548, 'aa_min': 0.7924092103024961, 'aa_max': 1.3302468431713206}, {'kind': 'i64', 'dist': 'reverse_nearly_sorted', 'n': 1024, 'ratio': 1.153253421654544, 'min': 0.7634720890654016, 'max': 1.4166154869570435, 'aa_min': 0.9326609459554875, 'aa_max': 1.0796943492732132}, {'kind': 'f64', 'dist': 'nearly_sorted', 'n': 1024, 'ratio': 1.1520807704922533, 'min': 0.9000769526011101, 'max': 1.4893966975678885, 'aa_min': 0.7853718707155257, 'aa_max': 1.3376103511071822}, {'kind': 'u128', 'dist': 'all_equal', 'n': 128, 'ratio': 1.1504305622928974, 'min': 0.6556851339914022, 'max': 1.4179527298669403, 'aa_min': 0.7212479645738906, 'aa_max': 1.3261093684880125}, {'kind': 'i32', 'dist': 'normal', 'n': 262144, 'ratio': 1.143213839401431, 'min': 0.9533632324218919, 'max': 1.4200123275894696, 'aa_min': 0.9845367849060676, 'aa_max': 1.0941328527912884}]

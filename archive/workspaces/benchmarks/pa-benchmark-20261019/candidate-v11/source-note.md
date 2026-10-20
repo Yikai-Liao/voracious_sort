@@ -1,0 +1,1 @@
+V11: sampled-monotone comparison completion within 512*block records; stable converted-key leaf, after tiled ordered proof. Other sources match V10. Rust stable slice allocation documentation: https://doc.rust-lang.org/stable/std/primitive.slice.html#method.sort_by_key (checked 2026-10-19).

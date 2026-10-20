@@ -1,0 +1,4 @@
+comparator,conditions,less,equal,more,gm_paired_time_ratio,faster_1_5x,slower_1_5x,faster_2x,slower_2x,all_six_pairs_faster,all_six_pairs_slower
+lsd,205,196,0,9,0.6761669271557481,133,43,92,30,146,47
+std,207,207,0,0,0.5713925085977258,127,43,108,29,143,52
+timsort,207,185,0,22,0.30927960703751234,136,37,124,28,149,47

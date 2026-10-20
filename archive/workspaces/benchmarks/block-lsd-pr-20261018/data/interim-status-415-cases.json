@@ -1,0 +1,70 @@
+{
+  "created_utc": "2026-10-18T10:52:14Z",
+  "status": "interim; incomplete matrix; not final aggregate",
+  "source": "primary.jsonl",
+  "prefix_rows": 44460,
+  "prefix_sha256": "22909bac9b4aca2510966fc5925de0082229e6664edf8c7ff0afbbbdac7dd8c3",
+  "input_cases": 415,
+  "uniform_1048576": [
+    {
+      "kind": "i64",
+      "algorithm": "block_lsd",
+      "median_ns": 33024871.0,
+      "n": 6
+    },
+    {
+      "kind": "i64",
+      "algorithm": "block_sqrt",
+      "median_ns": 42513107.5,
+      "n": 6
+    },
+    {
+      "kind": "i64",
+      "algorithm": "lsd",
+      "median_ns": 68436805.0,
+      "n": 6
+    },
+    {
+      "kind": "i64",
+      "algorithm": "std",
+      "median_ns": 41933301.5,
+      "n": 6
+    },
+    {
+      "kind": "i64",
+      "algorithm": "timsort",
+      "median_ns": 150191520.5,
+      "n": 6
+    },
+    {
+      "kind": "f64",
+      "algorithm": "block_lsd",
+      "median_ns": 33722307.0,
+      "n": 6
+    },
+    {
+      "kind": "f64",
+      "algorithm": "block_sqrt",
+      "median_ns": 48260121.0,
+      "n": 6
+    },
+    {
+      "kind": "f64",
+      "algorithm": "lsd",
+      "median_ns": 73088784.0,
+      "n": 6
+    },
+    {
+      "kind": "f64",
+      "algorithm": "std",
+      "median_ns": 54780982.5,
+      "n": 6
+    },
+    {
+      "kind": "f64",
+      "algorithm": "timsort",
+      "median_ns": 308768851.5,
+      "n": 6
+    }
+  ]
+}

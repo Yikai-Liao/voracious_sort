@@ -433,8 +433,3 @@ pub use sorts::peeka_sort::peeka_sort;
 pub use dedicated::cs_u16::cs_u16;
 pub use dedicated::lsd_f32::lsd_f32;
 pub use dedicated::lsd_u32::lsd_u32;
-
-#[cfg(feature = "voracious_multithread")]
-pub use sorts::block_lsd_stable_sort::{
-    block_lsd_stable_mt_radixsort, block_lsd_stable_mt_radixsort_in_pool,
-};

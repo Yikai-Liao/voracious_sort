@@ -1,0 +1,92 @@
+[
+  {
+    "kind": "u32",
+    "dist": "uniform",
+    "n": 1048576
+  },
+  {
+    "kind": "u32",
+    "dist": "organ_pipe",
+    "n": 1048576
+  },
+  {
+    "kind": "u64",
+    "dist": "uniform",
+    "n": 1048576
+  },
+  {
+    "kind": "u64",
+    "dist": "organ_pipe",
+    "n": 1048576
+  },
+  {
+    "kind": "u128",
+    "dist": "uniform",
+    "n": 1048576
+  },
+  {
+    "kind": "u128",
+    "dist": "organ_pipe",
+    "n": 1048576
+  },
+  {
+    "kind": "i32",
+    "dist": "uniform",
+    "n": 1048576
+  },
+  {
+    "kind": "i32",
+    "dist": "organ_pipe",
+    "n": 1048576
+  },
+  {
+    "kind": "i64",
+    "dist": "uniform",
+    "n": 1048576
+  },
+  {
+    "kind": "i64",
+    "dist": "organ_pipe",
+    "n": 1048576
+  },
+  {
+    "kind": "f32",
+    "dist": "uniform",
+    "n": 1048576
+  },
+  {
+    "kind": "f32",
+    "dist": "organ_pipe",
+    "n": 1048576
+  },
+  {
+    "kind": "f64",
+    "dist": "uniform",
+    "n": 1048576
+  },
+  {
+    "kind": "f64",
+    "dist": "organ_pipe",
+    "n": 1048576
+  },
+  {
+    "kind": "record32",
+    "dist": "uniform",
+    "n": 1048576
+  },
+  {
+    "kind": "record32",
+    "dist": "organ_pipe",
+    "n": 1048576
+  },
+  {
+    "kind": "record128",
+    "dist": "uniform",
+    "n": 1048576
+  },
+  {
+    "kind": "record128",
+    "dist": "organ_pipe",
+    "n": 1048576
+  }
+]

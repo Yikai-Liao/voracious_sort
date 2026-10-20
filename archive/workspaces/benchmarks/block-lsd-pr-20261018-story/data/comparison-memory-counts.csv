@@ -1,0 +1,4 @@
+comparator,conditions,less,equal,more
+lsd,205,196,0,9
+std,207,207,0,0
+timsort,207,185,0,22

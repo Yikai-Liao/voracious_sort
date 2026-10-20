@@ -1,0 +1,12 @@
+{
+  "auto-baseline/benchmark-time": {
+    "instructions": 420,
+    "normalized_sha": "4438d9f5fc7a96eaf408d9e4d0f74c60b21f29c3d1690cc6d6f19842c80ac129",
+    "constant_bytes": "0700000006000000050000000400000003000000020000000100000000000000"
+  },
+  "interval-v3-target/benchmark-time": {
+    "instructions": 420,
+    "normalized_sha": "4438d9f5fc7a96eaf408d9e4d0f74c60b21f29c3d1690cc6d6f19842c80ac129",
+    "constant_bytes": "0700000006000000050000000400000003000000020000000100000000000000"
+  }
+}

@@ -1,0 +1,9 @@
+model_id,family,label,kind,c,selection,exact_coverage,conditions,gm_regret,p90_regret,max_regret,within_25pct,gm_time_vs_4k,max_heap_bytes,gm_time_vs_smooth_c4_floor,rounding,minimum_block_bytes,tiers,thresholds,threshold_unit
+0,Reference,Smooth c4 + 1 KiB,balanced,4,Smooth c4 + 1 KiB,109,109,1.048594742016622,1.1331237522974904,1.368494731132334,0.981651376146789,0.8304165439954186,3359229.0,1.0,,,,,
+1,Quantized sqrt,"c1, round down",quantized_sqrt,1,Quantized sqrt,109,109,1.13713164170465,1.3278918631721701,2.4482680975071456,0.8256880733944955,0.9005318166636807,1720832.0,1.0844338581345134,down,1024,,,
+242,Byte tiers 1/4/8 KiB,Byte tiers 1/4/8 KiB,threshold_tiers,,Byte tiers 1/4/8 KiB,109,109,1.1130762966634153,1.3269357004231794,2.4482680975071456,0.8715596330275229,0.8814816005093041,2408960.0,1.0614933034308227,,,"[1024, 4096, 8192]","[16777216, 268435456]",input_bytes
+2010,Byte tiers 1/2/4/8 KiB,Byte tiers 1/2/4/8 KiB,threshold_tiers,,Byte tiers 1/2/4/8 KiB,109,109,1.115431292479913,1.3194561992581622,2.4482680975071456,0.8715596330275229,0.8833465988816005,2408960.0,1.0637391623142733,,,"[1024, 2048, 4096, 8192]","[33554432, 67108864, 268435456]",input_bytes
+2223,Item tiers 128/512/1024,Item tiers 128/512/1024,threshold_tiers,,Item tiers 128/512/1024,109,109,1.1447619227043448,1.3734435015169575,2.3989949117685194,0.7981651376146789,0.906574486270525,8479232.0,1.0917105310892343,,,"[128, 512, 1024]","[2097152, 33554432]",records
+7,Quantized sqrt,"c4, round down",quantized_sqrt,4,c4 round down,108,,,,,,,,,down,1024,,,
+8,Quantized sqrt,"c4, round nearest",quantized_sqrt,4,c4 round nearest,108,,,,,,,,,nearest,1024,,,
+9,Quantized sqrt,"c4, round up",quantized_sqrt,4,c4 round up,108,,,,,,,,,up,1024,,,

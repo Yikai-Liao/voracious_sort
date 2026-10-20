@@ -1,0 +1,776 @@
+{
+  "original_commit": "e649c6af49d6bfdde896ca40cad387235fce4bfa",
+  "original_branch": "origin/archive/block-lsd-original-20261018",
+  "created_utc": "2026-10-18T15:25:14Z",
+  "schedule": [
+    {
+      "kind": "record32",
+      "dist": "sorted",
+      "n": 1048576,
+      "block": 96
+    },
+    {
+      "kind": "u64",
+      "dist": "uniform",
+      "n": 16777216,
+      "block": 768
+    },
+    {
+      "kind": "u64",
+      "dist": "uniform",
+      "n": 1048576,
+      "block": 192
+    },
+    {
+      "kind": "record128",
+      "dist": "uniform_narrow",
+      "n": 1048576,
+      "block": 48
+    },
+    {
+      "kind": "f64",
+      "dist": "common_prefix",
+      "n": 1048576,
+      "block": 192
+    },
+    {
+      "kind": "f64",
+      "dist": "late_difference",
+      "n": 1048576,
+      "block": 192
+    },
+    {
+      "kind": "u32",
+      "dist": "all_equal",
+      "n": 1048576,
+      "block": 272
+    },
+    {
+      "kind": "record128",
+      "dist": "reversed",
+      "n": 1048576,
+      "block": 48
+    },
+    {
+      "kind": "u64",
+      "dist": "reverse_nearly_sorted",
+      "n": 1048576,
+      "block": 192
+    },
+    {
+      "kind": "record128",
+      "dist": "nearly_sorted",
+      "n": 1048576,
+      "block": 48
+    },
+    {
+      "kind": "record128",
+      "dist": "zipf",
+      "n": 1048576,
+      "block": 48
+    },
+    {
+      "kind": "i32",
+      "dist": "uniform",
+      "n": 1024,
+      "block": 256
+    },
+    {
+      "kind": "record128",
+      "dist": "uniform",
+      "n": 1024,
+      "block": 8
+    },
+    {
+      "kind": "record128",
+      "dist": "uniform",
+      "n": 16384,
+      "block": 8
+    },
+    {
+      "kind": "record128",
+      "dist": "common_prefix",
+      "n": 1048576,
+      "block": 48
+    },
+    {
+      "kind": "record128",
+      "dist": "uniform_numeric",
+      "n": 1048576,
+      "block": 48
+    },
+    {
+      "kind": "u128",
+      "dist": "late_difference",
+      "n": 1048576,
+      "block": 136
+    },
+    {
+      "kind": "u128",
+      "dist": "uniform",
+      "n": 1024,
+      "block": 64
+    },
+    {
+      "kind": "record32",
+      "dist": "uniform",
+      "n": 1048576,
+      "block": 96
+    },
+    {
+      "kind": "f64",
+      "dist": "uniform",
+      "n": 1048576,
+      "block": 192
+    },
+    {
+      "kind": "record128",
+      "dist": "high_only",
+      "n": 1048576,
+      "block": 48
+    },
+    {
+      "kind": "record128",
+      "dist": "late_difference",
+      "n": 1048576,
+      "block": 48
+    },
+    {
+      "kind": "u128",
+      "dist": "reversed",
+      "n": 1048576,
+      "block": 136
+    },
+    {
+      "kind": "u64",
+      "dist": "push_front",
+      "n": 1048576,
+      "block": 192
+    },
+    {
+      "kind": "u128",
+      "dist": "uniform",
+      "n": 1048576,
+      "block": 136
+    },
+    {
+      "kind": "f32",
+      "dist": "common_prefix",
+      "n": 1048576,
+      "block": 272
+    },
+    {
+      "kind": "record128",
+      "dist": "alternating",
+      "n": 1048576,
+      "block": 48
+    },
+    {
+      "kind": "i32",
+      "dist": "common_prefix",
+      "n": 1048576,
+      "block": 272
+    },
+    {
+      "kind": "record32",
+      "dist": "uniform",
+      "n": 16384,
+      "block": 32
+    },
+    {
+      "kind": "record128",
+      "dist": "sqrt_keys",
+      "n": 1048576,
+      "block": 48
+    },
+    {
+      "kind": "i32",
+      "dist": "sorted",
+      "n": 1048576,
+      "block": 272
+    },
+    {
+      "kind": "u64",
+      "dist": "sorted",
+      "n": 1048576,
+      "block": 192
+    },
+    {
+      "kind": "i64",
+      "dist": "uniform",
+      "n": 1048576,
+      "block": 192
+    },
+    {
+      "kind": "u32",
+      "dist": "sorted",
+      "n": 1048576,
+      "block": 272
+    },
+    {
+      "kind": "u32",
+      "dist": "reversed",
+      "n": 1048576,
+      "block": 272
+    },
+    {
+      "kind": "record128",
+      "dist": "push_front",
+      "n": 1048576,
+      "block": 48
+    },
+    {
+      "kind": "record128",
+      "dist": "normal",
+      "n": 1048576,
+      "block": 48
+    },
+    {
+      "kind": "u64",
+      "dist": "late_difference",
+      "n": 1048576,
+      "block": 192
+    },
+    {
+      "kind": "f64",
+      "dist": "sorted",
+      "n": 1048576,
+      "block": 192
+    },
+    {
+      "kind": "record128",
+      "dist": "all_equal",
+      "n": 1048576,
+      "block": 48
+    },
+    {
+      "kind": "u64",
+      "dist": "common_prefix",
+      "n": 1048576,
+      "block": 192
+    },
+    {
+      "kind": "record32",
+      "dist": "uniform",
+      "n": 1024,
+      "block": 32
+    },
+    {
+      "kind": "i32",
+      "dist": "uniform",
+      "n": 1048576,
+      "block": 272
+    },
+    {
+      "kind": "f32",
+      "dist": "sorted",
+      "n": 1048576,
+      "block": 272
+    },
+    {
+      "kind": "f32",
+      "dist": "reversed",
+      "n": 1048576,
+      "block": 272
+    },
+    {
+      "kind": "u64",
+      "dist": "low_bits_constant",
+      "n": 1048576,
+      "block": 192
+    },
+    {
+      "kind": "record128",
+      "dist": "almost_sorted",
+      "n": 1048576,
+      "block": 48
+    },
+    {
+      "kind": "u64",
+      "dist": "few_unique",
+      "n": 1048576,
+      "block": 192
+    },
+    {
+      "kind": "u128",
+      "dist": "common_prefix",
+      "n": 1048576,
+      "block": 136
+    },
+    {
+      "kind": "f32",
+      "dist": "late_difference",
+      "n": 1048576,
+      "block": 272
+    },
+    {
+      "kind": "record128",
+      "dist": "sorted",
+      "n": 1048576,
+      "block": 48
+    },
+    {
+      "kind": "u32",
+      "dist": "uniform",
+      "n": 1048576,
+      "block": 272
+    },
+    {
+      "kind": "u64",
+      "dist": "uniform_numeric",
+      "n": 1048576,
+      "block": 192
+    },
+    {
+      "kind": "u64",
+      "dist": "sqrt_keys",
+      "n": 1048576,
+      "block": 192
+    },
+    {
+      "kind": "record32",
+      "dist": "late_difference",
+      "n": 1048576,
+      "block": 96
+    },
+    {
+      "kind": "f32",
+      "dist": "uniform",
+      "n": 1024,
+      "block": 256
+    },
+    {
+      "kind": "i64",
+      "dist": "late_difference",
+      "n": 1048576,
+      "block": 192
+    },
+    {
+      "kind": "record128",
+      "dist": "skew95",
+      "n": 1048576,
+      "block": 48
+    },
+    {
+      "kind": "u64",
+      "dist": "normal",
+      "n": 1048576,
+      "block": 192
+    },
+    {
+      "kind": "u64",
+      "dist": "all_equal",
+      "n": 16777216,
+      "block": 768
+    },
+    {
+      "kind": "f64",
+      "dist": "reversed",
+      "n": 1048576,
+      "block": 192
+    },
+    {
+      "kind": "record128",
+      "dist": "uniform",
+      "n": 1048576,
+      "block": 48
+    },
+    {
+      "kind": "u64",
+      "dist": "uniform",
+      "n": 16384,
+      "block": 128
+    },
+    {
+      "kind": "record128",
+      "dist": "organ_pipe",
+      "n": 1048576,
+      "block": 48
+    },
+    {
+      "kind": "i64",
+      "dist": "sorted",
+      "n": 1048576,
+      "block": 192
+    },
+    {
+      "kind": "u64",
+      "dist": "zipf",
+      "n": 1048576,
+      "block": 192
+    },
+    {
+      "kind": "f64",
+      "dist": "all_equal",
+      "n": 1048576,
+      "block": 192
+    },
+    {
+      "kind": "record32",
+      "dist": "common_prefix",
+      "n": 1048576,
+      "block": 96
+    },
+    {
+      "kind": "u64",
+      "dist": "reversed",
+      "n": 1048576,
+      "block": 192
+    },
+    {
+      "kind": "u32",
+      "dist": "uniform",
+      "n": 1024,
+      "block": 256
+    },
+    {
+      "kind": "u128",
+      "dist": "uniform",
+      "n": 16384,
+      "block": 64
+    },
+    {
+      "kind": "u64",
+      "dist": "push_middle",
+      "n": 1048576,
+      "block": 192
+    },
+    {
+      "kind": "record32",
+      "dist": "reversed",
+      "n": 1048576,
+      "block": 96
+    },
+    {
+      "kind": "record128",
+      "dist": "push_middle",
+      "n": 1048576,
+      "block": 48
+    },
+    {
+      "kind": "u64",
+      "dist": "uniform_narrow",
+      "n": 1048576,
+      "block": 192
+    },
+    {
+      "kind": "i32",
+      "dist": "late_difference",
+      "n": 1048576,
+      "block": 272
+    },
+    {
+      "kind": "record128",
+      "dist": "sawtooth",
+      "n": 1048576,
+      "block": 48
+    },
+    {
+      "kind": "u64",
+      "dist": "almost_sorted",
+      "n": 1048576,
+      "block": 192
+    },
+    {
+      "kind": "u64",
+      "dist": "sawtooth",
+      "n": 1048576,
+      "block": 192
+    },
+    {
+      "kind": "u64",
+      "dist": "skew95",
+      "n": 1048576,
+      "block": 192
+    },
+    {
+      "kind": "record32",
+      "dist": "all_equal",
+      "n": 1048576,
+      "block": 96
+    },
+    {
+      "kind": "u32",
+      "dist": "late_difference",
+      "n": 1048576,
+      "block": 272
+    },
+    {
+      "kind": "i64",
+      "dist": "reversed",
+      "n": 1048576,
+      "block": 192
+    },
+    {
+      "kind": "f64",
+      "dist": "uniform",
+      "n": 16384,
+      "block": 128
+    },
+    {
+      "kind": "u128",
+      "dist": "all_equal",
+      "n": 1048576,
+      "block": 136
+    },
+    {
+      "kind": "i32",
+      "dist": "reversed",
+      "n": 1048576,
+      "block": 272
+    },
+    {
+      "kind": "u64",
+      "dist": "organ_pipe",
+      "n": 1048576,
+      "block": 192
+    },
+    {
+      "kind": "f64",
+      "dist": "uniform",
+      "n": 1024,
+      "block": 128
+    },
+    {
+      "kind": "u32",
+      "dist": "uniform",
+      "n": 16384,
+      "block": 256
+    },
+    {
+      "kind": "u64",
+      "dist": "alternating",
+      "n": 1048576,
+      "block": 192
+    },
+    {
+      "kind": "u64",
+      "dist": "late_difference",
+      "n": 16777216,
+      "block": 768
+    },
+    {
+      "kind": "u64",
+      "dist": "all_equal",
+      "n": 1048576,
+      "block": 192
+    },
+    {
+      "kind": "record128",
+      "dist": "low_bits_constant",
+      "n": 1048576,
+      "block": 48
+    },
+    {
+      "kind": "i64",
+      "dist": "all_equal",
+      "n": 1048576,
+      "block": 192
+    },
+    {
+      "kind": "i64",
+      "dist": "common_prefix",
+      "n": 1048576,
+      "block": 192
+    },
+    {
+      "kind": "f32",
+      "dist": "uniform",
+      "n": 1048576,
+      "block": 272
+    },
+    {
+      "kind": "i32",
+      "dist": "all_equal",
+      "n": 1048576,
+      "block": 272
+    },
+    {
+      "kind": "u128",
+      "dist": "sorted",
+      "n": 1048576,
+      "block": 136
+    },
+    {
+      "kind": "u64",
+      "dist": "nearly_sorted",
+      "n": 1048576,
+      "block": 192
+    },
+    {
+      "kind": "f32",
+      "dist": "all_equal",
+      "n": 1048576,
+      "block": 272
+    },
+    {
+      "kind": "u64",
+      "dist": "uniform",
+      "n": 1024,
+      "block": 128
+    },
+    {
+      "kind": "i64",
+      "dist": "uniform",
+      "n": 1024,
+      "block": 128
+    },
+    {
+      "kind": "i64",
+      "dist": "uniform",
+      "n": 16384,
+      "block": 128
+    },
+    {
+      "kind": "f32",
+      "dist": "uniform",
+      "n": 16384,
+      "block": 256
+    },
+    {
+      "kind": "i32",
+      "dist": "uniform",
+      "n": 16384,
+      "block": 256
+    },
+    {
+      "kind": "record128",
+      "dist": "few_unique",
+      "n": 1048576,
+      "block": 48
+    },
+    {
+      "kind": "u32",
+      "dist": "common_prefix",
+      "n": 1048576,
+      "block": 272
+    },
+    {
+      "kind": "record128",
+      "dist": "reverse_nearly_sorted",
+      "n": 1048576,
+      "block": 48
+    },
+    {
+      "kind": "u64",
+      "dist": "high_only",
+      "n": 1048576,
+      "block": 192
+    }
+  ],
+  "methods": [
+    "block_before",
+    "block_after",
+    "block_before_aa"
+  ],
+  "selection": "max(1, floor(1024/s), ceil(4*sqrt(9*n/(512*s))))",
+  "radix": 8,
+  "seed": 7640891576956012809,
+  "cpu": [
+    2
+  ],
+  "threads": 1,
+  "timing": "Complete sort including probes and allocation; block selection, clone, and full stable oracle excluded",
+  "cache": "One untimed warmup; independent cloned inputs; 3 ms target, 64 MiB/2048 buffer cap",
+  "repetitions": "3 seeds, each with forward/reversed method order; same-function baseline A/A alias",
+  "interpretation": "Per-case effects and A/A are descriptive; a small aggregate improvement cannot excuse repeatable case losses",
+  "memory": "Separate instrumented binary: peak live requested heap during sort, excluding input/harness/allocator metadata",
+  "files": {
+    "../run_screen.py": "8aa4ace67e374fd7c0c3953e08efdd590f5dd566ea802e00a23e69e0d76b370b",
+    "cases.json": "e95642fd6ce3209ae911118d96a27376298b5d3ef4288d0b90ffeb7984bbe37d",
+    "candidate.diff": "125db6fd10069a59f94495fe6627f996b0e45db31858369b9309499042d8c653",
+    "benchmark-time": "43c53638273ba903c71f29f2df4296ffe7cf6b9a5008a5d05f42f9bdd1e453f4",
+    "benchmark-memory": "0e924e5d2f16ff1ba6a577662b2a9effef0c7a1340c0b1df4a6a6569d38519a9",
+    "harness/Cargo.lock": "ab5147cebebd526fc171982d9214091bb8b2c30b1a4a4dc9cc647ec00371d890",
+    "harness/Cargo.toml": "9063cbc862a62556a71ea0d18836de0e1bfe31a4d393ee30bd6bca2e8a9d39e3",
+    "harness/timsort_bridge.cpp": "d56babf62f31d97da60cdfc3a601c43c6450158a25d85ec8d158fbc1531550fa",
+    "harness/build.rs": "6baf5c591640d530f8f42d4243e80dea6d45eb06deffd00b0e877295075c5dfc",
+    "harness/src/main.rs": "b6f06429a06a8779e07bb967d515232d29ed5ff0461a560b0295260b8b1954ad",
+    "harness/source/cpp-timsort/LICENSE": "210f3341e9e04dc3004f416ae0e28dc7e8eaa84528c5966661186a1b512f34c3",
+    "harness/source/pr/LICENSE": "501fa13d8a28ac984c663cd70fa98a47d583a0bbba783a094574aa6faf1b77d6",
+    "harness/source/pr/Cargo.toml": "f4847df5de68b080e04c667d018a2afa60fcb29b2615d8232f5f5bb405e2dec3",
+    "harness/source/pr/rustfmt.toml": "c390d9f71ff30db2d8fb73b0c6859799e14750884270a83167eee5d52a89371f",
+    "harness/source/pr/src/lib.rs": "bd2baa8c65efda4c62e06bc2c294c37e723f8b680a5634dfc7df2a652010ef0b",
+    "harness/source/pr/src/generators/unsigned_u128.rs": "51db9d7bcc5a120d0cf2dfacaa507a9962a3b4d4e546c357f3a9b0739ed9881d",
+    "harness/source/pr/src/generators/float_64.rs": "69847d1525222ed7f2f352acd95779990d09c9562632c71b8b12a04c2c0b004b",
+    "harness/source/pr/src/generators/signed_i128.rs": "939bee44b56fa796ecc32c1f5d66dd263f61790d624b23353fb0428f45995f30",
+    "harness/source/pr/src/generators/unsigned_u64.rs": "cc80b09ed6e9c0c941191d4d018d46565ac9919a030bef640c667d56817d4ff4",
+    "harness/source/pr/src/generators/unsigned_u8.rs": "371b66a709fd2ef8206c0437f6f1714032376de8c068457532e4d0cf9fe5e67b",
+    "harness/source/pr/src/generators/string.rs": "ba19f40486b8d088da00bc61d3cf48577ddd76be59a3ed04a1ad43ff3d332472",
+    "harness/source/pr/src/generators/signed_i8.rs": "72c7f864ef24a417c582b18a94c9c482c45da70a52079fa6cb2726ec2becce39",
+    "harness/source/pr/src/generators/signed_i32.rs": "73475321872499923b0caa3dd06186a1958b3897c0ebbcc6bddf3a55cc2c9117",
+    "harness/source/pr/src/generators/signed_i64.rs": "9a9d07f3fde59fe2807192b2d1dda1a5721d87aab7eb5a9efdb2a1eeee68e257",
+    "harness/source/pr/src/generators/custom.rs": "7edfe36f1e4f9843a93913aeca137731bf39cbf37a07bdb11861761755ca91bb",
+    "harness/source/pr/src/generators/float_32.rs": "76f9736705a9cce26a9ad1dd6536c12c012314e02e95d17c1f391116e7f9e04a",
+    "harness/source/pr/src/generators/signed_i16.rs": "5ac414312a1afcf0407198d5fe1acf9c92286c2ba45f5b87bfab0161b629262c",
+    "harness/source/pr/src/generators/unsigned_u32.rs": "b5da2c788611c621e8c636c335670caf6d41495400a24a5419687e769aacc1e9",
+    "harness/source/pr/src/generators/boolean.rs": "7726c7e1e8596c28f62e635101ad73cc23df57684546f375c8b0b367147cd51a",
+    "harness/source/pr/src/generators/mod.rs": "a20b1295b3f288cd9af0e4d9c01c3c8c3c9880c12b1a40200f080ea341416ff4",
+    "harness/source/pr/src/generators/unsigned_u16.rs": "82f69651d053066ee2b9f7a6156d723824395fee678b25ff223afcae32f141d1",
+    "harness/source/pr/src/generators/char.rs": "5e8484fa8c391a1b104720dd44cc7cfcf3433db4a56b033c9a0830726ff2a8e7",
+    "harness/source/pr/src/tests/test_helpers.rs": "ea83fa242e05f6d3ba30a277513df3c33f8aa8b0884fefeed2e29d105a688a2c",
+    "harness/source/pr/src/tests/comparative_sort.rs": "cb934dab419079b4f48aa1218040bca08cc6879daf5b81476686d1a8589dd4db",
+    "harness/source/pr/src/tests/regions_graph.rs": "ec12cab693aad8e251539763feff095690029ae166670d772b1a7c733e5d2dac",
+    "harness/source/pr/src/tests/types.rs": "be7e8c83b0509f3b352fc263f2ef861e3747e9d41b6b4b32d3361bfef5ff3d50",
+    "harness/source/pr/src/tests/dedicated.rs": "c0d924edf4a0c6195c83ab5802a4f70d5851b0b2a8e4eaa7880361453b3fe42b",
+    "harness/source/pr/src/tests/sorts.rs": "34ea9a3644d12d89d6df2a81825a1583467a22d24b189f42aed7dd4d2fe1ef04",
+    "harness/source/pr/src/tests/verge_sort_heuristic.rs": "1cc10d2c3f1083a802de6d711a73f42ddc0d1b1689c0398249cf610359e0184b",
+    "harness/source/pr/src/tests/speed_sort_ded.rs": "b8770355fb46c76e5cd77cff11363f0ab170af68cad8e4ea041ff4bf9ef8b74f",
+    "harness/source/pr/src/tests/utils_mt.rs": "c73e8705f8af34d7e98bcfd91777af317f2394622a2cf035c1038572fd0c9d54",
+    "harness/source/pr/src/tests/mod.rs": "205d74d70d3c76098d8d38a984ca64ee09b8db0840919d5deb5e42a5abd9225a",
+    "harness/source/pr/src/tests/utils.rs": "545e28a2d715d7bec41a71c1d88235375473d102c81274e6b4918a37fdd49c17",
+    "harness/source/pr/src/tests/speed_sort.rs": "7ee3fdea63876985ceeeb163a0643fcfa2139787b89071ee5ee992972d32851a",
+    "harness/source/pr/src/dedicated/cs_u16.rs": "c56ba3254eae72fbf121205ec81f52ab304f5ed11fa88c5f70dc427fa2885278",
+    "harness/source/pr/src/dedicated/lsd_u32.rs": "fe45f2026a1c2f3270f5f578fb7c84d64dc064948f77d6f41380365e4a820b24",
+    "harness/source/pr/src/dedicated/lsd_f32.rs": "cef2cd932f097f73fce35f12c3c696fac0f3b12c67f87805045c6eff9c087d24",
+    "harness/source/pr/src/dedicated/mod.rs": "b7704c7d342e731c8a59a1e56a9f46c6619bb146307c6c3af037bcbdc87d253f",
+    "harness/source/pr/src/algo/regions_graph.rs": "bb3244405cd27b0667b610fc03b449c2f06793db1fc283e218e58f2b33ce3b61",
+    "harness/source/pr/src/algo/k_way_merge_mt.rs": "935805b47987fb796f269bce2f5ac00371c74864a873220f3d90e299588ce464",
+    "harness/source/pr/src/algo/k_way_merge.rs": "fe23ef59e992670fc2b856a98abde5a422a2bb9bd12a8f814b8ef1bca5266021",
+    "harness/source/pr/src/algo/verge_sort_heuristic.rs": "7503406b9751eab13075a7ad8f389c5e79eb651efaf406b2293ba46bf0228676",
+    "harness/source/pr/src/algo/mod.rs": "82586228771746ef083ae142c37266dcae3d399ee9d78befdcbf36c5de25d218",
+    "harness/source/pr/src/traits/radixsort.rs": "0fcb71d0c23bd3bbc7a329e1d417ceeb75896dbcafa0b62a309b7230e99ea910",
+    "harness/source/pr/src/traits/radix_key.rs": "59d805f933ff6eb175c3e9810ca892ca91ee05c1a898db017e7a9c1881456640",
+    "harness/source/pr/src/traits/radixable.rs": "a78f85245c4ddfdee5ea47500b83b8c05f57aa61d3f88bfbc5c052cc88b68610",
+    "harness/source/pr/src/traits/dispatcher.rs": "63fc53fb2072872b16ac1d6780444e1ffdb04a54b0ce73e601c804200d22a5f9",
+    "harness/source/pr/src/traits/mod.rs": "b02a096636f614673180cf29fb2bd2a763c119e321ac9e32c67db94e97a09d9d",
+    "harness/source/pr/src/types/floats.rs": "a3a1d8361ac11ba44ffef711ae53415acfe90042e97d56f8a6b51f7479cf1da5",
+    "harness/source/pr/src/types/bool.rs": "39d841f2d0df2f5d3a7d7d0455be0c704fcfc9e61bb16d1ee3dd53eb2aa90cb1",
+    "harness/source/pr/src/types/unsigned_integer.rs": "3b7bdaaa1729ac21b3dd2daaa50b10ceb3f99458668ffa808703ebda73f2552b",
+    "harness/source/pr/src/types/custom.rs": "e21f80643a704fb3e6ac64c37d376d44d62079e5182014cace659b790169336d",
+    "harness/source/pr/src/types/usize.rs": "ecf18b3a4307e396d44c30c2ed0cbfe9642a3dca8544678ba1ff72527354cf43",
+    "harness/source/pr/src/types/isize.rs": "5880be2cceca1d25fd7bd96ef38c74a29e4b5bf967bbfe2f3fa6b9f4450ced95",
+    "harness/source/pr/src/types/mod.rs": "4bd921960b079914b9585c90a621c724db47fda23dceb6814fd41b5863b7aa6b",
+    "harness/source/pr/src/types/char.rs": "9d2b2447c8967cd1f94989fc3e1eda7b2f2e72feea6cdca9e25dba91ac804a1a",
+    "harness/source/pr/src/types/signed_integer.rs": "a2f8995eb86806e743c3341ff80dd2ebaf4bfec6f3222c3851be89d77615becc",
+    "harness/source/pr/src/sorts/thiel_sort.rs": "b813f2d52af4060cff2d939a68d504facc299c21dd9df00d6e94e7adc83a23a1",
+    "harness/source/pr/src/sorts/rollercoaster_sort.rs": "d8a264a1dcd4aa9b749ee015a7c253be4ff003e1e463afa03a0e36f8e38d30a5",
+    "harness/source/pr/src/sorts/comparative_sort.rs": "d59f8f4ba8a287d819b3e78ecb4d242b68d52f520e48fe4015ea126884d77567",
+    "harness/source/pr/src/sorts/voracious_sort.rs": "867bc7b518c15a4e334d23c3ec21254aec75063a31eddbd22c607df9a7dd26fd",
+    "harness/source/pr/src/sorts/boolean_sort.rs": "6e7a929e4218e9b72c08004df3cfe21d52a082eae5ba06f8ed23489c8610ff7c",
+    "harness/source/pr/src/sorts/lsd_stable_sort.rs": "e0735408839e2022d68526fff41b4f4804ac984c722b0de4d42bbcb1e1649f37",
+    "harness/source/pr/src/sorts/msd_stable_sort.rs": "3def17e389eb84068ff3bbf98c79e1e038cb091ccab2d0c414f998a3b4fa708e",
+    "harness/source/pr/src/sorts/peeka_sort.rs": "af57eedbfc17b00f768656d4240ac88df5e9b0ea6132cd613b19bae855e3c215",
+    "harness/source/pr/src/sorts/counting_sort.rs": "fad94df6b4b1e6e4bddfd891cff4485a5a31e7fe2497c4bb132aaf79c0dcdd09",
+    "harness/source/pr/src/sorts/ska_sort.rs": "6ba7dd5a351294d184acdc61ff42f5c41ab90b06c61b64ab6acfaaf6c12883b6",
+    "harness/source/pr/src/sorts/dlsd_sort.rs": "07e8dcfde6c00ba6f6b245d3595234fbc301df5f43eec38533370a2a522f74b9",
+    "harness/source/pr/src/sorts/block_lsd_stable_sort.rs": "bc0a35e71a7aa4def1b8467d73a3960d49d9809ced180f1f94fc89c0322add56",
+    "harness/source/pr/src/sorts/utils_mt.rs": "31097c8b67ab53156b4fbaadb9f10fad5a91924558482bf16cea96e39513771a",
+    "harness/source/pr/src/sorts/mod.rs": "c936c36acc2900efc81d0ec153587537319c49db1d2c7bfe0c68691f7c576064",
+    "harness/source/pr/src/sorts/lsd_sort.rs": "d399bd290ec408f256674ff0e564fad569e485ae1d4e0da96e090fbd1d3cd75d",
+    "harness/source/pr/src/sorts/american_flag_sort.rs": "9069e6db17b25ccb49d2706a7ebe9df74c58cc62a75fd43c60160db64a64c883",
+    "harness/source/pr/src/sorts/baseline_block.rs": "68503f818a48ea01134ce0a1d2a692020c24746d1b42fbdad632fba6e48ed684",
+    "harness/source/pr/src/sorts/utils.rs": "30a8d74b55de82de36cfa9c36f81b3d316491a5b6bf3914ea85275b1d9ece57b",
+    "harness/source/pr/src/sorts/msd_sort.rs": "541942ce934c292f4eba69c9845da24bbef095a685036efe5b263ab3a6dd42b8",
+    "harness/source/cpp-timsort/gfx/timsort.hpp": "b718fbb7908d6ad705ac3242d0f45c8dd41a6677820b367fc17678333e9c39d4"
+  },
+  "rustc": "rustc 1.98.1 (48a229cea 2026-09-01)\nbinary: rustc\ncommit-hash: 48a229ceaefd4985c50990b14116b6d856af0985\ncommit-date: 2026-09-01\nhost: x86_64-unknown-linux-gnu\nrelease: 1.98.1\nLLVM version: 22.1.8\n",
+  "rustflags": "-C target-cpu=native",
+  "profile": "opt-level=3, codegen-units=1, lto=thin",
+  "vmstat_start": {
+    "pswpin": 315951,
+    "pswpout": 2052835,
+    "pgmajfault": 574211,
+    "oom_kill": 0
+  }
+}

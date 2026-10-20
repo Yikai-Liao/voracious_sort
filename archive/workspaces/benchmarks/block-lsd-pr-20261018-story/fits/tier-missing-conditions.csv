@@ -1,0 +1,4 @@
+selection,model_id,kind,dist,n,record_bytes,input_bytes,nominal_block,nominal_block_bytes,exact_available,identical_small_leaf
+c4 round down,7,u64,uniform,2097152,8,16777216,256,2048,False,False
+c4 round nearest,8,u64,uniform,2097152,8,16777216,256,2048,False,False
+c4 round up,9,u64,uniform,524288,8,4194304,256,2048,False,False

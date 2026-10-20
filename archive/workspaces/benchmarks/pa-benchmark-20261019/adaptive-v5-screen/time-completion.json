@@ -1,0 +1,10 @@
+{
+  "seconds": 35.353606939315796,
+  "rows": 252,
+  "vmstat": {
+    "pswpin": 319374,
+    "pswpout": 2053095,
+    "pgmajfault": 579767,
+    "oom_kill": 0
+  }
+}

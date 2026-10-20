@@ -1,0 +1,656 @@
+[
+  {
+    "kind": "i64",
+    "dist": "organ_pipe",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "u64",
+    "dist": "push_front",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "u64",
+    "dist": "uniform",
+    "n": 8388608,
+    "group": "u64_scaling"
+  },
+  {
+    "kind": "u64",
+    "dist": "uniform",
+    "n": 4096,
+    "group": "u64_scaling"
+  },
+  {
+    "kind": "record32",
+    "dist": "uniform",
+    "n": 1024,
+    "group": "uniform_matrix"
+  },
+  {
+    "kind": "u64",
+    "dist": "uniform",
+    "n": 16384,
+    "group": "uniform_matrix"
+  },
+  {
+    "kind": "u128",
+    "dist": "uniform",
+    "n": 1048576,
+    "group": "uniform_matrix"
+  },
+  {
+    "kind": "i32",
+    "dist": "common_prefix",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "u128",
+    "dist": "skew95",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "i64",
+    "dist": "nearly_sorted",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "f64",
+    "dist": "uniform",
+    "n": 262144,
+    "group": "uniform_matrix"
+  },
+  {
+    "kind": "u128",
+    "dist": "uniform",
+    "n": 1024,
+    "group": "uniform_matrix"
+  },
+  {
+    "kind": "u64",
+    "dist": "uniform",
+    "n": 131072,
+    "group": "u64_scaling"
+  },
+  {
+    "kind": "i32",
+    "dist": "normal",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "record128",
+    "dist": "skew95",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "f32",
+    "dist": "uniform",
+    "n": 262144,
+    "group": "uniform_matrix"
+  },
+  {
+    "kind": "u64",
+    "dist": "uniform",
+    "n": 4194304,
+    "group": "u64_scaling"
+  },
+  {
+    "kind": "u32",
+    "dist": "skew95",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "i64",
+    "dist": "skew95",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "u32",
+    "dist": "organ_pipe",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "f32",
+    "dist": "common_prefix",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "f32",
+    "dist": "normal",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "record32",
+    "dist": "uniform",
+    "n": 1048576,
+    "group": "uniform_matrix"
+  },
+  {
+    "kind": "record32",
+    "dist": "uniform",
+    "n": 128,
+    "group": "uniform_matrix"
+  },
+  {
+    "kind": "i32",
+    "dist": "organ_pipe",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "record128",
+    "dist": "common_prefix",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "i32",
+    "dist": "uniform",
+    "n": 262144,
+    "group": "uniform_matrix"
+  },
+  {
+    "kind": "f32",
+    "dist": "uniform",
+    "n": 1024,
+    "group": "uniform_matrix"
+  },
+  {
+    "kind": "u64",
+    "dist": "uniform",
+    "n": 524288,
+    "group": "u64_scaling"
+  },
+  {
+    "kind": "u64",
+    "dist": "uniform",
+    "n": 128,
+    "group": "uniform_matrix"
+  },
+  {
+    "kind": "i64",
+    "dist": "uniform",
+    "n": 1024,
+    "group": "uniform_matrix"
+  },
+  {
+    "kind": "f32",
+    "dist": "uniform",
+    "n": 128,
+    "group": "uniform_matrix"
+  },
+  {
+    "kind": "u32",
+    "dist": "uniform",
+    "n": 1024,
+    "group": "uniform_matrix"
+  },
+  {
+    "kind": "i64",
+    "dist": "common_prefix",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "u64",
+    "dist": "uniform",
+    "n": 16777216,
+    "group": "u64_scaling"
+  },
+  {
+    "kind": "record32",
+    "dist": "nearly_sorted",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "u64",
+    "dist": "organ_pipe",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "f32",
+    "dist": "nearly_sorted",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "u64",
+    "dist": "normal",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "record128",
+    "dist": "push_front",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "f64",
+    "dist": "nearly_sorted",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "u64",
+    "dist": "nearly_sorted",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "u32",
+    "dist": "normal",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "i64",
+    "dist": "uniform",
+    "n": 16384,
+    "group": "uniform_matrix"
+  },
+  {
+    "kind": "record32",
+    "dist": "common_prefix",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "i64",
+    "dist": "uniform",
+    "n": 1048576,
+    "group": "uniform_matrix"
+  },
+  {
+    "kind": "u128",
+    "dist": "uniform",
+    "n": 262144,
+    "group": "uniform_matrix"
+  },
+  {
+    "kind": "record128",
+    "dist": "nearly_sorted",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "u128",
+    "dist": "common_prefix",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "f64",
+    "dist": "uniform",
+    "n": 128,
+    "group": "uniform_matrix"
+  },
+  {
+    "kind": "f64",
+    "dist": "uniform",
+    "n": 1024,
+    "group": "uniform_matrix"
+  },
+  {
+    "kind": "u64",
+    "dist": "uniform",
+    "n": 262144,
+    "group": "uniform_matrix"
+  },
+  {
+    "kind": "u64",
+    "dist": "skew95",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "i32",
+    "dist": "skew95",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "u64",
+    "dist": "uniform",
+    "n": 1024,
+    "group": "uniform_matrix"
+  },
+  {
+    "kind": "record32",
+    "dist": "uniform",
+    "n": 262144,
+    "group": "uniform_matrix"
+  },
+  {
+    "kind": "i32",
+    "dist": "uniform",
+    "n": 1024,
+    "group": "uniform_matrix"
+  },
+  {
+    "kind": "i64",
+    "dist": "uniform",
+    "n": 128,
+    "group": "uniform_matrix"
+  },
+  {
+    "kind": "i32",
+    "dist": "uniform",
+    "n": 1048576,
+    "group": "uniform_matrix"
+  },
+  {
+    "kind": "u128",
+    "dist": "push_front",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "f64",
+    "dist": "push_front",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "record32",
+    "dist": "skew95",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "f64",
+    "dist": "normal",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "u64",
+    "dist": "common_prefix",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "record128",
+    "dist": "organ_pipe",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "u64",
+    "dist": "uniform",
+    "n": 256,
+    "group": "u64_scaling"
+  },
+  {
+    "kind": "f64",
+    "dist": "organ_pipe",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "i64",
+    "dist": "push_front",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "u32",
+    "dist": "uniform",
+    "n": 1048576,
+    "group": "uniform_matrix"
+  },
+  {
+    "kind": "u64",
+    "dist": "uniform",
+    "n": 65536,
+    "group": "u64_scaling"
+  },
+  {
+    "kind": "u128",
+    "dist": "uniform",
+    "n": 16384,
+    "group": "uniform_matrix"
+  },
+  {
+    "kind": "i32",
+    "dist": "push_front",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "f32",
+    "dist": "organ_pipe",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "record128",
+    "dist": "uniform",
+    "n": 16384,
+    "group": "uniform_matrix"
+  },
+  {
+    "kind": "u128",
+    "dist": "normal",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "u32",
+    "dist": "uniform",
+    "n": 16384,
+    "group": "uniform_matrix"
+  },
+  {
+    "kind": "record128",
+    "dist": "uniform",
+    "n": 262144,
+    "group": "uniform_matrix"
+  },
+  {
+    "kind": "u64",
+    "dist": "uniform",
+    "n": 2097152,
+    "group": "u64_scaling"
+  },
+  {
+    "kind": "i64",
+    "dist": "uniform",
+    "n": 262144,
+    "group": "uniform_matrix"
+  },
+  {
+    "kind": "f32",
+    "dist": "skew95",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "u32",
+    "dist": "nearly_sorted",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "f32",
+    "dist": "uniform",
+    "n": 1048576,
+    "group": "uniform_matrix"
+  },
+  {
+    "kind": "f64",
+    "dist": "uniform",
+    "n": 16384,
+    "group": "uniform_matrix"
+  },
+  {
+    "kind": "f32",
+    "dist": "push_front",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "u64",
+    "dist": "uniform",
+    "n": 250000,
+    "group": "u64_scaling"
+  },
+  {
+    "kind": "u128",
+    "dist": "uniform",
+    "n": 128,
+    "group": "uniform_matrix"
+  },
+  {
+    "kind": "u64",
+    "dist": "uniform",
+    "n": 1048576,
+    "group": "uniform_matrix"
+  },
+  {
+    "kind": "record128",
+    "dist": "uniform",
+    "n": 128,
+    "group": "uniform_matrix"
+  },
+  {
+    "kind": "u128",
+    "dist": "organ_pipe",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "record32",
+    "dist": "normal",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "i64",
+    "dist": "normal",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "u32",
+    "dist": "common_prefix",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "record32",
+    "dist": "organ_pipe",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "record32",
+    "dist": "push_front",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "record128",
+    "dist": "normal",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "u32",
+    "dist": "uniform",
+    "n": 128,
+    "group": "uniform_matrix"
+  },
+  {
+    "kind": "i32",
+    "dist": "uniform",
+    "n": 16384,
+    "group": "uniform_matrix"
+  },
+  {
+    "kind": "record128",
+    "dist": "uniform",
+    "n": 1048576,
+    "group": "uniform_matrix"
+  },
+  {
+    "kind": "u32",
+    "dist": "uniform",
+    "n": 262144,
+    "group": "uniform_matrix"
+  },
+  {
+    "kind": "f64",
+    "dist": "skew95",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "f64",
+    "dist": "uniform",
+    "n": 1048576,
+    "group": "uniform_matrix"
+  },
+  {
+    "kind": "record32",
+    "dist": "uniform",
+    "n": 16384,
+    "group": "uniform_matrix"
+  },
+  {
+    "kind": "u128",
+    "dist": "nearly_sorted",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "u32",
+    "dist": "push_front",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "f32",
+    "dist": "uniform",
+    "n": 16384,
+    "group": "uniform_matrix"
+  },
+  {
+    "kind": "i32",
+    "dist": "uniform",
+    "n": 128,
+    "group": "uniform_matrix"
+  },
+  {
+    "kind": "f64",
+    "dist": "common_prefix",
+    "n": 1048576,
+    "group": "stress"
+  },
+  {
+    "kind": "record128",
+    "dist": "uniform",
+    "n": 1024,
+    "group": "uniform_matrix"
+  },
+  {
+    "kind": "i32",
+    "dist": "nearly_sorted",
+    "n": 1048576,
+    "group": "stress"
+  }
+]

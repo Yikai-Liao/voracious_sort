@@ -1,0 +1,41 @@
+[
+  {
+    "file": "figures/curve-and-tier-fitting.pdf",
+    "sha256": "88f7810cb0d37ed81d03634c24bc741e11e2b0e5c483182c6b33c7a4cc424703",
+    "pages": [
+      {
+        "width_mm": 183.00000559488933,
+        "height_mm": 174.99999864366316,
+        "fonts": [
+          [
+            19,
+            "ttf",
+            "Type0",
+            "BHPUCF+DejaVuSans-Bold",
+            "F2",
+            "Identity-H",
+            0
+          ],
+          [
+            26,
+            "ttf",
+            "Type0",
+            "DKDQJW+DejaVuSans",
+            "F1",
+            "Identity-H",
+            0
+          ],
+          [
+            33,
+            "ttf",
+            "Type0",
+            "DEOWHK+DejaVuSans",
+            "F3",
+            "Identity-H",
+            0
+          ]
+        ]
+      }
+    ]
+  }
+]

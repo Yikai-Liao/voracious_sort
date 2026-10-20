@@ -1,0 +1,117 @@
+[
+  {
+    "kind": "u32",
+    "dist": "uniform",
+    "n": 1048576
+  },
+  {
+    "kind": "u64",
+    "dist": "uniform",
+    "n": 1048576
+  },
+  {
+    "kind": "u128",
+    "dist": "uniform",
+    "n": 1048576
+  },
+  {
+    "kind": "f32",
+    "dist": "uniform",
+    "n": 1048576
+  },
+  {
+    "kind": "record128",
+    "dist": "uniform",
+    "n": 1048576
+  },
+  {
+    "kind": "u64",
+    "dist": "few_unique",
+    "n": 1048576
+  },
+  {
+    "kind": "u128",
+    "dist": "common_prefix",
+    "n": 1048576
+  },
+  {
+    "kind": "f32",
+    "dist": "normal",
+    "n": 1048576
+  },
+  {
+    "kind": "record128",
+    "dist": "few_unique",
+    "n": 1048576
+  },
+  {
+    "kind": "u32",
+    "dist": "low_bits_constant",
+    "n": 1048576
+  },
+  {
+    "kind": "u64",
+    "dist": "all_equal",
+    "n": 1048576
+  },
+  {
+    "kind": "u64",
+    "dist": "reversed",
+    "n": 1048576
+  },
+  {
+    "kind": "f32",
+    "dist": "all_equal",
+    "n": 1048576
+  },
+  {
+    "kind": "f32",
+    "dist": "reversed",
+    "n": 1048576
+  },
+  {
+    "kind": "record128",
+    "dist": "all_equal",
+    "n": 1048576
+  },
+  {
+    "kind": "record128",
+    "dist": "reversed",
+    "n": 1048576
+  },
+  {
+    "kind": "u32",
+    "dist": "uniform",
+    "n": 1024
+  },
+  {
+    "kind": "u64",
+    "dist": "uniform",
+    "n": 1024
+  },
+  {
+    "kind": "u128",
+    "dist": "uniform",
+    "n": 1024
+  },
+  {
+    "kind": "f32",
+    "dist": "uniform",
+    "n": 1024
+  },
+  {
+    "kind": "record128",
+    "dist": "uniform",
+    "n": 1024
+  },
+  {
+    "kind": "u32",
+    "dist": "uniform",
+    "n": 128
+  },
+  {
+    "kind": "record128",
+    "dist": "uniform",
+    "n": 128
+  }
+]

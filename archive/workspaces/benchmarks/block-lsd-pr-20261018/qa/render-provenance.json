@@ -1,0 +1,12 @@
+{
+  "source_bundle": "/root/code/voracious_sort-workspaces/benchmarks/block-lsd-pr-20261018",
+  "matrix_n": 1048576,
+  "summary_csv_sha256": "d734ac437c1935add83259f0e30de60b85d99c4802d6ca7c3aec4a40805e7f9c",
+  "plot_source_sha256": "f423f8059624f84f1a5db4e7ba1ed5563229d474572e759b5819001a67842cdb",
+  "supplemental_summary_sha256": "ee57389c4ebafc3e9e42e392b2b50449e7d920ac1613fdfaa4de0cc507dec646",
+  "runtime": {
+    "python": "3.14.7 free-threading build (main, Aug  7 2026, 02:26:20) [Clang 22.1.3 ]",
+    "matplotlib": "3.11.2",
+    "numpy": "2.5.4"
+  }
+}

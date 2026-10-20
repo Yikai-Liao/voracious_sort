@@ -1,0 +1,164 @@
+{
+  "time_observations": 16350,
+  "memory_observations": 8175,
+  "input_cases": 109,
+  "algorithm_cases": 2725,
+  "all_block_rust_std_and_timsort_outputs_match": true,
+  "all_inputs_match_initial_campaign": true,
+  "all_block_allocations_within_bound": true,
+  "block_ranges_at_1048576": {
+    "f32": {
+      "space_balanced_sqrt": [
+        68,
+        4345
+      ],
+      "byte_normalized_sqrt": [
+        256,
+        32768
+      ]
+    },
+    "f64": {
+      "space_balanced_sqrt": [
+        48,
+        3072
+      ],
+      "byte_normalized_sqrt": [
+        128,
+        16384
+      ]
+    },
+    "i32": {
+      "space_balanced_sqrt": [
+        68,
+        4345
+      ],
+      "byte_normalized_sqrt": [
+        256,
+        32768
+      ]
+    },
+    "i64": {
+      "space_balanced_sqrt": [
+        48,
+        3072
+      ],
+      "byte_normalized_sqrt": [
+        128,
+        16384
+      ]
+    },
+    "record128": {
+      "space_balanced_sqrt": [
+        12,
+        768
+      ],
+      "byte_normalized_sqrt": [
+        8,
+        1024
+      ]
+    },
+    "record32": {
+      "space_balanced_sqrt": [
+        24,
+        1536
+      ],
+      "byte_normalized_sqrt": [
+        32,
+        4096
+      ]
+    },
+    "u128": {
+      "space_balanced_sqrt": [
+        34,
+        2173
+      ],
+      "byte_normalized_sqrt": [
+        64,
+        8192
+      ]
+    },
+    "u32": {
+      "space_balanced_sqrt": [
+        68,
+        4345
+      ],
+      "byte_normalized_sqrt": [
+        256,
+        32768
+      ]
+    },
+    "u64": {
+      "space_balanced_sqrt": [
+        48,
+        3072
+      ],
+      "byte_normalized_sqrt": [
+        128,
+        16384
+      ]
+    }
+  },
+  "normalized_block_byte_ranges_at_1048576": {
+    "f32": [
+      1024,
+      131072
+    ],
+    "f64": [
+      1024,
+      131072
+    ],
+    "i32": [
+      1024,
+      131072
+    ],
+    "i64": [
+      1024,
+      131072
+    ],
+    "record128": [
+      1024,
+      131072
+    ],
+    "record32": [
+      1024,
+      131072
+    ],
+    "u128": [
+      1024,
+      131072
+    ],
+    "u32": [
+      1024,
+      131072
+    ],
+    "u64": [
+      1024,
+      131072
+    ]
+  },
+  "comparator_failure_cases": 0,
+  "key_order_failure_cases": 0,
+  "fingerprint_failure_cases": 0,
+  "aa_samples": 654,
+  "aa_median_ratio": 0.997690435370945,
+  "aa_absolute_change_percent_median": 5.003577765675016,
+  "aa_absolute_change_percent_p95": 28.860605678940843,
+  "equal_block_normalized_vs_fixed_512": {
+    "samples": 378,
+    "median_ratio": 0.9997332939477618,
+    "absolute_change_percent_median": 6.304953315738238,
+    "absolute_change_percent_p95": 30.936099877783878
+  },
+  "processes": 218,
+  "process_failures": 0,
+  "max_final_process_swap_kib": 0,
+  "max_process_rss_kib": 577696,
+  "total_process_major_faults": 0,
+  "total_process_swaps": 0,
+  "global_swap_traffic_pages": {
+    "pswpin": 503,
+    "pswpout": 0
+  },
+  "coverage": "All nine types and five primary sizes on uniform inputs, ten additional u64 uniform sizes, plus six predeclared stress distributions at 1048576 elements for all nine types",
+  "exclusions": "No supplemental observations removed; preflight remains separate"
+}

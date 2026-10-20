@@ -1,0 +1,26 @@
+{
+  "auto-baseline/benchmark-time": {
+    "symbol": "block_msd_research::frontier::pa::visit::<u64, u64>",
+    "code_bytes": 12929,
+    "stack_reservation_bytes": 360,
+    "prologue": "\nauto-baseline/benchmark-time:     file format elf64-x86-64\n\n\nDisassembly of section .text:\n\n00000000002fa010 <block_msd_research::frontier::pa::visit::<u64, u64>>:\n  2fa010:\t55                   \tpush   %rbp\n  2fa011:\t41 57                \tpush   %r15\n  2fa013:\t41 56                \tpush   %r14\n  2fa015:\t41 55                \tpush   %r13\n  2fa017:\t41 54                \tpush   %r12\n  2fa019:\t53                   \tpush   %rbx\n  2fa01a:\t48 81 ec 68 01 00 00 \tsub    $0x168,%rsp\n  2fa021:\t4c 89 4c 24 30       \tmov    %r9,0x30(%rsp)\n  2fa026:\t49 89 cd             \tmov    %rcx,%r13\n  2fa029:\t49 89 f6             \tmov    %rsi,%r14\n  2fa02c:\t48 89 fb             \tmov    %rdi,%rbx\n  2fa02f:\t48 81 fe 81 00 00 00 \tcmp    $0x81,%rsi\n  2fa036:\t73 5c                \tjae    2fa094 <block_msd_research::frontier::pa::visit::<u64, u64>+0x84>\n"
+  },
+  "adaptive-v6-screen/benchmark-time": {
+    "symbol": "block_msd_research::frontier::pa::visit::<u64, u64>",
+    "code_bytes": 9729,
+    "stack_reservation_bytes": 360,
+    "prologue": "\nadaptive-v6-screen/benchmark-time:     file format elf64-x86-64\n\n\nDisassembly of section .text:\n\n00000000001d37a0 <block_msd_research::frontier::pa::visit::<u64, u64>>:\n  1d37a0:\t55                   \tpush   %rbp\n  1d37a1:\t41 57                \tpush   %r15\n  1d37a3:\t41 56                \tpush   %r14\n  1d37a5:\t41 55                \tpush   %r13\n  1d37a7:\t41 54                \tpush   %r12\n  1d37a9:\t53                   \tpush   %rbx\n  1d37aa:\t48 81 ec 68 01 00 00 \tsub    $0x168,%rsp\n  1d37b1:\t4c 89 4c 24 28       \tmov    %r9,0x28(%rsp)\n  1d37b6:\t49 89 cb             \tmov    %rcx,%r11\n  1d37b9:\t49 89 f6             \tmov    %rsi,%r14\n  1d37bc:\t48 89 fb             \tmov    %rdi,%rbx\n  1d37bf:\t48 81 fe 81 00 00 00 \tcmp    $0x81,%rsi\n  1d37c6:\t73 5c                \tjae    1d3824 <block_msd_research::frontier::pa::visit::<u64, u64>+0x84>\n"
+  },
+  "adaptive-v8-screen/benchmark-time": {
+    "symbol": "block_msd_research::frontier::pa::visit_unordered::<u64, u64>",
+    "code_bytes": 16044,
+    "stack_reservation_bytes": 2456,
+    "prologue": "\nadaptive-v8-screen/benchmark-time:     file format elf64-x86-64\n\n\nDisassembly of section .text:\n\n00000000001d1800 <block_msd_research::frontier::pa::visit_unordered::<u64, u64>>:\n  1d1800:\t55                   \tpush   %rbp\n  1d1801:\t41 57                \tpush   %r15\n  1d1803:\t41 56                \tpush   %r14\n  1d1805:\t41 55                \tpush   %r13\n  1d1807:\t41 54                \tpush   %r12\n  1d1809:\t53                   \tpush   %rbx\n  1d180a:\t48 81 ec 98 09 00 00 \tsub    $0x998,%rsp\n  1d1811:\t4c 89 4c 24 68       \tmov    %r9,0x68(%rsp)\n  1d1816:\t48 89 cb             \tmov    %rcx,%rbx\n  1d1819:\t49 89 d7             \tmov    %rdx,%r15\n  1d181c:\t49 89 f5             \tmov    %rsi,%r13\n  1d181f:\t49 89 fe             \tmov    %rdi,%r14\n  1d1822:\t48                   \trex.W\n  1d1823:\t8b                   \t.byte 0x8b\n  1d1824:\t84 24 d0             \ttest   %ah,(%rax,%rdx,8)\n  1d1827:\t09                   \t.byte 0x9\n"
+  },
+  "adaptive-v10-screen/benchmark-time": {
+    "symbol": "block_msd_research::frontier::pa::visit::<u64, u64, false>",
+    "code_bytes": 8885,
+    "stack_reservation_bytes": 360,
+    "prologue": "\nadaptive-v10-screen/benchmark-time:     file format elf64-x86-64\n\n\nDisassembly of section .text:\n\n000000000031e940 <block_msd_research::frontier::pa::visit::<u64, u64, false>>:\n  31e940:\t55                   \tpush   %rbp\n  31e941:\t41 57                \tpush   %r15\n  31e943:\t41 56                \tpush   %r14\n  31e945:\t41 55                \tpush   %r13\n  31e947:\t41 54                \tpush   %r12\n  31e949:\t53                   \tpush   %rbx\n  31e94a:\t48 81 ec 68 01 00 00 \tsub    $0x168,%rsp\n  31e951:\t49 89 f6             \tmov    %rsi,%r14\n  31e954:\t48 89 fb             \tmov    %rdi,%rbx\n  31e957:\t48 81 fe 81 00 00 00 \tcmp    $0x81,%rsi\n  31e95e:\t73 64                \tjae    31e9c4 <block_msd_research::frontier::pa::visit::<u64, u64, false>+0x84>\n  31e960:\t80 79 19 00          \tcmpb   $0x0,0x19(%rcx)\n  31e964:\t0f                   \t.byte 0xf\n  31e965:\t84                   \t.byte 0x84\n  31e966:\t25                   \t.byte 0x25\n  31e967:\t01                   \t.byte 0x1\n"
+  }
+}

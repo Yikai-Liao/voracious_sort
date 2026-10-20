@@ -1,0 +1,102 @@
+[
+  {
+    "kind": "u32",
+    "dist": "nearly_sorted",
+    "n": 1048576
+  },
+  {
+    "kind": "u32",
+    "dist": "almost_sorted",
+    "n": 1048576
+  },
+  {
+    "kind": "u32",
+    "dist": "sawtooth",
+    "n": 1048576
+  },
+  {
+    "kind": "u64",
+    "dist": "nearly_sorted",
+    "n": 1048576
+  },
+  {
+    "kind": "u64",
+    "dist": "almost_sorted",
+    "n": 1048576
+  },
+  {
+    "kind": "u64",
+    "dist": "sawtooth",
+    "n": 1048576
+  },
+  {
+    "kind": "u128",
+    "dist": "nearly_sorted",
+    "n": 1048576
+  },
+  {
+    "kind": "u128",
+    "dist": "almost_sorted",
+    "n": 1048576
+  },
+  {
+    "kind": "u128",
+    "dist": "sawtooth",
+    "n": 1048576
+  },
+  {
+    "kind": "f32",
+    "dist": "nearly_sorted",
+    "n": 1048576
+  },
+  {
+    "kind": "f32",
+    "dist": "almost_sorted",
+    "n": 1048576
+  },
+  {
+    "kind": "f32",
+    "dist": "sawtooth",
+    "n": 1048576
+  },
+  {
+    "kind": "record128",
+    "dist": "nearly_sorted",
+    "n": 1048576
+  },
+  {
+    "kind": "record128",
+    "dist": "almost_sorted",
+    "n": 1048576
+  },
+  {
+    "kind": "record128",
+    "dist": "sawtooth",
+    "n": 1048576
+  },
+  {
+    "kind": "u32",
+    "dist": "nearly_sorted",
+    "n": 1024
+  },
+  {
+    "kind": "u64",
+    "dist": "nearly_sorted",
+    "n": 1024
+  },
+  {
+    "kind": "u128",
+    "dist": "nearly_sorted",
+    "n": 1024
+  },
+  {
+    "kind": "f32",
+    "dist": "nearly_sorted",
+    "n": 1024
+  },
+  {
+    "kind": "record128",
+    "dist": "nearly_sorted",
+    "n": 1024
+  }
+]

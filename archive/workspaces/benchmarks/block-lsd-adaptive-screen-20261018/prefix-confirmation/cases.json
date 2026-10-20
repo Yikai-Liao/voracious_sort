@@ -1,0 +1,547 @@
+[
+  {
+    "kind": "f32",
+    "dist": "all_equal",
+    "n": 1048576
+  },
+  {
+    "kind": "f32",
+    "dist": "common_prefix",
+    "n": 1048576
+  },
+  {
+    "kind": "f32",
+    "dist": "late_difference",
+    "n": 1048576
+  },
+  {
+    "kind": "f32",
+    "dist": "reversed",
+    "n": 1048576
+  },
+  {
+    "kind": "f32",
+    "dist": "sorted",
+    "n": 1048576
+  },
+  {
+    "kind": "f32",
+    "dist": "uniform",
+    "n": 1024
+  },
+  {
+    "kind": "f32",
+    "dist": "uniform",
+    "n": 16384
+  },
+  {
+    "kind": "f32",
+    "dist": "uniform",
+    "n": 1048576
+  },
+  {
+    "kind": "f64",
+    "dist": "all_equal",
+    "n": 1048576
+  },
+  {
+    "kind": "f64",
+    "dist": "common_prefix",
+    "n": 1048576
+  },
+  {
+    "kind": "f64",
+    "dist": "late_difference",
+    "n": 1048576
+  },
+  {
+    "kind": "f64",
+    "dist": "reversed",
+    "n": 1048576
+  },
+  {
+    "kind": "f64",
+    "dist": "sorted",
+    "n": 1048576
+  },
+  {
+    "kind": "f64",
+    "dist": "uniform",
+    "n": 1024
+  },
+  {
+    "kind": "f64",
+    "dist": "uniform",
+    "n": 16384
+  },
+  {
+    "kind": "f64",
+    "dist": "uniform",
+    "n": 1048576
+  },
+  {
+    "kind": "i32",
+    "dist": "all_equal",
+    "n": 1048576
+  },
+  {
+    "kind": "i32",
+    "dist": "common_prefix",
+    "n": 1048576
+  },
+  {
+    "kind": "i32",
+    "dist": "late_difference",
+    "n": 1048576
+  },
+  {
+    "kind": "i32",
+    "dist": "reversed",
+    "n": 1048576
+  },
+  {
+    "kind": "i32",
+    "dist": "sorted",
+    "n": 1048576
+  },
+  {
+    "kind": "i32",
+    "dist": "uniform",
+    "n": 1024
+  },
+  {
+    "kind": "i32",
+    "dist": "uniform",
+    "n": 16384
+  },
+  {
+    "kind": "i32",
+    "dist": "uniform",
+    "n": 1048576
+  },
+  {
+    "kind": "i64",
+    "dist": "all_equal",
+    "n": 1048576
+  },
+  {
+    "kind": "i64",
+    "dist": "common_prefix",
+    "n": 1048576
+  },
+  {
+    "kind": "i64",
+    "dist": "late_difference",
+    "n": 1048576
+  },
+  {
+    "kind": "i64",
+    "dist": "reversed",
+    "n": 1048576
+  },
+  {
+    "kind": "i64",
+    "dist": "sorted",
+    "n": 1048576
+  },
+  {
+    "kind": "i64",
+    "dist": "uniform",
+    "n": 1024
+  },
+  {
+    "kind": "i64",
+    "dist": "uniform",
+    "n": 16384
+  },
+  {
+    "kind": "i64",
+    "dist": "uniform",
+    "n": 1048576
+  },
+  {
+    "kind": "record128",
+    "dist": "all_equal",
+    "n": 1048576
+  },
+  {
+    "kind": "record128",
+    "dist": "almost_sorted",
+    "n": 1048576
+  },
+  {
+    "kind": "record128",
+    "dist": "alternating",
+    "n": 1048576
+  },
+  {
+    "kind": "record128",
+    "dist": "common_prefix",
+    "n": 1048576
+  },
+  {
+    "kind": "record128",
+    "dist": "few_unique",
+    "n": 1048576
+  },
+  {
+    "kind": "record128",
+    "dist": "high_only",
+    "n": 1048576
+  },
+  {
+    "kind": "record128",
+    "dist": "late_difference",
+    "n": 1048576
+  },
+  {
+    "kind": "record128",
+    "dist": "low_bits_constant",
+    "n": 1048576
+  },
+  {
+    "kind": "record128",
+    "dist": "nearly_sorted",
+    "n": 1048576
+  },
+  {
+    "kind": "record128",
+    "dist": "normal",
+    "n": 1048576
+  },
+  {
+    "kind": "record128",
+    "dist": "organ_pipe",
+    "n": 1048576
+  },
+  {
+    "kind": "record128",
+    "dist": "push_front",
+    "n": 1048576
+  },
+  {
+    "kind": "record128",
+    "dist": "push_middle",
+    "n": 1048576
+  },
+  {
+    "kind": "record128",
+    "dist": "reverse_nearly_sorted",
+    "n": 1048576
+  },
+  {
+    "kind": "record128",
+    "dist": "reversed",
+    "n": 1048576
+  },
+  {
+    "kind": "record128",
+    "dist": "sawtooth",
+    "n": 1048576
+  },
+  {
+    "kind": "record128",
+    "dist": "skew95",
+    "n": 1048576
+  },
+  {
+    "kind": "record128",
+    "dist": "sorted",
+    "n": 1048576
+  },
+  {
+    "kind": "record128",
+    "dist": "sqrt_keys",
+    "n": 1048576
+  },
+  {
+    "kind": "record128",
+    "dist": "uniform",
+    "n": 1024
+  },
+  {
+    "kind": "record128",
+    "dist": "uniform",
+    "n": 16384
+  },
+  {
+    "kind": "record128",
+    "dist": "uniform",
+    "n": 1048576
+  },
+  {
+    "kind": "record128",
+    "dist": "uniform_narrow",
+    "n": 1048576
+  },
+  {
+    "kind": "record128",
+    "dist": "uniform_numeric",
+    "n": 1048576
+  },
+  {
+    "kind": "record128",
+    "dist": "zipf",
+    "n": 1048576
+  },
+  {
+    "kind": "record32",
+    "dist": "all_equal",
+    "n": 1048576
+  },
+  {
+    "kind": "record32",
+    "dist": "common_prefix",
+    "n": 1048576
+  },
+  {
+    "kind": "record32",
+    "dist": "late_difference",
+    "n": 1048576
+  },
+  {
+    "kind": "record32",
+    "dist": "reversed",
+    "n": 1048576
+  },
+  {
+    "kind": "record32",
+    "dist": "sorted",
+    "n": 1048576
+  },
+  {
+    "kind": "record32",
+    "dist": "uniform",
+    "n": 1024
+  },
+  {
+    "kind": "record32",
+    "dist": "uniform",
+    "n": 16384
+  },
+  {
+    "kind": "record32",
+    "dist": "uniform",
+    "n": 1048576
+  },
+  {
+    "kind": "u128",
+    "dist": "all_equal",
+    "n": 1048576
+  },
+  {
+    "kind": "u128",
+    "dist": "common_prefix",
+    "n": 1048576
+  },
+  {
+    "kind": "u128",
+    "dist": "late_difference",
+    "n": 1048576
+  },
+  {
+    "kind": "u128",
+    "dist": "reversed",
+    "n": 1048576
+  },
+  {
+    "kind": "u128",
+    "dist": "sorted",
+    "n": 1048576
+  },
+  {
+    "kind": "u128",
+    "dist": "uniform",
+    "n": 1024
+  },
+  {
+    "kind": "u128",
+    "dist": "uniform",
+    "n": 16384
+  },
+  {
+    "kind": "u128",
+    "dist": "uniform",
+    "n": 1048576
+  },
+  {
+    "kind": "u32",
+    "dist": "all_equal",
+    "n": 1048576
+  },
+  {
+    "kind": "u32",
+    "dist": "common_prefix",
+    "n": 1048576
+  },
+  {
+    "kind": "u32",
+    "dist": "late_difference",
+    "n": 1048576
+  },
+  {
+    "kind": "u32",
+    "dist": "reversed",
+    "n": 1048576
+  },
+  {
+    "kind": "u32",
+    "dist": "sorted",
+    "n": 1048576
+  },
+  {
+    "kind": "u32",
+    "dist": "uniform",
+    "n": 1024
+  },
+  {
+    "kind": "u32",
+    "dist": "uniform",
+    "n": 16384
+  },
+  {
+    "kind": "u32",
+    "dist": "uniform",
+    "n": 1048576
+  },
+  {
+    "kind": "u64",
+    "dist": "all_equal",
+    "n": 1048576
+  },
+  {
+    "kind": "u64",
+    "dist": "all_equal",
+    "n": 16777216
+  },
+  {
+    "kind": "u64",
+    "dist": "almost_sorted",
+    "n": 1048576
+  },
+  {
+    "kind": "u64",
+    "dist": "alternating",
+    "n": 1048576
+  },
+  {
+    "kind": "u64",
+    "dist": "common_prefix",
+    "n": 1048576
+  },
+  {
+    "kind": "u64",
+    "dist": "few_unique",
+    "n": 1048576
+  },
+  {
+    "kind": "u64",
+    "dist": "high_only",
+    "n": 1048576
+  },
+  {
+    "kind": "u64",
+    "dist": "late_difference",
+    "n": 1048576
+  },
+  {
+    "kind": "u64",
+    "dist": "late_difference",
+    "n": 16777216
+  },
+  {
+    "kind": "u64",
+    "dist": "low_bits_constant",
+    "n": 1048576
+  },
+  {
+    "kind": "u64",
+    "dist": "nearly_sorted",
+    "n": 1048576
+  },
+  {
+    "kind": "u64",
+    "dist": "normal",
+    "n": 1048576
+  },
+  {
+    "kind": "u64",
+    "dist": "organ_pipe",
+    "n": 1048576
+  },
+  {
+    "kind": "u64",
+    "dist": "push_front",
+    "n": 1048576
+  },
+  {
+    "kind": "u64",
+    "dist": "push_middle",
+    "n": 1048576
+  },
+  {
+    "kind": "u64",
+    "dist": "reverse_nearly_sorted",
+    "n": 1048576
+  },
+  {
+    "kind": "u64",
+    "dist": "reversed",
+    "n": 1048576
+  },
+  {
+    "kind": "u64",
+    "dist": "sawtooth",
+    "n": 1048576
+  },
+  {
+    "kind": "u64",
+    "dist": "skew95",
+    "n": 1048576
+  },
+  {
+    "kind": "u64",
+    "dist": "sorted",
+    "n": 1048576
+  },
+  {
+    "kind": "u64",
+    "dist": "sqrt_keys",
+    "n": 1048576
+  },
+  {
+    "kind": "u64",
+    "dist": "uniform",
+    "n": 1024
+  },
+  {
+    "kind": "u64",
+    "dist": "uniform",
+    "n": 16384
+  },
+  {
+    "kind": "u64",
+    "dist": "uniform",
+    "n": 1048576
+  },
+  {
+    "kind": "u64",
+    "dist": "uniform",
+    "n": 16777216
+  },
+  {
+    "kind": "u64",
+    "dist": "uniform_narrow",
+    "n": 1048576
+  },
+  {
+    "kind": "u64",
+    "dist": "uniform_numeric",
+    "n": 1048576
+  },
+  {
+    "kind": "u64",
+    "dist": "zipf",
+    "n": 1048576
+  }
+]

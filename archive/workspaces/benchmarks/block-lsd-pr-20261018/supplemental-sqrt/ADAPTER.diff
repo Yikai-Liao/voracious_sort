@@ -1,0 +1,35 @@
+--- frozen/src/main.rs
++++ supplemental/src/main.rs
+@@ -524,7 +524,7 @@
+             }
+             b
+         } else {
+-            vec![only]
++            only.split(',').collect()
+         };
+         let orders = if mode == "time" { 2 } else { 1 };
+         for order in 0..orders {
+@@ -539,7 +539,13 @@
+             } else {
+                 algorithms.rotate_right(rotate);
+             }
+-            for (slot, &algorithm) in algorithms.iter().enumerate() {
++            for (slot, &entry) in algorithms.iter().enumerate() {
++                // The supplement supplies an explicit block length per method.
++                // Selection and parsing stay outside the timed sorting interval.
++                let (algorithm, requested_block) = match entry.split_once(':') {
++                    Some((name, value)) => (name, value.parse::<usize>().unwrap()),
++                    None => (entry, block),
++                };
+                 // Policy selection is outside the sort's timed interval.
+                 let balanced = (9.0 * n as f64
+                     / (2.0 * (1usize << radix) as f64 * std::mem::size_of::<T>() as f64))
+@@ -553,7 +559,7 @@
+                     "block_sqrt_half" => (0.5 * balanced).ceil().max(1.0) as usize,
+                     "block_sqrt" => balanced.ceil().max(1.0) as usize,
+                     "block_sqrt_double" => (2.0 * balanced).ceil().max(1.0) as usize,
+-                    _ => block,
++                    _ => requested_block,
+                 };
+                 let mut warm = original.clone();
+                 let start = Instant::now();

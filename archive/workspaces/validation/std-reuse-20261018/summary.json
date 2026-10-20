@@ -1,0 +1,136 @@
+{
+  "find": {
+    "equal": {
+      "paired_median_change_percent": -0.08210058197786751,
+      "baseline_range_percent": 21.562178454980252,
+      "samples_per_variant": 6
+    },
+    "late-difference": {
+      "paired_median_change_percent": -0.9037411322597111,
+      "baseline_range_percent": 25.680579644932667,
+      "samples_per_variant": 6
+    },
+    "descending": {
+      "paired_median_change_percent": 5.724195101818241,
+      "baseline_range_percent": 18.075055894146796,
+      "samples_per_variant": 6
+    },
+    "scatter": {
+      "paired_median_change_percent": -3.305687985143374,
+      "baseline_range_percent": 23.90865863698799,
+      "samples_per_variant": 6
+    },
+    "random": {
+      "paired_median_change_percent": -4.012496924756692,
+      "baseline_range_percent": 26.91846924585286,
+      "samples_per_variant": 6
+    },
+    "small": {
+      "paired_median_change_percent": 0.3288562126090966,
+      "baseline_range_percent": 30.65237853297793,
+      "samples_per_variant": 6
+    }
+  },
+  "iter": {
+    "equal": {
+      "paired_median_change_percent": 3.4302277821112948,
+      "baseline_range_percent": 14.92115317747591,
+      "samples_per_variant": 6
+    },
+    "late-difference": {
+      "paired_median_change_percent": 7.177416996087393,
+      "baseline_range_percent": 9.959209161015625,
+      "samples_per_variant": 6
+    },
+    "descending": {
+      "paired_median_change_percent": 0.25431168302568197,
+      "baseline_range_percent": 20.790190001973553,
+      "samples_per_variant": 6
+    },
+    "scatter": {
+      "paired_median_change_percent": -1.6451084755762013,
+      "baseline_range_percent": 22.96735551799689,
+      "samples_per_variant": 6
+    },
+    "random": {
+      "paired_median_change_percent": 5.825379390207863,
+      "baseline_range_percent": 17.550776955975756,
+      "samples_per_variant": 6
+    },
+    "small": {
+      "paired_median_change_percent": -2.1046580841570184,
+      "baseline_range_percent": 15.027958959508748,
+      "samples_per_variant": 6
+    }
+  },
+  "baseline-twin": {
+    "equal": {
+      "paired_median_change_percent": 0.5335760384797827,
+      "baseline_range_percent": 15.150042527003826,
+      "samples_per_variant": 6
+    },
+    "late-difference": {
+      "paired_median_change_percent": 2.864882999335605,
+      "baseline_range_percent": 27.368054514394945,
+      "samples_per_variant": 6
+    },
+    "descending": {
+      "paired_median_change_percent": 1.4372232624071724,
+      "baseline_range_percent": 12.57749733427973,
+      "samples_per_variant": 6
+    },
+    "scatter": {
+      "paired_median_change_percent": 0.45724736596061133,
+      "baseline_range_percent": 11.188005007388613,
+      "samples_per_variant": 6
+    },
+    "random": {
+      "paired_median_change_percent": -0.11514534047349367,
+      "baseline_range_percent": 23.750734504324832,
+      "samples_per_variant": 6
+    },
+    "small": {
+      "paired_median_change_percent": 0.14209840928338657,
+      "baseline_range_percent": 10.008487357609951,
+      "samples_per_variant": 6
+    }
+  },
+  "find_kernel": {
+    "u8": {
+      "paired_median_change_percent": -17.30200231220696,
+      "samples_per_variant": 6
+    },
+    "u32": {
+      "paired_median_change_percent": 20.194664447921618,
+      "samples_per_variant": 6
+    },
+    "u128": {
+      "paired_median_change_percent": -12.95307245564138,
+      "samples_per_variant": 6
+    }
+  },
+  "decision": {
+    "selected": "Retain four-element chunks and non-short-circuit comparisons; directly iterate over each chunk.",
+    "rejected": "Whole-scan Iterator::find showed a u32 equal-prefix kernel regression despite gains for u8 and u128.",
+    "shared_prefix_sums": "Deferred to a future independent PR as requested.",
+    "scope": "Only two loops in block_lsd_stable_sort.rs; no dependencies or shared utility changes.",
+    "evidence_limits": "u64 full-sort .text is byte-identical; u8/u32/u128 first-different kernels merge to the same implementation. Runtime timing is noisy, including identical-baseline A/A; no speedup claim."
+  },
+  "machine_code": {
+    "baseline_text_sha256": "c56d3f6291ed67d4b8534910814aa4454b6f775d43d5175fed6eced3fc25cbe3",
+    "candidate_text_sha256": "c56d3f6291ed67d4b8534910814aa4454b6f775d43d5175fed6eced3fc25cbe3",
+    "find_disassembly": "find-kernel.asm",
+    "chosen_scan_kernel_symbols": "iter-kernel-symbols.txt"
+  },
+  "tests": {
+    "all-features-tests": [
+      "test result: ok. 90 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 82.83s",
+      "test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.32s",
+      "test result: ok. 4 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.77s"
+    ],
+    "default-block-tests": [
+      "test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.21s"
+    ]
+  },
+  "delivered_commit": "e649c6af49d6bfdde896ca40cad387235fce4bfa"
+}

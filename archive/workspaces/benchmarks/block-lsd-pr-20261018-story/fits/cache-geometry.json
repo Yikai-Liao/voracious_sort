@@ -1,0 +1,9 @@
+{
+  "level": "1",
+  "type": "Data",
+  "size": "32K",
+  "coherency_line_size": "64",
+  "number_of_sets": "64",
+  "ways_of_associativity": "8",
+  "model": "When heads advance synchronously, y=line_size*q touches sets/gcd(q,sets) sets under the simple modulo set-index model. This is a mechanism hypothesis, not a measured cache-miss attribution."
+}

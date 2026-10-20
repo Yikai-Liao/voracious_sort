@@ -1,0 +1,6 @@
+[package]
+name = "block-lsd-std-reuse-screen"
+version = "0.0.0"
+edition = "2021"
+[dependencies]
+voracious_radix_sort = { path = "/root/code/voracious_sort" }

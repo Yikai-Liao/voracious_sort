@@ -1,0 +1,3 @@
+{
+  "reason": "Two simple prefix-reuse implementations both caused repeatable all-equal floating-point regressions beyond same-case AA. Last attempt: f32 median after/before=1.9772 and f64=1.2381. Reject all production candidates; do not add input-specific or type-specific repairs."
+}

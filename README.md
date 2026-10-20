@@ -41,9 +41,7 @@ Last version tested/used:
 
 ## License
 
-This project is under the **MIT** license, except the block LSD sort adapted
-from Robert Clausecker’s Radsort, which is under **BSD-2-Clause** (see
-[LICENSE-BSD-2-Clause](LICENSE-BSD-2-Clause)).
+This project is under the **MIT** license.
 
 See the license file.
 
@@ -121,49 +119,6 @@ each elements. For a detail example, I let the reader read the Wikipedia page on
 <sup>[1]</sup>: If a radix of 8 is choosen, level 1 is the first 8 bits, level
 2 is the next 8 following bits, and so on until there is no more bit to handle.
 
-## Block LSD sort
-
-`block_lsd_stable_radixsort` sorts stably using the existing `Radixable` and `RadixKey`
-traits, including custom structs. It is an independent single-threaded algorithm;
-the `voracious_*` dispatcher thresholds have not been changed.
-
-```rust
-use voracious_radix_sort::block_lsd_stable_radixsort;
-let mut arr = [42u32, 7, 42, 0];
-block_lsd_stable_radixsort(&mut arr, 8, 512);
-assert_eq!(arr, [0, 7, 42, 42]);
-```
-
-The radix is the number of bits per digit (1..=8), and `block_size` is the
-positive number of elements per block. Parameters 8 and 512 match the original
-C implementation. Auxiliary storage is O(2^radix * block_size + n / block_size).
-A full-array scatter buffer is used only when its complete heap budget fits
-within the block scratch budget; arrays of at most 128 elements use stable
-comparison sorting by converted key. With fixed radix, a block size proportional
-to sqrt(n) gives O(sqrt(n)) overhead; a fixed block size gives linear metadata.
-For comparisons across record sizes, a fixed block byte budget can be converted
-to elements with `(block_bytes / std::mem::size_of::<T>()).max(1)` for non-zero-sized
-T. A 4 KiB block matches the original eight-byte record at block_size 512;
-performance still depends on radix, key width and workload.
-
-See [the paper](https://arxiv.org/abs/2607.05302) and the
-[local C/Rust benchmark](tools/block_lsd_bench/README.md) for reproducible comparisons.
-
-With the `voracious_multithread` feature, the parallel variant uses Rayon:
-
-```rust
-use voracious_radix_sort::block_lsd_stable_mt_radixsort;
-let mut arr = vec![42u32, 7, 42, 0];
-block_lsd_stable_mt_radixsort(&mut arr, 8, 512, 4);
-```
-
-`block_lsd_stable_mt_radixsort_in_pool(arr, radix, block_size, &pool)` reuses an
-existing `rayon::ThreadPool`. Scatter runs in parallel; block directory fixup and
-final compaction are sequential, following the original parallel C algorithm.
-For p active segments, extra space is O(2^radix * p * block_size + n / block_size)
-for a fixed record size. See the [parallel benchmark](tools/block_lsd_parallel_bench/README.md)
-for thread placement, acceleration and efficiency comparisons.
-
 ## Benchmarks
 
 First, please, read: [PROFILING.md](https://github.com/lakwet/voracious_sort/blob/master/PROFILING.md).
@@ -188,6 +143,14 @@ and it uses the [Verge sort pre-processing heuristic](https://github.com/Morwenn
 - DLSD (Diverting LSD radix sort) is a simpler version of the
 [DFR sort](https://github.com/ramou/dfr) with a different diversion and
 a variable radix (see [article](https://users.encs.concordia.ca/~sthiel/DS/SEA2015_FastRadix.pdf)).
+
+- Block LSD sort is a fast and memory-efficient stable LSD radix sort. It is adapted from
+[Radsort](https://github.com/clausecker/radsort), described in
+[Parallel O(sqrt(n)) Overhead LSD Radix Sort](https://arxiv.org/pdf/2607.05302),
+and supports a variable radix. The block size is selected automatically from the
+input length and element size, using a space-balanced square-root policy with
+an approximately 1 KiB block floor. For fixed radix and element size, auxiliary
+space is O(sqrt(n)). Call `block_lsd_stable_radixsort(&mut array, 8)` to use it.
 
 - Thiel sort is a LSD radix sort. It is an implementation of [Fast radix sort](https://github.com/AwardOfSky/Fast-Radix-Sort): [Relaxing the Counting Requirement for Least Significant Digit Radix Sorts](https://users.encs.concordia.ca/~sthiel/DS/SEA2015_FastRadix.pdf) (Implementation in C/C++ is not from the article's author)
 

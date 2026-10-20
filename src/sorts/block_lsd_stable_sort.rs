@@ -25,47 +25,65 @@
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-//! Stable block LSD radix sort adapted from Clausecker's `radixsort_permuted.c`.
+//! Stable block LSD radix sort adapted from Robert Clausecker's
+//! BSD-2-Clause C implementation, `radixsort_permuted.c`.
 //! Reference revision: f69e816c3cd79d312cd67aea5b9cf1c338c1b371.
-//! <https://github.com/clausecker/radsort>
+//! <https://github.com/clausecker/radsort/blob/f69e816c3cd79d312cd67aea5b9cf1c338c1b371/radixsort_permuted.c>
 //! <https://arxiv.org/abs/2607.05302>
 
 use super::super::{RadixKey, Radixable};
 use super::utils::{compute_max_level, get_full_histograms, Params};
 use std::{marker::PhantomData, mem::MaybeUninit, ptr};
 
-/// Sort an array stably by its converted radix key using block LSD radix sort.
-/// Equal converted keys retain their incoming order.
+/// # Block LSD stable sort
 ///
-/// `radix` is the number of bits per digit (1 through 8); `block_size` is
-/// the number of elements per block and must be positive. For example, 8 and
-/// 512 match the parameters of the original C implementation. All key bits
-/// are sorted using the same key conversion as the other radix sorts. Constant
-/// digits are skipped; an array of identical converted keys needs no scratch.
+/// Sort by converted radix key, preserving the order of equal keys.
+/// `radix` is the number of bits per digit (1..=8). The block size is chosen
+/// from the input length and element size; 8 bits per digit is recommended.
 ///
-/// This is a single-threaded sort. It uses `2 * 2^radix * block_size` elements
-/// of scratch storage and nine bytes per block (including scratch blocks),
-/// plus O(2^radix) bookkeeping. A full scatter buffer is used only when its
-/// total requested heap fits in the block scratch budget. Arrays up to 128
-/// elements use stable converted-key comparison sorting. With fixed
-/// radix, choosing block_size proportional to sqrt(n) gives O(sqrt(n)) extra
-/// space; a fixed block size gives O(n / block_size) metadata instead.
+/// For n elements of s bytes and R = 2^radix buckets, the block size in elements
+/// is `max(1, ceil(4 * sqrt(9*n / (2*R*s))), floor(1024/s))`. This balances the
+/// block scratch and descriptor storage with an approximately 1 KiB block
+/// floor. The coefficient is tuned for radix 8, not proven optimal.
+///
+/// This single-threaded sort uses O(sqrt(n)) auxiliary space for fixed radix
+/// and record size. Small inputs use stable comparison
+/// sorting; constant digits are skipped. A full scatter buffer is used only
+/// when its total requested heap fits within the block scratch budget.
 ///
 /// # Panics
 ///
-/// Panics if radix is outside 1..=8, block_size is zero, or the required block
-/// indices or allocation sizes cannot be represented. As with the other radix
-/// sorts, custom key extraction must produce a bucket within the digit range.
+/// Panics on invalid parameters or unrepresentable allocation sizes or block
+/// indices. Custom key extraction must produce a bucket within the digit range.
 ///
 /// # Example
 ///
 /// ```
 /// use voracious_radix_sort::block_lsd_stable_radixsort;
 /// let mut arr = [42u32, 7, 42, 0, u32::MAX];
-/// block_lsd_stable_radixsort(&mut arr, 8, 512);
+/// block_lsd_stable_radixsort(&mut arr, 8);
 /// assert_eq!(arr, [0, 7, 42, 42, u32::MAX]);
 /// ```
-pub fn block_lsd_stable_radixsort<T, K>(
+pub fn block_lsd_stable_radixsort<T, K>(arr: &mut [T], radix: usize)
+where
+    T: Radixable<K>,
+    K: RadixKey,
+{
+    assert!((1..=8).contains(&radix), "radix must be in 1..=8");
+    let record_bytes = std::mem::size_of::<T>();
+    if arr.len() < 2 || record_bytes == 0 {
+        return;
+    }
+    let range = 1usize << radix;
+    // Convert before multiplying so the policy cannot overflow on large slices.
+    let balanced = 4.0
+        * (9.0 * arr.len() as f64 / (2.0 * range as f64 * record_bytes as f64))
+            .sqrt();
+    let block_size = (balanced.ceil() as usize).max(1024 / record_bytes).max(1);
+    block_lsd_stable_radixsort_with_block_size(arr, radix, block_size);
+}
+
+fn block_lsd_stable_radixsort_with_block_size<T, K>(
     arr: &mut [T],
     radix: usize,
     block_size: usize,
@@ -106,9 +124,9 @@ pub fn block_lsd_stable_radixsort<T, K>(
         };
     let descending = first_different < first_key;
     let (ordered, has_equal_keys) = if descending {
-        monotone::<T, K, true>(arr)
+        check_order::<T, K, true>(arr)
     } else {
-        monotone::<T, K, false>(arr)
+        check_order::<T, K, false>(arr)
     };
     if ordered && !descending {
         return;
@@ -138,15 +156,32 @@ pub fn block_lsd_stable_radixsort<T, K>(
     // BitXor bound to RadixKey, and skips constant digits without histograms.
     let mut union = dummy.into_key_type();
     let mut intersection = union;
-    for item in &arr[1..] {
+    let bits = dummy.type_size();
+    let zero = dummy.default_key();
+    let mut full_mask = zero;
+    // Build the complete key mask in bytes, including keys wider than usize.
+    for shift in (0..bits).step_by(8) {
+        full_mask |= dummy.default_mask(8.min(bits - shift))
+            << dummy.usize_to_keytype(shift);
+    }
+    // Check a bounded prefix first. Saturation proves the remaining keys cannot
+    // change a digit; otherwise keep one uninterrupted, vectorizable scan.
+    let boundary = arr.len().min(1025);
+    for item in &arr[1..boundary] {
         let key = item.into_key_type();
         union |= key;
         intersection = intersection & key;
     }
+    if union != full_mask || intersection != zero {
+        for item in &arr[boundary..] {
+            let key = item.into_key_type();
+            union |= key;
+            intersection = intersection & key;
+        }
+    }
     if union == intersection {
         return;
     }
-    let bits = dummy.type_size();
     let mut levels = compute_max_level(bits, 0, radix);
     // Constant high digits cannot affect the result. Trim them before sizing
     // and building the fused histogram, even for a nonzero common prefix.
@@ -163,8 +198,7 @@ pub fn block_lsd_stable_radixsort<T, K>(
         return;
     }
     // The ordinary scatter path is admissible only when its complete requested
-    // heap fits within the block scratch budget. This inequality preserves the
-    // block algorithm's space bound and uses no type or workload tuning table.
+    // heap fits within the block scratch budget, preserving the space bound.
     // get_full_histograms grows its outer Vec geometrically. Reserve the
     // final capacity and a conservative allowance for a realloc's old storage.
     let histogram_bytes = levels
@@ -200,7 +234,7 @@ pub fn block_lsd_stable_radixsort<T, K>(
             sorter.step::<K>(mask, shift);
         }
     }
-    sorter.compact(sorter.radix_range);
+    sorter.compact();
 }
 
 fn first_different_key<T: Radixable<K>, K: RadixKey>(
@@ -210,8 +244,8 @@ fn first_different_key<T: Radixable<K>, K: RadixKey>(
     let mut chunks = arr.chunks_exact(4);
     for chunk in &mut chunks {
         let mut equal = true;
-        for offset in 0..4 {
-            equal &= chunk[offset].into_key_type() == first;
+        for item in chunk {
+            equal &= item.into_key_type() == first;
         }
         if !equal {
             return chunk
@@ -228,8 +262,9 @@ fn first_different_key<T: Radixable<K>, K: RadixKey>(
 }
 
 // Check independent adjacent pairs in fixed groups. This avoids a serial
-// previous-key dependency, and needs equality tracking only for descending runs.
-fn monotone<T: Radixable<K>, K: RadixKey, const DESCENDING: bool>(
+// previous-key dependency, and needs equality tracking only for
+// descending runs.
+fn check_order<T: Radixable<K>, K: RadixKey, const DESCENDING: bool>(
     arr: &[T],
 ) -> (bool, bool) {
     let pairs = arr.len() - 1;
@@ -320,10 +355,8 @@ fn bounded_scatter<T: Radixable<K>, K: RadixKey>(
         };
         let mut chunks = source.chunks_exact(4);
         for chunk in &mut chunks {
-            // The fixed range lets the compiler expand this small loop while
-            // keeping one expression for checked bucket/cursor handling.
-            for offset in 0..4 {
-                write(&chunk[offset]);
+            for value in chunk {
+                write(value);
             }
         }
         for value in chunks.remainder() {
@@ -348,11 +381,13 @@ struct Partial {
     index: usize,
     length: usize,
 }
+
 #[derive(Clone, Copy)]
 struct Bucket<T> {
     next: *mut T,
     end: *mut T,
 }
+
 struct Sorter<'a, T> {
     block_size: usize,
     radix_range: usize,
@@ -368,6 +403,7 @@ struct Sorter<'a, T> {
     partials: Vec<Partial>,
     fill: usize,
 }
+
 impl<'a, T: Copy> Sorter<'a, T> {
     fn new(
         records: &'a mut [T],
@@ -428,11 +464,13 @@ impl<'a, T: Copy> Sorter<'a, T> {
             fill,
         }
     }
-    fn block(&mut self, physical: usize) -> *mut T {
+
+    fn block_ptr(&mut self, physical: usize) -> *mut T {
         assert!(physical < self.perm.len());
-        // SAFETY: physical IDs below scratch_blocks identify full scratch blocks.
-        // Other IDs identify exactly floor(n / block_size) full input blocks.
-        // Vec allocations are never resized while these pointers are in use.
+        // SAFETY: physical IDs below scratch_blocks identify full scratch
+        // blocks. Other IDs identify exactly floor(n / block_size) full input
+        // blocks. Vec allocations are never resized while these pointers are
+        // in use.
         unsafe {
             if physical < self.scratch_blocks {
                 self.scratch_base.add(physical * self.block_size)
@@ -442,7 +480,8 @@ impl<'a, T: Copy> Sorter<'a, T> {
             }
         }
     }
-    fn length(&self, logical: usize, partial: &mut usize) -> usize {
+
+    fn next_block_len(&self, logical: usize, partial: &mut usize) -> usize {
         if *partial < self.partials.len()
             && self.partials[*partial].index == logical
         {
@@ -453,6 +492,7 @@ impl<'a, T: Copy> Sorter<'a, T> {
             self.block_size
         }
     }
+
     #[cfg(debug_assertions)]
     fn validate(&self) {
         let mut seen = vec![false; self.perm.len()];
@@ -467,10 +507,11 @@ impl<'a, T: Copy> Sorter<'a, T> {
             && p.length < self.block_size));
         let mut partial = 0;
         let total: usize = (self.radix_range..self.fill)
-            .map(|i| self.length(i, &mut partial))
+            .map(|i| self.next_block_len(i, &mut partial))
             .sum();
         assert_eq!(total, self.length);
     }
+
     fn step<K: RadixKey>(
         &mut self,
         mask: <<T as Radixable<K>>::Key as RadixKey>::Key,
@@ -485,44 +526,13 @@ impl<'a, T: Copy> Sorter<'a, T> {
             ];
         let mut counts = vec![1_usize; self.radix_range];
         for (i, bucket) in buckets.iter_mut().enumerate() {
-            let out = self.block(self.perm[i] as usize);
-            // SAFETY: block() returns storage for block_size elements.
+            let out = self.block_ptr(self.perm[i] as usize);
+            // SAFETY: block_ptr() returns storage for block_size elements.
             *bucket =
                 Bucket { next: out, end: unsafe { out.add(self.block_size) } };
             self.usage[i] = i as u8;
         }
-        // Constant byte shifts avoid double-word variable shifts for wide keys.
-        // Other digit widths retain the generic path.
-        let output = match shift {
-            0 => self.scatter::<K, 0>(mask, shift, &mut buckets, &mut counts),
-            8 => self.scatter::<K, 8>(mask, shift, &mut buckets, &mut counts),
-            16 => self.scatter::<K, 16>(mask, shift, &mut buckets, &mut counts),
-            24 => self.scatter::<K, 24>(mask, shift, &mut buckets, &mut counts),
-            32 => self.scatter::<K, 32>(mask, shift, &mut buckets, &mut counts),
-            40 => self.scatter::<K, 40>(mask, shift, &mut buckets, &mut counts),
-            48 => self.scatter::<K, 48>(mask, shift, &mut buckets, &mut counts),
-            56 => self.scatter::<K, 56>(mask, shift, &mut buckets, &mut counts),
-            64 => self.scatter::<K, 64>(mask, shift, &mut buckets, &mut counts),
-            72 => self.scatter::<K, 72>(mask, shift, &mut buckets, &mut counts),
-            80 => self.scatter::<K, 80>(mask, shift, &mut buckets, &mut counts),
-            88 => self.scatter::<K, 88>(mask, shift, &mut buckets, &mut counts),
-            96 => self.scatter::<K, 96>(mask, shift, &mut buckets, &mut counts),
-            104 => {
-                self.scatter::<K, 104>(mask, shift, &mut buckets, &mut counts)
-            },
-            112 => {
-                self.scatter::<K, 112>(mask, shift, &mut buckets, &mut counts)
-            },
-            120 => {
-                self.scatter::<K, 120>(mask, shift, &mut buckets, &mut counts)
-            },
-            _ => self.scatter::<K, { usize::MAX }>(
-                mask,
-                shift,
-                &mut buckets,
-                &mut counts,
-            ),
-        };
+        let output = self.scatter::<K>(mask, shift, &mut buckets, &mut counts);
         self.fill = output;
         let mut starts = vec![self.radix_range; self.radix_range];
         for b in 1..self.radix_range {
@@ -533,7 +543,7 @@ impl<'a, T: Copy> Sorter<'a, T> {
             let j = starts[b];
             starts[b] += 1;
             self.perm2[j] = self.perm[i];
-            let base = self.block(self.perm[i] as usize);
+            let base = self.block_ptr(self.perm[i] as usize);
             // SAFETY: next/end belong to the same block-sized allocation.
             if unsafe { base.add(self.block_size) } == buckets[b].end {
                 self.partials[b] = Partial {
@@ -555,7 +565,8 @@ impl<'a, T: Copy> Sorter<'a, T> {
         #[cfg(debug_assertions)]
         self.validate();
     }
-    fn scatter<K: RadixKey, const SHIFT: usize>(
+
+    fn scatter<K: RadixKey>(
         &mut self,
         mask: <<T as Radixable<K>>::Key as RadixKey>::Key,
         shift: usize,
@@ -568,16 +579,14 @@ impl<'a, T: Copy> Sorter<'a, T> {
         let mut output = self.radix_range;
         let mut partial = 0;
         for input in self.radix_range..self.fill {
-            let source = self.block(self.perm[input] as usize);
-            let length = self.length(input, &mut partial);
-            for j in 0..length {
-                // SAFETY: source is a valid block, length <= block_size. The stable
-                // logical input traversal consumes each element exactly once.
-                let value = unsafe { source.add(j).read() };
-                let b = value.extract(
-                    mask,
-                    if SHIFT == usize::MAX { shift } else { SHIFT },
-                );
+            let source = self.block_ptr(self.perm[input] as usize);
+            let length = self.next_block_len(input, &mut partial);
+            let mut write = |offset: usize| {
+                // SAFETY: the grouped and remainder loops visit exactly the
+                // initialized prefix. Recycling cannot overwrite an
+                // unread cell.
+                let value = unsafe { source.add(offset).read() };
+                let b = value.extract(mask, shift);
                 // SAFETY: next points to an unused cell in the output block.
                 // The bucket index is bounds-checked before the pointer write.
                 // An output block is recycled only after its input is consumed:
@@ -591,13 +600,13 @@ impl<'a, T: Copy> Sorter<'a, T> {
                 let next = bucket.next;
                 let end = bucket.end;
                 let next = unsafe {
-                    ptr::copy(source.add(j), next, 1);
+                    ptr::copy(source.add(offset), next, 1);
                     next.add(1)
                 };
                 bucket.next = next;
                 if next == end {
                     debug_assert!(output <= input);
-                    let out = self.block(self.perm[output] as usize);
+                    let out = self.block_ptr(self.perm[output] as usize);
                     *bucket = Bucket {
                         next: out,
                         end: unsafe { out.add(self.block_size) },
@@ -606,28 +615,44 @@ impl<'a, T: Copy> Sorter<'a, T> {
                     counts[b] += 1;
                     output += 1;
                 }
+            };
+            // Bound expansion by copy volume: at most four records and four
+            // machine words. The group size is constant after monomorphization.
+            let group = (4 * std::mem::size_of::<usize>()
+                / std::mem::size_of::<T>().max(1))
+            .clamp(1, 4);
+            let complete = length - length % group;
+            for start in (0..complete).step_by(group) {
+                for offset in 0..group {
+                    write(start + offset);
+                }
+            }
+            for offset in complete..length {
+                write(offset);
             }
         }
         output
     }
-    fn compact(&mut self, head_start: usize) {
+
+    fn compact(&mut self) {
         for i in 0..self.perm.len() {
             self.perm2[self.perm[i] as usize] = i as u32;
         }
         let mut start = 0;
         let mut partial = 0;
-        let mut free_logical = if head_start == 0 { self.fill } else { 0 };
+        let mut free_logical = 0;
         let mut free_physical = self.perm[free_logical] as usize;
         for destination in self.scratch_blocks..self.perm.len() {
-            let input = destination - self.scratch_blocks + head_start;
+            let input = destination - self.radix_range;
             let mut output = self.perm2[destination] as usize;
             let source = self.perm[input] as usize;
             if output > input && output < self.fill {
                 debug_assert!(
-                    free_logical < head_start || free_logical >= self.fill
+                    free_logical < self.radix_range
+                        || free_logical >= self.fill
                 );
-                let from = self.block(destination);
-                let to = self.block(free_physical);
+                let from = self.block_ptr(destination);
+                let to = self.block_ptr(free_physical);
                 // SAFETY: both physical IDs are valid full blocks. Free block
                 // receives live output which would otherwise be overwritten.
                 // ptr::copy preserves uninitialized padding without reading it
@@ -642,13 +667,14 @@ impl<'a, T: Copy> Sorter<'a, T> {
                 free_logical = output;
                 output = self.perm2[destination] as usize;
             }
-            let length = self.length(input, &mut partial);
-            let from = self.block(source);
+            let length = self.next_block_len(input, &mut partial);
+            let from = self.block_ptr(source);
             assert!(start + length <= self.length);
             // Completed partials can only shorten preceding output: start <=
-            // (destination - self.scratch_blocks) * self.block_size, and start + length never exceeds
-            // this destination block's end. Any still-live destination block was
-            // evacuated above; earlier physical destinations are already consumed.
+            // (destination - self.scratch_blocks) * self.block_size, and
+            // start + length never exceeds this destination block's end.
+            // Any still-live destination block was evacuated above; earlier
+            // physical destinations are already consumed.
             // SAFETY: length valid source elements are moved into the next
             // logical output interval. ptr::copy permits overlap as memmove.
             unsafe {
@@ -664,13 +690,11 @@ impl<'a, T: Copy> Sorter<'a, T> {
                 free_logical = output;
             }
         }
-        for input in
-            self.perm.len() - self.scratch_blocks + head_start..self.fill
-        {
+        for input in self.perm.len() - self.radix_range..self.fill {
             let source = self.perm[input] as usize;
             assert!(source < self.scratch_blocks);
-            let length = self.length(input, &mut partial);
-            let from = self.block(source);
+            let length = self.next_block_len(input, &mut partial);
+            let from = self.block_ptr(source);
             assert!(start + length <= self.length);
             unsafe {
                 ptr::copy(from, self.records.add(start), length);
@@ -681,9 +705,5 @@ impl<'a, T: Copy> Sorter<'a, T> {
     }
 }
 
-#[cfg(feature = "voracious_multithread")]
-mod parallel;
-#[cfg(feature = "voracious_multithread")]
-pub use parallel::{
-    block_lsd_stable_mt_radixsort, block_lsd_stable_mt_radixsort_in_pool,
-};
+#[cfg(test)]
+mod tests;

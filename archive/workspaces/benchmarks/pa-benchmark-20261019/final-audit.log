@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "final_stage": "radix-v16-diagnostic",
+  "candidate_only_rows": 6864,
+  "final_schedule_matches_saved_1045": false,
+  "final_methods": [
+    "pa_radix",
+    "pa_radix"
+  ],
+  "current_frontier_source_matches_frozen": true,
+  "note": "Hash, input/output oracle and resource audit. No algorithms executed."
+}

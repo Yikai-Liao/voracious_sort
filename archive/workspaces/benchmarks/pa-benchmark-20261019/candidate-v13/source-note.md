@@ -1,0 +1,1 @@
+Pure radix candidate: translated interval + exact constant-tail terminal proof. Hybrid completion modes and natural merge module removed from this source; all hybrid evidence remains frozen in earlier packages. No added comparison fallback. Existing <=128-record PA stable leaf retained. Root completion budget is n > 512*block records.

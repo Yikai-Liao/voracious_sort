@@ -1,0 +1,56 @@
+[
+  {
+    "kind": "u32",
+    "dist": "uniform",
+    "n": 16384,
+    "group": "preflight"
+  },
+  {
+    "kind": "u64",
+    "dist": "uniform",
+    "n": 16384,
+    "group": "preflight"
+  },
+  {
+    "kind": "u128",
+    "dist": "uniform",
+    "n": 16384,
+    "group": "preflight"
+  },
+  {
+    "kind": "i32",
+    "dist": "uniform",
+    "n": 16384,
+    "group": "preflight"
+  },
+  {
+    "kind": "i64",
+    "dist": "uniform",
+    "n": 16384,
+    "group": "preflight"
+  },
+  {
+    "kind": "f32",
+    "dist": "uniform",
+    "n": 16384,
+    "group": "preflight"
+  },
+  {
+    "kind": "f64",
+    "dist": "uniform",
+    "n": 16384,
+    "group": "preflight"
+  },
+  {
+    "kind": "record32",
+    "dist": "uniform",
+    "n": 16384,
+    "group": "preflight"
+  },
+  {
+    "kind": "record128",
+    "dist": "uniform",
+    "n": 16384,
+    "group": "preflight"
+  }
+]

@@ -1,0 +1,341 @@
+[
+  {
+    "pdf": "figures/algorithm-comparison-1048576.pdf",
+    "pages": 9,
+    "page_metadata": [
+      {
+        "width_mm": 183.00000559488933,
+        "height_mm": 159.99999906751842,
+        "fonts": [
+          [
+            67,
+            "ttf",
+            "Type0",
+            "CMWROC+DejaVuSans",
+            "F1",
+            "Identity-H",
+            0
+          ],
+          [
+            74,
+            "ttf",
+            "Type0",
+            "DQIFZV+DejaVuSans",
+            "F2",
+            "Identity-H",
+            0
+          ]
+        ]
+      },
+      {
+        "width_mm": 183.00000559488933,
+        "height_mm": 159.99999906751842,
+        "fonts": [
+          [
+            67,
+            "ttf",
+            "Type0",
+            "CMWROC+DejaVuSans",
+            "F1",
+            "Identity-H",
+            0
+          ],
+          [
+            74,
+            "ttf",
+            "Type0",
+            "DQIFZV+DejaVuSans",
+            "F2",
+            "Identity-H",
+            0
+          ]
+        ]
+      },
+      {
+        "width_mm": 183.00000559488933,
+        "height_mm": 159.99999906751842,
+        "fonts": [
+          [
+            67,
+            "ttf",
+            "Type0",
+            "CMWROC+DejaVuSans",
+            "F1",
+            "Identity-H",
+            0
+          ],
+          [
+            74,
+            "ttf",
+            "Type0",
+            "DQIFZV+DejaVuSans",
+            "F2",
+            "Identity-H",
+            0
+          ]
+        ]
+      },
+      {
+        "width_mm": 183.00000559488933,
+        "height_mm": 159.99999906751842,
+        "fonts": [
+          [
+            67,
+            "ttf",
+            "Type0",
+            "CMWROC+DejaVuSans",
+            "F1",
+            "Identity-H",
+            0
+          ],
+          [
+            74,
+            "ttf",
+            "Type0",
+            "DQIFZV+DejaVuSans",
+            "F2",
+            "Identity-H",
+            0
+          ]
+        ]
+      },
+      {
+        "width_mm": 183.00000559488933,
+        "height_mm": 159.99999906751842,
+        "fonts": [
+          [
+            67,
+            "ttf",
+            "Type0",
+            "CMWROC+DejaVuSans",
+            "F1",
+            "Identity-H",
+            0
+          ],
+          [
+            74,
+            "ttf",
+            "Type0",
+            "DQIFZV+DejaVuSans",
+            "F2",
+            "Identity-H",
+            0
+          ]
+        ]
+      },
+      {
+        "width_mm": 183.00000559488933,
+        "height_mm": 159.99999906751842,
+        "fonts": [
+          [
+            67,
+            "ttf",
+            "Type0",
+            "CMWROC+DejaVuSans",
+            "F1",
+            "Identity-H",
+            0
+          ],
+          [
+            74,
+            "ttf",
+            "Type0",
+            "DQIFZV+DejaVuSans",
+            "F2",
+            "Identity-H",
+            0
+          ]
+        ]
+      },
+      {
+        "width_mm": 183.00000559488933,
+        "height_mm": 159.99999906751842,
+        "fonts": [
+          [
+            67,
+            "ttf",
+            "Type0",
+            "CMWROC+DejaVuSans",
+            "F1",
+            "Identity-H",
+            0
+          ],
+          [
+            74,
+            "ttf",
+            "Type0",
+            "DQIFZV+DejaVuSans",
+            "F2",
+            "Identity-H",
+            0
+          ]
+        ]
+      },
+      {
+        "width_mm": 183.00000559488933,
+        "height_mm": 159.99999906751842,
+        "fonts": [
+          [
+            67,
+            "ttf",
+            "Type0",
+            "CMWROC+DejaVuSans",
+            "F1",
+            "Identity-H",
+            0
+          ],
+          [
+            74,
+            "ttf",
+            "Type0",
+            "DQIFZV+DejaVuSans",
+            "F2",
+            "Identity-H",
+            0
+          ]
+        ]
+      },
+      {
+        "width_mm": 183.00000559488933,
+        "height_mm": 159.99999906751842,
+        "fonts": [
+          [
+            67,
+            "ttf",
+            "Type0",
+            "CMWROC+DejaVuSans",
+            "F1",
+            "Identity-H",
+            0
+          ],
+          [
+            74,
+            "ttf",
+            "Type0",
+            "DQIFZV+DejaVuSans",
+            "F2",
+            "Identity-H",
+            0
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "pdf": "figures/block-policy-sensitivity.pdf",
+    "pages": 1,
+    "page_metadata": [
+      {
+        "width_mm": 183.00000559488933,
+        "height_mm": 179.99999491373697,
+        "fonts": [
+          [
+            15,
+            "ttf",
+            "Type0",
+            "EUCIJB+DejaVuSans-Bold",
+            "F2",
+            "Identity-H",
+            0
+          ],
+          [
+            22,
+            "ttf",
+            "Type0",
+            "ETVJEL+DejaVuSans",
+            "F1",
+            "Identity-H",
+            0
+          ],
+          [
+            29,
+            "ttf",
+            "Type0",
+            "CPUQYB+DejaVuSans",
+            "F3",
+            "Identity-H",
+            0
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "pdf": "figures/overview.pdf",
+    "pages": 1,
+    "page_metadata": [
+      {
+        "width_mm": 183.00000559488933,
+        "height_mm": 179.99999491373697,
+        "fonts": [
+          [
+            48,
+            "ttf",
+            "Type0",
+            "BHPUCF+DejaVuSans-Bold",
+            "F2",
+            "Identity-H",
+            0
+          ],
+          [
+            55,
+            "ttf",
+            "Type0",
+            "BVLBVA+DejaVuSans",
+            "F1",
+            "Identity-H",
+            0
+          ],
+          [
+            62,
+            "ttf",
+            "Type0",
+            "CPUQYB+DejaVuSans",
+            "F3",
+            "Identity-H",
+            0
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "pdf": "figures/sqrt-policy-scaling.pdf",
+    "pages": 1,
+    "page_metadata": [
+      {
+        "width_mm": 183.00000559488933,
+        "height_mm": 179.99999491373697,
+        "fonts": [
+          [
+            39,
+            "ttf",
+            "Type0",
+            "BHPUCF+DejaVuSans-Bold",
+            "F2",
+            "Identity-H",
+            0
+          ],
+          [
+            46,
+            "ttf",
+            "Type0",
+            "GOYCHD+DejaVuSans",
+            "F1",
+            "Identity-H",
+            0
+          ],
+          [
+            53,
+            "ttf",
+            "Type0",
+            "ERSIFX+DejaVuSans",
+            "F3",
+            "Identity-H",
+            0
+          ]
+        ]
+      }
+    ]
+  }
+]

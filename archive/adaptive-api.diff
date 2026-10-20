@@ -1,0 +1,746 @@
+diff --git a/README.md b/README.md
+index 2fa7bd3..465657e 100644
+--- a/README.md
++++ b/README.md
+@@ -147,7 +147,10 @@ a variable radix (see [article](https://users.encs.concordia.ca/~sthiel/DS/SEA20
+ - Block LSD sort is a fast and memory-efficient stable LSD radix sort. It is adapted from
+ [Radsort](https://github.com/clausecker/radsort), described in
+ [Parallel O(sqrt(n)) Overhead LSD Radix Sort](https://arxiv.org/pdf/2607.05302),
+-and supports a variable radix and block size.
++and supports a variable radix. The block size is selected automatically from the
++input length and element size, using a space-balanced square-root policy with
++an approximately 1 KiB block floor. For fixed radix and element size, auxiliary
++space is O(sqrt(n)). Call `block_lsd_stable_radixsort(&mut array, 8)` to use it.
+ 
+ - Thiel sort is a LSD radix sort. It is an implementation of [Fast radix sort](https://github.com/AwardOfSky/Fast-Radix-Sort): [Relaxing the Counting Requirement for Least Significant Digit Radix Sorts](https://users.encs.concordia.ca/~sthiel/DS/SEA2015_FastRadix.pdf) (Implementation in C/C++ is not from the article's author)
+ 
+diff --git a/src/sorts/block_lsd_stable_sort.rs b/src/sorts/block_lsd_stable_sort.rs
+index a7ea44d..8dec0f5 100644
+--- a/src/sorts/block_lsd_stable_sort.rs
++++ b/src/sorts/block_lsd_stable_sort.rs
+@@ -38,11 +38,16 @@ use std::{marker::PhantomData, mem::MaybeUninit, ptr};
+ /// # Block LSD stable sort
+ ///
+ /// Sort by converted radix key, preserving the order of equal keys.
+-/// `radix` is the number of bits per digit (1..=8); `block_size` is a positive
+-/// number of elements. Values 8 and 512 match the original C implementation.
++/// `radix` is the number of bits per digit (1..=8). The block size is chosen
++/// from the input length and element size; 8 bits per digit is recommended.
+ ///
+-/// This single-threaded sort uses O(block_size + n / block_size) auxiliary
+-/// space for fixed radix and record size. Small inputs use stable comparison
++/// For n elements of s bytes and R = 2^radix buckets, the block size in elements
++/// is `max(1, ceil(4 * sqrt(9*n / (2*R*s))), floor(1024/s))`. This balances the
++/// block scratch and descriptor storage with an approximately 1 KiB block
++/// floor. The coefficient is tuned for radix 8, not proven optimal.
++///
++/// This single-threaded sort uses O(sqrt(n)) auxiliary space for fixed radix
++/// and record size. Small inputs use stable comparison
+ /// sorting; constant digits are skipped. A full scatter buffer is used only
+ /// when its total requested heap fits within the block scratch budget.
+ ///
+@@ -56,10 +61,29 @@ use std::{marker::PhantomData, mem::MaybeUninit, ptr};
+ /// ```
+ /// use voracious_radix_sort::block_lsd_stable_radixsort;
+ /// let mut arr = [42u32, 7, 42, 0, u32::MAX];
+-/// block_lsd_stable_radixsort(&mut arr, 8, 512);
++/// block_lsd_stable_radixsort(&mut arr, 8);
+ /// assert_eq!(arr, [0, 7, 42, 42, u32::MAX]);
+ /// ```
+-pub fn block_lsd_stable_radixsort<T, K>(
++pub fn block_lsd_stable_radixsort<T, K>(arr: &mut [T], radix: usize)
++where
++    T: Radixable<K>,
++    K: RadixKey,
++{
++    assert!((1..=8).contains(&radix), "radix must be in 1..=8");
++    let record_bytes = std::mem::size_of::<T>();
++    if arr.len() < 2 || record_bytes == 0 {
++        return;
++    }
++    let range = 1usize << radix;
++    // Convert before multiplying so the policy cannot overflow on large slices.
++    let balanced = 4.0
++        * (9.0 * arr.len() as f64 / (2.0 * range as f64 * record_bytes as f64))
++            .sqrt();
++    let block_size = (balanced.ceil() as usize).max(1024 / record_bytes).max(1);
++    block_lsd_stable_radixsort_with_block_size(arr, radix, block_size);
++}
++
++fn block_lsd_stable_radixsort_with_block_size<T, K>(
+     arr: &mut [T],
+     radix: usize,
+     block_size: usize,
+@@ -680,3 +704,6 @@ impl<'a, T: Copy> Sorter<'a, T> {
+         assert_eq!(start, self.length);
+     }
+ }
++
++#[cfg(test)]
++mod tests;
+diff --git a/tests/block_lsd.rs b/tests/block_lsd.rs
+index 52cfa39..3bc6734 100644
+--- a/tests/block_lsd.rs
++++ b/tests/block_lsd.rs
+@@ -1,212 +1,114 @@
+-use voracious_radix_sort::{block_lsd_stable_radixsort, RadixKey, Radixable};
+-
+-fn check_keys<T: Radixable<K>, K: RadixKey>(
+-    input: &[T],
+-    radix: usize,
+-    block_size: usize,
+-) {
+-    for n in [input.len(), 515] {
+-        let mut arr: Vec<T> = input.iter().copied().cycle().take(n).collect();
+-        let mut expected = arr.clone();
+-        expected.sort_by_key(|v| v.into_key_type());
+-        block_lsd_stable_radixsort(&mut arr, radix, block_size);
+-        assert!(arr
+-            .iter()
+-            .zip(&expected)
+-            .all(|(a, b)| a.into_key_type() == b.into_key_type()));
+-    }
+-}
++use voracious_radix_sort::{block_lsd_stable_radixsort, Radixable};
+ 
++#[repr(C)]
+ #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
+-struct Record {
+-    key: u128,
++struct Record<const N: usize> {
++    key: u64,
+     position: usize,
++    payload: [u64; N],
+ }
+-impl Radixable<u128> for Record {
+-    type Key = u128;
+-    fn key(&self) -> u128 {
++
++impl<const N: usize> Radixable<u64> for Record<N> {
++    type Key = u64;
++    fn key(&self) -> u64 {
+         self.key
+     }
+ }
+ 
+-fn check_records<T: Radixable<K> + std::fmt::Debug + PartialEq, K: RadixKey>(
+-    input: &[T],
+-    radix: usize,
+-    block_size: usize,
+-) {
+-    let mut arr = input.to_vec();
+-    let mut expected = arr.clone();
+-    expected.sort_by_key(|item| item.into_key_type());
+-    block_lsd_stable_radixsort(&mut arr, radix, block_size);
+-    assert_eq!(arr, expected, "radix={}, block_size={}", radix, block_size);
+-}
+-
+-#[test]
+-fn test_sort_block_lsd_records() {
+-    let mut state = 0x123456789abcdefu128;
+-    for radix in 1..=8 {
+-        for block_size in [1, 2, 3, 7, 31, 512] {
+-            for n in [
+-                0,
+-                1,
+-                2,
+-                block_size - 1,
+-                block_size,
+-                block_size + 1,
+-                2 * block_size,
+-                2 * block_size + 1,
+-                4099,
+-            ] {
+-                for pattern in 0..6 {
+-                    let arr: Vec<_> = (0..n)
+-                        .map(|i| {
+-                            state ^= state << 13;
+-                            state ^= state >> 7;
+-                            state ^= state << 17;
+-                            let key = match pattern {
+-                                0 => state,
+-                                1 => state % 7,
+-                                2 => i as u128,
+-                                3 => ((n - i) / 7) as u128,
+-                                4 => ((i % 17) as u128) << 120,
+-                                _ => u128::MAX,
+-                            };
+-                            Record { key, position: n - i }
+-                        })
+-                        .collect();
+-                    check_records(&arr, radix, block_size);
+-                }
++fn check_records<const N: usize>() {
++    for n in [0, 1, 128, 129, 1025, 16_385] {
++        for pattern in 0..6 {
++            let input: Vec<_> = (0..n)
++                .map(|position| {
++                    let mixed =
++                        (position as u64).wrapping_mul(0x9e3779b97f4a7c15);
++                    let key = match pattern {
++                        0 => mixed,
++                        1 => mixed % 7,
++                        2 => (u64::MAX & !65535) | (mixed & 65535),
++                        3 => ((n - position) / 4) as u64,
++                        4 => 42,
++                        _ => {
++                            if position + 1 == n {
++                                43
++                            } else {
++                                42
++                            }
++                        },
++                    };
++                    Record { key, position, payload: [mixed; N] }
++                })
++                .collect();
++            let mut expected = input.clone();
++            expected.sort_by_key(|item| item.key);
++            for radix in 1..=8 {
++                let mut actual = input.clone();
++                block_lsd_stable_radixsort(&mut actual, radix);
++                assert_eq!(
++                    actual, expected,
++                    "n={}, pattern={}, radix={}",
++                    n, pattern, radix
++                );
+             }
+         }
+     }
+ }
+ 
+ #[test]
+-fn test_sort_block_lsd_varying_bits() {
+-    for pattern in 0..3 {
+-        let mut arr: Vec<_> = (0..2051)
+-            .map(|position| Record {
+-                key: ((position * 31) % 257) as u128,
+-                position,
+-            })
+-            .collect();
+-        match pattern {
+-            0 => arr.iter_mut().for_each(|item| item.key |= u128::MAX << 13),
+-            1 => {
+-                arr[0].key = 0;
+-                arr[1].key = u128::MAX;
+-            },
+-            _ => arr.last_mut().unwrap().key |= 1 << 127,
+-        }
+-        for radix in 1..=8 {
+-            for block_size in [1, 31, 512] {
+-                check_records(&arr, radix, block_size);
+-            }
+-        }
+-    }
++fn test_adaptive_records() {
++    check_records::<2>();
++    check_records::<14>();
+ }
+ 
+ #[test]
+-fn test_sort_block_lsd_key_conversions() {
++fn test_adaptive_integer_keys() {
+     for radix in 1..=8 {
+-        macro_rules! integers {
++        macro_rules! check {
+             ($($t:ty),*) => {$({
+                 let input = [<$t>::MAX, 0, 1, <$t>::MIN, 0, <$t>::MAX, 2];
+-                check_keys(&input, radix, 3);
++                let mut actual: Vec<$t> = input.iter().copied().cycle().take(1025).collect();
++                let mut expected = actual.clone();
++                expected.sort();
++                block_lsd_stable_radixsort(&mut actual, radix);
++                assert_eq!(actual, expected);
+             })*};
+         }
+-        integers!(
+-            u8, u16, u32, u64, u128, usize, i8, i16, i32, i64, i128, isize
+-        );
+-        check_keys(&[true, false, true, false], radix, 1);
+-        check_keys(&['🦀', 'a', '\0', '中', 'a', '\u{10ffff}'], radix, 2);
+-        check_keys(
+-            &[
+-                f32::NEG_INFINITY,
+-                -3.0,
+-                -0.0,
+-                0.0,
+-                2.5,
+-                f32::INFINITY,
+-                f32::from_bits(0x7fc00001),
+-                f32::from_bits(0xffc00002),
+-            ],
+-            radix,
+-            3,
+-        );
+-        check_keys(
+-            &[
+-                f64::NEG_INFINITY,
+-                -3.0,
+-                -0.0,
+-                0.0,
+-                2.5,
+-                f64::INFINITY,
+-                f64::from_bits(0x7ff8000000000001),
+-                f64::from_bits(0xfff8000000000002),
+-            ],
+-            radix,
+-            3,
+-        );
+-    }
+-}
+-
+-#[test]
+-fn test_sort_block_lsd_invalid_parameters() {
+-    for (radix, block_size) in
+-        [(0, 512), (9, 512), (usize::MAX, 512), (8, 0), (8, usize::MAX)]
+-    {
+-        let mut arr = [3u32, 1, 2];
+-        let result =
+-            std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
+-                block_lsd_stable_radixsort(&mut arr, radix, block_size);
+-            }));
+-        assert!(result.is_err());
+-        assert_eq!(arr, [3, 1, 2]);
++        check!(u8, u16, u32, u64, u128, usize, i8, i16, i32, i64, i128, isize);
+     }
+ }
+ 
+-#[cfg(not(feature = "voracious_multithread"))]
+ #[test]
+-fn test_sort_block_lsd_local_records() {
+-    #[derive(Clone, Copy, PartialEq, PartialOrd)]
+-    struct Local<'a> {
+-        key: u32,
+-        payload: &'a std::rc::Rc<()>,
+-    }
+-    impl Radixable<u32> for Local<'_> {
+-        type Key = u32;
+-        fn key(&self) -> u32 {
+-            self.key
++fn test_adaptive_float_keys() {
++    for radix in 1..=8 {
++        macro_rules! check {
++            ($t:ty, $nan:expr) => {{
++                let input = [
++                    <$t>::NEG_INFINITY,
++                    -3.0,
++                    -0.0,
++                    0.0,
++                    2.5,
++                    <$t>::INFINITY,
++                    $nan,
++                ];
++                let mut actual: Vec<$t> =
++                    input.iter().copied().cycle().take(1025).collect();
++                let mut expected = actual.clone();
++                expected.sort_by_key(|item| item.into_key_type());
++                block_lsd_stable_radixsort(&mut actual, radix);
++                assert!(actual
++                    .iter()
++                    .zip(&expected)
++                    .all(|(a, b)| a.to_bits() == b.to_bits()));
++            }};
+         }
+-    }
+-    let payload = std::rc::Rc::new(());
+-    let mut arr = [
+-        Local { key: 3, payload: &payload },
+-        Local { key: 1, payload: &payload },
+-    ];
+-    block_lsd_stable_radixsort(&mut arr, 8, 1);
+-    assert_eq!(arr[0].key, 1);
+-    assert!(std::ptr::eq(arr[0].payload, &payload));
+-}
+-
+-#[test]
+-fn test_sort_block_lsd_block_tails() {
+-    for n in [262_144, 262_145, 400_385] {
+-        let arr: Vec<_> = (0..n)
+-            .map(|i| Record {
+-                // Repeated keys exercise stability while all 256 buckets get
+-                // partial blocks, including exact multiples of the block size.
+-                key: ((i as u128 * 73) % 997) | (((i % 256) as u128) << 120),
+-                position: n - i,
+-            })
+-            .collect();
+-        check_records(&arr, 8, 512);
++        check!(f32, f32::from_bits(0xffc00002));
++        check!(f64, f64::from_bits(0x7ff8000000000001));
+     }
+ }
+ 
+ #[test]
+-fn test_sort_block_lsd_zero_sized_records() {
++fn test_adaptive_zero_sized_records() {
+     #[derive(Clone, Copy, PartialEq, PartialOrd)]
+     struct Empty;
+     impl Radixable<u32> for Empty {
+@@ -215,67 +117,22 @@ fn test_sort_block_lsd_zero_sized_records() {
+             0
+         }
+     }
+-    let mut arr = [Empty; 5];
+-    block_lsd_stable_radixsort(&mut arr, 8, 512);
+-    assert_eq!(arr.len(), 5);
++    let mut actual = [Empty; 1025];
++    block_lsd_stable_radixsort(&mut actual, 8);
+ }
+ 
+ #[test]
+-fn test_sort_block_lsd_invalid_extraction() {
+-    #[derive(Clone, Copy, PartialEq, PartialOrd)]
+-    struct Invalid {
+-        key: u32,
+-        bucket: usize,
+-    }
+-    impl Radixable<u32> for Invalid {
+-        type Key = u32;
+-        fn key(&self) -> u32 {
+-            self.key
+-        }
+-        fn extract(&self, _mask: u32, _shift: usize) -> usize {
+-            self.bucket
+-        }
+-    }
+-    for (bucket, block_size) in [(usize::MAX, 1), (usize::MAX, 512), (0, 512)] {
+-        let mut arr: Vec<_> =
+-            (0..129).map(|i| Invalid { key: (i * 73) % 129, bucket }).collect();
+-        let result =
+-            std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
+-                block_lsd_stable_radixsort(&mut arr, 8, block_size);
+-            }));
+-        assert!(result.is_err());
+-    }
+-}
+-
+-#[test]
+-fn test_sort_block_lsd_scratch_payloads() {
+-    #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
+-    struct NonzeroRecord<'a> {
+-        key: u64,
+-        nonzero: std::num::NonZeroU32,
+-        reference: &'a u64,
+-        payload: bool,
+-        position: usize,
+-    }
+-    impl Radixable<u64> for NonzeroRecord<'_> {
+-        type Key = u64;
+-        fn key(&self) -> u64 {
+-            self.key
+-        }
+-    }
+-    let referent = 17;
+-    let input: Vec<_> = (0..4099)
+-        .map(|position| NonzeroRecord {
+-            key: ((position * 73) % 997) as u64,
+-            nonzero: std::num::NonZeroU32::new(position as u32 + 1).unwrap(),
+-            reference: &referent,
+-            payload: position % 2 == 0,
+-            position,
+-        })
+-        .collect();
+-    for radix in [1, 4, 7, 8] {
+-        for block_size in [1, 3, 31, 512] {
+-            check_records(&input, radix, block_size);
++fn test_adaptive_invalid_radix() {
++    for radix in [0, 9, usize::MAX] {
++        for n in [0, 1, 129] {
++            let mut actual: Vec<u32> = (0..n).rev().collect();
++            let expected = actual.clone();
++            let result =
++                std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
++                    block_lsd_stable_radixsort(&mut actual, radix);
++                }));
++            assert!(result.is_err());
++            assert_eq!(actual, expected);
+         }
+     }
+ }
+diff --git a/src/sorts/block_lsd_stable_sort/tests.rs b/src/sorts/block_lsd_stable_sort/tests.rs
+new file mode 100644
+index 0000000..b25be25
+--- /dev/null
++++ b/src/sorts/block_lsd_stable_sort/tests.rs
+@@ -0,0 +1,282 @@
++use super::block_lsd_stable_radixsort_with_block_size as sort_with_block_size;
++use crate::{RadixKey, Radixable};
++
++fn check_keys<T: Radixable<K>, K: RadixKey>(
++    input: &[T],
++    radix: usize,
++    block_size: usize,
++) {
++    for n in [input.len(), 515] {
++        let mut arr: Vec<T> = input.iter().copied().cycle().take(n).collect();
++        let mut expected = arr.clone();
++        expected.sort_by_key(|v| v.into_key_type());
++        sort_with_block_size(&mut arr, radix, block_size);
++        assert!(arr
++            .iter()
++            .zip(&expected)
++            .all(|(a, b)| a.into_key_type() == b.into_key_type()));
++    }
++}
++
++#[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
++struct Record {
++    key: u128,
++    position: usize,
++}
++impl Radixable<u128> for Record {
++    type Key = u128;
++    fn key(&self) -> u128 {
++        self.key
++    }
++}
++
++fn check_records<T: Radixable<K> + std::fmt::Debug + PartialEq, K: RadixKey>(
++    input: &[T],
++    radix: usize,
++    block_size: usize,
++) {
++    let mut arr = input.to_vec();
++    let mut expected = arr.clone();
++    expected.sort_by_key(|item| item.into_key_type());
++    sort_with_block_size(&mut arr, radix, block_size);
++    assert_eq!(arr, expected, "radix={}, block_size={}", radix, block_size);
++}
++
++#[test]
++fn test_sort_block_lsd_records() {
++    let mut state = 0x123456789abcdefu128;
++    for radix in 1..=8 {
++        for block_size in [1, 2, 3, 7, 31, 512] {
++            for n in [
++                0,
++                1,
++                2,
++                block_size - 1,
++                block_size,
++                block_size + 1,
++                2 * block_size,
++                2 * block_size + 1,
++                4099,
++            ] {
++                for pattern in 0..6 {
++                    let arr: Vec<_> = (0..n)
++                        .map(|i| {
++                            state ^= state << 13;
++                            state ^= state >> 7;
++                            state ^= state << 17;
++                            let key = match pattern {
++                                0 => state,
++                                1 => state % 7,
++                                2 => i as u128,
++                                3 => ((n - i) / 7) as u128,
++                                4 => ((i % 17) as u128) << 120,
++                                _ => u128::MAX,
++                            };
++                            Record { key, position: n - i }
++                        })
++                        .collect();
++                    check_records(&arr, radix, block_size);
++                }
++            }
++        }
++    }
++}
++
++#[test]
++fn test_sort_block_lsd_varying_bits() {
++    for pattern in 0..3 {
++        let mut arr: Vec<_> = (0..2051)
++            .map(|position| Record {
++                key: ((position * 31) % 257) as u128,
++                position,
++            })
++            .collect();
++        match pattern {
++            0 => arr.iter_mut().for_each(|item| item.key |= u128::MAX << 13),
++            1 => {
++                arr[0].key = 0;
++                arr[1].key = u128::MAX;
++            },
++            _ => arr.last_mut().unwrap().key |= 1 << 127,
++        }
++        for radix in 1..=8 {
++            for block_size in [1, 31, 512] {
++                check_records(&arr, radix, block_size);
++            }
++        }
++    }
++}
++
++#[test]
++fn test_sort_block_lsd_key_conversions() {
++    for radix in 1..=8 {
++        macro_rules! integers {
++            ($($t:ty),*) => {$({
++                let input = [<$t>::MAX, 0, 1, <$t>::MIN, 0, <$t>::MAX, 2];
++                check_keys(&input, radix, 3);
++            })*};
++        }
++        integers!(
++            u8, u16, u32, u64, u128, usize, i8, i16, i32, i64, i128, isize
++        );
++        check_keys(&[true, false, true, false], radix, 1);
++        check_keys(&['🦀', 'a', '\0', '中', 'a', '\u{10ffff}'], radix, 2);
++        check_keys(
++            &[
++                f32::NEG_INFINITY,
++                -3.0,
++                -0.0,
++                0.0,
++                2.5,
++                f32::INFINITY,
++                f32::from_bits(0x7fc00001),
++                f32::from_bits(0xffc00002),
++            ],
++            radix,
++            3,
++        );
++        check_keys(
++            &[
++                f64::NEG_INFINITY,
++                -3.0,
++                -0.0,
++                0.0,
++                2.5,
++                f64::INFINITY,
++                f64::from_bits(0x7ff8000000000001),
++                f64::from_bits(0xfff8000000000002),
++            ],
++            radix,
++            3,
++        );
++    }
++}
++
++#[test]
++fn test_sort_block_lsd_invalid_parameters() {
++    for (radix, block_size) in
++        [(0, 512), (9, 512), (usize::MAX, 512), (8, 0), (8, usize::MAX)]
++    {
++        let mut arr = [3u32, 1, 2];
++        let result =
++            std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
++                sort_with_block_size(&mut arr, radix, block_size);
++            }));
++        assert!(result.is_err());
++        assert_eq!(arr, [3, 1, 2]);
++    }
++}
++
++#[cfg(not(feature = "voracious_multithread"))]
++#[test]
++fn test_sort_block_lsd_local_records() {
++    #[derive(Clone, Copy, PartialEq, PartialOrd)]
++    struct Local<'a> {
++        key: u32,
++        payload: &'a std::rc::Rc<()>,
++    }
++    impl Radixable<u32> for Local<'_> {
++        type Key = u32;
++        fn key(&self) -> u32 {
++            self.key
++        }
++    }
++    let payload = std::rc::Rc::new(());
++    let mut arr = [
++        Local { key: 3, payload: &payload },
++        Local { key: 1, payload: &payload },
++    ];
++    sort_with_block_size(&mut arr, 8, 1);
++    assert_eq!(arr[0].key, 1);
++    assert!(std::ptr::eq(arr[0].payload, &payload));
++}
++
++#[test]
++fn test_sort_block_lsd_block_tails() {
++    for n in [262_144, 262_145, 400_385] {
++        let arr: Vec<_> = (0..n)
++            .map(|i| Record {
++                // Repeated keys exercise stability while all 256 buckets get
++                // partial blocks, including exact multiples of the block size.
++                key: ((i as u128 * 73) % 997) | (((i % 256) as u128) << 120),
++                position: n - i,
++            })
++            .collect();
++        check_records(&arr, 8, 512);
++    }
++}
++
++#[test]
++fn test_sort_block_lsd_zero_sized_records() {
++    #[derive(Clone, Copy, PartialEq, PartialOrd)]
++    struct Empty;
++    impl Radixable<u32> for Empty {
++        type Key = u32;
++        fn key(&self) -> u32 {
++            0
++        }
++    }
++    let mut arr = [Empty; 5];
++    sort_with_block_size(&mut arr, 8, 512);
++    assert_eq!(arr.len(), 5);
++}
++
++#[test]
++fn test_sort_block_lsd_invalid_extraction() {
++    #[derive(Clone, Copy, PartialEq, PartialOrd)]
++    struct Invalid {
++        key: u32,
++        bucket: usize,
++    }
++    impl Radixable<u32> for Invalid {
++        type Key = u32;
++        fn key(&self) -> u32 {
++            self.key
++        }
++        fn extract(&self, _mask: u32, _shift: usize) -> usize {
++            self.bucket
++        }
++    }
++    for (bucket, block_size) in [(usize::MAX, 1), (usize::MAX, 512), (0, 512)] {
++        let mut arr: Vec<_> =
++            (0..129).map(|i| Invalid { key: (i * 73) % 129, bucket }).collect();
++        let result =
++            std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
++                sort_with_block_size(&mut arr, 8, block_size);
++            }));
++        assert!(result.is_err());
++    }
++}
++
++#[test]
++fn test_sort_block_lsd_scratch_payloads() {
++    #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
++    struct NonzeroRecord<'a> {
++        key: u64,
++        nonzero: std::num::NonZeroU32,
++        reference: &'a u64,
++        payload: bool,
++        position: usize,
++    }
++    impl Radixable<u64> for NonzeroRecord<'_> {
++        type Key = u64;
++        fn key(&self) -> u64 {
++            self.key
++        }
++    }
++    let referent = 17;
++    let input: Vec<_> = (0..4099)
++        .map(|position| NonzeroRecord {
++            key: ((position * 73) % 997) as u64,
++            nonzero: std::num::NonZeroU32::new(position as u32 + 1).unwrap(),
++            reference: &referent,
++            payload: position % 2 == 0,
++            position,
++        })
++        .collect();
++    for radix in [1, 4, 7, 8] {
++        for block_size in [1, 3, 31, 512] {
++            check_records(&input, radix, block_size);
++        }
++    }
++}

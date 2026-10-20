@@ -1,0 +1,18 @@
+{
+  "cases": 1012,
+  "input_digests_match": true,
+  "all_keys_ordered": true,
+  "all_fingerprints_preserved": true,
+  "source_sha256": {
+    "benchmarks/block-lsd-pr-20261018/data/timing.csv": "9196ce1f11f4e794fba616210d831406a568d4246491e1828d8aec5d19ccaf28",
+    "benchmarks/block-lsd-pr-20261018/data/memory.csv": "6f7e00cac0a200090ff1f7ee2462cf455d5637a108c440a81211db7ab1c5fd67",
+    "benchmarks/block-lsd-pr-20261018-story/data/validated-policy-conditions.csv": "5fc847dfc41631b9b945fa1641c0e62acc87cde2a1bcd0c824364419caebaf5d",
+    "benchmarks/block-lsd-pr-20261018-story/data/original-timing.csv": "9196ce1f11f4e794fba616210d831406a568d4246491e1828d8aec5d19ccaf28",
+    "benchmarks/block-lsd-pr-20261018-story/data/supplemental-sqrt-timing.csv": "7968a9c4a4ba35060910d3c5e8c4aae22db4e6283d46679c6bacb10f5a7d55fe",
+    "benchmarks/block-lsd-pr-20261018-story/validation/data/time.jsonl": "9d104fdac0416df28658047ddf17d942933b5d7a07501cd81740d4e274cba8a7",
+    "benchmarks/block-lsd-pr-20261018-story/missing-only/data/time.jsonl": "af90b6204c3330b026bcaaf64ad73d11f776cd9467f6cccb2addbedfbfe989e3"
+  },
+  "metric": "comparator median ns / candidate median ns; descriptive, no confidence interval",
+  "min_speedup": 0.1549772913559345,
+  "max_speedup": 47.256805336088824
+}

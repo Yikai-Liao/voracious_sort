@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="518.740157480315pt" height="793.7007874015748pt" viewBox="0 0 518.740157480315 793.7007874015748">
+<rect width="100%" height="100%" fill="white"/>
+<rect x="103.748" y="99.213" width="116.269" height="180.074" fill="none" stroke="#2c7bb6" stroke-width="1.2"/>
+<text x="105.748" y="109.213" font-family="Arial, sans-serif" font-size="8" fill="#2c7bb6">a</text>
+<rect x="247.922" y="99.213" width="116.269" height="180.074" fill="none" stroke="#2c7bb6" stroke-width="1.2"/>
+<text x="249.922" y="109.213" font-family="Arial, sans-serif" font-size="8" fill="#2c7bb6">b</text>
+<rect x="392.096" y="99.213" width="116.269" height="180.074" fill="none" stroke="#2c7bb6" stroke-width="1.2"/>
+<text x="394.096" y="109.213" font-family="Arial, sans-serif" font-size="8" fill="#2c7bb6">c</text>
+<rect x="103.748" y="320.703" width="116.269" height="180.074" fill="none" stroke="#2c7bb6" stroke-width="1.2"/>
+<text x="105.748" y="330.703" font-family="Arial, sans-serif" font-size="8" fill="#2c7bb6">d</text>
+<rect x="247.922" y="320.703" width="116.269" height="180.074" fill="none" stroke="#2c7bb6" stroke-width="1.2"/>
+<text x="249.922" y="330.703" font-family="Arial, sans-serif" font-size="8" fill="#2c7bb6">e</text>
+<rect x="392.096" y="320.703" width="116.269" height="180.074" fill="none" stroke="#2c7bb6" stroke-width="1.2"/>
+<text x="394.096" y="330.703" font-family="Arial, sans-serif" font-size="8" fill="#2c7bb6">f</text>
+<rect x="103.748" y="542.194" width="116.269" height="180.074" fill="none" stroke="#2c7bb6" stroke-width="1.2"/>
+<text x="105.748" y="552.194" font-family="Arial, sans-serif" font-size="8" fill="#2c7bb6">g</text>
+<rect x="247.922" y="542.194" width="116.269" height="180.074" fill="none" stroke="#2c7bb6" stroke-width="1.2"/>
+<text x="249.922" y="552.194" font-family="Arial, sans-serif" font-size="8" fill="#2c7bb6">h</text>
+<rect x="392.096" y="542.194" width="116.269" height="180.074" fill="none" stroke="#2c7bb6" stroke-width="1.2"/>
+<text x="394.096" y="552.194" font-family="Arial, sans-serif" font-size="8" fill="#2c7bb6">i</text>
+<text x="4" y="788.701" font-family="Arial, sans-serif" font-size="7" fill="#333">PASS: 0 fail, 0 warn</text>
+</svg>

@@ -1,0 +1,30 @@
+[
+  {
+    "table": "benchmarks/block-lsd-pr-20261018/data/timing.csv",
+    "observations": 112170,
+    "sha256": "9196ce1f11f4e794fba616210d831406a568d4246491e1828d8aec5d19ccaf28",
+    "stored": "benchmarks/block-lsd-pr-20261018/data/timing.csv.gz",
+    "gzip": true
+  },
+  {
+    "table": "benchmarks/block-lsd-pr-20261018/data/memory.csv",
+    "observations": 56085,
+    "sha256": "6f7e00cac0a200090ff1f7ee2462cf455d5637a108c440a81211db7ab1c5fd67",
+    "stored": "benchmarks/block-lsd-pr-20261018/data/memory.csv.gz",
+    "gzip": true
+  },
+  {
+    "table": "benchmarks/block-lsd-pr-20261018/data/supplemental-sqrt-timing.csv",
+    "observations": 16350,
+    "sha256": "7968a9c4a4ba35060910d3c5e8c4aae22db4e6283d46679c6bacb10f5a7d55fe",
+    "stored": "benchmarks/block-lsd-pr-20261018/data/supplemental-sqrt-timing.csv.gz",
+    "gzip": true
+  },
+  {
+    "table": "benchmarks/block-lsd-pr-20261018/data/supplemental-sqrt-memory.csv",
+    "observations": 8175,
+    "sha256": "832a693cf95ca40f09502ddef4c2da0ed3b4378b070327ba8a5a240bb46eca4d",
+    "stored": "benchmarks/block-lsd-pr-20261018/data/supplemental-sqrt-memory.csv.gz",
+    "gzip": true
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "kind": "f32",
+    "dist": "uniform",
+    "n": 1048576
+  },
+  {
+    "kind": "u64",
+    "dist": "few_unique",
+    "n": 1048576
+  },
+  {
+    "kind": "f32",
+    "dist": "normal",
+    "n": 1048576
+  },
+  {
+    "kind": "f32",
+    "dist": "uniform",
+    "n": 1024
+  }
+]

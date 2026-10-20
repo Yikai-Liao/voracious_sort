@@ -1,0 +1,12 @@
+{
+  "plot_story.py": "ae9959814cdde16ccafaa2d217d0dbeaf7ef74ca483293bceefa4f908d7f4e46",
+  "data/evaluation-provenance.json": "34241e4877abf156cf5d64b977ecc27f3938a88b0ebd18edca3394c52192270a",
+  "data/comparison-largest-example.csv": "ef4d2da3d7b8e34b1002a607dcb05c574caaed1c8f3fe2d82de682396221d9e2",
+  "data/comparison-forest.csv": "6286b5e575721a192c75954e3aac466de4c9f486b58e900fa9b453bf65c2590b",
+  "data/comparison-excluded.csv": "4e073ee6a22aa498dbaef9741a06e94aeaf758f41e4bce337079a0194a36bd3e",
+  "data/comparison-overall.csv": "2eac42cde11b12185e83abb7bf4bbbd92ff07ac9c54ca839bbe29f33f48c0e35",
+  "data/comparison-memory-counts.csv": "0e5290f81023f9f8b0ca5190a23bfe8f7c5cca614291fe4a517e7bd27474d40e",
+  "data/policy-strata-matrix.csv": "98be5ec557784085253d043d451a178063bdccb96358179b29d93a08bc07b4b9",
+  "data/policy-floor-screen-ranking.csv": "0df5e7bda0d63cc6b32090f7c6809264fb5fbf60d4b602c82f94f4dffdffb5a6",
+  "data/policy-floor-screen-conditions.csv": "bec2016dcd010686362a78836c5f99bd28c480377f864acd8502ffb0b0ffa817"
+}

@@ -1,0 +1,107 @@
+diff --git a/src/sorts/block_lsd_stable_sort.rs b/src/sorts/block_lsd_stable_sort.rs
+index a7ea44d..0d20430 100644
+--- a/src/sorts/block_lsd_stable_sort.rs
++++ b/src/sorts/block_lsd_stable_sort.rs
+@@ -93,17 +93,20 @@ pub fn block_lsd_stable_radixsort<T, K>(
+         return;
+     }
+     let first_key = arr[0].into_key_type();
+-    let first_different =
++    let (equal_prefix, first_different) =
+         match first_different_key::<T, K>(&arr[1..], first_key) {
+             Some(key) => key,
+             None => return,
+         };
+     let descending = first_different < first_key;
+     let (ordered, has_equal_keys) = if descending {
+-        check_order::<T, K, true>(arr)
++        check_order::<T, K, true>(&arr[equal_prefix..])
+     } else {
+-        check_order::<T, K, false>(arr)
++        check_order::<T, K, false>(&arr[equal_prefix..])
+     };
++    // The orientation scan already proved this prefix equal. Recheck only its
++    // last key and the remaining suffix; retain the skipped ties for reversal.
++    let has_equal_keys = has_equal_keys || equal_prefix > 0;
+     if ordered && !descending {
+         return;
+     }
+@@ -216,9 +219,9 @@ pub fn block_lsd_stable_radixsort<T, K>(
+ fn first_different_key<T: Radixable<K>, K: RadixKey>(
+     arr: &[T],
+     first: <<T as Radixable<K>>::Key as RadixKey>::Key,
+-) -> Option<<<T as Radixable<K>>::Key as RadixKey>::Key> {
++) -> Option<(usize, <<T as Radixable<K>>::Key as RadixKey>::Key)> {
+     let mut chunks = arr.chunks_exact(4);
+-    for chunk in &mut chunks {
++    for (index, chunk) in chunks.by_ref().enumerate() {
+         let mut equal = true;
+         for item in chunk {
+             equal &= item.into_key_type() == first;
+@@ -226,15 +229,18 @@ fn first_different_key<T: Radixable<K>, K: RadixKey>(
+         if !equal {
+             return chunk
+                 .iter()
+-                .map(|item| item.into_key_type())
+-                .find(|&key| key != first);
++                .enumerate()
++                .map(|(offset, item)| (index * 4 + offset, item.into_key_type()))
++                .find(|&(_, key)| key != first);
+         }
+     }
+-    chunks
+-        .remainder()
++    let remainder = chunks.remainder();
++    let start = arr.len() - remainder.len();
++    remainder
+         .iter()
+-        .map(|item| item.into_key_type())
+-        .find(|&key| key != first)
++        .enumerate()
++        .map(|(offset, item)| (start + offset, item.into_key_type()))
++        .find(|&(_, key)| key != first)
+ }
+ 
+ // Check independent adjacent pairs in fixed groups. This avoids a serial
+diff --git a/tests/block_lsd.rs b/tests/block_lsd.rs
+index 52cfa39..1cbfe77 100644
+--- a/tests/block_lsd.rs
++++ b/tests/block_lsd.rs
+@@ -41,6 +41,37 @@ fn check_records<T: Radixable<K> + std::fmt::Debug + PartialEq, K: RadixKey>(
+     assert_eq!(arr, expected, "radix={}, block_size={}", radix, block_size);
+ }
+ 
++#[test]
++fn test_sort_block_lsd_equal_prefix_order_checks() {
++    // The first change can fall inside a four-key chunk or its tail. Skipping
++    // the known prefix must still preserve its equal-key payload order when
++    // reversing, and must not skip a later violation of the chosen direction.
++    for first_change in [1, 2, 3, 4, 5, 127, 128, 255, 256, 511, 512] {
++        for pattern in 0..4 {
++            let mut input: Vec<_> = (0..513)
++                .map(|position| Record {
++                    key: if position < first_change {
++                        42
++                    } else if pattern % 2 == 0 {
++                        43
++                    } else {
++                        41
++                    },
++                    position,
++                })
++                .collect();
++            if pattern >= 2 {
++                input.last_mut().unwrap().key = if pattern == 2 { 41 } else { 43 };
++            }
++            for radix in [1, 4, 8] {
++                for block_size in [1, 31, 512] {
++                    check_records(&input, radix, block_size);
++                }
++            }
++        }
++    }
++}
++
+ #[test]
+ fn test_sort_block_lsd_records() {
+     let mut state = 0x123456789abcdefu128;

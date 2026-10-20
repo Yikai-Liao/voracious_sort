@@ -1,0 +1,8 @@
+{
+  "stopped_utc": "2026-10-18T14:41:34Z",
+  "reason": "User corrected unnecessary complete-matrix rerun; retain the completed prefix and fill only missing effective candidate calls.",
+  "completed_conditions": 884,
+  "time_observations": 58266,
+  "memory_stage_started": false,
+  "formal_full_validation_completed": false
+}

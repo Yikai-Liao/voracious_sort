@@ -1,0 +1,65 @@
+[
+  {
+    "kind": "u32",
+    "dist": "uniform",
+    "n": 1024,
+    "group": "preflight",
+    "include_variants": true
+  },
+  {
+    "kind": "u64",
+    "dist": "uniform",
+    "n": 1024,
+    "group": "preflight",
+    "include_variants": true
+  },
+  {
+    "kind": "u128",
+    "dist": "uniform",
+    "n": 1024,
+    "group": "preflight",
+    "include_variants": true
+  },
+  {
+    "kind": "i32",
+    "dist": "uniform",
+    "n": 1024,
+    "group": "preflight",
+    "include_variants": true
+  },
+  {
+    "kind": "i64",
+    "dist": "uniform",
+    "n": 1024,
+    "group": "preflight",
+    "include_variants": true
+  },
+  {
+    "kind": "f32",
+    "dist": "uniform",
+    "n": 1024,
+    "group": "preflight",
+    "include_variants": true
+  },
+  {
+    "kind": "f64",
+    "dist": "uniform",
+    "n": 1024,
+    "group": "preflight",
+    "include_variants": true
+  },
+  {
+    "kind": "record32",
+    "dist": "uniform",
+    "n": 1024,
+    "group": "preflight",
+    "include_variants": true
+  },
+  {
+    "kind": "record128",
+    "dist": "uniform",
+    "n": 1024,
+    "group": "preflight",
+    "include_variants": true
+  }
+]

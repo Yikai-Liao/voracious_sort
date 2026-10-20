@@ -1,0 +1,31 @@
+[package]
+name = "block_msd_research"
+version = "0.0.0"
+edition = "2018"
+publish = false
+[dependencies]
+voracious_radix_sort = { path = "../pr" }
+hakmem = { version = "=0.2.0", default-features = false }
+[profile.release]
+# Keep source locations for profiling without retaining full type/local DWARF
+# in every monomorphized benchmark body and copied evidence executable.
+debug = "line-tables-only"
+# Reuse optimized artifacts while screening changes. Freeze build settings and
+# the resulting ELF separately for final measurements.
+incremental = true
+codegen-units = 16
+
+[features]
+cf_early_scan = []
+simple_stream = []
+terminal_fusion = []
+cf_span_leaf = []
+cf_std_leaf = []
+cf_phases = []
+cf_work = []
+frontier_work = []
+frontier_narrow_screen = []
+
+# Disable hardware admission and keep the original PA route. The dependency's
+# portable primitive is exercised by isolated correctness tests only.
+projection_portable = ["hakmem/portable"]

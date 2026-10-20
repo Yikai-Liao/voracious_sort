@@ -1,0 +1,18 @@
+[package]
+name = "block-lsd-pr-benchmark"
+version = "0.1.0"
+edition = "2021"
+
+[features]
+track-alloc = []
+
+[dependencies]
+voracious_radix_sort = { path = "source/pr" }
+
+block_msd_research = { path = "source/pa" }
+
+[profile.release]
+opt-level = 3
+codegen-units = 1
+lto = "thin"
+debug = 1

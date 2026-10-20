@@ -1,0 +1,10 @@
+{
+  "wall_seconds": 354.92540287971497,
+  "vmstat_end": {
+    "pswpin": 315982,
+    "pswpout": 2052835,
+    "pgmajfault": 574243,
+    "oom_kill": 0
+  },
+  "observations": 1962
+}

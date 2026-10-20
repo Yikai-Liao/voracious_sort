@@ -1,0 +1,7 @@
+kind,dist,n,record_bytes
+u64,uniform,131072,8
+u64,uniform,250000,8
+u64,uniform,524288,8
+u64,uniform,2097152,8
+u64,uniform,8388608,8
+u64,uniform,16777216,8
