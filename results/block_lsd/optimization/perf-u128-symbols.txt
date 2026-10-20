@@ -1,0 +1,17 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 1K of event 'cycles:u'
+# Event count (approx.): 8243848933
+#
+# Overhead  Symbol                                                                                               IPC   [IPC Coverage]
+# ........  ...................................................................................................  ....................
+#
+    94.05%  [.] block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>  -      -            
+
+
+#
+# (Tip: Use parent filter to see specific call path: perf report -p <regex>)
+#

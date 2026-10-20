@@ -1,0 +1,1382 @@
+ Percent |	Source code & Disassembly of block_lsd_bench for cycles:u (2265 samples, percent: local period)
+---------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3      Disassembly of section .text:
+         :
+         : 5      000000000027a350 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>>:
+    0.00 :   27a350: push   %rbp
+    0.00 :   27a351: push   %r15
+    0.00 :   27a353: push   %r14
+    0.00 :   27a355: push   %r13
+    0.00 :   27a357: push   %r12
+    0.00 :   27a359: push   %rbx
+    0.00 :   27a35a: sub    $0x188,%rsp
+    0.00 :   27a361: lea    -0x1(%rdx),%rax
+    0.00 :   27a365: mov    %rsi,0x8(%rsp)
+    0.00 :   27a36a: mov    %rdi,0x10(%rsp)
+    0.00 :   27a36f: cmp    $0x8,%rax
+    0.00 :   27a373: jae    27b7b1 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x1461>
+    0.00 :   27a379: mov    %rcx,%r10
+    0.00 :   27a37c: test   %rcx,%rcx
+    0.00 :   27a37f: je     27b7ca <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x147a>
+    0.00 :   27a385: cmpq   $0x2,0x8(%rsp)
+    0.00 :   27a38b: jae    27a3a2 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x52>
+    0.00 :   27a38d: add    $0x188,%rsp
+    0.00 :   27a394: pop    %rbx
+    0.00 :   27a395: pop    %r12
+    0.00 :   27a397: pop    %r13
+    0.00 :   27a399: pop    %r14
+    0.00 :   27a39b: pop    %r15
+    0.00 :   27a39d: pop    %rbp
+    0.00 :   27a39e: vzeroupper
+    0.00 :   27a3a1: ret
+    0.00 :   27a3a2: mov    $0x2,%eax
+    0.00 :   27a3a7: mov    %rdx,%r8
+    0.00 :   27a3aa: shlx   %rdx,%rax,%rax
+    0.00 :   27a3af: mul    %r10
+    0.00 :   27a3b2: jo     27b7e3 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x1493>
+    0.00 :   27a3b8: mov    %rax,%rcx
+    0.00 :   27a3bb: shr    $0x3b,%rcx
+    0.00 :   27a3bf: jne    27b7fc <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x14ac>
+    0.00 :   27a3c5: shl    $0x5,%rax
+    0.00 :   27a3c9: js     27b815 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x14c5>
+    0.00 :   27a3cf: cmpq   $0x81,0x8(%rsp)
+    0.00 :   27a3d8: jae    27a59d <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x24d>
+    0.00 :   27a3de: cmpq   $0x15,0x8(%rsp)
+    0.00 :   27a3e4: lea    0x37(%rsp),%rax
+    0.00 :   27a3e9: mov    %rax,0x68(%rsp)
+    0.00 :   27a3ee: jae    27b84c <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x14fc>
+    0.00 :   27a3f4: mov    0x10(%rsp),%rax
+    0.00 :   27a3f9: testb  $0x1,0x8(%rsp)
+    0.00 :   27a3fe: lea    0x20(%rax),%rax
+    0.00 :   27a402: jne    27a456 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x106>
+    0.00 :   27a404: mov    0x10(%rsp),%rdi
+    0.00 :   27a409: mov    0x20(%rdi),%rcx
+    0.00 :   27a40d: mov    0x28(%rdi),%rdx
+    0.00 :   27a411: cmp    (%rdi),%rcx
+    0.00 :   27a414: mov    %rdx,%rsi
+    0.00 :   27a417: sbb    0x8(%rdi),%rsi
+    0.00 :   27a41b: jae    27a44d <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0xfd>
+    0.00 :   27a41d: mov    0x10(%rsp),%rsi
+    0.00 :   27a422: vmovaps 0x30(%rsi),%xmm0
+    0.00 :   27a427: vmovups (%rsi),%ymm2
+    0.00 :   27a42b: vmovaps %xmm0,0xa0(%rsp)
+    0.00 :   27a434: vmovups %ymm2,(%rax)
+    0.00 :   27a438: mov    %rdx,0x8(%rsi)
+    0.00 :   27a43c: mov    %rcx,(%rsi)
+    0.00 :   27a43f: vmovaps 0xa0(%rsp),%xmm1
+    0.00 :   27a448: vmovaps %xmm1,0x10(%rsi)
+    0.00 :   27a44d: mov    0x10(%rsp),%rax
+    0.00 :   27a452: add    $0x40,%rax
+    0.00 :   27a456: cmpq   $0x2,0x8(%rsp)
+    0.00 :   27a45c: je     27a38d <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x3d>
+    0.00 :   27a462: mov    0x8(%rsp),%rcx
+    0.00 :   27a467: mov    0x10(%rsp),%r9
+    0.00 :   27a46c: shl    $0x5,%rcx
+    0.00 :   27a470: add    0x10(%rsp),%rcx
+    0.00 :   27a475: jmp    27a49e <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x14e>
+    0.00 :   27a477: mov    0x10(%rsp),%rdi
+    0.00 :   27a47c: vmovaps 0xa0(%rsp),%xmm0
+    0.00 :   27a485: mov    %rdx,(%rdi)
+    0.00 :   27a488: mov    %rsi,0x8(%rdi)
+    0.00 :   27a48c: vmovaps %xmm0,0x10(%rdi)
+    0.00 :   27a491: add    $0x40,%rax
+    0.00 :   27a495: cmp    %rcx,%rax
+    0.00 :   27a498: je     27a38d <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x3d>
+    0.00 :   27a49e: mov    (%rax),%rdx
+    0.00 :   27a4a1: mov    0x8(%rax),%rsi
+    0.00 :   27a4a5: cmp    -0x20(%rax),%rdx
+    0.00 :   27a4a9: mov    %rsi,%rdi
+    0.00 :   27a4ac: sbb    -0x18(%rax),%rdi
+    0.00 :   27a4b0: jae    27a524 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x1d4>
+    0.00 :   27a4b2: lea    -0x20(%rax),%rdi
+    0.00 :   27a4b6: vmovaps 0x10(%rax),%xmm0
+    0.00 :   27a4bb: mov    %r9,%r8
+    0.00 :   27a4be: vmovups (%rdi),%ymm1
+    0.00 :   27a4c2: vmovaps %xmm0,0xa0(%rsp)
+    0.00 :   27a4cb: vmovups %ymm1,(%rax)
+    0.00 :   27a4cf: cmp    %r9,%rdi
+    0.00 :   27a4d2: je     27a50e <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x1be>
+    0.00 :   27a4d4: data16 data16 cs nopw 0x0(%rax,%rax,1)
+    0.00 :   27a4e0: cmp    -0x20(%rdi),%rdx
+    0.00 :   27a4e4: mov    %rsi,%r8
+    0.00 :   27a4e7: sbb    -0x18(%rdi),%r8
+    0.00 :   27a4eb: jae    27a50b <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x1bb>
+    0.00 :   27a4ed: lea    -0x20(%rdi),%r8
+    0.00 :   27a4f1: vmovups (%r8),%ymm0
+    0.00 :   27a4f6: vmovups %ymm0,(%rdi)
+    0.00 :   27a4fa: mov    %r8,%rdi
+    0.00 :   27a4fd: cmp    0x10(%rsp),%r8
+    0.00 :   27a502: jne    27a4e0 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x190>
+    0.00 :   27a504: mov    0x10(%rsp),%r8
+    0.00 :   27a509: jmp    27a50e <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x1be>
+    0.00 :   27a50b: mov    %rdi,%r8
+    0.00 :   27a50e: vmovaps 0xa0(%rsp),%xmm0
+    0.00 :   27a517: mov    %rdx,(%r8)
+    0.00 :   27a51a: mov    %rsi,0x8(%r8)
+    0.00 :   27a51e: vmovaps %xmm0,0x10(%r8)
+    0.00 :   27a524: mov    0x20(%rax),%rdx
+    0.00 :   27a528: mov    0x28(%rax),%rsi
+    0.00 :   27a52c: cmp    (%rax),%rdx
+    0.00 :   27a52f: mov    %rsi,%rdi
+    0.00 :   27a532: sbb    0x8(%rax),%rdi
+    0.00 :   27a536: jae    27a491 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x141>
+    0.00 :   27a53c: vmovaps 0x30(%rax),%xmm0
+    0.00 :   27a541: vmovups (%rax),%ymm1
+    0.00 :   27a545: mov    0x10(%rsp),%r8
+    0.00 :   27a54a: lea    0x20(%rax),%rdi
+    0.00 :   27a54e: vmovups %ymm1,(%rdi)
+    0.00 :   27a552: vmovaps %xmm0,0xa0(%rsp)
+    0.00 :   27a55b: mov    %r8,%rdi
+    0.00 :   27a55e: cmp    %r8,%rax
+    0.00 :   27a561: je     27a47c <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x12c>
+    0.00 :   27a567: mov    %rax,%rdi
+    0.00 :   27a56a: nopw   0x0(%rax,%rax,1)
+    0.00 :   27a570: cmp    -0x20(%rdi),%rdx
+    0.00 :   27a574: mov    %rsi,%r8
+    0.00 :   27a577: sbb    -0x18(%rdi),%r8
+    0.00 :   27a57b: jae    27a47c <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x12c>
+    0.00 :   27a581: lea    -0x20(%rdi),%r8
+    0.00 :   27a585: vmovups (%r8),%ymm0
+    0.00 :   27a58a: vmovups %ymm0,(%rdi)
+    0.00 :   27a58e: mov    %r8,%rdi
+    0.00 :   27a591: cmp    0x10(%rsp),%r8
+    0.00 :   27a596: jne    27a570 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x220>
+    0.00 :   27a598: jmp    27a477 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x127>
+    0.00 :   27a59d: mov    0x8(%rsp),%rdx
+    0.00 :   27a5a2: mov    $0x1,%ecx
+    0.00 :   27a5a7: shlx   %r8,%rcx,%r9
+    0.00 :   27a5ac: lea    0x1(%rdx),%rcx
+    0.00 :   27a5b0: mov    0x10(%rsp),%rdx
+    0.00 :   27a5b5: add    $0x20,%rdx
+    0.00 :   27a5b9: nopl   0x0(%rax)
+    0.00 :   27a5c0: mov    (%rdx),%rsi
+    0.00 :   27a5c3: mov    0x8(%rdx),%rdi
+    0.00 :   27a5c7: cmp    -0x20(%rdx),%rsi
+    0.00 :   27a5cb: sbb    -0x18(%rdx),%rdi
+    0.00 :   27a5cf: jb     27a5e3 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x293>
+    0.00 :   27a5d1: dec    %rcx
+    0.00 :   27a5d4: add    $0x20,%rdx
+    0.00 :   27a5d8: cmp    $0x3,%rcx
+    0.00 :   27a5dc: jae    27a5c0 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x270>
+    0.00 :   27a5de: jmp    27a38d <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x3d>
+    0.00 :   27a5e3: mov    0x8(%rsp),%rcx
+    0.00 :   27a5e8: mov    0x10(%rsp),%rdx
+    0.00 :   27a5ed: inc    %rcx
+    0.00 :   27a5f0: add    $0x20,%rdx
+    0.00 :   27a5f4: data16 data16 cs nopw 0x0(%rax,%rax,1)
+    0.00 :   27a600: mov    -0x20(%rdx),%rsi
+    0.00 :   27a604: mov    -0x18(%rdx),%rdi
+    0.00 :   27a608: cmp    (%rdx),%rsi
+    0.00 :   27a60b: sbb    0x8(%rdx),%rdi
+    0.00 :   27a60f: jb     27a68a <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x33a>
+    0.00 :   27a611: dec    %rcx
+    0.00 :   27a614: add    $0x20,%rdx
+    0.00 :   27a618: cmp    $0x3,%rcx
+    0.00 :   27a61c: jae    27a600 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x2b0>
+    0.00 :   27a61e: mov    0x8(%rsp),%rdx
+    0.00 :   27a623: movabs $0x7fffffffffffffe,%r8
+    0.00 :   27a62d: movabs $0x7fffffffffffffd,%r10
+    0.00 :   27a637: movabs $0x7fffffffffffffc,%r11
+    0.00 :   27a641: movabs $0x7fffffffffffffb,%rbx
+    0.00 :   27a64b: movabs $0x7fffffffffffffa,%r14
+    0.00 :   27a655: movabs $0x7fffffffffffff9,%r15
+    0.00 :   27a65f: movabs $0x7fffffffffffff8,%rbp
+    0.00 :   27a669: mov    %rdx,%rdi
+    0.00 :   27a66c: shr    $1,%rdi
+    0.00 :   27a66f: shl    $0x5,%rdx
+    0.00 :   27a673: mov    %edi,%eax
+    0.00 :   27a675: lea    -0x1(%rdi),%rcx
+    0.00 :   27a679: and    $0x7,%eax
+    0.00 :   27a67c: cmp    $0x7,%rcx
+    0.00 :   27a680: jae    27a6ff <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x3af>
+    0.00 :   27a682: xor    %r12d,%r12d
+    0.00 :   27a685: jmp    27a865 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x515>
+    0.00 :   27a68a: mov    0x10(%rsp),%rcx
+    0.00 :   27a68f: mov    0x8(%rsp),%r15
+    0.00 :   27a694: mov    %r9,0x40(%rsp)
+    0.00 :   27a699: mov    %r8,0x90(%rsp)
+    0.00 :   27a6a1: shl    $0x5,%r15
+    0.00 :   27a6a5: mov    (%rcx),%rbx
+    0.00 :   27a6a8: mov    0x8(%rcx),%r14
+    0.00 :   27a6ac: lea    0x20(%rcx),%rdx
+    0.00 :   27a6b0: lea    -0x40(%r15),%rsi
+    0.00 :   27a6b4: mov    %esi,%edi
+    0.00 :   27a6b6: shr    $0x5,%edi
+    0.00 :   27a6b9: inc    %edi
+    0.00 :   27a6bb: and    $0x7,%edi
+    0.00 :   27a6be: je     27ab84 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x834>
+    0.00 :   27a6c4: shl    $0x5,%edi
+    0.00 :   27a6c7: mov    %rbx,%r8
+    0.00 :   27a6ca: mov    %r14,%r9
+    0.00 :   27a6cd: nopl   (%rax)
+    0.00 :   27a6d0: mov    (%rdx),%rcx
+    0.00 :   27a6d3: mov    0x8(%rdx),%r11
+    0.00 :   27a6d7: add    $0x20,%rdx
+    0.00 :   27a6db: or     %r11,%r9
+    0.00 :   27a6de: or     %rcx,%r8
+    0.00 :   27a6e1: and    %r11,%r14
+    0.00 :   27a6e4: and    %rcx,%rbx
+    0.00 :   27a6e7: add    $0xffffffffffffffe0,%rdi
+    0.00 :   27a6eb: jne    27a6d0 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x380>
+    0.00 :   27a6ed: cmp    $0xe0,%rsi
+    0.00 :   27a6f4: jae    27ab97 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x847>
+    0.00 :   27a6fa: jmp    27ac8b <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x93b>
+    0.00 :   27a6ff: mov    0x10(%rsp),%rsi
+    0.00 :   27a704: movabs $0x1fffffffffffff8,%rcx
+    0.00 :   27a70e: mov    %rbp,%r9
+    0.00 :   27a711: xor    %r12d,%r12d
+    0.00 :   27a714: and    %rcx,%rdi
+    0.00 :   27a717: lea    -0x20(%rdx,%rsi,1),%rbp
+    0.00 :   27a71c: lea    (%rsi,%rdx,1),%r13
+    0.00 :   27a720: lea    0xe0(%rsi),%rcx
+    0.00 :   27a727: nopw   0x0(%rax,%rax,1)
+    0.00 :   27a730: vmovups -0xe0(%rcx),%ymm0
+    0.00 :   27a738: vmovups 0x0(%rbp),%ymm1
+    0.00 :   27a73d: mov    %r12,%rsi
+    0.00 :   27a740: xor    %r8,%rsi
+    0.00 :   27a743: shl    $0x5,%rsi
+    0.00 :   27a747: vmovups %ymm1,-0xe0(%rcx)
+    0.00 :   27a74f: vmovups %ymm0,0x0(%rbp)
+    0.00 :   27a754: add    $0xffffffffffffff00,%rbp
+    0.00 :   27a75b: vmovups -0xc0(%rcx),%ymm0
+    0.00 :   27a763: vmovups 0x0(%r13,%rsi,1),%ymm1
+    0.00 :   27a76a: vmovups %ymm1,-0xc0(%rcx)
+    0.00 :   27a772: vmovups %ymm0,0x0(%r13,%rsi,1)
+    0.00 :   27a779: mov    %r12,%rsi
+    0.00 :   27a77c: xor    %r10,%rsi
+    0.00 :   27a77f: shl    $0x5,%rsi
+    0.00 :   27a783: vmovups -0xa0(%rcx),%ymm0
+    0.00 :   27a78b: vmovups 0x0(%r13,%rsi,1),%ymm1
+    0.00 :   27a792: vmovups %ymm1,-0xa0(%rcx)
+    0.00 :   27a79a: vmovups %ymm0,0x0(%r13,%rsi,1)
+    0.00 :   27a7a1: mov    %r12,%rsi
+    0.00 :   27a7a4: xor    %r11,%rsi
+    0.00 :   27a7a7: shl    $0x5,%rsi
+    0.00 :   27a7ab: vmovups -0x80(%rcx),%ymm0
+    0.00 :   27a7b0: vmovups 0x0(%r13,%rsi,1),%ymm1
+    0.00 :   27a7b7: vmovups %ymm1,-0x80(%rcx)
+    0.00 :   27a7bc: vmovups %ymm0,0x0(%r13,%rsi,1)
+    0.00 :   27a7c3: mov    %r12,%rsi
+    0.00 :   27a7c6: xor    %rbx,%rsi
+    0.00 :   27a7c9: shl    $0x5,%rsi
+    0.00 :   27a7cd: vmovups -0x60(%rcx),%ymm0
+    0.00 :   27a7d2: vmovups 0x0(%r13,%rsi,1),%ymm1
+    0.00 :   27a7d9: vmovups %ymm1,-0x60(%rcx)
+    0.00 :   27a7de: vmovups %ymm0,0x0(%r13,%rsi,1)
+    0.00 :   27a7e5: mov    %r12,%rsi
+    0.00 :   27a7e8: xor    %r14,%rsi
+    0.00 :   27a7eb: shl    $0x5,%rsi
+    0.00 :   27a7ef: vmovups -0x40(%rcx),%ymm0
+    0.00 :   27a7f4: vmovups 0x0(%r13,%rsi,1),%ymm1
+    0.00 :   27a7fb: vmovups %ymm1,-0x40(%rcx)
+    0.00 :   27a800: vmovups %ymm0,0x0(%r13,%rsi,1)
+    0.00 :   27a807: mov    %r12,%rsi
+    0.00 :   27a80a: xor    %r15,%rsi
+    0.00 :   27a80d: shl    $0x5,%rsi
+    0.00 :   27a811: vmovups -0x20(%rcx),%ymm0
+    0.00 :   27a816: vmovups 0x0(%r13,%rsi,1),%ymm1
+    0.00 :   27a81d: vmovups %ymm1,-0x20(%rcx)
+    0.00 :   27a822: vmovups %ymm0,0x0(%r13,%rsi,1)
+    0.00 :   27a829: mov    %r12,%rsi
+    0.00 :   27a82c: xor    %r9,%rsi
+    0.00 :   27a82f: add    $0x8,%r12
+    0.00 :   27a833: shl    $0x5,%rsi
+    0.00 :   27a837: vmovups (%rcx),%ymm0
+    0.00 :   27a83b: vmovups 0x0(%r13,%rsi,1),%ymm1
+    0.00 :   27a842: vmovups %ymm1,(%rcx)
+    0.00 :   27a846: add    $0x100,%rcx
+    0.00 :   27a84d: vmovups %ymm0,0x0(%r13,%rsi,1)
+    0.00 :   27a854: cmp    %r12,%rdi
+    0.00 :   27a857: jne    27a730 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x3e0>
+    0.00 :   27a85d: mov    %r9,%rbp
+    0.00 :   27a860: test   %rax,%rax
+    0.00 :   27a863: je     27a89f <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x54f>
+    0.00 :   27a865: mov    0x10(%rsp),%rsi
+    0.00 :   27a86a: shl    $0x5,%r12
+    0.00 :   27a86e: shl    $0x5,%eax
+    0.00 :   27a871: sub    %r12,%rdx
+    0.00 :   27a874: lea    -0x20(%rdx,%rsi,1),%rdx
+    0.00 :   27a879: lea    (%rsi,%r12,1),%rcx
+    0.00 :   27a87d: xor    %esi,%esi
+    0.00 :   27a87f: nop
+    0.00 :   27a880: vmovups (%rcx,%rsi,1),%ymm0
+    0.00 :   27a885: vmovups (%rdx),%ymm1
+    0.00 :   27a889: vmovups %ymm1,(%rcx,%rsi,1)
+    0.00 :   27a88e: vmovups %ymm0,(%rdx)
+    0.00 :   27a892: add    $0x20,%rsi
+    0.00 :   27a896: add    $0xffffffffffffffe0,%rdx
+    0.00 :   27a89a: cmp    %rsi,%rax
+    0.00 :   27a89d: jne    27a880 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x530>
+    0.00 :   27a89f: mov    0x10(%rsp),%rax
+    0.00 :   27a8a4: xor    %esi,%esi
+    0.00 :   27a8a6: lea    0x20(%rax),%rcx
+    0.00 :   27a8aa: lea    0xe0(%rax),%rdx
+    0.00 :   27a8b1: add    $0xffffffffffffffe0,%rax
+    0.00 :   27a8b5: mov    %rcx,0x60(%rsp)
+    0.00 :   27a8ba: mov    %rdx,0x58(%rsp)
+    0.00 :   27a8bf: mov    %rax,0x18(%rsp)
+    0.00 :   27a8c4: jmp    27a8db <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x58b>
+    0.00 :   27a8c6: cs nopw 0x0(%rax,%rax,1)
+    0.00 :   27a8d0: cmp    0x8(%rsp),%rsi
+    0.00 :   27a8d5: jae    27a38d <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x3d>
+    0.00 :   27a8db: mov    0x8(%rsp),%rax
+    0.00 :   27a8e0: lea    0x1(%rsi),%rcx
+    0.00 :   27a8e4: mov    %rsi,%rdx
+    0.00 :   27a8e7: shl    $0x5,%rdx
+    0.00 :   27a8eb: mov    %rsi,%rdi
+    0.00 :   27a8ee: mov    %rcx,%rsi
+    0.00 :   27a8f1: cmp    %rcx,%rax
+    0.00 :   27a8f4: cmova  %rax,%rsi
+    0.00 :   27a8f8: lea    -0x1(%rsi),%rax
+    0.00 :   27a8fc: cmp    %rax,%rdi
+    0.00 :   27a8ff: je     27a972 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x622>
+    0.00 :   27a901: mov    0x10(%rsp),%r12
+    0.00 :   27a906: mov    %r14,%r15
+    0.00 :   27a909: mov    %rbx,%r14
+    0.00 :   27a90c: mov    %r10,%rbx
+    0.00 :   27a90f: mov    %rsi,%r10
+    0.00 :   27a912: mov    %r8,%r9
+    0.00 :   27a915: mov    %rbp,%rax
+    0.00 :   27a918: mov    (%r12,%rdx,1),%rsi
+    0.00 :   27a91c: mov    0x8(%r12,%rdx,1),%r8
+    0.00 :   27a921: mov    0x60(%rsp),%r12
+    0.00 :   27a926: add    %rdx,%r12
+    0.00 :   27a929: nopl   0x0(%rax)
+    0.00 :   27a930: mov    (%r12),%r13
+    0.00 :   27a934: mov    0x8(%r12),%rbp
+    0.00 :   27a939: xor    %rsi,%r13
+    0.00 :   27a93c: xor    %r8,%rbp
+    0.00 :   27a93f: or     %r13,%rbp
+    0.00 :   27a942: jne    27a960 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x610>
+    0.00 :   27a944: inc    %rcx
+    0.00 :   27a947: add    $0x20,%r12
+    0.00 :   27a94b: cmp    %rcx,%r10
+    0.00 :   27a94e: jne    27a930 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x5e0>
+    0.00 :   27a950: mov    %r9,%r8
+    0.00 :   27a953: mov    %rax,%rbp
+    0.00 :   27a956: mov    %r10,%rsi
+    0.00 :   27a959: jmp    27a969 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x619>
+    0.00 :   27a95b: nopl   0x0(%rax,%rax,1)
+    0.00 :   27a960: mov    %r9,%r8
+    0.00 :   27a963: mov    %rax,%rbp
+    0.00 :   27a966: mov    %rcx,%rsi
+    0.00 :   27a969: mov    %rbx,%r10
+    0.00 :   27a96c: mov    %r14,%rbx
+    0.00 :   27a96f: mov    %r15,%r14
+    0.00 :   27a972: mov    %rsi,%rcx
+    0.00 :   27a975: sub    %rdi,%rcx
+    0.00 :   27a978: jb     27b77d <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x142d>
+    0.00 :   27a97e: mov    %rcx,%r12
+    0.00 :   27a981: shr    $1,%r12
+    0.00 :   27a984: je     27a8d0 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x580>
+    0.00 :   27a98a: mov    %r12d,%r13d
+    0.00 :   27a98d: mov    %rsi,%rdi
+    0.00 :   27a990: shl    $0x5,%rdi
+    0.00 :   27a994: and    $0x7,%r13d
+    0.00 :   27a998: cmp    $0x10,%rcx
+    0.00 :   27a99c: jae    27a9b0 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x660>
+    0.00 :   27a99e: xor    %r9d,%r9d
+    0.00 :   27a9a1: jmp    27ab3c <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x7ec>
+    0.00 :   27a9a6: cs nopw 0x0(%rax,%rax,1)
+    0.00 :   27a9b0: mov    0x10(%rsp),%rcx
+    0.00 :   27a9b5: mov    %rsi,0x40(%rsp)
+    0.00 :   27a9ba: mov    0x58(%rsp),%rsi
+    0.00 :   27a9bf: mov    %rbx,%r14
+    0.00 :   27a9c2: mov    %r11,%rbx
+    0.00 :   27a9c5: mov    %r10,%r11
+    0.00 :   27a9c8: mov    %r8,%r10
+    0.00 :   27a9cb: mov    0x18(%rsp),%r8
+    0.00 :   27a9d0: movabs $0x7ffffffffffffff8,%rax
+    0.00 :   27a9da: xor    %r9d,%r9d
+    0.00 :   27a9dd: and    %rax,%r12
+    0.00 :   27a9e0: mov    %rbp,%rax
+    0.00 :   27a9e3: add    %rdi,%rcx
+    0.00 :   27a9e6: add    %rdx,%rsi
+    0.00 :   27a9e9: add    %rdi,%r8
+    0.00 :   27a9ec: nopl   0x0(%rax)
+    0.00 :   27a9f0: vmovups -0xe0(%rsi),%ymm0
+    0.00 :   27a9f8: vmovups (%r8),%ymm1
+    0.00 :   27a9fd: mov    %r9,%rbp
+    0.00 :   27aa00: xor    %r10,%rbp
+    0.00 :   27aa03: movabs $0x7fffffffffffffa,%r15
+    0.00 :   27aa0d: shl    $0x5,%rbp
+    0.00 :   27aa11: vmovups %ymm1,-0xe0(%rsi)
+    0.00 :   27aa19: vmovups %ymm0,(%r8)
+    0.00 :   27aa1e: add    $0xffffffffffffff00,%r8
+    0.00 :   27aa25: vmovups -0xc0(%rsi),%ymm0
+    0.00 :   27aa2d: vmovups (%rcx,%rbp,1),%ymm1
+    0.00 :   27aa32: vmovups %ymm1,-0xc0(%rsi)
+    0.00 :   27aa3a: vmovups %ymm0,(%rcx,%rbp,1)
+    0.00 :   27aa3f: mov    %r9,%rbp
+    0.00 :   27aa42: xor    %r11,%rbp
+    0.00 :   27aa45: shl    $0x5,%rbp
+    0.00 :   27aa49: vmovups -0xa0(%rsi),%ymm0
+    0.00 :   27aa51: vmovups (%rcx,%rbp,1),%ymm1
+    0.00 :   27aa56: vmovups %ymm1,-0xa0(%rsi)
+    0.00 :   27aa5e: vmovups %ymm0,(%rcx,%rbp,1)
+    0.00 :   27aa63: mov    %r9,%rbp
+    0.00 :   27aa66: xor    %rbx,%rbp
+    0.00 :   27aa69: shl    $0x5,%rbp
+    0.00 :   27aa6d: vmovups -0x80(%rsi),%ymm0
+    0.00 :   27aa72: vmovups (%rcx,%rbp,1),%ymm1
+    0.00 :   27aa77: vmovups %ymm1,-0x80(%rsi)
+    0.00 :   27aa7c: vmovups %ymm0,(%rcx,%rbp,1)
+    0.00 :   27aa81: mov    %r9,%rbp
+    0.00 :   27aa84: xor    %r14,%rbp
+    0.00 :   27aa87: shl    $0x5,%rbp
+    0.00 :   27aa8b: vmovups -0x60(%rsi),%ymm0
+    0.00 :   27aa90: vmovups (%rcx,%rbp,1),%ymm1
+    0.00 :   27aa95: vmovups %ymm1,-0x60(%rsi)
+    0.00 :   27aa9a: vmovups %ymm0,(%rcx,%rbp,1)
+    0.00 :   27aa9f: mov    %r9,%rbp
+    0.00 :   27aaa2: xor    %r15,%rbp
+    0.00 :   27aaa5: movabs $0x7fffffffffffff9,%r15
+    0.00 :   27aaaf: shl    $0x5,%rbp
+    0.00 :   27aab3: vmovups -0x40(%rsi),%ymm0
+    0.00 :   27aab8: vmovups (%rcx,%rbp,1),%ymm1
+    0.00 :   27aabd: vmovups %ymm1,-0x40(%rsi)
+    0.00 :   27aac2: vmovups %ymm0,(%rcx,%rbp,1)
+    0.00 :   27aac7: mov    %r9,%rbp
+    0.00 :   27aaca: xor    %r15,%rbp
+    0.00 :   27aacd: shl    $0x5,%rbp
+    0.00 :   27aad1: vmovups -0x20(%rsi),%ymm0
+    0.00 :   27aad6: vmovups (%rcx,%rbp,1),%ymm1
+    0.00 :   27aadb: vmovups %ymm1,-0x20(%rsi)
+    0.00 :   27aae0: vmovups %ymm0,(%rcx,%rbp,1)
+    0.00 :   27aae5: mov    %r9,%rbp
+    0.00 :   27aae8: xor    %rax,%rbp
+    0.00 :   27aaeb: add    $0x8,%r9
+    0.00 :   27aaef: shl    $0x5,%rbp
+    0.00 :   27aaf3: vmovups (%rsi),%ymm0
+    0.00 :   27aaf7: vmovups (%rcx,%rbp,1),%ymm1
+    0.00 :   27aafc: vmovups %ymm1,(%rsi)
+    0.00 :   27ab00: add    $0x100,%rsi
+    0.00 :   27ab07: vmovups %ymm0,(%rcx,%rbp,1)
+    0.00 :   27ab0c: cmp    %r9,%r12
+    0.00 :   27ab0f: jne    27a9f0 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x6a0>
+    0.00 :   27ab15: mov    0x40(%rsp),%rsi
+    0.00 :   27ab1a: mov    %r10,%r8
+    0.00 :   27ab1d: mov    %r11,%r10
+    0.00 :   27ab20: mov    %rbx,%r11
+    0.00 :   27ab23: mov    %r14,%rbx
+    0.00 :   27ab26: movabs $0x7fffffffffffffa,%r14
+    0.00 :   27ab30: mov    %rax,%rbp
+    0.00 :   27ab33: test   %r13,%r13
+    0.00 :   27ab36: je     27a8d0 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x580>
+    0.00 :   27ab3c: shl    $0x5,%r9
+    0.00 :   27ab40: shl    $0x5,%r13d
+    0.00 :   27ab44: xor    %ecx,%ecx
+    0.00 :   27ab46: add    %r9,%rdx
+    0.00 :   27ab49: sub    %r9,%rdi
+    0.00 :   27ab4c: add    0x10(%rsp),%rdx
+    0.00 :   27ab51: add    0x18(%rsp),%rdi
+    0.00 :   27ab56: cs nopw 0x0(%rax,%rax,1)
+    0.00 :   27ab60: vmovups (%rdx,%rcx,1),%ymm0
+    0.00 :   27ab65: vmovups (%rdi),%ymm1
+    0.00 :   27ab69: vmovups %ymm1,(%rdx,%rcx,1)
+    0.00 :   27ab6e: vmovups %ymm0,(%rdi)
+    0.00 :   27ab72: add    $0x20,%rcx
+    0.00 :   27ab76: add    $0xffffffffffffffe0,%rdi
+    0.00 :   27ab7a: cmp    %rcx,%r13
+    0.00 :   27ab7d: jne    27ab60 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x810>
+    0.00 :   27ab7f: jmp    27a8d0 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x580>
+    0.00 :   27ab84: mov    %rbx,%r8
+    0.00 :   27ab87: mov    %r14,%r9
+    0.00 :   27ab8a: cmp    $0xe0,%rsi
+    0.00 :   27ab91: jb     27ac8b <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x93b>
+    0.00 :   27ab97: mov    0x10(%rsp),%rcx
+    0.00 :   27ab9c: add    %r15,%rcx
+    0.00 :   27ab9f: mov    %rcx,0x18(%rsp)
+    0.00 :   27aba4: data16 data16 cs nopw 0x0(%rax,%rax,1)
+    0.00 :   27abb0: mov    (%rdx),%rcx
+    0.00 :   27abb3: mov    0x8(%rdx),%rsi
+    0.05 :   27abb7: mov    0x48(%rdx),%rdi
+    0.08 :   27abbb: mov    0x28(%rdx),%r12
+    0.04 :   27abbf: mov    0x88(%rdx),%rbp
+    0.23 :   27abc6: or     %rcx,%r8
+    0.00 :   27abc9: and    %rcx,%rbx
+    0.00 :   27abcc: or     %rsi,%r9
+    0.00 :   27abcf: and    %rsi,%r14
+    0.00 :   27abd2: mov    0x40(%rdx),%rsi
+    0.00 :   27abd6: mov    0x20(%rdx),%rcx
+    0.00 :   27abda: mov    %rdi,%r13
+    0.00 :   27abdd: or     %r12,%r13
+    0.00 :   27abe0: and    %r12,%rdi
+    0.00 :   27abe3: or     %r9,%r13
+    0.00 :   27abe6: mov    0x60(%rdx),%r9
+    0.00 :   27abea: and    %r14,%rdi
+    0.00 :   27abed: mov    0xe8(%rdx),%r14
+    0.05 :   27abf4: mov    %rsi,%r11
+    0.00 :   27abf7: or     %rcx,%r11
+    0.00 :   27abfa: and    %rcx,%rsi
+    0.00 :   27abfd: mov    0x80(%rdx),%rcx
+    0.01 :   27ac04: and    %rbx,%rsi
+    0.00 :   27ac07: mov    0x68(%rdx),%rbx
+    0.00 :   27ac0b: or     %r8,%r11
+    0.00 :   27ac0e: mov    %rbp,%r8
+    0.00 :   27ac11: mov    %rcx,%r12
+    0.04 :   27ac14: or     %r9,%r12
+    0.00 :   27ac17: and    %r9,%rcx
+    0.00 :   27ac1a: mov    0xa0(%rdx),%r9
+    0.00 :   27ac21: or     %rbx,%r8
+    0.00 :   27ac24: and    %rbx,%rbp
+    0.00 :   27ac27: mov    0xa8(%rdx),%rbx
+    0.00 :   27ac2e: or     %r9,%r12
+    0.00 :   27ac31: and    %r9,%rcx
+    0.00 :   27ac34: mov    %r14,%r9
+    0.00 :   27ac37: and    %rbx,%rbp
+    0.14 :   27ac3a: or     %r11,%r12
+    0.00 :   27ac3d: mov    0xc8(%rdx),%r11
+    0.05 :   27ac44: or     %rbx,%r8
+    0.00 :   27ac47: mov    0xe0(%rdx),%rbx
+    0.05 :   27ac4e: and    %rsi,%rcx
+    0.00 :   27ac51: and    %rdi,%rbp
+    0.00 :   27ac54: mov    0xc0(%rdx),%rdi
+    0.00 :   27ac5b: or     %r13,%r8
+    0.00 :   27ac5e: add    $0x100,%rdx
+    0.00 :   27ac65: or     %r11,%r9
+    0.01 :   27ac68: and    %r11,%r14
+    0.00 :   27ac6b: or     %r8,%r9
+    0.00 :   27ac6e: mov    %rbx,%r8
+    0.00 :   27ac71: or     %rdi,%r8
+    0.04 :   27ac74: and    %rdi,%rbx
+    0.05 :   27ac77: and    %rbp,%r14
+    0.00 :   27ac7a: or     %r12,%r8
+    0.05 :   27ac7d: and    %rcx,%rbx
+    0.00 :   27ac80: cmp    0x18(%rsp),%rdx
+    0.00 :   27ac85: jne    27abb0 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x860>
+    0.00 :   27ac8b: mov    0x90(%rsp),%r12
+    0.00 :   27ac93: mov    0x40(%rsp),%rbp
+    0.00 :   27ac98: mov    %r8,%r13
+    0.00 :   27ac9b: mov    %r9,%rsi
+    0.00 :   27ac9e: xor    %rbx,%r13
+    0.00 :   27aca1: xor    %r14,%rsi
+    0.00 :   27aca4: mov    %r13,%rcx
+    0.00 :   27aca7: or     %rsi,%rcx
+    0.00 :   27acaa: je     27a38d <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x3d>
+    0.00 :   27acb0: test   %r12,%r12
+    0.00 :   27acb3: je     27ba83 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x1733>
+    0.00 :   27acb9: cmp    $0x80,%r12
+    0.00 :   27acc0: ja     27acd7 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x987>
+    0.00 :   27acc2: mov    %rax,%rcx
+    0.00 :   27acc5: mov    $0x80,%eax
+    0.00 :   27acca: xor    %edx,%edx
+    0.00 :   27accc: div    %r12d
+    0.00 :   27accf: mov    %eax,%r11d
+    0.00 :   27acd2: mov    %rcx,%rax
+    0.00 :   27acd5: jmp    27acdf <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x98f>
+    0.00 :   27acd7: mov    $0x80,%edx
+    0.00 :   27acdc: xor    %r11d,%r11d
+    0.00 :   27acdf: cmp    $0x1,%rdx
+    0.00 :   27ace3: mov    $0x4,%ecx
+    0.00 :   27ace8: mov    $0xffffffffffffffff,%rdx
+    0.00 :   27acef: sbb    $0xffffffffffffffff,%r11
+    0.00 :   27acf3: cmp    $0x5,%r11
+    0.00 :   27acf7: cmovae %r11,%rcx
+    0.00 :   27acfb: dec    %rcx
+    0.00 :   27acfe: lzcnt  %rcx,%rcx
+    0.00 :   27ad03: shrx   %rcx,%rdx,%rcx
+    0.00 :   27ad08: lea    0x3(%r12),%edx
+    0.00 :   27ad0d: lea    (%rcx,%rcx,8),%rcx
+    0.00 :   27ad11: shlx   %rdx,%r11,%rdx
+    0.00 :   27ad16: lea    0x48(%rdx,%rcx,8),%rcx
+    0.00 :   27ad1b: cmp    %rdx,%rcx
+    0.00 :   27ad1e: jae    27ad8b <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0xa3b>
+    0.00 :   27ad20: mov    %r11,0x158(%rsp)
+    0.00 :   27ad28: mov    %rsi,0x50(%rsp)
+    0.00 :   27ad2d: mov    0x10(%rsp),%rsi
+    0.00 :   27ad32: mov    0x8(%rsp),%rdx
+    0.00 :   27ad37: lea    0xa0(%rsp),%rdi
+    0.00 :   27ad3f: mov    %rbp,%rcx
+    0.00 :   27ad42: mov    %r10,%r8
+    0.00 :   27ad45: call   289380 <<block_lsd_bench::shared::cursor::Sorter<block_lsd_bench::Record<u128, 4>>>::new>
+    0.00 :   27ad4a: mov    0x50(%rsp),%r8
+    0.00 :   27ad4f: lea    0xde46a(%rip),%rax        # 3591c0 <anon.eddde403183433b74fec11346de0c988.11.llvm.15907582582815929209+0x720>
+    0.00 :   27ad56: mov    $0x80,%r9d
+    0.00 :   27ad5c: xor    %edi,%edi
+    0.00 :   27ad5e: xor    %r10d,%r10d
+    0.00 :   27ad61: mov    %r13,0x150(%rsp)
+    0.00 :   27ad69: mov    %rax,0x28(%rsp)
+    0.00 :   27ad6e: lea    0xde3a3(%rip),%rax        # 359118 <anon.eddde403183433b74fec11346de0c988.11.llvm.15907582582815929209+0x678>
+    0.00 :   27ad75: mov    %rax,0x20(%rsp)
+    0.00 :   27ad7a: lea    0xde2d7(%rip),%rax        # 359058 <anon.eddde403183433b74fec11346de0c988.11.llvm.15907582582815929209+0x5b8>
+    0.00 :   27ad81: mov    %rax,0x48(%rsp)
+    0.00 :   27ad86: jmp    27ae0b <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0xabb>
+    0.00 :   27ad8b: cmp    $0x10,%r11
+    0.00 :   27ad8f: ja     27ad20 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x9d0>
+    0.00 :   27ad91: mov    $0x10,%edx
+    0.00 :   27ad96: add    %r15,%rcx
+    0.00 :   27ad99: shlx   %r12,%rdx,%rdx
+    0.00 :   27ad9e: add    %rcx,%rdx
+    0.00 :   27ada1: cmp    %rcx,%rdx
+    0.00 :   27ada4: jb     27ad20 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x9d0>
+    0.00 :   27adaa: cmp    %rax,%rdx
+    0.00 :   27adad: ja     27ad20 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x9d0>
+    0.00 :   27adb3: mov    0x10(%rsp),%rdi
+    0.00 :   27adb8: mov    0x8(%rsp),%rsi
+    0.00 :   27adbd: mov    %r12,%rdx
+    0.00 :   27adc0: mov    %r11,%rcx
+    0.00 :   27adc3: push   %r14
+    0.00 :   27adc5: push   %rbx
+    0.00 :   27adc6: call   261220 <block_lsd_bench::shared::cursor::bounded_scatter::<block_lsd_bench::Record<u128, 4>, u128>>
+    0.00 :   27adcb: add    $0x198,%rsp
+    0.00 :   27add2: jmp    27a394 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x44>
+    0.00 :   27add7: mov    %rbp,%rdi
+    0.00 :   27adda: call   *0xe2080(%rip)        # 35ce60 <free@GLIBC_2.2.5>
+    0.00 :   27ade0: mov    0x50(%rsp),%r8
+    0.00 :   27ade5: mov    0x88(%rsp),%r9
+    0.00 :   27aded: mov    0x80(%rsp),%r10
+    0.00 :   27adf5: xor    %edi,%edi
+    0.00 :   27adf7: inc    %r10
+    0.00 :   27adfa: sub    %r12,%r9
+    0.00 :   27adfd: cmp    0x158(%rsp),%r10
+    0.00 :   27ae05: je     27b792 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x1442>
+    0.00 :   27ae0b: cmp    %r9,%r12
+    0.00 :   27ae0e: mov    %r9,%rax
+    0.00 :   27ae11: mov    %r12,%rdx
+    0.00 :   27ae14: cmovb  %r12,%rax
+    0.00 :   27ae18: imul   %r10,%rdx
+    0.00 :   27ae1c: lea    -0x80(%rdx),%rcx
+    0.00 :   27ae20: mov    %rdx,%r11
+    0.00 :   27ae23: neg    %rcx
+    0.00 :   27ae26: cmp    %rcx,%r12
+    0.00 :   27ae29: cmovb  %r12,%rcx
+    0.00 :   27ae2d: cmp    $0x80,%rdx
+    0.00 :   27ae34: jne    27ae3a <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0xaea>
+    0.00 :   27ae36: xor    %edx,%edx
+    0.00 :   27ae38: jmp    27ae7a <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0xb2a>
+    0.00 :   27ae3a: lea    -0x1(%rcx),%rdx
+    0.00 :   27ae3e: cmp    $0x7,%rdx
+    0.00 :   27ae42: jae    27ae48 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0xaf8>
+    0.00 :   27ae44: xor    %edx,%edx
+    0.00 :   27ae46: jmp    27ae66 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0xb16>
+    0.00 :   27ae48: mov    %eax,%esi
+    0.00 :   27ae4a: and    $0x8,%esi
+    0.00 :   27ae4d: xor    %edx,%edx
+    0.00 :   27ae4f: nop
+    0.00 :   27ae50: shl    $0x8,%rdx
+    0.00 :   27ae54: or     $0xff,%rdx
+    0.00 :   27ae5b: add    $0xfffffffffffffff8,%rsi
+    0.00 :   27ae5f: jne    27ae50 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0xb00>
+    0.00 :   27ae61: test   $0x7,%cl
+    0.00 :   27ae64: je     27ae7a <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0xb2a>
+    0.00 :   27ae66: and    $0x7,%eax
+    0.00 :   27ae69: nopl   0x0(%rax)
+    0.00 :   27ae70: lea    0x1(%rdx,%rdx,1),%rdx
+    0.00 :   27ae75: dec    %rax
+    0.00 :   27ae78: jne    27ae70 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0xb20>
+    0.00 :   27ae7a: mov    %r11,%rcx
+    0.00 :   27ae7d: and    $0x7f,%ecx
+    0.00 :   27ae80: xor    %eax,%eax
+    0.00 :   27ae82: shld   %cl,%rdx,%rax
+    0.00 :   27ae86: shlx   %rcx,%rdx,%rdx
+    0.00 :   27ae8b: test   $0x40,%cl
+    0.00 :   27ae8e: mov    %rcx,0x180(%rsp)
+    0.00 :   27ae96: cmovne %rdx,%rax
+    0.00 :   27ae9a: cmovne %rdi,%rdx
+    0.00 :   27ae9e: mov    %rdx,%rcx
+    0.00 :   27aea1: mov    %rax,0x178(%rsp)
+    0.00 :   27aea9: and    %r8,%rax
+    0.00 :   27aeac: and    %r13,%rcx
+    0.00 :   27aeaf: mov    %rdx,0x170(%rsp)
+    0.00 :   27aeb7: or     %rax,%rcx
+    0.00 :   27aeba: je     27adf7 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0xaa7>
+    0.00 :   27aec0: mov    0x120(%rsp),%rbx
+    0.00 :   27aec8: movabs $0x7ffffffffffffff8,%rcx
+    0.00 :   27aed2: mov    %rbx,%r13
+    0.00 :   27aed5: shl    $0x4,%r13
+    0.00 :   27aed9: mov    %rbx,%rax
+    0.00 :   27aedc: shr    $0x3c,%rax
+    0.00 :   27aee0: setne  %al
+    0.00 :   27aee3: cmp    %rcx,%r13
+    0.00 :   27aee6: seta   %cl
+    0.00 :   27aee9: or     %al,%cl
+    0.00 :   27aeeb: jne    27baa8 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x1758>
+    0.00 :   27aef1: mov    %rbx,0x8(%rsp)
+    0.00 :   27aef6: test   %r13,%r13
+    0.00 :   27aef9: je     27af6a <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0xc1a>
+    0.00 :   27aefb: mov    %r10,%r14
+    0.00 :   27aefe: mov    %r9,%rbx
+    0.00 :   27af01: call   *0xe1f69(%rip)        # 35ce70 <_DYNAMIC+0x270>
+    0.00 :   27af07: mov    %r13,%rdi
+    0.00 :   27af0a: call   *0xe1fd8(%rip)        # 35cee8 <malloc@GLIBC_2.2.5>
+    0.00 :   27af10: test   %rax,%rax
+    0.00 :   27af13: je     27baa0 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x1750>
+    0.00 :   27af19: movzbl 0xe4380(%rip),%ecx        # 35f2a0 <block_lsd_bench::TRACK>
+    0.00 :   27af20: mov    %rax,%rbp
+    0.00 :   27af23: test   %cl,%cl
+    0.00 :   27af25: je     27af55 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0xc05>
+    0.00 :   27af27: mov    %r13,%rcx
+    0.00 :   27af2a: lock xadd %rcx,0xe435d(%rip)        # 35f290 <block_lsd_bench::LIVE>
+    0.00 :   27af33: mov    0xe435e(%rip),%rax        # 35f298 <block_lsd_bench::PEAK>
+    0.00 :   27af3a: add    %r13,%rcx
+    0.00 :   27af3d: nopl   (%rax)
+    0.00 :   27af40: cmp    %rcx,%rax
+    0.00 :   27af43: mov    %rcx,%rdx
+    0.00 :   27af46: cmova  %rax,%rdx
+    0.00 :   27af4a: lock cmpxchg %rdx,0xe4345(%rip)        # 35f298 <block_lsd_bench::PEAK>
+    0.00 :   27af53: jne    27af40 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0xbf0>
+    0.00 :   27af55: mov    0x8(%rsp),%rax
+    0.00 :   27af5a: mov    %rbx,%r9
+    0.00 :   27af5d: mov    %r14,%r10
+    0.00 :   27af60: mov    %rax,%rbx
+    0.00 :   27af63: mov    %rax,0x38(%rsp)
+    0.00 :   27af68: jmp    27af78 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0xc28>
+    0.00 :   27af6a: mov    $0x8,%ebp
+    0.00 :   27af6f: movq   $0x0,0x38(%rsp)
+    0.00 :   27af78: mov    %r9,0x88(%rsp)
+    0.00 :   27af80: mov    %r10,0x80(%rsp)
+    0.00 :   27af88: cmp    $0x2,%rbx
+    0.00 :   27af8c: jb     27afa4 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0xc54>
+    0.00 :   27af8e: lea    -0x10(%r13),%rdx
+    0.00 :   27af92: mov    %rbp,%rdi
+    0.00 :   27af95: xor    %esi,%esi
+    0.00 :   27af97: call   *0xe1f6b(%rip)        # 35cf08 <memset@GLIBC_2.2.5>
+    0.00 :   27af9d: lea    -0x10(%r13,%rbp,1),%rax
+    0.00 :   27afa2: jmp    27afb0 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0xc60>
+    0.00 :   27afa4: mov    %rbp,%rax
+    0.00 :   27afa7: test   %rbx,%rbx
+    0.00 :   27afaa: je     27b060 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0xd10>
+    0.00 :   27afb0: lea    0x0(,%rbx,8),%r13
+    0.00 :   27afb8: vxorps %xmm0,%xmm0,%xmm0
+    0.00 :   27afbc: vmovups %xmm0,(%rax)
+    0.00 :   27afc0: call   *0xe1eaa(%rip)        # 35ce70 <_DYNAMIC+0x270>
+    0.00 :   27afc6: mov    %r13,%rdi
+    0.00 :   27afc9: call   *0xe1f19(%rip)        # 35cee8 <malloc@GLIBC_2.2.5>
+    0.00 :   27afcf: test   %rax,%rax
+    0.00 :   27afd2: je     27ba90 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x1740>
+    0.00 :   27afd8: vbroadcastsd -0x257a52(%rip),%zmm0        # 23590 <anon.4ed5c0d230dda35e0b38415628e6c054.8.llvm.12745806348638736510+0x49e>
+    0.00 :   27afe2: mov    %rax,%r12
+    0.00 :   27afe5: movzbl 0xe42b4(%rip),%eax        # 35f2a0 <block_lsd_bench::TRACK>
+    0.00 :   27afec: test   %al,%al
+    0.00 :   27afee: je     27b025 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0xcd5>
+    0.00 :   27aff0: mov    %r13,%rcx
+    0.00 :   27aff3: lock xadd %rcx,0xe4294(%rip)        # 35f290 <block_lsd_bench::LIVE>
+    0.00 :   27affc: mov    0xe4295(%rip),%rax        # 35f298 <block_lsd_bench::PEAK>
+    0.00 :   27b003: add    %r13,%rcx
+    0.00 :   27b006: cs nopw 0x0(%rax,%rax,1)
+    0.00 :   27b010: cmp    %rcx,%rax
+    0.00 :   27b013: mov    %rcx,%rdx
+    0.00 :   27b016: cmova  %rax,%rdx
+    0.00 :   27b01a: lock cmpxchg %rdx,0xe4275(%rip)        # 35f298 <block_lsd_bench::PEAK>
+    0.00 :   27b023: jne    27b010 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0xcc0>
+    0.00 :   27b025: mov    $0x1,%r14d
+    0.00 :   27b02b: lea    0xa0(%rsp),%r11
+    0.00 :   27b033: mov    %r12,%rax
+    0.00 :   27b036: cmp    $0x2,%rbx
+    0.00 :   27b03a: jb     27b0f4 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0xda4>
+    0.00 :   27b040: lea    -0x1(%rbx),%rdx
+    0.00 :   27b044: mov    $0x1,%ecx
+    0.00 :   27b049: mov    %r12,%rax
+    0.00 :   27b04c: cmp    $0x8,%rdx
+    0.00 :   27b050: jb     27b0de <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0xd8e>
+    0.00 :   27b056: cmp    $0x20,%rdx
+    0.00 :   27b05a: jae    27b074 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0xd24>
+    0.00 :   27b05c: xor    %esi,%esi
+    0.00 :   27b05e: jmp    27b0b7 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0xd67>
+    0.00 :   27b060: mov    $0x8,%r12d
+    0.00 :   27b066: movq   $0x0,0x18(%rsp)
+    0.00 :   27b06f: jmp    27b1b9 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0xe69>
+    0.00 :   27b074: mov    %rdx,%rsi
+    0.00 :   27b077: and    $0xffffffffffffffe0,%rsi
+    0.00 :   27b07b: xor    %edi,%edi
+    0.00 :   27b07d: lea    (%r12,%rsi,8),%rax
+    0.00 :   27b081: lea    0x1(%rsi),%rcx
+    0.00 :   27b085: vmovups %zmm0,(%r12,%rdi,8)
+    0.00 :   27b08c: vmovups %zmm0,0x40(%r12,%rdi,8)
+    0.00 :   27b094: vmovups %zmm0,0x80(%r12,%rdi,8)
+    0.00 :   27b09c: vmovups %zmm0,0xc0(%r12,%rdi,8)
+    0.00 :   27b0a4: add    $0x20,%rdi
+    0.00 :   27b0a8: cmp    %rdi,%rsi
+    0.00 :   27b0ab: jne    27b085 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0xd35>
+    0.00 :   27b0ad: cmp    %rsi,%rdx
+    0.00 :   27b0b0: je     27b0f1 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0xda1>
+    0.00 :   27b0b2: test   $0x18,%dl
+    0.00 :   27b0b5: je     27b0de <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0xd8e>
+    0.00 :   27b0b7: mov    %rdx,%rdi
+    0.00 :   27b0ba: and    $0xfffffffffffffff8,%rdi
+    0.00 :   27b0be: lea    (%r12,%rdi,8),%rax
+    0.00 :   27b0c2: lea    0x1(%rdi),%rcx
+    0.00 :   27b0c6: vmovups %zmm0,(%r12,%rsi,8)
+    0.00 :   27b0cd: add    $0x8,%rsi
+    0.00 :   27b0d1: cmp    %rsi,%rdi
+    0.00 :   27b0d4: jne    27b0c6 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0xd76>
+    0.00 :   27b0d6: mov    %rbx,%r14
+    0.00 :   27b0d9: cmp    %rdi,%rdx
+    0.00 :   27b0dc: je     27b0f4 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0xda4>
+    0.00 :   27b0de: movq   $0x1,(%rax)
+    0.00 :   27b0e5: inc    %rcx
+    0.00 :   27b0e8: add    $0x8,%rax
+    0.00 :   27b0ec: cmp    %rcx,%rbx
+    0.00 :   27b0ef: jne    27b0de <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0xd8e>
+    0.00 :   27b0f1: mov    %rbx,%r14
+    0.00 :   27b0f4: mov    0xc8(%rsp),%rsi
+    0.00 :   27b0fc: movq   $0x1,(%rax)
+    0.00 :   27b103: mov    %r14,%rax
+    0.00 :   27b106: shl    $0x4,%rax
+    0.00 :   27b10a: mov    %rbp,%rcx
+    0.00 :   27b10d: xor    %r15d,%r15d
+    0.00 :   27b110: mov    %r14,0x18(%rsp)
+    0.00 :   27b115: add    %rbp,%rax
+    0.00 :   27b118: mov    %rsi,0x10(%rsp)
+    0.00 :   27b11d: nopl   (%rax)
+    0.00 :   27b120: cmp    %rsi,%r15
+    0.00 :   27b123: jae    27b981 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x1631>
+    0.00 :   27b129: mov    0xc0(%rsp),%rdx
+    0.00 :   27b131: mov    (%rdx,%r15,4),%edx
+    0.00 :   27b135: cmp    %rdx,%rsi
+    0.00 :   27b138: jbe    27b75c <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x140c>
+    0.00 :   27b13e: mov    0x128(%rsp),%r8
+    0.00 :   27b146: mov    0x118(%rsp),%rdi
+    0.00 :   27b14e: xor    %r9d,%r9d
+    0.00 :   27b151: mov    $0x0,%r10d
+    0.00 :   27b157: cmp    %rdx,%r8
+    0.00 :   27b15a: cmovbe %r8,%r10
+    0.00 :   27b15e: seta   %r9b
+    0.00 :   27b162: sub    %r10,%rdx
+    0.00 :   27b165: shl    $0x4,%r9d
+    0.00 :   27b169: imul   %rdi,%rdx
+    0.00 :   27b16d: shl    $0x5,%rdi
+    0.00 :   27b171: shl    $0x5,%rdx
+    0.00 :   27b175: add    0x90(%r9,%r11,1),%rdx
+    0.00 :   27b17d: add    %rdx,%rdi
+    0.00 :   27b180: mov    %rdx,(%rcx)
+    0.00 :   27b183: mov    %rdi,0x8(%rcx)
+    0.00 :   27b187: mov    0xf8(%rsp),%rdx
+    0.00 :   27b18f: cmp    %rdx,%r15
+    0.00 :   27b192: jae    27b98c <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x163c>
+    0.00 :   27b198: mov    0xf0(%rsp),%rdx
+    0.00 :   27b1a0: mov    0x10(%rsp),%rsi
+    0.00 :   27b1a5: add    $0x10,%rcx
+    0.00 :   27b1a9: mov    %r15b,(%rdx,%r15,1)
+    0.00 :   27b1ad: inc    %r15
+    0.00 :   27b1b0: cmp    %rax,%rcx
+    0.00 :   27b1b3: jne    27b120 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0xdd0>
+    0.00 :   27b1b9: mov    0x148(%rsp),%rax
+    0.00 :   27b1c1: mov    %rbx,%r13
+    0.00 :   27b1c4: mov    %rax,0x160(%rsp)
+    0.00 :   27b1cc: cmp    %rax,%rbx
+    0.00 :   27b1cf: jae    27b414 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x10c4>
+    0.00 :   27b1d5: mov    0xc8(%rsp),%r8
+    0.00 :   27b1dd: mov    %rbx,%r13
+    0.00 :   27b1e0: mov    %rbx,%rdi
+    0.00 :   27b1e3: xor    %r11d,%r11d
+    0.00 :   27b1e6: mov    %r8,0x10(%rsp)
+    0.00 :   27b1eb: jmp    27b211 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0xec1>
+    0.00 :   27b1ed: nopl   (%rax)
+    0.00 :   27b1f0: mov    0x98(%rsp),%rdi
+    0.00 :   27b1f8: mov    0x168(%rsp),%r11
+    0.00 :   27b200: inc    %rdi
+    0.00 :   27b203: cmp    0x160(%rsp),%rdi
+    0.00 :   27b20b: je     27b414 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x10c4>
+    0.00 :   27b211: cmp    %r8,%rdi
+    0.04 :   27b214: jae    27ba29 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x16d9>
+    0.00 :   27b21a: mov    0xc0(%rsp),%rax
+    0.04 :   27b222: mov    %rdi,0x98(%rsp)
+    0.00 :   27b22a: mov    (%rax,%rdi,4),%r15d
+    0.26 :   27b22e: mov    %rax,0x40(%rsp)
+    0.00 :   27b233: cmp    %r15,%r8
+    0.00 :   27b236: jbe    27b865 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x1515>
+    0.00 :   27b23c: mov    0x128(%rsp),%r10
+    0.05 :   27b244: mov    0x140(%rsp),%rax
+    0.00 :   27b24c: mov    0x130(%rsp),%rdx
+    0.00 :   27b254: mov    0x118(%rsp),%rsi
+    0.00 :   27b25c: mov    $0x0,%edi
+    0.00 :   27b261: cmp    %r15,%r10
+    0.00 :   27b264: mov    %rdx,0x58(%rsp)
+    0.00 :   27b269: mov    %rax,0x60(%rsp)
+    0.00 :   27b26e: cmovbe %r10,%rdi
+    0.00 :   27b272: cmova  %rax,%rdx
+    0.00 :   27b276: cmp    %rbx,%r11
+    0.00 :   27b279: jae    27b2c5 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0xf75>
+    0.00 :   27b27b: mov    0x110(%rsp),%rcx
+    0.00 :   27b283: cmp    %rcx,%r11
+    0.00 :   27b286: jae    27ba66 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x1716>
+    0.00 :   27b28c: mov    0x108(%rsp),%rcx
+    0.00 :   27b294: mov    0x98(%rsp),%rax
+    0.00 :   27b29c: mov    %r11,%r9
+    0.00 :   27b29f: shl    $0x4,%r9
+    0.00 :   27b2a3: cmp    %rax,(%rcx,%r9,1)
+    0.05 :   27b2a7: jne    27b2c5 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0xf75>
+    0.00 :   27b2a9: add    %r9,%rcx
+    0.00 :   27b2ac: inc    %r11
+    0.00 :   27b2af: mov    0x8(%rcx),%r9
+    0.00 :   27b2b3: mov    %r11,0x168(%rsp)
+    0.00 :   27b2bb: test   %r9,%r9
+    0.00 :   27b2be: jne    27b2d9 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0xf89>
+    0.00 :   27b2c0: jmp    27b1f0 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0xea0>
+    0.00 :   27b2c5: mov    %rsi,%r9
+    0.00 :   27b2c8: mov    %r11,0x168(%rsp)
+    0.00 :   27b2d0: test   %r9,%r9
+    0.00 :   27b2d3: je     27b1f0 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0xea0>
+    0.00 :   27b2d9: sub    %rdi,%r15
+    0.00 :   27b2dc: imul   %rsi,%r15
+    0.05 :   27b2e0: shl    $0x5,%r15
+    0.18 :   27b2e4: add    %r15,%rdx
+    0.00 :   27b2e7: nopw   0x0(%rax,%rax,1)
+    0.00 :   27b2f0: mov    (%rdx),%r11
+    3.70 :   27b2f3: mov    0x8(%rdx),%rdi
+    0.13 :   27b2f7: mov    0x180(%rsp),%rcx
+    0.09 :   27b2ff: mov    %r12,%rax
+    0.49 :   27b302: and    0x170(%rsp),%r11
+    0.48 :   27b30a: and    0x178(%rsp),%rdi
+    4.11 :   27b312: shrd   %cl,%rdi,%r11
+    2.06 :   27b316: shrx   %rcx,%rdi,%rdi
+    0.31 :   27b31b: test   $0x40,%cl
+    0.00 :   27b31e: cmove  %r11,%rdi
+    0.45 :   27b322: cmp    %rdi,0x18(%rsp)
+    3.56 :   27b327: jbe    27b91c <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x15cc>
+    0.00 :   27b32d: vmovups (%rdx),%ymm0
+    0.41 :   27b331: mov    %rdi,%rcx
+    0.36 :   27b334: shl    $0x4,%rcx
+    0.00 :   27b338: mov    0x0(%rbp,%rcx,1),%r15
+    9.65 :   27b33d: mov    0x8(%rbp,%rcx,1),%r12
+    0.26 :   27b342: vmovups %ymm0,(%r15)
+   43.93 :   27b347: cmp    %r8,%r13
+    0.62 :   27b34a: jae    27b908 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x15b8>
+    0.00 :   27b350: mov    0x40(%rsp),%r11
+    0.13 :   27b355: mov    (%r11,%r13,4),%ebx
+    1.11 :   27b359: cmp    %rbx,%r8
+    0.00 :   27b35c: jbe    27b754 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x1404>
+    0.00 :   27b362: add    %rbp,%rcx
+    0.05 :   27b365: add    $0x20,%r15
+    0.00 :   27b369: cmp    %rbx,%r10
+    0.00 :   27b36c: mov    $0x0,%r11d
+    0.09 :   27b372: mov    0x58(%rsp),%r14
+    3.58 :   27b377: mov    %rbp,%r8
+    0.04 :   27b37a: mov    %rsi,%rbp
+    0.18 :   27b37d: cmovbe %r10,%r11
+    0.63 :   27b381: cmova  0x60(%rsp),%r14
+    0.05 :   27b387: shl    $0x5,%rbp
+    0.09 :   27b38b: sub    %r11,%rbx
+    0.00 :   27b38e: imul   %rsi,%rbx
+    0.09 :   27b392: shl    $0x5,%rbx
+    5.19 :   27b396: add    %r14,%rbx
+    0.00 :   27b399: xor    %r14d,%r14d
+    1.02 :   27b39c: add    %rbx,%rbp
+    0.00 :   27b39f: cmp    %r12,%r15
+    0.00 :   27b3a2: cmovne %r15,%rbx
+    0.00 :   27b3a6: cmovne %r12,%rbp
+    0.40 :   27b3aa: sete   %r11b
+    0.00 :   27b3ae: mov    %rbx,(%rcx)
+    4.05 :   27b3b1: mov    %rbp,0x8(%rcx)
+    0.04 :   27b3b5: mov    0xf8(%rsp),%rcx
+    0.71 :   27b3bd: cmp    %rcx,%r13
+    0.05 :   27b3c0: jae    27b94a <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x15fa>
+    0.00 :   27b3c6: mov    0xf0(%rsp),%rcx
+    0.09 :   27b3ce: cmp    %r12,%r15
+    0.00 :   27b3d1: mov    %edi,%ebp
+    0.00 :   27b3d3: movzbl (%rcx,%r13,1),%ebx
+    0.76 :   27b3d8: cmovne %ebx,%ebp
+    0.53 :   27b3db: mov    0x8(%rsp),%rbx
+    3.29 :   27b3e0: mov    %bpl,(%rcx,%r13,1)
+    0.04 :   27b3e4: cmp    %rdi,%rbx
+    0.31 :   27b3e7: jbe    27b937 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x15e7>
+    0.00 :   27b3ed: mov    %r11b,%r14b
+    0.00 :   27b3f0: mov    %r8,%rbp
+    0.00 :   27b3f3: mov    0x10(%rsp),%r8
+    0.09 :   27b3f8: add    $0x20,%rdx
+    0.38 :   27b3fc: mov    %rax,%r12
+    0.26 :   27b3ff: add    %r14,(%rax,%rdi,8)
+    3.70 :   27b403: add    %r14,%r13
+    0.00 :   27b406: dec    %r9
+    0.49 :   27b409: jne    27b2f0 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0xfa0>
+    0.00 :   27b40f: jmp    27b1f0 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0xea0>
+    0.00 :   27b414: mov    %r13,0x148(%rsp)
+    0.00 :   27b41c: lea    0x68(%rsp),%rdi
+    0.00 :   27b421: mov    %rbx,%rsi
+    0.00 :   27b424: mov    %rbx,%rdx
+    0.00 :   27b427: vzeroupper
+    0.00 :   27b42a: call   282080 <<usize as alloc::vec::spec_from_elem::SpecFromElem>::from_elem::<alloc::alloc::Global>>
+    0.00 :   27b42f: cmp    $0x2,%rbx
+    0.00 :   27b433: jb     27b493 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x1143>
+    0.00 :   27b435: mov    0x78(%rsp),%rax
+    0.00 :   27b43a: mov    0x70(%rsp),%rcx
+    0.00 :   27b43f: lea    -0x1(%rbx),%r9
+    0.00 :   27b443: mov    $0x1,%esi
+    0.00 :   27b448: cmp    $0x1,%rax
+    0.00 :   27b44c: mov    %rax,%rdx
+    0.00 :   27b44f: adc    $0x0,%rdx
+    0.00 :   27b453: xor    %edi,%edi
+    0.00 :   27b455: lea    -0x1(%rdx),%r8
+    0.00 :   27b459: nopl   0x0(%rax)
+    0.00 :   27b460: cmp    %rdi,%rax
+    0.00 :   27b463: je     27ba1b <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x16cb>
+    0.00 :   27b469: cmp    %rdi,%rbx
+    0.00 :   27b46c: je     27ba13 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x16c3>
+    0.00 :   27b472: cmp    %rdi,%r8
+    0.00 :   27b475: je     27ba02 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x16b2>
+    0.00 :   27b47b: mov    (%rcx,%rdi,8),%r10
+    0.00 :   27b47f: inc    %rsi
+    0.00 :   27b482: add    (%r12,%rdi,8),%r10
+    0.00 :   27b486: mov    %r10,0x8(%rcx,%rdi,8)
+    0.00 :   27b48b: inc    %rdi
+    0.00 :   27b48e: cmp    %rdi,%r9
+    0.00 :   27b491: jne    27b460 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x1110>
+    0.00 :   27b493: test   %r13,%r13
+    0.00 :   27b496: je     27b5d0 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x1280>
+    0.00 :   27b49c: mov    0x70(%rsp),%rdx
+    0.00 :   27b4a1: mov    0x78(%rsp),%rax
+    0.00 :   27b4a6: mov    0xf8(%rsp),%rcx
+    0.00 :   27b4ae: xor    %edi,%edi
+    0.00 :   27b4b0: jmp    27b4df <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x118f>
+    0.00 :   27b4b2: add    %rbp,%r10
+    0.00 :   27b4b5: mov    0x108(%rsp),%r11
+    0.00 :   27b4bd: shl    $0x4,%esi
+    0.00 :   27b4c0: mov    (%r10),%r10
+    0.00 :   27b4c3: mov    %r8,(%r11,%rsi,1)
+    0.00 :   27b4c7: sub    %r9,%r10
+    0.00 :   27b4ca: sar    $0x5,%r10
+    0.00 :   27b4ce: mov    %r10,0x8(%r11,%rsi,1)
+    0.00 :   27b4d3: inc    %rdi
+    0.00 :   27b4d6: cmp    %rdi,%r13
+    0.00 :   27b4d9: je     27b5d8 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x1288>
+    0.00 :   27b4df: cmp    %rcx,%rdi
+    0.00 :   27b4e2: jae    27b9b9 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x1669>
+    0.00 :   27b4e8: mov    0xf0(%rsp),%rsi
+    0.00 :   27b4f0: movzbl (%rsi,%rdi,1),%esi
+    0.00 :   27b4f4: cmp    %rsi,%rax
+    0.00 :   27b4f7: jbe    27b9db <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x168b>
+    0.00 :   27b4fd: mov    (%rdx,%rsi,8),%r8
+    0.00 :   27b501: lea    0x1(%r8),%r9
+    0.00 :   27b505: mov    %r9,(%rdx,%rsi,8)
+    0.05 :   27b509: mov    0xc8(%rsp),%r15
+    0.04 :   27b511: cmp    %r15,%rdi
+    0.00 :   27b514: jae    27b9a8 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x1658>
+    0.00 :   27b51a: mov    0xe0(%rsp),%r9
+    0.00 :   27b522: cmp    %r9,%r8
+    0.00 :   27b525: jae    27b9ca <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x167a>
+    0.00 :   27b52b: mov    0xc0(%rsp),%r9
+    0.00 :   27b533: mov    0xd8(%rsp),%r10
+    0.00 :   27b53b: mov    (%r9,%rdi,4),%r9d
+    0.00 :   27b53f: mov    %r9d,(%r10,%r8,4)
+    0.22 :   27b543: cmp    %r9,%r15
+    0.00 :   27b546: jbe    27b82e <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x14de>
+    0.00 :   27b54c: mov    0x128(%rsp),%r14
+    0.00 :   27b554: xor    %r10d,%r10d
+    0.04 :   27b557: mov    $0x0,%ebx
+    0.00 :   27b55c: cmp    %r9,%r14
+    0.00 :   27b55f: seta   %r11b
+    0.00 :   27b563: cmovbe %r14,%rbx
+    0.00 :   27b567: cmp    %rsi,0x18(%rsp)
+    0.00 :   27b56c: jbe    27b9ec <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x169c>
+    0.00 :   27b572: mov    0x118(%rsp),%r14
+    0.05 :   27b57a: sub    %rbx,%r9
+    0.00 :   27b57d: mov    %r11b,%r10b
+    0.00 :   27b580: lea    0xa0(%rsp),%r11
+    0.00 :   27b588: mov    0x8(%rsp),%rbx
+    0.00 :   27b58d: shl    $0x4,%r10d
+    0.00 :   27b591: imul   %r14,%r9
+    0.00 :   27b595: shl    $0x5,%r14
+    0.00 :   27b599: shl    $0x5,%r9
+    0.05 :   27b59d: add    0x90(%r10,%r11,1),%r9
+    0.00 :   27b5a5: mov    %esi,%r10d
+    0.00 :   27b5a8: shl    $0x4,%r10d
+    0.00 :   27b5ac: add    %r9,%r14
+    0.00 :   27b5af: cmp    0x8(%rbp,%r10,1),%r14
+    0.00 :   27b5b4: jne    27b4d3 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x1183>
+    0.00 :   27b5ba: mov    0x110(%rsp),%r11
+    0.00 :   27b5c2: cmp    %rsi,%r11
+    0.00 :   27b5c5: ja     27b4b2 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x1162>
+    0.00 :   27b5cb: jmp    27ba40 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x16f0>
+    0.00 :   27b5d0: mov    0xc8(%rsp),%r15
+    0.00 :   27b5d8: lea    (%rbx,%r13,1),%rax
+    0.00 :   27b5dc: cmp    %r15,%rax
+    0.00 :   27b5df: ja     27b874 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x1524>
+    0.00 :   27b5e5: mov    0xe0(%rsp),%rcx
+    0.00 :   27b5ed: mov    %rcx,0x10(%rsp)
+    0.00 :   27b5f2: cmp    %rcx,%rbx
+    0.00 :   27b5f5: ja     27b86f <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x151f>
+    0.00 :   27b5fb: cmp    %r13,%rax
+    0.00 :   27b5fe: jb     27b892 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x1542>
+    0.00 :   27b604: mov    0x8(%rsp),%rax
+    0.00 :   27b609: mov    0xc0(%rsp),%r14
+    0.00 :   27b611: mov    0xd8(%rsp),%rbx
+    0.00 :   27b619: lea    0x0(,%rax,4),%rdx
+    0.00 :   27b621: lea    (%r14,%r13,4),%rsi
+    0.00 :   27b625: mov    %rbx,%rdi
+    0.00 :   27b628: call   *0xe1892(%rip)        # 35cec0 <memcpy@GLIBC_2.14>
+    0.00 :   27b62e: mov    0x10(%rsp),%rax
+    0.00 :   27b633: add    0x8(%rsp),%r13
+    0.00 :   27b638: mov    %rax,%rdx
+    0.00 :   27b63b: sub    %r13,%rdx
+    0.00 :   27b63e: jb     27b8aa <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x155a>
+    0.00 :   27b644: mov    %r15,%rsi
+    0.00 :   27b647: sub    %r13,%rsi
+    0.00 :   27b64a: jb     27b8bd <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x156d>
+    0.00 :   27b650: mov    %r12,0x8(%rsp)
+    0.00 :   27b655: cmp    %r15,%rax
+    0.00 :   27b658: jne    27b8f0 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x15a0>
+    0.00 :   27b65e: lea    (%r14,%r13,4),%rsi
+    0.00 :   27b662: lea    (%rbx,%r13,4),%rdi
+    0.00 :   27b666: shl    $0x2,%rdx
+    0.00 :   27b66a: call   *0xe1850(%rip)        # 35cec0 <memcpy@GLIBC_2.14>
+    0.00 :   27b670: mov    %r13,0x148(%rsp)
+    0.00 :   27b678: mov    0x90(%rsp),%r12
+    0.00 :   27b680: mov    0x150(%rsp),%r13
+    0.00 :   27b688: mov    0xb8(%rsp),%rax
+    0.00 :   27b690: mov    0xd0(%rsp),%rcx
+    0.00 :   27b698: mov    %rcx,0xb8(%rsp)
+    0.00 :   27b6a0: mov    %rax,0xd0(%rsp)
+    0.00 :   27b6a8: mov    0x68(%rsp),%rax
+    0.00 :   27b6ad: mov    %rbx,0xc0(%rsp)
+    0.00 :   27b6b5: mov    %r14,0xd8(%rsp)
+    0.00 :   27b6bd: mov    %r15,0xc8(%rsp)
+    0.00 :   27b6c5: mov    %r15,0xe0(%rsp)
+    0.00 :   27b6cd: test   %rax,%rax
+    0.00 :   27b6d0: je     27b6f4 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x13a4>
+    0.00 :   27b6d2: mov    0x70(%rsp),%rdi
+    0.00 :   27b6d7: movzbl 0xe3bc2(%rip),%ecx        # 35f2a0 <block_lsd_bench::TRACK>
+    0.00 :   27b6de: test   %cl,%cl
+    0.00 :   27b6e0: je     27b6ee <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x139e>
+    0.00 :   27b6e2: shl    $0x3,%rax
+    0.00 :   27b6e6: lock sub %rax,0xe3ba2(%rip)        # 35f290 <block_lsd_bench::LIVE>
+    0.00 :   27b6ee: call   *0xe176c(%rip)        # 35ce60 <free@GLIBC_2.2.5>
+    0.00 :   27b6f4: cmpq   $0x0,0x18(%rsp)
+    0.00 :   27b6fa: je     27b723 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x13d3>
+    0.00 :   27b6fc: movzbl 0xe3b9d(%rip),%eax        # 35f2a0 <block_lsd_bench::TRACK>
+    0.00 :   27b703: test   %al,%al
+    0.00 :   27b705: je     27b718 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x13c8>
+    0.00 :   27b707: mov    0x18(%rsp),%rax
+    0.00 :   27b70c: shl    $0x3,%rax
+    0.00 :   27b710: lock sub %rax,0xe3b78(%rip)        # 35f290 <block_lsd_bench::LIVE>
+    0.00 :   27b718: mov    0x8(%rsp),%rdi
+    0.00 :   27b71d: call   *0xe173d(%rip)        # 35ce60 <free@GLIBC_2.2.5>
+    0.00 :   27b723: cmpq   $0x0,0x38(%rsp)
+    0.00 :   27b729: je     27ade0 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0xa90>
+    0.00 :   27b72f: movzbl 0xe3b6a(%rip),%eax        # 35f2a0 <block_lsd_bench::TRACK>
+    0.00 :   27b736: test   %al,%al
+    0.00 :   27b738: je     27add7 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0xa87>
+    0.00 :   27b73e: mov    0x38(%rsp),%rax
+    0.00 :   27b743: shl    $0x4,%rax
+    0.00 :   27b747: lock sub %rax,0xe3b41(%rip)        # 35f290 <block_lsd_bench::LIVE>
+    0.00 :   27b74f: jmp    27add7 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0xa87>
+    0.00 :   27b754: mov    0x18(%rsp),%r14
+    0.00 :   27b759: mov    %rax,%r12
+    0.00 :   27b75c: lea    -0x2549b6(%rip),%rdi        # 26dad <anon.c5862773a544a98ebfd42667029cfcec.1522.llvm.17443555614370274988+0x262d>
+    0.00 :   27b763: lea    0xddc1e(%rip),%rdx        # 359388 <anon.eddde403183433b74fec11346de0c988.11.llvm.15907582582815929209+0x8e8>
+    0.00 :   27b76a: mov    $0x2c,%esi
+    0.00 :   27b76f: vzeroupper
+    0.00 :   27b772: call   *0xe1728(%rip)        # 35cea0 <_DYNAMIC+0x2a0>
+    0.00 :   27b778: jmp    27bab1 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x1761>
+    0.00 :   27b77d: mov    0x8(%rsp),%rdx
+    0.00 :   27b782: lea    0xddb87(%rip),%rcx        # 359310 <anon.eddde403183433b74fec11346de0c988.11.llvm.15907582582815929209+0x870>
+    0.00 :   27b789: vzeroupper
+    0.00 :   27b78c: call   *0xe173e(%rip)        # 35ced0 <_DYNAMIC+0x2d0>
+    0.00 :   27b792: lea    0xa0(%rsp),%rdi
+    0.00 :   27b79a: call   289c10 <<block_lsd_bench::shared::cursor::Sorter<block_lsd_bench::Record<u128, 4>>>::compact>
+    0.00 :   27b79f: lea    0xa0(%rsp),%rdi
+    0.00 :   27b7a7: call   25dd20 <core::ptr::drop_glue::<block_lsd_bench::shared::cursor::Sorter<block_lsd_bench::Record<u32, 7>>>>
+    0.00 :   27b7ac: jmp    27a38d <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x3d>
+    0.00 :   27b7b1: lea    -0x254a9a(%rip),%rdi        # 26d1e <anon.c5862773a544a98ebfd42667029cfcec.1522.llvm.17443555614370274988+0x259e>
+    0.00 :   27b7b8: lea    0xddb09(%rip),%rdx        # 3592c8 <anon.eddde403183433b74fec11346de0c988.11.llvm.15907582582815929209+0x828>
+    0.00 :   27b7bf: mov    $0x16,%esi
+    0.00 :   27b7c4: call   *0xe16ce(%rip)        # 35ce98 <_DYNAMIC+0x298>
+    0.00 :   27b7ca: lea    -0x254a9d(%rip),%rdi        # 26d34 <anon.c5862773a544a98ebfd42667029cfcec.1522.llvm.17443555614370274988+0x25b4>
+    0.00 :   27b7d1: lea    0xddb08(%rip),%rdx        # 3592e0 <anon.eddde403183433b74fec11346de0c988.11.llvm.15907582582815929209+0x840>
+    0.00 :   27b7d8: mov    $0x1b,%esi
+    0.00 :   27b7dd: call   *0xe16b5(%rip)        # 35ce98 <_DYNAMIC+0x298>
+    0.00 :   27b7e3: lea    -0x254a7f(%rip),%rdi        # 26d6b <anon.c5862773a544a98ebfd42667029cfcec.1522.llvm.17443555614370274988+0x25eb>
+    0.00 :   27b7ea: lea    0xddb4f(%rip),%rdx        # 359340 <anon.eddde403183433b74fec11346de0c988.11.llvm.15907582582815929209+0x8a0>
+    0.00 :   27b7f1: mov    $0x15,%esi
+    0.00 :   27b7f6: call   *0xe171c(%rip)        # 35cf18 <_DYNAMIC+0x318>
+    0.00 :   27b7fc: lea    -0x2570a3(%rip),%rdi        # 24760 <anon.4ed5c0d230dda35e0b38415628e6c054.8.llvm.12745806348638736510+0x166e>
+    0.00 :   27b803: lea    0xddb1e(%rip),%rdx        # 359328 <anon.eddde403183433b74fec11346de0c988.11.llvm.15907582582815929209+0x888>
+    0.00 :   27b80a: mov    $0x20,%esi
+    0.00 :   27b80f: call   *0xe1703(%rip)        # 35cf18 <_DYNAMIC+0x318>
+    0.00 :   27b815: lea    -0x254acd(%rip),%rdi        # 26d4f <anon.c5862773a544a98ebfd42667029cfcec.1522.llvm.17443555614370274988+0x25cf>
+    0.00 :   27b81c: lea    0xddad5(%rip),%rdx        # 3592f8 <anon.eddde403183433b74fec11346de0c988.11.llvm.15907582582815929209+0x858>
+    0.00 :   27b823: mov    $0x1c,%esi
+    0.00 :   27b828: call   *0xe166a(%rip)        # 35ce98 <_DYNAMIC+0x298>
+    0.00 :   27b82e: lea    -0x254a88(%rip),%rdi        # 26dad <anon.c5862773a544a98ebfd42667029cfcec.1522.llvm.17443555614370274988+0x262d>
+    0.00 :   27b835: lea    0xddb4c(%rip),%rdx        # 359388 <anon.eddde403183433b74fec11346de0c988.11.llvm.15907582582815929209+0x8e8>
+    0.00 :   27b83c: mov    $0x2c,%esi
+    0.00 :   27b841: call   *0xe1659(%rip)        # 35cea0 <_DYNAMIC+0x2a0>
+    0.00 :   27b847: jmp    27bab1 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x1761>
+    0.00 :   27b84c: mov    0x10(%rsp),%rdi
+    0.00 :   27b851: mov    0x8(%rsp),%rsi
+    0.00 :   27b856: lea    0x68(%rsp),%rdx
+    0.00 :   27b85b: call   2a56d0 <core::slice::sort::stable::driftsort_main::<block_lsd_bench::Record<u128, 4>, <[block_lsd_bench::Record<u128, 4>]>::sort_by_key<u128, block_lsd_bench::shared::cursor::block_lsd_stable_radixsort<block_lsd_bench::Record<u128, 4>, u128, true>::{closure#1}>::{closure#0}, alloc::vec::Vec<block_lsd_bench::Record<u128, 4>>>>
+    0.00 :   27b860: jmp    27a38d <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x3d>
+    0.00 :   27b865: mov    0x18(%rsp),%r14
+    0.00 :   27b86a: jmp    27b75c <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x140c>
+    0.00 :   27b86f: xor    %r13d,%r13d
+    0.00 :   27b872: jmp    27b8d3 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x1583>
+    0.00 :   27b874: lea    -0x254bbb(%rip),%rdi        # 26cc0 <anon.c5862773a544a98ebfd42667029cfcec.1522.llvm.17443555614370274988+0x2540>
+    0.00 :   27b87b: lea    0xdd75e(%rip),%rdx        # 358fe0 <anon.eddde403183433b74fec11346de0c988.11.llvm.15907582582815929209+0x540>
+    0.00 :   27b882: mov    $0x41,%esi
+    0.00 :   27b887: call   *0xe1613(%rip)        # 35cea0 <_DYNAMIC+0x2a0>
+    0.00 :   27b88d: jmp    27bab1 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x1761>
+    0.00 :   27b892: lea    0xdd7a7(%rip),%rcx        # 359040 <anon.eddde403183433b74fec11346de0c988.11.llvm.15907582582815929209+0x5a0>
+    0.00 :   27b899: mov    %rax,0x8(%rsp)
+    0.00 :   27b89e: mov    %r15,0x10(%rsp)
+    0.00 :   27b8a3: mov    %rcx,0x48(%rsp)
+    0.00 :   27b8a8: jmp    27b8d3 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x1583>
+    0.00 :   27b8aa: lea    0xdd777(%rip),%rcx        # 359028 <anon.eddde403183433b74fec11346de0c988.11.llvm.15907582582815929209+0x588>
+    0.00 :   27b8b1: mov    %rax,0x8(%rsp)
+    0.00 :   27b8b6: mov    %rcx,0x48(%rsp)
+    0.00 :   27b8bb: jmp    27b8d3 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x1583>
+    0.00 :   27b8bd: lea    0xdd74c(%rip),%rax        # 359010 <anon.eddde403183433b74fec11346de0c988.11.llvm.15907582582815929209+0x570>
+    0.00 :   27b8c4: mov    %r15,0x8(%rsp)
+    0.00 :   27b8c9: mov    %r15,0x10(%rsp)
+    0.00 :   27b8ce: mov    %rax,0x48(%rsp)
+    0.00 :   27b8d3: mov    0x8(%rsp),%rsi
+    0.00 :   27b8d8: mov    0x10(%rsp),%rdx
+    0.00 :   27b8dd: mov    0x48(%rsp),%rcx
+    0.00 :   27b8e2: mov    %r13,%rdi
+    0.00 :   27b8e5: call   *0xe15e5(%rip)        # 35ced0 <_DYNAMIC+0x2d0>
+    0.00 :   27b8eb: jmp    27bab1 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x1761>
+    0.00 :   27b8f0: lea    0xdd701(%rip),%rax        # 358ff8 <anon.eddde403183433b74fec11346de0c988.11.llvm.15907582582815929209+0x558>
+    0.00 :   27b8f7: mov    %rdx,%rdi
+    0.00 :   27b8fa: mov    %rax,%rdx
+    0.00 :   27b8fd: call   *0xe161d(%rip)        # 35cf20 <_DYNAMIC+0x320>
+    0.00 :   27b903: jmp    27bab1 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x1761>
+    0.00 :   27b908: lea    0xdd8e1(%rip),%rcx        # 3591f0 <anon.eddde403183433b74fec11346de0c988.11.llvm.15907582582815929209+0x750>
+    0.00 :   27b90f: mov    %rbp,%r8
+    0.00 :   27b912: mov    %r13,%rdi
+    0.00 :   27b915: mov    %rcx,0x28(%rsp)
+    0.00 :   27b91a: jmp    27b95e <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x160e>
+    0.00 :   27b91c: mov    0x18(%rsp),%rcx
+    0.00 :   27b921: lea    0xdd838(%rip),%rdx        # 359160 <anon.eddde403183433b74fec11346de0c988.11.llvm.15907582582815929209+0x6c0>
+    0.00 :   27b928: mov    %rbp,%r8
+    0.00 :   27b92b: mov    %rdx,0x28(%rsp)
+    0.00 :   27b930: mov    %rcx,0x10(%rsp)
+    0.00 :   27b935: jmp    27b95e <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x160e>
+    0.00 :   27b937: lea    0xdd8e2(%rip),%rcx        # 359220 <anon.eddde403183433b74fec11346de0c988.11.llvm.15907582582815929209+0x780>
+    0.00 :   27b93e: mov    %rbx,0x10(%rsp)
+    0.00 :   27b943: mov    %rcx,0x28(%rsp)
+    0.00 :   27b948: jmp    27b95e <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x160e>
+    0.00 :   27b94a: lea    0xdd8b7(%rip),%rdx        # 359208 <anon.eddde403183433b74fec11346de0c988.11.llvm.15907582582815929209+0x768>
+    0.00 :   27b951: mov    %r13,%rdi
+    0.00 :   27b954: mov    %rcx,0x10(%rsp)
+    0.00 :   27b959: mov    %rdx,0x28(%rsp)
+    0.00 :   27b95e: mov    0x10(%rsp),%rsi
+    0.00 :   27b963: mov    0x28(%rsp),%rdx
+    0.00 :   27b968: mov    0x18(%rsp),%r14
+    0.00 :   27b96d: mov    %r8,%rbp
+    0.00 :   27b970: mov    %rax,%r12
+    0.00 :   27b973: vzeroupper
+    0.00 :   27b976: call   *0xe1504(%rip)        # 35ce80 <_DYNAMIC+0x280>
+    0.00 :   27b97c: jmp    27bab1 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x1761>
+    0.00 :   27b981: mov    %r15,%rdi
+    0.00 :   27b984: mov    %r12,%rax
+    0.00 :   27b987: mov    %rbp,%r8
+    0.00 :   27b98a: jmp    27b95e <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x160e>
+    0.00 :   27b98c: lea    0xdd845(%rip),%rcx        # 3591d8 <anon.eddde403183433b74fec11346de0c988.11.llvm.15907582582815929209+0x738>
+    0.00 :   27b993: mov    %r15,%rdi
+    0.00 :   27b996: mov    %r12,%rax
+    0.00 :   27b999: mov    %rbp,%r8
+    0.00 :   27b99c: mov    %rdx,0x10(%rsp)
+    0.00 :   27b9a1: mov    %rcx,0x28(%rsp)
+    0.00 :   27b9a6: jmp    27b95e <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x160e>
+    0.00 :   27b9a8: mov    %r15,0x8(%rsp)
+    0.00 :   27b9ad: lea    0xdd6ec(%rip),%rax        # 3590a0 <anon.eddde403183433b74fec11346de0c988.11.llvm.15907582582815929209+0x600>
+    0.00 :   27b9b4: jmp    27ba4f <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x16ff>
+    0.00 :   27b9b9: mov    %rcx,0x8(%rsp)
+    0.00 :   27b9be: lea    0xdd6ab(%rip),%rax        # 359070 <anon.eddde403183433b74fec11346de0c988.11.llvm.15907582582815929209+0x5d0>
+    0.00 :   27b9c5: jmp    27ba4f <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x16ff>
+    0.00 :   27b9ca: mov    %r8,%rdi
+    0.00 :   27b9cd: mov    %r9,0x8(%rsp)
+    0.00 :   27b9d2: lea    0xdd6df(%rip),%rax        # 3590b8 <anon.eddde403183433b74fec11346de0c988.11.llvm.15907582582815929209+0x618>
+    0.00 :   27b9d9: jmp    27ba4f <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x16ff>
+    0.00 :   27b9db: mov    %rax,0x8(%rsp)
+    0.00 :   27b9e0: mov    %rsi,%rdi
+    0.00 :   27b9e3: lea    0xdd69e(%rip),%rax        # 359088 <anon.eddde403183433b74fec11346de0c988.11.llvm.15907582582815929209+0x5e8>
+    0.00 :   27b9ea: jmp    27ba4f <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x16ff>
+    0.00 :   27b9ec: mov    0x18(%rsp),%rax
+    0.00 :   27b9f1: mov    %rsi,%rdi
+    0.00 :   27b9f4: mov    %rax,0x8(%rsp)
+    0.00 :   27b9f9: lea    0xdd6d0(%rip),%rax        # 3590d0 <anon.eddde403183433b74fec11346de0c988.11.llvm.15907582582815929209+0x630>
+    0.00 :   27ba00: jmp    27ba4f <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x16ff>
+    0.00 :   27ba02: mov    %rax,0x8(%rsp)
+    0.00 :   27ba07: lea    0xdd722(%rip),%rax        # 359130 <anon.eddde403183433b74fec11346de0c988.11.llvm.15907582582815929209+0x690>
+    0.00 :   27ba0e: mov    %rdx,%rdi
+    0.00 :   27ba11: jmp    27ba4f <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x16ff>
+    0.00 :   27ba13: dec    %rsi
+    0.00 :   27ba16: mov    %rsi,%rdi
+    0.00 :   27ba19: jmp    27ba54 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x1704>
+    0.00 :   27ba1b: mov    %rax,0x8(%rsp)
+    0.00 :   27ba20: lea    0xdd6d9(%rip),%rax        # 359100 <anon.eddde403183433b74fec11346de0c988.11.llvm.15907582582815929209+0x660>
+    0.00 :   27ba27: jmp    27ba4f <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x16ff>
+    0.00 :   27ba29: lea    0xdd718(%rip),%rcx        # 359148 <anon.eddde403183433b74fec11346de0c988.11.llvm.15907582582815929209+0x6a8>
+    0.00 :   27ba30: mov    %r12,%rax
+    0.00 :   27ba33: mov    %rbp,%r8
+    0.00 :   27ba36: mov    %rcx,0x28(%rsp)
+    0.00 :   27ba3b: jmp    27b95e <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x160e>
+    0.00 :   27ba40: mov    %rsi,%rdi
+    0.00 :   27ba43: mov    %r11,0x8(%rsp)
+    0.00 :   27ba48: lea    0xdd699(%rip),%rax        # 3590e8 <anon.eddde403183433b74fec11346de0c988.11.llvm.15907582582815929209+0x648>
+    0.00 :   27ba4f: mov    %rax,0x20(%rsp)
+    0.00 :   27ba54: mov    0x8(%rsp),%rsi
+    0.00 :   27ba59: mov    0x20(%rsp),%rdx
+    0.00 :   27ba5e: call   *0xe141c(%rip)        # 35ce80 <_DYNAMIC+0x280>
+    0.00 :   27ba64: jmp    27bab1 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x1761>
+    0.00 :   27ba66: mov    0x18(%rsp),%r14
+    0.00 :   27ba6b: lea    0xdd92e(%rip),%rdx        # 3593a0 <anon.eddde403183433b74fec11346de0c988.11.llvm.15907582582815929209+0x900>
+    0.00 :   27ba72: mov    %r11,%rdi
+    0.00 :   27ba75: mov    %rcx,%rsi
+    0.00 :   27ba78: vzeroupper
+    0.00 :   27ba7b: call   *0xe13ff(%rip)        # 35ce80 <_DYNAMIC+0x280>
+    0.00 :   27ba81: jmp    27bab1 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x1761>
+    0.00 :   27ba83: lea    0xdcf6e(%rip),%rdi        # 3589f8 <anon.ed4165d82a8a4b9c88b89bf145dda3a4.1364.llvm.11795285028881376480>
+    0.00 :   27ba8a: call   *0xe13f8(%rip)        # 35ce88 <_DYNAMIC+0x288>
+    0.00 :   27ba90: mov    $0x8,%edi
+    0.00 :   27ba95: mov    %r13,%rsi
+    0.00 :   27ba98: call   *0xe13ca(%rip)        # 35ce68 <_DYNAMIC+0x268>
+    0.00 :   27ba9e: jmp    27bab1 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x1761>
+    0.00 :   27baa0: mov    $0x8,%edi
+    0.00 :   27baa5: mov    %r13,%rbp
+    0.00 :   27baa8: mov    %rbp,%rsi
+    0.00 :   27baab: call   *0xe13b7(%rip)        # 35ce68 <_DYNAMIC+0x268>
+    0.00 :   27bab1: ud2
+    0.00 :   27bab3: mov    %rax,%rbx
+    0.00 :   27bab6: jmp    27bb22 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x17d2>
+    0.00 :   27bab8: mov    %rax,%rbx
+    0.00 :   27babb: jmp    27baf3 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x17a3>
+    0.00 :   27babd: mov    0x8(%rsp),%r12
+    0.00 :   27bac2: jmp    27bac4 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x1774>
+    0.00 :   27bac4: mov    %rax,%rbx
+    0.00 :   27bac7: mov    0x68(%rsp),%rax
+    0.00 :   27bacc: test   %rax,%rax
+    0.00 :   27bacf: je     27baf3 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x17a3>
+    0.00 :   27bad1: mov    0x70(%rsp),%rdi
+    0.00 :   27bad6: movzbl 0xe37c3(%rip),%ecx        # 35f2a0 <block_lsd_bench::TRACK>
+    0.00 :   27badd: test   %cl,%cl
+    0.00 :   27badf: je     27baed <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x179d>
+    0.00 :   27bae1: shl    $0x3,%rax
+    0.00 :   27bae5: lock sub %rax,0xe37a3(%rip)        # 35f290 <block_lsd_bench::LIVE>
+    0.00 :   27baed: call   *0xe136d(%rip)        # 35ce60 <free@GLIBC_2.2.5>
+    0.00 :   27baf3: mov    0x18(%rsp),%r14
+    0.00 :   27baf8: jmp    27bafd <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x17ad>
+    0.00 :   27bafa: mov    %rax,%rbx
+    0.00 :   27bafd: test   %r14,%r14
+    0.00 :   27bb00: je     27bb22 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x17d2>
+    0.00 :   27bb02: movzbl 0xe3797(%rip),%eax        # 35f2a0 <block_lsd_bench::TRACK>
+    0.00 :   27bb09: test   %al,%al
+    0.00 :   27bb0b: je     27bb19 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x17c9>
+    0.00 :   27bb0d: shl    $0x3,%r14
+    0.00 :   27bb11: lock sub %r14,0xe3777(%rip)        # 35f290 <block_lsd_bench::LIVE>
+    0.00 :   27bb19: mov    %r12,%rdi
+    0.00 :   27bb1c: call   *0xe133e(%rip)        # 35ce60 <free@GLIBC_2.2.5>
+    0.00 :   27bb22: cmpq   $0x0,0x38(%rsp)
+    0.00 :   27bb28: je     27bb67 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x1817>
+    0.00 :   27bb2a: movzbl 0xe376f(%rip),%eax        # 35f2a0 <block_lsd_bench::TRACK>
+    0.00 :   27bb31: test   %al,%al
+    0.00 :   27bb33: je     27bb46 <block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>+0x17f6>
+    0.00 :   27bb35: mov    0x38(%rsp),%rax
+    0.00 :   27bb3a: shl    $0x4,%rax
+    0.00 :   27bb3e: lock sub %rax,0xe374a(%rip)        # 35f290 <block_lsd_bench::LIVE>
+    0.00 :   27bb46: mov    %rbp,%rdi
+    0.00 :   27bb49: call   *0xe1311(%rip)        # 35ce60 <free@GLIBC_2.2.5>
+    0.00 :   27bb4f: lea    0xa0(%rsp),%rdi
+    0.00 :   27bb57: call   25dd20 <core::ptr::drop_glue::<block_lsd_bench::shared::cursor::Sorter<block_lsd_bench::Record<u32, 7>>>>
+    0.00 :   27bb5c: mov    %rbx,%rdi
+    0.00 :   27bb5f: call   3479b0 <_Unwind_Resume@plt>
+    0.00 :   27bb64: mov    %rax,%rbx
+    0.00 :   27bb67: lea    0xa0(%rsp),%rdi
+    0.00 :   27bb6f: call   25dd20 <core::ptr::drop_glue::<block_lsd_bench::shared::cursor::Sorter<block_lsd_bench::Record<u32, 7>>>>
+    0.00 :   27bb74: mov    %rbx,%rdi
+    0.00 :   27bb77: call   3479b0 <_Unwind_Resume@plt>

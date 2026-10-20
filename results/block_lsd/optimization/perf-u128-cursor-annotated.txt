@@ -1,0 +1,1511 @@
+ Percent |	Source code & Disassembly of block_lsd_bench for cycles:u (1893 samples, percent: local period)
+---------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3      Disassembly of section .text:
+         :
+         : 5      00000000001b7f00 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>>:
+    0.00 :   1b7f00: push   %rbp
+    0.00 :   1b7f01: push   %r15
+    0.00 :   1b7f03: push   %r14
+    0.00 :   1b7f05: push   %r13
+    0.00 :   1b7f07: push   %r12
+    0.00 :   1b7f09: push   %rbx
+    0.00 :   1b7f0a: sub    $0x1d8,%rsp
+    0.00 :   1b7f11: lea    -0x1(%rdx),%rax
+    0.00 :   1b7f15: mov    %rdi,0x40(%rsp)
+    0.00 :   1b7f1a: cmp    $0x8,%rax
+    0.00 :   1b7f1e: jae    1b95a2 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x16a2>
+    0.00 :   1b7f24: test   %rcx,%rcx
+    0.00 :   1b7f27: je     1b95bb <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x16bb>
+    0.00 :   1b7f2d: cmp    $0x2,%rsi
+    0.00 :   1b7f31: jb     1b80dc <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1dc>
+    0.00 :   1b7f37: mov    0x40(%rsp),%rdi
+    0.00 :   1b7f3c: mov    %rsi,%rax
+    0.00 :   1b7f3f: shl    $0x5,%rax
+    0.00 :   1b7f43: mov    %rcx,0x80(%rsp)
+    0.00 :   1b7f4b: mov    %rdx,0x18(%rsp)
+    0.00 :   1b7f50: mov    %rsi,0x88(%rsp)
+    0.00 :   1b7f58: mov    (%rdi),%r13
+    0.00 :   1b7f5b: mov    0x8(%rdi),%r12
+    0.00 :   1b7f5f: lea    0x20(%rdi),%rcx
+    0.00 :   1b7f63: lea    -0x40(%rax),%rdi
+    0.00 :   1b7f67: mov    %edi,%r8d
+    0.00 :   1b7f6a: shr    $0x5,%r8d
+    0.00 :   1b7f6e: inc    %r8d
+    0.00 :   1b7f71: and    $0x7,%r8d
+    0.00 :   1b7f75: je     1b7fbb <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xbb>
+    0.00 :   1b7f77: shl    $0x5,%r8d
+    0.00 :   1b7f7b: mov    %r13,%rbp
+    0.00 :   1b7f7e: mov    %r12,%rdx
+    0.00 :   1b7f81: data16 data16 data16 data16 data16 cs nopw 0x0(%rax,%rax,1)
+    0.00 :   1b7f90: mov    (%rcx),%r9
+    0.00 :   1b7f93: mov    0x8(%rcx),%r10
+    0.00 :   1b7f97: add    $0x20,%rcx
+    0.00 :   1b7f9b: or     %r10,%rdx
+    0.00 :   1b7f9e: or     %r9,%rbp
+    0.00 :   1b7fa1: and    %r10,%r12
+    0.00 :   1b7fa4: and    %r9,%r13
+    0.00 :   1b7fa7: add    $0xffffffffffffffe0,%r8
+    0.00 :   1b7fab: jne    1b7f90 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x90>
+    0.00 :   1b7fad: cmp    $0xe0,%rdi
+    0.00 :   1b7fb4: jae    1b7fce <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xce>
+    0.00 :   1b7fb6: jmp    1b80b9 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1b9>
+    0.00 :   1b7fbb: mov    %r13,%rbp
+    0.00 :   1b7fbe: mov    %r12,%rdx
+    0.00 :   1b7fc1: cmp    $0xe0,%rdi
+    0.00 :   1b7fc8: jb     1b80b9 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1b9>
+    0.00 :   1b7fce: add    0x40(%rsp),%rax
+    0.00 :   1b7fd3: data16 data16 data16 cs nopw 0x0(%rax,%rax,1)
+    0.00 :   1b7fe0: mov    (%rcx),%rdi
+    0.10 :   1b7fe3: mov    0x8(%rcx),%r8
+    0.00 :   1b7fe7: mov    0x48(%rcx),%r9
+    0.24 :   1b7feb: mov    0x28(%rcx),%r10
+    0.04 :   1b7fef: mov    0x68(%rcx),%rsi
+    0.06 :   1b7ff3: mov    %r9,%r15
+    0.00 :   1b7ff6: or     %rdi,%rbp
+    0.00 :   1b7ff9: and    %rdi,%r13
+    0.00 :   1b7ffc: mov    0x40(%rcx),%rdi
+    0.00 :   1b8000: or     %r8,%rdx
+    0.00 :   1b8003: or     %r10,%r15
+    0.00 :   1b8006: and    %r8,%r12
+    0.00 :   1b8009: and    %r10,%r9
+    0.00 :   1b800c: mov    0x88(%rcx),%r10
+    0.00 :   1b8013: mov    0x20(%rcx),%r8
+    0.00 :   1b8017: or     %rdx,%r15
+    0.00 :   1b801a: mov    0x60(%rcx),%rdx
+    0.01 :   1b801e: and    %r12,%r9
+    0.00 :   1b8021: mov    0xe8(%rcx),%r12
+    0.06 :   1b8028: mov    %rdi,%r11
+    0.00 :   1b802b: mov    %r10,%r14
+    0.00 :   1b802e: or     %r8,%r11
+    0.00 :   1b8031: and    %r8,%rdi
+    0.00 :   1b8034: mov    0x80(%rcx),%r8
+    0.05 :   1b803b: or     %rsi,%r14
+    0.07 :   1b803e: and    %rsi,%r10
+    0.00 :   1b8041: mov    0xa8(%rcx),%rsi
+    0.02 :   1b8048: and    %r13,%rdi
+    0.00 :   1b804b: mov    0xe0(%rcx),%r13
+    0.06 :   1b8052: or     %rbp,%r11
+    0.00 :   1b8055: mov    %r8,%rbx
+    0.00 :   1b8058: and    %rsi,%r10
+    0.00 :   1b805b: or     %rdx,%rbx
+    0.00 :   1b805e: and    %rdx,%r8
+    0.00 :   1b8061: mov    0xa0(%rcx),%rdx
+    0.24 :   1b8068: or     %rsi,%r14
+    0.00 :   1b806b: mov    0xc8(%rcx),%rsi
+    0.12 :   1b8072: and    %r9,%r10
+    0.00 :   1b8075: mov    0xc0(%rcx),%r9
+    0.00 :   1b807c: mov    %r13,%rbp
+    0.00 :   1b807f: or     %r15,%r14
+    0.00 :   1b8082: add    $0x100,%rcx
+    0.00 :   1b8089: or     %rdx,%rbx
+    0.00 :   1b808c: and    %rdx,%r8
+    0.00 :   1b808f: mov    %r12,%rdx
+    0.00 :   1b8092: or     %rsi,%rdx
+    0.00 :   1b8095: and    %rsi,%r12
+    0.00 :   1b8098: or     %r11,%rbx
+    0.00 :   1b809b: or     %r9,%rbp
+    0.00 :   1b809e: and    %rdi,%r8
+    0.05 :   1b80a1: and    %r9,%r13
+    0.00 :   1b80a4: or     %r14,%rdx
+    0.01 :   1b80a7: and    %r10,%r12
+    0.00 :   1b80aa: or     %rbx,%rbp
+    0.00 :   1b80ad: and    %r8,%r13
+    0.00 :   1b80b0: cmp    %rax,%rcx
+    0.00 :   1b80b3: jne    1b7fe0 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xe0>
+    0.00 :   1b80b9: xor    %r13,%rbp
+    0.00 :   1b80bc: mov    0x18(%rsp),%r14
+    0.00 :   1b80c1: mov    0x80(%rsp),%r13
+    0.00 :   1b80c9: mov    0x88(%rsp),%rbx
+    0.00 :   1b80d1: xor    %r12,%rdx
+    0.00 :   1b80d4: mov    %rbp,%rax
+    0.00 :   1b80d7: or     %rdx,%rax
+    0.00 :   1b80da: jne    1b80ee <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1ee>
+    0.00 :   1b80dc: add    $0x1d8,%rsp
+    0.00 :   1b80e3: pop    %rbx
+    0.00 :   1b80e4: pop    %r12
+    0.00 :   1b80e6: pop    %r13
+    0.00 :   1b80e8: pop    %r14
+    0.00 :   1b80ea: pop    %r15
+    0.00 :   1b80ec: pop    %rbp
+    0.00 :   1b80ed: ret
+    0.00 :   1b80ee: mov    $0x80,%edi
+    0.00 :   1b80f3: mov    %rdx,0x98(%rsp)
+    0.00 :   1b80fb: xor    %esi,%esi
+    0.00 :   1b80fd: mov    %r14,%rdx
+    0.00 :   1b8100: call   *0x784d2(%rip)        # 2305d8 <_DYNAMIC+0x418>
+    0.00 :   1b8106: mov    %rbx,%rcx
+    0.00 :   1b8109: or     %r13,%rcx
+    0.00 :   1b810c: mov    %rax,%rsi
+    0.00 :   1b810f: mov    $0x2,%eax
+    0.00 :   1b8114: shlx   %r14,%rax,%rax
+    0.00 :   1b8119: shr    $0x20,%rcx
+    0.00 :   1b811d: mov    %rax,0x48(%rsp)
+    0.00 :   1b8122: je     1b8136 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x236>
+    0.00 :   1b8124: mov    %rbx,%rax
+    0.00 :   1b8127: xor    %edx,%edx
+    0.00 :   1b8129: div    %r13
+    0.00 :   1b812c: mov    %rdx,0x8(%rsp)
+    0.00 :   1b8131: mov    %rax,%rbx
+    0.00 :   1b8134: jmp    1b8144 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x244>
+    0.00 :   1b8136: mov    %ebx,%eax
+    0.00 :   1b8138: xor    %edx,%edx
+    0.00 :   1b813a: div    %r13d
+    0.00 :   1b813d: mov    %rdx,0x8(%rsp)
+    0.00 :   1b8142: mov    %eax,%ebx
+    0.00 :   1b8144: mov    0x48(%rsp),%rax
+    0.00 :   1b8149: lea    (%rbx,%rax,1),%rcx
+    0.00 :   1b814d: mov    %rcx,%rax
+    0.00 :   1b8150: shr    $0x20,%rax
+    0.00 :   1b8154: jne    1b9607 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1707>
+    0.00 :   1b815a: mov    %rsi,0xb8(%rsp)
+    0.00 :   1b8162: mov    %rcx,0x10(%rsp)
+    0.00 :   1b8167: lea    0x0(,%rcx,4),%r12
+    0.00 :   1b816f: call   *0x782bb(%rip)        # 230430 <_DYNAMIC+0x270>
+    0.00 :   1b8175: mov    $0x1,%esi
+    0.00 :   1b817a: mov    %r12,%rdi
+    0.00 :   1b817d: call   *0x782b5(%rip)        # 230438 <calloc@GLIBC_2.2.5>
+    0.00 :   1b8183: test   %rax,%rax
+    0.00 :   1b8186: je     1b97f4 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x18f4>
+    0.00 :   1b818c: movzbl 0x7a6bd(%rip),%ecx        # 232850 <block_lsd_bench::TRACK>
+    0.00 :   1b8193: mov    %rax,%r15
+    0.00 :   1b8196: mov    $0x1,%eax
+    0.00 :   1b819b: shlx   %r14,%rax,%r9
+    0.00 :   1b81a0: test   %cl,%cl
+    0.00 :   1b81a2: je     1b81d5 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x2d5>
+    0.00 :   1b81a4: mov    %r12,%rcx
+    0.00 :   1b81a7: lock xadd %rcx,0x7a690(%rip)        # 232840 <block_lsd_bench::LIVE>
+    0.00 :   1b81b0: mov    0x7a691(%rip),%rax        # 232848 <block_lsd_bench::PEAK>
+    0.00 :   1b81b7: add    %r12,%rcx
+    0.00 :   1b81ba: nopw   0x0(%rax,%rax,1)
+    0.00 :   1b81c0: cmp    %rcx,%rax
+    0.00 :   1b81c3: mov    %rcx,%rdx
+    0.00 :   1b81c6: cmova  %rax,%rdx
+    0.00 :   1b81ca: lock cmpxchg %rdx,0x7a675(%rip)        # 232848 <block_lsd_bench::PEAK>
+    0.00 :   1b81d3: jne    1b81c0 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x2c0>
+    0.00 :   1b81d5: lea    (%rbx,%r9,1),%r8
+    0.00 :   1b81d9: movabs $0x7ffffffffffffff0,%rcx
+    0.00 :   1b81e3: lea    -0x4(%r12),%rax
+    0.00 :   1b81e8: cmp    $0x1c,%rax
+    0.00 :   1b81ec: jae    1b81f8 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x2f8>
+    0.00 :   1b81ee: xor    %eax,%eax
+    0.00 :   1b81f0: mov    %r15,%rdx
+    0.00 :   1b81f3: jmp    1b8516 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x616>
+    0.00 :   1b81f8: mov    %rax,%rsi
+    0.00 :   1b81fb: shr    $0x2,%rsi
+    0.00 :   1b81ff: vpbroadcastq %r9,%zmm0
+    0.00 :   1b8205: vpbroadcastq %r8,%zmm1
+    0.00 :   1b820b: inc    %rsi
+    0.00 :   1b820e: cmp    $0x3c,%rax
+    0.00 :   1b8212: jae    1b82a7 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x3a7>
+    0.00 :   1b8218: xor    %eax,%eax
+    0.00 :   1b821a: mov    %rax,%rdi
+    0.00 :   1b821d: vpbroadcastq %rdi,%zmm2
+    0.00 :   1b8223: vporq  -0x19aa2d(%rip),%zmm2,%zmm4        # 1d800 <anon.d35df8537a9ef5050ceb7e667662bffa.10.llvm.3634249459765829945+0x2674>
+    0.00 :   1b822d: vpbroadcastq -0x19e4bf(%rip),%zmm3        # 19d78 <anon.1000b255692110c1e1df217f61ce8746.4.llvm.3563159085420552679+0x1c5>
+    0.00 :   1b8237: lea    0x8(%rcx),%rax
+    0.00 :   1b823b: mov    %r8,%r10
+    0.00 :   1b823e: mov    %rbx,%r8
+    0.00 :   1b8241: neg    %r8
+    0.00 :   1b8244: and    %rsi,%rax
+    0.00 :   1b8247: vpbroadcastq %r8,%zmm2
+    0.00 :   1b824d: lea    (%r15,%rax,4),%rdx
+    0.00 :   1b8251: data16 data16 data16 data16 data16 cs nopw 0x0(%rax,%rax,1)
+    0.00 :   1b8260: vpcmpltuq %zmm1,%zmm4,%k2
+    0.00 :   1b8267: vpcmpnltuq %zmm0,%zmm4,%k1
+    0.00 :   1b826e: vpaddq %zmm3,%zmm4,%zmm6
+    0.00 :   1b8274: vpblendmq %zmm0,%zmm2,%zmm5{%k2}
+    0.00 :   1b827a: vpaddq %zmm5,%zmm4,%zmm4{%k1}
+    0.00 :   1b8280: vpmovqd %zmm4,(%r15,%rdi,4)
+    0.00 :   1b8287: add    $0x8,%rdi
+    0.00 :   1b828b: vmovdqa64 %zmm6,%zmm4
+    0.00 :   1b8291: cmp    %rdi,%rax
+    0.00 :   1b8294: jne    1b8260 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x360>
+    0.00 :   1b8296: mov    %r10,%r8
+    0.00 :   1b8299: cmp    %rax,%rsi
+    0.00 :   1b829c: je     1b834d <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x44d>
+    0.00 :   1b82a2: jmp    1b8516 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x616>
+    0.00 :   1b82a7: vmovdqa64 -0x19aaf1(%rip),%zmm4        # 1d7c0 <anon.d35df8537a9ef5050ceb7e667662bffa.10.llvm.3634249459765829945+0x2634>
+    0.00 :   1b82b1: vmovdqa64 -0x19aabb(%rip),%zmm5        # 1d800 <anon.d35df8537a9ef5050ceb7e667662bffa.10.llvm.3634249459765829945+0x2674>
+    0.00 :   1b82bb: vpbroadcastq -0x19e4d5(%rip),%zmm3        # 19df0 <anon.1000b255692110c1e1df217f61ce8746.4.llvm.3563159085420552679+0x23d>
+    0.00 :   1b82c5: mov    %rsi,%rax
+    0.00 :   1b82c8: and    %rcx,%rax
+    0.00 :   1b82cb: mov    %rbx,%rdi
+    0.00 :   1b82ce: neg    %rdi
+    0.00 :   1b82d1: lea    (%r15,%rax,4),%rdx
+    0.00 :   1b82d5: vpbroadcastq %rdi,%zmm2
+    0.00 :   1b82db: xor    %edi,%edi
+    0.00 :   1b82dd: nopl   (%rax)
+    0.00 :   1b82e0: vpcmpltuq %zmm1,%zmm4,%k3
+    0.00 :   1b82e7: vpcmpltuq %zmm1,%zmm5,%k4
+    0.00 :   1b82ee: vpcmpnltuq %zmm0,%zmm5,%k1
+    0.00 :   1b82f5: vpcmpnltuq %zmm0,%zmm4,%k2
+    0.00 :   1b82fc: vpaddq %zmm3,%zmm4,%zmm8
+    0.00 :   1b8302: vpaddq %zmm3,%zmm5,%zmm9
+    0.00 :   1b8308: vpblendmq %zmm0,%zmm2,%zmm6{%k4}
+    0.00 :   1b830e: vpblendmq %zmm0,%zmm2,%zmm7{%k3}
+    0.00 :   1b8314: vpaddq %zmm7,%zmm4,%zmm4{%k2}
+    0.00 :   1b831a: vpaddq %zmm6,%zmm5,%zmm5{%k1}
+    0.00 :   1b8320: vpmovqd %zmm5,(%r15,%rdi,4)
+    0.00 :   1b8327: vpmovqd %zmm4,0x20(%r15,%rdi,4)
+    0.00 :   1b832f: add    $0x10,%rdi
+    0.00 :   1b8333: vmovdqa64 %zmm9,%zmm5
+    0.00 :   1b8339: vmovdqa64 %zmm8,%zmm4
+    0.00 :   1b833f: cmp    %rdi,%rax
+    0.00 :   1b8342: jne    1b82e0 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x3e0>
+    0.00 :   1b8344: cmp    %rax,%rsi
+    0.00 :   1b8347: jne    1b850c <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x60c>
+    0.00 :   1b834d: mov    0x48(%rsp),%rax
+    0.00 :   1b8352: mul    %r13
+    0.00 :   1b8355: jo     1b9620 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1720>
+    0.00 :   1b835b: mov    %rax,%r14
+    0.00 :   1b835e: shl    $0x5,%r14
+    0.00 :   1b8362: mov    %rax,%rdx
+    0.00 :   1b8365: shr    $0x3b,%rdx
+    0.00 :   1b8369: setne  %dl
+    0.00 :   1b836c: cmp    %rcx,%r14
+    0.00 :   1b836f: seta   %cl
+    0.00 :   1b8372: or     %dl,%cl
+    0.00 :   1b8374: je     1b8389 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x489>
+    0.00 :   1b8376: xor    %edi,%edi
+    0.00 :   1b8378: mov    %r14,%rsi
+    0.00 :   1b837b: vzeroupper
+    0.00 :   1b837e: call   *0x780a4(%rip)        # 230428 <_DYNAMIC+0x268>
+    0.00 :   1b8384: jmp    1b986b <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x196b>
+    0.00 :   1b8389: mov    %r15,0x20(%rsp)
+    0.00 :   1b838e: mov    $0x10,%r15d
+    0.00 :   1b8394: mov    %r8,0x30(%rsp)
+    0.00 :   1b8399: mov    %r9,(%rsp)
+    0.00 :   1b839d: mov    %rax,0x28(%rsp)
+    0.00 :   1b83a2: test   %r14,%r14
+    0.00 :   1b83a5: je     1b840c <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x50c>
+    0.00 :   1b83a7: vzeroupper
+    0.00 :   1b83aa: call   *0x78080(%rip)        # 230430 <_DYNAMIC+0x270>
+    0.00 :   1b83b0: mov    %r14,%rdi
+    0.00 :   1b83b3: call   *0x780df(%rip)        # 230498 <malloc@GLIBC_2.2.5>
+    0.00 :   1b83b9: test   %rax,%rax
+    0.00 :   1b83bc: je     1b9834 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1934>
+    0.00 :   1b83c2: movzbl 0x7a487(%rip),%ecx        # 232850 <block_lsd_bench::TRACK>
+    0.00 :   1b83c9: mov    %rax,%rsi
+    0.00 :   1b83cc: test   %cl,%cl
+    0.00 :   1b83ce: je     1b8405 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x505>
+    0.00 :   1b83d0: mov    %r14,%rcx
+    0.00 :   1b83d3: lock xadd %rcx,0x7a464(%rip)        # 232840 <block_lsd_bench::LIVE>
+    0.00 :   1b83dc: mov    0x7a465(%rip),%rax        # 232848 <block_lsd_bench::PEAK>
+    0.00 :   1b83e3: add    %r14,%rcx
+    0.00 :   1b83e6: cs nopw 0x0(%rax,%rax,1)
+    0.00 :   1b83f0: cmp    %rcx,%rax
+    0.00 :   1b83f3: mov    %rcx,%rdx
+    0.00 :   1b83f6: cmova  %rax,%rdx
+    0.00 :   1b83fa: lock cmpxchg %rdx,0x7a445(%rip)        # 232848 <block_lsd_bench::PEAK>
+    0.00 :   1b8403: jne    1b83f0 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x4f0>
+    0.00 :   1b8405: mov    0x28(%rsp),%r14
+    0.00 :   1b840a: jmp    1b8414 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x514>
+    0.00 :   1b840c: xor    %r14d,%r14d
+    0.00 :   1b840f: mov    $0x10,%esi
+    0.00 :   1b8414: imul   %r13,%rbx
+    0.00 :   1b8418: mov    %r13,%rax
+    0.00 :   1b841b: mov    0x18(%rsp),%r13
+    0.00 :   1b8420: mov    0x8(%rsp),%rdx
+    0.00 :   1b8425: mov    %rsi,0x38(%rsp)
+    0.00 :   1b842a: shl    $0x5,%rbx
+    0.00 :   1b842e: add    0x40(%rsp),%rbx
+    0.00 :   1b8433: shlx   %r13,%rax,%rdi
+    0.00 :   1b8438: shl    $0x5,%rdx
+    0.00 :   1b843c: shl    $0x5,%rdi
+    0.00 :   1b8440: add    %rsi,%rdi
+    0.00 :   1b8443: mov    %rbx,%rsi
+    0.00 :   1b8446: vzeroupper
+    0.00 :   1b8449: call   *0x78021(%rip)        # 230470 <memcpy@GLIBC_2.14>
+    0.00 :   1b844f: shlx   %r13,%r15,%rbx
+    0.00 :   1b8454: mov    %r13,%r15
+    0.00 :   1b8457: call   *0x77fd3(%rip)        # 230430 <_DYNAMIC+0x270>
+    0.00 :   1b845d: mov    %rbx,%rdi
+    0.00 :   1b8460: call   *0x78032(%rip)        # 230498 <malloc@GLIBC_2.2.5>
+    0.00 :   1b8466: mov    %rax,0x58(%rsp)
+    0.00 :   1b846b: test   %rax,%rax
+    0.00 :   1b846e: je     1b9802 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1902>
+    0.00 :   1b8474: movzbl 0x7a3d5(%rip),%eax        # 232850 <block_lsd_bench::TRACK>
+    0.00 :   1b847b: mov    0x10(%rsp),%r9
+    0.00 :   1b8480: mov    (%rsp),%r10
+    0.00 :   1b8484: mov    0x30(%rsp),%r8
+    0.00 :   1b8489: test   %al,%al
+    0.00 :   1b848b: je     1b84c5 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x5c5>
+    0.00 :   1b848d: mov    %rbx,%rcx
+    0.00 :   1b8490: lock xadd %rcx,0x7a3a7(%rip)        # 232840 <block_lsd_bench::LIVE>
+    0.00 :   1b8499: mov    0x7a3a8(%rip),%rax        # 232848 <block_lsd_bench::PEAK>
+    0.00 :   1b84a0: add    %rbx,%rcx
+    0.00 :   1b84a3: data16 data16 data16 cs nopw 0x0(%rax,%rax,1)
+    0.00 :   1b84b0: cmp    %rcx,%rax
+    0.00 :   1b84b3: mov    %rcx,%rdx
+    0.00 :   1b84b6: cmova  %rax,%rdx
+    0.00 :   1b84ba: lock cmpxchg %rdx,0x7a385(%rip)        # 232848 <block_lsd_bench::PEAK>
+    0.00 :   1b84c3: jne    1b84b0 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x5b0>
+    0.00 :   1b84c5: mov    0x80(%rsp),%rbx
+    0.00 :   1b84cd: mov    0x58(%rsp),%rax
+    0.00 :   1b84d2: test   %r15,%r15
+    0.00 :   1b84d5: je     1b84fc <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x5fc>
+    0.00 :   1b84d7: mov    $0x1,%edx
+    0.00 :   1b84dc: vmovq  %r9,%xmm0
+    0.00 :   1b84e1: cmp    $0x3,%r15
+    0.00 :   1b84e5: jb     1b8620 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x720>
+    0.00 :   1b84eb: lea    -0x1(%r10),%rsi
+    0.00 :   1b84ef: cmp    $0x6,%r15
+    0.00 :   1b84f3: jae    1b854b <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x64b>
+    0.00 :   1b84f5: xor    %ecx,%ecx
+    0.00 :   1b84f7: jmp    1b85cf <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x6cf>
+    0.00 :   1b84fc: mov    %r9,(%rax)
+    0.00 :   1b84ff: movq   $0x0,0x8(%rax)
+    0.00 :   1b8507: jmp    1b864d <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x74d>
+    0.00 :   1b850c: test   $0x8,%sil
+    0.00 :   1b8510: jne    1b821a <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x31a>
+    0.00 :   1b8516: mov    %r15,%rsi
+    0.00 :   1b8519: add    %r12,%rsi
+    0.00 :   1b851c: jmp    1b8536 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x636>
+    0.00 :   1b851e: xchg   %ax,%ax
+    0.00 :   1b8520: lea    (%rax,%r9,1),%rdi
+    0.00 :   1b8524: mov    %edi,(%rdx)
+    0.00 :   1b8526: add    $0x4,%rdx
+    0.00 :   1b852a: inc    %rax
+    0.00 :   1b852d: cmp    %rsi,%rdx
+    0.00 :   1b8530: je     1b834d <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x44d>
+    0.00 :   1b8536: mov    %rax,%rdi
+    0.00 :   1b8539: cmp    %r9,%rax
+    0.00 :   1b853c: jb     1b8524 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x624>
+    0.00 :   1b853e: cmp    %r8,%rax
+    0.00 :   1b8541: jb     1b8520 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x620>
+    0.00 :   1b8543: mov    %rax,%rdi
+    0.00 :   1b8546: sub    %rbx,%rdi
+    0.00 :   1b8549: jmp    1b8524 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x624>
+    0.00 :   1b854b: mov    0x58(%rsp),%rdi
+    0.00 :   1b8550: mov    %rsi,%rcx
+    0.00 :   1b8553: and    $0xffffffffffffffe0,%rcx
+    0.00 :   1b8557: vshufi64x2 $0x0,%zmm0,%zmm0,%zmm1
+    0.00 :   1b855e: mov    %rcx,%rax
+    0.00 :   1b8561: shl    $0x4,%rax
+    0.00 :   1b8565: lea    0x1(%rcx),%rdx
+    0.00 :   1b8569: mov    %rcx,%r8
+    0.00 :   1b856c: add    %rdi,%rax
+    0.00 :   1b856f: add    $0x180,%rdi
+    0.00 :   1b8576: cs nopw 0x0(%rax,%rax,1)
+    0.00 :   1b8580: vmovdqu64 %zmm1,-0x180(%rdi)
+    0.00 :   1b8587: vmovdqu64 %zmm1,-0x140(%rdi)
+    0.00 :   1b858e: vmovdqu64 %zmm1,-0x100(%rdi)
+    0.00 :   1b8595: vmovdqu64 %zmm1,-0xc0(%rdi)
+    0.00 :   1b859c: vmovdqu64 %zmm1,-0x80(%rdi)
+    0.00 :   1b85a3: vmovdqu64 %zmm1,-0x40(%rdi)
+    0.00 :   1b85aa: vmovdqu64 %zmm1,(%rdi)
+    0.00 :   1b85b0: vmovdqu64 %zmm1,0x40(%rdi)
+    0.00 :   1b85b7: add    $0x200,%rdi
+    0.00 :   1b85be: add    $0xffffffffffffffe0,%r8
+    0.00 :   1b85c2: jne    1b8580 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x680>
+    0.00 :   1b85c4: mov    0x30(%rsp),%r8
+    0.00 :   1b85c9: test   $0x1c,%sil
+    0.00 :   1b85cd: je     1b8620 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x720>
+    0.00 :   1b85cf: vmovdqa64 -0x19ad99(%rip),%zmm1        # 1d840 <anon.d35df8537a9ef5050ceb7e667662bffa.10.llvm.3634249459765829945+0x26b4>
+    0.00 :   1b85d9: mov    0x58(%rsp),%r11
+    0.00 :   1b85de: vpxor  %xmm2,%xmm2,%xmm2
+    0.00 :   1b85e2: and    $0xfffffffffffffffc,%rsi
+    0.00 :   1b85e6: mov    %rcx,%rdi
+    0.00 :   1b85e9: shl    $0x4,%rcx
+    0.00 :   1b85ed: mov    %rsi,%rax
+    0.00 :   1b85f0: shl    $0x4,%rax
+    0.00 :   1b85f4: mov    %rsi,%rdx
+    0.00 :   1b85f7: sub    %rsi,%rdi
+    0.00 :   1b85fa: inc    %rdx
+    0.00 :   1b85fd: add    %r11,%rax
+    0.00 :   1b8600: add    %r11,%rcx
+    0.00 :   1b8603: vpermi2q %zmm2,%zmm0,%zmm1
+    0.00 :   1b8609: nopl   0x0(%rax)
+    0.00 :   1b8610: vmovdqu64 %zmm1,(%rcx)
+    0.00 :   1b8616: add    $0x40,%rcx
+    0.00 :   1b861a: add    $0x4,%rdi
+    0.00 :   1b861e: jne    1b8610 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x710>
+    0.00 :   1b8620: mov    %r10,%rcx
+    0.00 :   1b8623: sub    %rdx,%rcx
+    0.00 :   1b8626: cs nopw 0x0(%rax,%rax,1)
+    0.00 :   1b8630: vmovdqu %xmm0,(%rax)
+    0.00 :   1b8634: add    $0x10,%rax
+    0.00 :   1b8638: dec    %rcx
+    0.00 :   1b863b: jne    1b8630 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x730>
+    0.00 :   1b863d: mov    %r9,(%rax)
+    0.00 :   1b8640: movq   $0x0,0x8(%rax)
+    0.00 :   1b8648: mov    0x58(%rsp),%rax
+    0.00 :   1b864d: mov    0x8(%rsp),%rcx
+    0.00 :   1b8652: mov    %r8,(%rax)
+    0.00 :   1b8655: mov    %rcx,0x8(%rax)
+    0.00 :   1b8659: vzeroupper
+    0.00 :   1b865c: call   *0x77dce(%rip)        # 230430 <_DYNAMIC+0x270>
+    0.00 :   1b8662: mov    $0x1,%esi
+    0.00 :   1b8667: mov    %r12,%rdi
+    0.00 :   1b866a: call   *0x77dc8(%rip)        # 230438 <calloc@GLIBC_2.2.5>
+    0.00 :   1b8670: mov    %rax,0x68(%rsp)
+    0.00 :   1b8675: test   %rax,%rax
+    0.00 :   1b8678: je     1b9812 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1912>
+    0.00 :   1b867e: movzbl 0x7a1cb(%rip),%eax        # 232850 <block_lsd_bench::TRACK>
+    0.00 :   1b8685: test   %al,%al
+    0.00 :   1b8687: je     1b86b5 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x7b5>
+    0.00 :   1b8689: mov    %r12,%rcx
+    0.00 :   1b868c: lock xadd %rcx,0x7a1ab(%rip)        # 232840 <block_lsd_bench::LIVE>
+    0.00 :   1b8695: mov    0x7a1ac(%rip),%rax        # 232848 <block_lsd_bench::PEAK>
+    0.00 :   1b869c: add    %r12,%rcx
+    0.00 :   1b869f: nop
+    0.00 :   1b86a0: cmp    %rcx,%rax
+    0.00 :   1b86a3: mov    %rcx,%rdx
+    0.00 :   1b86a6: cmova  %rax,%rdx
+    0.00 :   1b86aa: lock cmpxchg %rdx,0x7a195(%rip)        # 232848 <block_lsd_bench::PEAK>
+    0.00 :   1b86b3: jne    1b86a0 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x7a0>
+    0.00 :   1b86b5: call   *0x77d75(%rip)        # 230430 <_DYNAMIC+0x270>
+    0.00 :   1b86bb: mov    0x10(%rsp),%rdi
+    0.00 :   1b86c0: mov    $0x1,%esi
+    0.00 :   1b86c5: call   *0x77d6d(%rip)        # 230438 <calloc@GLIBC_2.2.5>
+    0.00 :   1b86cb: mov    %rax,0x70(%rsp)
+    0.00 :   1b86d0: test   %rax,%rax
+    0.00 :   1b86d3: je     1b9822 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1922>
+    0.00 :   1b86d9: movzbl 0x7a170(%rip),%eax        # 232850 <block_lsd_bench::TRACK>
+    0.00 :   1b86e0: mov    0x10(%rsp),%r10
+    0.00 :   1b86e5: mov    0xb8(%rsp),%r9
+    0.00 :   1b86ed: mov    0x98(%rsp),%rsi
+    0.00 :   1b86f5: test   %al,%al
+    0.00 :   1b86f7: je     1b8725 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x825>
+    0.00 :   1b86f9: mov    %r10,%rcx
+    0.00 :   1b86fc: lock xadd %rcx,0x7a13b(%rip)        # 232840 <block_lsd_bench::LIVE>
+    0.00 :   1b8705: mov    0x7a13c(%rip),%rax        # 232848 <block_lsd_bench::PEAK>
+    0.00 :   1b870c: add    %r10,%rcx
+    0.00 :   1b870f: nop
+    0.00 :   1b8710: cmp    %rcx,%rax
+    0.00 :   1b8713: mov    %rcx,%rdx
+    0.00 :   1b8716: cmova  %rax,%rdx
+    0.00 :   1b871a: lock cmpxchg %rdx,0x7a125(%rip)        # 232848 <block_lsd_bench::PEAK>
+    0.00 :   1b8723: jne    1b8710 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x810>
+    0.00 :   1b8725: mov    (%rsp),%rdi
+    0.00 :   1b8729: mov    0x58(%rsp),%rax
+    0.00 :   1b872e: mov    0x48(%rsp),%rcx
+    0.00 :   1b8733: mov    0x40(%rsp),%r8
+    0.00 :   1b8738: mov    0x30(%rsp),%rdx
+    0.00 :   1b873d: mov    0x68(%rsp),%r11
+    0.00 :   1b8742: mov    %rdi,0x188(%rsp)
+    0.00 :   1b874a: mov    %rax,0x190(%rsp)
+    0.00 :   1b8752: mov    %rdi,0x198(%rsp)
+    0.00 :   1b875a: mov    %rbx,0x1a0(%rsp)
+    0.00 :   1b8762: mov    %rdi,0x1a8(%rsp)
+    0.00 :   1b876a: mov    %rcx,0x1b0(%rsp)
+    0.00 :   1b8772: mov    0x88(%rsp),%rcx
+    0.00 :   1b877a: mov    %r8,0x1b8(%rsp)
+    0.00 :   1b8782: mov    0x38(%rsp),%r8
+    0.00 :   1b8787: inc    %rdx
+    0.00 :   1b878a: mov    %rdx,0x30(%rsp)
+    0.00 :   1b878f: mov    %rcx,0x1c0(%rsp)
+    0.00 :   1b8797: mov    0x28(%rsp),%rcx
+    0.00 :   1b879c: mov    %r14,0x128(%rsp)
+    0.00 :   1b87a4: mov    %r8,0x130(%rsp)
+    0.00 :   1b87ac: mov    %rcx,0x138(%rsp)
+    0.00 :   1b87b4: mov    %r8,0x1c8(%rsp)
+    0.00 :   1b87bc: mov    0x20(%rsp),%rcx
+    0.00 :   1b87c1: mov    0x70(%rsp),%r8
+    0.00 :   1b87c6: mov    %r10,0x140(%rsp)
+    0.00 :   1b87ce: mov    %rcx,0x148(%rsp)
+    0.00 :   1b87d6: mov    %r10,0x150(%rsp)
+    0.00 :   1b87de: mov    %r10,0x158(%rsp)
+    0.00 :   1b87e6: mov    %r11,0x160(%rsp)
+    0.00 :   1b87ee: mov    %r10,0x168(%rsp)
+    0.00 :   1b87f6: mov    %r10,0x170(%rsp)
+    0.00 :   1b87fe: mov    %r8,0x178(%rsp)
+    0.00 :   1b8806: mov    %r10,0x180(%rsp)
+    0.00 :   1b880e: mov    %rdx,0x1d0(%rsp)
+    0.00 :   1b8816: test   %r9,%r9
+    0.00 :   1b8819: je     1b910d <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x120d>
+    0.00 :   1b881f: mov    $0x10,%eax
+    0.00 :   1b8824: mov    %rcx,%r13
+    0.00 :   1b8827: mov    %rbx,0x8(%rsp)
+    0.00 :   1b882c: xor    %ecx,%ecx
+    0.00 :   1b882e: shlx   %r15,%rax,%rdx
+    0.00 :   1b8833: lea    -0x10(%rdx),%rax
+    0.00 :   1b8837: mov    %rdx,0x78(%rsp)
+    0.00 :   1b883c: lea    -0x1(%rdi),%rdx
+    0.00 :   1b8840: mov    %rdx,%rdi
+    0.00 :   1b8843: and    $0xffffffffffffffe0,%rdi
+    0.00 :   1b8847: mov    %rax,0x110(%rsp)
+    0.00 :   1b884f: mov    $0x8,%eax
+    0.00 :   1b8854: mov    %rdx,0xc0(%rsp)
+    0.00 :   1b885c: and    $0xfffffffffffffff8,%rdx
+    0.00 :   1b8860: lea    0x0(,%rdi,8),%r8
+    0.00 :   1b8868: shlx   %r15,%rax,%rax
+    0.00 :   1b886d: lea    0x0(,%rdx,8),%r11
+    0.00 :   1b8875: mov    %rdx,0x108(%rsp)
+    0.00 :   1b887d: inc    %rdx
+    0.00 :   1b8880: mov    %rdi,0xf0(%rsp)
+    0.00 :   1b8888: mov    %rax,0xa8(%rsp)
+    0.00 :   1b8890: mov    $0x4,%eax
+    0.00 :   1b8895: mov    %rdx,0xf8(%rsp)
+    0.00 :   1b889d: lea    0x74f5c(%rip),%rdx        # 22d800 <anon.d35df8537a9ef5050ceb7e667662bffa.21.llvm.3634249459765829945+0x860>
+    0.00 :   1b88a4: mov    %r8,0xe8(%rsp)
+    0.00 :   1b88ac: lea    0x1(%rdi),%r8
+    0.00 :   1b88b0: shlx   %r15,%rax,%rax
+    0.00 :   1b88b5: mov    %r11,0x100(%rsp)
+    0.00 :   1b88bd: mov    $0x80,%r11d
+    0.00 :   1b88c3: xor    %edi,%edi
+    0.00 :   1b88c5: mov    %rdx,0x60(%rsp)
+    0.00 :   1b88ca: mov    %r8,0xe0(%rsp)
+    0.00 :   1b88d2: lea    0x74fb7(%rip),%r8        # 22d890 <anon.d35df8537a9ef5050ceb7e667662bffa.21.llvm.3634249459765829945+0x8f0>
+    0.00 :   1b88d9: mov    %rax,0x120(%rsp)
+    0.00 :   1b88e1: mov    %r8,0x90(%rsp)
+    0.00 :   1b88e9: cmp    %r11,%r15
+    0.00 :   1b88ec: mov    %r11,%rax
+    0.00 :   1b88ef: mov    %r15,%rbx
+    0.00 :   1b88f2: mov    %rcx,0x50(%rsp)
+    0.00 :   1b88f7: mov    %r13,0xb0(%rsp)
+    0.00 :   1b88ff: cmovb  %r15,%rax
+    0.00 :   1b8903: imul   %rcx,%rbx
+    0.00 :   1b8907: mov    $0x80,%ecx
+    0.00 :   1b890c: sub    %rbx,%rcx
+    0.00 :   1b890f: cmp    %r15,%rcx
+    0.00 :   1b8912: cmovae %r15,%rcx
+    0.00 :   1b8916: test   %rcx,%rcx
+    0.00 :   1b8919: je     1b8929 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xa29>
+    0.00 :   1b891b: lea    -0x1(%rcx),%rdx
+    0.00 :   1b891f: cmp    $0x7,%rdx
+    0.00 :   1b8923: jae    1b892d <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xa2d>
+    0.00 :   1b8925: xor    %edx,%edx
+    0.00 :   1b8927: jmp    1b895e <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xa5e>
+    0.00 :   1b8929: xor    %edx,%edx
+    0.00 :   1b892b: jmp    1b897a <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xa7a>
+    0.00 :   1b892d: mov    %eax,%esi
+    0.00 :   1b892f: and    $0x8,%esi
+    0.00 :   1b8932: xor    %edx,%edx
+    0.00 :   1b8934: data16 data16 cs nopw 0x0(%rax,%rax,1)
+    0.00 :   1b8940: shl    $0x8,%rdx
+    0.00 :   1b8944: or     $0xff,%rdx
+    0.00 :   1b894b: add    $0xfffffffffffffff8,%rsi
+    0.00 :   1b894f: jne    1b8940 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xa40>
+    0.00 :   1b8951: mov    0x98(%rsp),%rsi
+    0.00 :   1b8959: test   $0x7,%cl
+    0.00 :   1b895c: je     1b897a <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xa7a>
+    0.00 :   1b895e: and    $0x7,%eax
+    0.00 :   1b8961: data16 data16 data16 data16 data16 cs nopw 0x0(%rax,%rax,1)
+    0.00 :   1b8970: lea    0x1(%rdx,%rdx,1),%rdx
+    0.00 :   1b8975: dec    %rax
+    0.00 :   1b8978: jne    1b8970 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xa70>
+    0.00 :   1b897a: and    $0x7f,%ebx
+    0.00 :   1b897d: xor    %r13d,%r13d
+    0.00 :   1b8980: mov    %ebx,%ecx
+    0.00 :   1b8982: shld   %cl,%rdx,%r13
+    0.00 :   1b8986: shlx   %rbx,%rdx,%rcx
+    0.00 :   1b898b: test   $0x40,%bl
+    0.00 :   1b898e: cmovne %rcx,%r13
+    0.00 :   1b8992: cmovne %rdi,%rcx
+    0.00 :   1b8996: mov    %r13,%rax
+    0.00 :   1b8999: mov    %rcx,%r12
+    0.00 :   1b899c: and    %rsi,%rax
+    0.00 :   1b899f: and    %rbp,%rcx
+    0.00 :   1b89a2: or     %rax,%rcx
+    0.00 :   1b89a5: je     1b8ae1 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xbe1>
+    0.00 :   1b89ab: cmp    $0x3b,%r15
+    0.00 :   1b89af: ja     1b9862 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1962>
+    0.00 :   1b89b5: mov    %r11,0x118(%rsp)
+    0.00 :   1b89bd: call   *0x77a6d(%rip)        # 230430 <_DYNAMIC+0x270>
+    0.00 :   1b89c3: mov    0x78(%rsp),%rdi
+    0.00 :   1b89c8: call   *0x77aca(%rip)        # 230498 <malloc@GLIBC_2.2.5>
+    0.00 :   1b89ce: test   %rax,%rax
+    0.00 :   1b89d1: je     1b9858 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1958>
+    0.00 :   1b89d7: movzbl 0x79e72(%rip),%ecx        # 232850 <block_lsd_bench::TRACK>
+    0.00 :   1b89de: mov    %rax,%r14
+    0.00 :   1b89e1: test   %cl,%cl
+    0.00 :   1b89e3: je     1b8a15 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xb15>
+    0.00 :   1b89e5: mov    0x78(%rsp),%rax
+    0.00 :   1b89ea: mov    %rax,%rcx
+    0.00 :   1b89ed: lock xadd %rcx,0x79e4a(%rip)        # 232840 <block_lsd_bench::LIVE>
+    0.00 :   1b89f6: add    %rax,%rcx
+    0.00 :   1b89f9: mov    0x79e48(%rip),%rax        # 232848 <block_lsd_bench::PEAK>
+    0.00 :   1b8a00: cmp    %rcx,%rax
+    0.00 :   1b8a03: mov    %rcx,%rdx
+    0.00 :   1b8a06: cmova  %rax,%rdx
+    0.00 :   1b8a0a: lock cmpxchg %rdx,0x79e35(%rip)        # 232848 <block_lsd_bench::PEAK>
+    0.00 :   1b8a13: jne    1b8a00 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xb00>
+    0.00 :   1b8a15: mov    %r14,%rax
+    0.00 :   1b8a18: test   %r15,%r15
+    0.00 :   1b8a1b: je     1b8a3a <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xb3a>
+    0.00 :   1b8a1d: mov    0x110(%rsp),%rdx
+    0.00 :   1b8a25: mov    %r14,%rdi
+    0.00 :   1b8a28: xor    %esi,%esi
+    0.00 :   1b8a2a: call   *0x77b60(%rip)        # 230590 <memset@GLIBC_2.2.5>
+    0.00 :   1b8a30: mov    0x78(%rsp),%rax
+    0.00 :   1b8a35: lea    -0x10(%r14,%rax,1),%rax
+    0.00 :   1b8a3a: vpxor  %xmm0,%xmm0,%xmm0
+    0.00 :   1b8a3e: vmovdqu %xmm0,(%rax)
+    0.00 :   1b8a42: call   *0x779e8(%rip)        # 230430 <_DYNAMIC+0x270>
+    0.00 :   1b8a48: mov    0xa8(%rsp),%rdi
+    0.00 :   1b8a50: call   *0x77a42(%rip)        # 230498 <malloc@GLIBC_2.2.5>
+    0.00 :   1b8a56: mov    %rax,0x28(%rsp)
+    0.00 :   1b8a5b: test   %rax,%rax
+    0.00 :   1b8a5e: je     1b9843 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1943>
+    0.00 :   1b8a64: vpbroadcastq -0x19ecc6(%rip),%zmm0        # 19da8 <anon.1000b255692110c1e1df217f61ce8746.4.llvm.3563159085420552679+0x1f5>
+    0.00 :   1b8a6e: movzbl 0x79ddb(%rip),%eax        # 232850 <block_lsd_bench::TRACK>
+    0.00 :   1b8a75: mov    0x10(%rsp),%r11
+    0.00 :   1b8a7a: mov    (%rsp),%rsi
+    0.00 :   1b8a7e: test   %al,%al
+    0.00 :   1b8a80: je     1b8ab5 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xbb5>
+    0.00 :   1b8a82: mov    0xa8(%rsp),%rax
+    0.00 :   1b8a8a: mov    %rax,%rcx
+    0.00 :   1b8a8d: lock xadd %rcx,0x79daa(%rip)        # 232840 <block_lsd_bench::LIVE>
+    0.00 :   1b8a96: add    %rax,%rcx
+    0.00 :   1b8a99: mov    0x79da8(%rip),%rax        # 232848 <block_lsd_bench::PEAK>
+    0.00 :   1b8aa0: cmp    %rcx,%rax
+    0.00 :   1b8aa3: mov    %rcx,%rdx
+    0.00 :   1b8aa6: cmova  %rax,%rdx
+    0.00 :   1b8aaa: lock cmpxchg %rdx,0x79d95(%rip)        # 232848 <block_lsd_bench::PEAK>
+    0.00 :   1b8ab3: jne    1b8aa0 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xba0>
+    0.00 :   1b8ab5: mov    0x28(%rsp),%rax
+    0.00 :   1b8aba: test   %r15,%r15
+    0.00 :   1b8abd: je     1b8ba0 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xca0>
+    0.00 :   1b8ac3: mov    0x28(%rsp),%rax
+    0.00 :   1b8ac8: mov    $0x1,%edx
+    0.00 :   1b8acd: cmp    $0x4,%r15
+    0.00 :   1b8ad1: jb     1b8b88 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xc88>
+    0.00 :   1b8ad7: cmp    $0x6,%r15
+    0.00 :   1b8adb: jae    1b8aee <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xbee>
+    0.00 :   1b8add: xor    %ecx,%ecx
+    0.00 :   1b8adf: jmp    1b8b4d <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xc4d>
+    0.00 :   1b8ae1: mov    0xb0(%rsp),%r13
+    0.00 :   1b8ae9: jmp    1b90f9 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x11f9>
+    0.00 :   1b8aee: mov    0xe8(%rsp),%rax
+    0.00 :   1b8af6: mov    0x28(%rsp),%rdi
+    0.00 :   1b8afb: mov    0xf0(%rsp),%rdx
+    0.00 :   1b8b03: xor    %ecx,%ecx
+    0.00 :   1b8b05: add    %rdi,%rax
+    0.00 :   1b8b08: nopl   0x0(%rax,%rax,1)
+    0.00 :   1b8b10: vmovdqu64 %zmm0,(%rdi,%rcx,8)
+    0.00 :   1b8b17: vmovdqu64 %zmm0,0x40(%rdi,%rcx,8)
+    0.00 :   1b8b1f: vmovdqu64 %zmm0,0x80(%rdi,%rcx,8)
+    0.00 :   1b8b27: vmovdqu64 %zmm0,0xc0(%rdi,%rcx,8)
+    0.00 :   1b8b2f: add    $0x20,%rcx
+    0.00 :   1b8b33: cmp    %rcx,%rdx
+    0.00 :   1b8b36: jne    1b8b10 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xc10>
+    0.00 :   1b8b38: mov    %rdx,%rcx
+    0.00 :   1b8b3b: mov    0xe0(%rsp),%rdx
+    0.00 :   1b8b43: testb  $0x18,0xc0(%rsp)
+    0.00 :   1b8b4b: je     1b8b88 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xc88>
+    0.00 :   1b8b4d: mov    0x28(%rsp),%rdi
+    0.00 :   1b8b52: mov    0x108(%rsp),%rdx
+    0.00 :   1b8b5a: mov    %rdi,%rax
+    0.00 :   1b8b5d: add    0x100(%rsp),%rax
+    0.00 :   1b8b65: data16 cs nopw 0x0(%rax,%rax,1)
+    0.00 :   1b8b70: vmovdqu64 %zmm0,(%rdi,%rcx,8)
+    0.00 :   1b8b77: add    $0x8,%rcx
+    0.00 :   1b8b7b: cmp    %rcx,%rdx
+    0.00 :   1b8b7e: jne    1b8b70 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xc70>
+    0.00 :   1b8b80: mov    0xf8(%rsp),%rdx
+    0.00 :   1b8b88: mov    %rsi,%rcx
+    0.00 :   1b8b8b: sub    %rdx,%rcx
+    0.00 :   1b8b8e: xchg   %ax,%ax
+    0.00 :   1b8b90: movq   $0x1,(%rax)
+    0.00 :   1b8b97: add    $0x8,%rax
+    0.00 :   1b8b9b: dec    %rcx
+    0.00 :   1b8b9e: jne    1b8b90 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xc90>
+    0.00 :   1b8ba0: movq   $0x1,(%rax)
+    0.00 :   1b8ba7: mov    0x78(%rsp),%rax
+    0.00 :   1b8bac: mov    %r14,%rcx
+    0.00 :   1b8baf: xor    %edi,%edi
+    0.00 :   1b8bb1: add    %r14,%rax
+    0.00 :   1b8bb4: data16 data16 cs nopw 0x0(%rax,%rax,1)
+    0.00 :   1b8bc0: cmp    %r11,%rdi
+    0.00 :   1b8bc3: jae    1b96ed <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x17ed>
+    0.00 :   1b8bc9: mov    0x20(%rsp),%rdx
+    0.00 :   1b8bce: mov    (%rdx,%rdi,4),%edx
+    0.00 :   1b8bd1: cmp    %rdx,%r11
+    0.00 :   1b8bd4: jbe    1b9549 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1649>
+    0.00 :   1b8bda: mov    0x48(%rsp),%r8
+    0.00 :   1b8bdf: mov    0x8(%rsp),%r9
+    0.00 :   1b8be4: mov    $0x0,%esi
+    0.00 :   1b8be9: mov    0x40(%rsp),%r10
+    0.00 :   1b8bee: cmp    %rdx,%r8
+    0.00 :   1b8bf1: cmovbe %r8,%rsi
+    0.00 :   1b8bf5: cmova  0x38(%rsp),%r10
+    0.00 :   1b8bfb: sub    %rsi,%rdx
+    0.00 :   1b8bfe: mov    0x70(%rsp),%rsi
+    0.00 :   1b8c03: imul   %r9,%rdx
+    0.00 :   1b8c07: shl    $0x5,%r9
+    0.00 :   1b8c0b: shl    $0x5,%rdx
+    0.00 :   1b8c0f: add    %r10,%rdx
+    0.00 :   1b8c12: mov    %dil,(%rsi,%rdi,1)
+    0.00 :   1b8c16: inc    %rdi
+    0.00 :   1b8c19: add    %rdx,%r9
+    0.00 :   1b8c1c: mov    %rdx,(%rcx)
+    0.00 :   1b8c1f: mov    %r9,0x8(%rcx)
+    0.00 :   1b8c23: add    $0x10,%rcx
+    0.00 :   1b8c27: cmp    %rax,%rcx
+    0.00 :   1b8c2a: jne    1b8bc0 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xcc0>
+    0.00 :   1b8c2c: mov    (%rsp),%rdx
+    0.00 :   1b8c30: mov    %rdx,%r15
+    0.00 :   1b8c33: cmp    0x30(%rsp),%rdx
+    0.00 :   1b8c38: jae    1b8e01 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xf01>
+    0.00 :   1b8c3e: mov    %rdx,%r15
+    0.00 :   1b8c41: mov    %rdx,%rdi
+    0.00 :   1b8c44: movq   $0x0,0xa0(%rsp)
+    0.00 :   1b8c50: jmp    1b8c6e <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xd6e>
+    0.00 :   1b8c52: data16 data16 data16 data16 cs nopw 0x0(%rax,%rax,1)
+    0.00 :   1b8c60: inc    %rdi
+    0.07 :   1b8c63: cmp    0x30(%rsp),%rdi
+    0.09 :   1b8c68: je     1b8e01 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xf01>
+    0.00 :   1b8c6e: cmp    %r11,%rdi
+    0.00 :   1b8c71: jae    1b9773 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1873>
+    0.00 :   1b8c77: mov    0x20(%rsp),%rax
+    0.00 :   1b8c7c: mov    (%rax,%rdi,4),%ecx
+    0.28 :   1b8c7f: cmp    %rcx,%r11
+    0.00 :   1b8c82: jbe    1b9549 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1649>
+    0.00 :   1b8c88: mov    0x48(%rsp),%rdx
+    0.00 :   1b8c8d: mov    $0x0,%r8d
+    0.11 :   1b8c93: mov    0x40(%rsp),%rax
+    0.00 :   1b8c98: mov    0xa0(%rsp),%r10
+    0.00 :   1b8ca0: cmp    %rcx,%rdx
+    0.00 :   1b8ca3: cmovbe %rdx,%r8
+    0.06 :   1b8ca7: cmova  0x38(%rsp),%rax
+    0.06 :   1b8cad: mov    (%rsp),%rdx
+    0.00 :   1b8cb1: cmp    %rdx,%r10
+    0.00 :   1b8cb4: jae    1b8cf0 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xdf0>
+    0.00 :   1b8cb6: mov    0x58(%rsp),%r9
+    0.00 :   1b8cbb: mov    %r10,%rsi
+    0.00 :   1b8cbe: shl    $0x4,%rsi
+    0.05 :   1b8cc2: cmp    %rdi,(%r9,%rsi,1)
+    0.14 :   1b8cc6: jne    1b8cf0 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xdf0>
+    0.00 :   1b8cc8: add    %r9,%rsi
+    0.05 :   1b8ccb: inc    %r10
+    0.00 :   1b8cce: mov    0x8(%rsi),%rsi
+    0.00 :   1b8cd2: mov    %r10,0xa0(%rsp)
+    0.00 :   1b8cda: test   %rsi,%rsi
+    0.00 :   1b8cdd: jne    1b8cfe <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xdfe>
+    0.00 :   1b8cdf: jmp    1b8c60 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xd60>
+    0.00 :   1b8ce4: data16 data16 cs nopw 0x0(%rax,%rax,1)
+    0.00 :   1b8cf0: mov    0x8(%rsp),%rsi
+    0.00 :   1b8cf5: test   %rsi,%rsi
+    0.00 :   1b8cf8: je     1b8c60 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xd60>
+    0.00 :   1b8cfe: sub    %r8,%rcx
+    0.00 :   1b8d01: imul   0x8(%rsp),%rcx
+    0.00 :   1b8d07: shl    $0x5,%rcx
+    0.00 :   1b8d0b: add    %rcx,%rax
+    0.00 :   1b8d0e: jmp    1b8d21 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xe21>
+    0.76 :   1b8d10: mov    (%rsp),%rdx
+    0.22 :   1b8d14: add    $0x20,%rax
+    0.00 :   1b8d18: dec    %rsi
+    0.00 :   1b8d1b: je     1b8c60 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xd60>
+    0.00 :   1b8d21: mov    (%rax),%r8
+    8.04 :   1b8d24: mov    0x8(%rax),%r9
+    0.16 :   1b8d28: mov    %ebx,%ecx
+    5.69 :   1b8d2a: and    %r12,%r8
+    2.34 :   1b8d2d: and    %r13,%r9
+    0.00 :   1b8d30: shrd   %cl,%r9,%r8
+    0.97 :   1b8d34: shrx   %rbx,%r9,%rcx
+    4.56 :   1b8d39: test   $0x40,%bl
+    0.00 :   1b8d3c: cmove  %r8,%rcx
+    3.05 :   1b8d40: cmp    %rcx,%rdx
+    0.00 :   1b8d43: jbe    1b96b5 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x17b5>
+    0.00 :   1b8d49: vmovdqu (%rax),%ymm0
+    0.91 :   1b8d4d: mov    %rcx,%r8
+    0.00 :   1b8d50: shl    $0x4,%r8
+    0.05 :   1b8d54: mov    (%r14,%r8,1),%r9
+    3.42 :   1b8d58: lea    0x20(%r9),%r10
+    0.72 :   1b8d5c: cmp    0x8(%r14,%r8,1),%r10
+    1.33 :   1b8d61: vmovdqu %ymm0,(%r9)
+   60.13 :   1b8d66: mov    %r10,(%r14,%r8,1)
+    2.59 :   1b8d6a: jne    1b8d10 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xe10>
+    0.00 :   1b8d6c: cmp    %r11,%r15
+    0.10 :   1b8d6f: jae    1b96ca <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x17ca>
+    0.00 :   1b8d75: mov    0x20(%rsp),%rdx
+    0.05 :   1b8d7a: mov    (%rdx,%r15,4),%r9d
+    0.59 :   1b8d7e: cmp    %r9,%r11
+    0.04 :   1b8d81: jbe    1b9549 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1649>
+    0.00 :   1b8d87: mov    0x48(%rsp),%r11
+    0.00 :   1b8d8c: mov    0x8(%rsp),%rdx
+    0.22 :   1b8d91: add    %r14,%r8
+    0.00 :   1b8d94: mov    $0x0,%r10d
+    0.00 :   1b8d9a: cmp    %r9,%r11
+    0.00 :   1b8d9d: cmovbe %r11,%r10
+    0.16 :   1b8da1: mov    0x40(%rsp),%r11
+    0.00 :   1b8da6: cmova  0x38(%rsp),%r11
+    0.00 :   1b8dac: sub    %r10,%r9
+    0.00 :   1b8daf: imul   %rdx,%r9
+    0.00 :   1b8db3: shl    $0x5,%rdx
+    0.00 :   1b8db7: shl    $0x5,%r9
+    0.31 :   1b8dbb: add    %r11,%r9
+    0.00 :   1b8dbe: add    %r9,%rdx
+    0.05 :   1b8dc1: mov    %r9,(%r8)
+    0.00 :   1b8dc4: mov    %rdx,0x8(%r8)
+    0.00 :   1b8dc8: mov    0x70(%rsp),%rdx
+    0.05 :   1b8dcd: mov    %cl,(%rdx,%r15,1)
+    0.29 :   1b8dd1: mov    (%rsp),%rdx
+    0.00 :   1b8dd5: cmp    %rcx,%rdx
+    0.00 :   1b8dd8: jbe    1b96d6 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x17d6>
+    0.00 :   1b8dde: mov    0x28(%rsp),%r8
+    0.07 :   1b8de3: mov    0x10(%rsp),%r11
+    0.00 :   1b8de8: inc    %r15
+    0.05 :   1b8deb: incq   (%r8,%rcx,8)
+    0.40 :   1b8def: add    $0x20,%rax
+    0.00 :   1b8df3: dec    %rsi
+    0.00 :   1b8df6: jne    1b8d21 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xe21>
+    0.00 :   1b8dfc: jmp    1b8c60 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xd60>
+    0.00 :   1b8e01: mov    %r15,0x1d0(%rsp)
+    0.00 :   1b8e09: lea    0xc8(%rsp),%rdi
+    0.00 :   1b8e11: mov    %rdx,%rsi
+    0.00 :   1b8e14: vzeroupper
+    0.00 :   1b8e17: call   1bd3b0 <<usize as alloc::vec::spec_from_elem::SpecFromElem>::from_elem::<alloc::alloc::Global>>
+    0.00 :   1b8e1c: cmpq   $0x0,0x18(%rsp)
+    0.00 :   1b8e22: mov    0x10(%rsp),%r11
+    0.00 :   1b8e27: mov    (%rsp),%rsi
+    0.00 :   1b8e2b: mov    0xb0(%rsp),%r13
+    0.00 :   1b8e33: je     1b8e9d <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xf9d>
+    0.00 :   1b8e35: mov    0xd8(%rsp),%rax
+    0.00 :   1b8e3d: mov    0xd0(%rsp),%rcx
+    0.00 :   1b8e45: mov    $0x1,%r10d
+    0.00 :   1b8e4b: cmp    $0x1,%rax
+    0.00 :   1b8e4f: mov    %rax,%rdx
+    0.00 :   1b8e52: adc    $0x0,%rdx
+    0.00 :   1b8e56: xor    %edi,%edi
+    0.00 :   1b8e58: lea    -0x1(%rdx),%r8
+    0.00 :   1b8e5c: nopl   0x0(%rax)
+    0.00 :   1b8e60: cmp    %rdi,%rax
+    0.00 :   1b8e63: je     1b9766 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1866>
+    0.00 :   1b8e69: cmp    %rdi,%rsi
+    0.00 :   1b8e6c: je     1b974e <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x184e>
+    0.00 :   1b8e72: cmp    %rdi,%r8
+    0.00 :   1b8e75: je     1b9756 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1856>
+    0.00 :   1b8e7b: mov    0x28(%rsp),%rbx
+    0.00 :   1b8e80: mov    (%rcx,%rdi,8),%r9
+    0.00 :   1b8e84: inc    %r10
+    0.00 :   1b8e87: add    (%rbx,%rdi,8),%r9
+    0.00 :   1b8e8b: mov    %r9,0x8(%rcx,%rdi,8)
+    0.00 :   1b8e90: inc    %rdi
+    0.00 :   1b8e93: cmp    %rdi,0xc0(%rsp)
+    0.00 :   1b8e9b: jne    1b8e60 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xf60>
+    0.00 :   1b8e9d: mov    0xd0(%rsp),%rcx
+    0.00 :   1b8ea5: mov    0xd8(%rsp),%rax
+    0.00 :   1b8ead: xor    %edi,%edi
+    0.00 :   1b8eaf: jmp    1b8ecc <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xfcc>
+    0.00 :   1b8eb1: data16 data16 data16 data16 data16 cs nopw 0x0(%rax,%rax,1)
+    0.00 :   1b8ec0: inc    %rdi
+    0.06 :   1b8ec3: cmp    %rdi,%r15
+    0.00 :   1b8ec6: je     1b8faa <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x10aa>
+    0.00 :   1b8ecc: cmp    %r11,%rdi
+    0.00 :   1b8ecf: jae    1b972b <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x182b>
+    0.00 :   1b8ed5: mov    0x70(%rsp),%rdx
+    0.09 :   1b8eda: movzbl (%rdx,%rdi,1),%edx
+    0.00 :   1b8ede: cmp    %rdx,%rax
+    0.00 :   1b8ee1: jbe    1b9708 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1808>
+    0.00 :   1b8ee7: mov    (%rcx,%rdx,8),%rbx
+    0.06 :   1b8eeb: lea    0x1(%rbx),%r8
+    0.00 :   1b8eef: mov    %r8,(%rcx,%rdx,8)
+    0.00 :   1b8ef3: cmp    %r11,%rbx
+    0.00 :   1b8ef6: jae    1b971b <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x181b>
+    0.00 :   1b8efc: mov    0x0(%r13,%rdi,4),%r8d
+    0.00 :   1b8f01: mov    0x68(%rsp),%r9
+    0.00 :   1b8f06: mov    %r8d,(%r9,%rbx,4)
+    0.12 :   1b8f0a: mov    0x148(%rsp),%r13
+    0.00 :   1b8f12: mov    0x0(%r13,%rdi,4),%r9d
+    0.00 :   1b8f17: cmp    %r9,%r11
+    0.00 :   1b8f1a: jbe    1b956a <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x166a>
+    0.00 :   1b8f20: mov    0x48(%rsp),%r8
+    0.00 :   1b8f25: mov    $0x0,%r10d
+    0.00 :   1b8f2b: cmp    %r9,%r8
+    0.00 :   1b8f2e: cmovbe %r8,%r10
+    0.00 :   1b8f32: mov    0x40(%rsp),%r8
+    0.00 :   1b8f37: cmova  0x38(%rsp),%r8
+    0.00 :   1b8f3d: cmp    %rdx,%rsi
+    0.00 :   1b8f40: jbe    1b9738 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1838>
+    0.00 :   1b8f46: mov    0x1a0(%rsp),%rsi
+    0.00 :   1b8f4e: sub    %r10,%r9
+    0.00 :   1b8f51: imul   %rsi,%r9
+    0.00 :   1b8f55: mov    %rsi,0x8(%rsp)
+    0.00 :   1b8f5a: shl    $0x5,%rsi
+    0.00 :   1b8f5e: shl    $0x5,%r9
+    0.00 :   1b8f62: add    %r9,%r8
+    0.00 :   1b8f65: mov    %edx,%r9d
+    0.11 :   1b8f68: shl    $0x4,%r9d
+    0.00 :   1b8f6c: add    %r8,%rsi
+    0.00 :   1b8f6f: cmp    0x8(%r14,%r9,1),%rsi
+    0.00 :   1b8f74: mov    (%rsp),%rsi
+    0.00 :   1b8f78: jne    1b8ec0 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xfc0>
+    0.00 :   1b8f7e: cmp    %rdx,%rsi
+    0.00 :   1b8f81: jbe    1b979f <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x189f>
+    0.00 :   1b8f87: add    %r14,%r9
+    0.00 :   1b8f8a: mov    0x58(%rsp),%r10
+    0.00 :   1b8f8f: shl    $0x4,%edx
+    0.00 :   1b8f92: mov    (%r9),%r9
+    0.00 :   1b8f95: mov    %rbx,(%r10,%rdx,1)
+    0.00 :   1b8f99: sub    %r8,%r9
+    0.00 :   1b8f9c: sar    $0x5,%r9
+    0.00 :   1b8fa0: mov    %r9,0x8(%r10,%rdx,1)
+    0.00 :   1b8fa5: jmp    1b8ec0 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xfc0>
+    0.00 :   1b8faa: lea    (%rsi,%r15,1),%rax
+    0.00 :   1b8fae: cmp    %r11,%rax
+    0.00 :   1b8fb1: ja     1b964c <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x174c>
+    0.00 :   1b8fb7: mov    0x774b2(%rip),%r12        # 230470 <memcpy@GLIBC_2.14>
+    0.00 :   1b8fbe: mov    %rax,0x30(%rsp)
+    0.00 :   1b8fc3: cmp    %rsi,%r11
+    0.00 :   1b8fc6: jb     1b9641 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1741>
+    0.00 :   1b8fcc: lea    0x0(%r13,%r15,4),%rsi
+    0.00 :   1b8fd1: mov    0x68(%rsp),%r15
+    0.00 :   1b8fd6: mov    0x120(%rsp),%rdx
+    0.00 :   1b8fde: mov    %r11,%rbx
+    0.00 :   1b8fe1: mov    %r15,%rdi
+    0.00 :   1b8fe4: call   *%r12
+    0.00 :   1b8fe7: mov    0x30(%rsp),%rdi
+    0.00 :   1b8fec: mov    %rbx,%rdx
+    0.00 :   1b8fef: sub    %rdi,%rdx
+    0.00 :   1b8ff2: jb     1b966f <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x176f>
+    0.00 :   1b8ff8: lea    0x0(%r13,%rdi,4),%rsi
+    0.00 :   1b8ffd: lea    (%r15,%rdi,4),%rdi
+    0.00 :   1b9001: shl    $0x2,%rdx
+    0.00 :   1b9005: call   *%r12
+    0.00 :   1b9008: mov    0x30(%rsp),%rax
+    0.00 :   1b900d: mov    0x18(%rsp),%r15
+    0.00 :   1b9012: mov    %rax,0x1d0(%rsp)
+    0.00 :   1b901a: mov    %rbx,0x140(%rsp)
+    0.00 :   1b9022: mov    %rbx,0x158(%rsp)
+    0.00 :   1b902a: mov    0x160(%rsp),%rax
+    0.00 :   1b9032: mov    %rax,0x148(%rsp)
+    0.00 :   1b903a: mov    %rax,0x20(%rsp)
+    0.00 :   1b903f: mov    0xc8(%rsp),%rax
+    0.00 :   1b9047: mov    %r13,0x160(%rsp)
+    0.00 :   1b904f: mov    %rbx,0x150(%rsp)
+    0.00 :   1b9057: mov    %rbx,0x168(%rsp)
+    0.00 :   1b905f: test   %rax,%rax
+    0.00 :   1b9062: je     1b9089 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1189>
+    0.00 :   1b9064: mov    0xd0(%rsp),%rdi
+    0.00 :   1b906c: movzbl 0x797dd(%rip),%ecx        # 232850 <block_lsd_bench::TRACK>
+    0.00 :   1b9073: test   %cl,%cl
+    0.00 :   1b9075: je     1b9083 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1183>
+    0.00 :   1b9077: shl    $0x3,%rax
+    0.00 :   1b907b: lock sub %rax,0x797bd(%rip)        # 232840 <block_lsd_bench::LIVE>
+    0.00 :   1b9083: call   *0x77397(%rip)        # 230420 <free@GLIBC_2.2.5>
+    0.00 :   1b9089: movzbl 0x797c0(%rip),%eax        # 232850 <block_lsd_bench::TRACK>
+    0.00 :   1b9090: test   %al,%al
+    0.00 :   1b9092: je     1b90a4 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x11a4>
+    0.00 :   1b9094: mov    0xa8(%rsp),%rax
+    0.00 :   1b909c: lock sub %rax,0x7979c(%rip)        # 232840 <block_lsd_bench::LIVE>
+    0.00 :   1b90a4: mov    0x28(%rsp),%rdi
+    0.00 :   1b90a9: call   *0x77371(%rip)        # 230420 <free@GLIBC_2.2.5>
+    0.00 :   1b90af: movzbl 0x7979a(%rip),%eax        # 232850 <block_lsd_bench::TRACK>
+    0.00 :   1b90b6: test   %al,%al
+    0.00 :   1b90b8: je     1b90c7 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x11c7>
+    0.00 :   1b90ba: mov    0x78(%rsp),%rax
+    0.00 :   1b90bf: lock sub %rax,0x79779(%rip)        # 232840 <block_lsd_bench::LIVE>
+    0.00 :   1b90c7: mov    %r14,%rdi
+    0.00 :   1b90ca: call   *0x77350(%rip)        # 230420 <free@GLIBC_2.2.5>
+    0.00 :   1b90d0: mov    %r13,0x68(%rsp)
+    0.00 :   1b90d5: mov    0x20(%rsp),%r13
+    0.00 :   1b90da: mov    0x10(%rsp),%r10
+    0.00 :   1b90df: mov    0xb8(%rsp),%r9
+    0.00 :   1b90e7: mov    0x98(%rsp),%rsi
+    0.00 :   1b90ef: mov    0x118(%rsp),%r11
+    0.00 :   1b90f7: xor    %edi,%edi
+    0.00 :   1b90f9: mov    0x50(%rsp),%rcx
+    0.00 :   1b90fe: sub    %r15,%r11
+    0.00 :   1b9101: inc    %rcx
+    0.00 :   1b9104: cmp    %r9,%rcx
+    0.00 :   1b9107: jne    1b88e9 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x9e9>
+    0.00 :   1b910d: mov    0x20(%rsp),%rcx
+    0.00 :   1b9112: mov    0x68(%rsp),%rdx
+    0.00 :   1b9117: mov    0x88(%rsp),%rsi
+    0.00 :   1b911f: mov    0x80(%rsp),%rdi
+    0.00 :   1b9127: lea    0x748e2(%rip),%r9        # 22da10 <anon.d35df8537a9ef5050ceb7e667662bffa.21.llvm.3634249459765829945+0xa70>
+    0.00 :   1b912e: xor    %eax,%eax
+    0.00 :   1b9130: mov    (%rcx,%rax,4),%r12d
+    0.00 :   1b9134: cmp    %r12,%r10
+    0.00 :   1b9137: jbe    1b9744 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1844>
+    0.00 :   1b913d: mov    %eax,(%rdx,%r12,4)
+    0.00 :   1b9141: inc    %rax
+    0.00 :   1b9144: cmp    %rax,%r10
+    0.00 :   1b9147: jne    1b9130 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1230>
+    0.00 :   1b9149: movq   $0x0,0xc8(%rsp)
+    0.00 :   1b9155: cmp    %rsi,%rdi
+    0.00 :   1b9158: jbe    1b916e <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x126e>
+    0.00 :   1b915a: mov    (%rsp),%rcx
+    0.00 :   1b915e: xor    %ebx,%ebx
+    0.00 :   1b9160: movq   $0x0,0x8(%rsp)
+    0.00 :   1b9169: jmp    1b940f <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x150f>
+    0.00 :   1b916e: mov    0x1a0(%rsp),%rax
+    0.00 :   1b9176: mov    (%rsp),%rsi
+    0.00 :   1b917a: mov    (%rcx),%r8d
+    0.00 :   1b917d: mov    %rcx,%rdx
+    0.00 :   1b9180: mov    0x48(%rsp),%rbp
+    0.00 :   1b9185: movq   $0x0,0x70(%rsp)
+    0.00 :   1b918e: xor    %r12d,%r12d
+    0.00 :   1b9191: movq   $0x0,0x8(%rsp)
+    0.00 :   1b919a: mov    %rax,0xa0(%rsp)
+    0.00 :   1b91a2: shl    $0x5,%rax
+    0.00 :   1b91a6: mov    %rsi,%rcx
+    0.00 :   1b91a9: mov    %rax,0x80(%rsp)
+    0.00 :   1b91b1: mov    %rsi,%rax
+    0.00 :   1b91b4: neg    %rax
+    0.00 :   1b91b7: mov    %rax,0x98(%rsp)
+    0.00 :   1b91bf: lea    0x0(,%rsi,4),%rax
+    0.00 :   1b91c7: lea    0x747b2(%rip),%rsi        # 22d980 <anon.d35df8537a9ef5050ceb7e667662bffa.21.llvm.3634249459765829945+0x9e0>
+    0.00 :   1b91ce: mov    %rsi,0x50(%rsp)
+    0.00 :   1b91d3: mov    0x40(%rsp),%rsi
+    0.00 :   1b91d8: sub    %rax,%rdx
+    0.00 :   1b91db: mov    %ecx,%eax
+    0.00 :   1b91dd: neg    %eax
+    0.00 :   1b91df: mov    %rax,0xb0(%rsp)
+    0.00 :   1b91e7: mov    %rdx,0xb8(%rsp)
+    0.00 :   1b91ef: nop
+    0.00 :   1b91f0: cmp    %rbp,%r10
+    0.00 :   1b91f3: je     1b978e <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x188e>
+    0.00 :   1b91f9: mov    0x98(%rsp),%rax
+    0.00 :   1b9201: mov    0x68(%rsp),%rbx
+    0.00 :   1b9206: lea    (%rax,%rbp,1),%r15
+    0.00 :   1b920a: cmp    %r10,%r15
+    0.00 :   1b920d: jae    1b977f <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x187f>
+    0.00 :   1b9213: mov    (%rdx,%rbp,4),%eax
+    0.00 :   1b9216: mov    (%rbx,%rbp,4),%r13d
+    0.00 :   1b921a: mov    %rsi,0xc0(%rsp)
+    0.00 :   1b9222: mov    %rax,0x28(%rsp)
+    0.05 :   1b9227: cmp    %r13,%r15
+    0.00 :   1b922a: jae    1b92e0 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x13e0>
+    0.00 :   1b9230: cmp    %r13,0x30(%rsp)
+    0.00 :   1b9235: jbe    1b92e0 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x13e0>
+    0.00 :   1b923b: cmp    %r10,%r8
+    0.00 :   1b923e: jae    1b958d <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x168d>
+    0.00 :   1b9244: mov    0x48(%rsp),%rcx
+    0.00 :   1b9249: mov    $0x0,%eax
+    0.00 :   1b924e: mov    0x40(%rsp),%rdx
+    0.00 :   1b9253: mov    %r8,%r14
+    0.00 :   1b9256: cmp    %rcx,%r8
+    0.00 :   1b9259: cmovae %rcx,%rax
+    0.00 :   1b925d: cmovb  0x38(%rsp),%rdx
+    0.00 :   1b9263: sub    %rax,%r8
+    0.00 :   1b9266: imul   0xa0(%rsp),%r8
+    0.00 :   1b926f: shl    $0x5,%r8
+    0.06 :   1b9273: add    %rdx,%r8
+    0.00 :   1b9276: mov    0x80(%rsp),%rdx
+    0.00 :   1b927e: mov    %r8,%rdi
+    0.00 :   1b9281: call   *0x772d1(%rip)        # 230558 <memmove@GLIBC_2.2.5>
+    0.00 :   1b9287: mov    0x10(%rsp),%r10
+    0.00 :   1b928c: cmp    %r10,%r12
+    0.00 :   1b928f: jae    1b97c7 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x18c7>
+    0.00 :   1b9295: mov    0x20(%rsp),%rax
+    0.00 :   1b929a: mov    (%rsp),%rcx
+    0.00 :   1b929e: mov    %r13,%r11
+    0.00 :   1b92a1: mov    %ebp,(%rax,%r12,4)
+    0.00 :   1b92a5: cmp    %r13,%r10
+    0.00 :   1b92a8: jbe    1b97d0 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x18d0>
+    0.00 :   1b92ae: mov    %r14,%r8
+    0.00 :   1b92b1: mov    %r8d,(%rax,%r11,4)
+    0.00 :   1b92b5: mov    %r11d,(%rbx,%r14,4)
+    0.00 :   1b92b9: mov    %r12d,(%rbx,%rbp,4)
+    0.00 :   1b92bd: mov    %r12,%r13
+    0.00 :   1b92c0: mov    0x8(%rsp),%rsi
+    0.00 :   1b92c5: cmp    %rcx,%rsi
+    0.00 :   1b92c8: jb     1b92ed <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x13ed>
+    0.00 :   1b92ca: mov    0x38(%rsp),%rcx
+    0.00 :   1b92cf: jmp    1b9310 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1410>
+    0.00 :   1b92d1: data16 data16 data16 data16 data16 cs nopw 0x0(%rax,%rax,1)
+    0.00 :   1b92e0: mov    %r12,%r11
+    0.00 :   1b92e3: mov    0x8(%rsp),%rsi
+    0.00 :   1b92e8: cmp    %rcx,%rsi
+    0.00 :   1b92eb: jae    1b92ca <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x13ca>
+    0.00 :   1b92ed: mov    0x58(%rsp),%rdx
+    0.00 :   1b92f2: mov    0x38(%rsp),%rcx
+    0.00 :   1b92f7: mov    %rsi,%rax
+    0.00 :   1b92fa: shl    $0x4,%rax
+    0.00 :   1b92fe: cmp    (%rdx,%rax,1),%r15
+    0.00 :   1b9302: jne    1b9310 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1410>
+    0.00 :   1b9304: add    %rdx,%rax
+    0.00 :   1b9307: inc    %rsi
+    0.00 :   1b930a: add    $0x8,%rax
+    0.00 :   1b930e: jmp    1b9318 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1418>
+    0.00 :   1b9310: lea    0x1a0(%rsp),%rax
+    0.00 :   1b9318: mov    0x28(%rsp),%rdx
+    0.00 :   1b931d: cmp    %rdx,%r10
+    0.00 :   1b9320: jbe    1b958d <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x168d>
+    0.00 :   1b9326: mov    %rdx,%r10
+    0.00 :   1b9329: mov    (%rax),%rdx
+    0.00 :   1b932c: mov    0x70(%rsp),%rdi
+    0.00 :   1b9331: lea    (%rdx,%rdi,1),%rbx
+    0.00 :   1b9335: cmp    0x88(%rsp),%rbx
+    0.00 :   1b933d: ja     1b95d4 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x16d4>
+    0.00 :   1b9343: mov    %rsi,0x8(%rsp)
+    0.00 :   1b9348: mov    0x48(%rsp),%rsi
+    0.00 :   1b934d: mov    %r8,%r12
+    0.00 :   1b9350: mov    0x40(%rsp),%r8
+    0.00 :   1b9355: mov    %r11,0x18(%rsp)
+    0.00 :   1b935a: mov    %r10,%r14
+    0.00 :   1b935d: cmp    %r10,%rsi
+    0.00 :   1b9360: mov    %r8,%rax
+    0.00 :   1b9363: cmova  %rcx,%rax
+    0.00 :   1b9367: mov    $0x0,%ecx
+    0.00 :   1b936c: cmovbe %rsi,%rcx
+    0.00 :   1b9370: mov    %r10,%rsi
+    0.00 :   1b9373: shl    $0x5,%rdi
+    0.00 :   1b9377: shl    $0x5,%rdx
+    0.00 :   1b937b: sub    %rcx,%rsi
+    0.00 :   1b937e: imul   0xa0(%rsp),%rsi
+    0.00 :   1b9387: add    %r8,%rdi
+    0.00 :   1b938a: shl    $0x5,%rsi
+    0.00 :   1b938e: add    %rax,%rsi
+    0.00 :   1b9391: call   *0x771c1(%rip)        # 230558 <memmove@GLIBC_2.2.5>
+    0.00 :   1b9397: mov    0xb8(%rsp),%rdx
+    0.00 :   1b939f: mov    0x10(%rsp),%r10
+    0.00 :   1b93a4: mov    %ebp,(%rdx,%rbp,4)
+    0.00 :   1b93a7: cmp    %r10,%r13
+    0.00 :   1b93aa: jae    1b9793 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1893>
+    0.00 :   1b93b0: mov    0x20(%rsp),%rax
+    0.00 :   1b93b5: mov    %r12,%r8
+    0.00 :   1b93b8: mov    0x68(%rsp),%rcx
+    0.00 :   1b93bd: mov    0x18(%rsp),%r12
+    0.00 :   1b93c2: cmp    %r13,%r15
+    0.00 :   1b93c5: mov    0xc0(%rsp),%rsi
+    0.00 :   1b93cd: mov    %rbx,0x70(%rsp)
+    0.00 :   1b93d2: cmovne %r14,%r8
+    0.00 :   1b93d6: mov    %r14d,(%rax,%r13,4)
+    0.00 :   1b93da: mov    0xb0(%rsp),%rax
+    0.00 :   1b93e2: cmovne %r13,%r12
+    0.00 :   1b93e6: mov    %r13d,(%rcx,%r14,4)
+    0.07 :   1b93ea: add    0x80(%rsp),%rsi
+    0.00 :   1b93f2: add    %ebp,%eax
+    0.00 :   1b93f4: mov    %eax,(%rcx,%rbp,4)
+    0.05 :   1b93f7: mov    (%rsp),%rcx
+    0.00 :   1b93fb: inc    %rbp
+    0.00 :   1b93fe: mov    %rbx,0xc8(%rsp)
+    0.00 :   1b9406: cmp    %rbp,%r10
+    0.00 :   1b9409: jne    1b91f0 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x12f0>
+    0.00 :   1b940f: mov    %r10,%r12
+    0.00 :   1b9412: sub    %rcx,%r12
+    0.00 :   1b9415: cmp    0x30(%rsp),%r12
+    0.00 :   1b941a: jae    1b9526 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1626>
+    0.00 :   1b9420: mov    0x1a0(%rsp),%r15
+    0.00 :   1b9428: mov    0x77129(%rip),%rbp        # 230558 <memmove@GLIBC_2.2.5>
+    0.00 :   1b942f: lea    0x74502(%rip),%rax        # 22d938 <anon.d35df8537a9ef5050ceb7e667662bffa.21.llvm.3634249459765829945+0x998>
+    0.00 :   1b9436: lea    -0x19b82f(%rip),%r13        # 1dc0e <anon.d35df8537a9ef5050ceb7e667662bffa.10.llvm.3634249459765829945+0x2a82>
+    0.00 :   1b943d: mov    %rax,0x50(%rsp)
+    0.00 :   1b9442: jmp    1b94a7 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x15a7>
+    0.00 :   1b9444: add    %rdx,%rax
+    0.00 :   1b9447: inc    %rdi
+    0.00 :   1b944a: add    $0x8,%rax
+    0.00 :   1b944e: mov    (%rax),%rdx
+    0.00 :   1b9451: lea    (%rdx,%rbx,1),%r14
+    0.00 :   1b9455: cmp    0x88(%rsp),%r14
+    0.00 :   1b945d: ja     1b9512 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1612>
+    0.00 :   1b9463: imul   %r15,%rsi
+    0.00 :   1b9467: shl    $0x5,%rbx
+    0.00 :   1b946b: add    0x40(%rsp),%rbx
+    0.00 :   1b9470: shl    $0x5,%rdx
+    0.00 :   1b9474: mov    %rdi,0x8(%rsp)
+    0.00 :   1b9479: inc    %r12
+    0.00 :   1b947c: shl    $0x5,%rsi
+    0.00 :   1b9480: add    %rcx,%rsi
+    0.00 :   1b9483: mov    %rbx,%rdi
+    0.00 :   1b9486: call   *%rbp
+    0.00 :   1b9488: mov    (%rsp),%rcx
+    0.00 :   1b948c: mov    0x10(%rsp),%r10
+    0.00 :   1b9491: mov    %r14,0xc8(%rsp)
+    0.00 :   1b9499: mov    %r14,%rbx
+    0.00 :   1b949c: cmp    0x30(%rsp),%r12
+    0.00 :   1b94a1: je     1b9529 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1629>
+    0.00 :   1b94a7: cmp    %r10,%r12
+    0.00 :   1b94aa: jae    1b97df <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x18df>
+    0.00 :   1b94b0: mov    0x20(%rsp),%rax
+    0.00 :   1b94b5: mov    (%rax,%r12,4),%esi
+    0.00 :   1b94b9: cmp    %rsi,0x48(%rsp)
+    0.00 :   1b94be: jbe    1b95e9 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x16e9>
+    0.00 :   1b94c4: mov    0x8(%rsp),%rdi
+    0.00 :   1b94c9: cmp    %rcx,%rdi
+    0.00 :   1b94cc: jae    1b94f0 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x15f0>
+    0.00 :   1b94ce: mov    0x58(%rsp),%rdx
+    0.00 :   1b94d3: mov    0x38(%rsp),%rcx
+    0.00 :   1b94d8: mov    %rdi,%rax
+    0.00 :   1b94db: shl    $0x4,%rax
+    0.00 :   1b94df: cmp    (%rdx,%rax,1),%r12
+    0.00 :   1b94e3: jne    1b94f5 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x15f5>
+    0.00 :   1b94e5: jmp    1b9444 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1544>
+    0.00 :   1b94ea: nopw   0x0(%rax,%rax,1)
+    0.00 :   1b94f0: mov    0x38(%rsp),%rcx
+    0.00 :   1b94f5: lea    0x1a0(%rsp),%rax
+    0.00 :   1b94fd: mov    (%rax),%rdx
+    0.00 :   1b9500: lea    (%rdx,%rbx,1),%r14
+    0.00 :   1b9504: cmp    0x88(%rsp),%r14
+    0.00 :   1b950c: jbe    1b9463 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1563>
+    0.00 :   1b9512: mov    $0x2f,%esi
+    0.00 :   1b9517: mov    %r13,%rdi
+    0.00 :   1b951a: lea    0x74447(%rip),%rdx        # 22d968 <anon.d35df8537a9ef5050ceb7e667662bffa.21.llvm.3634249459765829945+0x9c8>
+    0.00 :   1b9521: jmp    1b95fc <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x16fc>
+    0.00 :   1b9526: mov    %rbx,%r14
+    0.00 :   1b9529: cmp    0x88(%rsp),%r14
+    0.00 :   1b9531: jne    1b968f <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x178f>
+    0.00 :   1b9537: lea    0x128(%rsp),%rdi
+    0.00 :   1b953f: call   1ab2a0 <core::ptr::drop_glue::<voracious_radix_sort::sorts::block_lsd_stable_sort::Sorter<block_lsd_bench::Record<u32, 7>>>>
+    0.00 :   1b9544: jmp    1b80dc <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1dc>
+    0.00 :   1b9549: lea    -0x19b99c(%rip),%rdi        # 1dbb4 <anon.d35df8537a9ef5050ceb7e667662bffa.10.llvm.3634249459765829945+0x2a28>
+    0.00 :   1b9550: lea    0x743b1(%rip),%rdx        # 22d908 <anon.d35df8537a9ef5050ceb7e667662bffa.21.llvm.3634249459765829945+0x968>
+    0.00 :   1b9557: mov    $0x2c,%esi
+    0.00 :   1b955c: vzeroupper
+    0.00 :   1b955f: call   *0x76f7b(%rip)        # 2304e0 <_DYNAMIC+0x320>
+    0.00 :   1b9565: jmp    1b986b <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x196b>
+    0.00 :   1b956a: mov    0x18(%rsp),%r15
+    0.00 :   1b956f: lea    -0x19b9c2(%rip),%rdi        # 1dbb4 <anon.d35df8537a9ef5050ceb7e667662bffa.10.llvm.3634249459765829945+0x2a28>
+    0.00 :   1b9576: lea    0x7438b(%rip),%rdx        # 22d908 <anon.d35df8537a9ef5050ceb7e667662bffa.21.llvm.3634249459765829945+0x968>
+    0.00 :   1b957d: mov    $0x2c,%esi
+    0.00 :   1b9582: call   *0x76f58(%rip)        # 2304e0 <_DYNAMIC+0x320>
+    0.00 :   1b9588: jmp    1b986b <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x196b>
+    0.00 :   1b958d: mov    $0x2c,%esi
+    0.00 :   1b9592: lea    -0x19b9e5(%rip),%rdi        # 1dbb4 <anon.d35df8537a9ef5050ceb7e667662bffa.10.llvm.3634249459765829945+0x2a28>
+    0.00 :   1b9599: lea    0x74368(%rip),%rdx        # 22d908 <anon.d35df8537a9ef5050ceb7e667662bffa.21.llvm.3634249459765829945+0x968>
+    0.00 :   1b95a0: jmp    1b95fc <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x16fc>
+    0.00 :   1b95a2: lea    -0x19ba68(%rip),%rdi        # 1db41 <anon.d35df8537a9ef5050ceb7e667662bffa.10.llvm.3634249459765829945+0x29b5>
+    0.00 :   1b95a9: lea    0x742f8(%rip),%rdx        # 22d8a8 <anon.d35df8537a9ef5050ceb7e667662bffa.21.llvm.3634249459765829945+0x908>
+    0.00 :   1b95b0: mov    $0x16,%esi
+    0.00 :   1b95b5: call   *0x76e9d(%rip)        # 230458 <_DYNAMIC+0x298>
+    0.00 :   1b95bb: lea    -0x19ba6b(%rip),%rdi        # 1db57 <anon.d35df8537a9ef5050ceb7e667662bffa.10.llvm.3634249459765829945+0x29cb>
+    0.00 :   1b95c2: lea    0x742f7(%rip),%rdx        # 22d8c0 <anon.d35df8537a9ef5050ceb7e667662bffa.21.llvm.3634249459765829945+0x920>
+    0.00 :   1b95c9: mov    $0x1b,%esi
+    0.00 :   1b95ce: call   *0x76e84(%rip)        # 230458 <_DYNAMIC+0x298>
+    0.00 :   1b95d4: mov    $0x2f,%esi
+    0.00 :   1b95d9: lea    -0x19b9d2(%rip),%rdi        # 1dc0e <anon.d35df8537a9ef5050ceb7e667662bffa.10.llvm.3634249459765829945+0x2a82>
+    0.00 :   1b95e0: lea    0x743f9(%rip),%rdx        # 22d9e0 <anon.d35df8537a9ef5050ceb7e667662bffa.21.llvm.3634249459765829945+0xa40>
+    0.00 :   1b95e7: jmp    1b95fc <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x16fc>
+    0.00 :   1b95e9: mov    $0x2e,%esi
+    0.00 :   1b95ee: lea    -0x19ba15(%rip),%rdi        # 1dbe0 <anon.d35df8537a9ef5050ceb7e667662bffa.10.llvm.3634249459765829945+0x2a54>
+    0.00 :   1b95f5: lea    0x74354(%rip),%rdx        # 22d950 <anon.d35df8537a9ef5050ceb7e667662bffa.21.llvm.3634249459765829945+0x9b0>
+    0.00 :   1b95fc: call   *0x76ede(%rip)        # 2304e0 <_DYNAMIC+0x320>
+    0.00 :   1b9602: jmp    1b986b <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x196b>
+    0.00 :   1b9607: lea    -0x19ba9c(%rip),%rdi        # 1db72 <anon.d35df8537a9ef5050ceb7e667662bffa.10.llvm.3634249459765829945+0x29e6>
+    0.00 :   1b960e: lea    0x742c3(%rip),%rdx        # 22d8d8 <anon.d35df8537a9ef5050ceb7e667662bffa.21.llvm.3634249459765829945+0x938>
+    0.00 :   1b9615: mov    $0x2d,%esi
+    0.00 :   1b961a: call   *0x76ec0(%rip)        # 2304e0 <_DYNAMIC+0x320>
+    0.00 :   1b9620: lea    -0x19ba88(%rip),%rdi        # 1db9f <anon.d35df8537a9ef5050ceb7e667662bffa.10.llvm.3634249459765829945+0x2a13>
+    0.00 :   1b9627: lea    0x742c2(%rip),%rdx        # 22d8f0 <anon.d35df8537a9ef5050ceb7e667662bffa.21.llvm.3634249459765829945+0x950>
+    0.00 :   1b962e: mov    $0x15,%esi
+    0.00 :   1b9633: vzeroupper
+    0.00 :   1b9636: call   *0x76f84(%rip)        # 2305c0 <_DYNAMIC+0x400>
+    0.00 :   1b963c: jmp    1b986b <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x196b>
+    0.00 :   1b9641: lea    0x74110(%rip),%rcx        # 22d758 <anon.d35df8537a9ef5050ceb7e667662bffa.21.llvm.3634249459765829945+0x7b8>
+    0.00 :   1b9648: xor    %edi,%edi
+    0.00 :   1b964a: jmp    1b967c <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x177c>
+    0.00 :   1b964c: mov    0x18(%rsp),%r15
+    0.00 :   1b9651: lea    -0x19bb58(%rip),%rdi        # 1db00 <anon.d35df8537a9ef5050ceb7e667662bffa.10.llvm.3634249459765829945+0x2974>
+    0.00 :   1b9658: lea    0x740c9(%rip),%rdx        # 22d728 <anon.d35df8537a9ef5050ceb7e667662bffa.21.llvm.3634249459765829945+0x788>
+    0.00 :   1b965f: mov    $0x41,%esi
+    0.00 :   1b9664: call   *0x76e76(%rip)        # 2304e0 <_DYNAMIC+0x320>
+    0.00 :   1b966a: jmp    1b986b <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x196b>
+    0.00 :   1b966f: mov    %rbx,%rsi
+    0.00 :   1b9672: lea    0x740c7(%rip),%rcx        # 22d740 <anon.d35df8537a9ef5050ceb7e667662bffa.21.llvm.3634249459765829945+0x7a0>
+    0.00 :   1b9679: mov    %rbx,%r11
+    0.00 :   1b967c: mov    0x18(%rsp),%r15
+    0.00 :   1b9681: mov    %r11,%rdx
+    0.00 :   1b9684: call   *0x76df6(%rip)        # 230480 <_DYNAMIC+0x2c0>
+    0.00 :   1b968a: jmp    1b986b <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x196b>
+    0.00 :   1b968f: lea    0x7428a(%rip),%r9        # 22d920 <anon.d35df8537a9ef5050ceb7e667662bffa.21.llvm.3634249459765829945+0x980>
+    0.00 :   1b9696: lea    0xc8(%rsp),%rsi
+    0.00 :   1b969e: lea    0x1c0(%rsp),%rdx
+    0.00 :   1b96a6: xor    %edi,%edi
+    0.00 :   1b96a8: xor    %ecx,%ecx
+    0.00 :   1b96aa: call   *0x76eb8(%rip)        # 230568 <_DYNAMIC+0x3a8>
+    0.00 :   1b96b0: jmp    1b986b <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x196b>
+    0.00 :   1b96b5: mov    (%rsp),%rax
+    0.00 :   1b96b9: mov    %rcx,%rdi
+    0.00 :   1b96bc: mov    %rax,0x10(%rsp)
+    0.00 :   1b96c1: lea    0x74180(%rip),%rax        # 22d848 <anon.d35df8537a9ef5050ceb7e667662bffa.21.llvm.3634249459765829945+0x8a8>
+    0.00 :   1b96c8: jmp    1b96e5 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x17e5>
+    0.00 :   1b96ca: mov    %r15,%rdi
+    0.00 :   1b96cd: lea    0x7418c(%rip),%rax        # 22d860 <anon.d35df8537a9ef5050ceb7e667662bffa.21.llvm.3634249459765829945+0x8c0>
+    0.00 :   1b96d4: jmp    1b96e5 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x17e5>
+    0.00 :   1b96d6: mov    %rcx,%rdi
+    0.00 :   1b96d9: mov    %rdx,0x10(%rsp)
+    0.00 :   1b96de: lea    0x74193(%rip),%rax        # 22d878 <anon.d35df8537a9ef5050ceb7e667662bffa.21.llvm.3634249459765829945+0x8d8>
+    0.00 :   1b96e5: mov    %rax,0x90(%rsp)
+    0.00 :   1b96ed: mov    0x10(%rsp),%rsi
+    0.00 :   1b96f2: mov    0x90(%rsp),%rdx
+    0.00 :   1b96fa: vzeroupper
+    0.00 :   1b96fd: call   *0x76d3d(%rip)        # 230440 <_DYNAMIC+0x280>
+    0.00 :   1b9703: jmp    1b986b <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x196b>
+    0.00 :   1b9708: mov    %rax,(%rsp)
+    0.00 :   1b970c: mov    %rdx,%rdi
+    0.00 :   1b970f: lea    0x74072(%rip),%rax        # 22d788 <anon.d35df8537a9ef5050ceb7e667662bffa.21.llvm.3634249459765829945+0x7e8>
+    0.00 :   1b9716: jmp    1b97a9 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x18a9>
+    0.00 :   1b971b: mov    %rbx,%rdi
+    0.00 :   1b971e: mov    %r11,(%rsp)
+    0.00 :   1b9722: lea    0x74077(%rip),%rax        # 22d7a0 <anon.d35df8537a9ef5050ceb7e667662bffa.21.llvm.3634249459765829945+0x800>
+    0.00 :   1b9729: jmp    1b97a9 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x18a9>
+    0.00 :   1b972b: lea    0x7403e(%rip),%rax        # 22d770 <anon.d35df8537a9ef5050ceb7e667662bffa.21.llvm.3634249459765829945+0x7d0>
+    0.00 :   1b9732: mov    %r11,(%rsp)
+    0.00 :   1b9736: jmp    1b97a9 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x18a9>
+    0.00 :   1b9738: mov    %rdx,%rdi
+    0.00 :   1b973b: lea    0x74076(%rip),%rax        # 22d7b8 <anon.d35df8537a9ef5050ceb7e667662bffa.21.llvm.3634249459765829945+0x818>
+    0.00 :   1b9742: jmp    1b97a9 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x18a9>
+    0.00 :   1b9744: mov    %r9,0x50(%rsp)
+    0.00 :   1b9749: jmp    1b97df <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x18df>
+    0.00 :   1b974e: dec    %r10
+    0.00 :   1b9751: mov    %r10,%rdi
+    0.00 :   1b9754: jmp    1b97ae <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x18ae>
+    0.00 :   1b9756: mov    %rax,(%rsp)
+    0.00 :   1b975a: mov    %rdx,%rdi
+    0.00 :   1b975d: lea    0x740b4(%rip),%rax        # 22d818 <anon.d35df8537a9ef5050ceb7e667662bffa.21.llvm.3634249459765829945+0x878>
+    0.00 :   1b9764: jmp    1b97a9 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x18a9>
+    0.00 :   1b9766: mov    %rax,(%rsp)
+    0.00 :   1b976a: lea    0x74077(%rip),%rax        # 22d7e8 <anon.d35df8537a9ef5050ceb7e667662bffa.21.llvm.3634249459765829945+0x848>
+    0.00 :   1b9771: jmp    1b97a9 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x18a9>
+    0.00 :   1b9773: lea    0x740b6(%rip),%rax        # 22d830 <anon.d35df8537a9ef5050ceb7e667662bffa.21.llvm.3634249459765829945+0x890>
+    0.00 :   1b977a: jmp    1b96e5 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x17e5>
+    0.00 :   1b977f: sub    %rcx,%rbp
+    0.00 :   1b9782: lea    0x7420f(%rip),%rax        # 22d998 <anon.d35df8537a9ef5050ceb7e667662bffa.21.llvm.3634249459765829945+0x9f8>
+    0.00 :   1b9789: mov    %rbp,%r12
+    0.00 :   1b978c: jmp    1b97da <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x18da>
+    0.00 :   1b978e: mov    %r10,%r12
+    0.00 :   1b9791: jmp    1b97df <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x18df>
+    0.00 :   1b9793: lea    0x7425e(%rip),%rax        # 22d9f8 <anon.d35df8537a9ef5050ceb7e667662bffa.21.llvm.3634249459765829945+0xa58>
+    0.00 :   1b979a: mov    %r13,%r12
+    0.00 :   1b979d: jmp    1b97da <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x18da>
+    0.00 :   1b979f: mov    %rdx,%rdi
+    0.00 :   1b97a2: lea    0x74027(%rip),%rax        # 22d7d0 <anon.d35df8537a9ef5050ceb7e667662bffa.21.llvm.3634249459765829945+0x830>
+    0.00 :   1b97a9: mov    %rax,0x60(%rsp)
+    0.00 :   1b97ae: mov    (%rsp),%rsi
+    0.00 :   1b97b2: mov    0x60(%rsp),%rdx
+    0.00 :   1b97b7: mov    0x18(%rsp),%r15
+    0.00 :   1b97bc: call   *0x76c7e(%rip)        # 230440 <_DYNAMIC+0x280>
+    0.00 :   1b97c2: jmp    1b986b <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x196b>
+    0.00 :   1b97c7: lea    0x741e2(%rip),%rax        # 22d9b0 <anon.d35df8537a9ef5050ceb7e667662bffa.21.llvm.3634249459765829945+0xa10>
+    0.00 :   1b97ce: jmp    1b97da <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x18da>
+    0.00 :   1b97d0: lea    0x741f1(%rip),%rax        # 22d9c8 <anon.d35df8537a9ef5050ceb7e667662bffa.21.llvm.3634249459765829945+0xa28>
+    0.00 :   1b97d7: mov    %r11,%r12
+    0.00 :   1b97da: mov    %rax,0x50(%rsp)
+    0.00 :   1b97df: mov    0x10(%rsp),%rsi
+    0.00 :   1b97e4: mov    0x50(%rsp),%rdx
+    0.00 :   1b97e9: mov    %r12,%rdi
+    0.00 :   1b97ec: call   *0x76c4e(%rip)        # 230440 <_DYNAMIC+0x280>
+    0.00 :   1b97f2: jmp    1b986b <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x196b>
+    0.00 :   1b97f4: mov    $0x4,%edi
+    0.00 :   1b97f9: mov    %r12,%rsi
+    0.00 :   1b97fc: call   *0x76c26(%rip)        # 230428 <_DYNAMIC+0x268>
+    0.00 :   1b9802: mov    $0x8,%edi
+    0.00 :   1b9807: mov    %rbx,%rsi
+    0.00 :   1b980a: call   *0x76c18(%rip)        # 230428 <_DYNAMIC+0x268>
+    0.00 :   1b9810: jmp    1b986b <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x196b>
+    0.00 :   1b9812: mov    $0x4,%edi
+    0.00 :   1b9817: mov    %r12,%rsi
+    0.00 :   1b981a: call   *0x76c08(%rip)        # 230428 <_DYNAMIC+0x268>
+    0.00 :   1b9820: jmp    1b986b <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x196b>
+    0.00 :   1b9822: mov    0x10(%rsp),%rsi
+    0.00 :   1b9827: mov    $0x1,%edi
+    0.00 :   1b982c: call   *0x76bf6(%rip)        # 230428 <_DYNAMIC+0x268>
+    0.00 :   1b9832: jmp    1b986b <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x196b>
+    0.00 :   1b9834: mov    0x20(%rsp),%r15
+    0.00 :   1b9839: mov    $0x10,%edi
+    0.00 :   1b983e: jmp    1b8378 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x478>
+    0.00 :   1b9843: mov    0xa8(%rsp),%rsi
+    0.00 :   1b984b: mov    $0x8,%edi
+    0.00 :   1b9850: call   *0x76bd2(%rip)        # 230428 <_DYNAMIC+0x268>
+    0.00 :   1b9856: jmp    1b986b <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x196b>
+    0.00 :   1b9858: mov    0x78(%rsp),%r14
+    0.00 :   1b985d: mov    $0x8,%edi
+    0.00 :   1b9862: mov    %r14,%rsi
+    0.00 :   1b9865: call   *0x76bbd(%rip)        # 230428 <_DYNAMIC+0x268>
+    0.00 :   1b986b: ud2
+    0.00 :   1b986d: jmp    1b99b1 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1ab1>
+    0.00 :   1b9872: mov    0x18(%rsp),%r15
+    0.00 :   1b9877: mov    %rax,%rbx
+    0.00 :   1b987a: jmp    1b99e1 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1ae1>
+    0.00 :   1b987f: movzbl 0x78fca(%rip),%ecx        # 232850 <block_lsd_bench::TRACK>
+    0.00 :   1b9886: mov    %rax,%rbx
+    0.00 :   1b9889: test   %cl,%cl
+    0.00 :   1b988b: je     1b9895 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1995>
+    0.00 :   1b988d: lock sub %r12,0x78fab(%rip)        # 232840 <block_lsd_bench::LIVE>
+    0.00 :   1b9895: mov    0x68(%rsp),%rdi
+    0.00 :   1b989a: call   *0x76b80(%rip)        # 230420 <free@GLIBC_2.2.5>
+    0.00 :   1b98a0: jmp    1b98a5 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x19a5>
+    0.00 :   1b98a2: mov    %rax,%rbx
+    0.00 :   1b98a5: movzbl 0x78fa4(%rip),%eax        # 232850 <block_lsd_bench::TRACK>
+    0.00 :   1b98ac: test   %al,%al
+    0.00 :   1b98ae: jne    1b98f5 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x19f5>
+    0.00 :   1b98b0: mov    0x20(%rsp),%rdi
+    0.00 :   1b98b5: call   *0x76b65(%rip)        # 230420 <free@GLIBC_2.2.5>
+    0.00 :   1b98bb: test   %r14,%r14
+    0.00 :   1b98be: jne    1b990d <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1a0d>
+    0.00 :   1b98c0: movzbl 0x78f89(%rip),%eax        # 232850 <block_lsd_bench::TRACK>
+    0.00 :   1b98c7: test   %al,%al
+    0.00 :   1b98c9: je     1b98e2 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x19e2>
+    0.00 :   1b98cb: mov    0x18(%rsp),%rcx
+    0.00 :   1b98d0: mov    $0x10,%eax
+    0.00 :   1b98d5: shlx   %rcx,%rax,%rax
+    0.00 :   1b98da: lock sub %rax,0x78f5e(%rip)        # 232840 <block_lsd_bench::LIVE>
+    0.00 :   1b98e2: mov    0x58(%rsp),%rdi
+    0.00 :   1b98e7: call   *0x76b33(%rip)        # 230420 <free@GLIBC_2.2.5>
+    0.00 :   1b98ed: mov    %rbx,%rdi
+    0.00 :   1b98f0: call   2234c0 <_Unwind_Resume@plt>
+    0.00 :   1b98f5: lock sub %r12,0x78f43(%rip)        # 232840 <block_lsd_bench::LIVE>
+    0.00 :   1b98fd: mov    0x20(%rsp),%rdi
+    0.00 :   1b9902: call   *0x76b18(%rip)        # 230420 <free@GLIBC_2.2.5>
+    0.00 :   1b9908: test   %r14,%r14
+    0.00 :   1b990b: je     1b98c0 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x19c0>
+    0.00 :   1b990d: movzbl 0x78f3c(%rip),%eax        # 232850 <block_lsd_bench::TRACK>
+    0.00 :   1b9914: test   %al,%al
+    0.00 :   1b9916: je     1b9924 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1a24>
+    0.00 :   1b9918: shl    $0x5,%r14
+    0.00 :   1b991c: lock sub %r14,0x78f1c(%rip)        # 232840 <block_lsd_bench::LIVE>
+    0.00 :   1b9924: mov    0x38(%rsp),%rdi
+    0.00 :   1b9929: call   *0x76af1(%rip)        # 230420 <free@GLIBC_2.2.5>
+    0.00 :   1b992f: movzbl 0x78f1a(%rip),%eax        # 232850 <block_lsd_bench::TRACK>
+    0.00 :   1b9936: test   %al,%al
+    0.00 :   1b9938: jne    1b98cb <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x19cb>
+    0.00 :   1b993a: jmp    1b98e2 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x19e2>
+    0.00 :   1b993c: mov    %rax,%rbx
+    0.00 :   1b993f: test   %r14,%r14
+    0.00 :   1b9942: jne    1b994e <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1a4e>
+    0.00 :   1b9944: mov    0x20(%rsp),%r15
+    0.00 :   1b9949: jmp    1b9a37 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1b37>
+    0.00 :   1b994e: movzbl 0x78efb(%rip),%eax        # 232850 <block_lsd_bench::TRACK>
+    0.00 :   1b9955: test   %al,%al
+    0.00 :   1b9957: je     1b9965 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1a65>
+    0.00 :   1b9959: shl    $0x5,%r14
+    0.00 :   1b995d: lock sub %r14,0x78edb(%rip)        # 232840 <block_lsd_bench::LIVE>
+    0.00 :   1b9965: mov    0x38(%rsp),%rdi
+    0.00 :   1b996a: call   *0x76ab0(%rip)        # 230420 <free@GLIBC_2.2.5>
+    0.00 :   1b9970: mov    0x20(%rsp),%r15
+    0.00 :   1b9975: jmp    1b9a37 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1b37>
+    0.00 :   1b997a: mov    %rax,%rbx
+    0.00 :   1b997d: mov    0xc8(%rsp),%rax
+    0.00 :   1b9985: test   %rax,%rax
+    0.00 :   1b9988: je     1b99b9 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1ab9>
+    0.00 :   1b998a: mov    0xd0(%rsp),%rdi
+    0.00 :   1b9992: movzbl 0x78eb7(%rip),%ecx        # 232850 <block_lsd_bench::TRACK>
+    0.00 :   1b9999: test   %cl,%cl
+    0.00 :   1b999b: je     1b99a9 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1aa9>
+    0.00 :   1b999d: shl    $0x3,%rax
+    0.00 :   1b99a1: lock sub %rax,0x78e97(%rip)        # 232840 <block_lsd_bench::LIVE>
+    0.00 :   1b99a9: call   *0x76a71(%rip)        # 230420 <free@GLIBC_2.2.5>
+    0.00 :   1b99af: jmp    1b99b9 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1ab9>
+    0.00 :   1b99b1: mov    0x18(%rsp),%r15
+    0.00 :   1b99b6: mov    %rax,%rbx
+    0.00 :   1b99b9: movzbl 0x78e90(%rip),%eax        # 232850 <block_lsd_bench::TRACK>
+    0.00 :   1b99c0: test   %al,%al
+    0.00 :   1b99c2: je     1b99d6 <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1ad6>
+    0.00 :   1b99c4: mov    $0x8,%eax
+    0.00 :   1b99c9: shlx   %r15,%rax,%rax
+    0.00 :   1b99ce: lock sub %rax,0x78e6a(%rip)        # 232840 <block_lsd_bench::LIVE>
+    0.00 :   1b99d6: mov    0x28(%rsp),%rdi
+    0.00 :   1b99db: call   *0x76a3f(%rip)        # 230420 <free@GLIBC_2.2.5>
+    0.00 :   1b99e1: movzbl 0x78e68(%rip),%eax        # 232850 <block_lsd_bench::TRACK>
+    0.00 :   1b99e8: test   %al,%al
+    0.00 :   1b99ea: je     1b99fe <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1afe>
+    0.00 :   1b99ec: mov    $0x10,%eax
+    0.00 :   1b99f1: shlx   %r15,%rax,%rax
+    0.00 :   1b99f6: lock sub %rax,0x78e42(%rip)        # 232840 <block_lsd_bench::LIVE>
+    0.00 :   1b99fe: mov    %r14,%rdi
+    0.00 :   1b9a01: call   *0x76a19(%rip)        # 230420 <free@GLIBC_2.2.5>
+    0.00 :   1b9a07: lea    0x128(%rsp),%rdi
+    0.00 :   1b9a0f: call   1ab2a0 <core::ptr::drop_glue::<voracious_radix_sort::sorts::block_lsd_stable_sort::Sorter<block_lsd_bench::Record<u32, 7>>>>
+    0.00 :   1b9a14: mov    %rbx,%rdi
+    0.00 :   1b9a17: call   2234c0 <_Unwind_Resume@plt>
+    0.00 :   1b9a1c: mov    %rax,%rbx
+    0.00 :   1b9a1f: lea    0x128(%rsp),%rdi
+    0.00 :   1b9a27: call   1ab2a0 <core::ptr::drop_glue::<voracious_radix_sort::sorts::block_lsd_stable_sort::Sorter<block_lsd_bench::Record<u32, 7>>>>
+    0.00 :   1b9a2c: mov    %rbx,%rdi
+    0.00 :   1b9a2f: call   2234c0 <_Unwind_Resume@plt>
+    0.00 :   1b9a34: mov    %rax,%rbx
+    0.00 :   1b9a37: movzbl 0x78e12(%rip),%eax        # 232850 <block_lsd_bench::TRACK>
+    0.00 :   1b9a3e: test   %al,%al
+    0.00 :   1b9a40: je     1b9a4a <voracious_radix_sort::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1b4a>
+    0.00 :   1b9a42: lock sub %r12,0x78df6(%rip)        # 232840 <block_lsd_bench::LIVE>
+    0.00 :   1b9a4a: mov    %r15,%rdi
+    0.00 :   1b9a4d: call   *0x769cd(%rip)        # 230420 <free@GLIBC_2.2.5>
+    0.00 :   1b9a53: mov    %rbx,%rdi
+    0.00 :   1b9a56: call   2234c0 <_Unwind_Resume@plt>

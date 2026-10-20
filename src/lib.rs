@@ -413,6 +413,7 @@ pub use traits::radixable::Radixable;
 pub use traits::radixsort::RadixSort;
 
 pub use sorts::american_flag_sort::american_flag_sort;
+pub use sorts::block_lsd_stable_sort::block_lsd_stable_radixsort;
 pub use sorts::boolean_sort::boolean_sort;
 pub use sorts::comparative_sort::insertion_sort;
 pub use sorts::counting_sort::counting_sort;
@@ -432,3 +433,8 @@ pub use sorts::peeka_sort::peeka_sort;
 pub use dedicated::cs_u16::cs_u16;
 pub use dedicated::lsd_f32::lsd_f32;
 pub use dedicated::lsd_u32::lsd_u32;
+
+#[cfg(feature = "voracious_multithread")]
+pub use sorts::block_lsd_stable_sort::{
+    block_lsd_stable_mt_radixsort, block_lsd_stable_mt_radixsort_in_pool,
+};

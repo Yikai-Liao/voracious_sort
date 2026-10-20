@@ -1,0 +1,31 @@
+
+legacy cache:
+  l1-dcache-load-misses
+       [Level 1 data cache read misses. Unit: cpu]
+        cpu/legacy-cache-config=0x10000/
+  l1-dcache-loads
+       [Level 1 data cache read accesses. Unit: cpu]
+        cpu/legacy-cache-config=0/
+  l1-dcache-prefetches
+       [Level 1 data cache prefetch accesses. Unit: cpu]
+        cpu/legacy-cache-config=0x200/
+  l1-icache-load-misses
+       [Level 1 instruction cache read misses. Unit: cpu]
+        cpu/legacy-cache-config=0x10001/
+  l1-icache-loads
+       [Level 1 instruction cache read accesses. Unit: cpu]
+        cpu/legacy-cache-config=1/
+
+legacy hardware:
+  cache-misses
+       [Cache misses. Usually this indicates Last Level Cache misses; this is
+        intended to be used in conjunction with the
+        PERF_COUNT_HW_CACHE_REFERENCES event to calculate cache miss rates.
+        Unit: cpu]
+        cpu/event=0x64,umask=0x09/
+  cache-references
+       [Cache accesses. Usually this indicates Last Level Cache accesses but
+        this may vary depending on your CPU. This may include prefetches and
+        coherency messages; again this depends on the design of your CPU.
+        Unit: cpu]
+        cpu/event=0x60,umask=0xff/

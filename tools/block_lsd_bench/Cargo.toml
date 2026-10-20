@@ -1,0 +1,10 @@
+[package]
+name = "block_lsd_bench"
+version = "0.1.0"
+edition = "2018"
+publish = false
+
+[dependencies]
+voracious_radix_sort = { path = "../.." }
+seq-macro = "=0.3.6"
+crunchy = "=0.2.4"

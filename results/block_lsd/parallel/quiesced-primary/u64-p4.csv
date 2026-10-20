@@ -1,0 +1,6 @@
+layout,record_bytes,n,distribution,algorithm,threads,block_size,sample,ns,status
+u64_pair16,16,4194304,uniform,rayon_block,4,256,0,54729644,ok
+u64_pair16,16,4194304,uniform,rayon_block,4,256,1,53084483,ok
+u64_pair16,16,4194304,uniform,rayon_block,4,256,2,52971341,ok
+u64_pair16,16,4194304,uniform,rayon_block,4,256,3,53098629,ok
+u64_pair16,16,4194304,uniform,rayon_block,4,256,4,53442876,ok

@@ -1,0 +1,4 @@
+Temporarily paused read-only VS Code rg processes: [(837266, '5141793'), (837452, '5141889')]
+25.00 22.94 19.36 27/3606 844127
+Elapsed seconds: 38.553
+All temporarily suspended scans resumed.

@@ -1,0 +1,17 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 2K of event 'cycles:u'
+# Event count (approx.): 10618966245
+#
+# Overhead  Symbol                                                                                                           IPC   [IPC Coverage]
+# ........  ...............................................................................................................  ....................
+#
+    95.35%  [.] block_lsd_bench::shared::cursor::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128, true>  -      -            
+
+
+#
+# (Tip: To compare hot regions in two workloads use perf record -b -o file ... ; perf diff --stream file1 file2)
+#

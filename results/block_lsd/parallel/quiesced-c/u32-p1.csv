@@ -1,0 +1,6 @@
+layout,record_bytes,n,distribution,algorithm,threads,block_size,sample,ns,status
+u32_pair8,8,4194304,uniform,c_parallel,1,512,0,24122936,ok
+u32_pair8,8,4194304,uniform,c_parallel,1,512,1,23679533,ok
+u32_pair8,8,4194304,uniform,c_parallel,1,512,2,23782536,ok
+u32_pair8,8,4194304,uniform,c_parallel,1,512,3,23649957,ok
+u32_pair8,8,4194304,uniform,c_parallel,1,512,4,23553817,ok

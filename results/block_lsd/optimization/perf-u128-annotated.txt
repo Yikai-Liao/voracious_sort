@@ -1,0 +1,1655 @@
+ Percent |	Source code & Disassembly of block_lsd_bench for cycles:u (1726 samples, percent: local period)
+---------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3      Disassembly of section .text:
+         :
+         : 5      00000000001868f0 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>>:
+    0.00 :   1868f0: push   %rbp
+    0.00 :   1868f1: push   %r15
+    0.00 :   1868f3: push   %r14
+    0.00 :   1868f5: push   %r13
+    0.00 :   1868f7: push   %r12
+    0.00 :   1868f9: push   %rbx
+    0.00 :   1868fa: sub    $0x1e8,%rsp
+    0.00 :   186901: lea    -0x1(%rdx),%rax
+    0.00 :   186905: cmp    $0x8,%rax
+    0.00 :   186909: jae    1881d4 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x18e4>
+    0.00 :   18690f: test   %rcx,%rcx
+    0.00 :   186912: je     1881ed <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x18fd>
+    0.00 :   186918: mov    %rsi,%r12
+    0.00 :   18691b: cmp    $0x2,%rsi
+    0.00 :   18691f: jb     186aaf <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1bf>
+    0.00 :   186925: mov    %r12,%rax
+    0.00 :   186928: mov    %rdx,%rbp
+    0.00 :   18692b: shl    $0x5,%rax
+    0.00 :   18692f: mov    (%rdi),%rdx
+    0.00 :   186932: mov    0x8(%rdi),%rsi
+    0.00 :   186936: mov    %rcx,0x88(%rsp)
+    0.00 :   18693e: lea    0x20(%rdi),%rcx
+    0.00 :   186942: mov    %rdi,0x50(%rsp)
+    0.00 :   186947: lea    -0x40(%rax),%r11
+    0.00 :   18694b: mov    %r11d,%r8d
+    0.00 :   18694e: shr    $0x5,%r8d
+    0.00 :   186952: inc    %r8d
+    0.00 :   186955: and    $0x7,%r8d
+    0.00 :   186959: je     18699b <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xab>
+    0.00 :   18695b: shl    $0x5,%r8d
+    0.00 :   18695f: mov    %rdx,%rbx
+    0.00 :   186962: mov    %rsi,%r13
+    0.00 :   186965: data16 cs nopw 0x0(%rax,%rax,1)
+    0.00 :   186970: mov    (%rcx),%r9
+    0.00 :   186973: mov    0x8(%rcx),%r10
+    0.00 :   186977: add    $0x20,%rcx
+    0.00 :   18697b: or     %r10,%r13
+    0.00 :   18697e: or     %r9,%rbx
+    0.00 :   186981: and    %r10,%rsi
+    0.00 :   186984: and    %r9,%rdx
+    0.00 :   186987: add    $0xffffffffffffffe0,%r8
+    0.00 :   18698b: jne    186970 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x80>
+    0.00 :   18698d: cmp    $0xe0,%r11
+    0.00 :   186994: jae    1869ae <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xbe>
+    0.00 :   186996: jmp    186a99 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1a9>
+    0.00 :   18699b: mov    %rdx,%rbx
+    0.00 :   18699e: mov    %rsi,%r13
+    0.00 :   1869a1: cmp    $0xe0,%r11
+    0.00 :   1869a8: jb     186a99 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1a9>
+    0.00 :   1869ae: add    0x50(%rsp),%rax
+    0.00 :   1869b3: data16 data16 data16 cs nopw 0x0(%rax,%rax,1)
+    0.00 :   1869c0: mov    (%rcx),%rdi
+    0.12 :   1869c3: mov    0x8(%rcx),%r8
+    0.01 :   1869c7: mov    0x48(%rcx),%r9
+    0.12 :   1869cb: mov    0x28(%rcx),%r10
+    0.00 :   1869cf: or     %rdi,%rbx
+    0.00 :   1869d2: and    %rdi,%rdx
+    0.00 :   1869d5: mov    0x40(%rcx),%rdi
+    0.00 :   1869d9: or     %r8,%r13
+    0.06 :   1869dc: and    %r8,%rsi
+    0.00 :   1869df: mov    0x20(%rcx),%r8
+    0.00 :   1869e3: mov    %r9,%r15
+    0.00 :   1869e6: and    %r10,%r9
+    0.06 :   1869e9: or     %r10,%r15
+    0.00 :   1869ec: mov    0x88(%rcx),%r10
+    0.00 :   1869f3: and    %rsi,%r9
+    0.00 :   1869f6: mov    0x68(%rcx),%rsi
+    0.00 :   1869fa: or     %r13,%r15
+    0.00 :   1869fd: mov    %rdi,%r11
+    0.00 :   186a00: and    %r8,%rdi
+    0.06 :   186a03: or     %r8,%r11
+    0.00 :   186a06: mov    0x80(%rcx),%r8
+    0.00 :   186a0d: and    %rdx,%rdi
+    0.00 :   186a10: mov    0x60(%rcx),%rdx
+    0.06 :   186a14: or     %rbx,%r11
+    0.00 :   186a17: mov    %r10,%rbx
+    0.00 :   186a1a: or     %rsi,%rbx
+    0.00 :   186a1d: and    %rsi,%r10
+    0.00 :   186a20: mov    0xa8(%rcx),%rsi
+    0.18 :   186a27: mov    %r8,%r14
+    0.02 :   186a2a: or     %rdx,%r14
+    0.00 :   186a2d: and    %rdx,%r8
+    0.00 :   186a30: mov    0xa0(%rcx),%rdx
+    0.06 :   186a37: or     %rsi,%rbx
+    0.00 :   186a3a: and    %rsi,%r10
+    0.00 :   186a3d: mov    0xe8(%rcx),%rsi
+    0.06 :   186a44: and    %r9,%r10
+    0.06 :   186a47: mov    0xc0(%rcx),%r9
+    0.00 :   186a4e: or     %r15,%rbx
+    0.00 :   186a51: or     %rdx,%r14
+    0.00 :   186a54: and    %rdx,%r8
+    0.00 :   186a57: mov    0xe0(%rcx),%rdx
+    0.06 :   186a5e: mov    %rsi,%r13
+    0.00 :   186a61: or     %r11,%r14
+    0.18 :   186a64: mov    0xc8(%rcx),%r11
+    0.00 :   186a6b: and    %rdi,%r8
+    0.00 :   186a6e: add    $0x100,%rcx
+    0.00 :   186a75: or     %r11,%r13
+    0.00 :   186a78: and    %r11,%rsi
+    0.00 :   186a7b: or     %rbx,%r13
+    0.00 :   186a7e: mov    %rdx,%rbx
+    0.00 :   186a81: or     %r9,%rbx
+    0.00 :   186a84: and    %r9,%rdx
+    0.00 :   186a87: and    %r10,%rsi
+    0.00 :   186a8a: or     %r14,%rbx
+    0.06 :   186a8d: and    %r8,%rdx
+    0.00 :   186a90: cmp    %rax,%rcx
+    0.00 :   186a93: jne    1869c0 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xd0>
+    0.00 :   186a99: mov    0x88(%rsp),%rcx
+    0.00 :   186aa1: xor    %rdx,%rbx
+    0.00 :   186aa4: xor    %rsi,%r13
+    0.00 :   186aa7: mov    %rbx,%rax
+    0.00 :   186aaa: or     %r13,%rax
+    0.00 :   186aad: jne    186ac1 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1d1>
+    0.00 :   186aaf: add    $0x1e8,%rsp
+    0.00 :   186ab6: pop    %rbx
+    0.00 :   186ab7: pop    %r12
+    0.00 :   186ab9: pop    %r13
+    0.00 :   186abb: pop    %r14
+    0.00 :   186abd: pop    %r15
+    0.00 :   186abf: pop    %rbp
+    0.00 :   186ac0: ret
+    0.00 :   186ac1: lea    0x7f(%rbp),%eax
+    0.00 :   186ac4: mov    %r12,%rdi
+    0.00 :   186ac7: or     %rcx,%rdi
+    0.00 :   186aca: movzbl %al,%eax
+    0.00 :   186acd: div    %bpl
+    0.00 :   186ad0: shr    $0x20,%rdi
+    0.00 :   186ad4: mov    %eax,%esi
+    0.00 :   186ad6: mov    $0x2,%eax
+    0.00 :   186adb: shlx   %rbp,%rax,%rax
+    0.00 :   186ae0: mov    %rax,0x58(%rsp)
+    0.00 :   186ae5: je     186af4 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x204>
+    0.00 :   186ae7: mov    %r12,%rax
+    0.00 :   186aea: xor    %edx,%edx
+    0.00 :   186aec: div    %rcx
+    0.00 :   186aef: mov    %rax,%r15
+    0.00 :   186af2: jmp    186afe <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x20e>
+    0.00 :   186af4: mov    %r12d,%eax
+    0.00 :   186af7: xor    %edx,%edx
+    0.00 :   186af9: div    %ecx
+    0.00 :   186afb: mov    %eax,%r15d
+    0.00 :   186afe: mov    0x58(%rsp),%rax
+    0.00 :   186b03: lea    (%r15,%rax,1),%rcx
+    0.00 :   186b07: mov    %rcx,%rax
+    0.00 :   186b0a: shr    $0x20,%rax
+    0.00 :   186b0e: jne    188206 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1916>
+    0.00 :   186b14: mov    %rdi,0x40(%rsp)
+    0.00 :   186b19: mov    %rdx,0x78(%rsp)
+    0.00 :   186b1e: mov    %sil,0x48(%rsp)
+    0.00 :   186b23: mov    %rcx,0x30(%rsp)
+    0.00 :   186b28: lea    0x0(,%rcx,4),%r14
+    0.00 :   186b30: call   *0x91a5a(%rip)        # 218590 <_DYNAMIC+0x270>
+    0.00 :   186b36: mov    $0x1,%esi
+    0.00 :   186b3b: mov    %r14,%rdi
+    0.00 :   186b3e: mov    %r14,0x20(%rsp)
+    0.00 :   186b43: call   *0x91a4f(%rip)        # 218598 <calloc@GLIBC_2.2.5>
+    0.00 :   186b49: mov    %rax,0x10(%rsp)
+    0.00 :   186b4e: test   %rax,%rax
+    0.00 :   186b51: je     18843d <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1b4d>
+    0.00 :   186b57: mov    $0x1,%eax
+    0.00 :   186b5c: shlx   %rbp,%rax,%rax
+    0.00 :   186b61: mov    %rax,0x8(%rsp)
+    0.00 :   186b66: movzbl 0x93e3b(%rip),%eax        # 21a9a8 <block_lsd_bench::TRACK>
+    0.00 :   186b6d: mov    0x50(%rsp),%r9
+    0.00 :   186b72: test   %al,%al
+    0.00 :   186b74: je     186bb5 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x2c5>
+    0.00 :   186b76: mov    0x20(%rsp),%rax
+    0.00 :   186b7b: mov    %rax,%rcx
+    0.00 :   186b7e: lock xadd %rcx,0x93e11(%rip)        # 21a998 <block_lsd_bench::LIVE>
+    0.00 :   186b87: add    %rax,%rcx
+    0.00 :   186b8a: mov    0x93e0f(%rip),%rax        # 21a9a0 <block_lsd_bench::PEAK>
+    0.00 :   186b91: data16 data16 data16 data16 data16 cs nopw 0x0(%rax,%rax,1)
+    0.00 :   186ba0: cmp    %rcx,%rax
+    0.00 :   186ba3: mov    %rcx,%rdx
+    0.00 :   186ba6: cmova  %rax,%rdx
+    0.00 :   186baa: lock cmpxchg %rdx,0x93ded(%rip)        # 21a9a0 <block_lsd_bench::PEAK>
+    0.00 :   186bb3: jne    186ba0 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x2b0>
+    0.00 :   186bb5: mov    0x20(%rsp),%rax
+    0.00 :   186bba: mov    0x8(%rsp),%rdx
+    0.00 :   186bbf: mov    0x88(%rsp),%r11
+    0.00 :   186bc7: movabs $0x7ffffffffffffff0,%rcx
+    0.00 :   186bd1: lea    (%r15,%rdx,1),%r14
+    0.00 :   186bd5: add    $0xfffffffffffffffc,%rax
+    0.00 :   186bd9: cmp    $0x1c,%rax
+    0.00 :   186bdd: jae    186beb <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x2fb>
+    0.00 :   186bdf: mov    0x10(%rsp),%rdx
+    0.00 :   186be4: xor    %eax,%eax
+    0.00 :   186be6: jmp    187111 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x821>
+    0.00 :   186beb: mov    %rax,%rsi
+    0.00 :   186bee: shr    $0x2,%rsi
+    0.00 :   186bf2: vpbroadcastq %rdx,%zmm0
+    0.00 :   186bf8: vpbroadcastq %r14,%zmm1
+    0.00 :   186bfe: inc    %rsi
+    0.00 :   186c01: cmp    $0x3c,%rax
+    0.00 :   186c05: jae    186c94 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x3a4>
+    0.00 :   186c0b: xor    %eax,%eax
+    0.00 :   186c0d: mov    %rax,%rdi
+    0.00 :   186c10: vpbroadcastq %rdi,%zmm2
+    0.00 :   186c16: vporq  -0x16c3e0(%rip),%zmm2,%zmm4        # 1a840 <anon.c5862773a544a98ebfd42667029cfcec.1522.llvm.17443555614370274988+0xc80>
+    0.00 :   186c20: vpbroadcastq -0x16d9ba(%rip),%zmm3        # 19270 <anon.1000b255692110c1e1df217f61ce8746.4.llvm.1257974741033515927+0x1cb>
+    0.00 :   186c2a: mov    0x10(%rsp),%r10
+    0.00 :   186c2f: lea    0x8(%rcx),%rax
+    0.00 :   186c33: mov    %r15,%r8
+    0.00 :   186c36: neg    %r8
+    0.00 :   186c39: and    %rsi,%rax
+    0.00 :   186c3c: vpbroadcastq %r8,%zmm2
+    0.00 :   186c42: lea    (%r10,%rax,4),%rdx
+    0.00 :   186c46: cs nopw 0x0(%rax,%rax,1)
+    0.00 :   186c50: vpcmpltuq %zmm1,%zmm4,%k2
+    0.00 :   186c57: vpcmpnltuq %zmm0,%zmm4,%k1
+    0.00 :   186c5e: vpaddq %zmm3,%zmm4,%zmm6
+    0.00 :   186c64: vpblendmq %zmm0,%zmm2,%zmm5{%k2}
+    0.00 :   186c6a: vpaddq %zmm5,%zmm4,%zmm4{%k1}
+    0.00 :   186c70: vpmovqd %zmm4,(%r10,%rdi,4)
+    0.00 :   186c77: add    $0x8,%rdi
+    0.00 :   186c7b: vmovdqa64 %zmm6,%zmm4
+    0.00 :   186c81: cmp    %rdi,%rax
+    0.00 :   186c84: jne    186c50 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x360>
+    0.00 :   186c86: cmp    %rax,%rsi
+    0.00 :   186c89: je     186d3d <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x44d>
+    0.00 :   186c8f: jmp    187111 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x821>
+    0.00 :   186c94: vmovdqa64 -0x16c49e(%rip),%zmm4        # 1a800 <anon.c5862773a544a98ebfd42667029cfcec.1522.llvm.17443555614370274988+0xc40>
+    0.00 :   186c9e: vmovdqa64 -0x16c468(%rip),%zmm5        # 1a840 <anon.c5862773a544a98ebfd42667029cfcec.1522.llvm.17443555614370274988+0xc80>
+    0.00 :   186ca8: vpbroadcastq -0x16d9ca(%rip),%zmm3        # 192e8 <anon.1000b255692110c1e1df217f61ce8746.4.llvm.1257974741033515927+0x243>
+    0.00 :   186cb2: mov    0x10(%rsp),%r8
+    0.00 :   186cb7: mov    %rsi,%rax
+    0.00 :   186cba: and    %rcx,%rax
+    0.00 :   186cbd: mov    %r15,%rdi
+    0.00 :   186cc0: neg    %rdi
+    0.00 :   186cc3: vpbroadcastq %rdi,%zmm2
+    0.00 :   186cc9: xor    %edi,%edi
+    0.00 :   186ccb: lea    (%r8,%rax,4),%rdx
+    0.00 :   186ccf: nop
+    0.00 :   186cd0: vpcmpltuq %zmm1,%zmm4,%k3
+    0.00 :   186cd7: vpcmpltuq %zmm1,%zmm5,%k4
+    0.00 :   186cde: vpcmpnltuq %zmm0,%zmm5,%k1
+    0.00 :   186ce5: vpcmpnltuq %zmm0,%zmm4,%k2
+    0.00 :   186cec: vpaddq %zmm3,%zmm4,%zmm8
+    0.00 :   186cf2: vpaddq %zmm3,%zmm5,%zmm9
+    0.00 :   186cf8: vpblendmq %zmm0,%zmm2,%zmm6{%k4}
+    0.00 :   186cfe: vpblendmq %zmm0,%zmm2,%zmm7{%k3}
+    0.00 :   186d04: vpaddq %zmm7,%zmm4,%zmm4{%k2}
+    0.00 :   186d0a: vpaddq %zmm6,%zmm5,%zmm5{%k1}
+    0.00 :   186d10: vpmovqd %zmm5,(%r8,%rdi,4)
+    0.00 :   186d17: vpmovqd %zmm4,0x20(%r8,%rdi,4)
+    0.00 :   186d1f: add    $0x10,%rdi
+    0.00 :   186d23: vmovdqa64 %zmm9,%zmm5
+    0.00 :   186d29: vmovdqa64 %zmm8,%zmm4
+    0.00 :   186d2f: cmp    %rdi,%rax
+    0.00 :   186d32: jne    186cd0 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x3e0>
+    0.00 :   186d34: cmp    %rax,%rsi
+    0.00 :   186d37: jne    187107 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x817>
+    0.00 :   186d3d: mov    0x58(%rsp),%rax
+    0.00 :   186d42: mul    %r11
+    0.00 :   186d45: jo     18821f <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x192f>
+    0.00 :   186d4b: vmovdqa 0x10(%r9),%xmm0
+    0.00 :   186d51: mov    %rbp,0x18(%rsp)
+    0.00 :   186d56: mov    %r12,0x98(%rsp)
+    0.00 :   186d5e: mov    (%r9),%r12
+    0.00 :   186d61: mov    0x8(%r9),%rbp
+    0.00 :   186d65: mov    %r14,0x68(%rsp)
+    0.00 :   186d6a: mov    %rax,%r14
+    0.00 :   186d6d: mov    %rax,%r8
+    0.00 :   186d70: shl    $0x5,%r14
+    0.00 :   186d74: shr    $0x3b,%rax
+    0.00 :   186d78: setne  %al
+    0.00 :   186d7b: cmp    %rcx,%r14
+    0.00 :   186d7e: seta   %cl
+    0.00 :   186d81: or     %al,%cl
+    0.00 :   186d83: vmovdqa %xmm0,0xe0(%rsp)
+    0.00 :   186d8c: je     186da6 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x4b6>
+    0.00 :   186d8e: xor    %edi,%edi
+    0.00 :   186d90: mov    0x10(%rsp),%rbx
+    0.00 :   186d95: mov    %r14,%rsi
+    0.00 :   186d98: vzeroupper
+    0.00 :   186d9b: call   *0x917e7(%rip)        # 218588 <_DYNAMIC+0x268>
+    0.00 :   186da1: jmp    188520 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1c30>
+    0.00 :   186da6: mov    %r8,0x70(%rsp)
+    0.00 :   186dab: test   %r14,%r14
+    0.00 :   186dae: je     186e31 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x541>
+    0.00 :   186db4: vzeroupper
+    0.00 :   186db7: call   *0x917d3(%rip)        # 218590 <_DYNAMIC+0x270>
+    0.00 :   186dbd: mov    %r14,%rdi
+    0.00 :   186dc0: call   *0x91832(%rip)        # 2185f8 <malloc@GLIBC_2.2.5>
+    0.00 :   186dc6: mov    %rax,0x38(%rsp)
+    0.00 :   186dcb: test   %rax,%rax
+    0.00 :   186dce: je     1884eb <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1bfb>
+    0.00 :   186dd4: movzbl 0x93bcd(%rip),%eax        # 21a9a8 <block_lsd_bench::TRACK>
+    0.00 :   186ddb: mov    0x70(%rsp),%r8
+    0.00 :   186de0: mov    0x40(%rsp),%rsi
+    0.00 :   186de5: test   %al,%al
+    0.00 :   186de7: je     186e15 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x525>
+    0.00 :   186de9: mov    %r14,%rcx
+    0.00 :   186dec: lock xadd %rcx,0x93ba3(%rip)        # 21a998 <block_lsd_bench::LIVE>
+    0.00 :   186df5: mov    0x93ba4(%rip),%rax        # 21a9a0 <block_lsd_bench::PEAK>
+    0.00 :   186dfc: add    %r14,%rcx
+    0.00 :   186dff: nop
+    0.00 :   186e00: cmp    %rcx,%rax
+    0.00 :   186e03: mov    %rcx,%rdx
+    0.00 :   186e06: cmova  %rax,%rdx
+    0.00 :   186e0a: lock cmpxchg %rdx,0x93b8d(%rip)        # 21a9a0 <block_lsd_bench::PEAK>
+    0.00 :   186e13: jne    186e00 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x510>
+    0.00 :   186e15: mov    0x50(%rsp),%r9
+    0.00 :   186e1a: mov    0x88(%rsp),%r11
+    0.00 :   186e22: mov    %r8,0x28(%rsp)
+    0.00 :   186e27: test   %r8,%r8
+    0.00 :   186e2a: jne    186e52 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x562>
+    0.00 :   186e2c: jmp    186fb9 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x6c9>
+    0.00 :   186e31: mov    0x40(%rsp),%rsi
+    0.00 :   186e36: mov    $0x10,%eax
+    0.00 :   186e3b: movq   $0x0,0x28(%rsp)
+    0.00 :   186e44: mov    %rax,0x38(%rsp)
+    0.00 :   186e49: test   %r8,%r8
+    0.00 :   186e4c: je     186fb9 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x6c9>
+    0.00 :   186e52: mov    0x38(%rsp),%rax
+    0.00 :   186e57: lea    -0x2(%r8),%rcx
+    0.00 :   186e5b: cmp    $0x7,%rcx
+    0.00 :   186e5f: jb     186f63 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x673>
+    0.00 :   186e65: mov    0x38(%rsp),%rax
+    0.00 :   186e6a: lea    -0x1(%r8),%rcx
+    0.00 :   186e6e: and    $0xfffffffffffffff8,%rcx
+    0.00 :   186e72: data16 data16 data16 data16 cs nopw 0x0(%rax,%rax,1)
+    0.00 :   186e80: mov    %r12,(%rax)
+    0.00 :   186e83: mov    %rbp,0x8(%rax)
+    0.00 :   186e87: vmovaps 0xe0(%rsp),%xmm0
+    0.00 :   186e90: vmovaps %xmm0,0x10(%rax)
+    0.00 :   186e95: mov    %rbp,0x28(%rax)
+    0.00 :   186e99: mov    %r12,0x20(%rax)
+    0.00 :   186e9d: vmovaps 0xe0(%rsp),%xmm0
+    0.00 :   186ea6: vmovaps %xmm0,0x30(%rax)
+    0.00 :   186eab: mov    %rbp,0x48(%rax)
+    0.00 :   186eaf: mov    %r12,0x40(%rax)
+    0.00 :   186eb3: vmovaps 0xe0(%rsp),%xmm0
+    0.00 :   186ebc: vmovaps %xmm0,0x50(%rax)
+    0.00 :   186ec1: mov    %rbp,0x68(%rax)
+    0.00 :   186ec5: mov    %r12,0x60(%rax)
+    0.00 :   186ec9: vmovaps 0xe0(%rsp),%xmm0
+    0.00 :   186ed2: vmovaps %xmm0,0x70(%rax)
+    0.00 :   186ed7: mov    %rbp,0x88(%rax)
+    0.00 :   186ede: mov    %r12,0x80(%rax)
+    0.00 :   186ee5: vmovaps 0xe0(%rsp),%xmm0
+    0.00 :   186eee: vmovaps %xmm0,0x90(%rax)
+    0.00 :   186ef6: mov    %rbp,0xa8(%rax)
+    0.00 :   186efd: mov    %r12,0xa0(%rax)
+    0.00 :   186f04: vmovaps 0xe0(%rsp),%xmm0
+    0.00 :   186f0d: vmovaps %xmm0,0xb0(%rax)
+    0.00 :   186f15: mov    %rbp,0xc8(%rax)
+    0.00 :   186f1c: mov    %r12,0xc0(%rax)
+    0.00 :   186f23: vmovaps 0xe0(%rsp),%xmm0
+    0.00 :   186f2c: vmovaps %xmm0,0xd0(%rax)
+    0.00 :   186f34: mov    %rbp,0xe8(%rax)
+    0.00 :   186f3b: mov    %r12,0xe0(%rax)
+    0.00 :   186f42: vmovdqa 0xe0(%rsp),%xmm0
+    0.00 :   186f4b: vmovdqa %xmm0,0xf0(%rax)
+    0.00 :   186f53: add    $0x100,%rax
+    0.00 :   186f59: add    $0xfffffffffffffff8,%rcx
+    0.00 :   186f5d: jne    186e80 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x590>
+    0.00 :   186f63: lea    0x6(%r8),%ecx
+    0.00 :   186f67: xor    %edx,%edx
+    0.00 :   186f69: movzbl %cl,%ecx
+    0.00 :   186f6c: and    $0x7,%ecx
+    0.00 :   186f6f: shl    $0x5,%ecx
+    0.00 :   186f72: add    $0x20,%rcx
+    0.00 :   186f76: cs nopw 0x0(%rax,%rax,1)
+    0.00 :   186f80: mov    %r12,(%rax,%rdx,1)
+    0.00 :   186f84: mov    %rbp,0x8(%rax,%rdx,1)
+    0.00 :   186f89: vmovdqa 0xe0(%rsp),%xmm0
+    0.00 :   186f92: vmovdqa %xmm0,0x10(%rax,%rdx,1)
+    0.00 :   186f98: add    $0x20,%rdx
+    0.00 :   186f9c: cmp    %rdx,%rcx
+    0.00 :   186f9f: jne    186f80 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x690>
+    0.00 :   186fa1: mov    %r12,(%rax,%rdx,1)
+    0.00 :   186fa5: mov    %rbp,0x8(%rax,%rdx,1)
+    0.00 :   186faa: vmovdqa 0xe0(%rsp),%xmm0
+    0.00 :   186fb3: vmovdqa %xmm0,0x10(%rax,%rdx,1)
+    0.00 :   186fb9: test   %rsi,%rsi
+    0.00 :   186fbc: je     186fd3 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x6e3>
+    0.00 :   186fbe: mov    0x98(%rsp),%rbp
+    0.00 :   186fc6: xor    %edx,%edx
+    0.00 :   186fc8: mov    %rbp,%rax
+    0.00 :   186fcb: div    %r11
+    0.00 :   186fce: mov    %rdx,%r14
+    0.00 :   186fd1: jmp    186fe5 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x6f5>
+    0.00 :   186fd3: mov    0x98(%rsp),%rbp
+    0.00 :   186fdb: xor    %edx,%edx
+    0.00 :   186fdd: mov    %ebp,%eax
+    0.00 :   186fdf: div    %r11d
+    0.00 :   186fe2: mov    %edx,%r14d
+    0.00 :   186fe5: mov    0x18(%rsp),%r12
+    0.00 :   186fea: mov    %r14,%rax
+    0.00 :   186fed: lea    0x8e55c(%rip),%rcx        # 215550 <anon.63b0faa5d83c36f8eca54b1a89ce500b.8.llvm.3123880007927975513+0x678>
+    0.00 :   186ff4: shlx   %r12,%r11,%rdi
+    0.00 :   186ff9: add    %rdi,%rax
+    0.00 :   186ffc: jb     188245 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1955>
+    0.00 :   187002: cmp    %r8,%rax
+    0.00 :   187005: ja     188245 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1955>
+    0.00 :   18700b: imul   %r11,%r15
+    0.00 :   18700f: cmp    %rbp,%r15
+    0.00 :   187012: ja     188271 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1981>
+    0.00 :   187018: mov    0x78(%rsp),%rsi
+    0.00 :   18701d: cmp    %rsi,%r14
+    0.00 :   187020: jne    18829c <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x19ac>
+    0.00 :   187026: shl    $0x5,%rdi
+    0.00 :   18702a: add    0x38(%rsp),%rdi
+    0.00 :   18702f: shl    $0x5,%r15
+    0.00 :   187033: mov    %r14,%rdx
+    0.00 :   187036: shl    $0x5,%rdx
+    0.00 :   18703a: add    %r9,%r15
+    0.00 :   18703d: mov    %r15,%rsi
+    0.00 :   187040: vzeroupper
+    0.00 :   187043: call   *0x91587(%rip)        # 2185d0 <memcpy@GLIBC_2.14>
+    0.00 :   187049: mov    $0x10,%eax
+    0.00 :   18704e: shlx   %r12,%rax,%r15
+    0.00 :   187053: call   *0x91537(%rip)        # 218590 <_DYNAMIC+0x270>
+    0.00 :   187059: mov    %r15,%rdi
+    0.00 :   18705c: call   *0x91596(%rip)        # 2185f8 <malloc@GLIBC_2.2.5>
+    0.00 :   187062: mov    %rax,0xa0(%rsp)
+    0.00 :   18706a: test   %rax,%rax
+    0.00 :   18706d: je     188457 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1b67>
+    0.00 :   187073: movzbl 0x9392e(%rip),%eax        # 21a9a8 <block_lsd_bench::TRACK>
+    0.00 :   18707a: mov    0x30(%rsp),%r9
+    0.00 :   18707f: test   %al,%al
+    0.00 :   187081: je     1870b5 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x7c5>
+    0.00 :   187083: mov    %r15,%rcx
+    0.00 :   187086: lock xadd %rcx,0x93909(%rip)        # 21a998 <block_lsd_bench::LIVE>
+    0.00 :   18708f: mov    0x9390a(%rip),%rax        # 21a9a0 <block_lsd_bench::PEAK>
+    0.00 :   187096: add    %r15,%rcx
+    0.00 :   187099: nopl   0x0(%rax)
+    0.00 :   1870a0: cmp    %rcx,%rax
+    0.00 :   1870a3: mov    %rcx,%rdx
+    0.00 :   1870a6: cmova  %rax,%rdx
+    0.00 :   1870aa: lock cmpxchg %rdx,0x938ed(%rip)        # 21a9a0 <block_lsd_bench::PEAK>
+    0.00 :   1870b3: jne    1870a0 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x7b0>
+    0.00 :   1870b5: test   %r12,%r12
+    0.00 :   1870b8: je     1870ef <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x7ff>
+    0.00 :   1870ba: mov    0xa0(%rsp),%r15
+    0.00 :   1870c2: mov    $0x1,%edx
+    0.00 :   1870c7: vmovq  %r9,%xmm0
+    0.00 :   1870cc: mov    %r15,%rax
+    0.00 :   1870cf: cmp    $0x3,%r12
+    0.00 :   1870d3: jb     187210 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x920>
+    0.00 :   1870d9: mov    0x8(%rsp),%rax
+    0.00 :   1870de: lea    -0x1(%rax),%rsi
+    0.00 :   1870e2: cmp    $0x6,%r12
+    0.00 :   1870e6: jae    187151 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x861>
+    0.00 :   1870e8: xor    %ecx,%ecx
+    0.00 :   1870ea: jmp    1871ca <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x8da>
+    0.00 :   1870ef: mov    0xa0(%rsp),%r15
+    0.00 :   1870f7: mov    %r9,(%r15)
+    0.00 :   1870fa: movq   $0x0,0x8(%r15)
+    0.00 :   187102: jmp    187238 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x948>
+    0.00 :   187107: test   $0x8,%sil
+    0.00 :   18710b: jne    186c0d <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x31d>
+    0.00 :   187111: mov    0x10(%rsp),%rsi
+    0.00 :   187116: add    0x20(%rsp),%rsi
+    0.00 :   18711b: jmp    18713a <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x84a>
+    0.00 :   18711d: nopl   (%rax)
+    0.00 :   187120: mov    0x8(%rsp),%rdi
+    0.00 :   187125: add    %rax,%rdi
+    0.00 :   187128: mov    %edi,(%rdx)
+    0.00 :   18712a: add    $0x4,%rdx
+    0.00 :   18712e: inc    %rax
+    0.00 :   187131: cmp    %rsi,%rdx
+    0.00 :   187134: je     186d3d <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x44d>
+    0.00 :   18713a: mov    %rax,%rdi
+    0.00 :   18713d: cmp    0x8(%rsp),%rax
+    0.00 :   187142: jb     187128 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x838>
+    0.00 :   187144: cmp    %r14,%rax
+    0.00 :   187147: jb     187120 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x830>
+    0.00 :   187149: mov    %rax,%rdi
+    0.00 :   18714c: sub    %r15,%rdi
+    0.00 :   18714f: jmp    187128 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x838>
+    0.00 :   187151: mov    %rsi,%rcx
+    0.00 :   187154: and    $0xffffffffffffffe0,%rcx
+    0.00 :   187158: vshufi64x2 $0x0,%zmm0,%zmm0,%zmm1
+    0.00 :   18715f: lea    0x180(%r15),%rdi
+    0.00 :   187166: mov    %rcx,%rax
+    0.00 :   187169: shl    $0x4,%rax
+    0.00 :   18716d: lea    0x1(%rcx),%rdx
+    0.00 :   187171: mov    %rcx,%r8
+    0.00 :   187174: add    %r15,%rax
+    0.00 :   187177: nopw   0x0(%rax,%rax,1)
+    0.00 :   187180: vmovdqu64 %zmm1,-0x180(%rdi)
+    0.00 :   187187: vmovdqu64 %zmm1,-0x140(%rdi)
+    0.00 :   18718e: vmovdqu64 %zmm1,-0x100(%rdi)
+    0.00 :   187195: vmovdqu64 %zmm1,-0xc0(%rdi)
+    0.00 :   18719c: vmovdqu64 %zmm1,-0x80(%rdi)
+    0.00 :   1871a3: vmovdqu64 %zmm1,-0x40(%rdi)
+    0.00 :   1871aa: vmovdqu64 %zmm1,(%rdi)
+    0.00 :   1871b0: vmovdqu64 %zmm1,0x40(%rdi)
+    0.00 :   1871b7: add    $0x200,%rdi
+    0.00 :   1871be: add    $0xffffffffffffffe0,%r8
+    0.00 :   1871c2: jne    187180 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x890>
+    0.00 :   1871c4: test   $0x1c,%sil
+    0.00 :   1871c8: je     187210 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x920>
+    0.00 :   1871ca: vmovdqa64 -0x16c954(%rip),%zmm1        # 1a880 <anon.c5862773a544a98ebfd42667029cfcec.1522.llvm.17443555614370274988+0xcc0>
+    0.00 :   1871d4: vpxor  %xmm2,%xmm2,%xmm2
+    0.00 :   1871d8: and    $0xfffffffffffffffc,%rsi
+    0.00 :   1871dc: mov    %rcx,%rdi
+    0.00 :   1871df: shl    $0x4,%rcx
+    0.00 :   1871e3: mov    %rsi,%rax
+    0.00 :   1871e6: shl    $0x4,%rax
+    0.00 :   1871ea: mov    %rsi,%rdx
+    0.00 :   1871ed: sub    %rsi,%rdi
+    0.00 :   1871f0: inc    %rdx
+    0.00 :   1871f3: add    %r15,%rcx
+    0.00 :   1871f6: add    %r15,%rax
+    0.00 :   1871f9: vpermi2q %zmm2,%zmm0,%zmm1
+    0.00 :   1871ff: nop
+    0.00 :   187200: vmovdqu64 %zmm1,(%rcx)
+    0.00 :   187206: add    $0x40,%rcx
+    0.00 :   18720a: add    $0x4,%rdi
+    0.00 :   18720e: jne    187200 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x910>
+    0.00 :   187210: mov    0x8(%rsp),%rcx
+    0.00 :   187215: sub    %rdx,%rcx
+    0.00 :   187218: nopl   0x0(%rax,%rax,1)
+    0.00 :   187220: vmovdqu %xmm0,(%rax)
+    0.00 :   187224: add    $0x10,%rax
+    0.00 :   187228: dec    %rcx
+    0.00 :   18722b: jne    187220 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x930>
+    0.00 :   18722d: mov    %r9,(%rax)
+    0.00 :   187230: movq   $0x0,0x8(%rax)
+    0.00 :   187238: mov    0x68(%rsp),%rax
+    0.00 :   18723d: mov    %rax,(%r15)
+    0.00 :   187240: mov    %r14,0x8(%r15)
+    0.00 :   187244: vzeroupper
+    0.00 :   187247: call   *0x91343(%rip)        # 218590 <_DYNAMIC+0x270>
+    0.00 :   18724d: mov    0x20(%rsp),%rdi
+    0.00 :   187252: mov    $0x1,%esi
+    0.00 :   187257: call   *0x9133b(%rip)        # 218598 <calloc@GLIBC_2.2.5>
+    0.00 :   18725d: test   %rax,%rax
+    0.00 :   187260: je     188474 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1b84>
+    0.00 :   187266: movzbl 0x9373b(%rip),%ecx        # 21a9a8 <block_lsd_bench::TRACK>
+    0.00 :   18726d: mov    %rax,%r14
+    0.00 :   187270: test   %cl,%cl
+    0.00 :   187272: je     1872a5 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x9b5>
+    0.00 :   187274: mov    0x20(%rsp),%rax
+    0.00 :   187279: mov    %rax,%rcx
+    0.00 :   18727c: lock xadd %rcx,0x93713(%rip)        # 21a998 <block_lsd_bench::LIVE>
+    0.00 :   187285: add    %rax,%rcx
+    0.00 :   187288: mov    0x93711(%rip),%rax        # 21a9a0 <block_lsd_bench::PEAK>
+    0.00 :   18728f: nop
+    0.00 :   187290: cmp    %rcx,%rax
+    0.00 :   187293: mov    %rcx,%rdx
+    0.00 :   187296: cmova  %rax,%rdx
+    0.00 :   18729a: lock cmpxchg %rdx,0x936fd(%rip)        # 21a9a0 <block_lsd_bench::PEAK>
+    0.00 :   1872a3: jne    187290 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x9a0>
+    0.00 :   1872a5: call   *0x912e5(%rip)        # 218590 <_DYNAMIC+0x270>
+    0.00 :   1872ab: mov    0x30(%rsp),%rdi
+    0.00 :   1872b0: mov    $0x1,%esi
+    0.00 :   1872b5: call   *0x912dd(%rip)        # 218598 <calloc@GLIBC_2.2.5>
+    0.00 :   1872bb: mov    0x68(%rsp),%rsi
+    0.00 :   1872c0: mov    %rax,0x78(%rsp)
+    0.00 :   1872c5: test   %rax,%rax
+    0.00 :   1872c8: je     188489 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1b99>
+    0.00 :   1872ce: movzbl 0x48(%rsp),%ebp
+    0.00 :   1872d3: movzbl 0x936ce(%rip),%eax        # 21a9a8 <block_lsd_bench::TRACK>
+    0.00 :   1872da: mov    0x50(%rsp),%r10
+    0.00 :   1872df: mov    0x30(%rsp),%r8
+    0.00 :   1872e4: mov    0x88(%rsp),%r9
+    0.00 :   1872ec: test   %al,%al
+    0.00 :   1872ee: je     187325 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xa35>
+    0.00 :   1872f0: mov    %r8,%rcx
+    0.00 :   1872f3: lock xadd %rcx,0x9369c(%rip)        # 21a998 <block_lsd_bench::LIVE>
+    0.00 :   1872fc: mov    0x9369d(%rip),%rax        # 21a9a0 <block_lsd_bench::PEAK>
+    0.00 :   187303: add    %r8,%rcx
+    0.00 :   187306: cs nopw 0x0(%rax,%rax,1)
+    0.00 :   187310: cmp    %rcx,%rax
+    0.00 :   187313: mov    %rcx,%rdx
+    0.00 :   187316: cmova  %rax,%rdx
+    0.00 :   18731a: lock cmpxchg %rdx,0x9367d(%rip)        # 21a9a0 <block_lsd_bench::PEAK>
+    0.00 :   187323: jne    187310 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xa20>
+    0.00 :   187325: mov    0x8(%rsp),%rcx
+    0.00 :   18732a: mov    0x28(%rsp),%rdx
+    0.00 :   18732f: mov    0x58(%rsp),%rax
+    0.00 :   187334: mov    0x98(%rsp),%r11
+    0.00 :   18733c: mov    %r14,0x28(%rsp)
+    0.00 :   187341: inc    %rsi
+    0.00 :   187344: xor    %edi,%edi
+    0.00 :   187346: mov    %r9,0x40(%rsp)
+    0.00 :   18734b: mov    %rsi,0x68(%rsp)
+    0.00 :   187350: mov    %rcx,0x140(%rsp)
+    0.00 :   187358: mov    %r15,0x148(%rsp)
+    0.00 :   187360: mov    %rcx,0x150(%rsp)
+    0.00 :   187368: mov    %r9,0x158(%rsp)
+    0.00 :   187370: mov    %rcx,0x160(%rsp)
+    0.00 :   187378: mov    %rax,0x168(%rsp)
+    0.00 :   187380: mov    %r10,0x170(%rsp)
+    0.00 :   187388: mov    %r11,0x178(%rsp)
+    0.00 :   187390: mov    %rdx,0xe0(%rsp)
+    0.00 :   187398: mov    0x38(%rsp),%r11
+    0.00 :   18739d: mov    0x70(%rsp),%rdx
+    0.00 :   1873a2: mov    $0x10,%eax
+    0.00 :   1873a7: lea    -0x1(%rcx),%rcx
+    0.00 :   1873ab: shlx   %r12,%rax,%rax
+    0.00 :   1873b0: mov    %rcx,0xd8(%rsp)
+    0.00 :   1873b8: mov    %rax,0x60(%rsp)
+    0.00 :   1873bd: lea    -0x10(%rax),%rax
+    0.00 :   1873c1: mov    %rax,0x1c0(%rsp)
+    0.00 :   1873c9: mov    $0x8,%eax
+    0.00 :   1873ce: shlx   %r12,%rax,%rax
+    0.00 :   1873d3: mov    %r11,0xe8(%rsp)
+    0.00 :   1873db: mov    %rdx,0xf0(%rsp)
+    0.00 :   1873e3: mov    0x10(%rsp),%rdx
+    0.00 :   1873e8: mov    %r11,0x180(%rsp)
+    0.00 :   1873f0: mov    %r8,0xf8(%rsp)
+    0.00 :   1873f8: mov    %rax,0xa8(%rsp)
+    0.00 :   187400: mov    $0x4,%eax
+    0.00 :   187405: shlx   %r12,%rax,%rax
+    0.00 :   18740a: mov    %rax,0x1e0(%rsp)
+    0.00 :   187412: mov    %rdx,0x100(%rsp)
+    0.00 :   18741a: mov    %r8,0x108(%rsp)
+    0.00 :   187422: mov    %r8,0x110(%rsp)
+    0.00 :   18742a: mov    %r14,0x118(%rsp)
+    0.00 :   187432: mov    0x78(%rsp),%r14
+    0.00 :   187437: mov    %r8,0x120(%rsp)
+    0.00 :   18743f: mov    %r8,0x128(%rsp)
+    0.00 :   187447: mov    %rdx,0x90(%rsp)
+    0.00 :   18744f: mov    %r14,0x130(%rsp)
+    0.00 :   187457: mov    %r8,0x138(%rsp)
+    0.00 :   18745f: mov    %rsi,0x188(%rsp)
+    0.00 :   187467: mov    %rcx,%rsi
+    0.00 :   18746a: and    $0xffffffffffffffe0,%rsi
+    0.00 :   18746e: and    $0xfffffffffffffff8,%rcx
+    0.00 :   187472: lea    0x0(,%rsi,8),%r11
+    0.00 :   18747a: lea    0x0(,%rcx,8),%r14
+    0.00 :   187482: mov    %rcx,0x1b8(%rsp)
+    0.00 :   18748a: inc    %rcx
+    0.00 :   18748d: mov    %rsi,0x1a0(%rsp)
+    0.00 :   187495: mov    %rcx,0x1a8(%rsp)
+    0.00 :   18749d: lea    0x8df8c(%rip),%rcx        # 215430 <anon.63b0faa5d83c36f8eca54b1a89ce500b.8.llvm.3123880007927975513+0x558>
+    0.00 :   1874a4: mov    %r11,0x198(%rsp)
+    0.00 :   1874ac: lea    0x1(%rsi),%r11
+    0.00 :   1874b0: mov    %r14,0x1b0(%rsp)
+    0.00 :   1874b8: lea    0x8e001(%rip),%r14        # 2154c0 <anon.63b0faa5d83c36f8eca54b1a89ce500b.8.llvm.3123880007927975513+0x5e8>
+    0.00 :   1874bf: mov    %r12,%rsi
+    0.00 :   1874c2: mov    %rcx,0x80(%rsp)
+    0.00 :   1874ca: xor    %r12d,%r12d
+    0.00 :   1874cd: mov    %r11,0x190(%rsp)
+    0.00 :   1874d5: mov    $0x80,%r11d
+    0.00 :   1874db: mov    %r14,0xb0(%rsp)
+    0.00 :   1874e3: jmp    187538 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xc48>
+    0.00 :   1874e5: mov    %r14,%rdi
+    0.00 :   1874e8: call   *0x91092(%rip)        # 218580 <free@GLIBC_2.2.5>
+    0.00 :   1874ee: mov    %r12,0x28(%rsp)
+    0.00 :   1874f3: mov    0x10(%rsp),%rax
+    0.00 :   1874f8: mov    0x50(%rsp),%r10
+    0.00 :   1874fd: mov    0x30(%rsp),%r8
+    0.00 :   187502: mov    0x88(%rsp),%r9
+    0.00 :   18750a: mov    0x1d8(%rsp),%r11
+    0.00 :   187512: mov    0x1d0(%rsp),%r12
+    0.00 :   18751a: xor    %edi,%edi
+    0.00 :   18751c: mov    %rax,0x90(%rsp)
+    0.00 :   187524: mov    0x18(%rsp),%rsi
+    0.00 :   187529: inc    %r12
+    0.00 :   18752c: sub    %rsi,%r11
+    0.00 :   18752f: cmp    %rbp,%r12
+    0.00 :   187532: jae    187da2 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x14b2>
+    0.00 :   187538: cmp    %r11,%rsi
+    0.00 :   18753b: mov    %r11,%rax
+    0.00 :   18753e: mov    %rsi,%r15
+    0.00 :   187541: cmovb  %rsi,%rax
+    0.00 :   187545: imul   %r12,%r15
+    0.00 :   187549: lea    -0x80(%r15),%rcx
+    0.00 :   18754d: neg    %rcx
+    0.00 :   187550: cmp    %rcx,%rsi
+    0.00 :   187553: cmovb  %rsi,%rcx
+    0.00 :   187557: cmp    $0x80,%r15
+    0.00 :   18755e: jne    187564 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xc74>
+    0.00 :   187560: xor    %edx,%edx
+    0.00 :   187562: jmp    1875aa <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xcba>
+    0.00 :   187564: lea    -0x1(%rcx),%rdx
+    0.00 :   187568: cmp    $0x7,%rdx
+    0.00 :   18756c: jae    187572 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xc82>
+    0.00 :   18756e: xor    %edx,%edx
+    0.00 :   187570: jmp    187596 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xca6>
+    0.00 :   187572: mov    %eax,%esi
+    0.00 :   187574: and    $0x8,%esi
+    0.00 :   187577: xor    %edx,%edx
+    0.00 :   187579: nopl   0x0(%rax)
+    0.00 :   187580: shl    $0x8,%rdx
+    0.00 :   187584: or     $0xff,%rdx
+    0.00 :   18758b: add    $0xfffffffffffffff8,%rsi
+    0.00 :   18758f: jne    187580 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xc90>
+    0.00 :   187591: test   $0x7,%cl
+    0.00 :   187594: je     1875aa <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xcba>
+    0.00 :   187596: and    $0x7,%eax
+    0.00 :   187599: nopl   0x0(%rax)
+    0.00 :   1875a0: lea    0x1(%rdx,%rdx,1),%rdx
+    0.00 :   1875a5: dec    %rax
+    0.00 :   1875a8: jne    1875a0 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xcb0>
+    0.00 :   1875aa: and    $0x7f,%r15d
+    0.00 :   1875ae: xor    %eax,%eax
+    0.00 :   1875b0: mov    %r15d,%ecx
+    0.00 :   1875b3: shld   %cl,%rdx,%rax
+    0.00 :   1875b7: shlx   %r15,%rdx,%rcx
+    0.00 :   1875bc: test   $0x40,%r15b
+    0.00 :   1875c0: cmovne %rcx,%rax
+    0.00 :   1875c4: cmovne %rdi,%rcx
+    0.00 :   1875c8: mov    %rax,0x70(%rsp)
+    0.00 :   1875cd: mov    %rcx,0x20(%rsp)
+    0.00 :   1875d2: and    %r13,%rax
+    0.00 :   1875d5: and    %rbx,%rcx
+    0.00 :   1875d8: or     %rax,%rcx
+    0.00 :   1875db: je     187524 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xc34>
+    0.00 :   1875e1: cmpq   $0x3b,0x18(%rsp)
+    0.00 :   1875e7: ja     1884e0 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1bf0>
+    0.00 :   1875ed: mov    %r12,0x1d0(%rsp)
+    0.00 :   1875f5: mov    %r11,0x1d8(%rsp)
+    0.00 :   1875fd: call   *0x90f8d(%rip)        # 218590 <_DYNAMIC+0x270>
+    0.00 :   187603: mov    0x60(%rsp),%r12
+    0.00 :   187608: mov    %r12,%rdi
+    0.00 :   18760b: call   *0x90fe7(%rip)        # 2185f8 <malloc@GLIBC_2.2.5>
+    0.00 :   187611: test   %rax,%rax
+    0.00 :   187614: je     1884d8 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1be8>
+    0.00 :   18761a: movzbl 0x93387(%rip),%ecx        # 21a9a8 <block_lsd_bench::TRACK>
+    0.00 :   187621: mov    %rax,%r14
+    0.00 :   187624: test   %cl,%cl
+    0.00 :   187626: je     187655 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xd65>
+    0.00 :   187628: mov    %r12,%rcx
+    0.00 :   18762b: lock xadd %rcx,0x93364(%rip)        # 21a998 <block_lsd_bench::LIVE>
+    0.00 :   187634: mov    0x93365(%rip),%rax        # 21a9a0 <block_lsd_bench::PEAK>
+    0.00 :   18763b: add    %r12,%rcx
+    0.00 :   18763e: xchg   %ax,%ax
+    0.00 :   187640: cmp    %rcx,%rax
+    0.00 :   187643: mov    %rcx,%rdx
+    0.00 :   187646: cmova  %rax,%rdx
+    0.00 :   18764a: lock cmpxchg %rdx,0x9334d(%rip)        # 21a9a0 <block_lsd_bench::PEAK>
+    0.00 :   187653: jne    187640 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xd50>
+    0.00 :   187655: cmpq   $0x0,0x18(%rsp)
+    0.00 :   18765b: mov    %r14,%rax
+    0.00 :   18765e: je     187678 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xd88>
+    0.00 :   187660: mov    0x1c0(%rsp),%rdx
+    0.00 :   187668: mov    %r14,%rdi
+    0.00 :   18766b: xor    %esi,%esi
+    0.00 :   18766d: call   *0x9107d(%rip)        # 2186f0 <memset@GLIBC_2.2.5>
+    0.00 :   187673: lea    -0x10(%r14,%r12,1),%rax
+    0.00 :   187678: vpxor  %xmm0,%xmm0,%xmm0
+    0.00 :   18767c: vmovdqu %xmm0,(%rax)
+    0.00 :   187680: call   *0x90f0a(%rip)        # 218590 <_DYNAMIC+0x270>
+    0.00 :   187686: mov    0xa8(%rsp),%rdi
+    0.00 :   18768e: call   *0x90f64(%rip)        # 2185f8 <malloc@GLIBC_2.2.5>
+    0.00 :   187694: mov    %rax,0x48(%rsp)
+    0.00 :   187699: test   %rax,%rax
+    0.00 :   18769c: je     1884c3 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1bd3>
+    0.00 :   1876a2: vpbroadcastq -0x16e40c(%rip),%zmm0        # 192a0 <anon.1000b255692110c1e1df217f61ce8746.4.llvm.1257974741033515927+0x1fb>
+    0.00 :   1876ac: movzbl 0x932f5(%rip),%eax        # 21a9a8 <block_lsd_bench::TRACK>
+    0.00 :   1876b3: mov    0x50(%rsp),%r9
+    0.00 :   1876b8: mov    0x30(%rsp),%r10
+    0.00 :   1876bd: test   %al,%al
+    0.00 :   1876bf: je     1876f5 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xe05>
+    0.00 :   1876c1: mov    0xa8(%rsp),%rax
+    0.00 :   1876c9: mov    %rax,%rcx
+    0.00 :   1876cc: lock xadd %rcx,0x932c3(%rip)        # 21a998 <block_lsd_bench::LIVE>
+    0.00 :   1876d5: add    %rax,%rcx
+    0.00 :   1876d8: mov    0x932c1(%rip),%rax        # 21a9a0 <block_lsd_bench::PEAK>
+    0.00 :   1876df: nop
+    0.00 :   1876e0: cmp    %rcx,%rax
+    0.00 :   1876e3: mov    %rcx,%rdx
+    0.00 :   1876e6: cmova  %rax,%rdx
+    0.00 :   1876ea: lock cmpxchg %rdx,0x932ad(%rip)        # 21a9a0 <block_lsd_bench::PEAK>
+    0.00 :   1876f3: jne    1876e0 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xdf0>
+    0.00 :   1876f5: mov    0x48(%rsp),%rax
+    0.00 :   1876fa: cmpq   $0x0,0x18(%rsp)
+    0.00 :   187700: je     1877e0 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xef0>
+    0.00 :   187706: mov    0x48(%rsp),%rax
+    0.00 :   18770b: cmpq   $0x4,0x18(%rsp)
+    0.00 :   187711: mov    $0x1,%edx
+    0.00 :   187716: jb     1877c8 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xed8>
+    0.00 :   18771c: cmpq   $0x6,0x18(%rsp)
+    0.00 :   187722: jae    187728 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xe38>
+    0.00 :   187724: xor    %ecx,%ecx
+    0.00 :   187726: jmp    18778d <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xe9d>
+    0.00 :   187728: mov    0x198(%rsp),%rax
+    0.00 :   187730: mov    0x48(%rsp),%rsi
+    0.00 :   187735: mov    0x1a0(%rsp),%rdx
+    0.00 :   18773d: xor    %ecx,%ecx
+    0.00 :   18773f: add    %rsi,%rax
+    0.00 :   187742: data16 data16 data16 data16 cs nopw 0x0(%rax,%rax,1)
+    0.00 :   187750: vmovdqu64 %zmm0,(%rsi,%rcx,8)
+    0.00 :   187757: vmovdqu64 %zmm0,0x40(%rsi,%rcx,8)
+    0.00 :   18775f: vmovdqu64 %zmm0,0x80(%rsi,%rcx,8)
+    0.00 :   187767: vmovdqu64 %zmm0,0xc0(%rsi,%rcx,8)
+    0.00 :   18776f: add    $0x20,%rcx
+    0.00 :   187773: cmp    %rcx,%rdx
+    0.00 :   187776: jne    187750 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xe60>
+    0.00 :   187778: mov    %rdx,%rcx
+    0.00 :   18777b: mov    0x190(%rsp),%rdx
+    0.00 :   187783: testb  $0x18,0xd8(%rsp)
+    0.00 :   18778b: je     1877c8 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xed8>
+    0.00 :   18778d: mov    0x48(%rsp),%rsi
+    0.00 :   187792: mov    0x1b8(%rsp),%rdx
+    0.00 :   18779a: mov    %rsi,%rax
+    0.00 :   18779d: add    0x1b0(%rsp),%rax
+    0.00 :   1877a5: data16 cs nopw 0x0(%rax,%rax,1)
+    0.00 :   1877b0: vmovdqu64 %zmm0,(%rsi,%rcx,8)
+    0.00 :   1877b7: add    $0x8,%rcx
+    0.00 :   1877bb: cmp    %rcx,%rdx
+    0.00 :   1877be: jne    1877b0 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xec0>
+    0.00 :   1877c0: mov    0x1a8(%rsp),%rdx
+    0.00 :   1877c8: mov    0x8(%rsp),%rcx
+    0.00 :   1877cd: sub    %rdx,%rcx
+    0.00 :   1877d0: movq   $0x1,(%rax)
+    0.00 :   1877d7: add    $0x8,%rax
+    0.00 :   1877db: dec    %rcx
+    0.00 :   1877de: jne    1877d0 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xee0>
+    0.00 :   1877e0: movq   $0x1,(%rax)
+    0.00 :   1877e7: lea    (%r14,%r12,1),%rax
+    0.00 :   1877eb: mov    %rbp,0x1c8(%rsp)
+    0.00 :   1877f3: mov    %r14,%rcx
+    0.00 :   1877f6: xor    %edi,%edi
+    0.00 :   1877f8: nopl   0x0(%rax,%rax,1)
+    0.00 :   187800: cmp    %r10,%rdi
+    0.00 :   187803: jae    188361 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1a71>
+    0.00 :   187809: mov    0x10(%rsp),%rdx
+    0.00 :   18780e: mov    (%rdx,%rdi,4),%edx
+    0.00 :   187811: cmp    %rdx,%r10
+    0.00 :   187814: jbe    187d81 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1491>
+    0.00 :   18781a: mov    0x58(%rsp),%r8
+    0.00 :   18781f: mov    0x40(%rsp),%r11
+    0.00 :   187824: mov    $0x0,%esi
+    0.00 :   187829: cmp    %rdx,%r8
+    0.00 :   18782c: cmovbe %r8,%rsi
+    0.00 :   187830: mov    %r9,%r8
+    0.00 :   187833: cmova  0x38(%rsp),%r8
+    0.00 :   187839: sub    %rsi,%rdx
+    0.00 :   18783c: mov    0x78(%rsp),%rsi
+    0.00 :   187841: imul   %r11,%rdx
+    0.00 :   187845: shl    $0x5,%r11
+    0.00 :   187849: shl    $0x5,%rdx
+    0.00 :   18784d: add    %r8,%rdx
+    0.00 :   187850: mov    %dil,(%rsi,%rdi,1)
+    0.00 :   187854: inc    %rdi
+    0.00 :   187857: add    %rdx,%r11
+    0.00 :   18785a: mov    %rdx,(%rcx)
+    0.00 :   18785d: mov    %r11,0x8(%rcx)
+    0.00 :   187861: add    $0x10,%rcx
+    0.00 :   187865: cmp    %rax,%rcx
+    0.00 :   187868: jne    187800 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xf10>
+    0.00 :   18786a: mov    0x8(%rsp),%rdx
+    0.00 :   18786f: mov    %rdx,%r12
+    0.00 :   187872: cmp    0x68(%rsp),%rdx
+    0.00 :   187877: jae    187a83 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1193>
+    0.00 :   18787d: mov    %rdx,%r12
+    0.00 :   187880: mov    %rdx,%rdi
+    0.00 :   187883: movq   $0x0,0xb8(%rsp)
+    0.00 :   18788f: jmp    1878b8 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xfc8>
+    0.00 :   187891: data16 data16 data16 data16 data16 cs nopw 0x0(%rax,%rax,1)
+    0.00 :   1878a0: mov    0x50(%rsp),%r9
+    0.12 :   1878a5: mov    0x30(%rsp),%r10
+    0.00 :   1878aa: inc    %rdi
+    0.00 :   1878ad: cmp    0x68(%rsp),%rdi
+    0.00 :   1878b2: je     187a83 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1193>
+    0.00 :   1878b8: cmp    %r10,%rdi
+    0.00 :   1878bb: jae    188407 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1b17>
+    0.00 :   1878c1: mov    0x10(%rsp),%rax
+    0.00 :   1878c6: mov    (%rax,%rdi,4),%ecx
+    0.06 :   1878c9: cmp    %rcx,%r10
+    0.00 :   1878cc: jbe    187d81 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1491>
+    0.00 :   1878d2: mov    0x58(%rsp),%rdx
+    0.00 :   1878d7: mov    $0x0,%r8d
+    0.00 :   1878dd: mov    %r9,%rsi
+    0.00 :   1878e0: mov    0xb8(%rsp),%r10
+    0.00 :   1878e8: cmp    %rcx,%rdx
+    0.00 :   1878eb: cmovbe %rdx,%r8
+    0.06 :   1878ef: cmova  0x38(%rsp),%rsi
+    0.00 :   1878f5: mov    0x8(%rsp),%rdx
+    0.00 :   1878fa: cmp    %rdx,%r10
+    0.00 :   1878fd: jae    187940 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1050>
+    0.00 :   1878ff: mov    0xa0(%rsp),%r9
+    0.00 :   187907: mov    %r10,%rax
+    0.00 :   18790a: shl    $0x4,%rax
+    0.00 :   18790e: cmp    %rdi,(%r9,%rax,1)
+    0.06 :   187912: jne    187940 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1050>
+    0.00 :   187914: add    %r9,%rax
+    0.00 :   187917: inc    %r10
+    0.00 :   18791a: mov    0x8(%rax),%rbp
+    0.00 :   18791e: mov    0x70(%rsp),%rax
+    0.00 :   187923: mov    %r10,0xb8(%rsp)
+    0.00 :   18792b: test   %rbp,%rbp
+    0.00 :   18792e: jne    18795b <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x106b>
+    0.00 :   187930: jmp    1878a0 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xfb0>
+    0.00 :   187935: data16 cs nopw 0x0(%rax,%rax,1)
+    0.00 :   187940: mov    0x40(%rsp),%rbp
+    0.00 :   187945: mov    0x70(%rsp),%rax
+    0.00 :   18794a: mov    %r10,0xb8(%rsp)
+    0.00 :   187952: test   %rbp,%rbp
+    0.00 :   187955: je     1878a0 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xfb0>
+    0.00 :   18795b: sub    %r8,%rcx
+    0.00 :   18795e: imul   0x40(%rsp),%rcx
+    0.06 :   187964: shl    $0x5,%rcx
+    0.06 :   187968: lea    0x10(%rsi,%rcx,1),%rsi
+    0.00 :   18796d: jmp    18798e <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x109e>
+    0.00 :   18796f: nop
+    0.00 :   187970: mov    0x48(%rsp),%rax
+    0.00 :   187975: inc    %r12
+    0.00 :   187978: incq   (%rax,%rcx,8)
+    0.64 :   18797c: mov    0x70(%rsp),%rax
+    0.00 :   187981: add    $0x20,%rsi
+    2.03 :   187985: dec    %rbp
+    2.91 :   187988: je     1878a0 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xfb0>
+    0.00 :   18798e: mov    -0x10(%rsi),%r9
+    6.11 :   187992: mov    -0x8(%rsi),%r10
+    1.35 :   187996: mov    %r15d,%ecx
+    0.00 :   187999: mov    %r9,%r11
+    0.29 :   18799c: and    0x20(%rsp),%r11
+    0.52 :   1879a1: mov    %r10,%r8
+    0.17 :   1879a4: and    %rax,%r8
+    0.00 :   1879a7: shrd   %cl,%r8,%r11
+    7.23 :   1879ab: shrx   %r15,%r8,%rcx
+    0.53 :   1879b0: test   $0x40,%r15b
+    0.00 :   1879b4: cmove  %r11,%rcx
+    1.00 :   1879b8: cmp    %rcx,%rdx
+    0.00 :   1879bb: jbe    18832d <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1a3d>
+    0.00 :   1879c1: vmovaps (%rsi),%xmm0
+    0.70 :   1879c5: mov    %rcx,%r8
+    0.00 :   1879c8: shl    $0x4,%r8
+    2.17 :   1879cc: mov    (%r14,%r8,1),%r11
+    5.37 :   1879d0: vmovaps %xmm0,0xc0(%rsp)
+    0.23 :   1879d9: mov    %r10,0x8(%r11)
+   56.13 :   1879dd: mov    %r9,(%r11)
+    4.54 :   1879e0: vmovdqa 0xc0(%rsp),%xmm0
+    0.76 :   1879e9: vmovdqa %xmm0,0x10(%r11)
+    2.49 :   1879ef: mov    (%r14,%r8,1),%r9
+    0.34 :   1879f3: add    $0x20,%r9
+    0.75 :   1879f7: mov    %r9,(%r14,%r8,1)
+    0.87 :   1879fb: cmp    0x8(%r14,%r8,1),%r9
+    0.23 :   187a00: jne    187981 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1091>
+    0.00 :   187a06: mov    0x30(%rsp),%r10
+    0.00 :   187a0b: cmp    %r10,%r12
+    0.00 :   187a0e: jae    18833e <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1a4e>
+    0.00 :   187a14: mov    0x10(%rsp),%rax
+    0.00 :   187a19: mov    0x50(%rsp),%r11
+    0.00 :   187a1e: mov    (%rax,%r12,4),%r9d
+    0.34 :   187a22: cmp    %r9,%r10
+    0.00 :   187a25: jbe    187d81 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1491>
+    0.00 :   187a2b: mov    0x58(%rsp),%rax
+    0.00 :   187a30: add    %r14,%r8
+    0.00 :   187a33: mov    $0x0,%r10d
+    0.00 :   187a39: mov    0x8(%rsp),%rdx
+    0.00 :   187a3e: cmp    %r9,%rax
+    0.00 :   187a41: cmovbe %rax,%r10
+    0.00 :   187a45: mov    0x40(%rsp),%rax
+    0.00 :   187a4a: cmova  0x38(%rsp),%r11
+    0.00 :   187a50: sub    %r10,%r9
+    0.06 :   187a53: imul   %rax,%r9
+    0.00 :   187a57: shl    $0x5,%rax
+    0.00 :   187a5b: shl    $0x5,%r9
+    0.12 :   187a5f: add    %r11,%r9
+    0.00 :   187a62: add    %r9,%rax
+    0.00 :   187a65: mov    %r9,(%r8)
+    0.00 :   187a68: mov    %rax,0x8(%r8)
+    0.00 :   187a6c: mov    0x78(%rsp),%rax
+    0.00 :   187a71: mov    %cl,(%rax,%r12,1)
+    0.12 :   187a75: cmp    %rcx,%rdx
+    0.00 :   187a78: ja     187970 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1080>
+    0.00 :   187a7e: jmp    18834a <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1a5a>
+    0.00 :   187a83: mov    %r12,0x188(%rsp)
+    0.00 :   187a8b: lea    0xc0(%rsp),%rdi
+    0.00 :   187a93: mov    %rdx,%rsi
+    0.00 :   187a96: vzeroupper
+    0.00 :   187a99: call   18c4c0 <<usize as alloc::vec::spec_from_elem::SpecFromElem>::from_elem::<alloc::alloc::Global>>
+    0.00 :   187a9e: mov    0xd8(%rsp),%rbp
+    0.00 :   187aa6: cmpq   $0x0,0x18(%rsp)
+    0.00 :   187aac: mov    0x50(%rsp),%r11
+    0.00 :   187ab1: mov    0x30(%rsp),%r10
+    0.00 :   187ab6: mov    0xa0(%rsp),%r15
+    0.00 :   187abe: je     187b2a <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x123a>
+    0.00 :   187ac0: mov    0xd0(%rsp),%rax
+    0.00 :   187ac8: mov    0xc8(%rsp),%rcx
+    0.00 :   187ad0: mov    $0x1,%esi
+    0.00 :   187ad5: cmp    $0x1,%rax
+    0.00 :   187ad9: mov    %rax,%rdx
+    0.00 :   187adc: adc    $0x0,%rdx
+    0.00 :   187ae0: xor    %edi,%edi
+    0.00 :   187ae2: lea    -0x1(%rdx),%r8
+    0.00 :   187ae6: mov    %rdx,0x20(%rsp)
+    0.00 :   187aeb: nopl   0x0(%rax,%rax,1)
+    0.00 :   187af0: cmp    %rdi,%rax
+    0.00 :   187af3: je     1883f9 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1b09>
+    0.00 :   187af9: cmp    %rdi,0x8(%rsp)
+    0.00 :   187afe: je     1883de <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1aee>
+    0.00 :   187b04: cmp    %rdi,%r8
+    0.00 :   187b07: je     1883e6 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1af6>
+    0.00 :   187b0d: mov    0x48(%rsp),%rdx
+    0.00 :   187b12: mov    (%rcx,%rdi,8),%r9
+    0.00 :   187b16: inc    %rsi
+    0.00 :   187b19: add    (%rdx,%rdi,8),%r9
+    0.00 :   187b1d: mov    %r9,0x8(%rcx,%rdi,8)
+    0.00 :   187b22: inc    %rdi
+    0.00 :   187b25: cmp    %rdi,%rbp
+    0.00 :   187b28: jne    187af0 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1200>
+    0.00 :   187b2a: mov    0xc8(%rsp),%rcx
+    0.00 :   187b32: mov    0xd0(%rsp),%rax
+    0.00 :   187b3a: mov    0x90(%rsp),%rbp
+    0.00 :   187b42: xor    %edi,%edi
+    0.00 :   187b44: jmp    187b5c <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x126c>
+    0.00 :   187b46: cs nopw 0x0(%rax,%rax,1)
+    0.00 :   187b50: inc    %rdi
+    0.00 :   187b53: cmp    %rdi,%r12
+    0.00 :   187b56: je     187c38 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1348>
+    0.00 :   187b5c: cmp    %r10,%rdi
+    0.00 :   187b5f: jae    1883c4 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1ad4>
+    0.00 :   187b65: mov    0x78(%rsp),%rdx
+    0.00 :   187b6a: movzbl (%rdx,%rdi,1),%edx
+    0.00 :   187b6e: cmp    %rdx,%rax
+    0.00 :   187b71: jbe    1883a2 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1ab2>
+    0.00 :   187b77: mov    (%rcx,%rdx,8),%rsi
+    0.00 :   187b7b: lea    0x1(%rsi),%r8
+    0.00 :   187b7f: mov    %r8,(%rcx,%rdx,8)
+    0.00 :   187b83: cmp    %r10,%rsi
+    0.00 :   187b86: jae    1883b3 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1ac3>
+    0.00 :   187b8c: mov    0x0(%rbp,%rdi,4),%r8d
+    0.00 :   187b91: mov    0x28(%rsp),%r9
+    0.00 :   187b96: mov    %r8d,(%r9,%rsi,4)
+    0.11 :   187b9a: mov    0x100(%rsp),%rbp
+    0.00 :   187ba2: mov    0x0(%rbp,%rdi,4),%r9d
+    0.00 :   187ba7: cmp    %r9,%r10
+    0.00 :   187baa: jbe    1881b6 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x18c6>
+    0.00 :   187bb0: mov    0x58(%rsp),%r8
+    0.00 :   187bb5: mov    $0x0,%r10d
+    0.00 :   187bbb: cmp    %r9,%r8
+    0.00 :   187bbe: cmovbe %r8,%r10
+    0.00 :   187bc2: mov    %r11,%r8
+    0.00 :   187bc5: cmova  0x38(%rsp),%r8
+    0.00 :   187bcb: cmp    %rdx,0x8(%rsp)
+    0.06 :   187bd0: jbe    1883d2 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1ae2>
+    0.00 :   187bd6: sub    %r10,%r9
+    0.00 :   187bd9: mov    0x158(%rsp),%r10
+    0.00 :   187be1: imul   %r10,%r9
+    0.00 :   187be5: mov    %r10,0x40(%rsp)
+    0.00 :   187bea: shl    $0x5,%r10
+    0.00 :   187bee: shl    $0x5,%r9
+    0.00 :   187bf2: add    %r9,%r8
+    0.00 :   187bf5: mov    %edx,%r9d
+    0.00 :   187bf8: shl    $0x4,%r9d
+    0.00 :   187bfc: add    %r8,%r10
+    0.00 :   187bff: cmp    0x8(%r14,%r9,1),%r10
+    0.00 :   187c04: mov    0x30(%rsp),%r10
+    0.00 :   187c09: jne    187b50 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1260>
+    0.00 :   187c0f: cmp    %rdx,0x8(%rsp)
+    0.00 :   187c14: jbe    188413 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1b23>
+    0.00 :   187c1a: add    %r14,%r9
+    0.00 :   187c1d: shl    $0x4,%edx
+    0.00 :   187c20: mov    (%r9),%r9
+    0.00 :   187c23: mov    %rsi,(%r15,%rdx,1)
+    0.00 :   187c27: sub    %r8,%r9
+    0.00 :   187c2a: sar    $0x5,%r9
+    0.00 :   187c2e: mov    %r9,0x8(%r15,%rdx,1)
+    0.00 :   187c33: jmp    187b50 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1260>
+    0.00 :   187c38: mov    0x8(%rsp),%rsi
+    0.00 :   187c3d: lea    (%rsi,%r12,1),%rax
+    0.00 :   187c41: mov    %rax,0x68(%rsp)
+    0.00 :   187c46: cmp    %r10,%rax
+    0.00 :   187c49: ja     1882f1 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1a01>
+    0.00 :   187c4f: mov    0x9097a(%rip),%rax        # 2185d0 <memcpy@GLIBC_2.14>
+    0.00 :   187c56: cmp    %rsi,%r10
+    0.00 :   187c59: jb     18824d <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x195d>
+    0.00 :   187c5f: lea    0x0(%rbp,%r12,4),%rsi
+    0.00 :   187c64: mov    %rbp,0x90(%rsp)
+    0.00 :   187c6c: mov    0x28(%rsp),%rbp
+    0.00 :   187c71: mov    0x1e0(%rsp),%rdx
+    0.00 :   187c79: mov    %r10,%r15
+    0.00 :   187c7c: mov    %rbp,%rdi
+    0.00 :   187c7f: call   *%rax
+    0.00 :   187c81: mov    0x68(%rsp),%r12
+    0.00 :   187c86: mov    %r15,%rdx
+    0.00 :   187c89: sub    %r12,%rdx
+    0.00 :   187c8c: jb     18830f <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1a1f>
+    0.00 :   187c92: mov    0x90(%rsp),%rax
+    0.00 :   187c9a: lea    0x0(%rbp,%r12,4),%rdi
+    0.00 :   187c9f: shl    $0x2,%rdx
+    0.00 :   187ca3: lea    (%rax,%r12,4),%rsi
+    0.00 :   187ca7: call   *0x90923(%rip)        # 2185d0 <memcpy@GLIBC_2.14>
+    0.00 :   187cad: mov    %r12,0x188(%rsp)
+    0.00 :   187cb5: mov    %r15,0xf8(%rsp)
+    0.00 :   187cbd: mov    %r15,0x110(%rsp)
+    0.00 :   187cc5: mov    0x90(%rsp),%rcx
+    0.00 :   187ccd: mov    0x1c8(%rsp),%rbp
+    0.00 :   187cd5: mov    0x118(%rsp),%rax
+    0.00 :   187cdd: mov    %rcx,%r12
+    0.00 :   187ce0: mov    %rax,0x100(%rsp)
+    0.00 :   187ce8: mov    %rax,0x10(%rsp)
+    0.00 :   187ced: mov    %rcx,0x118(%rsp)
+    0.00 :   187cf5: mov    %r15,0x108(%rsp)
+    0.00 :   187cfd: mov    %r15,0x120(%rsp)
+    0.00 :   187d05: mov    0xc0(%rsp),%rax
+    0.00 :   187d0d: mov    0x48(%rsp),%r15
+    0.00 :   187d12: test   %rax,%rax
+    0.00 :   187d15: je     187d3c <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x144c>
+    0.00 :   187d17: mov    0xc8(%rsp),%rdi
+    0.00 :   187d1f: movzbl 0x92c82(%rip),%ecx        # 21a9a8 <block_lsd_bench::TRACK>
+    0.00 :   187d26: test   %cl,%cl
+    0.00 :   187d28: je     187d36 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1446>
+    0.00 :   187d2a: shl    $0x3,%rax
+    0.00 :   187d2e: lock sub %rax,0x92c62(%rip)        # 21a998 <block_lsd_bench::LIVE>
+    0.00 :   187d36: call   *0x90844(%rip)        # 218580 <free@GLIBC_2.2.5>
+    0.00 :   187d3c: movzbl 0x92c65(%rip),%eax        # 21a9a8 <block_lsd_bench::TRACK>
+    0.00 :   187d43: test   %al,%al
+    0.00 :   187d45: je     187d57 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1467>
+    0.00 :   187d47: mov    0xa8(%rsp),%rax
+    0.00 :   187d4f: lock sub %rax,0x92c41(%rip)        # 21a998 <block_lsd_bench::LIVE>
+    0.00 :   187d57: mov    %r15,%rdi
+    0.00 :   187d5a: call   *0x90820(%rip)        # 218580 <free@GLIBC_2.2.5>
+    0.00 :   187d60: movzbl 0x92c41(%rip),%eax        # 21a9a8 <block_lsd_bench::TRACK>
+    0.00 :   187d67: test   %al,%al
+    0.00 :   187d69: je     1874e5 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xbf5>
+    0.00 :   187d6f: mov    0x60(%rsp),%rax
+    0.00 :   187d74: lock sub %rax,0x92c1c(%rip)        # 21a998 <block_lsd_bench::LIVE>
+    0.00 :   187d7c: jmp    1874e5 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0xbf5>
+    0.00 :   187d81: lea    -0x16cf14(%rip),%rdi        # 1ae74 <anon.c5862773a544a98ebfd42667029cfcec.1522.llvm.17443555614370274988+0x12b4>
+    0.00 :   187d88: lea    0x8d7f1(%rip),%rdx        # 215580 <anon.63b0faa5d83c36f8eca54b1a89ce500b.8.llvm.3123880007927975513+0x6a8>
+    0.00 :   187d8f: mov    $0x2c,%esi
+    0.00 :   187d94: vzeroupper
+    0.00 :   187d97: call   *0x908c3(%rip)        # 218660 <_DYNAMIC+0x340>
+    0.00 :   187d9d: jmp    188520 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1c30>
+    0.00 :   187da2: mov    0x10(%rsp),%rdx
+    0.00 :   187da7: mov    0x28(%rsp),%rcx
+    0.00 :   187dac: mov    0x98(%rsp),%rsi
+    0.00 :   187db4: lea    0x8d8cd(%rip),%rdi        # 215688 <anon.63b0faa5d83c36f8eca54b1a89ce500b.8.llvm.3123880007927975513+0x7b0>
+    0.00 :   187dbb: xor    %eax,%eax
+    0.00 :   187dbd: nopl   (%rax)
+    0.00 :   187dc0: mov    (%rdx,%rax,4),%r15d
+    0.00 :   187dc4: cmp    %r15,%r8
+    0.00 :   187dc7: jbe    18844d <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1b5d>
+    0.00 :   187dcd: mov    %eax,(%rcx,%r15,4)
+    0.00 :   187dd1: inc    %rax
+    0.00 :   187dd4: cmp    %rax,%r8
+    0.00 :   187dd7: jne    187dc0 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x14d0>
+    0.00 :   187dd9: movq   $0x0,0xc0(%rsp)
+    0.00 :   187de5: cmp    %rsi,%r9
+    0.00 :   187de8: jbe    187dfa <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x150a>
+    0.00 :   187dea: mov    0x8(%rsp),%rax
+    0.00 :   187def: xor    %r11d,%r11d
+    0.00 :   187df2: xor    %r14d,%r14d
+    0.00 :   187df5: jmp    18808b <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x179b>
+    0.00 :   187dfa: mov    0x8(%rsp),%rcx
+    0.00 :   187dff: mov    0x158(%rsp),%rax
+    0.00 :   187e07: mov    (%rdx),%esi
+    0.00 :   187e09: mov    0x58(%rsp),%rbp
+    0.00 :   187e0e: xor    %edi,%edi
+    0.00 :   187e10: mov    %r10,0x40(%rsp)
+    0.00 :   187e15: xor    %r15d,%r15d
+    0.00 :   187e18: xor    %r11d,%r11d
+    0.00 :   187e1b: lea    0x0(,%rcx,4),%r9
+    0.00 :   187e23: mov    %rax,0xb8(%rsp)
+    0.00 :   187e2b: shl    $0x5,%rax
+    0.00 :   187e2f: mov    %rcx,%rbx
+    0.00 :   187e32: neg    %rbx
+    0.00 :   187e35: mov    %rax,0x88(%rsp)
+    0.00 :   187e3d: mov    %rcx,%rax
+    0.00 :   187e40: neg    %ecx
+    0.00 :   187e42: mov    %rbx,0x18(%rsp)
+    0.00 :   187e47: sub    %r9,%rdx
+    0.00 :   187e4a: mov    %rcx,0x90(%rsp)
+    0.00 :   187e52: mov    %rdx,0x78(%rsp)
+    0.00 :   187e57: lea    0x8d79a(%rip),%rdx        # 2155f8 <anon.63b0faa5d83c36f8eca54b1a89ce500b.8.llvm.3123880007927975513+0x720>
+    0.00 :   187e5e: mov    %rdx,0x60(%rsp)
+    0.00 :   187e63: cmp    %rbp,%r8
+    0.00 :   187e66: je     1884b2 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1bc2>
+    0.00 :   187e6c: mov    0x18(%rsp),%rcx
+    0.00 :   187e71: mov    0x28(%rsp),%rdx
+    0.00 :   187e76: lea    (%rcx,%rbp,1),%r13
+    0.00 :   187e7a: mov    0x68(%rsp),%rcx
+    0.00 :   187e7f: cmp    %r8,%r13
+    0.00 :   187e82: jae    18849e <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1bae>
+    0.00 :   187e88: mov    0x78(%rsp),%r9
+    0.00 :   187e8d: mov    (%rdx,%rbp,4),%ebx
+    0.00 :   187e90: mov    (%r9,%rbp,4),%edx
+    0.00 :   187e94: mov    %rdx,0x48(%rsp)
+    0.00 :   187e99: cmp    %rbx,%r13
+    0.00 :   187e9c: jae    187f66 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1676>
+    0.00 :   187ea2: cmp    %rbx,%rcx
+    0.00 :   187ea5: jbe    187f66 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1676>
+    0.00 :   187eab: mov    %rdi,0xa8(%rsp)
+    0.00 :   187eb3: mov    %r11,0x20(%rsp)
+    0.00 :   187eb8: cmp    %r8,%rsi
+    0.00 :   187ebb: jae    18825c <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x196c>
+    0.00 :   187ec1: mov    0x58(%rsp),%rcx
+    0.00 :   187ec6: mov    $0x0,%eax
+    0.00 :   187ecb: mov    %rsi,%rdi
+    0.00 :   187ece: mov    %rsi,%r12
+    0.00 :   187ed1: mov    0x88(%rsp),%rdx
+    0.00 :   187ed9: mov    %r8,%r14
+    0.00 :   187edc: cmp    %rcx,%rsi
+    0.00 :   187edf: mov    0x40(%rsp),%rsi
+    0.00 :   187ee4: cmovae %rcx,%rax
+    0.06 :   187ee8: mov    %r10,%rcx
+    0.00 :   187eeb: cmovb  0x38(%rsp),%rcx
+    0.00 :   187ef1: sub    %rax,%rdi
+    0.00 :   187ef4: imul   0xb8(%rsp),%rdi
+    0.00 :   187efd: shl    $0x5,%rdi
+    0.00 :   187f01: add    %rcx,%rdi
+    0.00 :   187f04: call   *0x907ae(%rip)        # 2186b8 <memmove@GLIBC_2.2.5>
+    0.00 :   187f0a: cmp    %r14,%r15
+    0.00 :   187f0d: jae    1884f5 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1c05>
+    0.00 :   187f13: mov    0x10(%rsp),%rcx
+    0.00 :   187f18: mov    0x8(%rsp),%rax
+    0.00 :   187f1d: mov    0x28(%rsp),%rdx
+    0.00 :   187f22: mov    0x20(%rsp),%r11
+    0.00 :   187f27: mov    0xa8(%rsp),%rdi
+    0.00 :   187f2f: mov    %r14,%r8
+    0.00 :   187f32: mov    %ebp,(%rcx,%r15,4)
+    0.06 :   187f36: cmp    %rbx,%r14
+    0.00 :   187f39: jbe    1884fe <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1c0e>
+    0.00 :   187f3f: mov    0x50(%rsp),%r10
+    0.00 :   187f44: mov    %r12,%rsi
+    0.00 :   187f47: mov    %esi,(%rcx,%rbx,4)
+    0.00 :   187f4a: mov    %ebx,(%rdx,%r12,4)
+    0.00 :   187f4e: mov    %r15d,(%rdx,%rbp,4)
+    0.00 :   187f52: mov    %r15,0x70(%rsp)
+    0.00 :   187f57: mov    0xa0(%rsp),%rcx
+    0.00 :   187f5f: cmp    %rax,%r11
+    0.00 :   187f62: jb     187f7b <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x168b>
+    0.00 :   187f64: jmp    187f94 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x16a4>
+    0.00 :   187f66: mov    %rbx,0x70(%rsp)
+    0.00 :   187f6b: mov    %r15,%rbx
+    0.00 :   187f6e: mov    0xa0(%rsp),%rcx
+    0.00 :   187f76: cmp    %rax,%r11
+    0.00 :   187f79: jae    187f94 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x16a4>
+    0.00 :   187f7b: mov    %r11,%rax
+    0.00 :   187f7e: shl    $0x4,%rax
+    0.00 :   187f82: cmp    (%rcx,%rax,1),%r13
+    0.00 :   187f86: jne    187f94 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x16a4>
+    0.00 :   187f88: add    %rcx,%rax
+    0.00 :   187f8b: inc    %r11
+    0.00 :   187f8e: add    $0x8,%rax
+    0.00 :   187f92: jmp    187f9c <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x16ac>
+    0.00 :   187f94: lea    0x158(%rsp),%rax
+    0.00 :   187f9c: mov    0x48(%rsp),%r12
+    0.00 :   187fa1: cmp    %r12,%r8
+    0.00 :   187fa4: jbe    18825c <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x196c>
+    0.00 :   187faa: mov    (%rax),%rdx
+    0.00 :   187fad: mov    %r11,0x20(%rsp)
+    0.06 :   187fb2: lea    (%rdx,%rdi,1),%r14
+    0.00 :   187fb6: cmp    0x98(%rsp),%r14
+    0.00 :   187fbe: ja     1882be <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x19ce>
+    0.00 :   187fc4: mov    %rsi,%r15
+    0.00 :   187fc7: mov    0x58(%rsp),%rsi
+    0.00 :   187fcc: mov    $0x0,%ecx
+    0.00 :   187fd1: mov    %r10,%rax
+    0.00 :   187fd4: cmp    %r12,%rsi
+    0.00 :   187fd7: cmovbe %rsi,%rcx
+    0.00 :   187fdb: cmova  0x38(%rsp),%rax
+    0.00 :   187fe1: mov    %r12,%rsi
+    0.00 :   187fe4: shl    $0x5,%rdi
+    0.00 :   187fe8: shl    $0x5,%rdx
+    0.00 :   187fec: sub    %rcx,%rsi
+    0.00 :   187fef: imul   0xb8(%rsp),%rsi
+    0.00 :   187ff8: add    %r10,%rdi
+    0.00 :   187ffb: shl    $0x5,%rsi
+    0.00 :   187fff: add    %rax,%rsi
+    0.00 :   188002: call   *0x906b0(%rip)        # 2186b8 <memmove@GLIBC_2.2.5>
+    0.00 :   188008: mov    0x78(%rsp),%rax
+    0.00 :   18800d: mov    0x30(%rsp),%r8
+    0.00 :   188012: mov    0x70(%rsp),%rdx
+    0.00 :   188017: mov    %ebp,(%rax,%rbp,4)
+    0.00 :   18801a: cmp    %r8,%rdx
+    0.00 :   18801d: jae    1884b7 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1bc7>
+    0.00 :   188023: mov    0x10(%rsp),%rax
+    0.00 :   188028: mov    0x28(%rsp),%rcx
+    0.00 :   18802d: cmp    %rdx,%r13
+    0.00 :   188030: mov    %r15,%rsi
+    0.00 :   188033: mov    0x50(%rsp),%r10
+    0.00 :   188038: mov    0x20(%rsp),%r11
+    0.00 :   18803d: mov    %r14,%rdi
+    0.00 :   188040: cmovne %rdx,%rbx
+    0.00 :   188044: cmovne %r12,%rsi
+    0.00 :   188048: mov    %rbx,%r15
+    0.00 :   18804b: mov    %r12d,(%rax,%rdx,4)
+    0.00 :   18804f: mov    0x90(%rsp),%rax
+    0.00 :   188057: mov    %edx,(%rcx,%r12,4)
+    0.00 :   18805b: add    %ebp,%eax
+    0.00 :   18805d: mov    %eax,(%rcx,%rbp,4)
+    0.00 :   188060: mov    0x40(%rsp),%rcx
+    0.00 :   188065: mov    0x8(%rsp),%rax
+    0.00 :   18806a: inc    %rbp
+    0.00 :   18806d: mov    %r14,0xc0(%rsp)
+    0.05 :   188075: add    0x88(%rsp),%rcx
+    0.00 :   18807d: mov    %rcx,0x40(%rsp)
+    0.00 :   188082: cmp    %rbp,%r8
+    0.00 :   188085: jne    187e63 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1573>
+    0.00 :   18808b: mov    %r8,%r15
+    0.00 :   18808e: sub    %rax,%r15
+    0.00 :   188091: cmp    0x68(%rsp),%r15
+    0.00 :   188096: jae    188193 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x18a3>
+    0.00 :   18809c: mov    0x158(%rsp),%r12
+    0.00 :   1880a4: mov    0x9060d(%rip),%rbp        # 2186b8 <memmove@GLIBC_2.2.5>
+    0.00 :   1880ab: lea    0x8d4fe(%rip),%rcx        # 2155b0 <anon.63b0faa5d83c36f8eca54b1a89ce500b.8.llvm.3123880007927975513+0x6d8>
+    0.00 :   1880b2: mov    %rcx,0x60(%rsp)
+    0.00 :   1880b7: jmp    188118 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1828>
+    0.00 :   1880b9: lea    0x158(%rsp),%rax
+    0.00 :   1880c1: mov    (%rax),%rdx
+    0.00 :   1880c4: lea    (%rdx,%r14,1),%rbx
+    0.00 :   1880c8: cmp    0x98(%rsp),%rbx
+    0.00 :   1880d0: ja     18817b <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x188b>
+    0.00 :   1880d6: imul   %r12,%rsi
+    0.00 :   1880da: shl    $0x5,%r14
+    0.00 :   1880de: shl    $0x5,%rdx
+    0.00 :   1880e2: mov    %r11,%r13
+    0.00 :   1880e5: inc    %r15
+    0.00 :   1880e8: add    %rcx,%r14
+    0.00 :   1880eb: mov    %r14,%rdi
+    0.00 :   1880ee: shl    $0x5,%rsi
+    0.00 :   1880f2: add    0x38(%rsp),%rsi
+    0.00 :   1880f7: call   *%rbp
+    0.00 :   1880f9: mov    0x30(%rsp),%r8
+    0.00 :   1880fe: mov    0x8(%rsp),%rax
+    0.00 :   188103: mov    %rbx,0xc0(%rsp)
+    0.00 :   18810b: mov    %rbx,%r14
+    0.00 :   18810e: mov    %r13,%r11
+    0.00 :   188111: cmp    0x68(%rsp),%r15
+    0.00 :   188116: je     188196 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x18a6>
+    0.00 :   188118: cmp    %r8,%r15
+    0.00 :   18811b: jae    18850d <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1c1d>
+    0.00 :   188121: mov    0x10(%rsp),%rcx
+    0.00 :   188126: mov    (%rcx,%r15,4),%esi
+    0.00 :   18812a: mov    0x50(%rsp),%rcx
+    0.00 :   18812f: cmp    %rsi,0x58(%rsp)
+    0.00 :   188134: jbe    1882d3 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x19e3>
+    0.00 :   18813a: cmp    %rax,%r11
+    0.00 :   18813d: jae    1880b9 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x17c9>
+    0.00 :   188143: mov    0xa0(%rsp),%rdx
+    0.00 :   18814b: mov    %r11,%rax
+    0.00 :   18814e: shl    $0x4,%rax
+    0.00 :   188152: cmp    (%rdx,%rax,1),%r15
+    0.00 :   188156: jne    1880b9 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x17c9>
+    0.00 :   18815c: add    %rdx,%rax
+    0.00 :   18815f: inc    %r11
+    0.00 :   188162: add    $0x8,%rax
+    0.00 :   188166: mov    (%rax),%rdx
+    0.00 :   188169: lea    (%rdx,%r14,1),%rbx
+    0.00 :   18816d: cmp    0x98(%rsp),%rbx
+    0.00 :   188175: jbe    1880d6 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x17e6>
+    0.00 :   18817b: mov    $0x2f,%esi
+    0.00 :   188180: lea    -0x16d2b9(%rip),%rdi        # 1aece <anon.c5862773a544a98ebfd42667029cfcec.1522.llvm.17443555614370274988+0x130e>
+    0.00 :   188187: lea    0x8d452(%rip),%rdx        # 2155e0 <anon.63b0faa5d83c36f8eca54b1a89ce500b.8.llvm.3123880007927975513+0x708>
+    0.00 :   18818e: jmp    1882e6 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x19f6>
+    0.00 :   188193: mov    %r14,%rbx
+    0.00 :   188196: cmp    0x98(%rsp),%rbx
+    0.00 :   18819e: jne    18837c <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1a8c>
+    0.00 :   1881a4: lea    0xe0(%rsp),%rdi
+    0.00 :   1881ac: call   1788b0 <core::ptr::drop_glue::<block_lsd_bench::baseline::Sorter<block_lsd_bench::Record<u32, 7>>>>
+    0.00 :   1881b1: jmp    186aaf <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1bf>
+    0.00 :   1881b6: lea    -0x16d349(%rip),%rdi        # 1ae74 <anon.c5862773a544a98ebfd42667029cfcec.1522.llvm.17443555614370274988+0x12b4>
+    0.00 :   1881bd: lea    0x8d3bc(%rip),%rdx        # 215580 <anon.63b0faa5d83c36f8eca54b1a89ce500b.8.llvm.3123880007927975513+0x6a8>
+    0.00 :   1881c4: mov    $0x2c,%esi
+    0.00 :   1881c9: call   *0x90491(%rip)        # 218660 <_DYNAMIC+0x340>
+    0.00 :   1881cf: jmp    188520 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1c30>
+    0.00 :   1881d4: lea    -0x16d3da(%rip),%rdi        # 1ae01 <anon.c5862773a544a98ebfd42667029cfcec.1522.llvm.17443555614370274988+0x1241>
+    0.00 :   1881db: lea    0x8d2f6(%rip),%rdx        # 2154d8 <anon.63b0faa5d83c36f8eca54b1a89ce500b.8.llvm.3123880007927975513+0x600>
+    0.00 :   1881e2: mov    $0x16,%esi
+    0.00 :   1881e7: call   *0x903cb(%rip)        # 2185b8 <_DYNAMIC+0x298>
+    0.00 :   1881ed: lea    -0x16d3dd(%rip),%rdi        # 1ae17 <anon.c5862773a544a98ebfd42667029cfcec.1522.llvm.17443555614370274988+0x1257>
+    0.00 :   1881f4: lea    0x8d2f5(%rip),%rdx        # 2154f0 <anon.63b0faa5d83c36f8eca54b1a89ce500b.8.llvm.3123880007927975513+0x618>
+    0.00 :   1881fb: mov    $0x1b,%esi
+    0.00 :   188200: call   *0x903b2(%rip)        # 2185b8 <_DYNAMIC+0x298>
+    0.00 :   188206: lea    -0x16d3db(%rip),%rdi        # 1ae32 <anon.c5862773a544a98ebfd42667029cfcec.1522.llvm.17443555614370274988+0x1272>
+    0.00 :   18820d: lea    0x8d2f4(%rip),%rdx        # 215508 <anon.63b0faa5d83c36f8eca54b1a89ce500b.8.llvm.3123880007927975513+0x630>
+    0.00 :   188214: mov    $0x2d,%esi
+    0.00 :   188219: call   *0x90441(%rip)        # 218660 <_DYNAMIC+0x340>
+    0.00 :   18821f: mov    0x10(%rsp),%rbx
+    0.00 :   188224: lea    -0x16d3cc(%rip),%rdi        # 1ae5f <anon.c5862773a544a98ebfd42667029cfcec.1522.llvm.17443555614370274988+0x129f>
+    0.00 :   18822b: lea    0x8d336(%rip),%rdx        # 215568 <anon.63b0faa5d83c36f8eca54b1a89ce500b.8.llvm.3123880007927975513+0x690>
+    0.00 :   188232: mov    $0x15,%esi
+    0.00 :   188237: vzeroupper
+    0.00 :   18823a: call   *0x904e0(%rip)        # 218720 <_DYNAMIC+0x400>
+    0.00 :   188240: jmp    188520 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1c30>
+    0.00 :   188245: mov    %rdi,%r15
+    0.00 :   188248: mov    %rax,%rbp
+    0.00 :   18824b: jmp    18827b <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x198b>
+    0.00 :   18824d: lea    0x8d134(%rip),%rcx        # 215388 <anon.63b0faa5d83c36f8eca54b1a89ce500b.8.llvm.3123880007927975513+0x4b0>
+    0.00 :   188254: xor    %r12d,%r12d
+    0.00 :   188257: jmp    18831c <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1a2c>
+    0.00 :   18825c: mov    $0x2c,%esi
+    0.00 :   188261: lea    -0x16d3f4(%rip),%rdi        # 1ae74 <anon.c5862773a544a98ebfd42667029cfcec.1522.llvm.17443555614370274988+0x12b4>
+    0.00 :   188268: lea    0x8d311(%rip),%rdx        # 215580 <anon.63b0faa5d83c36f8eca54b1a89ce500b.8.llvm.3123880007927975513+0x6a8>
+    0.00 :   18826f: jmp    1882e6 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x19f6>
+    0.00 :   188271: lea    0x8d2c0(%rip),%rcx        # 215538 <anon.63b0faa5d83c36f8eca54b1a89ce500b.8.llvm.3123880007927975513+0x660>
+    0.00 :   188278: mov    %rbp,%r8
+    0.00 :   18827b: mov    0x10(%rsp),%rbx
+    0.00 :   188280: mov    0x28(%rsp),%r14
+    0.00 :   188285: mov    %r15,%rdi
+    0.00 :   188288: mov    %rbp,%rsi
+    0.00 :   18828b: mov    %r8,%rdx
+    0.00 :   18828e: vzeroupper
+    0.00 :   188291: call   *0x90349(%rip)        # 2185e0 <_DYNAMIC+0x2c0>
+    0.00 :   188297: jmp    188520 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1c30>
+    0.00 :   18829c: mov    %r14,%rdi
+    0.00 :   18829f: mov    0x10(%rsp),%rbx
+    0.00 :   1882a4: mov    0x28(%rsp),%r14
+    0.00 :   1882a9: lea    0x8d270(%rip),%rdx        # 215520 <anon.63b0faa5d83c36f8eca54b1a89ce500b.8.llvm.3123880007927975513+0x648>
+    0.00 :   1882b0: vzeroupper
+    0.00 :   1882b3: call   *0x9046f(%rip)        # 218728 <_DYNAMIC+0x408>
+    0.00 :   1882b9: jmp    188520 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1c30>
+    0.00 :   1882be: mov    $0x2f,%esi
+    0.00 :   1882c3: lea    -0x16d3fc(%rip),%rdi        # 1aece <anon.c5862773a544a98ebfd42667029cfcec.1522.llvm.17443555614370274988+0x130e>
+    0.00 :   1882ca: lea    0x8d387(%rip),%rdx        # 215658 <anon.63b0faa5d83c36f8eca54b1a89ce500b.8.llvm.3123880007927975513+0x780>
+    0.00 :   1882d1: jmp    1882e6 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x19f6>
+    0.00 :   1882d3: mov    $0x2e,%esi
+    0.00 :   1882d8: lea    -0x16d43f(%rip),%rdi        # 1aea0 <anon.c5862773a544a98ebfd42667029cfcec.1522.llvm.17443555614370274988+0x12e0>
+    0.00 :   1882df: lea    0x8d2e2(%rip),%rdx        # 2155c8 <anon.63b0faa5d83c36f8eca54b1a89ce500b.8.llvm.3123880007927975513+0x6f0>
+    0.00 :   1882e6: call   *0x90374(%rip)        # 218660 <_DYNAMIC+0x340>
+    0.00 :   1882ec: jmp    188520 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1c30>
+    0.00 :   1882f1: lea    -0x16d538(%rip),%rdi        # 1adc0 <anon.c5862773a544a98ebfd42667029cfcec.1522.llvm.17443555614370274988+0x1200>
+    0.00 :   1882f8: lea    0x8d059(%rip),%rdx        # 215358 <anon.63b0faa5d83c36f8eca54b1a89ce500b.8.llvm.3123880007927975513+0x480>
+    0.00 :   1882ff: mov    $0x41,%esi
+    0.00 :   188304: call   *0x90356(%rip)        # 218660 <_DYNAMIC+0x340>
+    0.00 :   18830a: jmp    188520 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1c30>
+    0.00 :   18830f: mov    %r15,%rsi
+    0.00 :   188312: lea    0x8d057(%rip),%rcx        # 215370 <anon.63b0faa5d83c36f8eca54b1a89ce500b.8.llvm.3123880007927975513+0x498>
+    0.00 :   188319: mov    %r15,%r10
+    0.00 :   18831c: mov    %r12,%rdi
+    0.00 :   18831f: mov    %r10,%rdx
+    0.00 :   188322: call   *0x902b8(%rip)        # 2185e0 <_DYNAMIC+0x2c0>
+    0.00 :   188328: jmp    188520 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1c30>
+    0.00 :   18832d: mov    %rcx,%rdi
+    0.00 :   188330: mov    %rdx,0x30(%rsp)
+    0.00 :   188335: lea    0x8d13c(%rip),%rax        # 215478 <anon.63b0faa5d83c36f8eca54b1a89ce500b.8.llvm.3123880007927975513+0x5a0>
+    0.00 :   18833c: jmp    188359 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1a69>
+    0.00 :   18833e: mov    %r12,%rdi
+    0.00 :   188341: lea    0x8d148(%rip),%rax        # 215490 <anon.63b0faa5d83c36f8eca54b1a89ce500b.8.llvm.3123880007927975513+0x5b8>
+    0.00 :   188348: jmp    188359 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1a69>
+    0.00 :   18834a: mov    %rcx,%rdi
+    0.00 :   18834d: mov    %rdx,0x30(%rsp)
+    0.00 :   188352: lea    0x8d14f(%rip),%rax        # 2154a8 <anon.63b0faa5d83c36f8eca54b1a89ce500b.8.llvm.3123880007927975513+0x5d0>
+    0.00 :   188359: mov    %rax,0xb0(%rsp)
+    0.00 :   188361: mov    0x30(%rsp),%rsi
+    0.00 :   188366: mov    0xb0(%rsp),%rdx
+    0.00 :   18836e: vzeroupper
+    0.00 :   188371: call   *0x90229(%rip)        # 2185a0 <_DYNAMIC+0x280>
+    0.00 :   188377: jmp    188520 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1c30>
+    0.00 :   18837c: lea    0x8d215(%rip),%r9        # 215598 <anon.63b0faa5d83c36f8eca54b1a89ce500b.8.llvm.3123880007927975513+0x6c0>
+    0.00 :   188383: lea    0xc0(%rsp),%rsi
+    0.00 :   18838b: lea    0x178(%rsp),%rdx
+    0.00 :   188393: xor    %edi,%edi
+    0.00 :   188395: xor    %ecx,%ecx
+    0.00 :   188397: call   *0x9032b(%rip)        # 2186c8 <_DYNAMIC+0x3a8>
+    0.00 :   18839d: jmp    188520 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1c30>
+    0.00 :   1883a2: mov    %rax,0x8(%rsp)
+    0.00 :   1883a7: mov    %rdx,%rdi
+    0.00 :   1883aa: lea    0x8d007(%rip),%rax        # 2153b8 <anon.63b0faa5d83c36f8eca54b1a89ce500b.8.llvm.3123880007927975513+0x4e0>
+    0.00 :   1883b1: jmp    18841d <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1b2d>
+    0.00 :   1883b3: mov    %rsi,%rdi
+    0.00 :   1883b6: mov    %r10,0x8(%rsp)
+    0.00 :   1883bb: lea    0x8d00e(%rip),%rax        # 2153d0 <anon.63b0faa5d83c36f8eca54b1a89ce500b.8.llvm.3123880007927975513+0x4f8>
+    0.00 :   1883c2: jmp    18841d <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1b2d>
+    0.00 :   1883c4: lea    0x8cfd5(%rip),%rax        # 2153a0 <anon.63b0faa5d83c36f8eca54b1a89ce500b.8.llvm.3123880007927975513+0x4c8>
+    0.00 :   1883cb: mov    %r10,0x8(%rsp)
+    0.00 :   1883d0: jmp    18841d <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1b2d>
+    0.00 :   1883d2: mov    %rdx,%rdi
+    0.00 :   1883d5: lea    0x8d00c(%rip),%rax        # 2153e8 <anon.63b0faa5d83c36f8eca54b1a89ce500b.8.llvm.3123880007927975513+0x510>
+    0.00 :   1883dc: jmp    18841d <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1b2d>
+    0.00 :   1883de: dec    %rsi
+    0.00 :   1883e1: mov    %rsi,%rdi
+    0.00 :   1883e4: jmp    188425 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1b35>
+    0.00 :   1883e6: mov    0x20(%rsp),%rdi
+    0.00 :   1883eb: mov    %rax,0x8(%rsp)
+    0.00 :   1883f0: lea    0x8d051(%rip),%rax        # 215448 <anon.63b0faa5d83c36f8eca54b1a89ce500b.8.llvm.3123880007927975513+0x570>
+    0.00 :   1883f7: jmp    18841d <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1b2d>
+    0.00 :   1883f9: mov    %rax,0x8(%rsp)
+    0.00 :   1883fe: lea    0x8d013(%rip),%rax        # 215418 <anon.63b0faa5d83c36f8eca54b1a89ce500b.8.llvm.3123880007927975513+0x540>
+    0.00 :   188405: jmp    18841d <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1b2d>
+    0.00 :   188407: lea    0x8d052(%rip),%rax        # 215460 <anon.63b0faa5d83c36f8eca54b1a89ce500b.8.llvm.3123880007927975513+0x588>
+    0.00 :   18840e: jmp    188359 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1a69>
+    0.00 :   188413: mov    %rdx,%rdi
+    0.00 :   188416: lea    0x8cfe3(%rip),%rax        # 215400 <anon.63b0faa5d83c36f8eca54b1a89ce500b.8.llvm.3123880007927975513+0x528>
+    0.00 :   18841d: mov    %rax,0x80(%rsp)
+    0.00 :   188425: mov    0x8(%rsp),%rsi
+    0.00 :   18842a: mov    0x80(%rsp),%rdx
+    0.00 :   188432: call   *0x90168(%rip)        # 2185a0 <_DYNAMIC+0x280>
+    0.00 :   188438: jmp    188520 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1c30>
+    0.00 :   18843d: mov    0x20(%rsp),%rsi
+    0.00 :   188442: mov    $0x4,%edi
+    0.00 :   188447: call   *0x9013b(%rip)        # 218588 <_DYNAMIC+0x268>
+    0.00 :   18844d: mov    %rdi,0x60(%rsp)
+    0.00 :   188452: jmp    18850d <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1c1d>
+    0.00 :   188457: mov    0x10(%rsp),%rbx
+    0.00 :   18845c: mov    0x28(%rsp),%r14
+    0.00 :   188461: mov    $0x8,%edi
+    0.00 :   188466: mov    %r15,%rsi
+    0.00 :   188469: call   *0x90119(%rip)        # 218588 <_DYNAMIC+0x268>
+    0.00 :   18846f: jmp    188520 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1c30>
+    0.00 :   188474: mov    0x20(%rsp),%rsi
+    0.00 :   188479: mov    $0x4,%edi
+    0.00 :   18847e: call   *0x90104(%rip)        # 218588 <_DYNAMIC+0x268>
+    0.00 :   188484: jmp    188520 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1c30>
+    0.00 :   188489: mov    0x30(%rsp),%rsi
+    0.00 :   18848e: mov    $0x1,%edi
+    0.00 :   188493: call   *0x900ef(%rip)        # 218588 <_DYNAMIC+0x268>
+    0.00 :   188499: jmp    188520 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1c30>
+    0.00 :   18849e: sub    %rax,%rbp
+    0.00 :   1884a1: lea    0x8d168(%rip),%rcx        # 215610 <anon.63b0faa5d83c36f8eca54b1a89ce500b.8.llvm.3123880007927975513+0x738>
+    0.00 :   1884a8: mov    %rbp,%r15
+    0.00 :   1884ab: mov    %rcx,0x60(%rsp)
+    0.00 :   1884b0: jmp    18850d <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1c1d>
+    0.00 :   1884b2: mov    %r8,%r15
+    0.00 :   1884b5: jmp    18850d <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1c1d>
+    0.00 :   1884b7: lea    0x8d1b2(%rip),%rax        # 215670 <anon.63b0faa5d83c36f8eca54b1a89ce500b.8.llvm.3123880007927975513+0x798>
+    0.00 :   1884be: mov    %rdx,%r15
+    0.00 :   1884c1: jmp    188508 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1c18>
+    0.00 :   1884c3: mov    0xa8(%rsp),%rsi
+    0.00 :   1884cb: mov    $0x8,%edi
+    0.00 :   1884d0: call   *0x900b2(%rip)        # 218588 <_DYNAMIC+0x268>
+    0.00 :   1884d6: jmp    188520 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1c30>
+    0.00 :   1884d8: mov    $0x8,%edi
+    0.00 :   1884dd: mov    %r12,%r14
+    0.00 :   1884e0: mov    %r14,%rsi
+    0.00 :   1884e3: call   *0x9009f(%rip)        # 218588 <_DYNAMIC+0x268>
+    0.00 :   1884e9: jmp    188520 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1c30>
+    0.00 :   1884eb: mov    $0x10,%edi
+    0.00 :   1884f0: jmp    186d90 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x4a0>
+    0.00 :   1884f5: lea    0x8d12c(%rip),%rax        # 215628 <anon.63b0faa5d83c36f8eca54b1a89ce500b.8.llvm.3123880007927975513+0x750>
+    0.00 :   1884fc: jmp    188508 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1c18>
+    0.00 :   1884fe: lea    0x8d13b(%rip),%rax        # 215640 <anon.63b0faa5d83c36f8eca54b1a89ce500b.8.llvm.3123880007927975513+0x768>
+    0.00 :   188505: mov    %rbx,%r15
+    0.00 :   188508: mov    %rax,0x60(%rsp)
+    0.00 :   18850d: mov    0x30(%rsp),%rsi
+    0.00 :   188512: mov    0x60(%rsp),%rdx
+    0.00 :   188517: mov    %r15,%rdi
+    0.00 :   18851a: call   *0x90080(%rip)        # 2185a0 <_DYNAMIC+0x280>
+    0.00 :   188520: ud2
+    0.00 :   188522: jmp    1886a4 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1db4>
+    0.00 :   188527: mov    0x18(%rsp),%rbx
+    0.00 :   18852c: mov    %rax,%r15
+    0.00 :   18852f: jmp    1886d7 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1de7>
+    0.00 :   188534: movzbl 0x9246d(%rip),%ecx        # 21a9a8 <block_lsd_bench::TRACK>
+    0.00 :   18853b: mov    %rax,%r15
+    0.00 :   18853e: test   %cl,%cl
+    0.00 :   188540: je     18854f <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1c5f>
+    0.00 :   188542: mov    0x20(%rsp),%rax
+    0.00 :   188547: lock sub %rax,0x92449(%rip)        # 21a998 <block_lsd_bench::LIVE>
+    0.00 :   18854f: mov    %r14,%rdi
+    0.00 :   188552: call   *0x90028(%rip)        # 218580 <free@GLIBC_2.2.5>
+    0.00 :   188558: jmp    18855d <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1c6d>
+    0.00 :   18855a: mov    %rax,%r15
+    0.00 :   18855d: movzbl 0x92444(%rip),%eax        # 21a9a8 <block_lsd_bench::TRACK>
+    0.00 :   188564: test   %al,%al
+    0.00 :   188566: jne    1885b3 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1cc3>
+    0.00 :   188568: mov    0x10(%rsp),%rdi
+    0.00 :   18856d: call   *0x9000d(%rip)        # 218580 <free@GLIBC_2.2.5>
+    0.00 :   188573: cmpq   $0x0,0x28(%rsp)
+    0.00 :   188579: jne    1885d3 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1ce3>
+    0.00 :   18857b: movzbl 0x92426(%rip),%eax        # 21a9a8 <block_lsd_bench::TRACK>
+    0.00 :   188582: test   %al,%al
+    0.00 :   188584: je     18859d <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1cad>
+    0.00 :   188586: mov    0x18(%rsp),%rcx
+    0.00 :   18858b: mov    $0x10,%eax
+    0.00 :   188590: shlx   %rcx,%rax,%rax
+    0.00 :   188595: lock sub %rax,0x923fb(%rip)        # 21a998 <block_lsd_bench::LIVE>
+    0.00 :   18859d: mov    0xa0(%rsp),%rdi
+    0.00 :   1885a5: call   *0x8ffd5(%rip)        # 218580 <free@GLIBC_2.2.5>
+    0.00 :   1885ab: mov    %r15,%rdi
+    0.00 :   1885ae: call   20b930 <_Unwind_Resume@plt>
+    0.00 :   1885b3: mov    0x20(%rsp),%rax
+    0.00 :   1885b8: lock sub %rax,0x923d8(%rip)        # 21a998 <block_lsd_bench::LIVE>
+    0.00 :   1885c0: mov    0x10(%rsp),%rdi
+    0.00 :   1885c5: call   *0x8ffb5(%rip)        # 218580 <free@GLIBC_2.2.5>
+    0.00 :   1885cb: cmpq   $0x0,0x28(%rsp)
+    0.00 :   1885d1: je     18857b <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1c8b>
+    0.00 :   1885d3: movzbl 0x923ce(%rip),%eax        # 21a9a8 <block_lsd_bench::TRACK>
+    0.00 :   1885da: test   %al,%al
+    0.00 :   1885dc: je     1885ef <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1cff>
+    0.00 :   1885de: mov    0x28(%rsp),%rax
+    0.00 :   1885e3: shl    $0x5,%rax
+    0.00 :   1885e7: lock sub %rax,0x923a9(%rip)        # 21a998 <block_lsd_bench::LIVE>
+    0.00 :   1885ef: mov    0x38(%rsp),%rdi
+    0.00 :   1885f4: call   *0x8ff86(%rip)        # 218580 <free@GLIBC_2.2.5>
+    0.00 :   1885fa: movzbl 0x923a7(%rip),%eax        # 21a9a8 <block_lsd_bench::TRACK>
+    0.00 :   188601: test   %al,%al
+    0.00 :   188603: jne    188586 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1c96>
+    0.00 :   188605: jmp    18859d <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1cad>
+    0.00 :   188607: mov    %rax,%r15
+    0.00 :   18860a: test   %r14,%r14
+    0.00 :   18860d: jne    18862f <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1d3f>
+    0.00 :   18860f: movzbl 0x92392(%rip),%eax        # 21a9a8 <block_lsd_bench::TRACK>
+    0.00 :   188616: test   %al,%al
+    0.00 :   188618: jne    18873c <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1e4c>
+    0.00 :   18861e: mov    %rbx,%rdi
+    0.00 :   188621: call   *0x8ff59(%rip)        # 218580 <free@GLIBC_2.2.5>
+    0.00 :   188627: mov    %r15,%rdi
+    0.00 :   18862a: call   20b930 <_Unwind_Resume@plt>
+    0.00 :   18862f: movzbl 0x92372(%rip),%eax        # 21a9a8 <block_lsd_bench::TRACK>
+    0.00 :   188636: test   %al,%al
+    0.00 :   188638: je     188646 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1d56>
+    0.00 :   18863a: shl    $0x5,%r14
+    0.00 :   18863e: lock sub %r14,0x92352(%rip)        # 21a998 <block_lsd_bench::LIVE>
+    0.00 :   188646: mov    0x38(%rsp),%rdi
+    0.00 :   18864b: call   *0x8ff2f(%rip)        # 218580 <free@GLIBC_2.2.5>
+    0.00 :   188651: movzbl 0x92350(%rip),%eax        # 21a9a8 <block_lsd_bench::TRACK>
+    0.00 :   188658: test   %al,%al
+    0.00 :   18865a: je     18861e <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1d2e>
+    0.00 :   18865c: jmp    18873c <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1e4c>
+    0.00 :   188661: mov    %rax,%r15
+    0.00 :   188664: mov    0xc0(%rsp),%rax
+    0.00 :   18866c: test   %rax,%rax
+    0.00 :   18866f: jne    188678 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1d88>
+    0.00 :   188671: mov    0x18(%rsp),%rcx
+    0.00 :   188676: jmp    1886ac <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1dbc>
+    0.00 :   188678: mov    0xc8(%rsp),%rdi
+    0.00 :   188680: movzbl 0x92321(%rip),%ecx        # 21a9a8 <block_lsd_bench::TRACK>
+    0.00 :   188687: test   %cl,%cl
+    0.00 :   188689: je     188697 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1da7>
+    0.00 :   18868b: shl    $0x3,%rax
+    0.00 :   18868f: lock sub %rax,0x92301(%rip)        # 21a998 <block_lsd_bench::LIVE>
+    0.00 :   188697: call   *0x8fee3(%rip)        # 218580 <free@GLIBC_2.2.5>
+    0.00 :   18869d: mov    0x18(%rsp),%rcx
+    0.00 :   1886a2: jmp    1886ac <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1dbc>
+    0.00 :   1886a4: mov    0x18(%rsp),%rcx
+    0.00 :   1886a9: mov    %rax,%r15
+    0.00 :   1886ac: movzbl 0x922f5(%rip),%eax        # 21a9a8 <block_lsd_bench::TRACK>
+    0.00 :   1886b3: test   %al,%al
+    0.00 :   1886b5: je     1886c9 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1dd9>
+    0.00 :   1886b7: mov    $0x8,%eax
+    0.00 :   1886bc: shlx   %rcx,%rax,%rax
+    0.00 :   1886c1: lock sub %rax,0x922cf(%rip)        # 21a998 <block_lsd_bench::LIVE>
+    0.00 :   1886c9: mov    0x48(%rsp),%rdi
+    0.00 :   1886ce: mov    %rcx,%rbx
+    0.00 :   1886d1: call   *0x8fea9(%rip)        # 218580 <free@GLIBC_2.2.5>
+    0.00 :   1886d7: movzbl 0x922ca(%rip),%eax        # 21a9a8 <block_lsd_bench::TRACK>
+    0.00 :   1886de: test   %al,%al
+    0.00 :   1886e0: je     1886f4 <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1e04>
+    0.00 :   1886e2: mov    $0x10,%eax
+    0.00 :   1886e7: shlx   %rbx,%rax,%rax
+    0.00 :   1886ec: lock sub %rax,0x922a4(%rip)        # 21a998 <block_lsd_bench::LIVE>
+    0.00 :   1886f4: mov    %r14,%rdi
+    0.00 :   1886f7: call   *0x8fe83(%rip)        # 218580 <free@GLIBC_2.2.5>
+    0.00 :   1886fd: lea    0xe0(%rsp),%rdi
+    0.00 :   188705: call   1788b0 <core::ptr::drop_glue::<block_lsd_bench::baseline::Sorter<block_lsd_bench::Record<u32, 7>>>>
+    0.00 :   18870a: mov    %r15,%rdi
+    0.00 :   18870d: call   20b930 <_Unwind_Resume@plt>
+    0.00 :   188712: mov    %rax,%r15
+    0.00 :   188715: lea    0xe0(%rsp),%rdi
+    0.00 :   18871d: call   1788b0 <core::ptr::drop_glue::<block_lsd_bench::baseline::Sorter<block_lsd_bench::Record<u32, 7>>>>
+    0.00 :   188722: mov    %r15,%rdi
+    0.00 :   188725: call   20b930 <_Unwind_Resume@plt>
+    0.00 :   18872a: mov    %rax,%r15
+    0.00 :   18872d: movzbl 0x92274(%rip),%eax        # 21a9a8 <block_lsd_bench::TRACK>
+    0.00 :   188734: test   %al,%al
+    0.00 :   188736: je     18861e <block_lsd_bench::baseline::block_lsd_stable_radixsort::<block_lsd_bench::Record<u128, 4>, u128>+0x1d2e>
+    0.00 :   18873c: mov    0x20(%rsp),%rax
+    0.00 :   188741: lock sub %rax,0x9224f(%rip)        # 21a998 <block_lsd_bench::LIVE>
+    0.00 :   188749: mov    %rbx,%rdi
+    0.00 :   18874c: call   *0x8fe2e(%rip)        # 218580 <free@GLIBC_2.2.5>
+    0.00 :   188752: mov    %r15,%rdi
+    0.00 :   188755: call   20b930 <_Unwind_Resume@plt>

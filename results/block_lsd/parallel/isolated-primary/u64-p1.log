@@ -1,0 +1,1 @@
+threads=1 rayon_cpus=[0] omp_cpus=[0]

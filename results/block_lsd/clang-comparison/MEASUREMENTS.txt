@@ -1,0 +1,12 @@
+Final serial block-LSD comparison, 2026-10-15
+Submitted baseline: 1d28190c4d2899a2369202b5788272bf804f4500
+Optimized branch: d6f6b70497ae25f3600b5f458b316a4cedfcb470
+Focused records: u32 key + u32 identity, 8 bytes; radix 8, block 512.
+C source unchanged, radsort f69e816c3cd79d312cd67aea5b9cf1c338c1b371.
+Clang 23.1.1 and GCC 16, -O3 -march=native -DNDEBUG; Rust release target-cpu=native, LLVM 23.1.1.
+CPU0; raw-1m/raw-4m: 32/24 rotating samples, one reused input address, reset and full identity checks outside timing.
+final-matrix: 6 distributions x 4 layouts x 6 sizes x 7 samples; submitted and optimized 4KiB configuration plus C and fixed-block comparisons.
+final-perf indices 0=Clang C, 1=GCC C, 2=submitted Rust, 3=optimized Rust; 80 sort-only intervals each, fixtures/oracle excluded via perf control acknowledgements.
+PMU instructions/branches explain part of the gap; cache results do not prove a cache improvement.
+final.asm and optimized-rust.ll were emitted from the final optimized comparison driver.
+Host is not isolated: small differences are not universal guarantees.

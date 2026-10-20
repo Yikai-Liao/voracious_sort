@@ -1,0 +1,1190 @@
+    Blocking waiting for file lock on package cache
+   Compiling voracious_radix_sort v1.2.0 (/home/lyk/code/voracious_sort)
+warning: unexpected `cfg` condition value: `8`
+   --> src/traits/dispatcher.rs:198:7
+    |
+198 | #[cfg(target_pointer_width = "8")]
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+    = note: `#[warn(unexpected_cfgs)]` on by default
+help: `8` is an expected value for `target_has_atomic`
+    |
+198 - #[cfg(target_pointer_width = "8")]
+198 + #[cfg(target_has_atomic = "8")]
+    |
+help: `8` is an expected value for `target_has_atomic_load_store`
+    |
+198 - #[cfg(target_pointer_width = "8")]
+198 + #[cfg(target_has_atomic_load_store = "8")]
+    |
+help: `8` is an expected value for `target_has_atomic_primitive_alignment`
+    |
+198 - #[cfg(target_pointer_width = "8")]
+198 + #[cfg(target_has_atomic_primitive_alignment = "8")]
+    |
+
+warning: unexpected `cfg` condition value: `128`
+   --> src/traits/dispatcher.rs:418:7
+    |
+418 | #[cfg(target_pointer_width = "128")]
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+help: `128` is an expected value for `target_has_atomic`
+    |
+418 - #[cfg(target_pointer_width = "128")]
+418 + #[cfg(target_has_atomic = "128")]
+    |
+help: `128` is an expected value for `target_has_atomic_load_store`
+    |
+418 - #[cfg(target_pointer_width = "128")]
+418 + #[cfg(target_has_atomic_load_store = "128")]
+    |
+help: `128` is an expected value for `target_has_atomic_primitive_alignment`
+    |
+418 - #[cfg(target_pointer_width = "128")]
+418 + #[cfg(target_has_atomic_primitive_alignment = "128")]
+    |
+
+warning: unexpected `cfg` condition value: `8`
+   --> src/traits/dispatcher.rs:467:7
+    |
+467 | #[cfg(target_pointer_width = "8")]
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+help: `8` is an expected value for `target_has_atomic`
+    |
+467 - #[cfg(target_pointer_width = "8")]
+467 + #[cfg(target_has_atomic = "8")]
+    |
+help: `8` is an expected value for `target_has_atomic_load_store`
+    |
+467 - #[cfg(target_pointer_width = "8")]
+467 + #[cfg(target_has_atomic_load_store = "8")]
+    |
+help: `8` is an expected value for `target_has_atomic_primitive_alignment`
+    |
+467 - #[cfg(target_pointer_width = "8")]
+467 + #[cfg(target_has_atomic_primitive_alignment = "8")]
+    |
+
+warning: unexpected `cfg` condition value: `128`
+   --> src/traits/dispatcher.rs:678:7
+    |
+678 | #[cfg(target_pointer_width = "128")]
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+help: `128` is an expected value for `target_has_atomic`
+    |
+678 - #[cfg(target_pointer_width = "128")]
+678 + #[cfg(target_has_atomic = "128")]
+    |
+help: `128` is an expected value for `target_has_atomic_load_store`
+    |
+678 - #[cfg(target_pointer_width = "128")]
+678 + #[cfg(target_has_atomic_load_store = "128")]
+    |
+help: `128` is an expected value for `target_has_atomic_primitive_alignment`
+    |
+678 - #[cfg(target_pointer_width = "128")]
+678 + #[cfg(target_has_atomic_primitive_alignment = "128")]
+    |
+
+warning: unexpected `cfg` condition value: `8`
+   --> src/traits/radix_key.rs:127:7
+    |
+127 | #[cfg(target_pointer_width = "8")]
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+help: `8` is an expected value for `target_has_atomic`
+    |
+127 - #[cfg(target_pointer_width = "8")]
+127 + #[cfg(target_has_atomic = "8")]
+    |
+help: `8` is an expected value for `target_has_atomic_load_store`
+    |
+127 - #[cfg(target_pointer_width = "8")]
+127 + #[cfg(target_has_atomic_load_store = "8")]
+    |
+help: `8` is an expected value for `target_has_atomic_primitive_alignment`
+    |
+127 - #[cfg(target_pointer_width = "8")]
+127 + #[cfg(target_has_atomic_primitive_alignment = "8")]
+    |
+
+warning: unexpected `cfg` condition value: `128`
+   --> src/traits/radix_key.rs:259:7
+    |
+259 | #[cfg(target_pointer_width = "128")]
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+help: `128` is an expected value for `target_has_atomic`
+    |
+259 - #[cfg(target_pointer_width = "128")]
+259 + #[cfg(target_has_atomic = "128")]
+    |
+help: `128` is an expected value for `target_has_atomic_load_store`
+    |
+259 - #[cfg(target_pointer_width = "128")]
+259 + #[cfg(target_has_atomic_load_store = "128")]
+    |
+help: `128` is an expected value for `target_has_atomic_primitive_alignment`
+    |
+259 - #[cfg(target_pointer_width = "128")]
+259 + #[cfg(target_has_atomic_primitive_alignment = "128")]
+    |
+
+warning: unexpected `cfg` condition value: `8`
+   --> src/traits/radix_key.rs:292:7
+    |
+292 | #[cfg(target_pointer_width = "8")]
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+help: `8` is an expected value for `target_has_atomic`
+    |
+292 - #[cfg(target_pointer_width = "8")]
+292 + #[cfg(target_has_atomic = "8")]
+    |
+help: `8` is an expected value for `target_has_atomic_load_store`
+    |
+292 - #[cfg(target_pointer_width = "8")]
+292 + #[cfg(target_has_atomic_load_store = "8")]
+    |
+help: `8` is an expected value for `target_has_atomic_primitive_alignment`
+    |
+292 - #[cfg(target_pointer_width = "8")]
+292 + #[cfg(target_has_atomic_primitive_alignment = "8")]
+    |
+
+warning: unexpected `cfg` condition value: `128`
+   --> src/traits/radix_key.rs:426:7
+    |
+426 | #[cfg(target_pointer_width = "128")]
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+help: `128` is an expected value for `target_has_atomic`
+    |
+426 - #[cfg(target_pointer_width = "128")]
+426 + #[cfg(target_has_atomic = "128")]
+    |
+help: `128` is an expected value for `target_has_atomic_load_store`
+    |
+426 - #[cfg(target_pointer_width = "128")]
+426 + #[cfg(target_has_atomic_load_store = "128")]
+    |
+help: `128` is an expected value for `target_has_atomic_primitive_alignment`
+    |
+426 - #[cfg(target_pointer_width = "128")]
+426 + #[cfg(target_has_atomic_primitive_alignment = "128")]
+    |
+
+warning: unexpected `cfg` condition value: `8`
+  --> src/types/isize.rs:12:7
+   |
+12 | #[cfg(target_pointer_width = "8")]
+   |       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+help: `8` is an expected value for `target_has_atomic`
+   |
+12 - #[cfg(target_pointer_width = "8")]
+12 + #[cfg(target_has_atomic = "8")]
+   |
+help: `8` is an expected value for `target_has_atomic_load_store`
+   |
+12 - #[cfg(target_pointer_width = "8")]
+12 + #[cfg(target_has_atomic_load_store = "8")]
+   |
+help: `8` is an expected value for `target_has_atomic_primitive_alignment`
+   |
+12 - #[cfg(target_pointer_width = "8")]
+12 + #[cfg(target_has_atomic_primitive_alignment = "8")]
+   |
+
+warning: unexpected `cfg` condition value: `128`
+   --> src/types/isize.rs:904:7
+    |
+904 | #[cfg(target_pointer_width = "128")]
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+help: `128` is an expected value for `target_has_atomic`
+    |
+904 - #[cfg(target_pointer_width = "128")]
+904 + #[cfg(target_has_atomic = "128")]
+    |
+help: `128` is an expected value for `target_has_atomic_load_store`
+    |
+904 - #[cfg(target_pointer_width = "128")]
+904 + #[cfg(target_has_atomic_load_store = "128")]
+    |
+help: `128` is an expected value for `target_has_atomic_primitive_alignment`
+    |
+904 - #[cfg(target_pointer_width = "128")]
+904 + #[cfg(target_has_atomic_primitive_alignment = "128")]
+    |
+
+warning: unused import: `super::super::sorts::rollercoaster_sort::rollercoaster_sort_heu`
+ --> src/types/isize.rs:4:5
+  |
+4 | use super::super::sorts::rollercoaster_sort::rollercoaster_sort_heu;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused import: `super::super::sorts::lsd_sort::lsd_radixsort_heu`
+ --> src/types/isize.rs:5:5
+  |
+5 | use super::super::sorts::lsd_sort::lsd_radixsort_heu;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unexpected `cfg` condition value: `8`
+  --> src/types/usize.rs:11:7
+   |
+11 | #[cfg(target_pointer_width = "8")]
+   |       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+help: `8` is an expected value for `target_has_atomic`
+   |
+11 - #[cfg(target_pointer_width = "8")]
+11 + #[cfg(target_has_atomic = "8")]
+   |
+help: `8` is an expected value for `target_has_atomic_load_store`
+   |
+11 - #[cfg(target_pointer_width = "8")]
+11 + #[cfg(target_has_atomic_load_store = "8")]
+   |
+help: `8` is an expected value for `target_has_atomic_primitive_alignment`
+   |
+11 - #[cfg(target_pointer_width = "8")]
+11 + #[cfg(target_has_atomic_primitive_alignment = "8")]
+   |
+
+warning: unexpected `cfg` condition value: `128`
+   --> src/types/usize.rs:904:7
+    |
+904 | #[cfg(target_pointer_width = "128")]
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+help: `128` is an expected value for `target_has_atomic`
+    |
+904 - #[cfg(target_pointer_width = "128")]
+904 + #[cfg(target_has_atomic = "128")]
+    |
+help: `128` is an expected value for `target_has_atomic_load_store`
+    |
+904 - #[cfg(target_pointer_width = "128")]
+904 + #[cfg(target_has_atomic_load_store = "128")]
+    |
+help: `128` is an expected value for `target_has_atomic_primitive_alignment`
+    |
+904 - #[cfg(target_pointer_width = "128")]
+904 + #[cfg(target_has_atomic_primitive_alignment = "128")]
+    |
+
+warning: unused import: `super::super::sorts::lsd_sort::lsd_radixsort_heu`
+ --> src/types/usize.rs:4:5
+  |
+4 | use super::super::sorts::lsd_sort::lsd_radixsort_heu;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unexpected `cfg` condition value: `128`
+  --> src/generators/signed_i128.rs:25:7
+   |
+25 | #[cfg(target_pointer_width = "128")]
+   |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+   = note: `#[warn(unexpected_cfgs)]` on by default
+help: `128` is an expected value for `target_has_atomic`
+   |
+25 - #[cfg(target_pointer_width = "128")]
+25 + #[cfg(target_has_atomic = "128")]
+   |
+help: `128` is an expected value for `target_has_atomic_load_store`
+   |
+25 - #[cfg(target_pointer_width = "128")]
+25 + #[cfg(target_has_atomic_load_store = "128")]
+   |
+help: `128` is an expected value for `target_has_atomic_primitive_alignment`
+   |
+25 - #[cfg(target_pointer_width = "128")]
+25 + #[cfg(target_has_atomic_primitive_alignment = "128")]
+   |
+
+warning: unexpected `cfg` condition value: `8`
+  --> src/generators/signed_i8.rs:77:7
+   |
+77 | #[cfg(target_pointer_width = "8")]
+   |       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+help: `8` is an expected value for `target_has_atomic`
+   |
+77 - #[cfg(target_pointer_width = "8")]
+77 + #[cfg(target_has_atomic = "8")]
+   |
+help: `8` is an expected value for `target_has_atomic_load_store`
+   |
+77 - #[cfg(target_pointer_width = "8")]
+77 + #[cfg(target_has_atomic_load_store = "8")]
+   |
+help: `8` is an expected value for `target_has_atomic_primitive_alignment`
+   |
+77 - #[cfg(target_pointer_width = "8")]
+77 + #[cfg(target_has_atomic_primitive_alignment = "8")]
+   |
+
+warning: unexpected `cfg` condition value: `128`
+  --> src/generators/unsigned_u128.rs:25:7
+   |
+25 | #[cfg(target_pointer_width = "128")]
+   |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+help: `128` is an expected value for `target_has_atomic`
+   |
+25 - #[cfg(target_pointer_width = "128")]
+25 + #[cfg(target_has_atomic = "128")]
+   |
+help: `128` is an expected value for `target_has_atomic_load_store`
+   |
+25 - #[cfg(target_pointer_width = "128")]
+25 + #[cfg(target_has_atomic_load_store = "128")]
+   |
+help: `128` is an expected value for `target_has_atomic_primitive_alignment`
+   |
+25 - #[cfg(target_pointer_width = "128")]
+25 + #[cfg(target_has_atomic_primitive_alignment = "128")]
+   |
+
+warning: unexpected `cfg` condition value: `8`
+  --> src/generators/unsigned_u8.rs:77:7
+   |
+77 | #[cfg(target_pointer_width = "8")]
+   |       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+help: `8` is an expected value for `target_has_atomic`
+   |
+77 - #[cfg(target_pointer_width = "8")]
+77 + #[cfg(target_has_atomic = "8")]
+   |
+help: `8` is an expected value for `target_has_atomic_load_store`
+   |
+77 - #[cfg(target_pointer_width = "8")]
+77 + #[cfg(target_has_atomic_load_store = "8")]
+   |
+help: `8` is an expected value for `target_has_atomic_primitive_alignment`
+   |
+77 - #[cfg(target_pointer_width = "8")]
+77 + #[cfg(target_has_atomic_primitive_alignment = "8")]
+   |
+
+warning: unexpected `cfg` condition value: `8`
+   --> src/traits/dispatcher.rs:198:7
+    |
+198 | #[cfg(target_pointer_width = "8")]
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+help: `8` is an expected value for `target_has_atomic`
+    |
+198 - #[cfg(target_pointer_width = "8")]
+198 + #[cfg(target_has_atomic = "8")]
+    |
+help: `8` is an expected value for `target_has_atomic_load_store`
+    |
+198 - #[cfg(target_pointer_width = "8")]
+198 + #[cfg(target_has_atomic_load_store = "8")]
+    |
+help: `8` is an expected value for `target_has_atomic_primitive_alignment`
+    |
+198 - #[cfg(target_pointer_width = "8")]
+198 + #[cfg(target_has_atomic_primitive_alignment = "8")]
+    |
+
+warning: use of deprecated constant `std::f32::NEG_INFINITY`: replaced by the `NEG_INFINITY` associated constant on `f32`
+   --> src/tests/sorts.rs:130:25
+    |
+130 |     a[1999] = std::f32::NEG_INFINITY;
+    |                         ^^^^^^^^^^^^
+    |
+    = note: `#[warn(deprecated)]` on by default
+
+warning: use of deprecated constant `std::f32::INFINITY`: replaced by the `INFINITY` associated constant on `f32`
+   --> src/tests/sorts.rs:131:22
+    |
+131 |     a[0] = std::f32::INFINITY;
+    |                      ^^^^^^^^
+
+warning: use of deprecated constant `std::f64::NEG_INFINITY`: replaced by the `NEG_INFINITY` associated constant on `f64`
+   --> src/tests/sorts.rs:141:25
+    |
+141 |     a[1999] = std::f64::NEG_INFINITY;
+    |                         ^^^^^^^^^^^^
+
+warning: use of deprecated constant `std::f64::INFINITY`: replaced by the `INFINITY` associated constant on `f64`
+   --> src/tests/sorts.rs:142:22
+    |
+142 |     a[0] = std::f64::INFINITY;
+    |                      ^^^^^^^^
+
+warning: use of deprecated constant `std::f32::NEG_INFINITY`: replaced by the `NEG_INFINITY` associated constant on `f32`
+   --> src/tests/sorts.rs:190:25
+    |
+190 |     a[1999] = std::f32::NEG_INFINITY;
+    |                         ^^^^^^^^^^^^
+
+warning: use of deprecated constant `std::f32::INFINITY`: replaced by the `INFINITY` associated constant on `f32`
+   --> src/tests/sorts.rs:191:22
+    |
+191 |     a[0] = std::f32::INFINITY;
+    |                      ^^^^^^^^
+
+warning: use of deprecated constant `std::f64::NEG_INFINITY`: replaced by the `NEG_INFINITY` associated constant on `f64`
+   --> src/tests/sorts.rs:201:25
+    |
+201 |     a[1999] = std::f64::NEG_INFINITY;
+    |                         ^^^^^^^^^^^^
+
+warning: use of deprecated constant `std::f64::INFINITY`: replaced by the `INFINITY` associated constant on `f64`
+   --> src/tests/sorts.rs:202:22
+    |
+202 |     a[0] = std::f64::INFINITY;
+    |                      ^^^^^^^^
+
+warning: use of deprecated constant `std::f32::NEG_INFINITY`: replaced by the `NEG_INFINITY` associated constant on `f32`
+   --> src/tests/sorts.rs:251:25
+    |
+251 |     a[1999] = std::f32::NEG_INFINITY;
+    |                         ^^^^^^^^^^^^
+
+warning: use of deprecated constant `std::f32::INFINITY`: replaced by the `INFINITY` associated constant on `f32`
+   --> src/tests/sorts.rs:252:22
+    |
+252 |     a[0] = std::f32::INFINITY;
+    |                      ^^^^^^^^
+
+warning: use of deprecated constant `std::f64::NEG_INFINITY`: replaced by the `NEG_INFINITY` associated constant on `f64`
+   --> src/tests/sorts.rs:262:25
+    |
+262 |     a[1999] = std::f64::NEG_INFINITY;
+    |                         ^^^^^^^^^^^^
+
+warning: use of deprecated constant `std::f64::INFINITY`: replaced by the `INFINITY` associated constant on `f64`
+   --> src/tests/sorts.rs:263:22
+    |
+263 |     a[0] = std::f64::INFINITY;
+    |                      ^^^^^^^^
+
+warning: use of deprecated constant `std::f32::NEG_INFINITY`: replaced by the `NEG_INFINITY` associated constant on `f32`
+   --> src/tests/sorts.rs:312:25
+    |
+312 |     a[1999] = std::f32::NEG_INFINITY;
+    |                         ^^^^^^^^^^^^
+
+warning: use of deprecated constant `std::f32::INFINITY`: replaced by the `INFINITY` associated constant on `f32`
+   --> src/tests/sorts.rs:313:22
+    |
+313 |     a[0] = std::f32::INFINITY;
+    |                      ^^^^^^^^
+
+warning: use of deprecated constant `std::f64::NEG_INFINITY`: replaced by the `NEG_INFINITY` associated constant on `f64`
+   --> src/tests/sorts.rs:323:25
+    |
+323 |     a[1999] = std::f64::NEG_INFINITY;
+    |                         ^^^^^^^^^^^^
+
+warning: use of deprecated constant `std::f64::INFINITY`: replaced by the `INFINITY` associated constant on `f64`
+   --> src/tests/sorts.rs:324:22
+    |
+324 |     a[0] = std::f64::INFINITY;
+    |                      ^^^^^^^^
+
+warning: use of deprecated constant `std::f32::NEG_INFINITY`: replaced by the `NEG_INFINITY` associated constant on `f32`
+   --> src/tests/sorts.rs:373:25
+    |
+373 |     a[1999] = std::f32::NEG_INFINITY;
+    |                         ^^^^^^^^^^^^
+
+warning: use of deprecated constant `std::f32::INFINITY`: replaced by the `INFINITY` associated constant on `f32`
+   --> src/tests/sorts.rs:374:22
+    |
+374 |     a[0] = std::f32::INFINITY;
+    |                      ^^^^^^^^
+
+warning: use of deprecated constant `std::f64::NEG_INFINITY`: replaced by the `NEG_INFINITY` associated constant on `f64`
+   --> src/tests/sorts.rs:384:25
+    |
+384 |     a[1999] = std::f64::NEG_INFINITY;
+    |                         ^^^^^^^^^^^^
+
+warning: use of deprecated constant `std::f64::INFINITY`: replaced by the `INFINITY` associated constant on `f64`
+   --> src/tests/sorts.rs:385:22
+    |
+385 |     a[0] = std::f64::INFINITY;
+    |                      ^^^^^^^^
+
+warning: use of deprecated constant `std::f32::NEG_INFINITY`: replaced by the `NEG_INFINITY` associated constant on `f32`
+   --> src/tests/sorts.rs:433:25
+    |
+433 |     a[1999] = std::f32::NEG_INFINITY;
+    |                         ^^^^^^^^^^^^
+
+warning: use of deprecated constant `std::f32::INFINITY`: replaced by the `INFINITY` associated constant on `f32`
+   --> src/tests/sorts.rs:434:22
+    |
+434 |     a[0] = std::f32::INFINITY;
+    |                      ^^^^^^^^
+
+warning: use of deprecated constant `std::f64::NEG_INFINITY`: replaced by the `NEG_INFINITY` associated constant on `f64`
+   --> src/tests/sorts.rs:444:25
+    |
+444 |     a[1999] = std::f64::NEG_INFINITY;
+    |                         ^^^^^^^^^^^^
+
+warning: use of deprecated constant `std::f64::INFINITY`: replaced by the `INFINITY` associated constant on `f64`
+   --> src/tests/sorts.rs:445:22
+    |
+445 |     a[0] = std::f64::INFINITY;
+    |                      ^^^^^^^^
+
+warning: use of deprecated constant `std::f32::NEG_INFINITY`: replaced by the `NEG_INFINITY` associated constant on `f32`
+   --> src/tests/sorts.rs:493:25
+    |
+493 |     a[1999] = std::f32::NEG_INFINITY;
+    |                         ^^^^^^^^^^^^
+
+warning: use of deprecated constant `std::f32::INFINITY`: replaced by the `INFINITY` associated constant on `f32`
+   --> src/tests/sorts.rs:494:22
+    |
+494 |     a[0] = std::f32::INFINITY;
+    |                      ^^^^^^^^
+
+warning: use of deprecated constant `std::f64::NEG_INFINITY`: replaced by the `NEG_INFINITY` associated constant on `f64`
+   --> src/tests/sorts.rs:504:25
+    |
+504 |     a[1999] = std::f64::NEG_INFINITY;
+    |                         ^^^^^^^^^^^^
+
+warning: use of deprecated constant `std::f64::INFINITY`: replaced by the `INFINITY` associated constant on `f64`
+   --> src/tests/sorts.rs:505:22
+    |
+505 |     a[0] = std::f64::INFINITY;
+    |                      ^^^^^^^^
+
+warning: use of deprecated constant `std::f32::NEG_INFINITY`: replaced by the `NEG_INFINITY` associated constant on `f32`
+   --> src/tests/sorts.rs:553:25
+    |
+553 |     a[1999] = std::f32::NEG_INFINITY;
+    |                         ^^^^^^^^^^^^
+
+warning: use of deprecated constant `std::f32::INFINITY`: replaced by the `INFINITY` associated constant on `f32`
+   --> src/tests/sorts.rs:554:22
+    |
+554 |     a[0] = std::f32::INFINITY;
+    |                      ^^^^^^^^
+
+warning: use of deprecated constant `std::f64::NEG_INFINITY`: replaced by the `NEG_INFINITY` associated constant on `f64`
+   --> src/tests/sorts.rs:564:25
+    |
+564 |     a[1999] = std::f64::NEG_INFINITY;
+    |                         ^^^^^^^^^^^^
+
+warning: use of deprecated constant `std::f64::INFINITY`: replaced by the `INFINITY` associated constant on `f64`
+   --> src/tests/sorts.rs:565:22
+    |
+565 |     a[0] = std::f64::INFINITY;
+    |                      ^^^^^^^^
+
+warning: use of deprecated constant `std::f32::NEG_INFINITY`: replaced by the `NEG_INFINITY` associated constant on `f32`
+   --> src/tests/sorts.rs:615:25
+    |
+615 |     a[1999] = std::f32::NEG_INFINITY;
+    |                         ^^^^^^^^^^^^
+
+warning: use of deprecated constant `std::f32::INFINITY`: replaced by the `INFINITY` associated constant on `f32`
+   --> src/tests/sorts.rs:616:22
+    |
+616 |     a[0] = std::f32::INFINITY;
+    |                      ^^^^^^^^
+
+warning: use of deprecated constant `std::f64::NEG_INFINITY`: replaced by the `NEG_INFINITY` associated constant on `f64`
+   --> src/tests/sorts.rs:626:25
+    |
+626 |     a[1999] = std::f64::NEG_INFINITY;
+    |                         ^^^^^^^^^^^^
+
+warning: use of deprecated constant `std::f64::INFINITY`: replaced by the `INFINITY` associated constant on `f64`
+   --> src/tests/sorts.rs:627:22
+    |
+627 |     a[0] = std::f64::INFINITY;
+    |                      ^^^^^^^^
+
+warning: use of deprecated constant `std::f32::NEG_INFINITY`: replaced by the `NEG_INFINITY` associated constant on `f32`
+   --> src/tests/sorts.rs:675:25
+    |
+675 |     a[1999] = std::f32::NEG_INFINITY;
+    |                         ^^^^^^^^^^^^
+
+warning: use of deprecated constant `std::f32::INFINITY`: replaced by the `INFINITY` associated constant on `f32`
+   --> src/tests/sorts.rs:676:22
+    |
+676 |     a[0] = std::f32::INFINITY;
+    |                      ^^^^^^^^
+
+warning: use of deprecated constant `std::f64::NEG_INFINITY`: replaced by the `NEG_INFINITY` associated constant on `f64`
+   --> src/tests/sorts.rs:686:25
+    |
+686 |     a[1999] = std::f64::NEG_INFINITY;
+    |                         ^^^^^^^^^^^^
+
+warning: use of deprecated constant `std::f64::INFINITY`: replaced by the `INFINITY` associated constant on `f64`
+   --> src/tests/sorts.rs:687:22
+    |
+687 |     a[0] = std::f64::INFINITY;
+    |                      ^^^^^^^^
+
+warning: use of deprecated constant `std::f32::NEG_INFINITY`: replaced by the `NEG_INFINITY` associated constant on `f32`
+   --> src/tests/sorts.rs:735:25
+    |
+735 |     a[1999] = std::f32::NEG_INFINITY;
+    |                         ^^^^^^^^^^^^
+
+warning: use of deprecated constant `std::f32::INFINITY`: replaced by the `INFINITY` associated constant on `f32`
+   --> src/tests/sorts.rs:736:22
+    |
+736 |     a[0] = std::f32::INFINITY;
+    |                      ^^^^^^^^
+
+warning: use of deprecated constant `std::f64::NEG_INFINITY`: replaced by the `NEG_INFINITY` associated constant on `f64`
+   --> src/tests/sorts.rs:746:25
+    |
+746 |     a[1999] = std::f64::NEG_INFINITY;
+    |                         ^^^^^^^^^^^^
+
+warning: use of deprecated constant `std::f64::INFINITY`: replaced by the `INFINITY` associated constant on `f64`
+   --> src/tests/sorts.rs:747:22
+    |
+747 |     a[0] = std::f64::INFINITY;
+    |                      ^^^^^^^^
+
+warning: use of deprecated constant `std::f32::NEG_INFINITY`: replaced by the `NEG_INFINITY` associated constant on `f32`
+   --> src/tests/sorts.rs:795:25
+    |
+795 |     a[1999] = std::f32::NEG_INFINITY;
+    |                         ^^^^^^^^^^^^
+
+warning: use of deprecated constant `std::f32::INFINITY`: replaced by the `INFINITY` associated constant on `f32`
+   --> src/tests/sorts.rs:796:22
+    |
+796 |     a[0] = std::f32::INFINITY;
+    |                      ^^^^^^^^
+
+warning: use of deprecated constant `std::f64::NEG_INFINITY`: replaced by the `NEG_INFINITY` associated constant on `f64`
+   --> src/tests/sorts.rs:806:25
+    |
+806 |     a[1999] = std::f64::NEG_INFINITY;
+    |                         ^^^^^^^^^^^^
+
+warning: use of deprecated constant `std::f64::INFINITY`: replaced by the `INFINITY` associated constant on `f64`
+   --> src/tests/sorts.rs:807:22
+    |
+807 |     a[0] = std::f64::INFINITY;
+    |                      ^^^^^^^^
+
+warning: use of deprecated constant `std::f32::NEG_INFINITY`: replaced by the `NEG_INFINITY` associated constant on `f32`
+   --> src/tests/sorts.rs:855:25
+    |
+855 |     a[1999] = std::f32::NEG_INFINITY;
+    |                         ^^^^^^^^^^^^
+
+warning: use of deprecated constant `std::f32::INFINITY`: replaced by the `INFINITY` associated constant on `f32`
+   --> src/tests/sorts.rs:856:22
+    |
+856 |     a[0] = std::f32::INFINITY;
+    |                      ^^^^^^^^
+
+warning: use of deprecated constant `std::f64::NEG_INFINITY`: replaced by the `NEG_INFINITY` associated constant on `f64`
+   --> src/tests/sorts.rs:866:25
+    |
+866 |     a[1999] = std::f64::NEG_INFINITY;
+    |                         ^^^^^^^^^^^^
+
+warning: use of deprecated constant `std::f64::INFINITY`: replaced by the `INFINITY` associated constant on `f64`
+   --> src/tests/sorts.rs:867:22
+    |
+867 |     a[0] = std::f64::INFINITY;
+    |                      ^^^^^^^^
+
+warning: use of deprecated constant `std::f32::NEG_INFINITY`: replaced by the `NEG_INFINITY` associated constant on `f32`
+   --> src/tests/sorts.rs:915:25
+    |
+915 |     a[1999] = std::f32::NEG_INFINITY;
+    |                         ^^^^^^^^^^^^
+
+warning: use of deprecated constant `std::f32::INFINITY`: replaced by the `INFINITY` associated constant on `f32`
+   --> src/tests/sorts.rs:916:22
+    |
+916 |     a[0] = std::f32::INFINITY;
+    |                      ^^^^^^^^
+
+warning: use of deprecated constant `std::f64::NEG_INFINITY`: replaced by the `NEG_INFINITY` associated constant on `f64`
+   --> src/tests/sorts.rs:926:25
+    |
+926 |     a[1999] = std::f64::NEG_INFINITY;
+    |                         ^^^^^^^^^^^^
+
+warning: use of deprecated constant `std::f64::INFINITY`: replaced by the `INFINITY` associated constant on `f64`
+   --> src/tests/sorts.rs:927:22
+    |
+927 |     a[0] = std::f64::INFINITY;
+    |                      ^^^^^^^^
+
+warning: use of deprecated constant `std::f32::NEG_INFINITY`: replaced by the `NEG_INFINITY` associated constant on `f32`
+   --> src/tests/sorts.rs:975:25
+    |
+975 |     a[1999] = std::f32::NEG_INFINITY;
+    |                         ^^^^^^^^^^^^
+
+warning: use of deprecated constant `std::f32::INFINITY`: replaced by the `INFINITY` associated constant on `f32`
+   --> src/tests/sorts.rs:976:22
+    |
+976 |     a[0] = std::f32::INFINITY;
+    |                      ^^^^^^^^
+
+warning: use of deprecated constant `std::f64::NEG_INFINITY`: replaced by the `NEG_INFINITY` associated constant on `f64`
+   --> src/tests/sorts.rs:986:25
+    |
+986 |     a[1999] = std::f64::NEG_INFINITY;
+    |                         ^^^^^^^^^^^^
+
+warning: use of deprecated constant `std::f64::INFINITY`: replaced by the `INFINITY` associated constant on `f64`
+   --> src/tests/sorts.rs:987:22
+    |
+987 |     a[0] = std::f64::INFINITY;
+    |                      ^^^^^^^^
+
+warning: struct `StructBool` is never constructed
+ --> src/types/custom.rs:8:12
+  |
+8 | pub struct StructBool {
+  |            ^^^^^^^^^^
+  |
+  = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: struct `StructChar` is never constructed
+  --> src/types/custom.rs:29:12
+   |
+29 | pub struct StructChar {
+   |            ^^^^^^^^^^
+
+warning: struct `StructF32` is never constructed
+  --> src/types/custom.rs:50:12
+   |
+50 | pub struct StructF32 {
+   |            ^^^^^^^^^
+
+warning: struct `StructF64` is never constructed
+  --> src/types/custom.rs:71:12
+   |
+71 | pub struct StructF64 {
+   |            ^^^^^^^^^
+
+warning: struct `StructU8` is never constructed
+  --> src/types/custom.rs:92:12
+   |
+92 | pub struct StructU8 {
+   |            ^^^^^^^^
+
+warning: struct `StructU16` is never constructed
+   --> src/types/custom.rs:113:12
+    |
+113 | pub struct StructU16 {
+    |            ^^^^^^^^^
+
+warning: struct `StructU32` is never constructed
+   --> src/types/custom.rs:134:12
+    |
+134 | pub struct StructU32 {
+    |            ^^^^^^^^^
+
+warning: struct `StructU64` is never constructed
+   --> src/types/custom.rs:155:12
+    |
+155 | pub struct StructU64 {
+    |            ^^^^^^^^^
+
+warning: struct `StructU128` is never constructed
+   --> src/types/custom.rs:176:12
+    |
+176 | pub struct StructU128 {
+    |            ^^^^^^^^^^
+
+warning: struct `StructI8` is never constructed
+   --> src/types/custom.rs:197:12
+    |
+197 | pub struct StructI8 {
+    |            ^^^^^^^^
+
+warning: struct `StructI16` is never constructed
+   --> src/types/custom.rs:218:12
+    |
+218 | pub struct StructI16 {
+    |            ^^^^^^^^^
+
+warning: struct `StructI32` is never constructed
+   --> src/types/custom.rs:239:12
+    |
+239 | pub struct StructI32 {
+    |            ^^^^^^^^^
+
+warning: struct `StructI64` is never constructed
+   --> src/types/custom.rs:260:12
+    |
+260 | pub struct StructI64 {
+    |            ^^^^^^^^^
+
+warning: struct `StructI128` is never constructed
+   --> src/types/custom.rs:281:12
+    |
+281 | pub struct StructI128 {
+    |            ^^^^^^^^^^
+
+warning: struct `StructIsize` is never constructed
+   --> src/types/custom.rs:302:12
+    |
+302 | pub struct StructIsize {
+    |            ^^^^^^^^^^^
+
+warning: struct `StructUsize` is never constructed
+   --> src/types/custom.rs:323:12
+    |
+323 | pub struct StructUsize {
+    |            ^^^^^^^^^^^
+
+warning: field `other` is never read
+  --> src/types/custom.rs:10:9
+   |
+ 8 | pub struct StructBool {
+   |            ---------- field in this struct
+ 9 |     pub value: bool,
+10 |     pub other: isize,
+   |         ^^^^^
+   |
+   = note: `StructBool` has derived impls for the traits `Debug` and `Clone`, but these are intentionally ignored during dead code analysis
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: field `other` is never read
+  --> src/types/custom.rs:31:9
+   |
+29 | pub struct StructChar {
+   |            ---------- field in this struct
+30 |     pub value: char,
+31 |     pub other: isize,
+   |         ^^^^^
+   |
+   = note: `StructChar` has derived impls for the traits `Debug` and `Clone`, but these are intentionally ignored during dead code analysis
+
+warning: field `other` is never read
+  --> src/types/custom.rs:52:9
+   |
+50 | pub struct StructF32 {
+   |            --------- field in this struct
+51 |     pub value: f32,
+52 |     pub other: isize,
+   |         ^^^^^
+   |
+   = note: `StructF32` has derived impls for the traits `Debug` and `Clone`, but these are intentionally ignored during dead code analysis
+
+warning: field `other` is never read
+  --> src/types/custom.rs:73:9
+   |
+71 | pub struct StructF64 {
+   |            --------- field in this struct
+72 |     pub value: f64,
+73 |     pub other: isize,
+   |         ^^^^^
+   |
+   = note: `StructF64` has derived impls for the traits `Debug` and `Clone`, but these are intentionally ignored during dead code analysis
+
+warning: field `other` is never read
+  --> src/types/custom.rs:94:9
+   |
+92 | pub struct StructU8 {
+   |            -------- field in this struct
+93 |     pub value: u8,
+94 |     pub other: isize,
+   |         ^^^^^
+   |
+   = note: `StructU8` has derived impls for the traits `Debug` and `Clone`, but these are intentionally ignored during dead code analysis
+
+warning: field `other` is never read
+   --> src/types/custom.rs:115:9
+    |
+113 | pub struct StructU16 {
+    |            --------- field in this struct
+114 |     pub value: u16,
+115 |     pub other: isize,
+    |         ^^^^^
+    |
+    = note: `StructU16` has derived impls for the traits `Debug` and `Clone`, but these are intentionally ignored during dead code analysis
+
+warning: field `other` is never read
+   --> src/types/custom.rs:136:9
+    |
+134 | pub struct StructU32 {
+    |            --------- field in this struct
+135 |     pub value: u32,
+136 |     pub other: isize,
+    |         ^^^^^
+    |
+    = note: `StructU32` has derived impls for the traits `Debug` and `Clone`, but these are intentionally ignored during dead code analysis
+
+warning: field `other` is never read
+   --> src/types/custom.rs:157:9
+    |
+155 | pub struct StructU64 {
+    |            --------- field in this struct
+156 |     pub value: u64,
+157 |     pub other: isize,
+    |         ^^^^^
+    |
+    = note: `StructU64` has derived impls for the traits `Debug` and `Clone`, but these are intentionally ignored during dead code analysis
+
+warning: field `other` is never read
+   --> src/types/custom.rs:178:9
+    |
+176 | pub struct StructU128 {
+    |            ---------- field in this struct
+177 |     pub value: u128,
+178 |     pub other: isize,
+    |         ^^^^^
+    |
+    = note: `StructU128` has derived impls for the traits `Debug` and `Clone`, but these are intentionally ignored during dead code analysis
+
+warning: field `other` is never read
+   --> src/types/custom.rs:199:9
+    |
+197 | pub struct StructI8 {
+    |            -------- field in this struct
+198 |     pub value: i8,
+199 |     pub other: isize,
+    |         ^^^^^
+    |
+    = note: `StructI8` has derived impls for the traits `Debug` and `Clone`, but these are intentionally ignored during dead code analysis
+
+warning: field `other` is never read
+   --> src/types/custom.rs:220:9
+    |
+218 | pub struct StructI16 {
+    |            --------- field in this struct
+219 |     pub value: i16,
+220 |     pub other: isize,
+    |         ^^^^^
+    |
+    = note: `StructI16` has derived impls for the traits `Debug` and `Clone`, but these are intentionally ignored during dead code analysis
+
+warning: field `other` is never read
+   --> src/types/custom.rs:241:9
+    |
+239 | pub struct StructI32 {
+    |            --------- field in this struct
+240 |     pub value: i32,
+241 |     pub other: isize,
+    |         ^^^^^
+    |
+    = note: `StructI32` has derived impls for the traits `Debug` and `Clone`, but these are intentionally ignored during dead code analysis
+
+warning: field `other` is never read
+   --> src/types/custom.rs:262:9
+    |
+260 | pub struct StructI64 {
+    |            --------- field in this struct
+261 |     pub value: i64,
+262 |     pub other: isize,
+    |         ^^^^^
+    |
+    = note: `StructI64` has derived impls for the traits `Debug` and `Clone`, but these are intentionally ignored during dead code analysis
+
+warning: field `other` is never read
+   --> src/types/custom.rs:283:9
+    |
+281 | pub struct StructI128 {
+    |            ---------- field in this struct
+282 |     pub value: i128,
+283 |     pub other: isize,
+    |         ^^^^^
+    |
+    = note: `StructI128` has derived impls for the traits `Debug` and `Clone`, but these are intentionally ignored during dead code analysis
+
+warning: field `other` is never read
+   --> src/types/custom.rs:304:9
+    |
+302 | pub struct StructIsize {
+    |            ----------- field in this struct
+303 |     pub value: isize,
+304 |     pub other: isize,
+    |         ^^^^^
+    |
+    = note: `StructIsize` has derived impls for the traits `Debug` and `Clone`, but these are intentionally ignored during dead code analysis
+
+warning: field `other` is never read
+   --> src/types/custom.rs:325:9
+    |
+323 | pub struct StructUsize {
+    |            ----------- field in this struct
+324 |     pub value: usize,
+325 |     pub other: isize,
+    |         ^^^^^
+    |
+    = note: `StructUsize` has derived impls for the traits `Debug` and `Clone`, but these are intentionally ignored during dead code analysis
+
+warning: `voracious_radix_sort` (lib) generated 31 warnings (run `cargo fix --lib -p voracious_radix_sort` to apply 3 suggestions)
+warning: `voracious_radix_sort` (lib test) generated 95 warnings (14 duplicates)
+    Finished `release` profile [optimized] target(s) in 1m 35s
+     Running unittests src/lib.rs (target/release/deps/voracious_radix_sort-15f80ceb9191f644)
+
+running 90 tests
+test sorts::thiel_sort::test_utils_get_full_histograms_except_last_chunk ... ok
+test tests::comparative_sort::test_comparative_sort_insertion_sort_try ... ok
+test tests::regions_graph::test_regions_graph_bis ... ok
+test tests::regions_graph::test_regions_graph_two_path_2 ... ok
+test tests::regions_graph::test_regions_graph_two_cycle_3 ... ok
+test tests::regions_graph::test_regions_graph ... ok
+test tests::sorts::test_sort_dlsd_radixsort_f32_inf ... ok
+test tests::sorts::test_sort_american_flag_sort_f64_inf ... ok
+test tests::regions_graph::test_regions_graph_two_path_1 ... ok
+test tests::sorts::test_sort_american_flag_sort_f32_inf ... ok
+test tests::sorts::test_sort_lsd_radixsort_f32_inf ... ok
+test tests::sorts::test_sort_lsd_radixsort_f64_inf ... ok
+test tests::sorts::test_sort_insertion_sort_f64_inf ... ok
+test tests::sorts::test_sort_insertion_sort_f32_inf ... ok
+test tests::regions_graph::test_regions_graph_two_cycle_2 ... ok
+test tests::sorts::test_sort_msd_radixsort_f32_inf ... ok
+test tests::sorts::test_sort_msd_radixsort_f64_inf ... ok
+test tests::regions_graph::test_regions_graph_two_cycle_1 ... ok
+test tests::sorts::test_sort_lsd_stable_radixsort_f64_inf ... ok
+test tests::sorts::test_sort_msd_stable_radixsort_f32_inf ... ok
+test tests::sorts::test_sort_msd_stable_radixsort_f64_inf ... ok
+test tests::sorts::test_sort_lsd_stable_radixsort_f32_inf ... ok
+test tests::sorts::test_sort_counting_sort ... ok
+test tests::sorts::test_sort_peeka_sort_f32_inf ... ok
+test tests::sorts::test_sort_rollercoaster_sort_f32_inf ... ok
+test tests::sorts::test_sort_rollercoaster_sort_f64_inf ... ok
+test tests::sorts::test_sort_peeka_sort_f64_inf ... ok
+test tests::sorts::test_sort_ska_sort_f32_inf ... ok
+test tests::sorts::test_sort_ska_sort_f64_inf ... ok
+test tests::sorts::test_sort_boolean_sort ... ok
+test tests::sorts::test_sort_thiel_radixsort_f32_inf ... ok
+test tests::sorts::test_sort_thiel_radixsort_f64_inf ... ok
+test tests::dedicated::test_ded_sort_counting_sort_u16 ... ok
+test tests::sorts::test_sort_trait_voracious_f32_inf ... ok
+test tests::sorts::test_sort_dlsd_radixsort_f64_inf ... ok
+test tests::sorts::test_sort_trait_voracious_f64_inf ... ok
+test tests::sorts::test_sort_trait_voracious_mt_sort_f32_inf ... ok
+test tests::sorts::test_sort_trait_voracious_mt_sort_f64_inf ... ok
+test tests::dedicated::test_ded_sort_lsd_u32 ... ok
+test tests::sorts::test_sort_trait_voracious_stable_f32_inf ... ok
+test tests::sorts::test_sort_trait_voracious_stable_f64_inf ... ok
+test tests::dedicated::test_ded_sort_lsd_f32 ... ok
+test tests::sorts::test_sort_voracious_sort_f32_inf ... ok
+test tests::sorts::test_sort_voracious_sort_f64_inf ... ok
+test tests::types::test_types_compute_max_level ... ok
+test tests::types::test_types_compute_offset ... ok
+test tests::types::test_types_compute_offset_mt ... ok
+test tests::types::test_types_extract ... ok
+test tests::types::test_types_get_mask_and_shift ... ok
+test tests::types::test_types_get_mask_and_shift_from_left ... ok
+test tests::types::test_types_mask_for_high_bits ... ok
+test tests::utils::test_utils_compute_max_level ... ok
+test tests::utils::test_utils_compute_offset ... ok
+test tests::utils::test_utils_copy_nonoverlapping ... ok
+test tests::utils::test_utils_get_empty_histograms ... ok
+test tests::utils::test_utils_get_histogram ... ok
+test tests::utils::test_utils_get_partial_histograms ... ok
+test tests::utils::test_utils_offset_from_bits ... ok
+test tests::utils::test_utils_only_one_bucket_filled ... ok
+test tests::utils::test_utils_prefix_sums ... ok
+test tests::utils_mt::test_utils_mt_aggregate_histograms ... ok
+test tests::utils_mt::test_utils_mt_compute_offset_mt ... ok
+test tests::verge_sort_heuristic::test_verge_sort_heuristic_backward_orientation ... ok
+test tests::verge_sort_heuristic::test_verge_sort_heuristic_compute_big_enough_run ... ok
+test tests::verge_sort_heuristic::test_verge_sort_heuristic_explore_around ... ok
+test tests::verge_sort_heuristic::test_verge_sort_heuristic_explore_backward_asc ... ok
+test tests::verge_sort_heuristic::test_verge_sort_heuristic_explore_backward_desc ... ok
+test tests::verge_sort_heuristic::test_verge_sort_heuristic_explore_backward_plateau ... ok
+test tests::verge_sort_heuristic::test_verge_sort_heuristic_explore_forward_asc ... ok
+test tests::verge_sort_heuristic::test_verge_sort_heuristic_explore_forward_desc ... ok
+test tests::verge_sort_heuristic::test_verge_sort_heuristic_explore_forward_plateau ... ok
+test tests::verge_sort_heuristic::test_verge_sort_heuristic_explore_simple_forward ... ok
+test tests::verge_sort_heuristic::test_verge_sort_heuristic_forward_orientation ... ok
+test tests::verge_sort_heuristic::test_verge_sort_heuristic_jump ... ok
+test tests::verge_sort_heuristic::test_verge_sort_heuristic_verge_sort_preprocessing ... ok
+test tests::sorts::test_sort_lsd_radixsort ... ok
+test tests::sorts::test_sort_lsd_stable_radixsort ... ok
+test tests::sorts::test_sort_thiel_radixsort ... ok
+test tests::sorts::test_sort_msd_radixsort ... ok
+test tests::sorts::test_sort_msd_stable_radixsort ... ok
+test tests::sorts::test_sort_insertion_sort ... ok
+test tests::sorts::test_sort_ska_sort ... ok
+test tests::sorts::test_sort_rollercoaster_sort ... ok
+test tests::sorts::test_sort_american_flag_sort ... ok
+test tests::sorts::test_sort_dlsd_radixsort ... ok
+test tests::sorts::test_sort_peeka_sort ... ok
+test tests::sorts::test_sort_voracious_sort ... ok
+test tests::sorts::test_sort_trait_voracious_mt_sort ... ok
+test tests::sorts::test_sort_trait_voracious ... ok
+test tests::sorts::test_sort_trait_voracious_stable ... ok
+
+test result: ok. 90 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 50.90s
+
+     Running tests/block_lsd.rs (target/release/deps/block_lsd-6b8e8a10c83b9e4d)
+
+running 10 tests
+test descending_groups_keep_their_original_payload_order ... ok
+test invalid_custom_bucket_panics_without_an_unchecked_pointer_access ... ok
+test inconsistent_extract_cannot_read_an_unfilled_scatter_slot ... ok
+test zero_sized_records_do_not_use_pointer_differences ... ok
+test primitive_key_conversions_and_partial_digits ... ok
+test rejects_invalid_parameters_before_mutation ... ok
+test scratch_padding_never_becomes_a_typed_value ... ok
+test narrow_varying_bits_under_a_nonzero_wide_prefix ... ok
+test default_parameters_large_blocks_and_all_bucket_tails ... ok
+test stable_records_across_radices_blocks_and_distributions ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.12s
+
+     Running tests/block_lsd_parallel.rs (target/release/deps/block_lsd_parallel-56e3909bb2e6649f)
+
+running 6 tests
+test invalid_parameters_are_rejected_before_mutation ... ok
+test descending_duplicate_groups_remain_stable ... ok
+test signed_and_float_converted_key_order ... ok
+test invalid_extractor_panics_inside_join_without_unchecked_access ... ok
+test parallel_large_records_and_thread_boundary_tails ... ok
+test stable_across_pools_radices_blocks_and_partial_heavy_passes ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.22s
+
+   Doc-tests voracious_radix_sort
+
+running 5 tests
+test src/lib.rs - (line 89) ... ignored
+test src/lib.rs - (line 117) ... ok
+test src/lib.rs - (line 143) ... ok
+test src/sorts/block_lsd_stable_sort.rs - sorts::block_lsd_stable_sort::block_lsd_stable_radixsort (line 62) ... ok
+test src/lib.rs - (line 174) ... ok
+
+test result: ok. 4 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.49s
+
