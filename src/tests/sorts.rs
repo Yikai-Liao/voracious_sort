@@ -4,6 +4,7 @@ use super::super::{RadixKey, RadixSort, Radixable};
 
 use super::super::sorts::american_flag_sort::american_flag_sort;
 use super::super::sorts::boolean_sort::boolean_sort;
+use super::super::sorts::block_lsd_stable_sort::block_lsd_stable_radixsort;
 use super::super::sorts::comparative_sort::insertion_sort;
 use super::super::sorts::counting_sort::counting_sort;
 use super::super::sorts::dlsd_sort::dlsd_radixsort;
@@ -386,6 +387,66 @@ fn test_sort_lsd_stable_radixsort_f64_inf() {
     let mut check = a.to_vec();
     lsd_stable_radixsort(&mut a, 8);
     check.par_sort_unstable_by(|a, b| a.partial_cmp(b).unwrap());
+    assert_eq!(a, check);
+}
+
+#[test]
+fn test_sort_block_lsd_stable_radixsort() {
+    for size in [0, 1, 128, 129, 10_000].iter() { for radix in [7, 8].iter() {
+        helper_sort(true, &|a| block_lsd_stable_radixsort(a, *radix), generators_bool(), *size);
+        helper_sort(true, &|a| block_lsd_stable_radixsort(a, *radix), generators_char(), *size);
+        helper_sort(true, &|a| block_lsd_stable_radixsort(a, *radix), generators_f32(), *size);
+        helper_sort(true, &|a| block_lsd_stable_radixsort(a, *radix), generators_f64(), *size);
+        helper_sort(true, &|a| block_lsd_stable_radixsort(a, *radix), generators_u8(), *size);
+        helper_sort(true, &|a| block_lsd_stable_radixsort(a, *radix), generators_u16(), *size);
+        helper_sort(true, &|a| block_lsd_stable_radixsort(a, *radix), generators_u32(), *size);
+        helper_sort(true, &|a| block_lsd_stable_radixsort(a, *radix), generators_u64(), *size);
+        helper_sort(true, &|a| block_lsd_stable_radixsort(a, *radix), generators_u128(), *size);
+        helper_sort(true, &|a| block_lsd_stable_radixsort(a, *radix), generators_usize(), *size);
+        helper_sort(true, &|a| block_lsd_stable_radixsort(a, *radix), generators_i8(), *size);
+        helper_sort(true, &|a| block_lsd_stable_radixsort(a, *radix), generators_i16(), *size);
+        helper_sort(true, &|a| block_lsd_stable_radixsort(a, *radix), generators_i32(), *size);
+        helper_sort(true, &|a| block_lsd_stable_radixsort(a, *radix), generators_i64(), *size);
+        helper_sort(true, &|a| block_lsd_stable_radixsort(a, *radix), generators_i128(), *size);
+        helper_sort(true, &|a| block_lsd_stable_radixsort(a, *radix), generators_isize(), *size);
+        helper_sort(true, &|a| block_lsd_stable_radixsort(a, *radix), generators_structbool(), *size);
+        helper_sort(true, &|a| block_lsd_stable_radixsort(a, *radix), generators_structchar(), *size);
+        helper_sort(true, &|a| block_lsd_stable_radixsort(a, *radix), generators_structf32(), *size);
+        helper_sort(true, &|a| block_lsd_stable_radixsort(a, *radix), generators_structf64(), *size);
+        helper_sort(true, &|a| block_lsd_stable_radixsort(a, *radix), generators_structu8(), *size);
+        helper_sort(true, &|a| block_lsd_stable_radixsort(a, *radix), generators_structu16(), *size);
+        helper_sort(true, &|a| block_lsd_stable_radixsort(a, *radix), generators_structu32(), *size);
+        helper_sort(true, &|a| block_lsd_stable_radixsort(a, *radix), generators_structu64(), *size);
+        helper_sort(true, &|a| block_lsd_stable_radixsort(a, *radix), generators_structu128(), *size);
+        helper_sort(true, &|a| block_lsd_stable_radixsort(a, *radix), generators_structusize(), *size);
+        helper_sort(true, &|a| block_lsd_stable_radixsort(a, *radix), generators_structi8(), *size);
+        helper_sort(true, &|a| block_lsd_stable_radixsort(a, *radix), generators_structi16(), *size);
+        helper_sort(true, &|a| block_lsd_stable_radixsort(a, *radix), generators_structi32(), *size);
+        helper_sort(true, &|a| block_lsd_stable_radixsort(a, *radix), generators_structi64(), *size);
+        helper_sort(true, &|a| block_lsd_stable_radixsort(a, *radix), generators_structi128(), *size);
+        helper_sort(true, &|a| block_lsd_stable_radixsort(a, *radix), generators_structisize(), *size);
+    } }
+}
+
+#[test]
+fn test_sort_block_lsd_stable_radixsort_f32_inf() {
+    let mut a = helper_random_array_uniform_f32(2000);
+    a[1999] = std::f32::NEG_INFINITY;
+    a[0] = std::f32::INFINITY;
+    let mut check = a.to_vec();
+    block_lsd_stable_radixsort(&mut a, 8);
+    check.par_sort_by(|a, b| a.partial_cmp(b).unwrap());
+    assert_eq!(a, check);
+}
+
+#[test]
+fn test_sort_block_lsd_stable_radixsort_f64_inf() {
+    let mut a = helper_random_array_uniform_f64(2000);
+    a[1999] = std::f64::NEG_INFINITY;
+    a[0] = std::f64::INFINITY;
+    let mut check = a.to_vec();
+    block_lsd_stable_radixsort(&mut a, 8);
+    check.par_sort_by(|a, b| a.partial_cmp(b).unwrap());
     assert_eq!(a, check);
 }
 
