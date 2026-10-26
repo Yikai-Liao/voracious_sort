@@ -144,6 +144,16 @@ and it uses the [Verge sort pre-processing heuristic](https://github.com/Morwenn
 [DFR sort](https://github.com/ramou/dfr) with a different diversion and
 a variable radix (see [article](https://users.encs.concordia.ca/~sthiel/DS/SEA2015_FastRadix.pdf)).
 
+- Block LSD sort is a fast and memory-efficient stable LSD radix sort. It is adapted from
+[Radsort](https://github.com/clausecker/radsort), described in
+[Parallel O(sqrt(n)) Overhead LSD Radix Sort](https://arxiv.org/pdf/2607.05302),
+and supports a variable radix. The block size is selected automatically from the
+input length and element size, using a space-balanced square-root policy with
+an approximately 1 KiB block floor. For fixed radix and element size, auxiliary
+space is O(sqrt(n)). Inputs of at most 128 elements use stable comparison sorting;
+larger inputs use one block backend, skipping constant digits.
+Call `block_lsd_stable_radixsort(&mut array, 8)` to use it.
+
 - Thiel sort is a LSD radix sort. It is an implementation of [Fast radix sort](https://github.com/AwardOfSky/Fast-Radix-Sort): [Relaxing the Counting Requirement for Least Significant Digit Radix Sorts](https://users.encs.concordia.ca/~sthiel/DS/SEA2015_FastRadix.pdf) (Implementation in C/C++ is not from the article's author)
 
 - Rollercoaster sort is a hybrid radix sort. It starts as an MSD radix sort, and then switches as
